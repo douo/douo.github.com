@@ -1,0 +1,440 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    可交互的 adb devices | DouO's Blog</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">可交互的 adb devices</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-01-13">2012-06-26</span>
+
+    <span><a href="/categories#coder-ref" class="category category-coder waves-effect waves-light">coder</a></span>
+    
+</div>
+
+    <article>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>adb hell
+1<span class="o">)</span> HT18HTB00535 device
+2<span class="o">)</span> HT04RL901008 device
+Select the device to use, &lt;q&gt; to quit: 1
+shell@android:/ <span class="err">$</span>
+</code></pre></div></div>
+
+<p>即便有了方便的 Eclipse+ADT ，偶尔在命令行下敲个 adb
+也是少不了的。像我这样每天要切换操作系统的开发者，下面这个错误提示是每天都要遇到的：</p>
+
+<blockquote>
+  <p>Re-installation failed due to different application signatures. You
+must perform a full uninstall of the application. WARNING: This will
+remove the application data! Please execute ‘adb uninstall
+your.package.namespace’ in a shell.[^1)^](#e1)</p>
+</blockquote>
+
+<p>如果你忘记了你已连接了多台设备就兴匆匆地敲入，</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>adb uninstall your.package.namespace
+</code></pre></div></div>
+
+<p>那么下面这个错误也是不可避免的：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>error: more than one device and emulator
+</code></pre></div></div>
+
+<p>这时候又得用</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>adb devices
+</code></pre></div></div>
+
+<p>然后再选择，复制，粘帖打印出来的目标序列号，才能再执行。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>adb <span class="nt">-s</span> uninstall your.package.namespace
+</code></pre></div></div>
+
+<p>不过现在好了，<a href="http://dtmilano.blogspot.com/">dtmilano</a>
+提供了一个可交互的adb，<a href="http://dtmilano.blogspot.com/2012/03/selecting-adb-device.html">原文见此。</a></p>
+
+<p>这个交互的 adb
+由两个脚本组成，第一个是 <strong>android-select-device</strong> 。用于提示用户选择设备。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#! /bin/bash</span>
+<span class="c"># selects an android device</span>
+
+<span class="nv">PROGNAME</span><span class="o">=</span><span class="si">$(</span><span class="nb">basename</span> <span class="nv">$0</span><span class="si">)</span>
+<span class="nv">UNAME</span><span class="o">=</span><span class="si">$(</span><span class="nb">uname</span><span class="si">)</span>
+<span class="nv">DEVICE_OPT</span><span class="o">=</span>
+<span class="k">for </span>opt <span class="k">in</span> <span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span>
+<span class="k">do
+case</span> <span class="s2">"</span><span class="nv">$opt</span><span class="s2">"</span> <span class="k">in</span>
+<span class="nt">-d</span><span class="p">|</span><span class="nt">-e</span><span class="p">|</span><span class="nt">-s</span><span class="p">)</span>
+<span class="nv">DEVICE_OPT</span><span class="o">=</span><span class="nv">$opt</span>
+<span class="p">;;</span>
+<span class="k">esac</span>
+<span class="k">done</span>
+<span class="o">[</span> <span class="nt">-n</span> <span class="s2">"</span><span class="nv">$DEVICE_OPT</span><span class="s2">"</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">exit </span>0
+<span class="nv">DEV</span><span class="o">=</span><span class="si">$(</span>adb devices 2&gt;&amp;1 | <span class="nb">tail</span> <span class="nt">-n</span> +2 | <span class="nb">sed</span> <span class="s1">'/^$/d'</span><span class="si">)</span>
+<span class="k">if</span> <span class="o">[</span> <span class="nt">-z</span> <span class="s2">"</span><span class="nv">$DEV</span><span class="s2">"</span> <span class="o">]</span>
+<span class="k">then
+</span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$PROGNAME</span><span class="s2">: ERROR: There's no connected devices."</span> <span class="o">&gt;</span>&amp;2
+<span class="nb">exit </span>1
+<span class="k">fi
+</span><span class="nv">N</span><span class="o">=</span><span class="si">$(</span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$DEV</span><span class="s2">"</span> | <span class="nb">wc</span> <span class="nt">-l</span> | <span class="nb">sed</span> <span class="s1">'s/ //g'</span><span class="si">)</span>
+
+<span class="k">case</span> <span class="nv">$N</span> <span class="k">in
+</span>1<span class="p">)</span>
+<span class="c"># only one device detected</span>
+<span class="nv">D</span><span class="o">=</span><span class="nv">$DEV</span>
+<span class="p">;;</span>
+
+<span class="k">*</span><span class="p">)</span>
+<span class="c"># more than one device detected</span>
+<span class="nv">OLDIFS</span><span class="o">=</span><span class="nv">$IFS</span>
+<span class="nv">IFS</span><span class="o">=</span><span class="s2">"
+"</span>
+<span class="nv">PS3</span><span class="o">=</span><span class="s2">"Select the device to use, &lt;q&gt; to quit: "</span>
+<span class="k">select </span>D <span class="k">in</span> <span class="nv">$DEV</span>
+<span class="k">do</span>
+<span class="o">[</span> <span class="s2">"</span><span class="nv">$REPLY</span><span class="s2">"</span> <span class="o">=</span> <span class="s1">'q'</span> <span class="nt">-o</span> <span class="s2">"</span><span class="nv">$REPLY</span><span class="s2">"</span> <span class="o">=</span> <span class="s1">'Q'</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">exit </span>2
+<span class="o">[</span> <span class="nt">-n</span> <span class="s2">"</span><span class="nv">$D</span><span class="s2">"</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">break
+</span><span class="k">done</span>&lt;/q&gt;
+
+<span class="nv">IFS</span><span class="o">=</span><span class="nv">$OLDIFS</span>
+<span class="p">;;</span>
+<span class="k">esac</span>
+<span class="k">if</span> <span class="o">[</span> <span class="nt">-z</span> <span class="s2">"</span><span class="nv">$D</span><span class="s2">"</span> <span class="o">]</span>
+<span class="k">then
+</span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$PROGNAME</span><span class="s2">: ERROR: target device coulnd't be determined"</span> <span class="o">&gt;</span>&amp;2
+<span class="nb">exit </span>1
+<span class="k">fi</span>
+
+<span class="c"># this didn't work on Darwin</span>
+<span class="c"># echo "-s ${D%% *}"</span>
+<span class="nb">echo</span> <span class="s2">"-s </span><span class="si">$(</span><span class="nb">echo</span> <span class="k">${</span><span class="nv">D</span><span class="k">}</span> | <span class="nb">sed</span> <span class="s1">'s/ .*$//'</span><span class="si">)</span><span class="s2">"</span>
+</code></pre></div></div>
+
+<p>把上面代码复制保存到 <strong>android-select-device</strong> 
+这个文件里。第二个文件是 <strong>my-adb</strong> ，它是用来代替原本的adb的。当adb
+devices 多于一个的时候就会调用 <strong>android-select-device</strong> 让用户选择设备。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#! /bin/bash</span>
+<span class="c"># This command can be used as an alias for adb and it will prompt for the</span>
+<span class="c"># device selection if needed</span>
+<span class="c"># alias adb=my-adb</span>
+
+<span class="nb">set</span> +x
+<span class="nv">PROGNAME</span><span class="o">=</span><span class="si">$(</span><span class="nb">basename</span> <span class="nv">$0</span><span class="si">)</span>
+<span class="nv">ADB</span><span class="o">=</span><span class="si">$(</span>which adb<span class="si">)</span>
+<span class="k">if</span> <span class="o">[</span> <span class="nt">-z</span> <span class="s2">"</span><span class="nv">$ADB</span><span class="s2">"</span> <span class="o">]</span>
+<span class="k">then
+</span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$PROGNAME</span><span class="s2">: ERROR: cannot found adb"</span>
+<span class="nb">exit </span>1
+<span class="k">fi
+
+</span><span class="nb">set</span> <span class="nt">-e</span>
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$# </span><span class="o">==</span> 0 <span class="o">]</span>
+<span class="k">then</span>
+<span class="c"># no arguments</span>
+<span class="nb">exec</span> <span class="nv">$ADB</span>
+<span class="k">elif</span> <span class="o">[</span> <span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span> <span class="o">==</span> <span class="s1">'devices'</span> <span class="o">]</span>
+<span class="k">then</span>
+<span class="c"># adb devices should not accept -s, -e or -d</span>
+<span class="nb">exec</span> <span class="nv">$ADB</span> devices
+<span class="k">else</span>
+<span class="c"># because of the set -e, if selecting the device fails it exits</span>
+<span class="nv">S</span><span class="o">=</span><span class="si">$(</span>android-select-device <span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span><span class="si">)</span>
+<span class="nb">exec</span> <span class="nv">$ADB</span> <span class="nv">$S</span> <span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span>
+<span class="k">fi</span>
+</code></pre></div></div>
+
+<p>同样的把上面代码复制保存到文件
+<strong>my-adb</strong> 。 接下来把这两个脚本加入到 $PATH 里面。我的做法是在
+$ANDROID_SDK_HOME 里面建个 my-tools 文件夹，再把脚本放进去。然后直接在
+$PATH 里添加这个目录</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$ANDROID_SDK_HOME</span>/my-tools
+</code></pre></div></div>
+
+<p>最后给 my-adb 加个 adb 别名，让它替换掉原来的 adb。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">alias </span><span class="nv">adb</span><span class="o">=</span>my-adb
+</code></pre></div></div>
+
+<p>确保环境变量生效后，就可以键入 adb
+试试看了。如果运行失败，确保两个脚本的权限为可执行，如 744 。</p>
+
+<p>运行 adb hell 后，如果有多个设备的话，你应该可以看到文章一开始的输出：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>adb hell
+1<span class="o">)</span> HT18HTB00535 device
+2<span class="o">)</span> HT04RL901008 device
+Select the device to use, &lt;q&gt; to quit: 1
+shell@android:/ <span class="err">$</span>
+</code></pre></div></div>
+
+<p>不过这个脚本也是有缺陷的，不管 adb
+的子命令需不需要指定device，只要多于一个设备连接着，它都会提示选择设备。</p>
+
+<h3 id="注解">注解</h3>
+
+<p>​1)
+这个问题是由于不同的机器使用不同的<strong>debug.keystore</strong>，导致安装的时候验证错误。所有开发的机器使用相同的<strong>debug.keystore</strong>便可以避免这个问题再次发生。在
+Eclipse 下 Window -&gt; Preferences -&gt; Android -&gt; Build -&gt; Custom debug
+keystore 中可以更改。</p>
+
+    </article>
+    <div class="tag-container" >
+        
+        <div class="chip">
+        <a href="/tags#adb-ref">
+            adb
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#ADT-ref">
+            ADT
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#Android-ref">
+            Android
+        </a>
+        </div>
+        
+    </div>
+<div class="post-pager">
+    
+    <a href="/2012/06/24/madness_of_formatting/">上一篇：误删分区</a>
+    
+    
+    <a href="/2012/07/20/cat/" style="float:right;" >下一篇：猫</a>
+    
+</div>
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/2012/06/26/selecting-adb-device"
+ var disqus_config = function () {
+     this.page.title = "可交互的 adb devices"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/2012/06/26/selecting-adb-device/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

@@ -1,0 +1,961 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    Gradle | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">Gradle</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 18-05-28">2015-04-28</span>
+    
+</div>
+
+<article>
+    <h2 id="gradle">Gradle</h2>
+
+<p>Gradle 提供一个 DSL 来描述构建，这个构建语言基于 groovy。Gradle 有两种基本元素 projects &amp; tasks。</p>
+
+<h3 id="groovy">Groovy</h3>
+
+<h3 id="项目project">项目（Project）</h3>
+
+<p>一个可构建的东西称为项目，每个项目由一或多个任务组成。<a href="https://docs.gradle.org/current/javadoc/org/gradle/api/Project.html">Project</a> 接口也是 build.gradle 接口最外层的上下文。</p>
+
+<ul>
+  <li>Any method you call in your build script which is not defined in the build script, is delegated to the Project object.</li>
+  <li>Any property you access in your build script, which is not defined in the build script, is delegated to the Project object.</li>
+</ul>
+
+<p>gradle 利用 groovy 语言的特性实现 DSL 比如：</p>
+
+<pre><code>task hello {
+   println "Hello World"
+}
+</code></pre>
+
+<p>实际上等同于调用 Project 的 task 方法：</p>
+
+<pre><code>task("hello",{println "Hello World"})
+</code></pre>
+
+<p>利用了 groovy 的三个特性</p>
+
+<ol>
+  <li>方法调用在无歧义的时候，可以省略括号</li>
+  <li>最后一个参数是闭包可以放在方法括号后面，类似ruby</li>
+  <li>闭包内的变量和方法解析，可以通过 delegate 类，实现动态绑定。<a href="http://groovy.codehaus.org/Closures">Groovy closures</a></li>
+  <li>编译时元编程，groovy 支持自定义 AST 解析，gradle 可以分析出 <code>hello</code> 是字符串</li>
+</ol>
+
+<h4 id="groovy-1">Groovy</h4>
+
+<p>Groovy 的闭包有 <code>thisObject</code>、<code>owner</code>、<code>delegate</code> 三个属性，</p>
+
+<pre><code>task groovy &lt;&lt; {
+     println "it:${it.getClass()}" // org.gradle.api.DefaultTask_Decorated
+     println "thisObject:${thisObject.getClass()}" // build_49px60ctt3pjghny7qw5o4r2x
+     println "owner:${owner.getClass()}"  //build_49px60ctt3pjghny7qw5o4r2x
+     println "delegate:${delegate.getClass()}" // org.gradle.api.DefaultTask_Decorated
+}
+
+println "${this.getClass()}"  // build_49px60ctt3pjghny7qw5o4r2x
+</code></pre>
+
+<ul>
+  <li>thisObject 就是这个脚本的上下文，等同于最外层脚本的 this。</li>
+  <li>owner 指向 closure 外层的上下文，这里 closure 的外层就是最外层脚本。如果当期闭包在另外一个闭包里面，那么 onwer 就会指向外层的闭包</li>
+  <li>delegate 默认情况下和 owner 一样，但是它是可以修改的，gradle 把他修改成指向 it。</li>
+</ul>
+
+<p>Gradle 的 DSL 常用这种方式来实现：</p>
+
+<pre><code>task configClosure &lt;&lt; {
+    person {
+        personName "张三"
+        personAge 20
+        dumpPerson()
+    }
+}
+   
+class Person {
+    String personName
+    int personAge
+   
+    def dumpPerson(){
+        println "name is ${personName},age is ${personAge}"
+    }
+}
+   
+def person(Closure&lt;Person&gt; closure){
+    Person p = new Person();
+    closure.delegate = p
+    //委托模式优先
+    closure.setResolveStrategy(Closure.DELEGATE_FIRST);
+    closure(p)
+}
+</code></pre>
+
+<p>Groovy 搜索变量的顺序是，自身&gt;thisObject(存疑)&gt;owner&gt;delegate</p>
+
+<p>不过可以通过 setResolveStrategy 来改变这个顺序。</p>
+
+<h3 id="任务">任务</h3>
+
+<p><a href="https://docs.gradle.org/current/javadoc/org/gradle/api/Task.html">Task (Gradle API 4.4)</a></p>
+
+<p>声明一个任务，<code>task hello</code>、<code>task(hello)</code>、<code>task("hello")</code>.</p>
+
+<p>任务可以像是一个闭包序列，</p>
+
+<pre><code>task hello {
+    doLast {
+        println 'Hello world!'
+    }
+}
+# &lt;&lt;  等同于 leftShift 方法，在 Task 类已被标记为过期
+task hello &lt;&lt; { 
+        println 'Hello world!'
+    }
+</code></pre>
+
+<p>也可以配置其他数据</p>
+
+<p>task hello {
+     group “Udacity”
+     description “This is my first Gradle task”
+     doLast {
+            println ‘Hello World’
+     }
+}</p>
+
+<p>执行 <code>gradle -q hello</code>， <code>-q</code> 表示静默输出。</p>
+
+<pre><code>Hello world!
+</code></pre>
+
+<p>gradle 还支持动态任务</p>
+
+<pre><code>4.times {
+	task "task$counter" &lt;&lt; {
+		println "I'm task number $counter"
+	}
+
+}    
+</code></pre>
+
+<h4 id="任务依赖">任务依赖</h4>
+
+<pre><code>task intro(dependsOn: hello) &lt;&lt; {
+    println "I'm Gradle"
+}
+
+// or
+intro.dependsOn hello
+</code></pre>
+
+<p>表示完成了 hello 任务再执行 intro</p>
+
+<p>输出</p>
+
+<pre><code>&gt; gradle -q intro
+Hello world!
+I'm Gradle
+</code></pre>
+
+<p>上面可以在 intro 定义完后再修改任务，这也是 gradle 所支持的。</p>
+
+<ul>
+  <li>dependsOn，B 依赖于 A，运行 B 的时候 Gradle 会先运行 A</li>
+  <li>finalizeBy，B finalizeBy A，A 会在 B <strong>运行后</strong>运行</li>
+  <li>shouldRunAfter，B shouldRunAfter A，如果 A 和 B 同时运行， Gradle 会先运行 A 再运行 B</li>
+</ul>
+
+<p>另外还有 <code>mustRunAfter</code>，比起它 shouldRunAfter 更没有强制性一些，比如 B 依赖 A，A 依赖 C，C 应该在 B 之后执行。这时 shouldRunAfter 不会生效。</p>
+
+<h4 id="默认任务">默认任务</h4>
+
+<p>如果不指明任务 <code>gradle -q</code> 将运行默认任务</p>
+
+<p>默认任务可这样声明</p>
+
+<pre><code>defaultTasks 'clean', 'run'
+</code></pre>
+
+<h4 id="task-原理">Task 原理</h4>
+
+<p>Task 可以认为是一个 <a href="https://docs.gradle.org/current/javadoc/org/gradle/api/Action.html">Action</a> 对象序列</p>
+
+<h4 id="增量构建">增量构建</h4>
+
+<p>见 <a href="https://docs.gradle.org/current/userguide/more_about_tasks.html#sec:up_to_date_checks">up_to_date_checks</a></p>
+
+<h4 id="typed-task">Typed Task</h4>
+
+<p>Gradle 提供不少任务类型，用于执行各种常见任务</p>
+
+<h4 id="增量构建-1">增量构建</h4>
+
+<p>如何判断是否 UPDATE-TO-DATE</p>
+
+<h3 id="property">Property</h3>
+
+<h4 id="参数化构建">参数化构建</h4>
+
+<h5 id="cli">CLI</h5>
+
+<p>-P 也可以声明属性</p>
+
+<h5 id="gradleproperties">gradle.properties</h5>
+
+<p>可以声明属性</p>
+
+<h5 id="ext">ext</h5>
+
+<p>ext{
+  name value
+}</p>
+
+<h4 id="task-里定义额外的属性">Task 里定义额外的属性</h4>
+
+<pre><code>task myTask {
+    ext.myProperty = "myValue"
+}
+
+task printTaskProperties &lt;&lt; {
+    println myTask.myProperty
+}
+</code></pre>
+
+<p>ext 是 <code>org.gradle.api.internal.plugins.DefaultExtraPropertiesExtension</code> 的实例，要在闭包里面访问 Task 本身可用 <code>it</code> 这个 groovy 通用变量。</p>
+
+<h3 id="生命周期">生命周期</h3>
+
+<p>Gradle build 有三个阶段</p>
+
+<ol>
+  <li>初始化（Initialization），定位并加载 setting.gradle ，决定当前项目是 single 还是 multiproject。决定哪些项目需要参与这次构建。为每个参与的项目初始化 Project 对象</li>
+  <li>配置（Configuration）</li>
+  <li>执行（Execution）</li>
+</ol>
+
+<p>settings.gradle</p>
+
+<pre><code>println 'This is executed during the initialization phase.'
+</code></pre>
+
+<p>build.gradle</p>
+
+<pre><code>println 'This is executed during the configuration phase.'
+
+task configured {
+    println 'This is also executed during the configuration phase.'
+}
+
+task test &lt;&lt; {
+    println 'This is executed during the execution phase.'
+}
+
+task testBoth {
+    doFirst {
+      println 'This is executed first during the execution phase.'
+    }
+    doLast {
+      println 'This is executed last during the execution phase.'
+    }
+    println 'This is executed during the configuration phase as well.'
+}
+</code></pre>
+
+<h3 id="java-plugin">Java Plugin</h3>
+
+<p>一般常用下面几个任务</p>
+
+<ul>
+  <li>build，Gradle 编译并运行测试，然后打包 JAR 文件。</li>
+  <li>clean，删除整个 <code>build</code> 目录，移除所有 built 产生的文件。</li>
+  <li>assemble，编译打包 JAR，但不会运行单元测试任务。</li>
+  <li>check，编译并测试代码，Android 插件还会运行 lint 检查。</li>
+</ul>
+
+<h3 id="依赖">依赖</h3>
+
+<p>一个简单的依赖如下：</p>
+
+<pre><code>apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'org.hibernate', name: 'hibernate-core', version: '3.6.7.Final'
+    testCompile group: 'junit', name: 'junit', version: '4.+'
+}
+</code></pre>
+
+<h4 id="仓库">仓库</h4>
+
+<p>仓库，是 gradle 搜索依赖项目的地方。</p>
+
+<pre><code>repositories {
+    mavenCentral()
+	mavenLocal()
+	maven {
+        url "http://repo.mycompany.com/maven2"
+    }
+	ivy {
+        url "http://repo.mycompany.com/repo"
+    }
+	ivy {
+        url "../local-repo" //本地 url 也支持
+    }
+}
+</code></pre>
+
+<p>可以一次声明多个仓库， gradle 按照声明的顺序进行搜索，一旦找到了便停止向下搜索。</p>
+
+<p><a href="http://gradle.org/docs/current/dsl/org.gradle.api.artifacts.dsl.RepositoryHandler.html">RepositoryHandler - Gradle DSL Version 2.3</a></p>
+
+<h4 id="声明依赖">声明依赖</h4>
+
+<p>外部依赖：</p>
+
+<pre><code>dependencies {
+    compile group: 'org.hibernate', name: 'hibernate-core', version: '3.6.7.Final'
+	compile 'org.hibernate:hibernate-core:3.6.7.Final'
+}
+</code></pre>
+
+<p>外部依赖需要 group、name 和 version 来识别，也可以写出 <code>group:name:version</code> 这样简短的格式。</p>
+
+<p>相对应的还有，项目内的依赖：</p>
+
+<pre><code>dependencies {
+    compile project(':module')
+
+}
+</code></pre>
+
+<p>依赖可以有多种配置，如 <code>compile</code> 和 <code>testCompile</code></p>
+
+<p><a href="http://gradle.org/docs/current/dsl/org.gradle.api.artifacts.dsl.DependencyHandler.html">DependencyHandler - Gradle DSL Version 2.3</a></p>
+
+<h4 id="dependency-configuration">Dependency Configuration</h4>
+
+<p>依赖是由多个配置（Configuration）组成的，比如</p>
+
+<p>dependencies {
+   配置名 依赖记号
+   // 依赖记号指的是 ‘group:name:version’
+   也可以用 map 风格
+   compile group: ‘group’, name: ‘name’, version : ‘version’ <br />
+}</p>
+
+<pre><code>dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:support-v4:22.1.1'
+    compile 'com.android.support:appcompat-v7:22.1.1'
+
+}
+</code></pre>
+
+<p>依赖被组织到不同的配置项中（Configuration），如上面的 <code>compile</code> 就是一个配置项。可以同通过 <code>configurations.compile</code> 来访问到 <code>compile</code> 所有的依赖。</p>
+
+<p>配置项可以是 Gradle 插件预定制的，比如 Java 插件，就定制 <code>compile</code> <code>runtime</code> <code>testCompile</code> 等等，<code>compile</code> 表示编译时的依赖，<code>runtime</code> 表示运行时的依赖，不同的配置项的依赖的不同作用是由插件定义的。 配置项之间也是有层级关系的，比如 <code>runtime</code> 依赖是继承 <code>compile</code> 的，表示运行时的依赖同时也是编译时的依赖。</p>
+
+<p>配置项也可以自己定义，比如</p>
+
+<pre><code>configurations {
+  jaxDoclet
+}
+
+dependencies {
+  jaxDoclet "some.interesting:Dependency:1.0"
+}
+
+task generateRestApiDocs(type: Javadoc) {
+  source = sourceSets.main.allJava
+  destinationDir = reporting.file("rest-api-docs")
+  options.docletpath = configurations.jaxDoclet.files.asType(List)
+  options.doclet = "com.lunatech.doclets.jax.jaxrs.JAXRSDoclet"
+  options.addStringOption("jaxrscontext", "http://localhost:8080/myapp")
+}
+</code></pre>
+
+<p>一个配置项其实是一个 <a href="http://gradle.org/docs/current/javadoc/org/gradle/api/file/FileCollection.html">FileCollection</a> 实例。见 <a href="http://gradle.org/docs/current/dsl/org.gradle.api.artifacts.Configuration.html">Configuration - Gradle DSL Version 2.4</a></p>
+
+<h4 id="依赖传递">依赖传递</h4>
+
+<p>http://a123159521.iteye.com/blog/774322</p>
+
+<h3 id="android-plugin">Android Plugin</h3>
+
+<p>https://sites.google.com/a/android.com/tools/tech-docs/new-build-system</p>
+
+<p>android.libraryVariants</p>
+
+<p>https://sites.google.com/a/android.com/tools/tech-docs/new-build-system/user-guide</p>
+
+<p>Running the build twice without change will make Gradle report all tasks as UP-TO-DATE, meaning no work was required. This allows tasks to properly depend on each other without requiring unneeded build operations.</p>
+
+<p>An Android project has at least two outputs: a debug APK and a release APK</p>
+
+<p><a href="https://developer.android.com/tools/building/plugin-for-gradle.html">Android Plug-in for Gradle | Android Developers</a></p>
+
+<h4 id="basic-build-customization">Basic Build Customization</h4>
+
+<ul>
+  <li>minSdkVersion</li>
+  <li>targetSdkVersion</li>
+  <li>versionCode</li>
+  <li>versionName</li>
+  <li>applicationId</li>
+  <li>Package Name for the test application</li>
+  <li>Instrumentation test runner</li>
+</ul>
+
+<p>The defaultConfig element inside the android element is where all this configuration is defined.</p>
+
+<h4 id="build-types">Build Types</h4>
+
+<p>By default, 2 instances are created, a debug and a release one.</p>
+
+<h5 id="定义一个build-type">定义一个Build Type</h5>
+
+<pre><code>android {
+    buildTypes {
+        debug {
+            applicationIdSuffix ".debug"
+        }
+		//复制debug的配置初始一个新 build type: jnidebug
+        jnidebug.initWith(buildTypes.debug)
+        jnidebug {
+			//配置 buid type 的属性
+            packageNameSuffix ".jnidebug"
+            jniDebuggable true
+        }
+    }
+}
+</code></pre>
+
+<p>一个 build type 有下面这些属性</p>
+
+<pre><code>Property name	 Default values for debug	 Default values for release / other
+ debuggable	 true	 false
+ jniDebuggable	 false	 false
+ renderscriptDebuggable	 false	 false
+ renderscriptOptimLevel	 3	 3
+ applicationIdSuffix	 null	 null
+ versionNameSuffix	 null	 null
+ signingConfig	 android.signingConfigs.debug	 null
+ zipAlignEnabled	 false	 true
+ minifyEnabled	 false	 false
+ proguardFile	 N/A (set only)	 N/A (set only)
+ proguardFiles	 N/A (set only)	 N/A (set only)
+</code></pre>
+
+<p>BuildType 还可以有自己的源集（SourceSet），默认是</p>
+
+<pre><code>src/&lt;buildtypename&gt;/  //所以 BuildType 不能是 main 或 androidTest
+</code></pre>
+
+<p>新的源集可以</p>
+
+<ul>
+  <li>The manifest is merged into the app manifest</li>
+  <li>The code acts as just another source folder</li>
+  <li>The resources are overlayed over the main resources, replacing existing values.</li>
+</ul>
+
+<p>每个 BuildType 都会生成相应的任务，如 <code>assemble&lt;BuildTypeName&gt;</code></p>
+
+<p>获取源集与 java 不同，不能直接访问 sourceSets，需要在 android 的闭包内，或者通过 <code>android.sourceSets</code> 访问。</p>
+
+<h4 id="dependecies">Dependecies</h4>
+
+<p>每个 BuildType 都有自己的 Dependecies 配置项，<buildtype>Compile</buildtype></p>
+
+<h4 id="library">Library</h4>
+
+<h4 id="product-flavor">Product Flavor</h4>
+
+<pre><code>android {
+    ....
+
+    productFlavors {
+        flavor1 {
+            ...
+        }
+
+        flavor2 {
+            ...
+        }
+    }
+}
+</code></pre>
+
+<p>flavor 名称不能与 BuildType 名称相同</p>
+
+<p>Build Type + Product Flavor = Build Variant</p>
+
+<h3 id="android-plugin-1">Android Plugin</h3>
+
+<p><a href="https://google.github.io/android-gradle-dsl/current/">Android DSL</a></p>
+
+<h4 id="build-variants">Build variants</h4>
+
+<h4 id="live-collections">live collections</h4>
+
+<p>applicationVariants.all</p>
+
+<h3 id="android-studio">Android Studio</h3>
+
+<p>Android Studio 项目有两种 <code>build.gradle</code> ，</p>
+
+<ul>
+  <li>项目级别，配置可以影响所以模块</li>
+  <li>模块级别</li>
+</ul>
+
+<h4 id="项目级别-buildgradle">项目级别 build.gradle</h4>
+
+<pre><code>buildscript {
+ 
+//Project-level Gradle build files use buildscript to define dependencies.//
+//定义项目级别 build files 依赖
+ 
+    repositories {
+ 
+        jcenter()
+    }
+ 
+//This file relies on the jJCenter repository.//
+ 
+    dependencies {
+ 
+   classpath 'com.android.tools.build:gradle:1.0.0'
+ 
+//Project is dependent on version 1.0.0 of the Android plugin for Gradle.// 
+ 
+    }
+}
+ 
+allprojects {
+ 
+//Defines the dependencies required by your application.//
+ 
+    repositories {
+        jcenter()
+    }
+}
+ 
+//Application depends on the jCenter repository.//
+</code></pre>
+
+<h4 id="项目内其他-gradle-配置文件">项目内其他 Gradle 配置文件</h4>
+
+<h5 id="gradle-wrapperproperties">gradle-wrapper.properties</h5>
+
+<p>位于 <code>gradle/wrapper</code> 的 <code>gradle-wrapper.properties</code>，帮助其他人构建你的项目，即便他的机器没有安装 gradle，配合 <code>gradlew</code> 这个文件让用户下载合适的 gradle 版本。</p>
+
+<pre><code>distributionBase=GRADLE_USER_HOME
+ 
+//Determines whether the unpacked wrapper distribution should be stored in the project, or in the Gradle user home directory.//
+ 
+distributionPath=wrapper/dists
+ 
+//The path where the Gradle distributions required by the wrapper are unzipped.//
+ 
+zipStoreBase=GRADLE_USER_HOME
+ 
+zipStorePath=wrapper/dists
+ 
+distributionUrl=https\://services.gradle.org/distributions/gradle-2.2.1-all.zip
+ 
+//定义当前项目所用 Gradle 版本的下载地址//
+</code></pre>
+
+<p>GRADLE_USER_HOME 一般位于 <code>{user.dir}/.gradle</code>，比较奇怪的是似乎每个项目都要下载一份，不管是不是相同版本的 gradle。</p>
+
+<h5 id="settingsgradle">settings.gradle</h5>
+
+<p>这个文件用来声明当前项目所用的模块，不知是否还有其他功能 #TODO</p>
+
+<pre><code>include ':app'
+</code></pre>
+
+<h5 id="gradleproperties-1">gradle.properties</h5>
+
+<p>用来配置针对这个项目的 gradle 运行偏好，默认为空。</p>
+
+<h5 id="localproperties">local.properties</h5>
+
+<p>用来配置针对本地的偏好，比如 sdk 的地址，或者其他个人信息，这个文件应该保留在本地，不应上传至仓库。</p>
+
+<pre><code>sdk.dir=E\:\\Android\\android-sdk
+</code></pre>
+
+<h4 id="multidex">multidex</h4>
+
+<p>参考官方文档：<a href="https://developer.android.com/studio/build/multidex.html">配置方法数超过 64K 的应用 | Android Studio</a>，不过文档有个坑，文档建议用用不同产品风味（productFlavors）来配置不同的 minSdkVersion ，实现提高开发时构建效率。不过这个建议已经过时了，IDE 内置帮我做了这个处理：</p>
+
+<blockquote>
+  <p>In the past, our documentation recommended creating a dev product flavor with has a minSdkVersion of 21, in order to enable multidexing to speed up builds significantly during development.  That workaround is no longer necessary, and it has some serious downsides, such as breaking API access checking (since the true minSdkVersion is no longer known.)  In recent versions of the IDE and the Gradle plugin, the IDE automatically passes the API level of the connected device used for deployment, and if that device is at least API 21, then multidexing is automatically turned on, meaning that you get the same speed benefits as the dev product flavor but without the downsides.</p>
+</blockquote>
+
+<h3 id="实用链接">实用链接</h3>
+
+<ul>
+  <li>DSL 文档：<a href="https://docs.gradle.org/current/dsl/index.html">Gradle DSL Version 4.1</a></li>
+  <li><a href="https://docs.gradle.org/current/userguide/userguide.html">Gradle User Guide Version 4.1</a></li>
+  <li>源码 <a href="https://github.com/gradle/gradle">gradle/gradle: Adaptable, fast automation for all</a></li>
+  <li><a href="https://google.github.io/android-gradle-dsl/current/">Android Plugin 2.3.0 DSL Reference</a></li>
+</ul>
+
+<h3 id="api--implementation">api &amp; implementation</h3>
+
+<p><a href="https://docs.gradle.org/current/userguide/java_library_plugin.html">The Java Library Plugin - Gradle User Guide Version 4.0.2</a></p>
+
+<p>LibB 声明对 LibA 的依赖为 <code>api</code>，LibA 也会暴露给 LibB 的消费者。如果 App 依赖 LibB，那么 App 也能使用 LibA 的 Api。 LibA 发生变更也会导致 App 需要重新编译。</p>
+
+<p>相对的，LibB 声明对 LibA 的依赖为 <code>implementation</code>，那么 App 不能使用 LibA 的 Api，LibA 的变更也不会影响到 App。</p>
+
+<h3 id="加速-gradle">加速 Gradle</h3>
+
+<p>####　Gradle daemon</p>
+
+<p>Android Studio 默认就开启了这个选项。也可以在 <code>gradle.properties</code> 中加上</p>
+
+<pre><code>org.gradle.daemon=true
+</code></pre>
+
+<p>也可以通过命令行</p>
+
+<pre><code>gradle build --daemon
+</code></pre>
+
+<p>daemon 让 Gradle 在后台一直运行，不用每次打包都启动一次。缺点就是会占用大量内存，听说要好几百 MB。</p>
+
+<h5 id="关闭">关闭</h5>
+
+<pre><code>gradle --stop
+</code></pre>
+
+<p>Android Studio 在设置 <code>Build, Execution, Deployment &gt; Compiler</code> 可关掉 <code>Use in-process build</code></p>
+
+<h4 id="平行编译gradle-parallel">平行编译（Gradle parallel）</h4>
+
+<p>平行编译互相之间独立的模块，一般应用似乎没什么用</p>
+
+<pre><code>org.gradle.parallel=true
+</code></pre>
+
+<p>或者</p>
+
+<pre><code>gradle build --parallel --parallel-threads=N
+</code></pre>
+
+<p>Android Studio 在设置 <code>Build, Execution, Deployment &gt; Compiler</code> 中可开启，线程数应该要通过 <code>Command-line options</code> 指定</p>
+
+<h4 id="configure-projects-on-demand">Configure projects on demand</h4>
+
+<p>不用每次编译都配置所有模块</p>
+
+<pre><code>org.gradle.configureondemand=true
+</code></pre>
+
+<p>或者</p>
+
+<pre><code>gradle build --configure-on-demand
+</code></pre>
+
+<p>Android Studio 在设置 <code>Build, Execution, Deployment &gt; Compiler</code> 中可开启，默认开启。</p>
+
+<h3 id="链接">链接</h3>
+
+<ul>
+  <li><a href="http://code.tutsplus.com/tutorials/the-ins-and-outs-of-gradle--cms-22978">The Ins and Outs of Gradle</a></li>
+  <li><a href="http://jimulabs.com/2014/10/speeding-gradle-builds/">Speeding up Gradle builds - jimu Mirror: Live previews of Android layouts</a></li>
+  <li><a href="http://toastdroid.com/2014/03/28/customizing-your-build-with-gradle/">Customizing Your Build With Gradle | ToastDroid</a></li>
+  <li><a href="http://mrhaki.blogspot.de/search/label/Gradle%3AGoodness">Messages from mrhaki</a></li>
+  <li><a href="http://ph0b.com/android-studio-gradle-and-ndk-integration/">Android Studio, gradle and NDK integration | ph0b’s</a></li>
+</ul>
+
+<h4 id="2015-12-24">2015-12-24</h4>
+
+<h3 id="custom-task-classes">Custom Task Classes</h3>
+
+<p>rootProjectDir/buildSrc/src/main/groovy directory</p>
+
+<h3 id="实践">实践</h3>
+
+<h4 id="gradle-自定义打包apk文件名格式">Gradle 自定义打包apk文件名格式</h4>
+
+<pre><code>android {
+    applicationVariants.all { variant -&gt;
+        if (variant.name.toLowerCase().contains("release")) {
+          variant.outputs.all {
+            outputFileName = "${defaultConfig.applicationId}_${defaultConfig.versionName}.apk"
+          }
+        }
+      }
+}
+</code></pre>
+
+<h3 id="log">log</h3>
+
+<p>gradle 默认只显示 Lifecycle 以上的日志</p>
+
+<p><code>println</code> 的日记等级是 QUIET</p>
+
+<p>–stacktrace 可以用 -s 代替</p>
+
+<h3 id="plugin">Plugin</h3>
+
+
+</article>
+<div class="tag-container" >
+    
+    <div class="chip">
+        <a href="/tags#gradle-ref">
+            gradle
+        </a>
+    </div>
+    
+    <div class="chip">
+        <a href="/tags#groovy-ref">
+            groovy
+        </a>
+    </div>
+    
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Tools/gradle"
+ var disqus_config = function () {
+     this.page.title = "Gradle"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Tools/gradle/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

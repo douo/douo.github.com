@@ -1,0 +1,535 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    Mavericks 备忘 | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">Mavericks 备忘</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-11-30">2014-02-13</span>
+    
+</div>
+
+<article>
+    <h3 id="第一阶段安装">第一阶段：安装</h3>
+
+<h4 id="配置">配置</h4>
+
+<pre><code> Mobo：[GA-Z77-D3H](http://www.gigabyte.com/products/product-page.aspx?pid=4140#sp)
+     Audio: VIA VT2021
+     LAN: Atheros GbE LAN
+ CPU： i5 3450
+ GC： MSI HAWK r6850
+ MEN： 8G 1600Mzh
+</code></pre>
+
+<h4 id="硬盘">硬盘</h4>
+
+<p>SSD：SAMSUNG SSD 840 250G</p>
+
+<pre><code>   #:                       TYPE NAME                    SIZE       IDENTIFIER
+   0:      GUID_partition_scheme                        *250.1 GB   disk0
+   1:       Microsoft Basic Data EFI                     209.7 MB   disk0s1
+   2:                  Apple_HFS Hackintosh              125.0 GB   disk0s2
+   3:                  Apple_HFS Recovery HD             650.0 MB   disk0s3
+   4:       Microsoft Basic Data BOOT                    5.4 GB     disk0s4
+   5:         Microsoft Reserved                         134.2 MB   disk0s5
+   6:       Microsoft Basic Data Win8                    118.7 GB   disk0s6
+</code></pre>
+
+<p>HDD: WDC 2T</p>
+
+<pre><code>   #:                       TYPE NAME                    SIZE       IDENTIFIER
+   0:      GUID_partition_scheme                        *250.1 GB   disk0
+   1:       Microsoft Basic Data EFI                     209.7 MB   disk0s1
+   2:                  Apple_HFS Hackintosh              125.0 GB   disk0s2
+   3:                  Apple_HFS Recovery HD             650.0 MB   disk0s3
+   4:       Microsoft Basic Data BOOT                    5.4 GB     disk0s4
+   5:         Microsoft Reserved                         134.2 MB   disk0s5
+   6:       Microsoft Basic Data Win8                    118.7 GB   disk0s6
+</code></pre>
+
+<h4 id="clover">Clover</h4>
+
+<p>r2577 ，<a href="http://sourceforge.net/projects/cloverefiboot/files/">下载</a></p>
+
+<h4 id="mavericks">Mavericks</h4>
+
+<p>10.9.1(13B42)，<a href="http://bbs.pcbeta.com/viewthread-1457312-1-1.html">下载</a></p>
+
+<p>MD5(InstallESD.dmg) = f67bf055be1a494eb2547e17e74a0c13</p>
+
+<h4 id="安装">安装</h4>
+
+<h5 id="安装-clover">安装 Clover</h5>
+
+<p>将U盘用GPT方式分为两个区，第一个是 EFI 分区，Fat32 用于 Clover，大于 200 mb 便可以，第二个是 HFS+，用于恢复苹果安装镜像。</p>
+
+<p>安装 Clover，选择纯 UEFI 引导，以 ESP 方式安装，安装位置选择一个分区大，必须是 fat32 或者 hps 格式，同时必需让苹果系统不挂载第一个分区，安装的时候，Clover会自动把 efi 文件安装到第一个分区里。</p>
+
+<pre><code> 第一次安装的时候 Clover 会自己创建 EFI 分区，但是接下来再次安装都不行了，安装失败，log 显示设备的第一个分区 resource busy ，不知道原因，所以得使用上面的方法安装才可以。
+</code></pre>
+
+<p>这样用 UEFI 引导 U 盘便可以进入 Clover 了。</p>
+
+<h5 id="准备安装-u-盘">准备安装 U 盘</h5>
+
+<p>用了<a href="http://coolestguidesontheplanet.com/making-a-boot-usb-disk-of-osx-10-9-mavericks/">如何创建 Mavericks 安装盘</a>中的第三种方法，纯命令行比较方便。</p>
+
+<p>如果需要修改 SLE 里的文件，参考<a href="http://www.insanelymac.com/forum/topic/282787-clover-v2-instructions/page__st__20#entry1869539">How to modify InstallESD.dmg</a>。不过 Mavericks 不用修改什么，AMD6000Controller.kext 直接可以驱动 6850。</p>
+
+<p>不过进入 Clover 发现其不能找到U盘里的苹果安装包分区，原因未明。后来试了下，将安装镜像恢复到 HDD 的一个分区里，Clover 可以找到了安装盘了，不过进入后提示找不到 mach_kernel，原因未深究。将安装镜像恢复到整个U盘里，就可以顺利引导进入安装界面。不过 U盘的EFI也要被格式化的，需把 Clover 移到 HDD 里，为 HDD 创建一个 EFI 分区，然后将原先 EFI 分区的 EFI 文件夹移过来便可以。</p>
+
+<h5 id="如何创建一个-efi-分区">如何创建一个 EFI 分区</h5>
+
+<p>用 <a href="https://www.archlinux.org/download/">Arch Linux 的安装镜像</a>来创建 EFI 分区很方便，别的系统找不到得心应手的 GPT 分区工具，还是 Linux 方便。</p>
+
+<p>1.gdisk 分区，type: efi, code:ef00;一般 index 为 1，如果已经用了不放在第一个也可以
+2.parted 为分区加上 flag: boot,hidden
+3.格式化为 fat32，<code>mkdosfs /dev/sda1</code></p>
+
+<p>最后挂载两个分区，转移 EFI 文件便可。</p>
+
+<h5 id="重刷-bios">重刷 Bios</h5>
+
+<p>期间出了点状况，开机无法进入启动选择菜单，也无法进入 Bios，拔掉任意一个硬盘后一切正常。猜测是 Bios 有 Bug，可能是 EFI 分区太多导致。决定重刷 Bios。重刷的版本是<a href="http://www.gigabyte.com/products/product-page.aspx?pid=4140#bios">F22</a>，在 Windows 下用 @Bios 刷入，<a href="http://www.gigabyte.com/webpage/20/HowToReflashBIOS.html">指导</a>。重刷后就正常了。设置被恢复默认了，然后记得改回 ACHI。根据 <a href="http://www.macbreaker.com/2012/08/set-up-hackintosh-gigabyte-uefi.html">How to set up the UEFI of your Hackintosh’s Gigabyte motherboard</a>，还做了如下修改：</p>
+
+<ol>
+  <li>xhci mode ： smart auto 到 auto</li>
+  <li>echi hand-off：到 enable</li>
+</ol>
+
+<h5 id="其他问题">其他问题</h5>
+
+<p>google+ auto backup 导致系统缓慢，磁盘无法卸载。先卸而后快。</p>
+
+<h5 id="配置-clover">配置 Clover</h5>
+
+<p><code>config.plist</code> 无需修改。</p>
+
+<p>drivers64efi 保留 <code>CsmVideoDxe-64.efi DataHubDxe-64.efi FSInject-64.efi OsxAptioFixDrv-64.efi OsxFatBinaryDrv-64.efi PartitionDxe-64.efi VBoxHfs.efi</code>，具体参考<a href="./mountian-lion-memo">山狮备忘</a>。</p>
+
+<p>kexts 需要 <code>FakeSMC</code> 和 <code>VoodooPS2Controller</code>，我的键盘是 PS2 接口的。放于 EFI/CLOVER/KEXTS/下的 10.9 和 other</p>
+
+<p>这样就可以正常进入安装程序了。</p>
+
+<h5 id="安装问题">安装问题</h5>
+
+<p>安装的时候遇到一个比较麻烦的问题，DiskUtil 无法抹掉原先山狮是在的分区，只得删掉重新建立分区，系统和 Recovery HD 分区可以成功不到，但要建立新分区却提示失败了。</p>
+
+<p>原因可能与先安装 windows 再安装 mac 也有问题</p>
+
+<p>http://www.google.com.hk/url?sa=t&amp;rct=j&amp;q=prepare+to+partition+disk&amp;source=web&amp;cd=5&amp;cad=rja&amp;ved=0CD8QFjAE&amp;url=%68%74%74%70%3a%2f%2f%77%77%77%2e%72%65%64%64%69%74%2e%63%6f%6d%2f%72%2f%68%61%63%6b%69%6e%74%6f%73%68%2f%63%6f%6d%6d%65%6e%74%73%2f%31%6b%30%75%6b%70%2f%69%6e%73%74%61%6c%6c%69%6e%67%5f%6d%61%63%5f%6f%73%5f%78%5f%6d%6f%75%6e%74%61%69%6e%5f%6c%69%6f%6e%5f%73%74%75%63%6b%5f%61%74%2f&amp;ei=H3L6Ut_WNuGkigecqIGwDA&amp;usg=AFQjCNGLKImWftxdk1AjgQPJuJDE5bj9sw</p>
+
+<p>进入到上上次的山狮系统，同样用 DiskUtil 也无法建立分区。后来用 iPartition 才能成功创建分区，庆幸还保留着那个旧系统。</p>
+
+<p>分区后就可以顺利安装了，不过无法创建 Recovery 分区。安装后也顺利进入系统，显卡 OK，网卡，声卡不能工作。</p>
+
+<h3 id="第二阶段配置">第二阶段：配置</h3>
+
+<h4 id="网卡驱动">网卡驱动</h4>
+
+<p>网卡的 Kext 在<a href="http://bbs.pcbeta.com/forum.php?mod=viewthread&amp;tid=1425293">这位朋友的驱动</a>里找的，仅用了他的<code>ALXEthernet.kext</code>。</p>
+
+<h4 id="声卡驱动">声卡驱动</h4>
+
+<p>VIA VT2021，按照 <a href="http://www.osx86.net/user/345012-lacedaemon/">Lacedaemon</a> 的<a href="http://www.osx86.net/topic/16228-guide-via-vt2021-audio-on-os-x-108x109/">教程</a>修改 DSDT，用他提供的 <a href="http://www.osx86.net/files/file/3577-applehda-for-vt2021-mavericks-only/">AppleHDA.kext</a> 替换掉系统的，便可以不必用 VoodooHDA。不过前置面板还是没有输出。</p>
+
+<h4 id="cpu-变频问题">CPU 变频问题</h4>
+
+<p>有一个问题是之前没有遇到过的，系统装好后感觉比较慢，便用 GeekBench 跑了下，结果分数异常的低。折腾了半天后才发现 CPU 的频率被锁定在 800 mhz，用 <a href="http://software.intel.com/en-us/articles/intel-power-gadget-20">Intel® Power Gadget</a> 可以看到 CPU 的实时频率。然后用 <a href="https://github.com/Piker-Alpha/RevoBoot/blob/clang/i386/libsaio/acpi/Tools/ssdtPRGen.sh">ssdtPRGen.sh</a> 生成一个 ssdt.aml ，放入 /EFI/CLOVER/ACPI/patched 重启便可。</p>
+
+<p>这个问题确实折腾的比较久，还发过<a href="http://bbs.pcbeta.com/forum.php?mod=viewthread&amp;tid=1478000">求助帖</a>。尝试过 Clover <code>config.plist</code> 的不少选项，还替换了不少 SMBios，发现只有 iMac 和 Mac Pro（排除垃圾桶）可以支持 AMD 显卡。还更新了 <a href="https://github.com/RehabMan/OS-X-FakeSMC-kozlek">FakeSMC</a>，皆不能修复。</p>
+
+<h4 id="xmp">XMP</h4>
+
+<p>我的内存是骇客神条，默认频率是 1333MHz，必须在 Bios 中开启 XMP 模式才可以到 1600MHz，主板只有一个 XMP 模式，Profile 1。重启后 Mac 依然只认到 1333MHz，尝试重新用<a href="https://github.com/Piker-Alpha/RevoBoot/blob/clang/i386/libsaio/acpi/Tools/ssdtPRGen.sh">ssdtPRGen.sh</a> 生成一个 ssdt.aml 没有作用，后来在<code>config.plist</code>中加入 XMPDetection，强制使用 Profile 1 重启后就可以认出 1600MHz 了。</p>
+
+<p>重新跑了下分，分数更高了。结果如下：</p>
+
+<pre><code>Benchmark Summary
+  Integer Score              9615 ||||||||||
+  Floating Point Score      15179 |||||||||||||||||
+  Memory Score               9084 ||||||||||
+  Stream Score               8677 |||||||||
+
+  Geekbench Score           11362 ||||||||||||
+
+System Information
+  Operating System      Mac OS X 10.9.1 (Build 13B42)
+  Model                 iMac13,1
+  Model ID              iMac13,1
+  Motherboard           Apple Computer, Inc. Mac-00BE6ED71E35EB86 iMac13,1
+  Processor             Intel Core i5-3450 @ 3.10 GHz
+                        1 Processor, 4 Cores, 4 Threads
+  Processor ID          GenuineIntel Family 6 Model 58 Stepping 9
+  L1 Instruction Cache  32.0 KB x 2
+  L1 Data Cache         32.0 KB x 2
+  L2 Cache              256 KB x 2
+  L3 Cache              6.00 MB
+  Memory                8.00 GB 0 MHz RAM
+  BIOS                  Apple Computer, Inc. IM131.88Z.010A.B05.1209042338
+
+Integer Performance
+  Blowfish
+    single-threaded scalar   2277 ||
+    multi-threaded scalar    9754 ||||||||||
+  Text Compress
+    single-threaded scalar   3571 ||||
+    multi-threaded scalar   13865 |||||||||||||||
+  Text Decompress
+    single-threaded scalar   3890 ||||
+    multi-threaded scalar   16010 |||||||||||||||||
+  Image Compress
+    single-threaded scalar   3235 |||
+    multi-threaded scalar   12680 ||||||||||||||
+  Image Decompress
+    single-threaded scalar   3814 ||||
+    multi-threaded scalar   15333 |||||||||||||||||
+  Lua
+    single-threaded scalar   6181 ||||||
+    multi-threaded scalar   24773 |||||||||||||||||||||||||||
+
+Floating Point Performance
+  Mandelbrot
+    single-threaded scalar   3099 |||
+    multi-threaded scalar   12594 ||||||||||||||
+  Dot Product
+    single-threaded scalar   4831 |||||
+    multi-threaded scalar   20467 ||||||||||||||||||||||
+    single-threaded vector   7753 ||||||||
+    multi-threaded vector   35666 ||||||||||||||||||||||||||||||||||||||||
+  LU Decomposition
+    single-threaded scalar   2829 |||
+    multi-threaded scalar    9987 |||||||||||
+  Primality Test
+    single-threaded scalar   8863 |||||||||
+    multi-threaded scalar   28419 |||||||||||||||||||||||||||||||
+  Sharpen Image
+    single-threaded scalar   7297 ||||||||
+    multi-threaded scalar   29365 ||||||||||||||||||||||||||||||||
+  Blur Image
+    single-threaded scalar   8241 |||||||||
+    multi-threaded scalar   33103 |||||||||||||||||||||||||||||||||||||
+
+Memory Performance
+  Read Sequential
+    single-threaded scalar   8264 |||||||||
+  Write Sequential
+    single-threaded scalar  12459 |||||||||||||
+  Stdlib Allocate
+    single-threaded scalar   5119 |||||
+  Stdlib Write
+    single-threaded scalar  10667 |||||||||||
+  Stdlib Copy
+    single-threaded scalar   8915 |||||||||
+
+Stream Performance
+  Stream Copy
+    single-threaded scalar   8573 |||||||||
+    single-threaded vector   9893 |||||||||||
+  Stream Scale
+    single-threaded scalar   8950 ||||||||||
+    single-threaded vector   9441 ||||||||||
+  Stream Add
+    single-threaded scalar   7537 ||||||||
+    single-threaded vector   9746 ||||||||||
+  Stream Triad
+    single-threaded scalar   8040 |||||||||
+    single-threaded vector   7243 ||||||||
+</code></pre>
+
+<h4 id="显卡">显卡</h4>
+
+<p>很幸运显卡原生就驱动的很好，SMBios 为 iMac(13,1)。用 OpenGL Extensions
+Viewer 跑分正常，LuxMark 的跑分也跟<a href="http://www.luxrender.net/luxmark/search/search?page=1&amp;benchmark_type=Sala&amp;benchmark_mode=ANY&amp;os_type=ANY&amp;dev_count=1&amp;device_unique_name=Advanced%20Micro%20Devices,%20Inc._SEPARETOR_Barts_SEPARETOR_12">数据库里的数据</a>接近。只有一个问题 6850 显示成为 6xxx。这个问题要通过修改 DSDT 解决，得进一步学习 DSDT 知识，暂缓。</p>
+
+<h4 id="硬盘-1">硬盘</h4>
+
+<p>下载 Trim Enabler 来为 SSD 开启 Trim。</p>
+
+<h4 id="usb30">USB3.0</h4>
+
+<p>USB3.0 接口无法使用，<a href="http://sourceforge.net/projects/genericusbxhci/">GenericUSBXHCI</a> 可以解决问题，但热插拔 android
+手机的时候，会导致重启，开机前插入就不会有问题。应该跟 <a href="http://sourceforge.net/p/genericusbxhci/tickets/18/">Ticket18</a> 相同的
+问题。</p>
+
+<h4 id="总结">总结</h4>
+
+<p>最后把用到的各种工具总结下。</p>
+
+<ul>
+  <li><a href="https://bitbucket.org/blackosx/darwindumper">DarwinDumper</a>  可以dump Mac OS 中的大量信息，整合各种工具。</li>
+  <li><a href="http://cvad-mac.narod.ru/index/0-4">Kext Utility</a> 它做的是复制新 kext 到 SLE，备份原始 kext，修复权限，重新生成 Cache。</li>
+  <li><a href="http://www.osx86.net/files/file/49-clover-configurator/">Clover Configurator</a> 非常好用的 Clover <code>config.plist</code> GUI 工具</li>
+  <li><a href="https://github.com/RehabMan/OS-X-FakeSMC-kozlek">HWMonitor</a> 下载<a href="https://github.com/RehabMan/OS-X-FakeSMC-kozlek">FakeSMC</a> 附送的，可以参考电源管控方面的信息。</li>
+  <li><a href="http://olarila.com/forum/viewtopic.php?f=19&amp;t=62">DSDT Editor</a> dsdt 编辑器，也就是 aml 的编辑器。可以解出当前系统的 dsdt。</li>
+  <li><a href="http://software.intel.com/en-us/articles/intel-power-gadget-20">Intel® Power Gadget</a> Intel 出的 CPU 监控工具，可以查看 CPU 的实时频率。</li>
+  <li><a href="https://www.google.com/search?sourceid=chrome&amp;q=Geekbench">Geekbench</a> CPU 的跑分工具，跑一下看看 CPU 的分数是否正常。</li>
+</ul>
+
+<h3 id="第三阶段常用软件">第三阶段：常用软件</h3>
+
+<h3 id="base">Base</h3>
+
+<p>安装好 xCode，貌似我 xCode 安装好后就有 Command Line tools，有 <code>git</code> <code>gcc</code> <code>make</code> 这些命令。</p>
+
+<p>不过接下来安装 <a href="http://brew.sh/">Homebrew</a> 的时候还会提示安装 Command Line tools。</p>
+
+<p>用 <a href="http://www.iterm2.com/#/section/home">iTerm2</a> 来作为日常终端。</p>
+
+<h4 id="ruby">Ruby</h4>
+
+<p>mavericks 自带有 ruby 2.0，如果需最新版本推荐用 <a href="http://rvm.io/">rvm</a> 来管理不同版本的 ruby。</p>
+
+<h4 id="ruhoh">Ruhoh</h4>
+
+<p>Ruhoh 的安装配置请参考<a href="/notes/tools/ruhoh-env">配置 RUHOH 环境</a></p>
+
+<h4 id="android-开发">Android 开发</h4>
+
+<ul>
+  <li>Android Studio</li>
+  <li>ADT</li>
+  <li>NDK</li>
+</ul>
+
+<h4 id="ios-开发">iOS 开发</h4>
+
+<h4 id="design-tools">Design Tools</h4>
+
+
+</article>
+<div class="tag-container" >
+    
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Computer/Mac/mavericks-memo"
+ var disqus_config = function () {
+     this.page.title = "Mavericks 备忘"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Computer/Mac/mavericks-memo/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

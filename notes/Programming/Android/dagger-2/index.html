@@ -1,0 +1,625 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    Dagger 2 | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">Dagger 2</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 18-09-27">2017-05-15</span>
+    
+</div>
+
+<article>
+    <p>控制反转（IoC），指的便是类的依赖应该由外部来给，类不应该在自己内部实例化其他类。这个给类所需依赖的动作便叫依赖注入（DI）。</p>
+
+<p>A dependency consumer asks for the dependency(Object) from a dependency provider through a connector.</p>
+
+<p>https://blog.mindorks.com/introduction-to-dagger-2-using-dependency-injection-in-android-part-1-223289c2a01b</p>
+
+<h3 id="objects-graph">Objects graph</h3>
+
+<p><code>@Inject</code> 和 <code>@Provides</code> 注解的类形成一个对象图。图的边便是各自的依赖。</p>
+
+<p>main 方法或者 Android 应用/组件 通过一个定义好的根节点集合来访问对象图。这个集合由一个有一系列无参数与返回期望类型的方法列表的接口定义，这个接口由 @Component 注解生成。</p>
+
+<p>如何形成？依赖是什么？</p>
+
+<p>猜想：</p>
+
+<ol>
+  <li>如何形成节点：由 @Inject 注解的构造函数，@Module 内的 Provider 方法。用于提供对象。</li>
+  <li>如何形成边：构造函数的参数，Provider 方法的参数，参数与构造函数的对象之间便有了依赖，Provider 的返回对象和方法的参数对象间也有了依赖。</li>
+</ol>
+
+<blockquote>
+  <p>The @Inject and @Provides-annotated classes form a graph of objects, linked by their dependencies. Calling code like an application’s main method or an Android Application accesses that graph via a well-defined set of roots. In Dagger 2, that set is defined by an interface with methods that have no arguments and return the desired type. By applying the @Component</p>
+</blockquote>
+
+<p>引入提供者和消费者的概念</p>
+
+<h3 id="inject-注解">Inject 注解</h3>
+
+<ul>
+  <li>字段，Dagger 2 不会自动注入字段. 且字段不能是 <code>private</code>. 字段所属的类就是依赖的消费者。需要在 @Component 接口定义一个供给方法（返回该类实例），dagger2 才会为该类注入。</li>
+  <li>构造函数，当 dagger 需要这个类的实例时，会从 Inject 注解的构造函数初始化这个对象。With the @Inject annotation for the constructor, we tell Dagger that an object of this class is injectable into other objects. Dagger automatically calls this constructor, if an instance of this class is requested.</li>
+  <li>方法，只能注解实例方法， dagger2 会创建实例后，调用 inject 注解的方法，在对象图中找到合适的参数传递进去。</li>
+</ul>
+
+<h3 id="module">Module</h3>
+
+<p>Module 一般用于注解类，也可以注解接口。</p>
+
+<p>Module 类用于组织各个 Provide 方法。<code>@Provide</code> 注解的方法表示它是一个提供者，他的返回值将会加入 dagger 的对象图中。</p>
+
+<h4 id="provide">Provide</h4>
+
+<p>@Inject 注解构造器的类可以是提供者，但还不够：</p>
+
+<ul>
+  <li>接口不能被构造</li>
+  <li>第三方的类不能被注解</li>
+  <li>构造器可能不够，有些对象需要多几行代码来配置</li>
+</ul>
+
+<p>@Provide 就是为这些特殊情况来产生对象，注解的方法包含三个部分</p>
+
+<ul>
+  <li>返回值，声明这个 Provider 提供的类型</li>
+  <li>参数，表示创建这个对象需要的依赖</li>
+  <li>方法体，表示具体如何创建这个类型</li>
+</ul>
+
+<p>如果无必要，尽量将 Provide 方法声明为静态方法，避免创建 Module 实例，提高效率。</p>
+
+<h4 id="binds">Binds</h4>
+
+<p>消费者 A（ServletRequest），提供者 B（HttpServletRequest），B 是 A 的子类，但 dagger 仍不能将 B 提供给 A，所以提供者是不变的（invariable）。</p>
+
+<p>如果我们需要一个一般化的类型，而类图中已经一个该类型的子类，那么用Provide 是这样做的：</p>
+
+<pre><code>@Provide
+public ServletRequest provideServletRequet(HttpServletRequest httpRequest){
+    return httpRequest;
+}
+</code></pre>
+
+<p>这显得很没必要。用 Binds 注解可以这么做：</p>
+
+<pre><code>@Binds ServletRequest bindServletRequest(HttpServletRequest httpRequest);
+</code></pre>
+<p>@Binds 用于注解方法声明，如果 module 是接口，那么 binds 方法就是一个方法声明，如果 module 是类，那么 binds 方法就是一个抽象方法。 binds 方法有且只有一个参数，这个参数可以分配（assignable）给返回类型。</p>
+
+<p><strong>注意 Module 不能同时用 Binds 方法和 Provide 实例方法</strong>,因为 Binds 方法只是一个方法声明没有实现，一旦有了 Module 有了 Provide 实例方法，意味着这个 Module 必须实例化，所以方法声明就必须得有实现，这便起了冲突。</p>
+
+<ul>
+  <li><a href="https://google.github.io/dagger/faq.html#why-cant-binds-and-instance-provides-methods-go-in-the-same-module">Why can’t @Binds and instance @Provides methods go in the same module?</a></li>
+  <li><a href="https://google.github.io/dagger/api/latest/dagger/Binds.html">Binds</a></li>
+</ul>
+
+<h3 id="component">Component</h3>
+
+<p>Component 像是 Module 和 Inject 之间的桥梁。</p>
+
+<p>猜想：是对象图的部分节点集合，这些节点是入口节点，也可称为根节点</p>
+
+<p><a href="https://google.github.io/dagger/api/latest/dagger/Component.html">Component</a></p>
+
+<p>用于注解接口或抽象类，Dagger 生成的 Component 类将被冠与 Dagger 前缀。比如 <code>@Component interface MyComponent {...}</code> 将会生成类 <code>DaggerMyComponent</code>。</p>
+
+<p>Component 必须至少有一个方法。Component 的方法有两种类型</p>
+
+<ol>
+  <li>Provision，Provision 方法没有参数返回值是我们待注入的对象，该对象必须是提供者。Provision methods have no parameters and return an injected or provided type. Each method may have a Qualifier annotation as well.</li>
+  <li>Member-injection，该方法有一个参数，用于传递待注入的对象，由用户来构造实例。如果该对象不是提供者，那只能通过这种方法来注入。该方法的返回值是可选的，返回值与参数类型系统，主要用于链式调用。</li>
+</ol>
+
+<p>若方法的返回值为 MemboersInjector<T> 如 `MembersInjector<SomeType> getSomeTypeMembersInjector();`，调用 `MembersInjector.injectMembers(T)` 等同于 Component 的成员注入方法。</SomeType></T></p>
+
+<h4 id="builder">Builder</h4>
+
+<p>Component 的实现主要由 @Component.Buidler 来做。一般 Component.Buidler 是由 Dagger 生成的，Builder 将会生成各个 module 和 依赖组件（dependencies Component）的 setter 方法，方法名有 module 或依赖类型的小写驼峰式命名。
+如果 Module 有无参构造函数那也可以省略，Dagger 会自动实例化。</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+     <span class="nc">OtherComponent</span> <span class="n">otherComponent</span> <span class="o">=</span> <span class="o">...;</span>
+     <span class="nc">MyComponent</span> <span class="n">component</span> <span class="o">=</span> <span class="nc">DaggerMyComponent</span><span class="o">.</span><span class="na">builder</span><span class="o">()</span>
+         <span class="c1">// required because component dependencies must be set</span>
+         <span class="o">.</span><span class="na">otherComponent</span><span class="o">(</span><span class="n">otherComponent</span><span class="o">)</span>
+         <span class="c1">// required because FlagsModule has constructor parameters</span>
+         <span class="o">.</span><span class="na">flagsModule</span><span class="o">(</span><span class="k">new</span> <span class="nc">FlagsModule</span><span class="o">(</span><span class="n">args</span><span class="o">))</span>
+         <span class="c1">// may be elided because a no-args constructor is visible</span>
+         <span class="o">.</span><span class="na">myApplicationModule</span><span class="o">(</span><span class="k">new</span> <span class="nc">MyApplicationModule</span><span class="o">())</span>
+         <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+   <span class="o">}</span>
+</code></pre></div></div>
+
+<p>也可以自己用 @Compoent.Builder 实现，一般注解内部静态抽象类或接口。</p>
+
+<p><a href="https://google.github.io/dagger/api/latest/dagger/Component.Builder.html">Component.Builder</a></p>
+
+<h4 id="subcomponent">Subcomponent</h4>
+
+<p>Subcomponent 继承其父组件（parent Component/SubComponent）的绑定（bindings）。是组件间关系的一种。</p>
+
+<p>Subcomponent 不再独立生成一个类，而在其父组件中生成实现。</p>
+
+<p>Dagger 2.7 之前，Subcomponents 通过在父组件中声明一个工厂方法来和父组件绑定在一起。</p>
+
+<pre><code>@Singleton  @Component
+interface ApplicationComponent {
+ // component methods...
+
+ RequestComponent newRequestComponent(RequestModule requestModule);
+}
+</code></pre>
+
+<p>从 2.7 开始，Module 新增一个 subcomponents 可选元素（Optional elements），Subcomponents are declared by listing the class in the Module.subcomponents() attribute of one of the parent component’s modules. This binds the Subcomponent.Builder within the parent component.</p>
+
+<p>如下的方式定义一个 Subcomponent，以 Module 方式安装 subcomponent ，<code>@Subcomponent.Builder</code> 必须显式声明。</p>
+
+<pre><code>@Subcomponent
+public interface TestSubComponent {
+
+    @Subcomponent.Builder
+    abstract class Builder {
+        abstract TestSubComponent build();
+    }
+}
+
+@Module(subcomponents = TestSubComponent.class)
+public class BuildModule {
+}
+</code></pre>
+
+<p>然后在父组件中安装该 Module：</p>
+
+<pre><code>Component(modules = BuildModule.class)
+public interface ParentComponent {...}
+</code></pre>
+
+<p>接下来就可以通过 DaggerParentComponent 注入 SubComponent.Builder 了或者通过声明供给（provision）方法获取 SubComponent.Builder 对象，可以看到 DaggerParentComponent  里面有如下生成代码：</p>
+
+<pre><code>private final class TestSubComponentBuilder extends TestSubComponent.Builder {
+    @Override
+    public TestSubComponent build() {
+      return new TestSubComponentImpl(this);
+    }
+  }
+
+  private final class TestSubComponentImpl implements TestSubComponent {
+    private TestSubComponentImpl(TestSubComponentBuilder builder) {
+      assert builder != null;
+    }
+  }
+</code></pre>
+
+<p>在父组件中声明工厂方法还是继续被支持。</p>
+
+<blockquote>
+  <p>Using @Module.subcomponents is better since it allows Dagger to detect if the subcomponent is ever requested. Installing a subcomponent via a method on the parent component is an explicit request for that component, even if that method is never called</p>
+</blockquote>
+
+<h4 id="dependencies">dependencies</h4>
+
+<p>另一个组件间关系便是依赖，依赖与 subcomponent 不一样的地方在于，subcomponent 是共享父组件的整个对象图。组件间的依赖，只能获取到被依赖组件的供给方法（provision）暴露出来的对象。</p>
+
+<p>上面也提到过，声明了依赖的组件的 Builder 需要提供该依赖的 setter 方法，用于手动传入被依赖的组件。如某个 Comoponent 依赖了 OtherComoponent，这个 Component 会从 OtherComoponent 的供给方法作为提供者加入对象图：</p>
+
+<pre><code>public Builder otherComponent(OtherComponent otherComponent) {
+  this.otherComponent = Preconditions.checkNotNull(otherComponent);
+  return this;
+}
+</code></pre>
+
+<h3 id="multibinds">multibinds</h3>
+
+<p>将对象绑定到集合中。</p>
+
+<p>供给注解，用于注解 Provider 方法，表示提供的对象会被注入 Set/Map</p>
+
+<ul>
+  <li>Set
+    <ul>
+      <li>@IntoSet 将一个元素注入 Set</li>
+      <li>@ElementsIntoSet 将一个集合注入 Set</li>
+    </ul>
+  </li>
+  <li>Map
+    <ul>
+      <li>@IntoMap 表示该方法的返回值作为 Map 的 value 注入 Map 中，另外 Key 由下面的注解提供:</li>
+      <li>@Stringkey 提供字符串作为 key</li>
+      <li>@IntKey 提供 int</li>
+      <li>@ClassKey 提供 class</li>
+      <li>也可用 <code>@MapKey</code> 自定义 key 的类型</li>
+      <li>key 都是常量</li>
+    </ul>
+  </li>
+</ul>
+
+<p>@Multibinds，对于 @Inject 注解的集合，找不到元素的供给的话，dagger 会在编译期报错：</p>
+
+<pre><code>java.util.Map&lt;java.lang.String,java.lang.String&gt; cannot be provided without an @Provides- or @Produces-annotated method.
+</code></pre>
+
+<p>如果有在 Module 中声明了 @Multibinds，便不会报错，而是得到一个空集合。</p>
+
+<ul>
+  <li><a href="https://google.github.io/dagger//multibindings.html">Multibindings</a></li>
+  <li><a href="https://google.github.io/dagger/api/latest/dagger/multibindings/package-summary.html">dagger.multibindings</a></li>
+</ul>
+
+<h3 id="scope">@Scope</h3>
+
+<p>Scope 注解，只是语法糖的作用，相当于一个约定。</p>
+
+<p>例如使用 Scope 注解 <code>@ActivityScope</code> 注解 Component，那么 Component 下的对象只支持未使用 Scope 的绑定，或者使用 <code>@ActivityScope</code> 注解的绑定。不然 dagger 就会在编译期报错。</p>
+
+<blockquote>
+  <p>The component implementation ensures that there is <strong>only one provision of each scoped binding per instance of the component</strong>. If the component declares a scope, it may only contain unscoped bindings or bindings of that scope anywhere in the graph.</p>
+</blockquote>
+
+<p>注解 Provide 或 Binds，表面声明这些方法的 Modules 只能安装在声明相同 scope 注解的 Component 中。使用 Scope 的方法提供的对象，Component 每次注入都使用相同对象。</p>
+
+<blockquote>
+  <p>Modules with @Provides methods annotated with a scope may only be installed into a component annotated with the same scope</p>
+</blockquote>
+
+<p>@Inject 注解的构造函数也是作为对象节点，使用 scope 的意义与 Provides 相同。</p>
+
+<blockquote>
+  <p>You should although not keep activity or fragment scoped components any place besides in activities or fragments respectively</p>
+</blockquote>
+
+<p><a href="https://stackoverflow.com/questions/36371716/dagger-2-scope-and-subcomponents">java - Dagger 2 scope and subcomponents - Stack Overflow</a></p>
+
+<p>Scope 注解其他位置，除了起到提示的作用外，没有实际意义。</p>
+
+<p>所以 <code>@ActivityScope</code> 起作用的要点，在于每个 Activity 都初始化<strong>一个</strong>  <code>@ActivityScope</code>  注解的 Component 实例。Component 就跟 Activity 的生命周期绑定在一起了，使用  <code>@ActivityScope</code> 注解的实例就能保证有且只有一个并且跟 Activity 的生命周期绑定在一起。</p>
+
+<p><code>@Singleton</code> 也只是一个普通的 Scope 注解，他也只是起到让 <code>@Singleton</code> 注解的 Component 有且只有一个 <code>@Singleton</code> 注解的对象。至于确保 Component 是单例还是得自己控制。</p>
+
+<h4 id="reusable">@Reusable</h4>
+
+<p>起到和 Scope 类似的作用，@Resuable 注解的对象，dagger 会缓存起来，Component 及其子 Component 会使用相同的一个缓存对象。</p>
+
+<p>不同于 Scope 绑定到 Component，@Reusable 注解的供给方法或 Module 可以用于多个 Component，不必管 Component 的 Scope。</p>
+
+<h3 id="reference">Reference</h3>
+
+<ol>
+  <li>Lazy 调用 <code>Lazy#get</code> 才实例化对象</li>
+  <li>Provider 解决循环依赖</li>
+  <li>ProviderOfLazy</li>
+  <li>@CanReleaseReferences.</li>
+</ol>
+
+<h3 id="dagger-android">Dagger Android</h3>
+
+<p>dagger 2.10 引进的一个新模块，用于简化 android 中 dagger 的使用。详细例子见：https://android.jlelse.eu/android-and-dagger-2-10-androidinjector-5e9c523679a3</p>
+
+<p>主要通过 AndroidInjector 作为 Subcomponent 来对照 android 中的四大组件和 fragment。主要是提供一个注入方法，因为这些组件都是系统创建的，无法让 dagger2 帮我们创建。</p>
+
+<p>然后利用 multibinds 将各个组件的 Builder，如 Activity 的 Component（Subcomponent） 存放在 AppComopent 中，并注入到 Application。实际使用时 Application 实现 <code>HasActivityInjector</code> 接口，保存 <code>DispatchingAndroidInjector&lt;Activity&gt;</code> 的实例。在 Activity 通过  <code>AndroidInjection.inject(this);</code> 来实现注入，首先找到 Activity 对应的 Subomponent.Builder，保存在 Map 里面，已该 Activity 的类引用为 key，然后创建 Subcomponent 实例也是  AndroidInjector 实例，然后通过其来实现注入。</p>
+
+<p>将本来类似下面的注入代码变成一行搞定：</p>
+
+<pre><code>((SomeApplicationBaseType) getContext().getApplicationContext())
+        .getApplicationComponent()
+        .newActivityComponentBuilder()
+        .activity(this)
+        .build()
+        .inject(this);
+</code></pre>
+
+<p>最终代码：</p>
+
+<pre><code>public class YourActivity extends Activity {
+  public void onCreate(Bundle savedInstanceState) {
+    AndroidInjection.inject(this);
+    super.onCreate(savedInstanceState);
+  }
+}
+</code></pre>
+
+<p><a href="https://google.github.io/dagger//android.html">Dagger Android</a></p>
+
+<p>实际上，我们在 DeclarationsModule 提供的 FooActivity 绑定，会通过 AndroidInjectionModule 的 @Multibinds 绑定到一个以 Activity.class 为 key 的 Map 中。这个 Map 会最终绑定到 DispatchingAndroidInjector 中。DispatchingAndroidInjector 我们已经在 Application 声明注入。</p>
+
+<p><code>@ContributesAndroidInjector</code> 这个注解可以办我们自动生成，相应的 Subcomponent 和 builder 及绑定方法，对于很多 Activity 只是需要和 Application 共享对象图，自身没必要声明一个 Subcomponent 来说很有用，减少代码。</p>
+
+<pre><code>  @ContributesAndroidInjector
+  abstract ChatActivity contributeChatActivityInjector();
+</code></pre>
+
+<h4 id="问题">问题</h4>
+
+<p>SubComponent 如果需要 Module 实例怎么办？</p>
+
+<p>以注入 <code>RxPermissions</code> 为例，有多个 Activity 都需要 <code>RxPermissions</code> 实例，为了避免每个 Activity 都要定义一个 Module 提供各自的 <code>RxPermissions</code> 实例。所以把他放入一个所有 Activity 都通用的 Module。</p>
+
+<p>RxPermissions 需要一个当前 Activity 的引用。可以作为依赖声明在 Provides 方法的参数。</p>
+
+<pre><code>ActivityModule{
+
+    @Provides
+    @ActivityScope
+    public static RxPermissions provideRxPermissions(Activity ctx) {
+        return new RxPermissions(ctx);
+    }
+}
+</code></pre>
+
+<p>也可以作为 Module 实例的字段传入，但这样便需要实例化 Module 并传入 Activity 的引用</p>
+
+<pre><code>ActivityModule{
+
+    private Activity ctx;
+
+    @Provides
+    @ActivityScope
+    public RxPermissions provideRxPermissions() {
+        return new RxPermissions(ctx);
+    }
+}
+</code></pre>
+
+<p>但是 dagger android 不支持实例 module。</p>
+
+<p>所以，只能用第一种方法。因为 LoginActivity 已经在对象图里面，但是 dagger android 不能转换 LoginActivity 到 Activity。必须声明一个 Binds</p>
+
+<pre><code>@Module
+interface LoginActivityModule {
+    @Binds
+    @ActivityScope
+    Activity bindActivity(LoginActivity activity);
+}
+</code></pre>
+
+<p>Fragment 复用问题</p>
+
+<h3 id="kotlin">Kotlin</h3>
+
+<p>kotlin 和 dagger2 配合起来不太舒服</p>
+
+<ol>
+  <li>需要显示声明 constructor，<code>@Inject constructor(...)</code></li>
+  <li>静态 Module 很麻烦 https://stackoverflow.com/questions/44894218/dagger-2-static-provider-methods-in-kotlin</li>
+</ol>
+
+<p>https://github.com/google/dagger/issues/900</p>
+
+</article>
+<div class="tag-container" >
+    
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Programming/Android/dagger-2"
+ var disqus_config = function () {
+     this.page.title = "Dagger 2"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Programming/Android/dagger-2/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

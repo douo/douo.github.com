@@ -1,0 +1,550 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    SICP | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">SICP</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-12-01">2016-07-30</span>
+    
+</div>
+
+<article>
+    <h3 id="准备工作">准备工作</h3>
+
+<p>https://github.com/DeathKing/Learning-SICP</p>
+
+<h4 id="安装-mit-scheme">安装 <code>mit-scheme</code></h4>
+
+<p>Arch 通过 aur 安装：<a href="https://aur.archlinux.org/packages/mit-scheme/">AUR (en) - mit-scheme</a></p>
+
+<h4 id="scheme">scheme</h4>
+
+<p>安装后就可以进入 scheme 交互环境(REPL)了：</p>
+
+<pre><code>`$ scheme`
+</code></pre>
+
+<p>scheme 脚本保存为 <code>.scm</code> 文件，可以通过下面命令允许 <code>.scm</code></p>
+
+<pre><code>`$ scheme &lt; file.scm`
+</code></pre>
+
+<p>也可以通过 <code>(load "file.scm")</code> 加载 scm 文件。</p>
+
+<p>http://www.kancloud.cn/kancloud/yast-cn</p>
+
+<p><code>(trace-entry func)</code>  可以跟踪函数执行了多长时间。</p>
+
+<h4 id="答题">答题</h4>
+
+<p>答题位置 <code>$RUHOH/media/sicp</code></p>
+
+<p>我们在适当的时候隐藏起一些细节，通过创造抽象去控制复杂性</p>
+
+<h3 id="第一章">第一章</h3>
+
+<h4 id="过程与数据">过程与数据</h4>
+
+<p>表达式（Expressions），包括基本的类型和基本过程 + * 等</p>
+
+<p>用括号括起一些表达式为组合式，形成一张表，用于表示一个过程应用</p>
+
+<p>如<code>(+ 1 2)</code>， 最左边的元素称为运算符，其他元素称为运算对象。</p>
+
+<p>运算符放在最左边称为前缀表示（prefix notation）</p>
+
+<h4 id="命名与环境">命名与环境</h4>
+
+<p><code>(define size 2)</code> 定义一个变量，环境决定表达式中各个符号的意义</p>
+
+<p><code>(define size 2)</code> 并不是一个组合式，对 define 的求值并不是将 define 应用与两个参数，而是将 size 关联一个值， size 是一个符号，所以 define 是一种特殊形式（special forms）</p>
+
+<h4 id="过程定义">过程定义</h4>
+
+<pre><code>(define (&lt;name&gt; &lt;formal parameters&gt;)
+    &lt;body&gt;)
+</code></pre>
+
+<name> 是一个表示过程的符号
+
+
+- 正则序求值，展开
+- 应用序求值，代换，也就是将表达式传入过程，如果是组合式会求值后再传入
+
+
+条件表达式
+
+    (cond (<p1> <e1>)
+          (<p2> <e2>)
+          .
+          .
+          (<pn> <en>)
+    )
+
+表达式 p 是谓语解释为真假， e 是表达式， p、e 是一对表达式，p 是一个谓词（predicate），表示他的值可以解释为真或假
+
+
+    (cond (<p1> <e1>)
+          (<p2> <e2>)
+          .
+          .
+          (else <en>)
+    )
+    
+else 放在最后一条子句，相当于 default
+
+
+if
+
+    (if <predicate> <consequence> <alternative>)
+
+<predicate> 为真，解释并返回 <consequence> 否则 <alternative>
+
+#### 应用序和正则序
+
+- 应用型：先求值再将值应用于函数
+- 正则序：先
+
+#### 过程抽象
+
+
+**形式参数**（formal parameter），过程定义的参数称为形式，在过程调用之前，该参数只有形式，没有具体的值，如：
+
+
+    (define (sum a b) (+ a b))
+    
+a，b 就是形式参数。
+
+**实际参数**（actual argument），当过程被调用时，a、b 有了具体的值。这时的 a、b 就是实际参数。
+
+**约束变量**（bound variable），过程的形式参数，为过程绑定（bind）的变量，称为约束变量，意思是约束变量只是一个占位符，他的名称是没有意义，在过程内可以替换为任意合法字符，在过程外部是不可见的。
+
+相对约束变量，还有**自由变量**（free variable），自由变量是在过程调用外部上下文定义的变量，过程不能随意更改自由变量的名称，正是通过名称来指向自由变量
+
+    (define (addb a) (+ a b))
+
+a 是过程 addb 的约束变量，b 是自由变量。
+
+内部定义，过程的内部也允许定义过程，称为子过程局部化，这样结构称为块结构（block structure），外部过程的形式参数 x，对于内部过程来说 x 是自由变量。x 作为实参传递时，子过程也能访问导相同的 x，这样的规则称为词法作用域（lexical scoping）
+
+
+
+##### 牛顿迭代法求平方根
+
+
+求平方根 a 的函数为 :$$ f(x) = x^2-a $$ 导数：$$ f'(x) = 2x $$
+
+函数上点 $$ x_0 $$ 斜率函数: $$ g_0(x) = f'(x_0)x+b $$，代入 $$ (x_0, f(x_0)) $$ 得, $$ f(x_0)=f'(x_0)x_0+b $$ 
+
+求得 $$ b = x_0^2-a-2x_0^2  = -(x_0^2+a) $$ 
+
+代入 $$ g_0(x) = 0 $$，解得 $$ x_1 $$ 
+
+$$ x_1 $$ 比 $$ x_0 $$ 更靠近 $$ \sqrt{a} $$，得出迭代式 $$ x_{n+1} = \frac{x_n^2 + a}{2*x_n} $$
+
+原理见：[求牛顿开方法的算法及其原理](http://www.guokr.com/question/461510/)
+
+#### 递归
+
+
+递归计算过程，需要保存过程调用深度
+
+迭代计算过程（iterative process）
+
+尾递归，等同于迭代，
+
+递归过程(recursive procedure)与递归计算过程(recursive prcess)是不同的。递归过程，说明过程的定义中间接或直接地引用了本身，递归过程也可能产生迭代的计算过程。
+
+
+#### 斐波那契的迭代计算法
+
+    a&lt;-a+b
+    b&lt;-a
+
+令 $$ a=Fib_1,b=Fib_0 $$， 迭代 n 次后， $$ a=Fib_(n+1), b=Fib_n $$
+
+
+#### 阶（Order）
+
+表示函数增长的速度，
+
+高阶，低阶是两个函数比较而言的！ 在同一自自变量变化过程中 变化趋势的速度快慢不同！ 比如在趋于无穷时 lnx 比 x 变化快 所以是更高阶的无穷小！
+
+
+#### 求幂
+
+将 O(n) 转换为 O(logn)，当存在一个关系使得 T_n^2 = T_2n
+
+
+#### 高阶函数
+
+所谓高阶过程（Higher-Order Procedures），就是将过程作为参数，操作过程的过程。
+
+    (define (identity x) x)
+    
+返回本身的函数，起名`identity`
+
+习题 1.33 中文版是计算 a，b 间所有素数的和，英文版是计算所有素数的平方和。
+
+##### lambda
+
+lambda 与 define 同样的方式创建过程，除了无需提供过程名
+
+    (lambda (formal-parameters) <body>)
+    
+lambda 返回过程本身
+
+    ((lambda (x y z) (+ x y (square z))) 1 2 3)
+    ;; 12
+
+局部变量相当于块结构中的约束变量，所以使用 lambda 来约束变量便可以使用局部变量，比如需要设计过程：如果表达式 exp 等于 0 则返回 1 否则返回 exp 本身的值，如果没有局部变量：
+
+    (if (= exp 0) 1 exp)
+    
+exp 需要被计算两次，如果使用 lambda 来绑定变量
+    
+    ((lambda (v) (if (= v 0) 1 v)) exp)
+
+那么 exp 只计算一次。lisp 提供特殊形式 `let` 来绑定局部变量
+
+    (let ((v exp))
+        (if (= v 0) 1 v))
+
+`let` 的一般形式
+
+    (let ((<var1> <exp1>)
+          (<var2> <exp2>)
+          ...
+        )
+        <body>)
+
+等价于
+    
+    ((lambda (<var1> <var2> ...)
+        <body>
+    ) <exp1> <exp2> ...)
+
+所以 `let` 只是 `lambda` 的语法糖
+
+
+##### 一等公民
+
+- 可用用变量命名
+- 可用作为过程参数
+- 可作为过程返回值
+- 可包含在数据结构中
+
+
+Lisp 中过程是作为第一公民
+
+
+### 第二章
+
+
+#### 序对(pair)
+
+- `cons`，取两个参数，构造一个序对 ex:`(define x (cons 1 2))`
+- `car`，取地址部分，`Contents of Address part of Register` ex: `(car x) -&gt; 1`
+- `cdr`，取减量部分，`Contents of Decrement part of Register` ex: `(cdr x) -&gt; 2`
+
+
+
+数据抽象屏障
+
+数据抽象方法使我们能推迟决策时间，而不会阻碍系统其他部分的工作进展
+
+
+数据的过程性表示
+
+
+通过嵌套 cons 形成的一个序对的序列称为一个表，`list` 是 Scheme 提供的一个方便构造表的基本操作。
+
+    (list <a1> <a2> <a3> ... <an>)
+
+等价于
+
+    (cons <a1> (cons <a2> (cons <a3> (cons ... (cons <an> nil)))))
+    
+
+例如 `(list a b) = (cons a (cons b ()))`
+
+`()` 在 mit-scheme 中表示 nil
+
+#### 不定参数
+
+    (define (f x y . z) <body>)
+    
+f 可传递大于等于 2 个参数，多出的参数作为列表存放于 z
+
+#### 层次性结构
+
+(cons (list 1 2) (list 3 4)) 可表示为树结构
+
+`pair?` 用于判断变量是否为序对
+
+高阶过程 `map`，表示将列表的各个元素应用于过程将结果形成新列表。
+
+利用 `map` 和递归也能对层次性结构进行映射。
+
+
+
+
+
+### Video
+
+essence of computer science
+
+
+计算过程（process）进行形式化描述
+
+techniques for Controlling complexity
+
+
+
+基本元素
+组合的方法
+抽象的方法，（封装）
+
+</body></an></a3></a2></a1></an></a3></a2></a1></exp2></exp1></body></var2></var1></body></exp2></var2></exp1></var1></body></alternative></consequence></predicate></alternative></consequence></predicate></en></e2></p2></e1></p1></en></pn></e2></p2></e1></p1></name>
+
+</article>
+<div class="tag-container" >
+    
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Reading/sicp"
+ var disqus_config = function () {
+     this.page.title = "SICP"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Reading/sicp/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+    <script type="text/javascript" async
+ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+    
+</body>
+
+</html>
+

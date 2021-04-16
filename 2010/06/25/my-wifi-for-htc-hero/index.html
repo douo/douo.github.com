@@ -1,0 +1,339 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    让HTC Hero通过我的笔记本无线网卡共享上网 | DouO's Blog</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">让HTC Hero通过我的笔记本无线网卡共享上网</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-01-13">2010-06-25</span>
+
+    <span><a href="/categories#otaku-ref" class="category category-otaku waves-effect waves-light">otaku</a></span>
+    
+</div>
+
+    <article>
+        <p>今天为了解决宿舍没有无线AP的情况，让hero可以上网（我只开了20M的GPRS消费）。捣鼓了一下让Hero通过<a href="http://en.wikipedia.org/wiki/Ad_hoc">Ad-Hoc</a>连接我的笔记本来共享上网的问题，google一下，找到了两篇可以解决问题的文章，如下：</p>
+
+<p><a href="http://blog.sina.com.cn/s/blog_617b01db0100foqh.html">hTC G3 HERO 如何使用无线网卡共享宽带上网 ad
+hoc</a>（不推荐，步骤简单，但会丢失当前已记忆的wifi热点）</p>
+
+<p><a href="http://sean.huanglijiang.com/article.asp?id=217">ADSL+一台无线网卡笔记本实现Hero上网</a>（推荐：步骤多一些，但是可以学到东西）</p>
+
+<p>不过这种方式的局限很大，不适合长久使用（<a href="http://www.haoxiaoru.info/archives/25">用connectify有所改善</a>*win7
+only），而且不能动态获取IP非常麻烦，如果经常要更换AP那是相当痛苦。后来，我更新我的网卡驱动，发现里面包含了Intel®
+My
+WiFi软件。驱动在此<a href="http://drivers.mydrivers.com/drivers/368-147322-Intel-WiFi-Link-3945ABG-4965AGN-5100-AGN/">下载</a>，要独立安装<a href="http://www.google.com.hk/search?hl=zh-CN&amp;source=hp&amp;q=%E8%8B%B1%E7%89%B9%E5%B0%94+My+wifi&amp;aq=f&amp;aqi=&amp;aql=&amp;oq=&amp;gs_rfai=">My
+WiFi</a>应该也没问题。要确保网卡是下面的型号：</p>
+
+<p>Intel英特尔WiFi Link 3945ABG/4965AGN/5100 AGN/5300
+AGN/5150/5350/6200/6250/6300</p>
+
+<p>我的是5100
+AGN。安装的过程非常流畅，安装后程序会自动启动。这时只要启用了My
+WiFi技术，就可以在HERO上看WiFi热点了，不过，在你连接之前，还要改一下My
+WiFi的预配置，因为默认的密码是一串长达64位的随机字符串（真是随机的吗？）。大概类似：</p>
+
+<pre><code>ch@R2ku9tAYz5aOkPDz31TAWXfCGpz72.muvx#lugh9q6e97bo~gzDiuf8DoK+P
+</code></pre>
+
+<p>如果能在手机上一个个输完，那我真是五体投地。</p>
+
+<p>SSID是默认的计算机名，最好也改一下。如果想要换别的加密方式，比如wep，那必须新建一个配置。因为预配置只允许用WPA2-PSK加密。</p>
+
+<p>这样在计算机上的工作基本搞定了，HERO应该可以正常连接上来。如果一直卡在获取ip阶段，请确认下手机是不是开启了静态IP（无线局域网设置-&gt;menu键-&gt;高级），如果开启了最好关闭，因为Intel®
+My
+WiFi可以动态分配IP。如果要开启静态IP，默认的IP段是192.168.16.2～192.168.16.254。</p>
+
+<p>如果不能上网，</p>
+
+<p>请确定「过滤网络通信量」功能已被禁用（默认是禁用），在「配置式」的编辑界面-&gt;「共享」选项卡中。</p>
+
+<p>再看看是否已经开启了「共享我的互联网」功能，在My
+WiFi的任务栏图标，右键可以开启。如果连接出现问题会有提示。
+最后再确定你连接互联网的连接是否已开启了Internet连接共享。具体设置如下图：</p>
+
+<p><a href="wp-content/uploads/2010/06/Internet-share.jpg"><img src="wp-content/uploads/2010/06/Internet-share.jpg" alt="" title="Internet share" /></a></p>
+
+<p>现在正常情况下应该可以正常上网了。</p>
+
+<p>所谓My
+WiFi技术应该是将无线网卡虚拟成无线AP，这样所有设置都在计算机上进行，在手机就像连接普通无线AP那样方便，这应该是最完美的解决方案了。当然其他设备也可以连接到这个虚拟无线AP来。</p>
+
+<p>最后贴上一张正常使用的软件界面图和任务栏图标的右键菜单状态：</p>
+
+<p><a href="wp-content/uploads/2010/06/MY_WIFI.jpg"><img src="wp-content/uploads/2010/06/MY_WIFI.jpg" alt="" title="MY_WIFI" /></a> 设置名称”HTC
+HERO”和图标是我自己改的。</p>
+
+<p><a href="wp-content/uploads/2010/06/menu.jpg"><img src="wp-content/uploads/2010/06/menu.jpg" alt="" title="menu" /></a></p>
+
+    </article>
+    <div class="tag-container" >
+        
+        <div class="chip">
+        <a href="/tags#Ad-Hoc-ref">
+            Ad-Hoc
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#Android-ref">
+            Android
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#Hero-ref">
+            Hero
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#HTC G3-ref">
+            HTC G3
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#无线网卡-ref">
+            无线网卡
+        </a>
+        </div>
+        
+    </div>
+<div class="post-pager">
+    
+    <a href="/2010/06/24/convert-gbk-to-unicode/">上一篇：从GBK到Unicode的中文字符映射</a>
+    
+    
+    <a href="/2010/07/15/how-to-add-new-module-in-mtk/" style="float:right;" >下一篇：如何为MTK平台添加新模块</a>
+    
+</div>
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/2010/06/25/my-wifi-for-htc-hero"
+ var disqus_config = function () {
+     this.page.title = "让HTC Hero通过我的笔记本无线网卡共享上网"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/2010/06/25/my-wifi-for-htc-hero/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

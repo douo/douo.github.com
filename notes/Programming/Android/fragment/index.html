@@ -1,0 +1,451 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    Fragment | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">Fragment</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-11-30">2013-11-15</span>
+    
+</div>
+
+<article>
+    <h3 id="fragment">Fragment</h3>
+
+<p><a href="http://grepcode.com/file/repository.grepcode.com/java/ext/com.google.android/android/4.3_r2.1/android/support/v4/app/Fragment.java">Fragment.java</a></p>
+
+<h4 id="构造一个-fragment">构造一个 Fragment</h4>
+
+<p>Fragment 有一个无参的构造函数，但是构造一个Fragment不用这个方法（Android 内部只用这个方法来实例化 Fragment），而是用 <code>Fragment.instantiate</code>，子类 Fragment 不要实现其他有参数的构造函数，作为代替使用基于 Bundle 的 Arguments 机制。Arguments 可以在 Fragment 重新实例化的时候恢复。Fragment 需要保存的成员变量也都需要放到 Arguments 中。</p>
+
+<p>Every fragment must have an empty constructor, so it can be instantiated when restoring its activity’s state. It is strongly recommended that subclasses do not have other constructors with parameters, since these constructors will not be called when the fragment is re-instantiated; instead, arguments can be supplied by the caller with setArguments(android.os.Bundle) and later retrieved by the Fragment with getArguments().</p>
+
+<h4 id="生命周期">生命周期</h4>
+
+<p>onInflate typically from setting the content view of an activity. This may be called immediately after the fragment is created from a <fragment> tag in a layout file. Note this is before the fragment's onAttach(android.app.Activity) has been called;</fragment></p>
+
+<h5 id="在-layout-中的-fragment">在 layout 中的 fragment</h5>
+
+<h5 id="在-activity-运行时创建的-fragment">在 Activity 运行时创建的 fragment</h5>
+
+<h4 id="状态持久化机制">状态持久化机制</h4>
+
+<p>FragmentState</p>
+
+<p>SavedState</p>
+
+<h4 id="target-fragment-机制">Target Fragment 机制</h4>
+
+<p>类似于 startActivityForResult，不过是针对 Fragment 的。</p>
+
+<p>Fragment 本身有 <code>startActivityForResult(Intent intent, int requestCode)</code>，这个方法封装了 Activity 的相同方法。同时也封装了<code>onActivityResult</code>，在 Fragment 里面完成整个过程（FragmentActivity 利用 requestCode 的前16位来标识哪个 Fragment 调用的）。</p>
+
+<h4 id="parent-机制">Parent 机制</h4>
+
+<p>Fragment 可能依附于 Actvitiy 也可能依附于 Parent Fragment</p>
+
+<p>mChildFragmentManager</p>
+
+<h4 id="loadermanager">LoaderManager</h4>
+
+<h4 id="menu">Menu</h4>
+
+<h3 id="fragmentactiviy">FragmentActiviy</h3>
+
+<p>利用了 NonConfigurationInstances</p>
+
+<h3 id="fragmentmanager">FragmentManager</h3>
+
+<p>moveToState</p>
+
+<p>noteStateNotSaved</p>
+
+<pre><code>Handle onNewIntent() to inform the fragment manager that the state is not saved. If you are handling new intents and may be making changes to the fragment state, you want to be sure to call through to the super-class here first. Otherwise, if your state is saved but the activity is not stopped, you could get an onNewIntent() call which happens before onResume() and trying to perform fragment operations at that point will throw IllegalStateException because the fragment manager thinks the state is still saved.
+</code></pre>
+
+<p>execPendingActions</p>
+
+<h4 id="add-fragment">Add Fragment</h4>
+
+<p>添加 Fragment 到 mActive 和 mAdd</p>
+
+<p>mActive 保存当前激活的 Fragment，mAvailIndices 保存 mActive 中可用的 index，下次 makeActive 的时候优先使用中间可用的 index。</p>
+
+<p>mAdded 保存所有已添加的 Fragment</p>
+
+<h4 id="replace-fragment">Replace Fragment</h4>
+
+<p>移除掉所指定容器内的所有 Fragment，替换成当前传入的 Fragment。若传入的 Fragment 为空则移除掉所有容器内的 Fragment</p>
+
+<h4 id="remove-fragment">Remove Fragment</h4>
+
+<p>移除 Fragment，如果 Fragment 没有在 BackStack 中，那将 Fragment 状态置于 INITIALIZING，如果是在 BackStack 中等待恢复，那将状态置为 CREATED。</p>
+
+<h4 id="hide-fragment">Hide Fragment</h4>
+
+<p>将 Fragment 中 View 的 Visibility 设置为  Gone，同时调用 onHiddenChanged 方法。重复调用无影响。</p>
+
+<h4 id="show-fragment">Show Fragment</h4>
+
+<p>将 Fragment 中 View 的 Visibility 设置为  Visible，同时调用 onHiddenChanged 方法。重复调用无影响。</p>
+
+<h4 id="attach-fragment">Attach Fragment</h4>
+
+<p>添加 Fragment 到 mAdded，将 Fragment 的状态转移到当前 FM 的状态。重复调用无影响，只用 mDetached = true 时才会执行。</p>
+
+<h4 id="detach-fragment">Detach Fragment</h4>
+
+<p>从 mAdded 中移除 Fragment，将 Fragment 的状态转移到 CREATED。</p>
+
+<h4 id="backstackentry">BackStackEntry</h4>
+
+<h4 id="fragmenttransaction">FragmentTransaction</h4>
+
+<p><strong>A fragment transaction can only be created/committed prior to an activity saving its state. If you try to commit a transaction after FragmentActivity.onSaveInstanceState() (and prior to a following FragmentActivity.onStart or FragmentActivity.onResume(), you will get an error.</strong> This is because the framework takes care of saving your current fragments in the state, and if changes are made after the state is saved then they will be lost.</p>
+
+<ul>
+  <li>add</li>
+  <li>replace</li>
+</ul>
+
+<h5 id="backstackrecord">BackStackRecord</h5>
+
+<p>FragmentTransaction 的实现</p>
+
+<p>Op 一次操作</p>
+
+<h4 id="fragmenttransactions--activity-state-loss">FragmentTransactions &amp; Activity State Loss</h4>
+
+<p>http://www.androiddesignpatterns.com/2013/08/fragment-transaction-commit-state-loss.html</p>
+
+<ul>
+  <li>Be careful when committing transactions inside Activity lifecycle methods.</li>
+  <li>
+    <p>Avoid performing transactions inside asynchronous callback methods.
+ 必須要用的話也沒有什麼好辦法，嘗試用 commitAllowingStateLoss</p>
+
+    <p>“If framwework have some design limitation, this is your (developer) problem, not the framework’s”. :) Sure, it’s my (and maybe wrong) opinion.
+   –	Vladimir Kuts</p>
+  </li>
+</ul>
+
+<p>在 Activity 中实现这个机制， 模擬 FragmentManager 的行為 在 state saved 的時候暫存 Transaction 待下次恢復時再提交。</p>
+
+<pre><code>@Override
+protected void onCreate(Bundle savedInstanceState) {
+	super.onCreate(savedInstanceState);
+	
+	mUnCommit = new LinkedList&lt;FragmentTransaction&gt;();
+	mStateSaved = false;
+}
+
+@Override
+protected void onStart() {
+	super.onStart();
+	mStateSaved = false;
+}
+@Override
+protected void onResume() {
+
+	super.onResume();
+	mStateSaved = false;
+}
+
+@Override
+protected void onStop() {
+	super.onStop();
+	mStateSaved = true;
+}
+
+@Override
+protected void onDestroy() {
+	mUnCommit.clear();
+	super.onDestroy();
+}
+
+
+protected LinkedList&lt;FragmentTransaction&gt; mUnCommit;
+	protected boolean mStateSaved;
+
+	protected void onResumeFragments() {
+		d("onResumeFragments");
+		super.onResumeFragments();
+		while (!mUnCommit.isEmpty()) {
+			FragmentTransaction ft = mUnCommit.removeFirst();
+			ft.commit();
+		}
+	};
+
+	/**
+	 * 模擬 FragmentManager 的行為 在 state saved 的時候暫存 Transaction 待下次恢復時再提交 當
+	 * Transaction 發生在回調時，用這個方法提交避免發生 IllegalStateException
+	 * 
+	 * @param ft
+	 * @return commit 不能正確執行時返回false
+	 */
+	protected boolean commit(FragmentTransaction ft) {
+		try {
+			if (!mStateSaved) {
+				ft.commit();
+			} else {
+				mUnCommit.addLast(ft);
+			}
+			return true;
+		} catch (IllegalStateException ex) {
+			return false;
+		}
+	}
+</code></pre>
+
+<p>!#TODO fragment的retainInstance属性值默认为false。这表明其不会被保留。因此，设备旋转时
+fragment 会 随 托 管 activity 一 起 销 毁 并 重 建 。 调 用 setRetainInstance(true) 方 法 可 保 留
+fragment。已保留的fragment不会随activity一起被销毁。相反，它会被一直保留并在需要时原封
+不动的传递给新的activity。</p>
+
+<p>设备配置发生改变时，FragmentManager首先销毁队列中的fragment的视图。在设备配置改
+变时,总是销毁与重建fragment与activity的视图，都是基于同样的理由：新的配置可能需要新的资
+源来匹配；当有更合适的匹配资源可以利用时，则需重新创建视图。 
+紧接着，FragmentManager检查每个fragment的retainInstance属性值。如属性值为false
+（初始默认值），FragmentManager会立即销毁该fragment实例。随后，为适应新的设备配置，新
+activity的新FragmentManager会创建一个新的fragment及其视图，如图14-1所示。</p>
+
+<p>图14-1  设备旋转与默认不保留的UI fragment 
+如属性值为true，则该fragment的视图立即被销毁，但fragment本身不会被销毁。为适应新
+的设备配置，当新的activity创建后，新的FragmentManager会找到被保留的fragment，并重新创
+建它的视图，如图14-2所示。</p>
+
+</article>
+<div class="tag-container" >
+    
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Programming/Android/fragment"
+ var disqus_config = function () {
+     this.page.title = "Fragment"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Programming/Android/fragment/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

@@ -1,0 +1,359 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    笔记之舛·序 | DouO's Blog</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">笔记之舛·序</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-12-01">2013-08-16</span>
+
+    <span><a href="/categories#coder-ref" class="category category-coder waves-effect waves-light">coder</a></span>
+    
+</div>
+
+    <article>
+        <link type="text/css" rel="stylesheet" href="//cdn.jsdelivr.net/jqplot/1.0.8/jquery.jqplot.min.css" />
+
+<script type="text/javascript" src="//cdn.jsdelivr.net/jqplot/1.0.8/jquery.jqplot.min.js"></script>
+
+<script type="text/javascript" src="//cdn.jsdelivr.net/jqplot/1.0.8/plugins/jqplot.barRenderer.min.js"></script>
+
+<script type="text/javascript" src="//cdn.jsdelivr.net/jqplot/1.0.8/plugins/jqplot.blockRenderer.min.js"></script>
+
+<script type="text/javascript" src="//cdn.jsdelivr.net/jqplot/1.0.8/plugins/jqplot.canvasAxisTickRenderer.min.js"></script>
+
+<script type="text/javascript" src="//cdn.jsdelivr.net/jqplot/1.0.8/plugins/jqplot.canvasTextRenderer.min.js"></script>
+
+<script type="text/javascript" src="//cdn.jsdelivr.net/jqplot/1.0.8/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+
+<script type="text/javascript" src="//cdn.jsdelivr.net/jqplot/1.0.8/plugins/jqplot.dateAxisRenderer.min.js"></script>
+
+<script type="text/javascript" src="//cdn.jsdelivr.net/jqplot/1.0.8/plugins/jqplot.highlighter.min.js"></script>
+
+<script type="text/javascript" src="//cdn.jsdelivr.net/jqplot/1.0.8/plugins/jqplot.json2.min.js"></script>
+
+<script type="text/javascript" src="//cdn.jsdelivr.net/jqplot/1.0.8/plugins/jqplot.pointLabels.min.js"></script>
+
+<style type="text/css">
+    .myChart {margin:auto;}
+</style>
+
+<script type="text/javascript" src="note_system_review.js"></script>
+
+<p>下图是一年内所建笔记的统计图。</p>
+
+<div id="chartContainer">
+<div id="plotChart" class="myChart"></div>
+</div>
+
+<p>断断续续的数据与我预想中的效果相差甚远。更让人失望的是其中临时创建后没有归类整理的笔记占了将近一半。当然创建笔记的数目，并不能说明什么。若能统计出各个文件修改的次数这个才更有说服力，不过，一直都没规范 git 的使用，要统计很麻烦，自己估算了下感觉回头整理的时间实在太稀少了，可以说接近于零。不得不反思弄这个东西出来到底是做什么的。</p>
+
+<h3 id="为什么要笔记">为什么要笔记？</h3>
+
+<p>一开始我是希望做一个很大的平台，个人知识管理、便签、辅助学习、读书笔记，这里暂称为 notes（当然这个称呼在这文章内才生效，没一个简单的称呼写起来很拗，叫什么笔记系统的又显得很专业一样）。这只是个大饼，大多都是停留在美丽的想象。真正驱动我的是一个很简单的需要，<strong>不要重复解决以前解决过的问题</strong>。大家可能都有过体会，经常会遇到一个之前填过的坑，却找不到任何以往填坑的记录，只得重新填一遍，这真是一种折磨。我的目的其实很单一，就是记下自己的填坑经验，避免以后自己或者别人踩坑。然后再加上一个良好的组织结构就很好了。另外，一个笔记如果没有了回顾、写好就封存起来没人看，那么它肯定会失去大部分的价值。记录到 notes 中并公开，最大作用就是要减少这种情况的出现。</p>
+
+<h3 id="笔记记什么">笔记记什么？</h3>
+
+<p>什么样的坑，填过后还值得一记呢？</p>
+
+<blockquote>
+  <p>Where is the wisdom we have lost in knowledge.</p>
+
+  <p>Where is the knowledge we have lost in information.</p>
+
+  <p>T. S. Eliot: The Rock</p>
+
+</blockquote>
+
+<p>我觉得笔记的内容恰好可以分成三个层次，分别是思想，知识，信息。思想比知识更有价值，知识比信息更有价值。这三个概念如何定义，层次如何界定对我来说还很困难，不过这些概念首先应该是相对的，可以按照获取的难度来划分。如果对象是很容易观察到的，比如天空是蓝色的。或者可以直接用搜索引擎获取到，比如 objc 如何定义一个类或者如何实例化一个对象（不过这个例子有个前提是我已经掌握了面向对象的相关知识，但是我无法准确地用 objc 语法写出来。），这样可以将它当成信息，很多都是不值得花时间记录到笔记里的。因为记下来然后去笔记里查询，跟直接去观察或者用搜索引擎搜索相比起来时间上并没有优势（不仅没有优势，实际情况是还要大大的亏）。如果以后要进一步了解，怕忘记，那更适合写进 Todo List 或便签里。</p>
+
+<p>进一步挖掘信息后得到的东西，我认为便是知识，值得一记。比如，如何利用 LinearLayout 做一个底部菜单栏的页面？通过搜索引擎应该可以很容易找到类似下面的方法，</p>
+
+<pre><code>&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" &gt;
+
+    &lt;fragment
+		android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:padding="0dp" /&gt;
+
+    &lt;fragment
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0" /&gt;
+&lt;/LinearLayout&gt;
+</code></pre>
+
+<p>虽然直接贴代码，但具体的代码其实并不重要。上面的代码就像模板需要的时候复制黏贴再修改成自己要的效果。一开始并不理解它是怎么工作的，因为偷懒就仅把它记到 notes 里，以后需要用到这种布局，来复制粘贴一份就是。后来，了解了源码（<code>LinearLayout#onMeasure</code>这方法），才明白了上面的代码是如何巧妙地利用 <code>weight</code> 的。以宽度为例，第一步，先测量各个控件的宽度，得到剩下的空间。第二步，把剩下的空间按照 <code>weight</code> 分配给各个组件。其实很简单，只要更进一步理解了这个过程，上面的代码就再也不用死记了，以后还有更多活用的可能性。像这样自己理解出来的内容，我觉得就值得一记，但不仅仅是记录到笔记里就完了，记录的过程是辅助记忆的过程，只有记到脑子里才能发挥知识的作用，才能在需要的时候蹦出来为自己解决问题。</p>
+
+<p>再举个还没有掌握的例子。比如 Emacs，偶尔发现 Emacs 居然还有这样那样命令，便不自觉得要把这个命令的用法和快捷键记起来，但死记命令大多是无用功，或一直不需用到也就很难记住，或常用用多几次也就记住。 实际上，学会如何利用内建文档，学会快速查找到想要的内容，不是比单纯记下几个命令的用法和作用有价值的多，而且还可以避免以后再死记命令的苦恼。但用了几年 Emacs 我从系统地学习过，真是思想有问题了。</p>
+
+<p>什么可称为思想。比如，objc 的例子对我来说是信息层面的内容，对不懂编程人来说，那连信息都不算，仅仅只是噪音。可能还需掌握整个面向对象的思想后，这些信息才真正成为信息。比如上面贴出来的代码，不仅仅是一堆字符序列，它依附于 Android 布局系统，也依附于 xml 标记语言，再再再往下还可以到达计算机科学和信息科学的基础，然后还可以继续往下追溯，整个就是人类知识发展的轨迹。对于漫天飞舞的信息碎片，需要找到一条通往地面的路径，才能产生意义。我觉得这个地面就是思想所在。虽然是个很空泛的比喻，但我认为思想就是土壤和源泉，滋养出知识的大树，信息是叶子上的脉络。</p>
+
+<p>说了这么多只是泛泛其词，有点不知怎么继续了，这是我对笔记的一点点思考，接下来<a href="/2013/10/22/the-pain-of-note-2">整理一些实际的缺点</a>，才算回归主题，呼应这个网络文学般霸气的标题。</p>
+
+
+    </article>
+    <div class="tag-container" >
+        
+        <div class="chip">
+        <a href="/tags#ruhoh-ref">
+            ruhoh
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#笔记-ref">
+            笔记
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#jqplot-ref">
+            jqplot
+        </a>
+        </div>
+        
+    </div>
+<div class="post-pager">
+    
+    <a href="/2013/05/29/first-glance-in-android-studio/">上一篇：初尝 Android Studio</a>
+    
+    
+    <a href="/2013/10/07/staticfile-org/" style="float:right;" >下一篇：staticfile.org</a>
+    
+</div>
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/2013/08/16/the-pain-of-note"
+ var disqus_config = function () {
+     this.page.title = "笔记之舛·序"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/2013/08/16/the-pain-of-note/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

@@ -1,0 +1,639 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    理解 invokedynamic | DouO's Blog</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">理解 invokedynamic</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-11-30">2017-10-08</span>
+
+    <span><a href="/categories#coder-ref" class="category category-coder waves-effect waves-light">coder</a></span>
+    
+</div>
+
+    <article>
+        <p>inDy（invokedynamic）是 java 7 引入的一条新的虚拟机指令，这是自 1.0 以来第一次引入新的虚拟机指令。到了 java 8 这条指令才第一次在 java 应用，用在 lambda 表达式中。 indy 与其他 invoke 指令不同的是它允许由应用级的代码来决定方法解析。所谓应用级的代码其实是一个方法，在这里这个方法被称为引导方法（Bootstrap Method），简称 BSM。BSM 返回一个 CallSite（调用点） 对象，这个对象就和 inDy 链接在一起了。以后再执行这条 inDy 指令都不会创建新的 CallSite 对象。CallSite 就是一个 MethodHandle（方法句柄）的 holder。方法句柄指向一个调用点真正执行的方法。</p>
+
+<p>理解 <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/invoke/MethodHandle.html">MethodHandle</a>（方法句柄）的一种方式就是将其视为以安全、现代的方式来实现反射的核心功能。</p>
+
+<p>一个 java 方法的实体有四个构成：</p>
+
+<ol>
+  <li>方法名</li>
+  <li>签名–参数列表和返回值</li>
+  <li>定义方法的类</li>
+  <li>方法体（代码）</li>
+</ol>
+
+<p>同一个类中，方法名相同，签名不同，JVM 会视为不同的方法，不过在 Java 中只支持签名的参数列表部分，也就是重载多态。一次方法调用，除了要方法的实体外，还要调用者（caller）和接收者（receiver），调用者也就是方法调用语句所在的类。接收者是一个对象，每个方法调用都要一个接收者，它可以是隐藏的（this），也可以是类方法，比如： <code>String.valueOf</code>，类也是 Class 的一个实例。</p>
+
+<p><a href="https://docs.oracle.com/javase/7/docs/api/java/lang/invoke/MethodType.html">MethodType</a> 表示方法签名。</p>
+
+<p>用 MethodHandle 实现的方法调用的示例如下，可以看到方法的四个构成：</p>
+
+<pre><code>Object rcvr = "a";
+try {
+    MethodType mt = MethodType.methodType(int.class); // 方法签名
+    MethodHandles.Lookup l = MethodHandles.lookup(); // 调用者，也就是当前类。调用者决定有没有权限能访问到方法
+    MethodHandle mh = l.findVirtual(rcvr.getClass(), "hashCode", mt); //分别是定义方法的类，方法名，签名
+
+    int ret;
+    try {
+        ret = (int)mh.invoke(rcvr); // 代码，第一个参数就是接收者
+        System.out.println(ret);
+    } catch (Throwable t) {
+        t.printStackTrace();
+    }
+} catch (IllegalArgumentException | NoSuchMethodException | SecurityException e) {
+    e.printStackTrace();
+} catch (IllegalAccessException x) {
+    x.printStackTrace();
+}
+</code></pre>
+
+<p>详细可参考：</p>
+
+<ul>
+  <li><a href="https://www.infoq.com/articles/Invokedynamic-Javas-secret-weapon">Invokedynamic - Java’s Secret Weapon</a></li>
+  <li>和译文 <a href="https://zhuanlan.zhihu.com/p/28124632">Invokedynamic：Java的秘密武器 - 知乎专栏</a></li>
+</ul>
+
+<h3 id="java8-lambda-表达式">java8 lambda 表达式</h3>
+
+<p>lambda 表达式 是怎么使用 inDy 呢？以一段简单的代码为例</p>
+
+<pre><code>public class LambdaTest {
+    public static void main(String[] args) {
+        Runnable r = () -&gt; System.out.println(Arrays.toString(args));
+        r.run();
+    }
+}
+</code></pre>
+
+<p>用 <code>javap -v -p LambdaTest</code> 查看字节码，可以发现寥寥几行 java 代码生成的字节码却不少，单单常量池常量就有 66 个之多。输出见 <a href="https://gist.github.com/douo/05550163c8f40ffa38232084b800332c">LambdaTest.class</a>。</p>
+
+<p>可以发现多出了一个新方法，方法体就是 lambda 体（lambda body），转换为源码如下：</p>
+
+<pre><code>private static void lambda$main$0(java.lang.String[] args){
+    System.out.println(Arrays.toString(args));
+}
+</code></pre>
+
+<p>主要看一下 main 方法，并没有直接调用上面的方法，而是出现一条 inDy 指令：</p>
+
+<pre><code>public static void main(java.lang.String[]);
+    descriptor: ([Ljava/lang/String;)V
+    flags: ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=1, locals=2, args_size=1
+         0: aload_0
+         1: invokedynamic #2,  0              // InvokeDynamic #0:run:([Ljava/lang/String;)Ljava/lang/Runnable;
+         6: astore_1
+         7: aload_1
+         8: invokeinterface #3,  1            // InterfaceMethod java/lang/Runnable.run:()V
+        13: return
+</code></pre>
+
+<p>可以看到 inDy 指向一个类型为 [CONSTANT_InvokeDynamic_info][] 的常量项 <code>#2</code>，另外 <code>0</code> 是预留参数，暂时没有作用。</p>
+
+<pre><code>#2 = InvokeDynamic      #0:#30         // #0:run:([Ljava/lang/String;)Ljava/lang/Runnable;
+</code></pre>
+
+<p><code>#0</code> 表示在 <a href="http://docs.oracle.com/javase/specs/jvms/se7/html/jvms-4.html#jvms-4.7.21">Bootstrap methods 表</a>中的索引：</p>
+
+<pre><code>BootstrapMethods:
+  0: #27 invokestatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #28 ()V
+      #29 invokestatic com/company/LambdaTest.lambda$main$0:([Ljava/lang/String;)V
+      #28 ()V
+</code></pre>
+
+<p><code>#30</code> 则是一个 [CONSTANT_NameAndType_info][]，表示方法名和方法类型（返回值和参数列表），这个会作为参数传递给 BSM。</p>
+
+<pre><code>#30 = NameAndType        #43:#44        // run:([Ljava/lang/String;)Ljava/lang/Runnable;
+</code></pre>
+
+<p>再看回表中的第 0 项，<code>#27</code> 是一个 [CONSTANT_MethodHandle_info][]，实际上是个 MethodHandle（方法句柄）对象，这个句柄指向的就是 BSM 方法。在这里就是:</p>
+
+<pre><code>java.lang.invoke.LambdaMetafactory.metafactory(MethodHandles.Lookup,String,MethodType,MethodType,MethodHandle,MethodType)
+</code></pre>
+
+<p>BSM 前三个参数是固定的，后面还可以附加任意数量的参数，但是参数的类型是有限制的，参数类型只能是</p>
+
+<ul>
+  <li>String</li>
+  <li>Class</li>
+  <li>int</li>
+  <li>long</li>
+  <li>float</li>
+  <li>double</li>
+  <li>MethodHandle</li>
+  <li>MethodType</li>
+</ul>
+
+<p>LambdaMetafactory.metafactory 带多三个参数，这些的参数的值由 <a href="http://docs.oracle.com/javase/specs/jvms/se7/html/jvms-4.html#jvms-4.7.21">Bootstrap methods 表</a> 提供：</p>
+
+<pre><code>Method arguments:
+  #25 ()V
+  #26 invokestatic com/company/LambdaTest.lambda$main$0:()V
+  #25 ()V
+</code></pre>
+
+<p>inDy 所需要的数据大概就是这些，可参考 <a href="http://blog.csdn.net/zxhoo/article/details/38387141">Java8学习笔记（2） – InvokeDynamic指令 - CSDN博客</a></p>
+
+<h4 id="indy-运行时">inDy 运行时</h4>
+
+<p>每一个 inDy 指令都称为 Dynamic Call Site(动态调用点)，根据 jvm 规范所说的，inDy 可以分为两步，这两步部分代码代码是在 java 层的，给 <code>metafactory</code> 方法设断点可以看到一些行为。</p>
+
+<p>第一步 inDy 需要一个 <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/invoke/CallSite.html">CallSite</a>（调用点对象），CallSite 是由 BSM 返回的，所以这一步就是调用 BSM 方法。代码可参考：<a href="https://github.com/dmlloyd/openjdk/blob/92e8b3df00eddf6c661a8a2c52339d50a358d472/jdk/src/java.base/share/classes/java/lang/invoke/CallSite.java#L300">java.lang.invoke.CallSite#makeSite</a></p>
+
+<p>调用 BSM 方法可以看作 invokevirtual 指令执行一个 invoke 方法，方法签名如下：</p>
+
+<pre><code>invoke:(MethodHandle,Lookup,String,MethodType,/*其他附加静态参数*/)CallSite
+</code></pre>
+
+<p>前四个参数是固定的，被依次压入操作栈里</p>
+
+<ol>
+  <li>MethodHandle，实际上这个方法句柄就是指向 BSM</li>
+  <li>Lookup, 也就是调用者，是 Indy 指令所在的类的上下文，可以通过 <code>Lookup#lookupClass()</code>获取这个类</li>
+  <li>name ，lambda 所实现的方法名，也就是<code>"run"</code></li>
+  <li>invokedType，调用点的方法签名，这里是 <code>methodType(Runnable.class,String[].class)</code></li>
+</ol>
+
+<p>接下来就是附加参数，这些参数是灵活的，由<a href="http://docs.oracle.com/javase/specs/jvms/se7/html/jvms-4.html#jvms-4.7.21">Bootstrap methods 表</a>提供，这里分别是：</p>
+
+<ol>
+  <li>samMethodType，其实就是 Runnable.run 的描述符: <code>methodType(void.class)</code>。sam 就 single public abstract method 的缩写</li>
+  <li>implMethod: 编译器给生成的 desugar 方法，是一个 MethodHandle：<code>caller.findStatic(LambdaTest.class,"lambda$main$0",methodType(void.class))</code></li>
+  <li>instantiatedMethodType:  Runnable.run 运行时的描述符，如果方法泛型的，那这个类型可能不一样。这里是 <code>methodType(void.class)</code></li>
+</ol>
+
+<p>上面说的固定其实应该是指 inDy 传递的实参类型是固定的，BSM 形参声明可以是随意，保证 BSM 能被调用就行，比如说 Lookup 声明为 Object 不影响调用。</p>
+
+<p>接下来就是执行 <code>LambdaMetafactory.metafactory</code> 方法了，它会创建一个匿名类，这个类是通过 <a href="http://asm.ow2.org/">ASM</a> 编织字节码在内存中生成的，然后直接通过 unsafe 直接加载而不会写到文件里。不过可以通过下面的虚拟机参数让它运行的时候输出到文件</p>
+
+<pre><code>-Djdk.internal.lambda.dumpProxyClasses=&lt;path&gt;
+</code></pre>
+
+<p>这个类是根据 lambda 的特点生成的，输出后可以看到，在这个例子中是这样的：</p>
+
+<pre><code>import java.lang.invoke.LambdaForm.Hidden;
+
+// $FF: synthetic class
+final class LambdaTest$$Lambda$1 implements Runnable {
+    private final String[] arg$1;
+
+    private LambdaTest$$Lambda$1(String[] var1) {
+        this.arg$1 = var1;
+    }
+
+    private static Runnable get$Lambda(String[] var0) {
+        return new LambdaTest$$Lambda$1(var0);
+    }
+
+    @Hidden
+    public void run() {
+        LambdaTest.lambda$main$0(this.arg$1);
+    }
+}
+</code></pre>
+
+<p>然后就是创建一个 CallSite，绑定一个 MethodHandle，指向的方法其实就是生成的类中的静态方法 <code>LambdaTest$$Lambda$1.get$Lambda(String[])Runnable</code>。然后把调用点对象返回，到这里 BSM 方法执行完毕。</p>
+
+<p>更详细的可参考：</p>
+
+<ul>
+  <li><a href="http://www.jianshu.com/p/0251fef3211c">浅谈Lambda Expression - 简书</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/27159693">[Java] 关于OpenJDK对Java 8 lambda表达式的运行时实现的查看方式 - 知乎专栏</a></li>
+</ul>
+
+<p>第二步，就是执行这个方法句柄了，这个过程就像 <code>invokevirtual</code> 指令执行 <code>MethodHandle#invokeExact</code> 一样，</p>
+
+<p>加上 inDy 上面那一条 <code>aload_0</code> 指令，这是操作数栈有两个分别是：</p>
+
+<ol>
+  <li>args[]，lambda 里面调用了 main 方法的参数</li>
+  <li>调用点对象（CallSite），实际上是方法句柄。如果是 CostantCallSite 的时候，inDy 会直接跟他的方法句柄链接。见代码：<a href="https://github.com/dmlloyd/openjdk/blob/77d7cb3ad9efc4edeaae7cc46e3b4a98ea617679/jdk/src/java.base/share/classes/java/lang/invoke/MethodHandleNatives.java#L255">MethodHandleNatives.java#L255</a></li>
+</ol>
+
+<p>传入 args，执行方法，返回一个 Runnable 对象，压入栈顶。到这里 inDy 就执行完毕。</p>
+
+<p>接下来的指令就很好理解，<code>astore_1</code> 把栈顶的 Runnable 对象放到局部变量表的槽位1，也是变量 <code>r</code>。剩下的就是再拿出来调用 <code>run</code> 方法。</p>
+
+<h3 id="groovy">Groovy</h3>
+
+<p>接下来看一下 groovy 是如何使用 inDy 指令的。先复习一遍 groovy 的方法派发。</p>
+
+<p>每当 Groovy 调用一个方法时，它不会直接调用它，而是要求一个中间层来代替它。 中间层通过钩子方法允许我们更改方法调用的行为。这个中间层就是 MOP（meta object proctol），MOP 主要承载的类就是 <a href="https://github.com/groovy/groovy-core/blob/master/src/main/groovy/lang/MetaClass.java">MetaClass</a> 。一个简化版的 MOP 主要有这些方法：</p>
+
+<ul>
+  <li><code>invokeMethod(String methodName, Object args)</code></li>
+  <li><code>methodMissing(String name, Object arguments)</code></li>
+  <li><code>getProperty(String propertyName)</code></li>
+  <li><code>setProperty(String propertyName, Object newValue)</code></li>
+  <li><code>propertyMissing(String name)</code></li>
+</ul>
+
+<p>可以大致认为在 Groovy 中的每个方法和属性访问调用都会转化上面的方法调用。而这些方法可以在运行时通过重写修改它的默认行为，MOP 作为方法派发的中心枢纽为 Groovy 提供了非常灵活的动态编程的能力。</p>
+
+<p>现在来看一下一段简短的 groovy 代码，</p>
+
+<pre><code>class Test{
+  int a = 0;
+  static void main(args){
+      Test wtf = new Test()
+      wtf.a
+      wtf.doSomething()
+  }
+}
+</code></pre>
+
+<p>通过 <code>groovyc -indy Test.groovy</code> 把它编译成字节码。 <code>indy</code> 选项的意思就是启用  invokedynamic 支持。</p>
+
+<p>看一下编译后的 main 方法。</p>
+
+<pre><code>public static void main(java.lang.String...);
+    descriptor: ([Ljava/lang/String;)V
+    flags: ACC_PUBLIC, ACC_STATIC, ACC_VARARGS
+    Code:
+      stack=1, locals=2, args_size=1
+         0: ldc           #2                  // class Test
+         2: invokedynamic #44,  0             // InvokeDynamic #0:init:(Ljava/lang/Class;)Ljava/lang/Object;
+         7: invokedynamic #50,  0             // InvokeDynamic #1:cast:(Ljava/lang/Object;)LTest;
+        12: astore_1
+        13: aload_1
+        14: pop
+        15: aload_1
+        16: invokedynamic #56,  0             // InvokeDynamic #2:getProperty:(LTest;)Ljava/lang/Object;
+        21: pop
+        22: aload_1
+        23: invokedynamic #61,  0             // InvokeDynamic #3:invoke:(LTest;)Ljava/lang/Object;
+        28: pop
+        29: return
+</code></pre>
+
+<p>可以看到一共有 4 条 inDy 指令，包括构造函数，访问成员变量，和不存在的方法调用都是 通过 invokedynamic 实现的。</p>
+
+<p>再看一下引导方法表</p>
+
+<pre><code>BootstrapMethods:
+  0: #38 invokestatic org/codehaus/groovy/vmplugin/v7/IndyInterface.bootstrap:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;I)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #39 &lt;init&gt;
+      #40 0
+  1: #38 invokestatic org/codehaus/groovy/vmplugin/v7/IndyInterface.bootstrap:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;I)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #46 ()
+      #40 0
+  2: #38 invokestatic org/codehaus/groovy/vmplugin/v7/IndyInterface.bootstrap:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;I)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #51 a
+      #52 4
+  3: #38 invokestatic org/codehaus/groovy/vmplugin/v7/IndyInterface.bootstrap:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;I)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #58 doSomething
+      #40 0
+</code></pre>
+
+<p>可以发现所有 inDy 指令的引导方法都是 <a href="https://github.com/groovy/groovy-core/blob/master/src/main/org/codehaus/groovy/vmplugin/v7/IndyInterface.java#L132">IndyInterface.bootstrap</a></p>
+
+<p>以方法调用的 inDy 指令为例，它的方法名称是 “invoke”，方法签名是 <code>methodType(Object.class,Test.class)</code>，BSM 方法还附带两个参数分别是实际的方法名：<code>"doSomething"</code> 和一个标志：0</p>
+
+<p>BSM 方法最终调用的是 <code>realBootstrap</code> 方法：</p>
+
+<pre><code>private static CallSite realBootstrap(Lookup caller, String name, int callID, MethodType type, boolean safe, boolean thisCall, boolean spreadCall) {
+    MutableCallSite mc = new MutableCallSite(type); //这里是 MutableCallSite，lambda 表达式用的是 ConstantCallSite
+    MethodHandle mh = makeFallBack(mc,caller.lookupClass(),name,callID,type,safe,thisCall,spreadCall);
+    mc.setTarget(mh);
+    return mc;
+}
+</code></pre>
+
+<p>主要的代码是调用 <code>makeFallBack</code> 来获取一个临时的 MethodHandle。因为在第一步 groovy 无法确定接收者（receiver），也是就是 invoke 方法的第一个实参（Test 实例），必须要在第二步确定 CallSite 后才会传递过来。所以方法解析要放在第二步。</p>
+
+<pre><code>protected static MethodHandle makeFallBack(MutableCallSite mc, Class&lt;?&gt; sender, String name, int callID, MethodType type, boolean safeNavigation, boolean thisCall, boolean spreadCall) {
+    MethodHandle mh = MethodHandles.insertArguments(SELECT_METHOD, 0, mc, sender, name, callID, safeNavigation, thisCall, spreadCall, /*dummy receiver:*/ 1); //MethodHandle(Object.class,Object[].class)
+    mh =    mh.asCollector(Object[].class, type.parameterCount()).
+            asType(type);
+    return mh;
+}
+</code></pre>
+
+<p>这个 fallback 方法其实就是 <code>selectMethod</code>。<code>insertArguments</code> 在这里主要做了一个柯里化的操作，因为<code>selectMethod</code> 的方法签名是</p>
+
+<pre><code>methodType(Object.class, MutableCallSite.class, Class.class, String.class, int.class, Boolean.class, Boolean.class, Boolean.class, Object.class, Object[].class)
+</code></pre>
+
+<p>而 inDy 要求的方法签名却是</p>
+
+<pre><code>methodType(Object.class,Test.class)。
+</code></pre>
+
+<p>所以得经过 <code>insertArguments</code> 的变换，把确定的值填充进去，用最后的数组参数来接收 inDy 传递的参数。这样这个方法就能够被 inDy 调用了。第一步创建 CallSite 到这里就结束。</p>
+
+<p>第二步，就是 selectMethod 方法的调用，这时候 groovy 已经知道方法的接收者 <code>arguments[0]</code>，</p>
+
+<pre><code>public static Object selectMethod(MutableCallSite callSite, Class sender, String methodName, int callID, Boolean safeNavigation, Boolean thisCall, Boolean spreadCall, Object dummyReceiver, Object[] arguments) throws Throwable {
+    Selector selector = Selector.getSelector(callSite, sender, methodName, callID, safeNavigation, thisCall, spreadCall, arguments); 
+    selector.setCallSiteTarget();
+
+    MethodHandle call = selector.handle.asSpreader(Object[].class, arguments.length);
+    call = call.asType(MethodType.methodType(Object.class,Object[].class));
+    return call.invokeExact(arguments);
+}
+</code></pre>
+
+<p>首先创建一个方法解析器，在这里是 <code>MethodSelector</code>。接着调用 <code>setCallSiteTarget()</code>，这个方法就是用来解析实际的方法。具体的过程还是很复杂的，所以也没法说清楚，大体来说就是确定接收者的 <code>MetaClass</code>，决定这个方法是实际的方法，还是交给 <code>MetaClass</code> 的钩子方法，然后就是创建这个方法的 MethodHandle，然后把这个 MethodHandle 的签名转化为要求的签名。这时 selecor.handle 就是最终调用的方法句柄了。接下来就是最终的方法调用了，到这里 inDy 指令就执行完毕了。</p>
+
+<p>还有一个方法值得留意：</p>
+
+<pre><code>public void doCallSiteTargetSet() {
+    if (!cache) {
+        if (LOG_ENABLED) LOG.info("call site stays uncached");
+    } else {
+        callSite.setTarget(handle);
+        if (LOG_ENABLED) LOG.info("call site target set, preparing outside invocation");
+    }
+}
+</code></pre>
+
+<p>这也是为什么用 <code>MutableCallSite</code> 的原因，如果编译器认为这个方法是可以缓存，那么就会把这个 CallSite 绑定到实际的 MethodHandle，后续的调用就不用再重新解析了。</p>
+
+<h3 id="最后">最后</h3>
+
+<p>没有相关经验，inDy 还是很不好理解的，学习了 java 8 和 groovy 对 inDy 的应用才有一点大致的认识，文中如果有什么错误，还请帮忙指出。</p>
+
+
+    </article>
+    <div class="tag-container" >
+        
+        <div class="chip">
+        <a href="/tags#JVM-ref">
+            JVM
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#groovy-ref">
+            groovy
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#java-ref">
+            java
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#lambda-ref">
+            lambda
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#invokedynamic-ref">
+            invokedynamic
+        </a>
+        </div>
+        
+    </div>
+<div class="post-pager">
+    
+    <a href="/2017/05/23/lifecycle/">上一篇：Android Architecture Component -- Lifecycle 浅析</a>
+    
+    
+    <a href="/2017/10/20/lambda-in-android/" style="float:right;" >下一篇：Lambda in Android</a>
+    
+</div>
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/2017/10/08/understanding-invokedynamic"
+ var disqus_config = function () {
+     this.page.title = "理解 invokedynamic"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/2017/10/08/understanding-invokedynamic/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

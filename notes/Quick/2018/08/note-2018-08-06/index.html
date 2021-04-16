@@ -1,0 +1,401 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    2018年08月06日杂记 | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">2018年08月06日杂记</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 19-12-19">2018-08-06</span>
+    
+</div>
+
+<article>
+    <h1 id="导航原则">导航原则</h1>
+
+<ol>
+  <li>App 应该要有固定的第一屏（也称为 destination）</li>
+  <li>App 的导航状态应该是堆栈结构，底部是第一屏，最顶端是当前屏幕</li>
+  <li>Up 动作不能离开当前 App</li>
+  <li>在当前 App 的 task 时（返回按钮不会离开应用时），Up 动作与返回按钮行为相同</li>
+  <li>Deep linking 或者通过导航到达相同目的地应该产出一样的堆栈</li>
+</ol>
+
+<h1 id="navigation">Navigation</h1>
+
+<p>Navigation Architecture Component 用于简化各个目的地（destinations）之间的导航实现。通过一个 xml 文件来描述导航关系，AS 3.2 需要开启才能支持 nav xml 文件的图形化编辑:</p>
+
+<blockquote>
+  <p>File &gt; Settings (Android Studio &gt; Preferences on Mac), select the Experimental category in the left pane, check Enable Navigation Editor, and then restart Android Studio.</p>
+</blockquote>
+
+<p>每个 destination 为一个 Fragment， Activity 使用 <code>NavHostFragment</code> 将导航管理交给 <code>NavController</code>，通过 xml 中声明的 Fragment id 导航到相应的目的地。</p>
+
+<h2 id="menu-item">Menu Item</h2>
+
+<p>支持 Menu item 和 navigation 结合起来，只要 Menu item 的 id 和对应的 destination id 相同。</p>
+
+<p>也就是说 Drawer、BottomNavigation 都支持一行绑定</p>
+
+<h2 id="传递参数">传递参数</h2>
+
+<p>传递参数支持 Bundle，会自动插入到 Fragment 的 Arguments 中，还不知道怎么实现的。
+也支持类型安全的实现，需要 gradle 插件 <code>androidx.navigation.safeargs</code> 支持，主要实现原理</p>
+
+<ol>
+  <li>给每个有参数 Fragment （目标 Fragment）生成一个 <code>${fragment_name}Args</code> 类，</li>
+  <li>给源 Fragment 生成一个 <code>${fragment_name}Directions</code> 工具类，每个 action 都有对应的工厂方法</li>
+</ol>
+
+<h2 id="group">Group</h2>
+
+<p>navigation  支持嵌套 navigation</p>
+
+<h2 id="fragment-transactions">Fragment Transactions</h2>
+
+<h2 id="deeplinks">deepLinks</h2>
+
+<h3 id="explicit">Explicit</h3>
+
+<p>NavDeepLinkBuilder</p>
+
+<h3 id="implicit">Implicit</h3>
+
+<p>可以在 navigation xml 中为 destination 加入 deeplink</p>
+
+<pre><code>&lt;fragment&gt;
+    &lt;deepLink app:uri="flowers://www.example.com/details/{item_id}"/&gt;
+&lt;/fragment&gt;
+</code></pre>
+
+<p>同时需要在 AndroidManifest.xml 中 加入 <code>nav-graph</code>(Android Studio 3.2 以上)</p>
+
+<pre><code>&lt;activity
+        android:name=".GardenActivity"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme.NoActionBar"&gt;
+      &lt;nav-graph android:value="@navigation/nav_garden"/&gt;
+    &lt;/activity&gt;
+</code></pre>
+
+<p>IDE 会在构建时生成相应的 <code>intent-filter</code>，下面声明可以在反编译 Apk 后的 AndroidManifest 中找到：</p>
+
+<pre><code>&lt;intent-filter&gt;
+    &lt;action
+        android:name="android.intent.action.VIEW" /&gt;
+    &lt;category
+        android:name="android.intent.category.DEFAULT" /&gt;
+    &lt;category
+        android:name="android.intent.category.BROWSABLE" /&gt;
+    &lt;data
+        android:scheme="flowers" /&gt;
+    &lt;data
+        android:host="www.example.com" /&gt;
+    &lt;data
+        android:pathPrefix="/details/" /&gt;
+&lt;/intent-filter&gt;
+</code></pre>
+
+<h2 id="如何跨-navhostnavcontroller">如何跨 NavHost(NavController)</h2>
+
+<p>The NavController and its navigation graph is contained within a single activity. Therefore, when migrating an existing project to use the Navigation Architecture Component,</p>
+
+<h2 id="如何把数据传回源-desitination">如何把数据传回源 Desitination</h2>
+
+<h2 id="testing">Testing</h2>
+
+<h2 id="源码解析">源码解析</h2>
+
+<h3 id="navigation-1">Navigation</h3>
+
+<p>提供全局导航的方法，用于获取 NavController，可通过 Activity 或 View 可以避免使用导航逻辑时对 Activity Context 的依赖。</p>
+
+<p>通过 View 搜索的原理如下：</p>
+
+<pre><code>private static NavController findViewNavController(@NonNull View view) {
+    while (view != null) {
+        NavController controller = getViewNavController(view); // 获取 View 的 tag 判断是否是 NavContrroll
+        if (controller != null) {
+            return controller;
+        }
+        ViewParent parent = view.getParent();
+        view = parent instanceof View ? (View) parent : null;
+    }
+    return null;
+}
+</code></pre>
+
+<h3 id="navcontroller">NavController</h3>
+
+<p>NavController 和 Navigator 都有各自独立的 BackStack</p>
+
+<h3 id="navdestination">NavDestination</h3>
+
+<p>导航是个有向图 NavGraph， NavDestination 表示图中的节点。每个 Destination 还有一个对应 Navigator，这个 Navigator 处理怎么导购到这个 Destination 的逻辑。</p>
+
+<p>Destination 对应就行 xml 编辑器中 Destination 的概念，存放参数，action，deeplink等等。</p>
+
+<p>AtivityNavigator.Destination 就是封装了 Intent</p>
+
+<h3 id="navigator">Navigator</h3>
+
+<p>Navigators should be able to manage their own back stack when navigating between two destinations that belong to that navigator. The NavController manages a back stack of navigators representing the current navigation stack across all navigators.</p>
+
+<p>内置有 4 个子类，分别是 ActivityNavigator, FragmentNavigator, NavGraphNavigator, TestNavigator</p>
+
+<ul>
+  <li>
+    <h2 id="activitynavigator处理-navigate-到-activitynavigatordestination-的逻辑将-destination-转化为-intent-并通过-startactivity-启动-destinationpopbackstack-结束当前-activity发送-navigated-事件">ActivityNavigator，处理 navigate 到 ActivityNavigator.Destination 的逻辑，将 Destination 转化为 intent 并通过 startActivity 启动 Destination。popBackStack 结束当前 Activity，发送 navigated 事件。</h2>
+  </li>
+</ul>
+
+<h3 id="navgraph">NavGraph</h3>
+
+<p>NavGraph 也是 NavDestination，也就是 Navigation 还有子图的概念。</p>
+
+</article>
+<div class="tag-container" >
+    
+    <div class="chip">
+        <a href="/tags#navigation-ref">
+            navigation
+        </a>
+    </div>
+    
+    <div class="chip">
+        <a href="/tags#androidx-ref">
+            androidx
+        </a>
+    </div>
+    
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Quick/2018/08/note-2018-08-06"
+ var disqus_config = function () {
+     this.page.title = "2018年08月06日杂记"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Quick/2018/08/note-2018-08-06/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

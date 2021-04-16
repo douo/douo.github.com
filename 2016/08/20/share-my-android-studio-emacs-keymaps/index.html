@@ -1,0 +1,1284 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    分享我的 Android Studio Emacs 风格快捷键 | DouO's Blog</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">分享我的 Android Studio Emacs 风格快捷键</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-11-30">2016-08-20</span>
+
+    
+</div>
+
+    <article>
+        <p><img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Qwerty.svg" alt="QWERTY 键盘区域，来自 wikimedia" /></p>
+
+<p>Emacs 风格的快捷键通过<a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Prefix-Keys.html">前缀键</a>来扩展更多打字区的快捷键，尽量把快捷键控制在打字键区，显著减少编码过程手腕的移动，是个经得起考验的快捷键方案（非 emacs 用户可能深痛恶觉）。</p>
+
+<p>这套快捷键在 Emacs keymaps 的基础上进行自定义，首先减少对功能键区的使用，一来容易与系统快捷键冲突，二来手指移动的幅度过大难定位不容形成肌肉记忆，所以只保留编译运行相关的快捷键。至于编辑键区则更次，手腕必须得移动，眼睛也得跟着辅助定位，只保留少部分不常用的默认快捷键。数字键区最糟，手腕移动幅度最大，再说我的 87 键盘都没有小键盘-_-，直接弃用。至于鼠标，那更是万恶之源，整个手臂都得移动，还要眼睛配合才能用鼠标完成一次操作，写代码的过程大多是用鼠标辅助点击几次，然后又回到打字区继续敲，这样来回一次切换成本太高。何况程序员经常用鼠标点点点？多没 B 格啊。虽说如此，不过想要完全不用鼠标还是不太容易，只能说一个命令通过鼠标打开层层菜单来执行超过一次，第二次就应该用 Find Action 来执行，如果一天超过三次那就应该给它设个快捷键并记住。</p>
+
+<p>Android Studio 相比 Eclipse 内置的 Emacs keymaps 强大了许多，不过 Eclipse 有 Emacs+， Android Studio 却没有这方面的插件。所有 Android Studio 相比 Emacs 多了一些不足，比如：</p>
+
+<ol>
+  <li>Android Studio 只支持一个前缀键（prefix key），所以 spacemacs 那样的助记法快捷键 Android Studio 难以实现</li>
+  <li>Android Studio 中 Esc 不能作为修饰键使用</li>
+  <li>IntelliJ 可以为 <code>Escape</code> 命令配置快捷键，但不少 UI 还是硬编码为键盘的 <code>Esc</code> 键。所以为了退出浮窗，经常要 <code>C-g</code>、<code>Esc</code> 交替使用</li>
+  <li>不过窗口的操作逻辑不一致，有些 UI 可以用移动光标快捷键，有些只能用方向键</li>
+</ol>
+
+<p>一些约定先说明，特别是非 Emacs 党：</p>
+
+<ul>
+  <li>C = Control/Ctrl，<a href="https://www.emacswiki.org/emacs/MovingTheCtrlKey">如果小指还想要请将 CapsLock 改成 Ctrl</a></li>
+  <li>M = Meta = Alt != Options</li>
+  <li>S = Shift</li>
+  <li><code>C-F</code> 等同于 <code>C-S-f</code> ，无换档字符仍使用 <code>C-S-key</code> 表示</li>
+  <li>方向用图标表示：<code>←</code>、<code>→</code>、<code>↑</code>、<code>↓</code></li>
+  <li><code>,</code> 用于分隔前缀键，表示先按 <code>,</code> 前的键，<em>松开</em>，再按下一个键</li>
+  <li>关于 Mac 的 Options 键，参考：<a href="https://stackoverflow.com/questions/20770033/how-to-disable-option-key-to-type-greek-letter-in-mac-os">osx - How to disable option key to type greek letter in Mac OS? - Stack Overflow</a></li>
+</ul>
+
+<p>最终使用的前缀键有下面三个：</p>
+
+<ol>
+  <li><code>C-x</code></li>
+  <li><code>Esc</code></li>
+  <li><code>M-g</code></li>
+</ol>
+
+<p>首先，最基本又最重要的键肯定就是 Find Action，简直就是 Emacs 中的 Run Command，必须绑定为 <code>M-x</code>。别的快捷键记不住不要紧，只要记住这个还是能做到无鼠标操作，特别是还附带快捷键提示，如果有的话。不过还是得对命令的关键字有点概念，表格中的关键字项就是表示通过该关键字在 Find Action 或者 Keymaps 设置搜索到相应功能；自定义有 <code>*</code> 表示快捷键是我自定义的，非 Emacs Keymaps 的默认配置。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">快捷键</th>
+      <th>功能</th>
+      <th>关键字</th>
+      <th style="text-align: center">自定义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><code>M-x</code></td>
+      <td>执行命令</td>
+      <td>find Action</td>
+      <td style="text-align: center">*</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-g</code></td>
+      <td>取消</td>
+      <td>escape</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-M-s</code></td>
+      <td>打开设置</td>
+      <td>settings</td>
+      <td style="text-align: center"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="光标移动move-cursor">光标移动（Move cursor）</h3>
+
+<p>光标移动类的快捷键，这里指的是在单一文本的内的光标移动，又包括语法无关的移动和语法相关的移动，语法无关的移动指的就是光标的上下左右移动等等，这一块与 Emacs 基本一致。另外 <code>C-l</code>虽然不是移动光标，但也是放在这里。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">快捷键</th>
+      <th>功能</th>
+      <th>关键字</th>
+      <th style="text-align: center">自定义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><code>C-f</code></td>
+      <td>向前移动一个字符</td>
+      <td>right</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-b</code></td>
+      <td>向后移动一个字符</td>
+      <td>left</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-n</code></td>
+      <td>向上移动一行</td>
+      <td>up</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-p</code></td>
+      <td>向下移动一行</td>
+      <td>down</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>M-f</code></td>
+      <td>向前移动一个单词</td>
+      <td>next word</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>M-b</code></td>
+      <td>向后移动一个单词</td>
+      <td>previous word</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-a</code></td>
+      <td>移动到行头</td>
+      <td>line start</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-e</code></td>
+      <td>移动到行尾</td>
+      <td>line end</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-v</code></td>
+      <td>下一页</td>
+      <td>page down</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>M-v</code></td>
+      <td>上一页</td>
+      <td>page up</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>M-&lt;</code></td>
+      <td>移动到文本头</td>
+      <td>text start</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>M-&gt;</code></td>
+      <td>移动到文本尾</td>
+      <td>text end</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-l</code></td>
+      <td>将光标位置滚动到屏幕中央</td>
+      <td>scroll to center</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-Pgup</code></td>
+      <td>移动到当前页的起始处</td>
+      <td>Page Top</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-PgDn</code></td>
+      <td>移动到当前页的结束处</td>
+      <td>page end</td>
+      <td style="text-align: center"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>语法相关的移动：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">快捷键</th>
+      <th>功能</th>
+      <th>关键字</th>
+      <th style="text-align: center">自定义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><code>C-[</code></td>
+      <td>移动到当前 Block 起始大括号处</td>
+      <td>Code block start</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-]</code></td>
+      <td>移动到当前 BLock 结束大括号处</td>
+      <td>Code Block End</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-M-a</code></td>
+      <td>移动到前一个方法</td>
+      <td>previous method</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-M-e</code></td>
+      <td>移动到后一个方法</td>
+      <td>next method</td>
+      <td style="text-align: center"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Android Studio 将 <code>M-g</code> 作为跳转到行数，我改其作为前置键，同时作为跳转高亮错误的前置键。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">快捷键</th>
+      <th>功能</th>
+      <th>关键字</th>
+      <th style="text-align: center">自定义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><code>M-g g</code></td>
+      <td>作为跳转到行数</td>
+      <td>line</td>
+      <td style="text-align: center">*</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>M-g n</code></td>
+      <td>下一个高亮问题</td>
+      <td>next highlighted error</td>
+      <td style="text-align: center">*</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>M-g p</code></td>
+      <td>上一个高亮问题</td>
+      <td>next highlighted error</td>
+      <td style="text-align: center">*</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>与光标相关的还有文本选择，我保留 <code>C-space</code> 来加入选择模式，但这个快捷键也常被操作系统用来切换输入法，
+在 Linux 下我把输入切换配置为 Win-space，其他系统我也建议想办法把 C-space 留给 Android Studio。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">快捷键</th>
+      <th>功能</th>
+      <th>关键字</th>
+      <th style="text-align: center">自定义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><code>C-space</code></td>
+      <td>切换选择模式</td>
+      <td>sticky selection</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-x, h</code></td>
+      <td>全选</td>
+      <td>select all</td>
+      <td style="text-align: center"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>特别是 Android Studio 不像 emacs 可以用 <code>C-F</code> 等进行选择。只能用传统的 <code>S-→</code>。所以保留 C-space 还是有必要的，下面是例外：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">快捷键</th>
+      <th>功能</th>
+      <th>关键字</th>
+      <th style="text-align: center">自定义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><code>C-{</code></td>
+      <td>选择到当前 Block 起始大括号处</td>
+      <td>Code block start</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-}</code></td>
+      <td>选择到当前 Block 结束大括号处</td>
+      <td>Code block end</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-S-PgUp</code></td>
+      <td>选择到当前页的起始处</td>
+      <td>page start</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-S-PgDn</code></td>
+      <td>选择到当前页的结束处</td>
+      <td>page end</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-S-Home</code></td>
+      <td>选择到当前文本的起始处</td>
+      <td>text start</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-S-End</code></td>
+      <td>选择到当前文本的结束处</td>
+      <td>text end</td>
+      <td style="text-align: center"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="导航navigate">导航（Navigate）</h3>
+
+<p>导航，在不同文件中切换。常用的导航我用一段式快捷键。一定要善用前三个，对编码效率绝对是很大的提高，起码不会让切换文件的速度脱慢你的思路。</p>
+
+<p><code>C-M-G</code> 是 <code>C-M-g</code> 的高级版，直接从实例名跳转到其类中。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">快捷键</th>
+      <th>功能</th>
+      <th>关键字</th>
+      <th style="text-align: center">自定义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><code>C-M-f</code></td>
+      <td>上一个位置</td>
+      <td>forward</td>
+      <td style="text-align: center">*</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-M-b</code></td>
+      <td>下一个位置</td>
+      <td>back</td>
+      <td style="text-align: center">*</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-M-g</code></td>
+      <td>跳转到定义处</td>
+      <td>declaration</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-M-G</code></td>
+      <td>跳转到类型</td>
+      <td>type declaration</td>
+      <td style="text-align: center">*</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-M-u</code></td>
+      <td>跳转到父类方法</td>
+      <td>super method</td>
+      <td style="text-align: center">*</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>M-←/→</code></td>
+      <td>左右切换标签</td>
+      <td>select tab</td>
+      <td style="text-align: center"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>如果对简洁有要求或者屏幕太小（比如我），可以将 Android Studio 的标签关掉，具体参考：<a href="https://www.jetbrains.com/help/idea/2016.2/configuring-behavior-of-the-editor-tabs.html">Configuring Behavior of the Editor Tabs</a>，那么这时 <code>M-←/→</code> 就不会起作用了。</p>
+
+<p>另外 <code>M-num</code> 都被 Android Studio 绑定到切换功能窗体，很实用但不一一罗列了，比较常用的是 <code>M-6</code> 打开 Android Monitor、<code>M-7</code> 打开 Structure，至于 Project 有更好的快捷键打开。</p>
+
+<p><code>C-num</code> 用于跳转书签。<code>C-M-num</code> 则用于设置书签，书签是全局的。</p>
+
+<p><strong>Select in…</strong> 可谓的鼠标杀手中的 MVP，多少鼠标操作就是为了在其他窗体中操作当前文件。大部分情况下它都是比 <code>M-num</code> 更好的选择。默认的 <code>Alt+F1</code> 与系统冲突，我修改为 <code>Esc，S-i</code>，好记，不过需要前缀键确实难为了这个命令。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">快捷键</th>
+      <th>功能</th>
+      <th>关键字</th>
+      <th style="text-align: center">自定义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><code>Esc,S-i</code></td>
+      <td>在其它窗体中选择，比如在项目窗体定位当前文件</td>
+      <td>select in..</td>
+      <td style="text-align: center">*</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>S-Esc</code></td>
+      <td>隐藏工具窗口，配合上个命令使用更佳。</td>
+      <td>Hide Active ToolWindow</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-S-Esc</code></td>
+      <td>隐藏所有工具窗口</td>
+      <td>Hide All ToolWindow</td>
+      <td style="text-align: center">*</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="编辑edit">编辑（Edit）</h3>
+
+<p>看快捷键说明， Android Studio 有 kill ring 的概念，比如 <code>M-w</code>、<code>C-w</code>、<code>M-d</code>、<code>M-backspace</code> 都是操作 kill ring，但是居然没有 yank pop，所以 <code>M-y</code> 只能绑定为不太实用 <strong>paste from history…</strong>，话说你把 kill ring 藏到哪了？</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">快捷键</th>
+      <th>功能</th>
+      <th>关键字</th>
+      <th style="text-align: center">自定义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><code>C-x,C-f</code></td>
+      <td>打开文件</td>
+      <td>file</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-x,b</code></td>
+      <td>切换 Buffer</td>
+      <td>switcher</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-x,k</code></td>
+      <td>关闭当前文件</td>
+      <td>close</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-_</code></td>
+      <td>撤销</td>
+      <td>undo</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>M-_</code></td>
+      <td>重做</td>
+      <td>redo</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-w</code></td>
+      <td>剪切</td>
+      <td>kill selected</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>M-w</code></td>
+      <td>复制</td>
+      <td>save to kill ring</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-y</code></td>
+      <td>粘帖</td>
+      <td>paste</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>M-y</code></td>
+      <td>粘帖历史选择</td>
+      <td>paste from history</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>M-S-↑/↓</code></td>
+      <td>移动当前行</td>
+      <td>move line up/down</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-S-↑/↓</code></td>
+      <td>移动当前语句/代码块</td>
+      <td>move statement up/down</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>M-;</code></td>
+      <td>注释当前行</td>
+      <td>line comment</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>M-:</code></td>
+      <td>注释块</td>
+      <td>block comment</td>
+      <td style="text-align: center">*</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-=</code></td>
+      <td>展开</td>
+      <td>expand</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-M-=</code></td>
+      <td>全部展开</td>
+      <td>expand all</td>
+      <td style="text-align: center">*</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C--</code></td>
+      <td>收缩</td>
+      <td>collapse</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-M--)</code></td>
+      <td>全部收缩</td>
+      <td>collapse all</td>
+      <td style="text-align: center">*</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Android Studio 对分割窗格的支持，基本可以做到和 Emacs 一致，除了 <code>C-x, 0</code>，在 Android Studio 中它的行为与 <code>C-x, k</code> 一致。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">快捷键</th>
+      <th>功能</th>
+      <th>关键字</th>
+      <th style="text-align: center">自定义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><code>C-x, 1</code></td>
+      <td>关闭其他窗格</td>
+      <td>unsplit</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-x, 2</code></td>
+      <td>平行分割当前窗格</td>
+      <td>split</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-x, 3</code></td>
+      <td>竖直分割当前窗格</td>
+      <td>split</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-x, 0</code></td>
+      <td>关闭当前窗格</td>
+      <td>unsplit</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-x, o</code></td>
+      <td>切换不同窗格</td>
+      <td>goto next spliteer</td>
+      <td style="text-align: center"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="查找find">查找（Find）</h3>
+
+<p><code>C-D</code> 是 Dash 插件的默认快捷键，用于在 Dash/Velocity/Zeal 中搜索</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">快捷键</th>
+      <th>功能</th>
+      <th>关键字</th>
+      <th style="text-align: center">自定义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><code>C-s</code></td>
+      <td>文本内搜索/下一个匹配</td>
+      <td>find next</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-r</code></td>
+      <td>下一个匹配</td>
+      <td>find previous</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>M-%</code></td>
+      <td>替换</td>
+      <td>replace</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-S</code></td>
+      <td>全局搜索</td>
+      <td>find in path</td>
+      <td style="text-align: center">*</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-R</code></td>
+      <td>全局替换</td>
+      <td>replace in path</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>M-S</code></td>
+      <td>查找使用</td>
+      <td>find usage</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-D</code></td>
+      <td>Dash 中搜索</td>
+      <td>Search in Dash</td>
+      <td style="text-align: center">*</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Android Studio 支持宏功能，默认的宏操作都没有配置快捷键，不过没有 <code>C-u</code> 宏的实用性大打折扣</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">快捷键</th>
+      <th>功能</th>
+      <th>关键字</th>
+      <th style="text-align: center">自定义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><code>C-x, (</code></td>
+      <td>开始宏录制</td>
+      <td>start macro</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-x, )</code></td>
+      <td>停止宏录制</td>
+      <td>stop macro</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-x, e</code></td>
+      <td>运行宏</td>
+      <td>play last macro</td>
+      <td style="text-align: center"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="编码code">编码（Code）</h3>
+
+<p>重构的 Extract 都被绑定为 <code>C-M-key</code>，本来也是不错的选择，可惜太多冲突，我改为 <code>Esc,key</code>，取首字母相同来助记。前缀键我在 <code>Esc</code> 和 <code>C-c</code> 间犹豫了下，显然 <code>C-c</code> 效率更好，但我觉得重构的话，在操作前有个停顿思考下也不是坏事。所以最终选择了 <code>Esc</code>。</p>
+
+<p><code>C-M</code> 的默认功能与 <code>C-[</code>、<code>C-]</code> 重叠了，所以不如绑定为显示方法的参数信息，毕竟 Android Studio 的代码补全不支持显示方法参数，所以这个功能也是很有必要的。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">快捷键</th>
+      <th>功能</th>
+      <th>关键字</th>
+      <th style="text-align: center">自定义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><code>M-/</code></td>
+      <td>代码补全，按两次能显示更多选项</td>
+      <td>completion</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-M-/</code></td>
+      <td>代码补全，智能类型</td>
+      <td>completion</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>M-enter</code></td>
+      <td>显示建议行为，类是 quick fix</td>
+      <td>show intention actions</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-q</code></td>
+      <td>快速文档</td>
+      <td>quick document</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-I</code></td>
+      <td>快速显示定义</td>
+      <td>quick definition</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-P</code></td>
+      <td>显示当前表达式返回类型</td>
+      <td>expression type</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-M</code></td>
+      <td>显示方法参数信息</td>
+      <td>parameter info</td>
+      <td style="text-align: center">*</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-x, f</code></td>
+      <td>格式化</td>
+      <td>reformat code</td>
+      <td style="text-align: center">*</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-x, r</code></td>
+      <td>重命名</td>
+      <td>rename</td>
+      <td style="text-align: center">*</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-x, i</code></td>
+      <td>优化 imports</td>
+      <td>optimize imports</td>
+      <td style="text-align: center">*</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-x, j</code></td>
+      <td>插入在线模板，代码补全也支持补全模板</td>
+      <td>insert live template</td>
+      <td style="text-align: center">*</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-x, g</code></td>
+      <td>生成代码</td>
+      <td>generate</td>
+      <td style="text-align: center">*</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-x, s</code></td>
+      <td>生成包围代码</td>
+      <td>surround with</td>
+      <td style="text-align: center">*</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>Esc, f</code></td>
+      <td>提取为字段</td>
+      <td>field</td>
+      <td style="text-align: center">*</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>Esc, c</code></td>
+      <td>提取为常量</td>
+      <td>constant</td>
+      <td style="text-align: center">*</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>Esc, m</code></td>
+      <td>提取为方法</td>
+      <td>method</td>
+      <td style="text-align: center">*</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>Esc, p</code></td>
+      <td>提取为参数</td>
+      <td>parameter</td>
+      <td style="text-align: center">*</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>Esc, v</code></td>
+      <td>提取为变量</td>
+      <td>variable</td>
+      <td style="text-align: center">*</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="运行make">运行（Make）</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">快捷键</th>
+      <th>功能</th>
+      <th>关键字</th>
+      <th style="text-align: center">自定义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><code>S-F10</code></td>
+      <td>运行当前配置</td>
+      <td>run</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>S-F9</code></td>
+      <td>调试当前配置</td>
+      <td>debug</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-S-F9</code></td>
+      <td>运行当前 Activity</td>
+      <td>run context configuraton</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>M-S-F10</code></td>
+      <td>弹出运行选择菜单</td>
+      <td>run</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>M-S-F9</code></td>
+      <td>弹出调试选择菜单</td>
+      <td>debug</td>
+      <td style="text-align: center"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="git">Git</h3>
+
+<p>大部分 Vcs 相关的快捷键默认配置都和上面的配置冲突了，考虑到用于跳转的 <code>M-g</code> 前缀键只用了 3 个，我的 VCS 只用 git
+ 一个，所以把 git 相关操作用 <code>M-g</code> 前缀键重新编排下。因为很少用到，可能不太合理，一些 git 的基本操作我都是都是直接在 Shell 里输入。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">快捷键</th>
+      <th>功能</th>
+      <th>关键字</th>
+      <th style="text-align: center">自定义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><code>M-g, +</code></td>
+      <td>add 当前文件</td>
+      <td>add to vcs</td>
+      <td style="text-align: center">*</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>M-g, C-c</code></td>
+      <td>commit</td>
+      <td>commit</td>
+      <td style="text-align: center">*</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>M-g, C-z</code></td>
+      <td>revert</td>
+      <td>revert</td>
+      <td style="text-align: center">*</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>M-g, C-f</code></td>
+      <td>fetch</td>
+      <td>fetch</td>
+      <td style="text-align: center">*</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>M-g, C-u</code></td>
+      <td>push</td>
+      <td>push</td>
+      <td style="text-align: center">*</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>M-g, C-a</code></td>
+      <td>annotate</td>
+      <td>annotate</td>
+      <td style="text-align: center">*</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>M-g, C-p</code></td>
+      <td>pull</td>
+      <td>pull</td>
+      <td style="text-align: center">*</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>M-g, C-d</code></td>
+      <td>比较文件，在历史记录窗体可直接对比</td>
+      <td>compare file/show diff</td>
+      <td style="text-align: center">*</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>M-g, C-D</code></td>
+      <td>弹出比较文件浮窗</td>
+      <td>compare with</td>
+      <td style="text-align: center">*</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>M-g, C-h</code></td>
+      <td>显示当前文件历史</td>
+      <td>show history</td>
+      <td style="text-align: center">*</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>M-g, C-H</code></td>
+      <td>显示当前选择区域历史</td>
+      <td>show history</td>
+      <td style="text-align: center">*</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="鼠标mouse">鼠标（Mouse）</h3>
+
+<p>某些情况鼠标还是比键盘更高效</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">快捷键</th>
+      <th>功能</th>
+      <th>关键字</th>
+      <th style="text-align: center">自定义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><code>Button2</code></td>
+      <td>矩形选择</td>
+      <td> </td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>M-S-Button1</code></td>
+      <td>放置多个光标</td>
+      <td> </td>
+      <td style="text-align: center"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="live-plugin">Live-plugin</h3>
+
+<p><a href="https://github.com/dkandalov/live-plugin">live-plugin</a> 是一个强大的插件，能给 Android Studio 提供类似 elisp 的运行环境及解析器，通过 groovy 脚本在运行时更改 IDE 的行为，所谓的 <a href="http://martinfowler.com/bliki/InternalReprogrammability.html">InternalReprogrammability</a>。</p>
+
+<p>我将其运行当前插件的快捷键更改为 Emacs 中执行 elisp 表达式的快捷键。其他的我还没有深入使用，只是写了个脚本用来实现单词首字母大写功能，并将其绑定到 <code>M-c</code>，见 <a href="https://github.com/douo/douo_config/tree/master/android-studio/live-plugin/capitalizeWord">capitalizeWord</a>。原理主要是<code> registerAction</code> 来增加自定义 action，自定义的 action 能绑定快捷键，也能通过 find action 来搜索十分方便。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">快捷键</th>
+      <th>功能</th>
+      <th>关键字</th>
+      <th style="text-align: center">自定义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><code>C-x, C-e</code></td>
+      <td>运行当前插件</td>
+      <td>run current plugin</td>
+      <td style="text-align: center">*</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>C-x, C-t</code></td>
+      <td>测试当前插件</td>
+      <td>test current plugin</td>
+      <td style="text-align: center">*</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code>M-c</code></td>
+      <td>单词首字母大写</td>
+      <td>captilazie word</td>
+      <td style="text-align: center">*</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="总结">总结</h3>
+
+<p>这只是我常用的或偶尔用到的快捷键的罗列，不是完整的 Android Studio 快捷键说明，还有很多 Android Studio 的基本功能没有涉及到，记下来只是为了备忘和分享。这份快捷键会持续变更，可在 <a href="https://github.com/douo/douo_config/tree/master/android-studio">douo_keymaps</a> 查看最新的配置。</p>
+
+<h3 id="参考">参考</h3>
+
+<p><a href="https://spin.atomicobject.com/2014/08/07/intellij-emacs/">Customizing IntelliJ for Emacs Compatibility</a></p>
+
+    </article>
+    <div class="tag-container" >
+        
+        <div class="chip">
+        <a href="/tags#Android Studio-ref">
+            Android Studio
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#Emacs-ref">
+            Emacs
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#快捷键-ref">
+            快捷键
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#productive-ref">
+            productive
+        </a>
+        </div>
+        
+    </div>
+<div class="post-pager">
+    
+    <a href="/2015/05/09/trouble-of-publish-aar/">上一篇：Android 项目打包到 JCenter 的坑</a>
+    
+    
+    <a href="/2016/12/24/hierarchy-fragment-pager-adapter/" style="float:right;" >下一篇：解决 ViewPager 嵌套导致的 Fragment 菜单错乱</a>
+    
+</div>
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/2016/08/20/share-my-android-studio-emacs-keymaps"
+ var disqus_config = function () {
+     this.page.title = "分享我的 Android Studio Emacs 风格快捷键"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/2016/08/20/share-my-android-studio-emacs-keymaps/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

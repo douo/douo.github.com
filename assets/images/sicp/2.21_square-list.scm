@@ -1,0 +1,20 @@
+(define (map proc list)
+  (if (null? list)
+      ()
+      (cons (proc (car list))
+            (map proc (cdr list))
+            )
+      )
+  )
+
+(define (square-list items)
+  (map (lambda (x) (* x x)) items)
+  )
+
+
+(define (find list item)
+  (cond ((null? list) ())
+        ((= (car list) item) item)
+        (else (find (cdr list) item))
+         )
+      )

@@ -1,0 +1,315 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    迷宫生成算法 | DouO's Blog</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">迷宫生成算法</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-01-13">2011-07-14</span>
+
+    <span><a href="/categories#coder-ref" class="category category-coder waves-effect waves-light">coder</a></span>
+    
+</div>
+
+    <article>
+        <p>迷宫,大家都在知道是什么吧.一种标准的迷宫可以是像下图这样的结构,</p>
+
+<p><a href="wp-content/uploads/2011/07/maze01.png"><img src="wp-content/uploads/2011/07/maze01.png" alt="" title="maze01" /></a></p>
+
+<p>一个矩形空间上,布置出错综复杂的墙,本文讨论的主要是这种结构的简单迷宫.可以想象出在下图这样的结构里,推倒某些墙壁.来生成迷宫.当然墙不是随便可以推倒的.</p>
+
+<p><a href="wp-content/uploads/2011/07/maze3.png"><img src="wp-content/uploads/2011/07/maze3.png" alt="" title="maze3" /></a></p>
+
+<p>这样的结构姑且称为完全方格图(square grid
+graph)吧.从图论角度上看,这样的结构等同于下面这张图.圆圈表示顶点,线段表示边.</p>
+
+<p><a href="wp-content/uploads/2011/07/maze2.png"><img src="wp-content/uploads/2011/07/maze2.png" alt="" title="maze2" /></a></p>
+
+<p>而最上面的迷宫,就可以认为上面那张完全方格图的<a href="http://zh.wikipedia.org/wiki/%E5%9B%BE#.E5.9F.BA.E6.9C.AC.E6.9C.AF.E8.AF.AD">生成子图</a>,仔细观察上面的迷宫,就会发现无论从那里开始走,都可以到达迷宫中的任意一个地方(顶点).用图论术语来讲也就是说迷宫它还必须是一个<a href="http://zh.wikipedia.org/wiki/%E8%BF%9E%E9%80%9A%E5%9B%BE">连通图</a>,这个可以理解,迷宫里到达不了的地方实际上没有意义.</p>
+
+<p>另外继续观察还可以发现,无论你从那个地方出发,只要不往回走,就永远也回不到原来出发的地方.也就是不会绕圈圈.图论上说这叫做没有回路.当然回路这个可以有,有回路的迷宫更让人迷惑也可以更好玩,但这还得取决于回路如何设计.简单起见,这里生成的迷宫没有回路.就这两个特性,就可以给这种迷宫下定义了:完全方格图的没有回路连通生成子图.也就是完全方格图的<a href="http://zh.wikipedia.org/zh-cn/%E6%A0%91_(%E5%9B%BE%E8%AE%BA)#.E5.AE.9A.E4.B9.89">生成树</a>.</p>
+
+<p>图的生成树算法那就相当广泛了,一次广度优先搜索(BFS)或深度优先搜索(DFS),都可以构建出图的生成子树.只要让选择下一个顶点的策略随机化,每次搜索出来的就是一个随机生成树也就是随机生成的迷宫.但是BFS生成出来的结果由于其他顶点相对于起始顶点的深度不变,导致迷宫随机性不够理想,下面提到的Prim算法算是一种对BFS的不错改进.DFS生成的过程比较生动就像是在挖地道一样推倒一面面墙.用来生成迷宫就比较直观也比较适合.</p>
+
+<p>还有经典的最小生成树算法,Kruskal和Prim,都可以用来生成迷宫.当然完全方格图所有边都是单位权值的.所有生成树都是最小的,要运用Kruskal和Prim要做的改变就是将原来已以小优先的选择边策略改为随机选取.出来的是一个随机生成树.</p>
+
+<p>当然上面的算法都是基于图论的,在维基百科里还提到另外一种不用图论的算法,比较有趣,叫递归分割法(Recursive
+division
+method),我喜欢叫你建墙我挖洞法,从名字就可以看出这是一种分治法,基本的策略就是,在一个空间里建立两面相交墙,形成四个较小的空间,然后再挖上三个洞.然后再对四个较小的空间执行相同的处理.直至每个空间的长或宽为单元大小不可再分割为止.这种方法效率比较高,由于是分治法也比较适合用分布式运算.这种方法生成出来的迷宫也是符合上面所提到的连通性和没有回路两个特点,可以用递归法简单证明下,由于两面墙隔出了四个空间,开三个洞刚好使每个空间可以互相连通,且没有回路,如果从一个空间到达另一个空间必定到达该空间的其中一个子空间,也就可以到达其他三个子空间.以此类推就到达迷宫上的每一个空间.不过生成出来的迷宫却较为简单,直路太多不够扭曲.</p>
+
+<p>我用html5实现一个<a href="http://tools.dourok.info/mazegame/mazegame.html">迷宫生成算法的演示</a>,分别针对DFS,Kruskal,Prim和最后的分治法.可以去玩一下.</p>
+
+<p>抱怨一下javascript,绘画速度还是不够快,对于大一点的迷宫必须用脏矩形重绘,才能保证速度.不够画出来的效果却不咋地.</p>
+
+<p>至于这种迷宫的走法,一个DFS就可以很好地解决了.</p>
+
+<p>当然实际设计出迷宫不像是这些算法这么简单的,正如谁谁谁所说的</p>
+
+<p>“迷宫设计不仅是线条和图案的组合，要有娱乐性、装饰性，还要考虑那些穿越迷宫者的感受，那样才趣味无穷”</p>
+
+<p>有空再考虑下其他类型迷宫的生成算法.</p>
+
+<p>未完待续…</p>
+
+<p>参考: http://en.wikipedia.org/wiki/Maze_generation_algorithm
+http://en.wikipedia.org/wiki/Maze</p>
+
+    </article>
+    <div class="tag-container" >
+        
+        <div class="chip">
+        <a href="/tags#javascript-ref">
+            javascript
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#图论-ref">
+            图论
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#迷宫-ref">
+            迷宫
+        </a>
+        </div>
+        
+    </div>
+<div class="post-pager">
+    
+    <a href="/2011/06/05/one_of_spams/">上一篇：悠哉悠哉，辗转反侧</a>
+    
+    
+    <a href="/2011/08/08/fixed-ttplayer-lrc-py/" style="float:right;" >下一篇：修复了 Lyrics Grabber2 的千千静听歌词抓取脚本</a>
+    
+</div>
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/2011/07/14/maze-generation-algorithm"
+ var disqus_config = function () {
+     this.page.title = "迷宫生成算法"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/2011/07/14/maze-generation-algorithm/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

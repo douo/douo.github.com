@@ -1,0 +1,545 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    2020年04月16日杂记 | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">2020年04月16日杂记</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 20-06-10">2020-04-16</span>
+    
+</div>
+
+<article>
+    <h1 id="全局电竞切换">全局电竞切换</h1>
+
+<ul>
+  <li>比分页</li>
+  <li>推荐页</li>
+  <li>即时指数</li>
+  <li>资料库</li>
+  <li>资讯列表</li>
+  <li>不中退钻列表</li>
+</ul>
+
+<h1 id="筛选弹出菜单">筛选弹出菜单</h1>
+
+<ul>
+  <li>筛选联赛显示当前选择联赛数量及全部联赛数量</li>
+  <li>筛选游戏默认全选是否需要保存本地，是否影响其他比赛列表 TODO</li>
+  <li>比赛排序，可选时间及联赛。默认时间，需存本地，不影响其他列表、其他球种</li>
+  <li>任意选项变更时，关闭弹出菜单，同时刷新列表 TODO</li>
+  <li>游戏筛选是否影响联赛筛选 TODO</li>
+</ul>
+
+<h1 id="电竞-即时比分">电竞-即时比分</h1>
+
+<h2 id="头部栏">头部栏</h2>
+
+<ul>
+  <li>不显示即时指数入口</li>
+  <li>不显示比赛动态按钮</li>
+  <li>显示筛选按钮</li>
+  <li>切换球种回到标签栏回到即时比分列表</li>
+</ul>
+
+<h2 id="标签栏">标签栏</h2>
+
+<ul>
+  <li>高亮<strong>即时</strong>标签</li>
+  <li>点击即时Tab，弹出比赛状态筛选菜单，选项包括：即时（所有状态）、进行中（1）、未开始（0）。默认选中<strong>即时</strong>，选项需存本地</li>
+  <li>比赛状态：0=未开始 1=进行中 2=完场 3/4=已取消 5=待定</li>
+</ul>
+
+<h2 id="比赛列表">比赛列表</h2>
+
+<ul>
+  <li>显示满足赛事筛选和筛选栏条件的所有即时比赛</li>
+  <li>即时比赛：UTC+8 时间昨日未结束的比赛以及今日所有比赛</li>
+  <li>隔日第一场比赛需显示日期标示</li>
+  <li>列表支持下拉刷新</li>
+  <li>无数据时显示无数据 UI</li>
+  <li>报错时显示无数据 UI</li>
+</ul>
+
+<h3 id="排序">排序</h3>
+
+<ul>
+  <li>按时间排序，先按比赛状态分为 进行中/未开始/其他。同为进行中：按比赛时间升序，同时间的按比赛ID升序。同为未开始：按比赛时间升序，同时间的按比赛ID升序。其他：按比赛时间降序，同时间的按比赛ID升序。</li>
+  <li>按联赛排序，按先联赛默认顺序排序，后续排序规则与时间排序相同</li>
+</ul>
+
+<h2 id="比赛项">比赛项</h2>
+
+<ul>
+  <li>顶部显示：联赛简称、比赛状态、开赛时间、总局数（BO）</li>
+  <li>中间显示：游戏类型、A 队伍标示、比赛状态特殊标示、B 队伍标示、关注状态按钮</li>
+  <li>下方显示：当前局标示、直播标示、推荐标示</li>
+  <li>点击跳转比赛内页</li>
+</ul>
+
+<h3 id="未开始">未开始</h3>
+
+<ul>
+  <li>比赛状态特殊标示显示 VS</li>
+  <li>隐藏当前局标示</li>
+</ul>
+
+<h3 id="进行中">进行中</h3>
+
+<h4 id="moba">MOBA</h4>
+
+<ul>
+  <li>比赛状态，显示全场胜负</li>
+  <li>比赛状态特殊标示显示当前局人头数</li>
+  <li>经济优势队伍标示，显示经济优势，差量还是总值 TODO</li>
+  <li>当前局标示，显示当前局势及进行时间</li>
+</ul>
+
+<h4 id="csgo">CSGO</h4>
+
+<ul>
+  <li>比赛状态，显示全场胜负</li>
+  <li>比赛状态特殊标示显示当前局胜利回合数</li>
+  <li>当前局标示，显示当前局势及地图标示</li>
+</ul>
+
+<h3 id="完赛">完赛</h3>
+
+<ul>
+  <li>比赛状态特殊标示显示全场胜负</li>
+  <li>隐藏当前局标示</li>
+</ul>
+
+<h1 id="电竞-赛程完场">电竞-赛程/完场</h1>
+
+<h2 id="头部栏-1">头部栏</h2>
+
+<ul>
+  <li>不显示即时指数入口</li>
+  <li>不显示比赛动态按钮</li>
+  <li>显示筛选按钮</li>
+  <li>显示日期筛选按钮</li>
+</ul>
+
+<h2 id="赛程完场-联赛筛选">赛程/完场-联赛筛选</h2>
+
+<ul>
+  <li>当前比分列表所有比赛的赛事集</li>
+  <li>缺省筛选为全部赛事</li>
+  <li>筛选选择<strong>无需</strong>保存</li>
+</ul>
+
+<h2 id="比赛列表-1">比赛列表</h2>
+
+<ul>
+  <li>当前选择日期的所有比赛，是否为UTC+8时间，所选日期 0 时至第二天 12 时的所有比赛 TODO</li>
+  <li>排序规则为日期时，当日第一场比赛需显示日期标示，按联赛排序则不显示</li>
+  <li>显示满足赛事筛选和筛选栏条件的所有比赛</li>
+  <li>列表支持下拉刷新</li>
+  <li>无数据时显示无数据 UI</li>
+  <li>报错时显示无数据 UI</li>
+</ul>
+
+<h3 id="排序-1">排序</h3>
+
+<ul>
+  <li>按时间排序，先开赛时间升序显示</li>
+  <li>按联赛排序，按先联赛默认顺序排序，后续排序规则与时间排序相同</li>
+</ul>
+
+<h2 id="日期筛选">日期筛选</h2>
+
+<h3 id="赛程">赛程</h3>
+
+<ul>
+  <li>日历选择控件的可选日期范围：未来7天。（本地时区？） TODO</li>
+  <li>默认选择本地时区的明天</li>
+</ul>
+
+<h3 id="完场">完场</h3>
+
+<ul>
+  <li>日历选择控件的可选日期范围：2015年1月1日-昨天（本地时区？）TODO</li>
+  <li>默认选择本地时区的昨天</li>
+</ul>
+
+<h1 id="赛事筛选">赛事筛选</h1>
+
+<h2 id="标签栏-1">标签栏</h2>
+
+<ul>
+  <li>分为全部和推荐</li>
+  <li>默认选择 tab 由外部传入</li>
+  <li>全部，外部传入的所有赛事列表</li>
+  <li>推荐，筛选赛事赛事列表包含有顶级、一级和二级的赛事，如结果集为空则显示全部赛事</li>
+  <li>每个标签页的选择状态都是独立的</li>
+  <li>切换标签页时重置当前标签页的选择状态到默认状态</li>
+  <li>默认状态指，当前标签页属于外部传入的标签页码，则为已选择赛事集，不是则默认全选</li>
+  <li>赛事按游戏类型分组显示</li>
+</ul>
+
+<h2 id="排序-2">排序</h2>
+
+<ul>
+  <li>按游戏分组排序、再赛事 id 排序 TODO</li>
+  <li>游戏顺序为 DOTA2 LOL CSGO KPL（与筛选弹出菜单一致）</li>
+</ul>
+
+<h2 id="即时比分-联赛筛选">即时比分-联赛筛选</h2>
+
+<ul>
+  <li>全部联赛当前即时比分列表所有比赛的赛事集</li>
+  <li>缺省筛选为推荐赛事</li>
+  <li>筛选选择需保存到本地</li>
+</ul>
+
+<p>当前即时比分列表的赛事集，与已保存的赛事集不一致时：</p>
+
+<ul>
+  <li>取两个集合的交集，并更新本地保存结果</li>
+  <li>若交集为空，则重置为缺省？ TODO</li>
+</ul>
+
+<h2 id="赛程完场-联赛筛选-1">赛程/完场-联赛筛选</h2>
+
+<ul>
+  <li>全部联赛为当前比分列表所有比赛的赛事集</li>
+  <li>缺省筛选为全部赛事</li>
+  <li>筛选选择<strong>无需</strong>保存</li>
+</ul>
+
+<h2 id="与游戏筛选关联-todo">与游戏筛选关联 TODO</h2>
+
+<p>若当前已选择赛事包含游戏 A、B、C 的联赛</p>
+
+<ul>
+  <li>取消选择游戏 A、已选择赛事变为 B、C。</li>
+  <li>再选择回 A，已选择赛事是否仍为 A（全选、或恢复前一个选择状态）、B、C。</li>
+</ul>
+
+<h2 id="底部栏">底部栏</h2>
+
+<ul>
+  <li>底部固定显示</li>
+  <li>返回当前标签页码与已选择赛事集</li>
+  <li>无选择任何赛事时，不可按</li>
+  <li>全选，选择当前标签页所有赛事</li>
+  <li>反选，选择当前选择的补集</li>
+</ul>
+
+<h1 id="电竞-关注">电竞-关注</h1>
+
+<h2 id="头部栏-2">头部栏</h2>
+
+<ul>
+  <li>仅显示历史关注按钮</li>
+</ul>
+
+<h2 id="关注">关注</h2>
+
+<ul>
+  <li>本地维护关注比赛 Id 列表</li>
+  <li>切换关注操作，先更改本地再同步服务器</li>
+  <li>请求关注列表同时将后台关注数据同步到本地</li>
+  <li>历史关注列表不影响本地关注列表，但取消关注操作需同时尝试移除本地关注id</li>
+</ul>
+
+<h2 id="关注列表">关注列表</h2>
+
+<ul>
+  <li>UTC+8 昨日以及今日关注的所有比赛</li>
+  <li>即时数据需要同步更新到关注的比赛</li>
+</ul>
+
+<h3 id="排序-3">排序</h3>
+
+<ul>
+  <li>按比赛时间降序，同时间的按比赛ID升序</li>
+</ul>
+
+<h2 id="历史关注列表">历史关注列表</h2>
+
+<ul>
+  <li>关注的所有比赛</li>
+</ul>
+
+<h3 id="排序-4">排序</h3>
+
+<ul>
+  <li>按比赛时间降序，同时间的按比赛ID升序</li>
+</ul>
+
+<h1 id="比赛内页">比赛内页</h1>
+
+<ul>
+  <li>进入内页需向服务器请求当前比赛数据流</li>
+  <li>比赛状态变化需实时同步到 UI</li>
+  <li>返回上一页需通知服务器停止推送当前比赛详情</li>
+</ul>
+
+<h2 id="头部">头部</h2>
+
+<ul>
+  <li>直播、分享、关注复用其他球种功能</li>
+  <li>其他元素不可点</li>
+</ul>
+
+<h2 id="标签页">标签页</h2>
+
+<ul>
+  <li>默认显示赛况、推荐</li>
+  <li>推荐隐藏共用其他球种开关 TODO</li>
+  <li>默认选择页码，可外部控制</li>
+  <li>由推介页跳转进来默认选择推介</li>
+  <li>其他位置跳转，默认选择赛况页</li>
+</ul>
+
+<h2 id="赛况">赛况</h2>
+
+<ul>
+  <li>顶部显示对局Tab，列出该场比赛进行中&amp;已结束的对局</li>
+  <li>正文 UI 由前端实现，数据及数据更新由原生实现并提供给前端展示</li>
+</ul>
+
+<h2 id="推介列表">推介列表</h2>
+
+<ul>
+  <li>显示当前比赛的所有推介</li>
+  <li>有发布电竞推介权限的专家显示发布推介按钮</li>
+</ul>
+
+</article>
+<div class="tag-container" >
+    
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Quick/2020/04/note-2020-04-16"
+ var disqus_config = function () {
+     this.page.title = "2020年04月16日杂记"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Quick/2020/04/note-2020-04-16/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

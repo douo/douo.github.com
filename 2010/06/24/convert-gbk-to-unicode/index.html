@@ -1,0 +1,429 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    从GBK到Unicode的中文字符映射 | DouO's Blog</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">从GBK到Unicode的中文字符映射</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-01-13">2010-06-24</span>
+
+    <span><a href="/categories#coder-ref" class="category category-coder waves-effect waves-light">coder</a></span>
+    
+</div>
+
+    <article>
+        <h2 id="前言">前言</h2>
+
+<p>最近在做MTK开发，需要在程序中将GBK编码的文本文件实时转换为unicode编码，因为MTK只认Unicode。经尝试网上提供的mmi_chset_convert函数在我手上的SDK里没有用，很奇怪这个函数的只是调用了memcpy。无奈之下只能自己动手实现转换，也好趁这个机会摸清以前一直一知半解的字符编码。</p>
+
+<p>说到字符编码，第一误解就是字符集（character set）和字符编码（character
+encoding）的混淆。以前经常把所有名词都当成字符编码(encoding)，比如我就把GB2312叫成编码，实际上GB2312应该是字符集，
+而它用的编码方式应该叫做EUC-CN。对于字符集跟字符编码的区别还是很难理解的（可看维基百科<a href="http://zh.wikipedia.org/zh/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81">这里</a>、<a href="http://zh.wikipedia.org/zh-cn/Gb2312">这里</a>跟<a href="http://zh.wikipedia.org/zh-cn/EUC">这里</a>），我也模糊，再说下我的理解，比如说思密达们用的字符集是<a href="http://zh.wikipedia.org/zh-cn/KS_X_1001" title="KS X 1001">KS X 1001</a>，而他们的编码方式也是EUC，不过是叫做EUC-KR。关于EUC编码方式，实际上就是对于ASCII字符用一个字节（8bit）表示，高位(第一位)为0来表示它是
+ASCII字符，而其他字符用两个字节表示（16bit），且每个字节加上0xA0(16进制)，也就将它们的高位置为1，以跟ASCII字符区分开来（后面在我的程序里就可以看到这个应用）。关于这个问题可再参考Blogjava上的两篇系列文章，<a href="#ref1">[1]</a>、<a href="#ref2">[2]</a>。</p>
+
+<p>当然如今把GB2312等同于编码了也不会有任何问题了。Html文档头经常出现的
+charset=utf-8
+对此贡献不少，这里的charset应该是指encoding，再比如说charset=gb2312实际上指的就是「EUC-CN」（强调一下utf-8、iso-8859-1都是字符编码，unicode才是字符集）。所以关于标题《从GBK到Unicode的中文字符映射》，实际上应该叫做《GBK到UTF-16（UCS2）的中文字符映射》，</p>
+
+<h2 id="gbk">GBK</h2>
+
+<p>GBK即汉字内码扩展规范，是「国家标准扩展」三个词的拼音缩写。具体可参考<a href="http://zh.wikipedia.org/zh-cn/GBK">维基百科</a>。</p>
+
+<p>GBK既是字符集也是字符编码(够讨厌的吧…)<a href="#ref2">[2]</a>。不过这不重要，解决问题的关键是摸清GBK的编码方式，才能找到GBK到Unicode的映射规律。在此贴下维基百科上的图片：</p>
+
+<p><a href="wp-content/uploads/2010/06/GBK%E7%BC%96%E7%A0%81%E8%8C%83%E5%9B%B4.jpg"><img src="wp-content/uploads/2010/06/GBK%E7%BC%96%E7%A0%81%E8%8C%83%E5%9B%B4.jpg" alt="" title="GBK编码范围" /></a>
+<img src="http://upload.wikimedia.org/wikipedia/en/thumb/0/0c/GBK_encoding.svg/500px-GBK_encoding.svg.png" alt="" title="GBK" /></p>
+
+<p>由上表可见，GBK编码主要将字符分为五个区域。</p>
+
+<p>其中GBK/1、GBK/2就是GB2312的字符集，其编码跟GB2312的编码是一致的，所以说GBK是向下兼容GB2312。GBK/3、GBK4就是GBK新增的汉字，许多繁体字、偏僻字都集中在此。但GBK/4中并不是全都是汉字，或者是不存在Unicode字符集中的汉字，经我统计实际上只有8059个汉字是在Unicode中存在的。剩下的GBK/5跟GBK/1一样存放都是特殊符号。</p>
+
+<h2 id="unicode">Unicode</h2>
+
+<p>前面提到Unicode是字符集，常用的编码是UTF-8和UTF-16，还有另一种叫UTF-32，因为UTF-32每个字符都要占用4个字节不大实用所以比较少见。UTF-8、UTF-16则都是变长编码，我要实现的实际就是GBK到UTF-16的转换。UTF-16的好处是在0x0到0xFFFF这个区域，也就是说字符编码小于65535的都用2个字节表示，不过因此UTF-16不兼容于ASCII。在此区域UTF-16就等同于UCS-2，所以说UCS-2是UTF-16的子集。GBK中的字符都是属于这个区域，所以这里提到的UTF-16也就是等同于UCS-2（维基百科也将UCS-2重定向到
+UTF-16）。<a href="#ref4">[4]</a></p>
+
+<p>UTF-16还有个历史问题，就是字节序问题，也就是传说中的大尾、小尾问题，比如说<strong>‘A’</strong>的ASCII码是0x41，那么其对应的UTF-16编码是0x0041还是0x4100呢?这个区别就是字节序问题。传说Windows用的就是0x4100即小尾序，苹果的Mac有个性地用0x0041表示，即是大尾序。其他字符也要这样区分，比如汉字‘朱’小尾序表示是0x3167，大尾序表示是0x6731。因为UTF-16有字节序问题，为了区分一般文本编辑器都会在UTF-16编码的文档前面加上0xFFFE（小尾序）或）0xFEFF(大尾序)来区分，这个标记称为BOM，即字节序标记（Byte
+Order Mark）。<a href="#ref5">[5]</a></p>
+
+<h2 id="转换代码">转换代码</h2>
+
+<p>知道了这些基础，接下来就可以开始转换了。由于GBK到Unicode的汉字没有直接的映射关系，传说GBK是按拼音排序，Unicode是按部首排序的。所以要转换之前必须得有个对照表，一开始我就在网上找到这张表(<a href="#add1">附录1)</a>，表的结构如下所示。</p>
+
+<p><a href="wp-content/uploads/2010/06/%E6%B1%89%E5%AD%97%E7%BC%96%E7%A0%81%E5%AF%B9%E7%85%A7%E8%A1%A8.jpg"><img src="wp-content/uploads/2010/06/%E6%B1%89%E5%AD%97%E7%BC%96%E7%A0%81%E5%AF%B9%E7%85%A7%E8%A1%A8.jpg" alt="" title="汉字编码对照表" /></a></p>
+
+<p>从上表比较相同汉字的
+unicode编码跟gbk编码确实看不出有什么规律。区位码是GB2312的特色，也可以说EUC的特色。注意上表的区位码是十进制的，比如汉字<strong>‘一’</strong>区位码5027，将50转换为16进制得0x32，加上0xa0得0xd2；同样的27+0xa0
+= 0x1b+0xa0=0xbb。</p>
+
+<p>该表总共20902个汉字，Unicode范围从0x4e00到0x9fa5。整张表占用空间2.73Mb，是xlt格式的缘故。考虑到我只需做GBK到
+UTF-16的单向转换，要对表做一些处理，实际上只需保存unicode编码一项便可，为了让unicode编码方便用gbk编码索引，我先将编码按
+GBK的各个范围分段排列，不包括特殊符号只有三个段，分别对应GBK/1、GBK/2、GBK/3。在段内则按编码的数值大小排列。比如表的第一位是
+‘啊’，是GBK/1的第一个字符，而它的UTF-16编码是0x554a。这样出来的结果是这样的：</p>
+
+<p><a href="wp-content/uploads/2010/06/Unicode.jpg"><img src="wp-content/uploads/2010/06/Unicode.jpg" alt="" title="Unicode" /></a></p>
+
+<p>我还在表头添加了BOM以便文本编辑器能够识别，在这里用的是小尾序，所以添加的便是0xFFFE。整张表大小40.8KB((20902+1)*2
+= 41806
+byte)。这样在移动设备中也可以全部读取到内存中。写到这里代码也呼之欲出了。</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">typedef</span> <span class="kt">int</span> <span class="n">S32</span><span class="p">;</span>
+<span class="k">typedef</span> <span class="kt">char</span> <span class="n">S8</span><span class="p">;</span>
+<span class="k">static</span> <span class="n">S8</span> <span class="n">ULE</span><span class="p">[(</span><span class="mi">20902</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1040</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span><span class="p">];</span> <span class="c1">//Unicode Little-Endian 表，读取自上文所生成的文件。 总共20902个汉字  1040个特殊符号</span>
+<span class="k">const</span> <span class="k">static</span> <span class="n">S32</span> <span class="n">GBK2_OFFSET</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">//GBK/2的偏移地址,头两个字符是BOM(0xFFFE)</span>
+<span class="k">const</span> <span class="k">static</span> <span class="n">S32</span> <span class="n">GBK3_OFFSET</span> <span class="o">=</span> <span class="n">GBK2_OFFSET</span> <span class="o">+</span> <span class="mi">6763</span> <span class="o">*</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">//GBK/3的偏移地址,GBK/2有6763个字符</span>
+<span class="k">const</span> <span class="k">static</span> <span class="n">S32</span> <span class="n">GBK4_OFFSET</span> <span class="o">=</span> <span class="n">GBK3_OFFSET</span> <span class="o">+</span> <span class="mi">6080</span> <span class="o">*</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">//GBK/4的偏移地址,GBK/3有6080个字符</span>
+<span class="k">const</span> <span class="k">static</span> <span class="n">S32</span> <span class="n">GBK1_OFFSET</span> <span class="o">=</span> <span class="mi">41806</span><span class="p">;</span> <span class="c1">//  GBK/4即gb2312的符号的偏移地址</span>
+<span class="k">const</span> <span class="k">static</span> <span class="n">S32</span> <span class="n">GBK5_OFFSET</span> <span class="o">=</span> <span class="mi">41806</span> <span class="o">+</span> <span class="mi">846</span> <span class="o">*</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">// GBK5符号的偏移地址</span>
+
+<span class="cm">/**
+ * dest 输出的UTF-16(UCS-2)编码字符。
+ * src_size
+ * src GBK编码的字符
+ *
+ **/</span>
+<span class="n">S32</span> <span class="nf">gbk_to_ule</span><span class="p">(</span><span class="n">S8</span><span class="o">*</span> <span class="n">dest</span><span class="p">,</span> <span class="n">S32</span> <span class="n">src_size</span><span class="p">,</span> <span class="n">S8</span><span class="o">*</span> <span class="n">src</span><span class="p">)</span> <span class="p">{</span>
+	<span class="n">S32</span> <span class="n">h</span><span class="p">,</span> <span class="n">l</span><span class="p">;</span> <span class="c1">//h 高位字节  l 低位字节</span>
+	<span class="n">S32</span> <span class="n">i</span><span class="p">;</span> <span class="c1">//dest的索引</span>
+	<span class="n">S32</span> <span class="n">j</span><span class="p">;</span> <span class="c1">//src的索引</span>
+	<span class="n">S32</span> <span class="n">seek</span><span class="p">;</span> <span class="c1">//</span>
+	<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">src_size</span><span class="p">;</span> <span class="n">i</span> <span class="o">+=</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">h</span> <span class="o">=</span> <span class="n">src</span><span class="p">[</span><span class="n">j</span><span class="o">++</span><span class="p">]</span> <span class="o">&amp;</span> <span class="mh">0xff</span><span class="p">;</span> <span class="c1">//读取一个字节</span>
+		<span class="k">if</span> <span class="p">((</span><span class="n">h</span> <span class="o">&amp;</span> <span class="mh">0x80</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 高位为0 是Ascii 码</span>
+			<span class="n">l</span> <span class="o">=</span> <span class="mh">0x0</span><span class="p">;</span>
+		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+			<span class="n">l</span> <span class="o">=</span> <span class="n">src</span><span class="p">[</span><span class="n">j</span><span class="o">++</span><span class="p">]</span> <span class="o">&amp;</span> <span class="mh">0xff</span><span class="p">;</span> <span class="c1">// 高位为1 为gbk字符集字符,读取下一个字节</span>
+			<span class="c1">//将gbk编码映射到ULE表中的位置</span>
+			<span class="k">if</span> <span class="p">(</span><span class="n">h</span> <span class="o">&gt;=</span> <span class="mh">0xB0</span> <span class="o">&amp;&amp;</span> <span class="n">h</span> <span class="o">&lt;=</span> <span class="mh">0xF7</span> <span class="o">&amp;&amp;</span> <span class="n">l</span> <span class="o">&gt;=</span> <span class="mh">0xA1</span> <span class="o">&amp;&amp;</span> <span class="n">l</span> <span class="o">&lt;=</span> <span class="mh">0xFE</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//GBK/2的编码范围 ,实际上GBK2高字节包含在GBK/4的范围内,只是低字节的范围不同</span>
+			<span class="c1">//GBK/2实际就是GB2312,GB2312是区位码,16-87区为汉字编码区，每区有94个字符</span>
+				<span class="n">seek</span> <span class="o">=</span> <span class="n">GBK2_OFFSET</span> <span class="o">+</span> <span class="p">((</span><span class="n">h</span> <span class="o">-</span><span class="mi">16</span> <span class="o">-</span> <span class="mh">0xA0</span><span class="p">)</span> <span class="o">*</span> <span class="mi">94</span> <span class="o">+</span> <span class="p">(</span><span class="n">l</span> <span class="o">-</span><span class="mi">1</span> <span class="o">-</span> <span class="mh">0xA0</span><span class="p">))</span> <span class="o">*</span> <span class="mi">2</span><span class="p">;</span><span class="c1">//GBK2偏移+区位偏移+区内码数偏移为该GBK字符对应的unicode编码位置.</span>
+				<span class="n">h</span> <span class="o">=</span> <span class="n">ULE</span><span class="p">[</span><span class="n">seek</span><span class="p">];</span>
+				<span class="n">l</span> <span class="o">=</span> <span class="n">ULE</span><span class="p">[</span><span class="n">seek</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
+			<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">h</span> <span class="o">&gt;=</span> <span class="mh">0x81</span> <span class="o">&amp;&amp;</span> <span class="n">h</span> <span class="o">&lt;=</span> <span class="mh">0xA0</span> <span class="o">&amp;&amp;</span> <span class="n">l</span> <span class="o">&gt;=</span> <span class="mh">0x40</span> <span class="o">&amp;&amp;</span> <span class="n">l</span> <span class="o">&lt;=</span> <span class="mh">0xFE</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//GBK/3的编码范围</span>
+				<span class="n">seek</span> <span class="o">=</span> <span class="n">GBK3_OFFSET</span> <span class="o">+</span> <span class="p">((</span><span class="n">h</span> <span class="o">-</span> <span class="mh">0x81</span><span class="p">)</span> <span class="o">*</span> <span class="mi">190</span> <span class="o">+</span> <span class="p">(</span><span class="n">l</span> <span class="o">-</span> <span class="mh">0x40</span><span class="p">)</span>
+						<span class="o">-</span> <span class="p">(</span><span class="n">l</span> <span class="o">&gt;</span> <span class="mh">0x7F</span> <span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="mi">0</span><span class="p">))</span> <span class="o">*</span> <span class="mi">2</span><span class="p">;</span><span class="c1">//GBK3偏移+区位偏移+区内码数偏移因为低位字节0x7F处不编码,所以大于0x7F要-1已更正位置. 190=0xFE -  0x40+1-1 低字节 0x0-0x39 与 0x7F,0xFF 不放  总共空出66个字节</span>
+				<span class="n">h</span> <span class="o">=</span> <span class="n">ULE</span><span class="p">[</span><span class="n">seek</span><span class="p">];</span>
+				<span class="n">l</span> <span class="o">=</span> <span class="n">ULE</span><span class="p">[</span><span class="n">seek</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
+			<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">h</span> <span class="o">&gt;=</span> <span class="mh">0xAA</span> <span class="o">&amp;&amp;</span> <span class="n">h</span> <span class="o">&lt;=</span> <span class="mh">0xFE</span> <span class="o">&amp;&amp;</span> <span class="n">l</span> <span class="o">&gt;=</span> <span class="mh">0x40</span> <span class="o">&amp;&amp;</span> <span class="n">l</span> <span class="o">&lt;=</span> <span class="mh">0xA0</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//GBK/4的编码范围</span>
+				<span class="n">seek</span> <span class="o">=</span> <span class="n">GBK4_OFFSET</span> <span class="o">+</span> <span class="p">((</span><span class="n">h</span> <span class="o">-</span> <span class="mh">0xAA</span><span class="p">)</span> <span class="o">*</span> <span class="mi">96</span> <span class="o">+</span> <span class="p">(</span><span class="n">l</span> <span class="o">-</span> <span class="mh">0x40</span><span class="p">)</span>
+						<span class="o">-</span> <span class="p">(</span><span class="n">l</span> <span class="o">&gt;</span> <span class="mh">0x7F</span> <span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="mi">0</span><span class="p">))</span> <span class="o">*</span> <span class="mi">2</span><span class="p">;</span><span class="c1">//除了低位字符范围不同外,GBK4与GBK3大致相同</span>
+				<span class="n">h</span> <span class="o">=</span> <span class="n">ULE</span><span class="p">[</span><span class="n">seek</span><span class="p">];</span>
+				<span class="n">l</span> <span class="o">=</span> <span class="n">ULE</span><span class="p">[</span><span class="n">seek</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
+			<span class="p">}</span>
+			<span class="c1">//后来再添加的对GBK/1、GBK/2也就是GBK符号的支持.</span>
+			<span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">h</span> <span class="o">&gt;=</span> <span class="mh">0xA1</span> <span class="o">&amp;&amp;</span> <span class="n">h</span> <span class="o">&lt;=</span> <span class="mh">0xA9</span> <span class="o">&amp;&amp;</span> <span class="n">l</span> <span class="o">&gt;=</span> <span class="mh">0xA1</span> <span class="o">&amp;&amp;</span> <span class="n">l</span> <span class="o">&lt;=</span> <span class="mh">0xFE</span><span class="p">)</span> <span class="p">{</span>
+				<span class="n">seek</span> <span class="o">=</span> <span class="n">GBK1_OFFSET</span> <span class="o">+</span> <span class="p">((</span><span class="n">h</span> <span class="o">-</span> <span class="mh">0xA1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">94</span> <span class="o">+</span> <span class="p">(</span><span class="n">l</span> <span class="o">-</span> <span class="mh">0xA1</span><span class="p">))</span> <span class="o">*</span> <span class="mi">2</span><span class="p">;</span>
+				<span class="n">h</span> <span class="o">=</span> <span class="n">ULE</span><span class="p">[</span><span class="n">seek</span><span class="p">];</span>
+				<span class="n">l</span> <span class="o">=</span> <span class="n">ULE</span><span class="p">[</span><span class="n">seek</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
+			<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">h</span> <span class="o">&gt;=</span> <span class="mh">0xA8</span> <span class="o">&amp;&amp;</span> <span class="n">h</span> <span class="o">&lt;=</span> <span class="mh">0xA9</span> <span class="o">&amp;&amp;</span> <span class="n">l</span> <span class="o">&gt;=</span> <span class="mh">0x40</span> <span class="o">&amp;&amp;</span> <span class="n">l</span> <span class="o">&lt;=</span> <span class="mh">0xA0</span><span class="p">)</span> <span class="p">{</span>
+				<span class="n">seek</span> <span class="o">=</span> <span class="n">GBK5_OFFSET</span> <span class="o">+</span> <span class="p">((</span><span class="n">h</span> <span class="o">-</span> <span class="mh">0xA8</span><span class="p">)</span> <span class="o">*</span> <span class="mi">96</span> <span class="o">+</span> <span class="p">(</span><span class="n">l</span> <span class="o">-</span> <span class="mh">0x40</span><span class="p">)</span><span class="o">-</span> <span class="p">(</span><span class="n">l</span> <span class="o">&gt;</span> <span class="mh">0x7F</span> <span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="mi">0</span><span class="p">))</span> <span class="o">*</span> <span class="mi">2</span><span class="p">;</span>
+				<span class="n">h</span> <span class="o">=</span> <span class="n">ULE</span><span class="p">[</span><span class="n">seek</span><span class="p">];</span>
+				<span class="n">l</span> <span class="o">=</span> <span class="n">ULE</span><span class="p">[</span><span class="n">seek</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+		<span class="n">dest</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">h</span><span class="p">;</span>
+		<span class="n">dest</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">l</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="c1">//wchar 宽字符字符串的结束标记</span>
+	<span class="n">dest</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="err">'</span><span class="n">placeholderfor0code</span><span class="err">'</span><span class="p">;</span>
+	<span class="n">dest</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="err">'</span><span class="n">placeholderfor0code</span><span class="err">'</span><span class="p">;</span>
+	<span class="k">return</span> <span class="n">i</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>基于这个函数我实现了一个命令行程序<a href="#add2">gbktoule</a>，来将GBK编码的文件转换为UTF-16
+LE 编码的文件。当然这个程序主要是用来测试的，不支持批量转换。</p>
+
+<p>使用时，可以在控制台键入 gbktoule file1 file2
+来将GBK文件file1的字符转换到UTF-16的文件file2中。</p>
+
+<p>如 键入gbktoule gbkt.txt ule.txt。结果如下图所示：</p>
+
+<p><a href="wp-content/uploads/2010/06/result.jpg"><img src="wp-content/uploads/2010/06/result.jpg" alt="" title="result" /></a> It work!</p>
+
+<p>程序下载<a href="#add2">点此</a>，其实符号索引是后来才生成。以便能够完整的转换GBK文档，但是GBK/4缺少的那101个字符还是让我觉得很诡异。<a href="#add3">可在附录找到全部GBK符号</a>。</p>
+
+<h2 id="参考阅读">参考阅读</h2>
+
+<hr />
+
+<ol>
+  <li><a href="http://www.blogjava.net/zhenandaci/archive/2008/12/24/248041.html">Java
+中的字符集编码入门（二）编码字符集与字符集编码的区别</a></li>
+  <li><a href="http://www.blogjava.net/zhenandaci/archive/2008/12/24/248056.html">Java
+中的字符集编码入门（三）GB2312，GBK与中文网页</a></li>
+  <li><a href="http://kore-nordmann.de/blog/0082_charset_versus_encoding.html">Charset vs.
+Encoding</a></li>
+  <li><a href="http://zh.wikipedia.org/zh-cn/UCS-2">http://zh.wikipedia.org/zh-cn/UCS-2</a></li>
+  <li><a href="http://blog.csdn.net/linuxsystem/archive/2009/06/03/4238089.aspx">字符集编码的文本文件头标识</a></li>
+</ol>
+
+<h2 id="附录">附录</h2>
+
+<hr />
+
+<ol>
+  <li><a href="http://dourok.info/wp-content/uploads/2010/06/%E6%B1%89%E5%AD%97%E7%BC%96%E7%A0%81%E5%AF%B9%E7%85%A7%E8%A1%A8.xls">汉字编码对照表.xls</a></li>
+  <li><a href="http://dourok.info/wp-content/uploads/2010/06/gbktoule.7z">源码、编译的可执行文件、及ULE表都在这里</a></li>
+  <li>GBK/1、GBK/5符号集合，当然在我网页上显示的是UTF-8编码的：</li>
+</ol>
+
+    </article>
+    <div class="tag-container" >
+        
+        <div class="chip">
+        <a href="/tags#GBK-ref">
+            GBK
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#MTK-ref">
+            MTK
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#Unicode-ref">
+            Unicode
+        </a>
+        </div>
+        
+    </div>
+<div class="post-pager">
+    
+    <a href="/2010/05/22/netbeans-as-android-ide/">上一篇：在Netbeans上配置Android开发环境</a>
+    
+    
+    <a href="/2010/06/25/my-wifi-for-htc-hero/" style="float:right;" >下一篇：让HTC Hero通过我的笔记本无线网卡共享上网</a>
+    
+</div>
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/2010/06/24/convert-gbk-to-unicode"
+ var disqus_config = function () {
+     this.page.title = "从GBK到Unicode的中文字符映射"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/2010/06/24/convert-gbk-to-unicode/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

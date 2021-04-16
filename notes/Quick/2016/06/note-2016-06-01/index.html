@@ -1,0 +1,750 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    2016年06月01日杂记 | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">2016年06月01日杂记</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-11-30">2016-06-01</span>
+    
+</div>
+
+<article>
+    <h3 id="进程内消息传递">进程内消息传递</h3>
+
+<h4 id="localbroadcastmanager">LocalBroadcastManager</h4>
+
+<h4 id="eventbus">Eventbus</h4>
+
+<h4 id="rxbus">RxBus</h4>
+
+<h3 id="loader">Loader</h3>
+
+<p>Loader 的使用由下面的代码开始：</p>
+
+<pre><code>FragmentActivity#getSupportLoaderManager().initLoader(int id, Bundle args,
+        LoaderManager.LoaderCallbacks&lt;D&gt; callback);
+</code></pre>
+
+<h4 id="loadermanager-的创建">LoaderManager 的创建</h4>
+
+<p>首先通过 getSupportLoaderManager 获取 LoaderManager。FragmentActivity 有一个 LoaderManager 实例。</p>
+
+<p>getSupportLoaderManager 调用了 <code>FragmentController#getSupportLoaderManager</code> FragmentControll 又调用了 FragmentHostCallback#getLoaderManagerImpl 最终返回 LoaderManager 实例。</p>
+
+<pre><code>LoaderManagerImpl getLoaderManagerImpl() {
+        if (mLoaderManager != null) {
+            return mLoaderManager;
+        }
+        mCheckedForLoaderManager = true;
+        mLoaderManager = getLoaderManager("(root)", mLoadersStarted, true /*create*/);
+        return mLoaderManager;
+    }
+</code></pre>
+
+<p>FragmentActvity 通过内部成员类继承了 FramgentHostCallback 将其实例作为参数传递给 FragmentController</p>
+
+<pre><code>final FragmentController mFragments = FragmentController.createController(new HostCallbacks());
+</code></pre>
+
+<p>LoaderManager 并不是单例，每个 Fragment 也有自己的 LoaderManager 实例。由 FragmentHostCallback 统一管理。 每个 LoaderManager 是存放在一个以 String 为 Key 的 Map 里。</p>
+
+<pre><code>/**
+ * 
+ * @param who 作为 Map 的 key
+ * @param started 创建 LoaderManager 的同时启动 Loader
+ * @param create 是否创建 LoaderManager
+ * @return
+ */
+LoaderManagerImpl getLoaderManager(String who, boolean started, boolean create) {
+    if (mAllLoaderManagers == null) {
+        mAllLoaderManagers = new SimpleArrayMap&lt;String, LoaderManager&gt;();
+    }
+    LoaderManagerImpl lm = (LoaderManagerImpl) mAllLoaderManagers.get(who);
+    if (lm == null) {
+        if (create) {
+            lm = new LoaderManagerImpl(who, this, started);
+            mAllLoaderManagers.put(who, lm);
+        }
+    } else {
+        // 这里要注意，lm 不为空，也可能是上一个 Activity 留下来的。
+        // 因为 mAllLoaderManagers 是作为 NonConfigurationInstances
+        // 可以在 Configuration Changed 中 Activity 销毁重建中
+        // 保留下来。所用需要重新更新一下引用。
+        lm.updateHostController(this);
+    }
+    return lm;
+}
+</code></pre>
+
+<p>who 作为 Map 的 key，它的命名是死编码的，比如 Activity 的 who 便是 <code>(root)</code></p>
+
+<p>Fragment 则由下面的代码生成</p>
+
+<pre><code>if (parent != null) {
+    mWho = parent.mWho + ":" + mIndex;
+} else {
+    mWho = "android:fragment:" + mIndex;
+}
+</code></pre>
+
+<h4 id="initloader">initLoader</h4>
+
+<p>接下来看一下 LoaderManager#initLoader。 LoaderManager 是一个抽象类，它的实现类是 LoaderManagerImpl.</p>
+
+<p>LoaderManagerImpl 并不直接与 Loader 打交道，而是通过一个中间类 LoaderInfo</p>
+
+<pre><code>public &lt;D&gt; Loader&lt;D&gt; initLoader(int id, Bundle args, LoaderManager.LoaderCallbacks&lt;D&gt; callback) {
+    ...
+    
+    LoaderInfo info = mLoaders.get(id);
+    // 第一次运行将执行这块代码
+    if (info == null) {
+        // Loader doesn't already exist; create.
+        info = createAndInstallLoader(id, args,  (LoaderManager.LoaderCallbacks&lt;Object&gt;)callback);
+    }
+    ...
+    return (Loader&lt;D&gt;)info.mLoader;
+}
+
+private LoaderInfo createAndInstallLoader(int id, Bundle args,
+        LoaderManager.LoaderCallbacks&lt;Object&gt; callback) {
+    try {
+        mCreatingLoader = true;
+        LoaderInfo info = createLoader(id, args, callback);
+        installLoader(info);
+        return info;
+    } finally {
+        mCreatingLoader = false;
+    }
+}
+</code></pre>
+
+<p>在 createLoader 中首先创建 LoaderInfo，LoaderInfo 存放着实际的 Loader 还有 id，args，和 callback。接着通过 callback.onCreateLoader(id, args); 创建实际的 Loader，这里的 Loader 便由实际的用户代码创建。</p>
+
+<pre><code>private LoaderInfo createLoader(int id, Bundle args,
+        LoaderManager.LoaderCallbacks&lt;Object&gt; callback) {
+    LoaderInfo info = new LoaderInfo(id, args,  callback);
+    Loader&lt;Object&gt; loader = callback.onCreateLoader(id, args);
+    info.mLoader = loader;
+    return info;
+}
+</code></pre>
+
+<p>installLoader 将 LoaderInfo 扔到 Map 里，如果带有 mStarted 标志则顺便启动 Loader</p>
+
+<pre><code>void installLoader(LoaderInfo info) {
+    mLoaders.put(info.mId, info);
+    if (mStarted) {
+        // The activity will start all existing loaders in it's onStart(),
+        // so only start them here if we're past that point of the activitiy's
+        // life cycle
+        info.start();
+    }
+}
+</code></pre>
+
+<h3 id="start">start</h3>
+
+<p>回头看 FragmentActivity 和 Fragment 代码， LoaderManager 是否带有 mStarted 标志是由  mLoadersStarted 控制的。对于 FragmentActivity mLoadersStarted 是在 HostCallback 里。而 Fragment mLoadersStarted 是作为自己的私有实例变量。无论在 Actvity 还是 Fragment 都是在 onStart 将 mLoadersStarted 置为 true。并启动 LoaderManager(LoaderManager#doStart)，如果已经创建来 LoaderManager 实例的话。</p>
+
+<p>LoaderManager#doStart 便是调用 LoaderInfo#start，这里会对 Loader 进行检查，如果是 null 便重新创建 Loader，同时 Loader 不允许是非静态成员类，应该主要是为了防止 Activity 的泄漏。然后向 Loader 注册监听器。这里的监听器不是 LoaderManager.LoaderCallbacks ,而是 OnLoadCompleteListener 和 OnLoadCanceledListener，将 Loader 解耦，只和 LoaderInfo 关联。</p>
+
+<pre><code>void start() {
+        ...
+        mStarted = true;
+        ...
+        // 如果 info 还没有 Loader 会重新创建
+        if (mLoader == null &amp;&amp; mCallbacks != null) {
+           mLoader = mCallbacks.onCreateLoader(mId, mArgs);
+        }
+        if (mLoader != null) {
+            // Loader 不允许是非静态成员类，应该主要是为了防止 Activity 的泄漏
+            if (mLoader.getClass().isMemberClass()
+                    &amp;&amp; !Modifier.isStatic(mLoader.getClass().getModifiers())) {
+                throw new IllegalArgumentException(
+                        "Object returned from onCreateLoader must not be a non-static inner member class: "
+                        + mLoader);
+            }
+            //向 Loader 注册监听器
+            if (!mListenerRegistered) {
+                mLoader.registerListener(mId, this);
+                mLoader.registerOnLoadCanceledListener(this);
+                mListenerRegistered = true;
+            }
+            mLoader.startLoading();
+        }
+    }
+</code></pre>
+
+<p>接下来是 Loader#startLoading</p>
+
+<pre><code>public final void startLoading() {
+    mStarted = true;
+    mReset = false;
+    mAbandoned = false;
+    onStartLoading();
+}
+</code></pre>
+
+<p>onStartLoading 由子类实现，以 CursorLoader 为例，onStartLoading 初始调用将会调用 forceLoad。CursorLoader 并没有重写 onForceLoad，因为 CursorLoader 是 AsyncTaskLoader 的子类。</p>
+
+<p>再来看一下 AsyncTaskLoader，onForceLoad 主要创建一个 AsyncTask 然后执行。这个 AsyncTask 是 support 库的实现，不是平台的实现，这里不再深入。</p>
+
+<pre><code>@Overridep
+protected void onForceLoad() {
+    super.onForceLoad();
+    cancelLoad();
+    mTask = new LoadTask();
+    if (DEBUG) Log.v(TAG, "Preparing load: mTask=" + mTask);
+    executePendingTask();
+}
+</code></pre>
+
+<p>这个 LoadTask 就是调用 AsyncTaskLoader#doInBackground，完成后主要是调用  deliverResult</p>
+
+<p>CursorLoader#doInBackground 就是实际查询数据库的操作，获取 Cursor 后会为 Cursor 注册一个观察者。</p>
+
+<pre><code>public Cursor loadInBackground() {
+        ...
+        Cursor cursor = ContentResolverCompat.query(getContext().getContentResolver(),
+                mUri, mProjection, mSelection, mSelectionArgs, mSortOrder,
+                mCancellationSignal);
+        if (cursor != null) {
+            try {
+                // Ensure the cursor window is filled.
+                cursor.getCount();
+                cursor.registerContentObserver(mObserver);
+            } catch (RuntimeException ex) {
+                cursor.close();
+                throw ex;
+            }
+        }
+        return cursor;
+        ...
+}
+</code></pre>
+
+<p>然后回到主线程调用 deliverResult，最终调用监听器的 onLoadComplete，回到 LoadInfo 调用 Callback#onLoadFinished。</p>
+
+<pre><code>public void deliverResult(Cursor cursor) {
+    if (isReset()) {
+        // An async query came in while the loader is stopped
+        if (cursor != null) {
+            cursor.close();
+        }
+        return;
+    }
+    Cursor oldCursor = mCursor;
+    mCursor = cursor;
+
+    if (isStarted()) {
+        super.deliverResult(cursor);
+    }
+    // 释放掉前一个 Cursor
+    if (oldCursor != null &amp;&amp; oldCursor != cursor &amp;&amp; !oldCursor.isClosed()) {
+        oldCursor.close();
+    }
+}
+</code></pre>
+
+<h3 id="retain">retain</h3>
+
+<p>到这里，Loader 只是起到一个异步加载的功能。Loader 另一个能耐就是能在配置更改导致的 Activity 重启中仍然能保持自己的状态。这和 onSavedState 有点相像。只不过机制不一样，用的是 Activity#onRetainNonConfigurationInstance</p>
+
+<p>具体见下面的序列图</p>
+
+<p><img src="" alt="https://www.websequencediagrams.com/cgi-bin/cdraw?lz=b25SZXRhaW5Ob25Db25maWd1cmF0aW9uSW5zdGFuY2UtPmRvUmVhbGx5U3RvcCh0cnVlKTogCgADEi0-bUZyYWdtZW50cy5kb0xvYWRlclN0b3A6CgACFy0-bUhvc3QAHRAAAxEtPm0ASAZNYW5hZ2VyLmRvAIEuBjoKAAIXLT4AeQZJbmZvLnIAJQcK&amp;s=rose" /></p>
+
+<p>首先 FragmentActivity 会打开 mRetainning ，如何通过 FragmentController 调用 FragmentHostCallback#doLoaderStop，它将 mLoadersStarted 置 false。然后执行 LoaderManager#doRetain，<strong>这里只调用 Activity 的 LoaderManager。</strong></p>
+
+<p>LoaderManager 会打开 Retainning ,关闭 mStarted，继续调用 LoaderInfo#retain</p>
+
+<pre><code>  void retain() {
+        if (DEBUG) Log.v(TAG, "  Retaining: " + this);
+        mRetaining = true;
+        mRetainingStarted = mStarted;
+        mStarted = false;
+        mCallbacks = null;
+    }
+</code></pre>
+
+<p>可以看到 retian 实际上没有任何影响到 Loader 的代码，Loader 还是自己做自己的事，丝毫不管外面怎么翻天覆地。</p>
+
+<p>再回到 onRetainNonConfigurationInstance，LoaderManager 们在作为 NonConfigurationInstances 光荣地生存下来之前还要进行进行一次净身，简单说就是把不干活的清理掉，目前为止我们还没见过不干活的 LoaderManager</p>
+
+<pre><code>SimpleArrayMap&lt;String, LoaderManager&gt; retainLoaderNonConfig() {
+    boolean retainLoaders = false;
+    if (mAllLoaderManagers != null) {
+        // prune out any loader managers that were already stopped and so
+        // have nothing useful to retain.
+        final int N = mAllLoaderManagers.size();
+        LoaderManagerImpl loaders[] = new LoaderManagerImpl[N];
+        for (int i=N-1; i&gt;=0; i--) {
+            loaders[i] = (LoaderManagerImpl) mAllLoaderManagers.valueAt(i);
+        }
+        for (int i=0; i&lt;N; i++) {
+            LoaderManagerImpl lm = loaders[i];
+            if (lm.mRetaining) {
+                retainLoaders = true;
+            } else {
+                lm.doDestroy();
+                mAllLoaderManagers.remove(lm.mWho);
+            }
+        }
+    }
+
+    if (retainLoaders) {
+        return mAllLoaderManagers;
+    }
+    return null;
+}
+</code></pre>
+
+<p>外面的 Activity 接接下来就到了 onStop，同样 stop 事件一层层下发到 LoaderInfo</p>
+
+<pre><code>    void stop() {
+        if (DEBUG) Log.v(TAG, "  Stopping: " + this);
+        mStarted = false;
+        if (!mRetaining) {
+            ...
+            }
+        }
+    }
+</code></pre>
+
+<p>可以看到处于 Retainning 状态中的 LoadInfo 在 stop 中没有做任何事（除了关闭 mStarted 有实际执行到，但它已经在 retain 中置 false 了）。</p>
+
+<p>接下来 Activity 到了 onDestroy，同样一层层下发，但是现在 destroy 到不了 LoaderInfo，因为他在 LoaderManager 就被拦截了。</p>
+
+<pre><code>void doDestroy() {
+    if (!mRetaining) {
+        if (DEBUG) Log.v(TAG, "Destroying Active in " + this);
+        for (int i = mLoaders.size()-1; i &gt;= 0; i--) {
+            mLoaders.valueAt(i).destroy();
+        }
+        mLoaders.clear();
+    }
+    ...
+}
+</code></pre>
+
+<p>接下来 Activity 换了新人从新来过。onCreate 很简单就是把保存起来的 LoaderManager maps 交给新的 Host。</p>
+
+<p>如果我们的代码是在 onCreate 中执行的，那么就要从新过一遍 initLoader</p>
+
+<p>如前面所说 getLoaderManager 会直接拿上个 Activity 的 LoaderManager 但会同时更新一些 Host 的引用。</p>
+
+<p>回到 initLoader，只给 LoaderInfo 更新一下 callback，并没有做其他事。因为这时 mStart 还是 false</p>
+
+<pre><code>public &lt;D&gt; Loader&lt;D&gt; initLoader(int id, Bundle args, LoaderManager.LoaderCallbacks&lt;D&gt; callback) {
+    if (info == null) {
+        ..
+    } else {
+        if (DEBUG) Log.v(TAG, "  Re-using existing loader " + info);
+        info.mCallbacks = (LoaderManager.LoaderCallbacks&lt;Object&gt;)callback;
+    }
+    
+    if (info.mHaveData &amp;&amp; mStarted) {
+        // If the loader has already generated its data, report it now.
+        info.callOnLoadFinished(info.mLoader, info.mData);
+    }
+    
+    return (Loader&lt;D&gt;)info.mLoader;
+}
+</code></pre>
+
+<p>接下来到 onStart，这里比较特殊会调用两个 Loader 的方法，分别是 doLoaderStart ，然后向 Fragments 分发 start 后再调用 reportLoaderStart</p>
+
+<p>FragmentHostCallback#doLoaderStart 将之前的 mLoadersStarted 置 true，然后调用 LoaderManager#doStart 最后到 LoaderInfo</p>
+
+<pre><code> void start() {
+        if (mRetaining &amp;&amp; mRetainingStarted) {
+            // Our owner is started, but we were being retained from a
+            // previous instance in the started state...  so there is really
+            // nothing to do here, since the loaders are still started.
+            mStarted = true;
+            return;
+        }
+        ...
+    }
+</code></pre>
+
+<p>这里直接打开 mStarted，就没了</p>
+
+<p>分发完 Fragment onStart 后，又回到 FragmentHostCallback#reportLoaderStart，作两件事，将 LoaderManager LoaderInfo 的 mRetainning 标志置 false，根据 mReportNextStart 有没有，决定是否回调 LoadFinish。</p>
+
+<p>mReportNextStart 的意义就是是否在 start 生命周期后再回调。</p>
+
+<p>我们这里不是，所以直接在 finishRetain 调了回调。</p>
+
+<p>doReportStart() 就没有做什么事。<strong>在兼容库中这两个方法是接连执行的，这里就有点不解了</strong>。</p>
+
+<p>到这里数据就加载完毕了。</p>
+
+<h3 id="stop">Stop</h3>
+
+<p>onStop 的情况比较特殊，见 FragmentActivity</p>
+
+<pre><code>@Override
+protected void onStop() {
+    super.onStop();
+
+    mStopped = true;
+    mHandler.sendEmptyMessage(MSG_REALLY_STOPPED);
+
+    mFragments.dispatchStop();
+}
+</code></pre>
+
+<p>通过向 Handler 发送消息去调用 doReallyStop(false)。为什么不直接调用呢？是因为它要等待有没有 onRetainNonConfigurationInstance 的调用。API 11 之前没有 isChangingConfigurations，</p>
+
+<pre><code>@Override
+public final Object onRetainNonConfigurationInstance() {
+    if (mStopped) {
+        doReallyStop(true);
+    }
+    ...
+}
+</code></pre>
+
+<p>如果有那就直接调用 doReallyStop(true)，doReallyStop 会将 <code>MSG_REALLY_STOPPED</code> 移除掉。 不再分发 stop 事件，改成 retain 事件。这里主要利用了 Handler 的队列机制。</p>
+
+<pre><code>void doReallyStop(boolean retaining) {
+    if (!mReallyStopped) {
+        ...
+        mHandler.removeMessages(MSG_REALLY_STOPPED);
+        ...
+    }
+}
+</code></pre>
+
+<p>retain 已经在上面讲了。接下来单独讲讲 Stop。Stop 有必要讲一下，因为 onStop 中 Loader 的行为会停在加载，移除监听器并调用 stopLoading 。以 CursorLoader 为例。onStopLoading 会调用 cancelLoad，停止当前加载。</p>
+
+<pre><code>void stop() {
+        if (DEBUG) Log.v(TAG, "  Stopping: " + this);
+        mStarted = false;
+        if (!mRetaining) {
+            if (mLoader != null &amp;&amp; mListenerRegistered) {
+                // Let the loader know we're done with it
+                mListenerRegistered = false;
+                mLoader.unregisterListener(this);
+                mLoader.unregisterOnLoadCanceledListener(this);
+                mLoader.stopLoading();
+            }
+        }
+    }
+</code></pre>
+
+<h3 id="destroy">Destroy</h3>
+
+<p>Destroy 有三种情况会调用：</p>
+
+<ul>
+  <li>Host onDestroy</li>
+  <li>LocalManager#destroyLoader</li>
+  <li>LocalManager#restartLoader</li>
+</ul>
+
+<p>destroy 是唯一会导致 onLoaderReset 回调的地方。destroy 调用 Loader#reset。以 CursorLoader 为例，它会在这里关闭掉 cursor。</p>
+
+<pre><code>@Override
+protected void onReset() {
+    super.onReset();
+    
+    // Ensure the loader is stopped
+    onStopLoading();
+
+    if (mCursor != null &amp;&amp; !mCursor.isClosed()) {
+        mCursor.close();
+    }
+    mCursor = null;
+}
+</code></pre>
+
+<h3 id="other">other</h3>
+
+<p>LoaderManager 什么情况下会 stop abandon</p>
+
+<p>configuration 改变 Activity 重启 Loader 还是同一个实例</p>
+
+<p>三种状态</p>
+
+<p>stop-start</p>
+
+<p>onConfigurationChange</p>
+
+<p>onDestroy</p>
+
+<pre><code>but should not do your own release of the data since its Loader
+owns it and will take care of that.  The Loader will take care of
+management of its data so you don't have to
+</code></pre>
+
+<p>This function should generally be used when a component is initializing,
+     * to ensure that a Loader it relies on is created.  This allows it to re-use
+     * an existing Loader’s data if there already is one, so that for example
+     * when an {@link Activity} is re-created after a configuration change it
+     * does not need to re-create its loaders.</p>
+
+<h3 id="loaderinfo">LoaderInfo</h3>
+
+<p>mDeliveredData  数据是否已经传递</p>
+
+<p>PendingLoader</p>
+
+<h4 id="stop-1">stop</h4>
+
+<p>在 FramgentActivity 中  Really Stop 才会调用</p>
+
+<p>LoadInfo 会在 stop 中移除 Loader 的监听器，同时调用 Loader#stopLoading</p>
+
+<p>除非是处于 Retaining 中</p>
+
+<h4 id="destroy-1">destroy</h4>
+
+<p>如果有数据并且已经传递需要调用 Callback#onLoadReset</p>
+
+<p>调用 Loader#reset</p>
+
+<p>destroy 会在 LoaderManager#destroyLoader 中调用</p>
+
+<p>Host 的 onDestry 方法中也会调用，除非是处于 Retaining 中。与 是在 LoaderInfo#stop 不同，这个由 LoaderManager#doDestroy 控制。</p>
+
+<p>Loader 代码不算太复杂，只是和 Activity Fragment 的生命周期纠缠在一起比较那理解。</p>
+
+</article>
+<div class="tag-container" >
+    
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Quick/2016/06/note-2016-06-01"
+ var disqus_config = function () {
+     this.page.title = "2016年06月01日杂记"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Quick/2016/06/note-2016-06-01/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

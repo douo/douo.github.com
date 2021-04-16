@@ -1,0 +1,357 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    PC折腾记录 | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">PC折腾记录</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-11-30">2012-09-07</span>
+    
+</div>
+
+<article>
+    <h2 id="win7">win7</h2>
+<p>win7 64 位. 已经成功安装在uefi + gpt 上了.
+通过刷 slic2.1 的bios. 修改方法见 bios card.已经成功实现硬激活.</p>
+
+<p>bootmgr.efi可用于硬盘镜像安装.(将镜像解压到fat32分区的硬盘中,bootmgr.efi放入跟根目录,在efi shell 里运行)</p>
+
+<blockquote>
+  <p>/data/archives/os/win/tools/bootmgr.efi</p>
+</blockquote>
+
+<p>目前问题</p>
+
+<ul>
+  <li>win7 的efi 机制,  修改了 /boot/bootx64.efi 仍可以成功引导</li>
+  <li>挂载了efi 分区无法访问(解决: 原来efi分区在 fs0，我一直从fs1开始的)</li>
+</ul>
+
+<h2 id="hackintosh">hackintosh</h2>
+
+<h3 id="引导">引导</h3>
+
+<p>单纯UEFi引导mac 貌似无解.见这个 dmazar 的<a href="http://forum.voodooprojects.org/index.php?topic=2394.0">讨论</a></p>
+
+<p><a href="http://www.projectosx.com/forum/index.php?showtopic=2304">Clover</a> 基于  Chameleon, rEFIt, XNU, VirtualBox</p>
+
+<p><a href="http://xpcboot.weebly.com/dualbooting-windows.html">XPC EFI BOOTLOADER</a></p>
+
+<p><a href="http://forge.voodooprojects.org/p/chameleon/">chameleon</a>
+    http://bbs.pcbeta.com/viewthread-876046-1-1.html</p>
+
+<h3 id="一些有用的链接">一些有用的链接</h3>
+
+<p>跟我的情形一致:http://www.insanelymac.com/forum/index.php?showtopic=269655</p>
+
+<h3 id="网站">网站</h3>
+<ul>
+  <li><a href="http://www.insanelymac.com/">insanelymac</a></li>
+  <li><a href="http://forum.voodooprojects.org">voodooprojects</a></li>
+  <li><a href="http://www.tonymacx86.com/">tonymacx86</a> (引导盘iboot+multibeast安装单系统，就出自这个网站。站内还有不少别人做好的dsdt可以拿来用。)</li>
+  <li><a href="http://www.osx86.net">osx86</a></li>
+  <li><a href="www.kexts.com">kexts</a> (下载各类黑苹果驱动、引导文件等黑苹果专用程序的顶级网站。由网友自发上传的)</li>
+  <li>http://netkas.org/</li>
+  <li><a href="http://www.projectosx.com/forum/">projectosx</a></li>
+  <li>http://www.hackint0sh.org/</li>
+  <li>http://www.kakewalk.se/</li>
+  <li>http://aquamac.proboards.com/index.cgi</li>
+</ul>
+
+<h3 id="todo">TODO</h3>
+
+<p><a href="http://bbs.pcbeta.com/viewthread-936953-1-1.html">教程一枚：如何安装kext&amp;如何修改</a></p>
+
+<p><a href="http://bbs.pcbeta.com/viewthread-1060313-1-1.html">ATI 6xxx 显卡</a></p>
+
+<p><a href="http://bbs.pcbeta.com/viewthread-633082-1-1.html">DSDT</a></p>
+
+<p><a href="http://mac.pcbeta.com/thread-67417-1-1.html">详解MAC硬盘中各个文件夹</a></p>
+
+<h3 id="工具">工具</h3>
+<p><a href="http://www.insanelymac.com/forum/index.php?showtopic=142434">ACPI (DSDT) Patcher</a></p>
+
+<p><a href="http://bbs.pcbeta.com/viewthread-633082-1-1.html">磁盘兼容 HFS+ for win , NTFS for mac</a></p>
+
+<h2 id="archlinux">archlinux</h2>
+
+<p>已经安装好了,不过还不能引导.(可以通过efi shell 引导经系统,但是挂载不到home了,用 <a href="http://www.ext2fsd.com">ext2fsd</a> 编辑一下fstab应该可以搞定)</p>
+
+<h2 id="bios">bios</h2>
+
+<p><a href="http://www.gigabyte.com/products/product-page.aspx?pid=4140#bios">下载</a></p>
+
+<p><a href="http://bbs.bios.net.cn/thread-266330-1-1.html"> 技嘉EFI BIOS添加三激活视屏教程</a></p>
+
+<h2 id="efi">EFI</h2>
+
+<h3 id="推荐阅读">推荐阅读</h3>
+<p><a href="https://zh.wikipedia.org/wiki/%E5%8F%AF%E5%BB%B6%E4%BC%B8%E9%9F%8C%E9%AB%94%E4%BB%8B%E9%9D%A2">可延伸韌體介面(UEFI)</a></p>
+
+<p><a href="https://zh.wikipedia.org/wiki/%E5%85%A8%E5%B1%80%E5%94%AF%E4%B8%80%E6%A8%99%E8%AD%98%E5%88%86%E5%8D%80%E8%A1%A8">全局唯一標識分區表(GUID/UUID)</a></p>
+
+<p>The default location for the OS loader is \EFI\BOOT\boot[architecture name].efi, where the architecture name can be e.g. IA32, X64 or IA64. Some OS vendors may have their own OS loader. They may also change the default boot location.</p>
+
+<p><a href="https://wiki.archlinux.org/index.php/UEFI">archlinux UEFI</a></p>
+
+<p><a href="http://www.rodsbooks.com/bios2uefi/">rodsbooks</a></p>
+
+<h2 id="gpt-分区">GPT 分区</h2>
+
+<h3 id="分区参考">分区参考</h3>
+<p>http://www.douban.com/note/213539090/</p>
+
+<h3 id="我的设计">我的设计</h3>
+
+<p>EFI</p>
+
+<p>MSG</p>
+
+<p>WIN7</p>
+
+<p>ARCH</p>
+
+<p>DATA</p>
+
+<p>MAC</p>
+
+<h3 id="efi-1">EFI</h3>
+<p><a href="http://www.xinhuigroup.com/Article/10007/10146.html">uEFI常见问题解答</a></p>
+
+<p><a href="http://hi.baidu.com/gwjtzy/item/53cb5ffe5d20655dc9f33792">EFI和EFI工作原理简介</a></p>
+
+</article>
+<div class="tag-container" >
+    
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Computer/pc"
+ var disqus_config = function () {
+     this.page.title = "PC折腾记录"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Computer/pc/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

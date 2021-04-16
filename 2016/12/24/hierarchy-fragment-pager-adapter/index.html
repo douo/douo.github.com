@@ -1,0 +1,385 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    解决 ViewPager 嵌套导致的 Fragment 菜单错乱 | DouO's Blog</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">解决 ViewPager 嵌套导致的 Fragment 菜单错乱</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-11-30">2016-12-24</span>
+
+    <span><a href="/categories#coder-ref" class="category category-coder waves-effect waves-light">coder</a></span>
+    
+</div>
+
+    <article>
+        <p>以下图嵌套的 ViewPager 为例，它是一个两层嵌套的 ViewPager，也就是说 ViewPager 里面是 Fragment ，每个 Fragment 里面又是一个 ViewPager。在下面的例子中，每个 Fragment 都有一个相同名字的菜单项，可以看到不在当前页显示的 Fragment 它的菜单项也显示出来了。用户滑动到 B ，ViewPager 能正确处理第一层的菜单，显示 B 的时候同时预加载 A、C 两个 Fragment，而菜单里只显示 B 的菜单项。到第二层就有问题了， BA 是第二层当前的 Fragment，它的菜单项也能显示出来，这没问题。但却多出来 AA 和 CA，这是因为 ViewPager 预加载了 A，A 里面的 ViewPager 把 AA 当成是当前 Fragment，把它的菜单项也显示出来了。CA 也是同样道理。</p>
+
+<p><img src="b_aa_ba_ca.png" alt="" /></p>
+
+<p>决定是否显示菜单的代码是由 <code>PagerAdapter#setPrimaryItem</code> 实现的，属于主项（primary item）的 fragment 才会显示菜单项。以 FragmentPagerState 为例，具体代码如下:</p>
+
+<pre><code>Fragment fragment = (Fragment)object;
+if (fragment != mCurrentPrimaryItem) {
+    if (mCurrentPrimaryItem != null) {
+        mCurrentPrimaryItem.setMenuVisibility(false);
+        mCurrentPrimaryItem.setUserVisibleHint(false);
+    }
+    if (fragment != null) {
+        fragment.setMenuVisibility(true);
+        fragment.setUserVisibleHint(true);
+    }
+    mCurrentPrimaryItem = fragment;
+}
+</code></pre>
+
+<p>AA、CA 的显示就很好理解了，因为它们各自是 A 和 C 的主项（primary item），所以都调用了 <code>setMenuVisibility(true)</code>。</p>
+
+<p>要修复这个问题，一开始想到的是覆盖父 fragment 的 <code>setMenuVisibility</code> 方法，把值传递到当前子 fragment</p>
+
+<pre><code>@Override public void setMenuVisibility(boolean menuVisible) {
+    if (isAdded() &amp;&amp; getChildFragmentManager().getFragments() != null) {
+      Fragment f = getChildFragmentManager().findFragmentByTag(
+          "android:switcher:" + mPager.getId() + ":" + mPager.getCurrentItem());// 不支持 FragmentStatePagerAdapter
+      if (f != null) {
+        f.setMenuVisibility(menuVisible);
+      }
+    }
+    super.setMenuVisibility(menuVisible);
+  }
+</code></pre>
+
+<p>这样从 A 滑到 B 时，AA 能隐藏了。但仍然不能解决问题，从 A 滑到 B 时离屏加载 C，并设置 C 的 MenuVisibility 为 false。FragmentPagerAdapter 几次 setMenuVisibility 都在 finishUpdate 之前，所以此时 C 还未添加到 Activity，CA 更不存在。等到 CA 加载时，已经不会再触发 C 的 MenuVisibility 了。</p>
+
+<p><img src="b_ba_ca.png" alt="" /></p>
+
+<p>考虑自定义 FragmentPagerAdapter，主项（primary item）的 fragment 的 menuVisibility 同步父 Fragment 的状态，<code>mParent</code> 是适配器构造函数传入的 ViewPager 宿主 Fragment。</p>
+
+<pre><code>@Override public void setPrimaryItem(ViewGroup container, int position, Object object) {
+  super.setPrimaryItem(container, position, object);
+  if (mParent != null) ((Fragment) object).setMenuVisibility(mParent.isMenuVisible());
+}
+</code></pre>
+
+<p>这样的问题是，从 A 滑到 B 时，只是根 ViewPager 的当前主项（primary item）发生变化，A 适配器和 B 适配器的主项不会发生变化，所以 setPrimaryItem 不会被触发，AA 的菜单仍然可见，而 BA 的菜单则仍然不可见。</p>
+
+<p>幸运的是把修改两个地方合并起来，这样就覆盖了各种可能了。但未免过于繁琐，把问题重新整理一遍，建立模型，才是优雅的解决方法：</p>
+
+<ol>
+  <li>给适配器（Adapter）引入是否可视（visible)属性，不再是主项（primary item）的 Fragment 就显示菜单，而是只有当前适配器是可视的情况下才可以显示菜单。</li>
+  <li>是否可视的递归定义：父适配器（管理<strong>宿主 Fragment</strong> 的 Adapter）是可视的 ，且<strong>宿主 Fragment</strong> 是主项，适配器才是可视的。</li>
+  <li>父适配器的可视状态和<strong>宿主 Fragment</strong> 主项状态发生改变，要传递到其子适配器。</li>
+  <li>子适配器初始化要正确初始化他的可视状态。</li>
+</ol>
+
+<p>这样就能设计一个新的 PagerAdapter，把棘手的问题都放在 PagerAdapter 来做。</p>
+
+<p>要实现第三点，适配器需要获得指向其子适配器的引用，适配器是 Fragments 的管理者，这些 Fragments 又是子适配器的宿主，只要让 Fragment 实现接口来获取其内部的适配器便行。</p>
+
+<pre><code>public interface AdapterHolder {
+    HierarchyFragmentPagerAdapter getAdapter();
+  }
+
+/**
+ * 通知子 Adapter（宿主是 holder） ，父 Adapter(当前的 Adapter) visible 发生了变化。
+ * 或者通知子 Adapter，父 Adapter 希望它的 visible 发生变化
+ */
+private void notifyChildVisibleChanged(boolean visible, Fragment holder) {
+  if (holder instanceof AdapterHolder) {
+    HierarchyFragmentPagerAdapter adapter = ((AdapterHolder) holder).getAdapter();
+    if (adapter != null) {
+      adapter.setVisible(visible);
+    }
+  }
+}
+</code></pre>
+
+<p>没有继承 AdapterHolder 都会被适配器当成没有子 Adapter。</p>
+
+<p>相比第三点，第四点反而更麻烦。在 finishUpdate 之前，Fragment 是不知道它在树中的位置的。这时如果尝试用 <code>getParentFragment()</code> 是返回空，</p>
+
+<pre><code>    Fragment parent = fragment.getParentFragment();
+    if (parent == null || !(parent instanceof AdapterHolder)) {
+      // 拿不到 parent 有两种情况
+      // Adapter 在根 Pager 里
+      // 也有可能是第一次初始化，当前 Fragment 还未和其父 Fragment 建立链接
+      setVisible(isVisible());
+    } else {
+      // 否则，只有父 Adapter 是 visible primary，当前 primary item 才可能是 visible primary.
+      setVisible(((AdapterHolder) parent).getAdapter().isVisible());
+    }
+</code></pre>
+
+<p>为了能够正确初始化，需要在构造函数做个 hack。</p>
+
+<pre><code>public HierarchyFragmentPagerAdapter(PagerAdapter adapter, AdapterHolder holder) {
+   mAdapter = adapter;
+   mVisible = true;
+   if (holder != null) {
+     if (holder instanceof Fragment) {
+       // 一个 hack，初始化 的 visible 状态
+       // holder 不是 Fragment 表示 Adapter 为根 Adapter
+       // menu visible 为 true，便断言宿主 Fragment 是 primary item.
+       mVisible = ((Fragment) holder).isMenuVisible();
+     }
+   }
+ }
+</code></pre>
+
+<p>剩下的便没什么，鉴于 PagerAdapter 有两个, FragmentPagerAdapter 和 FragmentStatePagerAdapter。所以适配器的设计便用代理模式比较合适，实现起来比想象中的简洁，用起来也简单，只需将实际的 PagerAdapter 外面包一层 <code>HierarchyFragmentPagerAdapter</code> 就行，具体的代码见：<a href="https://github.com/douo/android-demo/blob/master/app/src/main/java/info/dourok/android/demo/pager/HierarchyFragmentPagerAdapter.java">HierarchyFragmentPagerAdapter</a></p>
+
+<p><img src="b_ba_baa_baaa.png" alt="" /></p>
+
+
+    </article>
+    <div class="tag-container" >
+        
+        <div class="chip">
+        <a href="/tags#Android-ref">
+            Android
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#ViewPager-ref">
+            ViewPager
+        </a>
+        </div>
+        
+    </div>
+<div class="post-pager">
+    
+    <a href="/2016/08/20/share-my-android-studio-emacs-keymaps/">上一篇：分享我的 Android Studio Emacs 风格快捷键</a>
+    
+    
+    <a href="/2017/05/23/lifecycle/" style="float:right;" >下一篇：Android Architecture Component -- Lifecycle 浅析</a>
+    
+</div>
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/2016/12/24/hierarchy-fragment-pager-adapter"
+ var disqus_config = function () {
+     this.page.title = "解决 ViewPager 嵌套导致的 Fragment 菜单错乱"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/2016/12/24/hierarchy-fragment-pager-adapter/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

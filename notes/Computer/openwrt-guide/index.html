@@ -1,0 +1,518 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    Openwrt 导引 | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">Openwrt 导引</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 21-03-14">2020-11-20</span>
+    
+</div>
+
+<article>
+    <h1 id="编译">编译</h1>
+
+<ol>
+  <li>
+    <p>下载源码：</p>
+
+    <pre><code> git clone https://github.com/douo/openwrt
+ cd openwrt
+</code></pre>
+  </li>
+  <li>
+    <p>更新 feeds</p>
+
+    <pre><code> ./scripts/feeds update -a
+ ./scripts/feeds install -a
+</code></pre>
+  </li>
+  <li>
+    <p>自定义编译选选项，这里会生成 <code>.config</code></p>
+
+    <pre><code> make menuconfig
+</code></pre>
+  </li>
+</ol>
+
+<h2 id="github-action">Github Action</h2>
+
+<p>接下来把 <code>.config</code> 提交到 github <a href="https://github.com/douo/openwrt/tree/douo-19.07.4/">douo-19.07.4</a>分支，便可以触发 github action 自动编译。</p>
+
+<h2 id="本地编译arch-linux">本地编译（Arch Linux）</h2>
+
+<ol>
+  <li>
+    <p>下载</p>
+
+    <pre><code> make download -j8 # 8 线程下载
+</code></pre>
+  </li>
+  <li>
+    <p>编译</p>
+
+    <p>第一次单线程编译同时开启 Verbose，方便排错。</p>
+
+    <pre><code>    make -j1 V=s
+</code></pre>
+
+    <p>一次成功以后，可以直接多线程编译</p>
+
+    <pre><code> make -j$(nproc)
+</code></pre>
+  </li>
+</ol>
+
+<p>最终生成文件在</p>
+
+<pre><code>bin
+├── packages # 生成的 ipk 文件
+└── targets  # 镜像
+</code></pre>
+
+<p>比如 <code>bin/targets/x86/64/openwrt-x86-64-combined-ext4.img.gz</code></p>
+
+<h1 id="自定义">自定义</h1>
+
+<p>见 <a href="openwrt-miscellaneous">Openwrt 折腾</a></p>
+
+<h2 id="源码">源码</h2>
+
+<p><a href="https://github.com/douo/openwrt">douo/openwrt</a>，fork 自官方源</p>
+
+<p>当前分支：<a href="https://github.com/douo/openwrt/tree/douo-19.07.4/">douo-19.07.4</a></p>
+
+<p>变动了：</p>
+
+<ul>
+  <li>推送到 douo-19.07.4 会自动编译 ，见 <a href="https://github.com/douo/openwrt/blob/douo-19.07.4/.github/workflows/openwrt-ci.yml">openwrt/openwrt-ci.yml</a></li>
+  <li>使用<a href="https://github.com/douo/openwrt-package">自己的 package</a></li>
+  <li>tools 新增 upx ucl，因为 v2ray-plugin 硬编码 upx 依赖</li>
+  <li><code>.config</code> 本地 <code>make menuconfig</code> 后的结果文件，提交上去是为了 github action 按这配置编译</li>
+</ul>
+
+<h2 id="packages">Packages</h2>
+
+<p>官方 19.07 的 golang 版本只只有 1.13，编译 v2ray 等包，需要 1.15，需要手动修改：</p>
+
+<p><code>feeds/packages/lang/golang/golang-version.mk</code> 和 <code>feeds/packages/lang/golang/golang/Makefile</code> （PKG_HASH），参考：<a href="https://github.com/openwrt/packages/blob/master/lang/golang/golang/Makefile#L10">1.15</a></p>
+
+<p><a href="https://github.com/douo/openwrt-package">douo/openwrt-package</a>，方便自己折腾和写包。</p>
+
+<h1 id="安装">安装</h1>
+
+<h2 id="旁路由">旁路由</h2>
+
+<p>在 Host（本机） 上运行虚拟机，通过 Bridged Adapter 让虚拟机获得与 Host 相同局域网内的另外一个 ip，局域网内包括 Host 的其他主机可以把网关设置为虚拟机的 ip，实现虚拟机转发流量。</p>
+
+<p>虚拟机用的是 <a href="https://www.virtualbox.org/wiki/Downloads">VisualBox</a>：</p>
+
+<ol>
+  <li>
+    <p>VirtualBox Tools -&gt; Networks 设置Host-only Adapter 为 vboxnet0、192.168.56.1/24</p>
+  </li>
+  <li>
+    <p>镜像转换成 vdi 文件</p>
+  </li>
+</ol>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">gzip</span> <span class="nt">-d</span> openwrt-x86-64-combined-ext4.img.gz
+VBoxManage convertfromraw <span class="nt">--format</span> VDI openwrt-x86-64-combined-ext4.img openwrt-x86-64-combined-ext4.vdi
+</code></pre></div></div>
+
+<ol>
+  <li>建立两个网口:
+    <ul>
+      <li>eth0, Host-Only. 作为 mng（管理）接口，用于 Host 管理 openwrt 虚拟机（可选）</li>
+      <li>eth1, Bridged Adapter, Promiscuous mode 选择：<code>Allow All</code> 作为 lan 接口。</li>
+    </ul>
+  </li>
+  <li>创建 Linux 2.6/3.x/4.x(64-bit) 虚拟机，硬盘选择转换的 vdi 文件</li>
+  <li>
+    <p>启动 openwrt，<code>uci show network</code> 确认 lan 分配在 <code>eth0</code>，把 IP 更新为虚拟机 Host-only 网络：</p>
+
+    <pre><code>uci set network.lan.ipaddr='192.168.56.2'
+uci commit
+reboot
+</code></pre>
+  </li>
+  <li>ssh 连上 <code>root@192.168.56.2</code></li>
+  <li>配置 eth0 为管理接口</li>
+</ol>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uci batch <span class="o">&lt;&lt;</span><span class="no">EOF</span><span class="sh">
+set network.mng=interface
+set network.mng.type='bridge'
+set network.mng.proto='static'
+set network.mng.netmask='255.255.255.0'
+set network.mng.ifname='eth0'
+
+delete network.wan
+delete network.wan6
+</span><span class="no">EOF
+</span></code></pre></div></div>
+
+<ol>
+  <li>配置 eth1，连上 Host 局域网：</li>
+</ol>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uci batch <span class="o">&lt;&lt;</span><span class="no">EOF</span><span class="sh">
+set network.lan=interface
+set network.lan.ifname='eth1'
+set network.lan.proto='static'
+set network.lan.ipaddr='192.168.50.221'
+set network.lan.netmask='255.255.255.0'
+set network.lan.gateway='192.168.50.1'
+set network.lan.dns='8.8.8.8'
+</span><span class="no">EOF
+</span></code></pre></div></div>
+
+<ol>
+  <li><code>uci commit &amp;&amp; reboot</code></li>
+  <li>
+    <p>注意确保接口<code>lan</code> 的防火墙允许 input/output/forward，<code>uci show firewall</code>：</p>
+
+    <pre><code>...
+firewall.@zone[0]=zone
+firewall.@zone[0].name='lan'
+firewall.@zone[0].network='lan'
+firewall.@zone[0].input='ACCEPT'
+firewall.@zone[0].output='ACCEPT'
+firewall.@zone[0].forward='ACCEPT'
+...
+</code></pre>
+  </li>
+  <li>设置局域网内其他主机的网关为 192.168.1.111（openwrt eth1 地址），也可以在主路由的 dhcp 服务设置网关为 192.168.1.111</li>
+</ol>
+
+<h2 id="主路由">主路由</h2>
+
+<p>小马 v1 ：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">T</th>
+      <th style="text-align: center">V</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">CPU</td>
+      <td style="text-align: center">Intel(R) Pentium(R) CPU  N3700  @ 1.60GHz</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Memory</td>
+      <td style="text-align: center">4g</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Disk</td>
+      <td style="text-align: center">8g</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Network</td>
+      <td style="text-align: center">四网口千兆</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>我的方案是双 openwrt 系统，一个常驻的 squashfs openwrt 作为 fallback，另外在 squashfs 上安装一个 ext4 日常折腾。这个 squashfs 也可以用 esxi 代替 ，不过考虑到内存达不到 8g，日常也没啥应用，暂时不折腾 esxi/pve 等虚拟化。</p>
+
+<h3 id="安装-squashfs-openwrt">安装 squashfs openwrt</h3>
+
+<p>全新机器第一次安装才需要这个步骤。首先需要一个引导 u 盘，我选择 archlinux 的镜像。</p>
+
+<p>squashfs 系统需要：</p>
+
+<pre><code>fdisk # 分区
+rsync # 同步文件
+losetup # 挂载 img，注意不要安装 busybox 的版本（不支持 -P）
+blkid # 工具
+</code></pre>
+
+<p>进入引导系统后，直接 <code>dd</code> 把 squashfs 的镜像写入到硬盘:</p>
+
+<pre><code>gunzip -c *.img.gz | dd of=/dev/sdx
+</code></pre>
+
+<p>重启进入 openwrt 系统，fdisk 为剩余空间建立一个 ext4 分区：</p>
+
+<pre><code>Device     Boot  Start      End  Sectors  Size Id Type
+/dev/sdb1  *       512    33279    32768   16M 83 Linux
+/dev/sdb2        33792   558079   524288  256M 83 Linux
+/dev/sdb3       559104 15649199 15090096  7.2G 83 Linux
+</code></pre>
+
+<h3 id="安装-ext4">安装 ext4</h3>
+
+<p>确保软路由运行的是 squashfs 的系统：</p>
+
+<pre><code>scp openwrt-x86-64-combined-ext4.img.gz root@192.168.1.1:/tmp/ # 上传镜像到路由
+</code></pre>
+
+<p>ssh 登陆到软路由，把 ext4 安装到 <code>/dev/sdb3</code>:</p>
+
+<pre><code>gunzip openwrt-x86-64-combined-ext4.img.gz
+losetup -Pf openwrt-x86-64-combined-ext4.img # 一般挂载在 loop1，lsblk 可以看到
+mkdir -p /tmp/boot; mount /dev/loop1p1 /tmp/boot # 挂载 /boot
+mkdir -p /tmp/root; mount /dev/loop1p2 /tmp/root # 挂载 /
+mkdir -p /tmp/hboot; mount /dev/sdx1 /tmp/hboot # 挂载软路由 boot
+mkdir -p /tmp/hroot; mount /dev/sdx3 /tmp/hroot # 挂载准备安装的 root
+
+rsync -av --delete /tmp/root/ /tmp/hroot # 同步镜像根目录，不放心可以先把旧清干净 mkfs.ext4 /dev/sdx3
+</code></pre>
+
+<p>如果是日常折腾:</p>
+
+<pre><code># 非第一次直接更新内核就可以
+cp /tmp/boot/boot/vmlinuz /tmp/hboot/boot/ # 更新内核
+</code></pre>
+
+<p>如果是第一次安装 ext4 还需要先修改引导，再更新内核：</p>
+
+<pre><code># 第一次需要修改引导
+cp -r /tmp/hboot/boot /tmp/hboot/boot_bk # 第一次的话先备份下 squashfs 的引导
+# 修改 grub menu
+mv /tmp/hboot/boot/vmlinuz /tmp/hboot/boot/vmlinuz-squashfs # 第一次重命名 squashfs 内核
+sed -i 's/"OpenWrt/"OpenWrt squashfs/' /tmp/hboot/boot/grub/grub.cfg # 第一次重命名 grub 的菜单项
+cp /tmp/boot/boot/vmlinuz /tmp/hboot/boot/ # 更新内核
+export partuuid=blkid | sed -n -r  's/\/dev\/sd.3.*PARTUUID="([^"]*)"/\1/gp' # 获取本机新 root 分区的 partuuid
+ sed -n '/menuentry/,+6{s/PARTUUID=[a-zA-Z0-9-]*/'PARTUUID="$partuuid"'/g;p}' /tmp/boot/boot/grub/grub.cfg # 输出替换 partuuid 后的 grub 菜单项
+vi /tmp/hboot/boot/grub/grub.cfg #把输出的菜单项追加到前面
+</code></pre>
+
+</article>
+<div class="tag-container" >
+    
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Computer/openwrt-guide"
+ var disqus_config = function () {
+     this.page.title = "Openwrt 导引"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Computer/openwrt-guide/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

@@ -1,0 +1,412 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    Google IO 2013 | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">Google IO 2013</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-11-30">2013-10-08</span>
+    
+</div>
+
+<article>
+    <h3 id="navigation-in-android">Navigation in Android</h3>
+
+<h4 id="taskaffinity">taskAffinity</h4>
+
+<p>http://yelinsen.iteye.com/blog/1122547</p>
+
+<h4 id="launcher">Launcher</h4>
+
+<p>在 Launcher 中打开应用的 Intent 带有 <code>FLAG_ACTIVITY_NEW_TASK</code>。一般情况下就是在新 Task 下打开一个 Activity。但是如果已经有相同 affinity 的 task 存在，这个 flag 意味着，如果 intent 跟 task 的 root activity 相同，那会把 task 带到前台，而不启动这个 Intent 的 activity。如果不同，那么新的 Activity 将会创建并压入 task 。</p>
+
+<blockquote>
+  <pre><code>创建两个工程，application1和application2，分别含有Activity1和Activity2，它们的taskAffinity相同，首先，我们启动application1,加载Activity1，然后按Home键，使该task（假设为task1）进入后台。然后启动application2，会看到Activity1 被带入前台，Activity2 没有启动。
+</code></pre>
+</blockquote>
+
+<h4 id="recent">Recent</h4>
+
+<p>Recent 按钮就是三个标准按钮中，除了 Back 和 Home 外的另外一个。实际上就是用于切换 Task。</p>
+
+<p>Recent 切换就是启动所选 Task 的 root activity，但是带有两个Flag，<code>FLAG_ACTIVITY_NEW_TASK</code>，<code>FLAG_ACTIVITY_TASK_ON_HOME</code>。意味着把这个 Task 和 Home 一起移到顶部，Home 置于 Task 之下。见:<a href="https://docs.google.com/presentation/d/1BaucBbey81e5qEyq_71hVe4kmd7F2x5nt_TcyuxrgK0/edit#slide=id.g63148c4_0_11">Slide</a></p>
+
+<h4 id="actionbar">ActionBar</h4>
+
+<p>ActionBar 的后退按钮，称之为<strong>UP</strong> ，UP 是作为应用内导航用的，它让当前 Activity 返回到他的父 Activity，不一定是当前 Task 中的前一个 Activity。Apps 中各个Activity的关系应该是树结构的。见<a href="https://docs.google.com/presentation/d/1BaucBbey81e5qEyq_71hVe4kmd7F2x5nt_TcyuxrgK0/edit#slide=id.g11d81ecd_1_32">Slide</a></p>
+
+<p>具体的实现见: <a href="https://developer.android.com/training/implementing-navigation/ancestral.html">Providing Up Navigation</a></p>
+
+<h4 id="widget">Widget</h4>
+
+<p>如果 Widget 打开一个某个 Content Activity（位于 App structure 的某个非根节点），<a href="https://docs.google.com/presentation/d/1BaucBbey81e5qEyq_71hVe4kmd7F2x5nt_TcyuxrgK0/edit#slide=id.g1464cfe7_1_208">Slide</a>。下面的代码显示这个 Activity 如何处理<strong>UP</strong>事件的。</p>
+
+<pre><code>Intent upIntent = NavUtils.getParentActivityIntent(this);
+if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
+	//如果当前 Task 找不到它的 parent intent，则通过下面的方法，启动整个 parent statck
+    TaskStackBuilder.from(this)
+		.addParentStack(this)
+		.startActivities();
+	finish();
+} else {
+    NavUtils.navigateUpTo(this, upIntent);
+}
+</code></pre>
+
+<p><code>navigateUpTo</code> 只是加了個 <code>FLAG_ACTIVITY_CLEAR_TOP</code></p>
+
+<pre><code>    @Override
+    public void navigateUpTo(Activity activity, Intent upIntent) {
+        upIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        activity.startActivity(upIntent);
+        activity.finish();
+    }
+</code></pre>
+
+<h4 id="notification">Notification</h4>
+
+<p>Notification 打开的 Activity 会启动一个新 Task，但不带<code>FLAG_ACTIVITY_TASK_ON_HOME</code>。<strong>Back</strong>可以返回到前一个 Task。</p>
+
+<h4 id="test">Test</h4>
+
+<p>要小心不同方式打开 Acitivty 的不同处理，</p>
+
+<ul>
+  <li>widget</li>
+  <li>notification</li>
+  <li>intent</li>
+</ul>
+
+<h3 id="android-graphics-performance">Android Graphics Performance</h3>
+
+<p>Android 4.3 优化了图形的绘制效率。<strong>Re-ordering</strong> 重新排序绘制指令，相
+同的指令一起绘制（所有的 Vew），比如先绘制所有 bitmap ，然后 9patch 然
+后text，而不是一个 View 一个 View 地绘制。<strong>Merge</strong> 相同的指令合并成一
+个指令，比如两个 Bitmap 一起绘制。</p>
+
+<p>Drawing 多线程优化，多核心 CPU 优化。</p>
+
+<p>支持 Path Clip。</p>
+
+<h4 id="overdraw">OverDraw</h4>
+
+<p>4.2 一个新的 debug tool 选项，<code>show GPU overdraw</code> Overdraw，就是一帧的
+中一个像素被绘制了多少次，前几次绘制都是无用的，只有最后一次绘制的颜色
+才会最终显示给用户。减少 overdraw 可以提供应用绘制的效率。</p>
+
+<p>提供了几个技巧来减少 overdraw</p>
+
+<ol>
+  <li>避免使用根View的背景，在 theme 中设置<code>android:windowBackground</code>代替。</li>
+  <li>可以将 9patch 的  content area 弄成透明的，前提是显示的内容是非透明的。</li>
+</ol>
+
+<h4 id="profilie-gpu-rendering">Profilie GPU rendering</h4>
+
+<p>4.2 实时显示每一帧的绘制时间在屏幕上，低于绿线表示帧率超过60。手头没
+有 4.2 的设备可供测试。</p>
+
+<h4 id="systrace">systrace</h4>
+
+<p>新的 API <code>android.os.Trace</code>。对 opengl  比较有用。</p>
+
+<h4 id="trilinear-filtering">Trilinear filtering</h4>
+
+<p>4.2 Bitmap#setHasMipMap 支持
+<a href="http://zh.wikipedia.org/wiki/Mipmap">MidMap</a></p>
+
+<h4 id="其他">其他</h4>
+<p>需要进一步详细了解</p>
+
+<ol>
+  <li>Canvas layout</li>
+  <li>alpha，TextView setTextColor，ImageView setImageAlpha</li>
+  <li>如果各个view间不相互覆盖，在4.1中可以通过设置hasOverLappingRendering为false来提高性能</li>
+  <li>Canvas confuse, hardware rendering 返回 size of view。softwarerendering 返回 size of window</li>
+  <li>clip ronate。 clip border</li>
+</ol>
+
+<p>最后放上 slide：</p>
+
+<iframe src="http://www.slideshare.net/slideshow/embed_code/26948262" width="98%" height="500" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+
+<h4 id="nvidia-perfhud-es">NVIDIA PerfHUD ES</h4>
+
+<p><a href="https://developer.nvidia.com/nvidia-perfhud-es">NVIDIA PerfHUD ES</a> 视频里出现了这个工具，看起来很酷的样子，可以逐
+步重现各个绘制的步骤。但貌似只支持 Terga GPU</p>
+
+<p>高通也有个类似的工具，用于调试 OpenGl ES，<a href="https://developer.qualcomm.com/mobile-development/mobile-technologies/gaming-graphics-optimization-adreno/tools-and-resources">ADRENO™ PROFILER</a></p>
+
+<h3 id="volley">Volley</h3>
+
+<p><a href="https://android-review.googlesource.com/#/admin/projects/platform/frameworks/volley">Volley</a> 类似于 async-http-client 的网络库，很强大的 cancelation 处理机制。（async-http-client 的 cancel 几乎不可用）。有吸引力，正式使用前必须跟 async-http-client 作一番对比才行，接口看起来复杂不少。</p>
+
+<p>mark 一下<a href="http://zh.wikipedia.org/wiki/%E5%BF%AB%E5%8F%96%E6%96%87%E4%BB%B6%E7%BD%AE%E6%8F%9B%E6%A9%9F%E5%88%B6">LRU Cache</a></p>
+
+<h4 id="okhttp">OkHttp</h4>
+
+<p><a href="http://square.github.io/okhttp/">OkHttp</a> 有两个优点，其一是更高效地使用 http，并支持 spdy；其二，实现了HttpURLConnection 和  Apache HttpClient 几乎一样的接口，重构成本低。</p>
+
+<p>这里有一份<a href="http://blog.chengyunfeng.com/?p=489#ixzz2i3evPpq0">中文介绍</a>。</p>
+
+<p>####</p>
+
+</article>
+<div class="tag-container" >
+    
+    <div class="chip">
+        <a href="/tags#Google IO-ref">
+            Google IO
+        </a>
+    </div>
+    
+    <div class="chip">
+        <a href="/tags#ActionBar-ref">
+            ActionBar
+        </a>
+    </div>
+    
+    <div class="chip">
+        <a href="/tags#Navigation-ref">
+            Navigation
+        </a>
+    </div>
+    
+    <div class="chip">
+        <a href="/tags#Graphics-ref">
+            Graphics
+        </a>
+    </div>
+    
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Programming/Android/Google-IO-2013"
+ var disqus_config = function () {
+     this.page.title = "Google IO 2013"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Programming/Android/Google-IO-2013/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

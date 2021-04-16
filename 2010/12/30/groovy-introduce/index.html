@@ -1,0 +1,502 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    Groovy初接触 | DouO's Blog</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">Groovy初接触</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-01-13">2010-12-30</span>
+
+    <span><a href="/categories#coder-ref" class="category category-coder waves-effect waves-light">coder</a></span>
+    
+</div>
+
+    <article>
+        <h3 id="groovy">Groovy</h3>
+
+<p>Groovy是一种运行在Java虚拟机上的脚本语言，语法相比java起来简单很多。而且完全支持Java语法，这个不知道是不是好事，写习惯groovy再去写java会不会很容易混淆？所有Java的库都可以在Groovy上使用，可以说跟Java是互通的。Groovy的就是一跑在jvm上的脚本语言嘛，Groovy的代码最后也要被编译成为jvm上的字节码。</p>
+
+<p>一直都打算学一种脚本语言来写脚本和小程序的，本来是用python的，用了几天，一放松又用回Java了。Java虽然库比较熟悉，代码比较亲切，但是用来写脚本还是太繁琐了。接触都Groovy后，感觉就是它了，有脚本语言的语法和Java的库，对于会Java的人来说，学习Groovy几乎是零成本的！</p>
+
+<p>官网:<a href="http://groovy.codehaus.org">http://groovy.codehaus.org</a>
+（二级域名…orz） 装Groovy前要先安装好Java环境。 Groovy的环境配置：</p>
+
+<p>文档方面:英文的该有还是有的.中文的就比较稀少了.
+netbeans下有个Groovy插件挺好用的，在同一个项目里Groovy文件可以跟java文件混用</p>
+
+<p>groovy没有强制分号
+groovy也没像python那样的强制缩进.还是得用花括号，这个比较可惜。</p>
+
+<p>Groovy 默认导入了下面这些包</p>
+
+<p>java.io.*</p>
+
+<p>java.lang.*</p>
+
+<p>java.math.BigDecimal</p>
+
+<p>java.math.BigInteger</p>
+
+<p>java.net.*</p>
+
+<p>java.util.*</p>
+
+<p>groovy.lang.*</p>
+
+<p>groovy.util.*</p>
+
+<p>「==」操作符，不再比较引用，如下面的的代码输出2个true</p>
+
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="s2">"wtf"</span><span class="o">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="s2">"wtf"</span><span class="o">)</span>
+<span class="n">println</span> <span class="n">a</span> <span class="o">==</span> <span class="n">b</span>
+<span class="n">println</span> <span class="n">a</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">b</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p><code>Output:true
+true
+</code>
+正则表达式也有独立的操作符，正则表达式要用两个斜杠包围起来。 是否匹配
+==~ 如 <code>println "potatoe" ==~ /potatoe/</code> <code>Output:true</code> 匹配结果 =~<br />
+会返回一个相当于java.util.regex.Matcher的对象。</p>
+
+<h3 id="闭包closure">闭包(Closure)</h3>
+
+<p>用python的时候还没用过闭包，毕竟是没接触过的特性所以有股阻力，Lisp则是想学还没动手，所以学Groovy也算是我第一次接触闭包了。</p>
+
+<p>闭包就像这样 <code>s = {println it}</code> 一个变量名 指向一个代码块 调用s(5)
+就会打印出 5 官方帮助的例子是</p>
+
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">square</span> <span class="o">=</span> <span class="o">{</span> <span class="n">it</span> <span class="o">*</span> <span class="n">it</span><span class="o">}</span>
+
+<span class="n">println</span> <span class="nf">square</span><span class="o">(</span><span class="mi">9</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p><code>Output:81</code></p>
+
+<p>闭包也可以当成方法的参数去传递； 如 <code>[ 1, 2, 3, 4 ].collect(square)</code>
+闭包在java成面就是groovy.util.Closure这个类，
+所以可以这样传递还可以理解。 关于闭包的参数；
+默认一个参数就是it，可以不用声明直接用便可。
+多于一个参数可以用下面这种方式来指定参数列表 <code>closure = {a,b,...n -&gt;  code}
+closure(a,b,...n)</code>
+还可以匿名<code>[ "yue" : "wu", "lane" : "burks", "sudha" : "saseethiaseeleethialeselan" ].each(
+{
+key, value -&gt; println key + "=" + value
+})</code> 闭包匿名的时候可以省略括号
+<code>[ "yue" : "wu", "lane" : "burks", "sudha" : "saseethiaseeleethialeselan" ].each
+{
+key, value -&gt; println key + "=" + value
+}</code></p>
+
+<p>还可以这样写</p>
+
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">n</span> <span class="o">=</span> <span class="mi">5</span><span class="o">;</span>
+<span class="o">({</span>
+<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">..</span><span class="mi">100</span><span class="o">)</span>
+<span class="n">println</span> <span class="n">i</span><span class="o">*</span><span class="n">n</span>
+<span class="o">}).</span><span class="na">call</span><span class="o">()</span>
+</code></pre></div></div>
+
+<p>闭包内部可以调用其外部的变量
+这个如何实现的也很好奇啊 在官网上的例子还看过这么一个用法</p>
+
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">def</span> <span class="n">groovyImage</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GroovyImage</span><span class="o">();</span>
+<span class="kt">def</span> <span class="n">argAndClosure</span> <span class="o">=</span> <span class="o">[</span><span class="s1">'-d'</span><span class="o">:{</span><span class="n">groovyImage</span><span class="o">.</span><span class="na">srcDir</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="n">it</span><span class="o">)},</span>
+<span class="s1">'-q'</span><span class="o">:{</span><span class="n">groovyImage</span><span class="o">.</span><span class="na">outputPattern</span> <span class="o">=</span> <span class="n">it</span><span class="o">},</span>
+<span class="s1">'-p'</span><span class="o">:{</span><span class="n">groovyImage</span><span class="o">.</span><span class="na">pattern</span> <span class="o">=</span> <span class="n">it</span><span class="o">},</span>
+<span class="s1">'-h'</span><span class="o">:{</span><span class="n">groovyImage</span><span class="o">.</span><span class="na">help</span><span class="o">()}];</span>
+</code></pre></div></div>
+
+<p>闭包当成Map的Value，直接Map[key].call()果然很方便。</p>
+
+<p>看了一天目前知道的差不多就这些，刚接触闭包，概念还待慢慢理解；Groovy其他的特点还待慢慢发掘。</p>
+
+<h3 id="groovy的效率">Groovy的效率</h3>
+
+<p>最后再看看Groovy的效率如何，分别在Java、Python、Groovy上写了个生成素数表的方法，代码几乎一致。
+Java：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */</span>
+
+<span class="kn">package</span> <span class="nn">org.dou.euler</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+
+<span class="cm">/**
+ *
+ * @author DouO
+ */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Prime</span> <span class="o">{</span>
+ <span class="kd">public</span> <span class="kd">static</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Long</span><span class="o">&gt;</span> <span class="n">primes</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Long</span><span class="o">&gt;(</span><span class="mi">100</span><span class="o">);</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">buildPrimeTable</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">){</span>
+        <span class="n">primes</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">2L</span><span class="o">);</span>
+        <span class="n">primes</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">3L</span><span class="o">);</span>
+        <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+        <span class="kt">long</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">5</span><span class="o">;</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+            <span class="kt">int</span> <span class="n">q</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="nc">Math</span><span class="o">.</span><span class="na">ceil</span><span class="o">(</span><span class="nc">Math</span><span class="o">.</span><span class="na">sqrt</span><span class="o">(</span><span class="n">s</span><span class="o">));;</span>
+            <span class="k">while</span> <span class="o">(</span><span class="n">j</span> <span class="o">&lt;</span> <span class="n">i</span> <span class="o">)</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">primes</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">j</span><span class="o">)&lt;=</span><span class="n">q</span><span class="o">&amp;&amp;</span><span class="n">s</span> <span class="o">%</span> <span class="n">primes</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">j</span><span class="o">)</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+                     <span class="n">s</span><span class="o">+=</span><span class="n">k</span><span class="o">;</span>
+                     <span class="n">k</span> <span class="o">=</span> <span class="o">(</span><span class="n">k</span><span class="o">+</span><span class="n">k</span><span class="o">)%</span><span class="mi">6</span><span class="o">;</span>
+                     <span class="n">q</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="nc">Math</span><span class="o">.</span><span class="na">ceil</span><span class="o">(</span><span class="nc">Math</span><span class="o">.</span><span class="na">sqrt</span><span class="o">(</span><span class="n">s</span><span class="o">));</span>
+                      <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+                <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                    <span class="n">j</span><span class="o">++;</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+            <span class="n">primes</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
+            <span class="n">s</span><span class="o">+=</span><span class="n">k</span><span class="o">;</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="o">(</span><span class="n">k</span><span class="o">+</span><span class="n">k</span><span class="o">)%</span><span class="mi">6</span><span class="o">;</span>
+            <span class="n">q</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="nc">Math</span><span class="o">.</span><span class="na">ceil</span><span class="o">(</span><span class="nc">Math</span><span class="o">.</span><span class="na">sqrt</span><span class="o">(</span><span class="n">s</span><span class="o">));</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">long</span> <span class="n">t</span> <span class="o">=</span> <span class="nc">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
+        <span class="n">buildPrimeTable</span><span class="o">(</span><span class="mi">10001</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">()</span> <span class="o">-</span> <span class="n">t</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">primes</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">10000</span><span class="o">));</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Python:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="n">primes</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">def</span> <span class="nf">buildTable</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="c1">#    if(len(primes)&lt;=0):
+#        primes.append(2)
+#        sindex = 1;
+#    else:
+#        sindex = len(primes+1);
+</span>    <span class="n">primes</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">primes</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">j</span><span class="o">=</span><span class="mi">0</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">math</span><span class="p">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">+</span><span class="mf">0.5</span><span class="p">)</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">j</span><span class="o">&lt;</span><span class="n">i</span><span class="p">):</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">primes</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">&lt;=</span><span class="n">q</span> <span class="ow">and</span> <span class="n">s</span><span class="o">%</span><span class="n">primes</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">):</span>
+                <span class="n">s</span><span class="o">+=</span><span class="n">k</span>
+                <span class="n">k</span><span class="o">=</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="n">k</span><span class="p">)</span><span class="o">%</span><span class="mi">6</span>
+                <span class="n">q</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">math</span><span class="p">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">+</span><span class="mf">0.5</span><span class="p">)</span>
+                <span class="n">j</span><span class="o">=</span><span class="mi">0</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">j</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="n">primes</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+        <span class="n">s</span><span class="o">+=</span><span class="n">k</span>
+        <span class="n">k</span><span class="o">=</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="n">k</span><span class="p">)</span><span class="o">%</span><span class="mi">6</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">math</span><span class="p">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">+</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="n">time</span><span class="p">.</span><span class="n">clock</span><span class="p">()</span>
+<span class="n">buildTable</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">primes</span><span class="p">[</span><span class="mi">10000</span><span class="p">]</span>
+<span class="k">print</span> <span class="n">time</span><span class="p">.</span><span class="n">clock</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>Groovy:</p>
+
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">primes</span> <span class="o">=</span> <span class="o">[]</span>
+<span class="kt">def</span> <span class="nf">buildPrimeTable</span><span class="o">(</span><span class="n">n</span><span class="o">){</span>
+    <span class="n">primes</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">2</span><span class="o">)</span>
+    <span class="n">primes</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">3</span><span class="o">)</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="k">for</span><span class="o">(</span><span class="n">i</span> <span class="k">in</span> <span class="mi">0</span><span class="o">..</span><span class="na">n</span><span class="o">-</span><span class="mi">2</span><span class="o">){</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="n">Math</span><span class="o">.</span><span class="na">ceil</span><span class="o">(</span><span class="n">Math</span><span class="o">.</span><span class="na">sqrt</span><span class="o">(</span><span class="n">s</span><span class="o">))</span>
+        <span class="k">while</span><span class="o">(</span><span class="n">j</span><span class="o">&lt;</span><span class="n">i</span><span class="o">){</span>
+            <span class="k">if</span><span class="o">(</span><span class="n">primes</span><span class="o">[</span><span class="n">j</span><span class="o">]&lt;=</span><span class="n">q</span> <span class="o">&amp;&amp;</span> <span class="n">s</span><span class="o">%</span><span class="n">primes</span><span class="o">[</span><span class="n">j</span><span class="o">]==</span><span class="mi">0</span><span class="o">){</span>
+                <span class="n">s</span><span class="o">+=</span><span class="n">k</span>
+                <span class="n">k</span><span class="o">=(</span><span class="n">k</span><span class="o">+</span><span class="n">k</span><span class="o">)%</span><span class="mi">6</span>
+                <span class="n">q</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="n">Math</span><span class="o">.</span><span class="na">ceil</span><span class="o">(</span><span class="n">Math</span><span class="o">.</span><span class="na">sqrt</span><span class="o">(</span><span class="n">s</span><span class="o">))</span>
+                <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="o">}</span><span class="k">else</span><span class="o">{</span>
+                <span class="n">j</span><span class="o">++;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="n">primes</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">s</span><span class="o">)</span>
+        <span class="n">s</span><span class="o">+=</span><span class="n">k</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="o">(</span><span class="n">k</span><span class="o">+</span><span class="n">k</span><span class="o">)%</span><span class="mi">6</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="n">Math</span><span class="o">.</span><span class="na">ceil</span><span class="o">(</span><span class="n">Math</span><span class="o">.</span><span class="na">sqrt</span><span class="o">(</span><span class="n">s</span><span class="o">))</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">()</span>
+<span class="n">buildPrimeTable</span><span class="o">(</span><span class="mi">10000</span><span class="o">)</span>
+<span class="n">println</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">()</span> <span class="o">-</span> <span class="n">t</span>
+<span class="n">println</span> <span class="n">primes</span><span class="o">[</span><span class="mi">10000</span><span class="o">]</span>
+</code></pre></div></div>
+
+<p>以生成前10000位素数为例，结果如下：
+Java:718ms，表现不错。
+Python:8833ms，8秒，java的10倍，也可能是我代码写的不好。
+Groovy:77484ms，没错，你没看错是5位数，77秒！几乎是java版的110倍。天啊，这也忒慢了吧，是不是我触犯了什么禁忌啊，很可能出现在列表结构上面，下次再弄清楚啦。</p>
+
+    </article>
+    <div class="tag-container" >
+        
+        <div class="chip">
+        <a href="/tags#Groovy-ref">
+            Groovy
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#Java-ref">
+            Java
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#闭包-ref">
+            闭包
+        </a>
+        </div>
+        
+    </div>
+<div class="post-pager">
+    
+    <a href="/2010/12/09/dokuwiki-new-realease/">上一篇：dokuwiki新版本"Anteater"支持UTF-8文件名</a>
+    
+    
+    <a href="/2011/05/09/im-back/" style="float:right;" >下一篇：I'm Back!</a>
+    
+</div>
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/2010/12/30/groovy-introduce"
+ var disqus_config = function () {
+     this.page.title = "Groovy初接触"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/2010/12/30/groovy-introduce/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

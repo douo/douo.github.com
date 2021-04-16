@@ -1,0 +1,347 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    Java ME通用Logger包和控制台 | DouO's Blog</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">Java ME通用Logger包和控制台</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-11-30">2010-05-15</span>
+
+    <span><a href="/categories#coder-ref" class="category category-coder waves-effect waves-light">coder</a></span>
+    
+</div>
+
+    <article>
+        <h2 id="写在前面">写在前面</h2>
+
+<p>这是一个JavaMe的通用轻量级Logger系统和控制台程序，轻击<a href="#source">这里下载logger源码</a>，把它拉到你的项目里面去便可，要看下例子可以再轻击<a href="#example">这里</a>，还有<a href="#image">效果图在这</a>。</p>
+
+<h2 id="正文">正文</h2>
+
+<p>OK，正文了。我写Java
+Me程序的时候很多次程序都是自我感觉良好在模拟器上跑起来也没问题，但一到真机就卡壳了。而且，在真机上跑又不像在电脑上开发一样有个控制台可以打印信息，有时要在真机上获得一系列错误信息那是相当麻烦。我曾经试过，调用InputStream的read(byte[]b,int
+offset,int len)方法,居然可以最后一字节没被读出来；用new String(byte[] b ,
+“gb2312”)来转换编码时，居然最后一个字节会丢失；还有用Connector来得到FileConnection时，如果将模式设置为「只读」直接程序崩溃，等等，好多。真是苦不堪言。恩，好吧，我承认我的机器是MTK系统滴。如果说ME程序员是IT民工中的搬运工，那么给MTK写ME程序的就是那枚扮演烈日下搬砖头的角色。所以说如果能有一个通用的控制台程序那就显得相当有用了，简直就是给ME程序员穿上滑轮鞋。</p>
+
+<p>恰好，近日在看Fire2[^[1]^](#fire2)时，里面刚好有个控制台，还有个日志系统。不过Fire2的控制台是基于它自己的UI控件的，不具备通用性，而且效率不行，打印信息一多严重拖慢系统程序。于是我自己用Canvas重新实现了控制台，并将Fire2中的日志系统提取出来做了点修改，跟我的控制台打包成一通用的日志系统logger包。</p>
+
+<p>该日志系统有三个类一个接口组成。</p>
+
+<ul>
+  <li><a href="#Log">Log</a></li>
+  <li><a href="#Logger">Logger</a></li>
+  <li><a href="#Console">Console</a></li>
+  <li><a href="#ConsolePainter">ConsolePainter</a></li>
+</ul>
+
+<p>Log是在Fire2里实现好的，有一系列的静态方法，包括添加和设置Logger，还有一系列记录消息的方法，Log里面的消息四个级别，分别为Info、Warn、ERROR、Debug。Log对象默认实现一个Logger，这个默认的Logger就是将消息打印在控制台(System.out.println())。</p>
+
+<p>Logger 是一个接口只有一个方法</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">println</span><span class="o">(</span><span class="nc">String</span> <span class="n">txt</span> <span class="o">,</span> <span class="kt">int</span> <span class="n">level</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>要自己实现logger只需实现这个接口便可，比如说把Log消息写文件里面去，发送到服务器等等。</p>
+
+<p>Console就是控制台，是一个独立的全屏的界面，继承了Canvas，实现了Logger接口。将Log记录下来的消息绘制到屏幕上。考虑到一个Midlet只需要一控制台，又必须给Console传入Display参数，所以便按单例模式实现Console。</p>
+
+<p>得到Console实例的方法有两个，getConsole(Display) 和getConsole()</p>
+
+<p>但要注意一点，第一次得到Console对象时，必须先使用getConsole(Display)，来为其传入Display对象。</p>
+
+<p>显示Console只需调用showConsole(Displayable
+screen)，传入的Displayable为调用显示控制台是的当前界面，从Console返回时会自动显示该界面。screen可以为null，当screen为null时Console无法返回。</p>
+
+<p>一个使用控制台的例程可以像这样</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Display</span> <span class="n">dis</span> <span class="o">=</span> <span class="nc">Display</span><span class="o">.</span><span class="na">getDisplay</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+<span class="nc">Console</span> <span class="n">console</span> <span class="o">=</span> <span class="nc">Console</span><span class="o">.</span><span class="na">getConsole</span><span class="o">(</span><span class="n">dis</span><span class="o">);</span>
+<span class="nc">Log</span><span class="o">.</span><span class="na">showDebug</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+<span class="nc">Log</span><span class="o">.</span><span class="na">addLogDestination</span><span class="o">(</span><span class="n">console</span><span class="o">);</span>
+<span class="nc">Log</span><span class="o">.</span><span class="na">logInfo</span><span class="o">(</span><span class="s">"console already"</span><span class="o">);</span>
+<span class="nc">Log</span><span class="o">.</span><span class="na">logDebug</span><span class="o">(</span><span class="nc">Console</span><span class="o">.</span><span class="na">getMemoryInfo</span><span class="o">());</span>
+<span class="k">try</span><span class="o">{</span>
+<span class="c1">//一些可能抛出异常的操作</span>
+<span class="o">}</span><span class="k">catch</span><span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">){</span>
+<span class="nc">Log</span><span class="o">.</span><span class="na">logError</span><span class="o">(</span><span class="s">"ERROR"</span> <span class="o">,</span> <span class="n">e</span><span class="o">);</span>
+<span class="n">console</span><span class="o">.</span><span class="na">showConsole</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Console还有个String getMemoryInfo()的方法，来得到当前虚拟机的内存信息。</p>
+
+<p>ConsolePainter
+是控制台画笔,负责把字符串绘制到屏幕上，ConsolePainter绘制字符串暂时还可以接受的，主要因为绘制的时候只有当前屏幕会显示到的字符串才会被绘制，具体留意下setTransition()。Console便是使用该类来绘制信息，同样的ConsolePainter实现了Logger接口，所以，也可直接在你的Canvas使用该画笔，来把Log消息直接绘制在Canvas上。</p>
+
+<p>再来看下ConsolePainter的构造函数ConsolePainter(Canvas canvas, boolean
+autoclean)，canvas为需要绘制画笔，ConsolePainter要获得Canvas的大小来布局字符串，绘制的时候需要在Canvas调用ConsolePainter.paint(Graphics
+g)。很多时候消息太多会超过一屏，要在canvas实现滚屏那显的没必要。将autoclean设置为true，当消息超过一屏时，旧的消息会被移除，以保证新消息可以显示在屏幕中。</p>
+
+<h2 id="最后">最后</h2>
+
+<p>先来看下效果图先。这可是MTK真机上截的图哦。</p>
+
+<h2><a href="wp-content/uploads/2010/05/console-e1274319179862-225x300.png"><img src="wp-content/uploads/2010/05/console-e1274319179862-225x300.png" alt="" title="console" /></a></h2>
+
+<p>现在Console的问题应该是多多的，可定制性几乎没有。不过我目前用起来挺顺手的，以后还会一直用它，发现问题到时再来改吧。</p>
+
+<p><a href="http://dourok.info/wp-content/uploads/2010/05/logger.zip">源码下载</a></p>
+
+<p>[1].Fire2 是一款轻量级的J2ME
+UI库，可自定义主题，同时支持渲染xHtml/CSS，提供有xHtml浏览器组件。<a href="http://sourceforge.net/projects/fire-j2me/">这里</a>是它的项目地址</p>
+
+<h2 id="-1"><a href="wp-content/uploads/2010/05/console-e1274319179862-225x300.png"><img src="wp-content/uploads/2010/05/console-e1274319179862-225x300.png" alt="" title="console" /></a></h2>
+
+    </article>
+    <div class="tag-container" >
+        
+        <div class="chip">
+        <a href="/tags#J2ME-ref">
+            J2ME
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#控制台-ref">
+            控制台
+        </a>
+        </div>
+        
+    </div>
+<div class="post-pager">
+    
+    <a href="/2010/04/22/j2me-jsr-75/">上一篇：Java Me读取本地文件(JSR 75)</a>
+    
+    
+    <a href="/2010/05/22/netbeans-as-android-ide/" style="float:right;" >下一篇：在Netbeans上配置Android开发环境</a>
+    
+</div>
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/2010/05/15/a-logger-for-j2me"
+ var disqus_config = function () {
+     this.page.title = "Java ME通用Logger包和控制台"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/2010/05/15/a-logger-for-j2me/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

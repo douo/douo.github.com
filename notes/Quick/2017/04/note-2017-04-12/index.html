@@ -1,0 +1,485 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    2017年04月12日杂记 | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">2017年04月12日杂记</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-11-30">2017-04-12</span>
+    
+</div>
+
+<article>
+    <h3 id="data-binding">Data Binding</h3>
+
+<p>data binding 可以兼容到 API 7。</p>
+
+<p>build.gradle 启用 databinding：</p>
+
+<pre><code>android {
+    …
+    dataBinding.enabled = true
+}
+</code></pre>
+
+<p>以 <code>layout</code> 标签圈起来的 layout 文件，才会被 databinding 框架处理。</p>
+
+<pre><code>&lt;layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"&gt;
+    &lt;RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            …
+    &lt;/RelativeLayout&gt;
+&lt;/layout&gt;
+</code></pre>
+
+<p>框架将会为 layout 文件生成一个 DataBinding 类，比如 activity_main.xml 生成的类为 <code>ActivityMainBinding</code>。</p>
+
+<p>在 Activity 中 获取 Binding 实例。</p>
+
+<pre><code>HelloWorldBinding binding = 
+    DataBindingUtil.setContentView(this, R.layout.hello_world);
+binding.hello.setText("Hello World")
+</code></pre>
+
+<ul>
+  <li><a href="https://developer.android.com/topic/libraries/data-binding/index.html">Data Binding Library | Android Developers</a></li>
+  <li><a href="https://medium.com/@georgemount007">George Mount – Medium</a></li>
+</ul>
+
+<h4 id="不再需要-findviewbyid">不再需要 findViewbyId</h4>
+
+<p>databinding 框架能起到取代 butterknife 的作用，甚至还更简单，无需自己声明属性和写注解。</p>
+
+<p>不同配置的 layout 文件转换为 Binding 类的时候，所有 View 都会整合在一起。如果当前 layout 没有的 View 就会被置为 null。</p>
+
+<h4 id="layout">layout</h4>
+
+<pre><code>&lt;data&gt;
+
+    &lt;import type="android.location.LocationManager" /&gt;
+
+    &lt;variable
+        name="status"
+        type="android.location.GnssStatus" /&gt;
+&lt;/data&gt;
+</code></pre>
+
+<p><code>&lt;imports&gt;</code> 导入类，等同于 java</p>
+
+<p><code>variables</code> 声明变量，变量的类型会在编译时检查。</p>
+
+<p>特殊变量：</p>
+
+<ol>
+  <li>view ids</li>
+  <li>content</li>
+</ol>
+
+<h4><include></include></h4>
+
+<p>Remember to give the include tag an ID or no public field will be given to it.
+Variables may be passed into an included layout’s binding from the containing layout by <strong>using the application namespace and the variable name in an attribute</strong>:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hello_world.xml
+<span class="nt">&lt;layout</span> <span class="na">xmlns:android=</span><span class="s">"http://schemas.android.com/apk/res/android"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;LinearLayout</span>
+            <span class="na">android:layout_width=</span><span class="s">"match_parent"</span>
+            <span class="na">android:layout_height=</span><span class="s">"match_parent"</span>
+            <span class="na">android:orientation=</span><span class="s">"vertical"</span><span class="nt">&gt;</span>
+
+        <span class="nt">&lt;TextView</span>
+                <span class="na">android:id=</span><span class="s">"@+id/hello"</span>
+                <span class="na">android:layout_width=</span><span class="s">"wrap_content"</span>
+                <span class="na">android:layout_height=</span><span class="s">"wrap_content"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;include</span>
+                <span class="na">android:id=</span><span class="s">"@+id/included"</span>
+                <span class="na">layout=</span><span class="s">"@layout/included_layout"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/LinearLayout&gt;</span>
+<span class="nt">&lt;/layout&gt;</span>
+included_layout.xml
+<span class="cp">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<span class="nt">&lt;layout</span> <span class="na">xmlns:android=</span><span class="s">"http://schemas.android.com/apk/res/android"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;TextView</span>
+            <span class="na">android:layout_width=</span><span class="s">"wrap_content"</span>
+            <span class="na">android:layout_height=</span><span class="s">"wrap_content"</span>
+            <span class="na">android:id=</span><span class="s">"@+id/world"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/layout&gt;</span>
+</code></pre></div></div>
+
+<h3 id="功能">功能</h3>
+
+<h4 id="模型绑定">模型绑定</h4>
+
+<p>将 Model 显示到  View 上。</p>
+
+<p>android:text=”@{user.firstName ?? user.userName}”</p>
+
+<p><code>@{}</code> 内的字符串可当成 java 语句取执行。</p>
+
+<p>还可以支持对 dimension 相加，或字符串格式化</p>
+
+<pre><code>android:padding=”@{@dim/textPadding + @dim/headerPadding}
+android:text=”@{@string/nameFormat(user.firstName, user.lastName)}”
+</code></pre>
+
+<h5 id="views-with-ids">Views With IDs</h5>
+
+<p>A public final field will be generated for each View with an ID in the layout. The binding does a single pass on the View hierarchy, extracting the Views with IDs. This mechanism can be faster than calling findViewById for several Views. For example:</p>
+
+<p>IDs are not nearly as necessary as without data binding, but there are still some instances where access to Views are still necessary from code.</p>
+
+<h5 id="observable-objects">Observable Objects</h5>
+
+<p>能将 Model 的更新通知到 View。</p>
+
+<p>This is done by assigning a Bindable annotation to the getter and notifying in the setter.</p>
+
+<p>The Bindable annotation generates an entry in the BR class file during compilation.</p>
+
+<p>可以使用默认的可观察类型（ObservableField）</p>
+
+<h5 id="bindingadapter">BindingAdapter</h5>
+
+<p>如果绑定的值和 View 的 xml 属性不能直接匹配。有两种情况：</p>
+
+<ol>
+  <li>有这个属性但绑定的值类型不对。</li>
+  <li>没有这个属性</li>
+</ol>
+
+<p>比如：</p>
+
+<pre><code>&lt;ImageView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:imageUrl="@{product.imageUrl}"/&gt;
+</code></pre>
+
+<p>可以通过 <code>BindingAdapter</code> 注解声明一个适配器方法，让 View 的属性和对象类型绑定起来。</p>
+
+<pre><code>@BindingAdapter("imageUrl")
+public static void setImageUrl(ImageView imageView, String url) {
+    if (url == null) {
+        imageView.setImageDrawable(null);
+    } else {
+        MyImageLoader.loadInto(imageView, url);
+    }
+}
+</code></pre>
+
+<p>BindingAdapter 注解一般用于静态方法。</p>
+
+<p>如果用于实例方法，必须通过构建 DataBindingComponent 类，传入实例方法的实例：</p>
+
+<pre><code>DataBindingUtil.setDefaultComponent(new android.databinding.DataBindingComponent() {
+        public info.dourok.android.demo.gps.GpsDemoActivity getGpsDemoActivity() {
+            return GpsDemoActivity.this;
+        }
+</code></pre>
+
+<p><a href="https://medium.com/google-developers/android-data-binding-custom-setters-55a25a7aea47">Android Data Binding: Custom Setters – Google Developers – Medium</a></p>
+
+<h4 id="事件绑定">事件绑定</h4>
+
+<p>将 View 的事件绑定到方法</p>
+
+<p>Data Binding allows you to write expressions handling events that are dispatched from the views</p>
+
+<ol>
+  <li>监听器对象
+<code>&lt;View android:onClickListener="@{callbacks.clickListener}" .../&gt;</code>
+条件： view 设置监听器的方法是<code>set</code>开头；clickListener 是一个监听器对象。
+注意：支持 <code>android:onClickListener</code>  也支持 <code>android:onClick</code>。Listener 后缀会被自动添加</li>
+  <li>Method References，可以单独绑定监听对象中的任意方法，只要返回值和参数列表一致
+<code>android:onClick="@{handlers::onClickFriend}"</code>
+条件：方法引用的参数和返回值要一样
+注意：如果 handlers 为空，那么不会设置监听器。</li>
+  <li>Listener Bindings，
+<code>android:onClick="@{() -&gt; presenter.onSaveClick(task)}"</code>
+条件：可以单独绑定监听对象中的任意方法，lambda 的参数可以是无参或者监听器方法的所有参数。
+注意：presenter 为空，还是会设置监听器。如果有返回值，会返回 <strong>java 默认值</strong>，比如 false 或者 null</li>
+</ol>
+
+<p>绑定的函数的返回值要和监听器的返回值一样。</p>
+
+<h5 id="bindingadapter-1">BindingAdapter</h5>
+
+<p>应该放在哪个位置好？</p>
+
+<h4 id="双向绑定">双向绑定</h4>
+
+<p>View 的属性被用户修改，将修改结果同步到 Model、</p>
+
+<pre><code>&lt;EditText
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@={user.firstName}"/&gt;
+</code></pre>
+
+<p>For every 2-way binding, a synthetic event attribute is generated with the same name as the attribute, but with the suffix “AttrChanged.</p>
+
+<p><a href="https://medium.com/google-developers/android-data-binding-2-way-your-way-ccac20f6313">Android Data Binding: 2-way Your Way – Google Developers – Medium</a></p>
+
+<pre><code>&lt;com.example.myapp.ColorPicker
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:color="@={color}"/&gt;
+</code></pre>
+
+<h4 id="automatic-setters">Automatic Setters</h4>
+
+<p>很强大，不过刚运行的时候会给 setter 传入空值。</p>
+
+<h4 id="dragger2">Dragger2</h4>
+
+<p>Dragger2 似乎不支持注入 ViewDataBinding</p>
+
+<p>@Component 用于注入的方法似乎可以是任意方法名，一个 Component 可以用于注入多个对象</p>
+
+<h4 id="rxjava">RxJava</h4>
+
+<p>RxJava and Android Data Binding both provide mechanisms for subscribing for changes.</p>
+
+</article>
+<div class="tag-container" >
+    
+    <div class="chip">
+        <a href="/tags#databinding-ref">
+            databinding
+        </a>
+    </div>
+    
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Quick/2017/04/note-2017-04-12"
+ var disqus_config = function () {
+     this.page.title = "2017年04月12日杂记"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Quick/2017/04/note-2017-04-12/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

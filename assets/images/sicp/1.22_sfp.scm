@@ -1,0 +1,38 @@
+(load "1.21_fermat.scm")
+
+(define (time-prime-test n)
+  (newline)
+  (display n)
+  (newline)
+  (start-prime-test n (real-time-clock))
+  )
+
+(define (start-prime-test n start-time)
+  (if (prime? n)
+      (report-prime (- (real-time-clock) start-time)))
+  )
+
+(define (report-prime elapsed-time)
+  (display "***")
+  (newline)
+  (display elapsed-time)
+  (newline)
+  )
+
+(define (least-prime n)
+  (cond
+   ((even? n) (least-prime (+ n 1)))
+   ((prime? n) n)
+   (else (least-prime (+ n 2)))
+   )
+  )
+
+(define (search-for-prime a b)
+  (define (block)
+    (time-prime-test a)
+    (search-for-prime (+ a 1) b)
+    )
+  (if (<= a b)
+      (block)
+      )
+  )

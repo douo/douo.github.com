@@ -1,0 +1,430 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    照片管理 | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">照片管理</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-11-30">2015-02-07</span>
+    
+</div>
+
+<article>
+    <h3 id="相片的存储">相片的存储</h3>
+
+<p>照片库用 Lightromm 管理，按照日期归档，格式：<code>yyyy/yyyy-MM/yyyy-MM-dd</code>。</p>
+
+<h3 id="元数据">元数据</h3>
+
+<blockquote>
+  <p>Metadata creation is time consuming</p>
+</blockquote>
+
+<p>创建元数据是件费时又费力的工作，元数据是了整理和规定，为了方便找到想要的作品，就像图书馆管理那样，图书馆是为了方便许许多多的人，对于个人来说如果对元数据投入太多，那未免本末倒置。照片的元数据必须得取得一个平衡，创建元数据不能太麻烦，利用好各种软件的自动化功能。</p>
+
+<p>照片的元数据有两种，一种是为了归类和搜索，一种为了方便工作流程。</p>
+
+<h4 id="标签">标签</h4>
+
+<p>标签便是属于方便归类和搜索的元数据。为照片添加多个标签来描述照片内容和主题，标签是有层次结构的，我以第一层的标签来作为照片的类别，所以照片就不需要再设置类别了。</p>
+
+<p>这个类别主要参考 500px 的分类，它的分类如下：</p>
+
+<pre><code>Abstract 抽象
+Animals 动物
+Black and White 黑白
+Celebrities 庆典
+City &amp; Architecture 城市建筑
+Commercial 商业
+Concert 音乐会
+Family 家庭
+Fashion 时尚
+Film 电影
+Fine Art 
+Food 食物
+Journalism  旅游
+Landscapes 风光
+Macro 微距
+Nature 自然
+Nude 裸体
+People 人物
+Performing Arts 表演艺术
+Sport 运动
+Still Life 静物
+Street 街道
+Transportation 运输
+Travel 交通
+Underwater 水下
+Urban Exploration
+Wedding 婚礼
+Uncategorized
+</code></pre>
+
+<p>这个列表作为我的标签类别骨架来使用，已这个列表为脚手架来置入标签，当然脚手架也是动态的，是根据具体照片需求来变动，基本原则就是尽量简单。现在主要有几个主要更改：</p>
+
+<ul>
+  <li>技巧，这个类别是里面是用来描述照片所用技巧的标签，如：HDR、黑白、追焦、全景、甚至微距等等，用技巧来描述这个分类并不准确，技巧本身也不能作为照片的标签，所以在 Lightroom 中我设置技巧并不作为关键字导出，这也是 Lightroom 很方便的一点。</li>
+  <li>事件，这是我新增的类别，主要用来代替庆典和节日，更具有通用性，比如说婚礼，葬礼，或者其他难以表述的事件都可以归入事件分类。</li>
+  <li>人物，不同于 500px 的原意，这个标签类别主要配合 Lightroom 的头像识别技术来做熟人的分类管理。</li>
+</ul>
+
+<h4 id="描述">描述</h4>
+
+<p>利用描述来记录创作的过程和想法。</p>
+
+<h4 id="exif">EXIF</h4>
+
+<p>快门，光圈，ISO，镜头信息，这些在照片拍摄下来的时候已经自动记录下来了。主要要提的就是<strong>手动头</strong>的管理，手动头缺少镜头信息和光圈。</p>
+
+<p>对于镜头信息，我使用 Lightroom 插件 <a href="http://www.essl.de/wp/software/lenstagger-lightroom-plugin/">lenstagger</a>，他可以批量生成手动头的镜头信息。</p>
+
+<p>光圈，这个比较麻烦，没有比较好的自动化方法，只能要求自己对于严肃创作的作品，在拍摄的同时在 Keep 记录下相应的光圈信息，然后后期导入。</p>
+
+<h4 id="工作用元数据">工作用元数据</h4>
+
+<p>这里是指 Lightroom 的元数据</p>
+
+<ul>
+  <li>标记（Flag）</li>
+  <li>星标（Rate）</li>
+  <li>颜色（Color）</li>
+</ul>
+
+<h3 id="lightroom-工作流">Lightroom 工作流</h3>
+
+<h4 id="flag-做初筛">Flag 做初筛</h4>
+
+<ul>
+  <li>Rejected 标记（X），标记删除的照片，删除的主观标准，重复，无意义，手
+抖，失焦，权衡唯一性，纪念价值，老照片，手机照片可无限制放宽。</li>
+  <li>Flagged（P），标记值得输出和进一步后期处理的照片，三个主要原则（纽摄）主题，吸引注意力，
+简结；主观原则：构图特别，纪念意义，对于个人的价值，稀缺性。评星（1~3，见星标），加比较详细的 tags。</li>
+  <li>Unflagged（U），一般般的照片，有点纪念意义，删除又觉得可惜，只用于归档。可适当加上 tags，方便搜索。</li>
+</ul>
+
+<p>照片导入后初筛，只是是做一次快速浏览，决定哪些照片要留下，哪些要删除。前期可适当放宽 Rejected 标准，慢慢积累经验。</p>
+
+<p>删除 Rejected 照片（Command+Delete Photo 菜单里）,老照片不忍心删除的可标记后不删除。</p>
+
+<h4 id="星标">星标</h4>
+
+<p>星标是非常难以量化的元数据。照片的评测是没有固定的标准的，每个人都有自己的喜好，我希望能慢慢形成自己一套评测标志，我现在还不具备鉴赏照片好坏的能力。所以使用星标的使用，我的规定是：<strong>使用 3 颗星，分别代表一般，好，很好。</strong>Flagged 的照片最少为 1 星，必须得知道为什么 Flagged，自己觉得非常好的照片也只能给 3 星，保留 4、5 星，尽量不使用，要使用起码得写出一篇长篇大论来才行。</p>
+
+<h4 id="颜色标记">颜色标记</h4>
+
+<h4 id="照片名的利用">照片名的利用</h4>
+
+<h4 id="stack">Stack</h4>
+
+<p>善用 Stack（C-g），多张同一场景的照片（HDR，全景），用 Stack</p>
+
+<h4 id="地理标签">地理标签</h4>
+
+<h4 id="照片处理流程">照片处理流程</h4>
+
+<p>标准流程:</p>
+
+<ol>
+  <li>修正曝光与白平衡，是否要矫正镜头畸变？</li>
+  <li>压低高光提高阴影，显示出更多细节，是否有必要？</li>
+  <li>调整色彩，最需要学习的地方，色彩最能表现出照片的情绪，参考预设。</li>
+  <li>调整饱和度/自然饱和度，是为了什么？</li>
+  <li>调整对比度，清晰度，是为了什么？</li>
+  <li>细节：降噪，锐化。</li>
+  <li>最后添加黑角或者胶片颗粒</li>
+  <li>总体调整曲线</li>
+</ol>
+
+<p>要快的话也直接可套用预设。</p>
+
+<p>其实按照 lightroom 的顺序来调节也不错</p>
+
+<h3 id="后期">后期</h3>
+
+<p>白平衡</p>
+
+<p>曝光
+对比度</p>
+
+<p>清晰度
+自然饱和度
+饱和度</p>
+
+<p>http://www.foto-biz.com/Lightroom/develop-module-basic-panel</p>
+
+<h4 id="直方图">直方图</h4>
+
+<h4 id="曲线">曲线</h4>
+
+<h4 id="色调">色调</h4>
+
+<h4 id="锐化">锐化</h4>
+
+<p>可让明亮度降噪噪和锐化的数值加起来等于 100。</p>
+
+<p>按住 Alt 调节锐化蒙版，让锐化不要影响到原本纯色的区域。</p>
+
+<h3 id="备份与分享">备份与分享</h3>
+
+<p>见<a href="/notes/study/photograpy/photo-backup-and-share">照片分享与备份</a>。</p>
+
+<h3 id="去重复工具">去重复工具</h3>
+
+<p>Duplicate Cleaner</p>
+
+<p>Total Commander</p>
+
+
+</article>
+<div class="tag-container" >
+    
+    <div class="chip">
+        <a href="/tags#照片管理-ref">
+            照片管理
+        </a>
+    </div>
+    
+    <div class="chip">
+        <a href="/tags#摄影-ref">
+            摄影
+        </a>
+    </div>
+    
+    <div class="chip">
+        <a href="/tags#Lightroom-ref">
+            Lightroom
+        </a>
+    </div>
+    
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Study/Photograpy/photo-managerment"
+ var disqus_config = function () {
+     this.page.title = "照片管理"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Study/Photograpy/photo-managerment/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

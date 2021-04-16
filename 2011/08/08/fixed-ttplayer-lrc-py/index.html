@@ -1,0 +1,376 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    修复了 Lyrics Grabber2 的千千静听歌词抓取脚本 | DouO's Blog</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">修复了 Lyrics Grabber2 的千千静听歌词抓取脚本</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-01-13">2011-08-08</span>
+
+    <span><a href="/categories#coder-ref" class="category category-coder waves-effect waves-light">coder</a></span>
+    <span><a href="/categories#otaku-ref" class="category category-otaku waves-effect waves-light">otaku</a></span>
+    
+</div>
+
+    <article>
+        <p>之前修改过现在查词失败的同学请点<a href="#attention">这里</a></p>
+
+<p><a href="http://code.google.com/p/lyricsgrabber2/">Lyrics Grabber2</a> 可以说我理想中的歌曲下载插件，主要是它可以批量抓取更新歌词，又可以自定义抓取脚本方便扩展(见此 <a href="http://code.google.com/p/lyricsgrabber/wiki/HowToMakeProviderInPython">HowToMakeProviderInPython</a>)，实在强大。不过还是有一些不足，比如找到的歌词没有给出来源（Provider），歌词服务器（Provier）不能更改优先级，还有就是出现多个歌词的匹配问题，既有多个服务器的，也有一个服务器的多个歌词的，希望能增加人工选择的选项。不过 Lyrics Grabber2 刚好一年没更新了，再更新实在希望不大。</p>
+
+<p>再者，现在Lyrics Grabber2 里面的千千静听歌词抓取脚本（TTPlayer(LRC).py）是用不了的。我了解一下，把 bug 总结如下：</p>
+
+<ol>
+  <li><a href="http://code.google.com/p/lyricsgrabber2/source/browse/trunk/foo_lyricsgrabber2/dist/pygrabber/scripts/TTPlayer(LRC).py#36">36行</a>，导致搜索失败的主要原因，现在千千静听搜索歌词的服务器变了</li>
+  <li><a href="http://code.google.com/p/lyricsgrabber2/source/browse/trunk/foo_lyricsgrabber2/dist/pygrabber/scripts/TTPlayer(LRC).py#103">103行</a>，另一个导致搜索失败的原因，用来生成 code 的字符串应该用 utf-8 编码，而用<code>minidom.parseString</code>出来的字符串已经是 utf-16le 的了.</li>
+  <li><a href="http://code.google.com/p/lyricsgrabber2/source/browse/trunk/foo_lyricsgrabber2/dist/pygrabber/scripts/TTPlayer(LRC).py#114">114行</a>，这一行应该是打错了. 条件应该是<code>c &gt;= 0x80</code></li>
+  <li><a href="http://code.google.com/p/lyricsgrabber2/source/browse/trunk/foo_lyricsgrabber2/dist/pygrabber/scripts/TTPlayer(LRC).py#42">42行</a>，同样是编码问题，导致 Levenshtein 算法失效，因为比对的是两个不同编码的字符串。</li>
+</ol>
+
+<p>修复完bug后，就可以成功查词了。但是结果并不理想。
+<a href="wp-content/uploads/2011/08/t2.png"><img src="wp-content/uploads/2011/08/t2.png" alt="" title="t2" /></a></p>
+
+<p>由上图可以看出是，英文和简体没压力但繁（正）体中文就不行了。显然还需对 title 做些处理。通过对千千静听进行测试，发现千千静听对查询串的处理远不止 <a href="http://code.google.com/p/lyricsgrabber2/source/browse/trunk/foo_lyricsgrabber2/dist/pygrabber/scripts/TTPlayer(LRC).py#71">71</a>、<a href="http://code.google.com/p/lyricsgrabber2/source/browse/trunk/foo_lyricsgrabber2/dist/pygrabber/scripts/TTPlayer(LRC).py#72">72</a>、<a href="http://code.google.com/p/lyricsgrabber2/source/browse/trunk/foo_lyricsgrabber2/dist/pygrabber/scripts/TTPlayer(LRC).py#73">73</a> 所在的那样。 大概做了下面这些过滤：</p>
+
+<ul>
+  <li>英文转小写</li>
+  <li>去括号，大中小还有全角的小括号</li>
+  <li>去除半角特殊符号，空格，逗号，etc。</li>
+  <li>去除全角特殊符号</li>
+  <li>繁（正）体转换为简体</li>
+</ul>
+
+<p>繁（正）体转换为简体，找不到好的现成方案（针对 unicode 字符集 uft-8 编码的）。只能动用谷歌翻译的 API 了。没想到谷歌翻译倒工作的很好。不过毕竟是多一个网络请求，建议不需要的时候可以把它注释掉，以加快查询速度。其他过滤功能也可以根据情况去掉，已加强效率。FYI:脚本更改后立即生效，无须重启 foobar2000.</p>
+
+<p>针对这些，增加了下面的新方法</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">QianQianStringFilter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">string</span><span class="p">):</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">string</span>
+<span class="c1"># 英文转小写
+</span><span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="c1"># 去括号，大中小还有全角的小括号
+</span><span class="n">s</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="n">sub</span><span class="p">(</span><span class="s">'\(.*?\)|\[.*?]|{.*?}|（.*?）'</span><span class="p">,</span> <span class="s">''</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
+<span class="c1"># 去除半角特殊符号，空格，逗号，etc。
+</span><span class="n">s</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="n">sub</span><span class="p">(</span><span class="s">'[ -/:-@[-`{-~]+'</span><span class="p">,</span> <span class="s">''</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
+<span class="c1"># 繁（正）体转换为简体
+</span><span class="n">s</span> <span class="o">=</span> <span class="n">translate</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="s">'zh-tw'</span><span class="p">,</span><span class="s">'zh-cn'</span><span class="p">)</span>
+<span class="n">s</span> <span class="o">=</span> <span class="nb">unicode</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="s">'utf_8'</span><span class="p">)</span>
+<span class="c1"># 去除全角特殊符号
+</span><span class="n">s</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">u</span><span class="s">'[</span><span class="se">\u2014\u2018\u201c\u2026\u3001\u3002\u300a\u300b\u300e\u300f\u3010\u3011\u30fb\uff01\uff08\uff09\uff0c\uff1a\uff1b\uff1f\uff5e\uffe5</span><span class="s">]+'</span><span class="p">,</span><span class="s">''</span><span class="p">,</span><span class="n">s</span><span class="p">)</span>
+<span class="k">return</span> <span class="n">s</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="n">text</span><span class="p">,</span><span class="n">lang_from</span><span class="p">,</span><span class="n">lang_to</span><span class="p">):</span>
+<span class="n">url</span> <span class="o">=</span> <span class="p">(</span><span class="s">'http://ajax.googleapis.com/ajax/services/language/translate?'</span> <span class="o">+</span>
+<span class="s">'v=1.0&amp;q='</span><span class="o">+</span><span class="n">urllib</span><span class="p">.</span><span class="n">quote</span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="o">+</span><span class="s">'&amp;langpair='</span><span class="o">+</span><span class="n">lang_from</span><span class="o">+</span><span class="s">'%7C'</span><span class="o">+</span><span class="n">lang_to</span><span class="p">)</span>
+<span class="n">json</span> <span class="o">=</span> <span class="n">urllib</span><span class="p">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">).</span><span class="n">read</span><span class="p">()</span>
+<span class="c1"># return json;
+</span><span class="n">p</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="nb">compile</span><span class="p">(</span><span class="s">'"translatedText":"(.+?)"'</span><span class="p">)</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="n">json</span><span class="p">);</span>
+<span class="k">return</span> <span class="n">m</span><span class="p">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><a id="attention"></a><strong>注意:</strong>谷歌翻译的 API 已经过期了，会导致查词失败，新的翻译 API 又要收费还很贵，见<a href="http://code.google.com/apis/language/translate/v2/pricing.html">http://code.google.com/apis/language/translate/v2/pricing.html</a>，坑爹呢这是。幸好还有 Bing 做后援。虽然不给力，但简繁转换还是没问题的。下面的代码改用 Bing 的翻译服务：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="n">text</span><span class="p">,</span><span class="n">lang_from</span><span class="p">,</span><span class="n">lang_to</span><span class="p">):</span>
+<span class="n">url</span> <span class="o">=</span> <span class="p">(</span><span class="s">'http://api.microsofttranslator.com/V2/Ajax.svc/Translate?'</span> <span class="o">+</span>
+<span class="s">'appId=DE2A1CAA235EB52E611BC1243F16E4D301BB600E'</span> <span class="o">+</span>
+<span class="s">'&amp;from='</span><span class="o">+</span> <span class="n">lang_from</span> <span class="o">+</span><span class="s">'&amp;to='</span><span class="o">+</span> <span class="n">lang_to</span> <span class="o">+</span>
+<span class="s">'&amp;text='</span><span class="o">+</span><span class="n">urllib</span><span class="p">.</span><span class="n">quote</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
+<span class="n">json</span> <span class="o">=</span> <span class="n">urllib</span><span class="p">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">).</span><span class="n">read</span><span class="p">()</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="nb">compile</span><span class="p">(</span><span class="s">'"(.+?)"'</span><span class="p">)</span> <span class="c1">#對應必應
+</span><span class="n">m</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="n">json</span><span class="p">);</span>
+<span class="k">return</span> <span class="n">m</span><span class="p">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>这样，大部分流行歌曲特别是华人音乐，都可以表示毫无压力。
+<a href="wp-content/uploads/2011/08/t1.png"><img src="wp-content/uploads/2011/08/t1.png" alt="" title="t1" /></a>
+千千静听的大部分歌词都是简体的……</p>
+
+<p>歌名特殊符号的也能识别了
+<a href="wp-content/uploads/2011/08/t3.png"><img src="wp-content/uploads/2011/08/t3.png" alt="" title="t3" /></a></p>
+
+<p><a href="wp-content/uploads/2011/08/t2_.png"><img src="wp-content/uploads/2011/08/t2_.png" alt="" title="t2_" /></a> You Ain’t Goin
+Nowhere在千千静听里面也是Fault。</p>
+
+<p>但是这样并不完美，毕竟是黑盒测试，比如
+中千千静听的<strong>後</strong>(/u8C5F)字并没有转换到<strong>后</strong>，如下图：</p>
+
+<p><a href="wp-content/uploads/2011/08/t4.png"><img src="wp-content/uploads/2011/08/t4.png" alt="" title="t4" /></a></p>
+
+<p><strong>最後の放課後</strong> 在千千静听中可以找到，<strong>花は桜 君は美し
+-instrumental-</strong> 则同样找不到</p>
+
+<p>不过目前也就这能做到这样。</p>
+
+<p>改好的脚本在此:<a href="https://gist.github.com/4361991">TTPlayer(LRC).py</a></p>
+
+<p>另外，乐辞的脚本也是不行的，顺手也改好了。<a href="https://gist.github.com/4361993">Lyricist(LRC).py</a></p>
+
+<p>btw：千千静听的歌词库，只要是热门的，流行的，出名的歌曲都挺全的，不知是从哪里来的。</p>
+
+
+    </article>
+    <div class="tag-container" >
+        
+        <div class="chip">
+        <a href="/tags#foobar2000-ref">
+            foobar2000
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#Lyrics Grabber2-ref">
+            Lyrics Grabber2
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#python-ref">
+            python
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#歌词搜索-ref">
+            歌词搜索
+        </a>
+        </div>
+        
+    </div>
+<div class="post-pager">
+    
+    <a href="/2011/07/14/maze-generation-algorithm/">上一篇：迷宫生成算法</a>
+    
+    
+    <a href="/2011/10/10/browse-android-sources-on-netbeans/" style="float:right;" >下一篇：在Netbeans上查看Android源码</a>
+    
+</div>
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/2011/08/08/fixed-ttplayer-lrc-py"
+ var disqus_config = function () {
+     this.page.title = "修复了 Lyrics Grabber2 的千千静听歌词抓取脚本"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/2011/08/08/fixed-ttplayer-lrc-py/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

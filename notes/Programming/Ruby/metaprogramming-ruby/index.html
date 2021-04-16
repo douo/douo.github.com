@@ -1,0 +1,849 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    Metaprogramming Ruby | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">Metaprogramming Ruby</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-11-30">2012-11-22</span>
+    
+</div>
+
+<article>
+    <p>所谓元编程</p>
+
+<blockquote>
+  <p>Metaprogramming is writing code that writes code.</p>
+</blockquote>
+
+<h3 id="the-object-model">The Object Model</h3>
+
+<h4 id="open-classes">Open Classes</h4>
+
+<p><strong>class</strong> 关键字并不仅仅是声明一个类，可以把他想象成打开了这个类的上下文，便可在这个区域内定义这个类的方法。</p>
+
+<pre><code>### 所以这样的代码也就可理解的了
+3.times do
+  class C
+    puts "Hello"
+  end
+end
+
+### output
+Hello
+Hello
+Hello
+</code></pre>
+
+<p>使用 <strong>class</strong>的时候，如果这个类还不存在，则Ruby会声明这个新类。如果已经存在，则是重新打开他，而不是重新定义这个类。</p>
+
+<pre><code>class D
+  def x; 'x'; end
+end
+
+class D
+  def y;'y'; end
+end
+
+obj = D.new
+obj.x # =&gt; "x"
+obj.y # =&gt; "y"
+</code></pre>
+
+<p>所以在Ruby运行时中也可以重新打开任意一个已存在的类，包括标准类库，然后可以更改它。</p>
+
+<p>使用Open Class 的时候要注意别不小心覆盖掉已经存在的方法。</p>
+
+<h5 id="monkey-patch">Monkey Patch</h5>
+
+<p><strong>monkey patch</strong> 就是指在运行时更改某个类的结构。https://en.wikipedia.org/wiki/Monkey_patch 。<strong>monkey patch</strong> 是个贬义词？</p>
+
+<h4 id="the-truth-about-classes">The Truth About Classes</h4>
+
+<blockquote>
+  <p>“object,” refers to a particular instance of a class.</p>
+
+  <p>–英文维基百科:Object_(computer_science)</p>
+</blockquote>
+
+<p><code>class A;end</code> 定义一个类<code>A</code>，<code>A</code>在这里其实是一个常量（Constant），它指向Class的一个实例。在Ruby 中所有类名都是这样的一个常量。</p>
+
+<p><code>A.new</code> 返回A实例。实例变量，跟这个类（A）没有关系，实例变量只在这个类的对象中，一旦对实例变量赋值了它才存在。与Java表现出来的完全不同。</p>
+
+<pre><code>obj.instance_variables
+</code></pre>
+
+<p>Object that share the same class also share the same methods,so the methods must be stored in the class, not the object.</p>
+
+<p>对象的方法，也称类的实例方法，同一个类的不同对象共享相同的方法.对象的方法都存储在其类中，obj只是保存了到其类(<code>.class</code>)的引用。</p>
+
+<pre><code>String.instance_methods == "abc".methods # =&gt; true
+String.methods == "abc".methods # =&gt; false
+</code></pre>
+
+<p>如果没有为<code>A</code>定义任何<strong>类方法</strong>，那么</p>
+
+<pre><code> A.methods == Class.instance_methods  # =&gt; true
+</code></pre>
+
+<p>如果为A定义一个类方法，</p>
+
+<pre><code>class A
+  def self.foo
+	  "foo"
+  end
+end
+</code></pre>
+
+<p>那么:</p>
+
+<pre><code>A.methods == Class.instance_methods  # =&gt; false
+</code></pre>
+
+<p>既然<code>A</code>是<code>Class</code>的实例，<code>A</code>的方法就是就是<code>Class</code>的实例方法，但是<code>:foo</code>并没有在<code>Class</code>的实例方法里面，怎么解释呢？<del>我也不知道。看来读完第一章对Class的理解还不全面。</del></p>
+
+<p><code>A</code>是<code>Class</code>的实例，<code>Class</code>也是<code>Class</code>的实例,他们是class这个类的不同对象,而<code>foo</code>这方法是存储在<code>A</code>(<code>Class</code>的一个实例,而且是单例(singleton))里面。这个方法也称为<code>A</code>的单例方法（见<a href="#toc_39">Eigenclasses</a>）。</p>
+
+<p>在ruby中,还可以这样定义方法:</p>
+
+<pre><code>def obj.method_name;end
+</code></pre>
+
+<p>跟上面的定义是一样的道理。</p>
+
+<h5 id="module--class">Module &amp; Class</h5>
+
+<p>Class 继承自 Module， 多了 <code>[:superclass, :allocate, :new]</code>。</p>
+
+<blockquote>
+  <p>Usually, you pick a module when you mean it to be included somewhere (or maybe to be used as a Namespace), and you pick a class when you mean it to be instantiated or inherited.</p>
+</blockquote>
+
+<p>如果准备把代码导入到其他地方，或者需要一个命名空间，那么使用<code>module</code>。
+如果是一般类用法，如实例化，继承。那么用<code>class</code>。</p>
+
+<h5 id="constant">Constant</h5>
+
+<p>常量（Constant） 是一个以首字母大写的驼峰式命名的变量，Ruby会把首字母大写的变量当初常量类和模块的名称也是一个常量。比如<code>A</code>就是<code>main</code>里面的一个常量，常量与本地变量不同，它的作用域在于当前命名空间。</p>
+
+<pre><code>module M
+  Y = 'another constant'
+  class C
+    X = 'a constant'
+    ::M::Y # =&gt; "another constant"
+  end
+  C::X # =&gt; "a constant"
+end
+M::C::X # =&gt; "a constant"
+</code></pre>
+
+<p>重新初始化常量会有警告。</p>
+
+<h5 id="总结">总结</h5>
+
+<blockquote>
+  <p>Object, a bunch of instance variables, plus a link to a class.</p>
+
+  <p>Class, just an object instnce of Class, plus a list of instance methods and a linkto a superclass.</p>
+</blockquote>
+
+<h4 id="method-call">Method Call</h4>
+
+<p>方法调用的过程:</p>
+
+<ol>
+  <li>找到这个方法</li>
+  <li>执行它</li>
+</ol>
+
+<p>似乎在各种语言中都是一样的。</p>
+
+<h5 id="method-lookup">Method Lookup</h5>
+
+<p><img src="ruby/method_call_path.PNG" alt="Method lookup goes &quot;one step to the right, then up.&quot;" /></p>
+
+<p>通过ancestors方法可以获得方法调用的查找路径。</p>
+
+<pre><code>MySubclass.ancestors # =&gt; [MySubclass, MyClass, Object, Kernel, BasicObject]
+</code></pre>
+
+<p>在这里Kernel并不是Object的超类，而是 Object 导入的一个模块。</p>
+
+<p>如果我们在某个类中导入某个模块，那么这个模块也会出现在，这个类的ancestors中。</p>
+
+<pre><code>module M
+  def my_method
+    'M#my_method()'
+  end
+end
+class C
+  include M
+end
+class D &lt; C; end
+D.new.my_method() # =&gt; "M#my_method()"
+
+D.ancestors # =&gt; [D, C, M, Object, Kernel, BasicObject]
+</code></pre>
+
+<h5 id="kernel">Kernel</h5>
+
+<p>Kernel 里定义了一下看起来像ruby关键字的方法，如<code>p</code>,<code>puts</code>,<code>proc</code>,<code>class</code>,etc.</p>
+
+<p>这些方法你可以在Ruby代码的”任意地方”调用，其实它们都是Kernel 的私有实例方法</p>
+
+<pre><code>Kernel.private_instance_methods
+</code></pre>
+
+<p>私有实例方法不能强制加上接收器（reciever），如<code>"foo".puts</code>是不合法。</p>
+
+<p>还可以重新打开 Kernel 来定义自己的”关键字”。</p>
+
+<pre><code>module Kernel
+  def gem(gem_name, *version_requirements)
+    # ...
+</code></pre>
+
+<h4 id="method-execution">Method Execution</h4>
+
+<p>Ruby 中的每一行代码都是在对象里执行的，这个对象可称之为<strong>当前对象(current object)</strong>。<code>self</code> 关键字就是指向这个对象的引用。</p>
+
+<pre><code>class MyClass
+  def testing_self
+    @var = 10 # An instance variable of self
+    my_method() # Same as self.my_method()
+    self
+  end
+  def my_method
+    @var = @var + 1
+  end
+end
+obj = MyClass.new
+obj.testing_self # =&gt; #&lt;MyClass:0x510b44 @var=11&gt;
+</code></pre>
+
+<p>在方法里面的<code>self</code>变成了这个方法的接收者，所有<code>@var</code>就是<code>obj</code>的实例变量。</p>
+
+<blockquote>
+  <p>「If you want to become a master of Ruby,you should always know which object has the role self at any given moment.」</p>
+</blockquote>
+
+<h5 id="回到kernel">回到Kernel</h5>
+
+<p>Kernel 的私有方法在可以在”任意地方”调用，为什么加上引号呢？因为这是错的。</p>
+
+<pre><code>class MyClass &lt; BasicObject
+  puts "MyClass"  # =&gt; MyClass 因为这里面self =&gt; MyClass
+                  # MyClass 是 Class 的对象
+  def method_1
+    puts "method_1"
+  end
+end
+
+
+obj = MyClass.new
+obj.method_1
+
+# =&gt; NoMethodError: undefined method `puts' for #&lt;MyClass:0x2026bf7c&gt;
+</code></pre>
+
+<p>因为Kernel 是Object导入模块，如果你的类不继承Object那就不能调用那些看起来像是Ruby关键字的方法了。</p>
+
+<pre><code>MyClass.ancestors  # =&gt; [MyClass, BasicObject]
+</code></pre>
+
+<p>Metaprogramming Ruby 并没有说明这种情况。参考: http://stackoverflow.com/questions/6258512/ruby-methods-without-class</p>
+
+<h5 id="private-method">private method</h5>
+
+<p>在ruby中，所谓私有方法就是不能显性声明接收者的方法。如果没有显性声明接收者，那么其接收者便是<code>self</code>，而<code>self</code>就是当前对象，所以私有方法便只能在当前对象里调用。像这样调用私有方法：</p>
+
+<pre><code>class C
+  def public_method
+    self.private_method
+  end
+  private
+  def private_method; end
+end
+</code></pre>
+
+<h4 id="总结-1">总结</h4>
+
+<ul>
+  <li>An object is composed of a bunch of instance variables and a link to a class.</li>
+  <li>The methods of an object live in the object’s class (from the point of view of the class, they’re called instance methods).</li>
+  <li>The class itself is just an object of class Class. The name of the class is just a constant.</li>
+  <li>Class is a subclass of Module. A module is basically a package of methods. In addition to that, a class can also be instantiated (with new( )) or arranged in a hierarchy (through its superclass( )).</li>
+  <li>Constants are arranged in a tree similar to a ﬁle system, where the names of modules and classes play the part of directories and regular constants play the part of ﬁles.</li>
+  <li>Each class has an ancestors chain, beginning with the class itself and going up to BasicObject.</li>
+  <li>When you call a method, Ruby goes right into the class of the receiver and then up the ancestors chain, until it either ﬁnds the method or reaches the end of the chain.</li>
+  <li>Every time a class includes a module, the module is inserted in the ancestors chain right above the class itself.</li>
+  <li>When you call a method, the receiver takes the role of self.</li>
+  <li>When you’re deﬁning a module (or a class), the module takes the role of self.</li>
+  <li>Instance variables are always assumed to be instance variables of self.</li>
+  <li>Any method called without an explicit receiver is assumed to be a method of self.</li>
+</ul>
+
+<h3 id="methods">Methods</h3>
+
+<p><code>MyClass#my_mfethod()</code> 表示<code>MyClass</code>的实例方法<code>my_method</code></p>
+
+<h4 id="dynamic-methods">Dynamic Methods</h4>
+
+<h5 id="dynamic-dispatch">Dynamic Dispatch</h5>
+<p><code>Object#send(symbol [, args...])</code> 可以动态地调用类的实例方法。这个方法可以调用类的私有方法。</p>
+
+<p><code>Object#public_send</code> 则只可以调用类的公共实例方法。</p>
+
+<h5 id="defining-methods-dynamically">Defining Methods Dynamically</h5>
+
+<p><code>Module#define_method()</code> 动态地定义一个新方法，另外<code>define_method</code>是私有方法，不能够显性地指明接收者。</p>
+
+<pre><code>class MyClass
+  define_method :my_method do |my_arg|  # 注意self是MyClass
+    my_arg * 3
+  end
+end
+obj = MyClass.new
+obj.my_method(2) # =&gt; 6
+</code></pre>
+
+<h4 id="symbols">Symbols</h4>
+
+<p>以<code>:</code>开头的字符串, used as names of things</p>
+
+<pre><code># 字符串转换为符号
+String#to_sym
+String#intern
+
+# 符号转换为字符串
+Symbol#to_S
+Symbol#id2name
+</code></pre>
+
+<h4 id="method_missing">method_missing()</h4>
+
+<p><code>Kernel#method_missing</code>，当调用的方法不存在时，对象会调用这个方法。默认会抛出<code>NoMethodError</code>。</p>
+
+<h5 id="ghost-method">Ghost Method</h5>
+
+<p>可以调用但是并不是实际存在的方法，称为<strong>幽灵方法(Ghost Method)</strong>，当调用这种方法的时候方法名会作为参数传递到<code>method_missing</code>中处理。不能通过<code>Object#methods</code>来列出这些方法。如，OpenStruct的实现</p>
+
+<pre><code>class MyOpenStruct
+  def initialize
+    @attributes = {}
+  end
+  def method_missing(name, *args)
+    attribute = name.to_s
+    if attribute =~ /=$/
+      @attributes[attribute.chop] = args[0]
+    else
+      @attributes[attribute]
+    end
+  end
+end
+icecream = MyOpenStruct.new
+icecream.flavor = "vanilla"
+icecream.flavor     # =&gt; "vanilla"
+</code></pre>
+
+<p>可以重写 <code>respond_to?()</code> 让Object可以检测出幽灵方法</p>
+
+<h5 id="blank-slate">Blank Slate</h5>
+
+<p>用幽灵方法的时候要注意其与真实存在的方法名冲突的问题，如果这个真实存在的方法不需要，可以将他移除。</p>
+
+<p><code>Module#undef_method()</code> removes all methods, including the inherited ones.</p>
+
+<p><code>Module#remove_method()</code> removes the method from the receiver, but it leaves inherited methods alone.</p>
+
+<pre><code>class BlankSlate
+  # Hide the method named +name+ in the BlankSlate class. Don't
+  # hide +instance_eval+ or any method beginning with "__".
+  def self.hide(name)
+    if instance_methods.include?(name.to_s) and
+        name !~ /^(__|instance_eval)/   # 移除已"__"开头的ruby保留方法会被警告
+      @hidden_methods ||= {}
+      @hidden_methods[name.to_sym] = instance_method(name)
+      undef_method name
+    end
+  end
+  instance_methods.each { |m| hide(m) }
+  # ...
+</code></pre>
+
+<h5 id="basicobject">BasicObject</h5>
+
+<p>在 Ruby 1.9 中 <code>BasicObject</code> 代替 <code>Object</code> 作为所有类的根类，它提供了一些必须的实例方法</p>
+
+<pre><code>[:==, :equal?, :!, :!=, :instance_eval, :instance_exec, :__send__]
+</code></pre>
+
+<p>让一个类继承自 BasicObject 可以实现 Blank Slates。但是注意<code>Kernel</code>里的方法也都不见了。</p>
+
+<h5 id="const_missing">const_missing</h5>
+
+<p>还有个跟<code>Object#method_missing()</code>相似的方法: <code>Module#const_missing</code></p>
+
+<h3 id="blocks">Blocks</h3>
+
+<p>Blocks 是 “callable objects” 中的一种，在Ruby中用<code>{}</code>或者<code>do...end</code>来定义Blocks，一般偏向于当行用<code>{}</code>，多行用<code>do...end</code>。只有作为方法参数传递时才能定义Blocks，在方法体内用<code>yield</code>关键字调用Block，Block也可以有参数</p>
+
+<pre><code>def a_method(a, b)
+  a + yield(a, b)
+end
+a_method(1, 2) {|x, y| (x + y) * 3 } # =&gt; 10
+</code></pre>
+
+<p><code>Kernel#block_given?()</code> 可以判断当前方法的调用有没有传递参数。</p>
+
+<h4 id="closures">Closures</h4>
+
+<blockquote>
+  <p>You can’t run code in vacuum. When code runs, it needs an environment</p>
+</blockquote>
+
+<h5 id="scope-作用域">Scope (作用域!!?)</h5>
+
+<p>Ruby 代码无时不刻，都在Scope里面，Scope里有这些Bindings</p>
+
+<ul>
+  <li>local variables</li>
+  <li>self （当前对象方法 实例变量）</li>
+  <li>tree of constants</li>
+  <li>global variables</li>
+</ul>
+
+<p>在Ruby中，当离开当前Scope的时候进入一个新的Scope，当前的bindings会被新的bindings代替。也就是说，每次Scope变动，之前的另一个Scope的本地变量都不能在新的Scope内访问，不管新的Scope是不是在另一个里面，这一点与java不同。</p>
+
+<p>Scope 不同于Block，在Ruby中只有三个地方程序会离开当前scope，并进入开一个新的Scope：</p>
+
+<ul>
+  <li>Class 定义 (<code>class</code>)</li>
+  <li>Module 定义 (<code>module</code>)</li>
+  <li>方法  (<code>def</code>)</li>
+</ul>
+
+<p>这个三个地方可称为<code>Scope Gate</code>，def 跟 class、module有些不同，在class或者module里定义的代码会被立即执行。方法里定义的代码会在会在你调用的时候才执行。</p>
+
+<p>通过下面这种方法（Flat Scope），以特定的方法调用代替直接声明，可以去掉Scope的限制，共享了本地变量。</p>
+
+<pre><code>my_var = "Success"
+MyClass = Class.new do
+  puts
+  "#{my_var} in the class definition!"
+  define_method :my_method do
+    puts
+    "#{my_var} in the method!"
+  end
+end
+MyClass.new.my_method
+# ⇒ Success in the class definition!
+#   Success in the method!
+</code></pre>
+
+<h4 id="instance_eval">instance_eval()</h4>
+
+<p><code>instance_eval</code> 可以传递一个block到reciever，block中的<code>self</code>就是reciever，可以使用外层scope的本地变量，这样的block称为<strong>Context Probe</strong></p>
+
+<pre><code>v = 2
+obj.instance_eval { @v = v }
+obj.instance_eval { @v } # =&gt; 2
+</code></pre>
+
+<p><code>instance_exec</code> 是1.9引入的，与<code>instance_eval</code>相似，但支持传递参数。</p>
+
+<pre><code>C.new.instance_exec(3) {|arg| (@x + @y) * arg } # =&gt; 9
+</code></pre>
+
+<h4 id="callable-objects">Callable Objects</h4>
+
+<p>除了block外，Callable Object 还有下面3种：</p>
+
+<ul>
+  <li>proc</li>
+  <li>lambda</li>
+  <li>method</li>
+</ul>
+
+<h4 id="procs">Procs</h4>
+
+<p>将block变成对象就是proc，测试化proc有三种方法：</p>
+
+<pre><code># 初始化
+inc = Proc.new {|x| x+1 }
+inc = proc {|x| x+1}  # Kernel#proc
+inc = lambda {|x| x+1} # Kernel#lambda
+# 调用
+inc.call(2) # =&gt; 3
+</code></pre>
+
+<p>proc将block转变为对象，而 <code>&amp;</code> 将proc转变回block</p>
+
+<pre><code>my_method(){block}
+# 等于
+my_proc = proc {block}
+my_method(&amp;my_proc)
+</code></pre>
+
+<h5 id="procs-vs-lambdas">Procs vs. Lambdas</h5>
+
+<p><code>return</code> 的意义不一样，在lambdas中，<code>return</code> 就是从当前lambda返回。在procs中，<code>return</code> 是从<strong>定义这个proc的scope</strong>里返回（不是调用这个proc的scope），跟block一样。</p>
+
+<p>另外，对待参数的方法不一样，当传递的参数与定义的参数数量（Proc#arity）不一样时，proc会自适应它。</p>
+
+<pre><code>p = Proc.new {|a, b| [a, b]}
+p.call(1, 2, 3) # =&gt; [1, 2]
+p.call(1) # =&gt; [1, nil]
+</code></pre>
+
+<p>而lambdas会抛出<code>ArgumentError</code></p>
+
+<p>lambdas 表现出来与方法(method)更相似.</p>
+
+<p>Paul Cantrell 写了个程序来解释闭包的各种特殊情况:http://innig.net/software/ruby/closures-in-ruby</p>
+
+<p>Ruby 1.9 提供了一个更加简单的lambda定义语法</p>
+
+<pre><code>p = -&gt;(x) { x + 1 }
+# 等于
+p = lambda {|x| x + 1 }
+</code></pre>
+
+<h5 id="methods-1">Methods</h5>
+
+<p>对象的方法也是一个对象，可以通过<code>Object#method</code>来获取当前对象的方法。</p>
+
+<pre><code>m = self.method :puts
+m.call "hello"
+# 等于
+
+puts "hello"
+</code></pre>
+
+<p>方法与lambda的主要区别就是:lambda在当前的scope内执行（闭包），而方法在自己的scope内执行。方法可以绑定另外一个同类的对象<code>Method#unbind</code>,<code>UnboundMethod#bind</code></p>
+
+<h4 id="domain-specific-languagedsl">Domain-Specific Language（DSL）</h4>
+
+<h3 id="class-definitions">Class Definitions</h3>
+
+<h4 id="the-current-class">The Current Class</h4>
+
+<p>在Ruby中你总有一个当前对象的引用 <code>self</code>,当还有一个当前类(current class)或者模块(module)的引用。当你定义一个方法，这个方法将成为当前类的实例方法。包括下面这种情况，在<code>method_one</code>里<code>self</code>不再是class，所以当前类就变成<code>self</code>的class。</p>
+
+<pre><code>class MyClass
+  def method_one
+    def method_two;
+      'Hello!'
+      ; end
+  end
+end
+obj = MyClass.new
+obj.method_one
+obj.method_two # =&gt; "Hello!"
+obj2 = MyClass.new
+obj2.method_two # =&gt; "Hello!"
+</code></pre>
+
+<h5 id="class_eval">class_eval</h5>
+
+<pre><code>def add_method_to(a_class)
+  a_class.class_eval do
+    def m;
+      'Hello!'
+      ; end
+  end
+end
+</code></pre>
+
+<p><code>Module#class_eval()</code> 和 <code>Object#instance_eval()</code>有很大的区别，<code>Object#instance_eval()</code> 改变<code>self</code>，<code>Module#class_eval()</code> 改变<code>self</code>和当前类。与<code>class</code>关键字相比,<code>Module#class_eval()</code>不会进入新的作用域。</p>
+
+<h5 id="class-instance-variables">Class Instance Variables</h5>
+
+<pre><code>class Foo
+  @bar = "I'm Class Instance Variables"
+
+def self.get_bar
+    @bar
+  end
+end
+</code></pre>
+
+<p>可比于Java的静态字段，不同的是，要访问<code>Class Instance Variables</code>只有通过类本身。</p>
+
+<h4 id="singleton-methods">Singleton Methods</h4>
+
+<pre><code>def object.method
+  # Method body here
+end
+</code></pre>
+
+<h5 id="class-macros">Class Macros</h5>
+
+<p><code>attr_accessor</code>就是一个 Class Macro, 看起来像是关键字,其实是一个普通<code>module</code>方法。</p>
+
+<pre><code>class MyClass
+  attr_accessor :my_attribute
+end
+</code></pre>
+
+<h4 id="eigenclasses">Eigenclasses</h4>
+
+<p>解决了阅读第一章时的困惑,每一个对象都有一个独享的类–Eigenclass,这个对象的singleton 方法就是存储在在它的eigenclass里.</p>
+
+<p><code>class &lt;&lt; obj</code> 是ruby打开eigenclass的方法.如:</p>
+
+<pre><code>class Object
+  def eigenclass
+    class &lt;&lt; self; self; end
+  end
+end
+</code></pre>
+
+<p>The Great Unified Theory</p>
+
+<ol>
+  <li>对象只有一种,普通的对象或者是module(Module 或 Class 的对象) (表达出来怎么是两种的意思?)</li>
+  <li>module 只有一种, 常规的module,类,eigenclass,proxy class</li>
+  <li>方法只有一种,方法存储在module(大部分是class)中.</li>
+  <li>每一个对象包括class(Class类的对象),有一个自己独享的<strong>real class</strong>,是一个普通的类或者eigenclass.(real class 的概念还不理解)</li>
+  <li>除了BasicObject每一个类都有唯一一个superclass.</li>
+  <li>对象的eigenclass的superclass是这个对象的类.类对象的eigenclass的superclass是这个类的superclass的eigenclass.(绕死了)</li>
+  <li>当调用一个方法的时候,先往右查找他的<strong>real class</strong>,再沿着ancestors chain 往上查找方法.</li>
+</ol>
+
+
+</article>
+<div class="tag-container" >
+    
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Programming/Ruby/metaprogramming-ruby"
+ var disqus_config = function () {
+     this.page.title = "Metaprogramming Ruby"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Programming/Ruby/metaprogramming-ruby/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

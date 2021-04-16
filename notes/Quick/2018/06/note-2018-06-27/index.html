@@ -1,0 +1,380 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    2018年06月27日杂记 | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">2018年06月27日杂记</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 18-08-02">2018-06-27</span>
+    
+</div>
+
+<article>
+    <h1 id="清晰架构">清晰架构</h1>
+
+<h2 id="架构是什么">架构是什么？</h2>
+
+<h3 id="定义">定义</h3>
+
+<p>软件架构是指，构建软件的人为软件赋予的形状，这个形状是指系统如何被划分为<strong>组件</strong>，各个组件如何<strong>安排</strong>，组件之间如何<strong>沟通</strong>。</p>
+
+<p>还是很抽象，那建筑架构来类比。但我觉得公司架构更合适</p>
+
+<p>中型公司组织架构为例，有董事会、董事长、董事会、总经理、部门、组等，以及各部门里面的员工。由组织架构图可以看出，所有的架构一定有三个东西：</p>
+
+<ul>
+  <li><strong>构成组织的单元</strong>：也就是不同职能的员工，在Clean Architecture中则称为元件（component）。</li>
+  <li><strong>人员的安排</strong>：阶层式、扁平式、矩阵式，component team还是feature team。在Clean Architecture中称为元件的排列方式（arrangement）。</li>
+  <li><strong>人员沟通的方式</strong>：直接沟通、透过部门主管或PM与其他部门或外部客户与厂商沟通、禁止沟通、圣上垂询才可开口等。在Clean Architecture中称为（communicate）</li>
+</ul>
+
+<p>架构与功能无关，以美术馆为例，如果要建造美术馆，可以有各种各样的形状，但它们都有相同的功能：美术馆</p>
+
+<p><img src="https://lh3.googleusercontent.com/-hJ5XfkRUCmY/WpgjQOX6EFI/AAAAAAAB6ZA/JTAljPMhvCA6lJaH0sCOG2UmAG4FWdmZgCHMYCw/Image?imgmax=800" alt="是用Google搜寻图片下「美术馆」关键字所找到的四个美术馆，达到同样的功能，但外型却各异" />
+这里引出软件有两个量（Value），</p>
+
+<ol>
+  <li>软件的功能或行为，就是需求在软件上的体现</li>
+  <li>软件的形状或设计，就是所谓的架构</li>
+</ol>
+
+<p>在软件世界，相同功能可以有不同形状，相同形状可以实现不同功能。</p>
+
+<h2 id="架构的目的">架构的目的</h2>
+
+<p>为了能够最小化创建和维护软件的成本。</p>
+
+<p>功能重要还是架构重要？功能衡量系统能不能满足需求？架构意味着系统是否易于变化。我们可以用控制变量法，假设有两个系统：</p>
+
+<ol>
+  <li>一个系统能完全的满足需求但是不可变。</li>
+  <li>一个系统完全不可用，但是易于改变。</li>
+</ol>
+
+<p>大部分人直觉上会选择那个马上就能跑起来的系统。但哪个系统更没用能？第一个系统虽然能用，但是一旦需求变化了变不能用了，可能有点比较难想象，换句话说修改系统的成本高于修改修改系统的收益，因为他非常难以更改。第二个系统虽然不能用，但是它可以持续改善最终变得有用。</p>
+
+<p>但是，</p>
+
+<ul>
+  <li>功能仍是软件的第一价值，功能是软件能产生价值的部分。关系到我们的金主能不能赚到钱。</li>
+  <li>架构退而次之是软件的第二价值，影响到软件的生命周期中的各种成本，间接地影响金主能不能赚到钱。</li>
+</ul>
+
+<h2 id="技术债务tech-debt">技术债务（Tech Debt）</h2>
+
+<p>龟兔赛跑，欲速则不达，这些道理相信我们都懂。但就像减肥节食一样，很多事我们知道不好但还是忍不住要去做。</p>
+
+<blockquote>
+  <p>写乱七八糟的代码能让项目写得更快。</p>
+</blockquote>
+
+<blockquote>
+  <p>有问题的代码完了我会改的，现在时间点就卡在这里，先弄好上线了再说，错过了时间窗口是不是你负责？</p>
+</blockquote>
+
+<blockquote>
+  <p>这代码我写得太漂亮了，只用一行、用 bit mask 只占用一个 int 值，而且别人还看不懂。有一种迷之优越感。</p>
+</blockquote>
+
+<p>《Clean Code》说过，一种要衡量代码质量的方法就是数一数 Code Review 时喊出多少句『What The Fuck』</p>
+
+<p><img src="https://davidwalsh.name/demo/code-review.png" alt="" /></p>
+
+<p>随着软件生命周期变化，一个不好的架构其维护成本是可能是指数增长的。老板可能不会了解这些。但作为开发者应该很清楚填坑的痛苦。</p>
+
+<p><img src="http://xargin.com/content/images/2017/12/costperline.png" alt="" /></p>
+
+<p>当项目最终全变成意大利面条式的代码。上面的种种想法让历史项目变成了一个公司的历史包袱，而不是技术积累。可能有勇士在某个时间点（维护成本不断增加直到高于重构成本的那个拐点）会提出重构可以解决问题。对，重构是可以解决一部分问题。问题在于这些负责重构的程序员思想可能和当初写历史包袱的那些程序员没什么两样：</p>
+
+<blockquote>
+  <p>太多依赖了，不敢动，怕会引发其他问题</p>
+</blockquote>
+
+<blockquote>
+  <p>这里代码什么意思，看不懂，总之就先抄过来。</p>
+</blockquote>
+
+<blockquote>
+  <p>我艹，这里的逻辑怎么是这样的，好像没办法满足我的新设计，还是按着原来这个 if 来写吧。</p>
+</blockquote>
+
+<p>站在 PM 的角度，他应该只关心把需求文档翻译成代码，让机器能够满足需求中提到的所有行为。PM 不懂也没有能力评估架构的重要性，因为这对他们来说是无关的细节。所以开发团队必须要责任去强调架构的重要性。</p>
+
+<p>良好的架构使系统易于理解，易于开发，易于维护和易于部署。 最终目标是最大限度地降低系统的生命周期成本并最大限度地提高程序员的生产力。</p>
+
+<p>但有一点是确定，架构设计和单元测试确实会使项目的开发变慢，而债务也不一定是坏的，在一些时间点欠点技术债是可以获得更好的投资回报率。这一点在现实生活中可以找到很多应用，比如贷款买房，炒股加杠杆。在资源有限的情况下，功能和设计确实是一对矛盾，架构师的职责换一种表述就是利用其专业知识为功能和设计分配资源以获得最佳的回报率。</p>
+
+<h2 id="移动应用的特点">移动应用的特点</h2>
+
+<p>理想的情况下架构是着眼于整个大系统的，由上往下的推行。决定系统的整个生命周期，好的架构必须支持，系统的<strong>开发</strong>、<strong>部署</strong>、<strong>运维（operation）</strong>、<strong>维护（maintain）</strong>。</p>
+
+<p>客户端可能只是整个系统中表现层的一个组件。但这个组件本身也是具有架构的。大的架构设计当前还不太现实，今天专注于讨论客户端上的架构设计问题。</p>
+
+<p>典型的移动应用程序与典型的企业应用程序有很大不同。它要小得多，不太依赖与现有代码库的集成，并且通常需要快速交付，同时确保在大量设备上进行可靠的操作。</p>
+
+<h2 id="基础">基础</h2>
+
+<ol>
+  <li>结构化编程，用子程序、代码区块、for循环以及while循环等结构，来取代传统的 goto
+对直接控制转移进行了限制，控制转移只能通过函数调用实现</li>
+  <li>面向对象编程，封装、继承、多态！！
+对间接控制转移进行了控制</li>
+  <li>函数式编程，lambda，高阶函数都是工具，最重要的可能是分离可变性
+对变量分配进行了控制</li>
+</ol>
+
+<p>多态（polymorphism）有着更强大的能力。没有多态的时候，源码的依赖关系必须代码的实际运行流程一致。比如高级函数调用了低级函数，那么声明高级函数的源码必须依赖声明低级函数的源码。引入多态后，高级函数依赖于低级函数的接口，而不是具体实现。把对具体实现的依赖分离出来。低级的实现，可以被独立部署更替。这就是依赖反转。</p>
+
+<p><img src="http://xargin.com/content/images/2017/12/di2.png" alt="" /></p>
+
+<h3 id="solid">SOLID</h3>
+
+<p>单一职责原则（Sinple Responsibility Principle）
+开闭原则（Open-Closed Principle）
+里氏替换原则（Liskov Substitution Principle），继承可能不是好东西，最容易被滥用。Kotlin 默认禁用了继承和重写。
+接口隔离原则（Interface Segregation Principle）
+依赖倒置（Dependency Inversion Principle）</p>
+
+<h2 id="移动应用">移动应用</h2>
+
+<h3 id="jetpack">Jetpack</h3>
+
+<p>将所有代码写入Activity或Fragment是一种常见的错误。 任何与处理UI或操作系统交互无关的代码都不应该在这些类中。尽可能保持精简可以避免许多生命周期相关的问题。不要忘记，我们不拥有这些类，它们只是体现操作系统和您的应用程序之间契约的胶合类。基于用户交互或其他因素（如低内存），Android操作系统可能随时销毁它们。最好尽量减少对它们的依赖，以提供可靠的用户体验。</p>
+
+<p>https://developer.android.com/jetpack/docs/guide#recommended_app_architecture</p>
+
+</article>
+<div class="tag-container" >
+    
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Quick/2018/06/note-2018-06-27"
+ var disqus_config = function () {
+     this.page.title = "2018年06月27日杂记"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Quick/2018/06/note-2018-06-27/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

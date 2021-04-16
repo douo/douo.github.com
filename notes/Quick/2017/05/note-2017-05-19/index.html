@@ -1,0 +1,504 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    2017年05月19日杂记 | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">2017年05月19日杂记</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-11-30">2017-05-19</span>
+    
+</div>
+
+<article>
+    <h3 id="architectural-principles">Architectural principles</h3>
+
+<ol>
+  <li>you should not store any app data or state in your app components and your app components should not depend on each other.</li>
+  <li>drive your UI from a model, preferably a persistent model.</li>
+</ol>
+
+<p>handling the lifecycle properly such that your data streams pause when the related LifecycleOwner is stopped and the streams are destroyed when the LifecycleOwner is destroyed. You can also add the android.arch.lifecycle:reactivestreams artifact to use LiveData with another reactive streams library</p>
+
+<h3 id="lifecycle">Lifecycle</h3>
+
+<p><a href="https://developer.android.com/topic/libraries/architecture/lifecycle.html">Lifecycle</a> 是 <a href="https://developer.android.com/topic/libraries/architecture/index.html">Android Architecture Components</a> 的一个组件，用于将系统组件（Activity、Fragment等等）的生命周期分离到 <code>Lifecycle</code> 类，<code>Lifecycle</code> 允许其他类作为观察者，观察组件生命周期的变化。Lifecycle 用起来很简单，首先声明一个 <code>LifecycleObserver</code> 对象，用 <code>@OnLifecycleEvent</code> 注解声明生命周期事件回调的方法：</p>
+
+<pre><code>public class LifecycleObserverDemo implements LifecycleObserver {
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_ANY)
+    void onAny(LifecycleOwner owner, Lifecycle.Event event) {
+        System.out.println("onAny:" + event.name());
+    }
+    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
+    void onCreate() {
+        System.out.println("onCreate");
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+    void onDestroy() {
+        System.out.println("onDestroy");
+    }
+}
+</code></pre>
+
+<p>然后在 <code>LifecycleRegistryOwner</code> 比如 <code>LifecycleActivity</code> 加入这么一行代码：</p>
+
+<pre><code>    getLifecycle().addObserver(new LifecycleObserverDemo());
+</code></pre>
+
+<p>然后？然后就没了，运行起来可以看到 <code>LifecycleActivity</code> 的生命周期发生变化时，<code>LifecycleObserverDemo</code> 总能得到通知。而 <code>LifecycleActivity</code> 只有寥寥几行代码，并没有覆盖任何回调方法。那么 Lifecycle 是怎么做到的，是不是有点黑魔法的感觉？</p>
+
+<h3 id="注解的作用">注解的作用</h3>
+
+<p>首先从注解入手，可以在 build 目录下发现注解处理器为我们生成了 <code>LifecycleObserverDemo_LifecycleAdapter</code>，不过这只是一个适配器，用于将生命周期事件派发到 <code>LifecycleObserverDemo</code> 对应的方法。</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LifecycleObserverDemo_LifecycleAdapter</span> <span class="kd">implements</span> <span class="nc">GenericLifecycleObserver</span> <span class="o">{</span>
+  <span class="kd">final</span> <span class="nc">LifecycleObserverDemo</span> <span class="n">mReceiver</span><span class="o">;</span>
+
+  <span class="n">LifecycleObserverDemo_LifecycleAdapter</span><span class="o">(</span><span class="nc">LifecycleObserverDemo</span> <span class="n">receiver</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">mReceiver</span> <span class="o">=</span> <span class="n">receiver</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onStateChanged</span><span class="o">(</span><span class="nc">LifecycleOwner</span> <span class="n">owner</span><span class="o">,</span> <span class="nc">Lifecycle</span><span class="o">.</span><span class="na">Event</span> <span class="n">event</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">mReceiver</span><span class="o">.</span><span class="na">onAny</span><span class="o">(</span><span class="n">owner</span><span class="o">,</span><span class="n">event</span><span class="o">);</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">event</span> <span class="o">==</span> <span class="nc">Lifecycle</span><span class="o">.</span><span class="na">Event</span><span class="o">.</span><span class="na">ON_CREATE</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">mReceiver</span><span class="o">.</span><span class="na">onCreate</span><span class="o">();</span>
+    <span class="o">}</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">event</span> <span class="o">==</span> <span class="nc">Lifecycle</span><span class="o">.</span><span class="na">Event</span><span class="o">.</span><span class="na">ON_START</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">mReceiver</span><span class="o">.</span><span class="na">onStart</span><span class="o">();</span>
+    <span class="o">}</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">event</span> <span class="o">==</span> <span class="nc">Lifecycle</span><span class="o">.</span><span class="na">Event</span><span class="o">.</span><span class="na">ON_PAUSE</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">mReceiver</span><span class="o">.</span><span class="na">onPause</span><span class="o">();</span>
+    <span class="o">}</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">event</span> <span class="o">==</span> <span class="nc">Lifecycle</span><span class="o">.</span><span class="na">Event</span><span class="o">.</span><span class="na">ON_DESTROY</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">mReceiver</span><span class="o">.</span><span class="na">onDestroy</span><span class="o">();</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="nc">Object</span> <span class="nf">getReceiver</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">mReceiver</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="如何传达-lifecycle-事件">如何传达 lifecycle 事件</h3>
+
+<p>比较好奇，Activity 不用写任何代码，那么 Lifecycle 是如何把 Activity 生命周期事件传递给 <code>LifecycleObserver</code>?最终通过研读 Lifecycle 的代码，发现里面有个包可见的类 <code>LifecycleDispatcher</code>，<code>LifecycleDispatcher</code> 是一个单例，在 <code>LifecycleDispatcher#init(Context)</code> 中，它通过 <code>registerActivityLifecycleCallbacks</code> 方法，向当前的 Application 注册一个 <code>DispatcherActivityCallback</code>，但 Lifecycle 并没使用 <code>ActivityLifecycleCallbacks</code> 来监听并派发生命周期事件。</p>
+
+<pre><code>static void init(Context context){
+    ...
+    ((Application)context.getApplicationContext()).registerActivityLifecycleCallbacks(new LifecycleDispatcher.DispatcherActivityCallback());
+    ...
+}
+
+static class DispatcherActivityCallback extends EmptyActivityLifecycleCallbacks {
+    public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
+        ...
+        if(manager.findFragmentByTag("android.arch.lifecycle.LifecycleDispatcher.report_fragment_tag") == null) {
+            manager.beginTransaction().add(new ReportFragment(), "android.arch.lifecycle.LifecycleDispatcher.report_fragment_tag").commit();
+            manager.executePendingTransactions();
+        }
+    }
+}
+</code></pre>
+
+<p>而是通过一个无 UI 的 Fragment，在 <code>DispatcherActivityCallback#onActivityCreated</code> 可以看到它在 <code>Activity#onCreate</code> 时，为 Activity 添加一个 <code>ReportFragment</code>。最终由 <code>ReportFragment</code> 来监听各个生命周期事件，然后传递给 <code>LifecycleRegistry</code>。</p>
+
+<pre><code>public class ReportFragment extends Fragment {
+    ...
+    public void onPause() {
+        super.onPause();
+        dispatch(Event.ON_PAUSE);
+    }
+    ...
+    private void dispatch(Event event) {
+        if(this.getActivity() instanceof LifecycleRegistryOwner) {
+            ((LifecycleRegistryOwner)this.getActivity()).getLifecycle().handleLifecycleEvent(event);
+        }
+    }
+}
+</code></pre>
+
+<p><em>Activity 的生命周期事件都会派发到它的 Fragments，向 Activity 注册一个无 UI 的 Fragment 用于将各种 Activity 回调分离出来是个常用的做法</em>，比如 <a href="https://github.com/tbruyelle/RxPermissions">RxPermissions</a> 也是用这种方法来避免复写 <code>Activity#onRequestPermissionsResult</code>。</p>
+
+<p>顺便一提 <a href="https://developer.android.com/reference/android/arch/lifecycle/Lifecycle.html">Lifecycle 文档</a>提到：</p>
+
+<blockquote>
+  <p>ON_CREATE, ON_START, ON_RESUME events in this class are dispatched <em>after</em> the LifecycleOwner’s related method returns. ON_PAUSE, ON_STOP, ON_DESTROY events in this class are dispatched <em>before</em> the LifecycleOwner’s related method is called.</p>
+</blockquote>
+
+<p>正好是 Fragment 生命周期回调的触发顺序。</p>
+
+<p>终于 Activity 的生命周期变化是如何传递到 LifecycleObserver 有了清晰的图表：</p>
+
+<p><img src="lifecycle_call.png" alt="" /></p>
+
+<h3 id="lifecycleruntimetrojanprovider">LifecycleRuntimeTrojanProvider</h3>
+
+<p>还有一个问题， <code>LifecycleDispatcher#init(Context)</code> 并不是入口，它也需要被调用。那么他的调用者是谁？Google 这里的做法还是很巧妙的，如果这时把 apk 的 AndroidManifest.xml 提前，就会发现多了一个 ContentProvider 声明：</p>
+
+<pre><code>&lt;provider
+        android:name="android.arch.lifecycle.LifecycleRuntimeTrojanProvider"
+        android:authorities="${applicationId}.lifecycle-trojan"
+        android:exported="false"
+        android:multiprocess="true" /&gt;
+</code></pre>
+
+<p><code>LifecycleRuntimeTrojanProvider</code>，运行时木马是什么鬼？实际上，它不是一个 ContentProvider，而是利用 ContentProvider 的特点在应用程序初始化时，向其注入两行代码：</p>
+
+<pre><code>LifecycleDispatcher.init(getContext());
+ProcessLifecycleOwner.init(getContext());
+</code></pre>
+
+<p>这里 ContentProvider 之于 Application 的作用就类似于无 UI Fragment 之于 Activity 一样，目的都是避免继承系统组件。关于 ContentProvider 的生命周期可以看 <a href="https://stackoverflow.com/questions/24047248/contentprovider-destruction-lifecycle">android - ContentProvider destruction/lifecycle - Stack Overflow</a>，</p>
+
+<h3 id="其他-lifecycleonwer">其他 LifecycleOnwer</h3>
+
+<p>最后再提一下，Lifecycle 还提供了内置了另外三个 LifecycleOnwer：</p>
+
+<ol>
+  <li><a href="https://developer.android.com/reference/android/arch/lifecycle/LifecycleFragment.html">LifecycleFragment</a></li>
+  <li><a href="https://developer.android.com/reference/android/arch/lifecycle/LifecycleService.html">LifecycleService</a>，ServiceLifecycleDispatcher 将事件派发重新推到主线程消息队列，用于保证确保回调在 Service 生命周期回调后再调用。</li>
+  <li><a href="https://developer.android.com/reference/android/arch/lifecycle/ProcessLifecycleOwner.html">ProcessLifecycleOwner</a>，用于监听整个应用的前后台切换。也是利用 ActivityLifecycleCallback 监听每个 Activity 的生命周期，如果 onStop 事件后，没有监听到任意的 onStart 事件，那么 ProcessLifecycleOwner 就会认为整个应用切换到后台，同时留下一个标志。如果监听到 onStart 事件，同时检查有标志那么就会认为应用回到前台。</li>
+</ol>
+
+<h3 id="livedata">LiveData</h3>
+
+<p>不太适合用于网络请求这种只有单一事件的序列？</p>
+
+<p>Lifecycle 事件小于 STARTED 对 LiveData 来说是 inactive。</p>
+
+<h4 id="livedata-与-databinding">LiveData 与 Databinding</h4>
+
+<p>现在这两个框架融合的不是很好，在 MVVM 中还是 Databinding 比较好用。</p>
+
+<h4 id="livedata-与-retrofit">LiveData 与 Retrofit</h4>
+
+<p>网络接口是一次性的，而 LiveData 是一个值随时间变化的序列，似乎不太搭，</p>
+
+<p>Retrofit 用 LiveData 用了他的 Lifecycle aware 的作用，防止泄露。</p>
+
+<p>用 CallAdapter.Factory 来转换 LiveData</p>
+
+<h3 id="viewmodel">ViewModel</h3>
+
+<p>两个问题让 UI Controller(Activities、Fragments…) 变得巨大且难以维护</p>
+
+<ul>
+  <li>在 destroy 的时候清理异步回调。</li>
+  <li>react to user actions or handle the operating system communication.</li>
+</ul>
+
+<p>ViewModel，</p>
+
+<ul>
+  <li>retain its state across Activity configuration changes</li>
+  <li>outlives the specific Activity or Fragment instances.</li>
+  <li>stay in memory until the Lifecycle it’s scoped to goes away permanently，Activity, once it finishes; in the case of a Fragment, once it’s detached.</li>
+  <li>it shouldn’t reference any Views directly inside of it or hold reference to a context. This can cause memory leaks.</li>
+  <li>If the ViewModel needs an Application context (e.g. to find a system service), it can extend the AndroidViewModel</li>
+</ul>
+
+<p>ViewModel 的实现生命是由框架自己管理，所以不能交给 Dagger 注入。</p>
+
+<p>那么只能注入 ViewModel 本身。</p>
+
+<h4 id="dagger-android">Dagger Android</h4>
+
+<p>Dagger Android 对系统组件的注入做了优化，当如果采用 Android 架构，系统组件会尽可能的薄，大部分需要注入的对象都不会放在系统组件。这对于大部分对象来说并没有问题。当对于 ViewModel 来说就有问题了。</p>
+
+<p>ViewModel 对象的生命周期是由 Architecture Component 直接管理的。所以不能依靠 Dagger 去自动注入。下面这行代码是跑不了的：</p>
+
+<pre><code>viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+</code></pre>
+
+<p>所以要实现对 ViewModel 最佳实践还是得用 AndroidInjector。实现 AndroidInjector 注入并不困难。照着实现下面四个类变行：</p>
+
+<ul>
+  <li>AndroidViewModelInjection</li>
+  <li>AndroidViewModelInjectionModule</li>
+  <li>HasViewModelInjector</li>
+  <li>ViewModelKey</li>
+</ul>
+
+<p>但是有个很大的限制，按照 AndroidInjection 的实现，ViewModel 必须有办法找到他的 Injector。 ViewModel 不能保存期宿主（Activity,Fragment）的引用，所以 ViewModel 的 Injector 只能是 Application。因为 ViewModel 是跨越 Activity/Fragment 生命周期的存在，所以一定程度上也是有道理的。拥有 Application 引用的 ViewModel。框架已经帮我们实现好了，就是 AndroidViewModel。</p>
+
+<p>ViewModel 的 scope 应该大于或独立于 Activity 或 Fragment</p>
+
+<p>但是不支持 @ContributesAndroidInjector 注解。</p>
+
+<h4 id="另一种注解">另一种注解</h4>
+
+<p>利用 <code>ViewModelProvider.NewInstanceFactory</code> 保持 Application 引用在外部进行注解。</p>
+
+<h3 id="io">IO</h3>
+
+<h2 id="kotlin">Kotlin</h2>
+
+<h2 id="android-architecture-components">Android Architecture Components</h2>
+
+<ul>
+  <li>LifeCycle</li>
+  <li>Live Data</li>
+  <li>ViewModel</li>
+  <li>Room</li>
+</ul>
+
+<h2 id="android-o">Android O</h2>
+
+<h2 id="supported-libraries">Supported Libraries</h2>
+
+<ul>
+  <li>font xml/ downloadable font</li>
+  <li>up to api 14+ remove methods</li>
+  <li></li>
+</ul>
+
+<p><del>sfa</del></p>
+
+<h3 id="romm">Romm</h3>
+
+<ol>
+  <li>如何对已有的数据库进行映射</li>
+  <li>如何对数据库名是变量名的数据进行映射</li>
+</ol>
+
+<h3 id="constraintlayout">ConstraintLayout</h3>
+
+
+</article>
+<div class="tag-container" >
+    
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Quick/2017/05/note-2017-05-19"
+ var disqus_config = function () {
+     this.page.title = "2017年05月19日杂记"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Quick/2017/05/note-2017-05-19/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

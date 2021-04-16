@@ -1,0 +1,394 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    如何为MTK平台添加新模块 | DouO's Blog</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">如何为MTK平台添加新模块</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-01-13">2010-07-15</span>
+
+    <span><a href="/categories#coder-ref" class="category category-coder waves-effect waves-light">coder</a></span>
+    
+</div>
+
+    <article>
+        <h2 id="包含源码的第三方库">包含源码的第三方库</h2>
+
+<p>以添加一个TTS模块为例，可以按如下步骤添加：</p>
+
+<ol>
+  <li>把TTS的源码包复制到你的MTK软件系统根目录下，以让TTS的源码都在TTS目录中</li>
+  <li>在make目录下新增一个tts目录，在tts目录下添加4个新文件，分别是，tts.def、tts.inc、tts.lis、tts.pth。tts.def文件的内容需要根据内容来修改，其他3个文件中加上源文件及其目录、头文件目录即可。</li>
+  <li>在REL_CR_MMI_&lt;project&gt;.mak 中加上如下语句 CUS_REL_SRC_COMP
++= tts</li>
+  <li>把MTK工程remake一下，若没有错误，tts模块就成功加上去了。</li>
+  <li><strong>如果要为Modis模拟器添加该模块，须进入到Modis目录，在createMoDIS.ini文件中，[GLOBAL_SETTINGS]下，追加
+**enable_libs += tts</strong> createMoDIS.ini会在createMoDIS.pl中加载**</li>
+</ol>
+
+<p>添加一个无源码的库，如xxx.lib，可按照下面步骤：</p>
+
+<ol>
+  <li>在MTK软件系统根目录中新建一个xxx文件夹，把xxx.lib放在里面</li>
+  <li>在make\Option.mak里增加下面几行，ifeq语句不是必要。 ifeq ($(strip
+$(XXX_SUPPORT)),TRUE) COMPOBJS += xxx\xxx.lib CUS_REL_OBJ_LIST
++= xxx\xxx.lib endif</li>
+  <li>有 头文件，要将头文件路径加入，用CUSTOM_COMMINC如： CUSTOM_COMMINC +=
+….</li>
+  <li>如果加了XXX_SUPPORT判断，须在&lt;customer&gt;_&lt;project&gt;.mak文件中添加，并初始化为
+TRUE： XXX_SUPPORT = TRUE;</li>
+  <li>修改完成后，remake就可以将新模块添加到工程里了。</li>
+  <li>关于 ifeq
+((XXX_SUPPORT)),TRUE)语句的意思是如果XXX_SUPPORT的值为TRUE则继续执行。strip函数详见<a href="http://dourok.info/wiki/doku.php?id=%E7%A8%8B%E5%BA%8F:makefile:strip" title="程序:makefile:strip">这里</a>。</li>
+</ol>
+
+<p><strong>Modis模拟器不能调用该库，Modis模拟器调用的库要经过VC编译。</strong></p>
+
+<h2 id="生成自己的lib库">生成自己的Lib库</h2>
+
+<p>比如说新建一个源文件dou.c，代码如下：</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include "dou.h"
+</span><span class="kt">int</span> <span class="nf">dou_max</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span> <span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">){</span>
+<span class="k">return</span> <span class="n">a</span><span class="o">&gt;</span><span class="n">b</span><span class="o">?</span><span class="n">a</span><span class="o">:</span><span class="n">b</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>接下来建立头文件dou.h,</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#ifndef _DOU_H
+#define _DOU_H
+</span><span class="k">extern</span> <span class="kt">int</span> <span class="nf">dou_max</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span><span class="kt">int</span> <span class="n">b</span><span class="p">);</span>
+<span class="cp">#endif
+</span></code></pre></div></div>
+
+<p>若要将程序打包成库发布，这里跟上面添加包含源码的第三方库一样，在MTK软件系统根目录下，新增一个dou目录，在创建inc和src文件夹，把dou.h放在dou，dou.c放在dou。接着在make目录下新增一个dou目录,再添加4个新文件，分别是，dou.def、dou.inc、dou.lis、dou.pth。</p>
+
+<p>dou.inc添加</p>
+
+<pre><code>dou\inc
+</code></pre>
+
+<p>dou.lis添加</p>
+
+<pre><code>dou\src\dou.c
+</code></pre>
+
+<p>dou.pth添加</p>
+
+<pre><code>dou\src
+</code></pre>
+
+<p>.inc是头文件目录，.lis是源文件列表，.pth是源文件目录。</p>
+
+<p>remake一下，完成后可在build文件夹里，搜索到dou.lib文件。接下来可以如上面所说的无源码的库的添加方法那样去添加。</p>
+
+<h3 id="也可以不用remake可以用命令行来编译">也可以不用remake，可以用命令行来编译</h3>
+
+<pre><code>armcc [options] file1 file2 ... filen
+</code></pre>
+
+<p>不过我用armmcc编译出来的obj文件加入MTK工程后链接出错。后来用</p>
+
+<pre><code>tcc
+</code></pre>
+
+<p>就OK了。
+用armcc还是tcc，在Option.mak里是有定义的，具体看COMPILE_MODE这个参数。好像默认就是tcc。</p>
+
+<p>tcc编译出来的是obj文件，还要打包成lib库,用命令</p>
+
+<pre><code>armar -r libfile objfile...
+</code></pre>
+
+<p>之后把lib加入工程的方法一开始说过了。但如果要把lib添加进模拟器中还需要多几个步骤。</p>
+
+<p>首先，这个lib库是用在真机上，而模拟器中的库是需要经过vc编译的。</p>
+
+<h3 id="modis">Modis</h3>
+
+<p>如按照包含源码的第三方库第5步操作过，那么重新生成、编译模拟器就可以在模拟器中使用该库。在模拟器的目录Modis中可以库目录dou，dou.lib应该就在Debug目录下。这个dou.lib就是vc编译过的库。
+如果第三方要在模拟器里使用该库，那么可以按下面几个步骤操作。
+确保lib文件是vc编译的 将lib复制到 _lib..
+这个目录是不确定的，在CreateModis.pl里有定义，具体可查看${modislibroot}这个变量</p>
+
+<p>在CreateModis.pl里，添加一句</p>
+
+<pre><code>push(@liblist, "${modislibroot}\\dou\.lib");
+</code></pre>
+
+<p>这里可以参考了其它${modislibroot}里的lib库的添加方法。 然后</p>
+
+<pre><code>make gen_modis
+make codegen_modis
+</code></pre>
+
+<p>编译Modis，不报错便大功告成。</p>
+
+<h3 id="pc-simulator">PC Simulator</h3>
+
+<p>如果用PC Simulator
+，并且确保代码是不依赖于MTK平台的，就是说没有使用MTK平台现有模块的任何函数，如dou.c。那么可以在VC6里面新建个静态库项目，把源文件添加进去，让编译打包成LIB库。再打开PC_Simulator.dsw。在project→setting把新生成的lib添加进去。接着再tools→options加入Lib库的路径，有的话在加入头文件的路径。这样可以在模拟器里使用该库了。</p>
+
+<p>最后调用下dou_max函数验证之。</p>
+
+<h2 id="参考资料">参考资料</h2>
+
+<p>[1]陈智鹏. 走出山寨-MTK芯片开发指南. 人民邮电出版社</p>
+
+<p>[2]52rd论坛.
+添加新模块模拟器编译出现问题<a href="http://www.52rd.com/bbs/Detail_RD.BBS_189450_5_1_1.html">http://www.52rd.com/bbs/Detail_RD.BBS_189450_5_1_1.html</a></p>
+
+    </article>
+    <div class="tag-container" >
+        
+        <div class="chip">
+        <a href="/tags#Modis-ref">
+            Modis
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#MTK-ref">
+            MTK
+        </a>
+        </div>
+        
+    </div>
+<div class="post-pager">
+    
+    <a href="/2010/06/25/my-wifi-for-htc-hero/">上一篇：让HTC Hero通过我的笔记本无线网卡共享上网</a>
+    
+    
+    <a href="/2010/07/20/painess-of-minesweeper/" style="float:right;" >下一篇：玩扫雷的悲剧</a>
+    
+</div>
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/2010/07/15/how-to-add-new-module-in-mtk"
+ var disqus_config = function () {
+     this.page.title = "如何为MTK平台添加新模块"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/2010/07/15/how-to-add-new-module-in-mtk/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

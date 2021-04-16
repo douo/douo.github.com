@@ -1,0 +1,793 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    Kotlin Style | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">Kotlin Style</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 18-11-09">2018-07-27</span>
+    
+</div>
+
+<article>
+    <p>本文档以 Android 的 <a href="https://android.github.io/kotlin-guides/style.html">Kotlin Style Guide</a> 为基准。</p>
+
+<p>本文档是Kotlin编程语言中Google的Android源代码编码标准的完整定义。 Kotlin源文件被描述为Google Android Style，当且仅当它符合此处的规则时。</p>
+
+<p>与其他编程风格指南一样，所涉及的问题不仅包括格式化的美学问题，还包括其他类型的约定或编码标准。 但是，本文档主要关注我们普遍遵循的严格规则，并避免提供不明确可执行的建议（无论是通过人工还是工具）。</p>
+
+<h1 id="源文件">源文件</h1>
+
+<h2 id="命名">命名</h2>
+
+<p>如果源文件仅包含单个顶级类，则文件名应反映区分大小写的名称加上<code>.kt</code>扩展名。 否则，如果源文件包含多个顶级声明，请选择描述文件内容的名称，应用PascalCase，并附加<code>.kt</code>扩展名。</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Foo.kt</span>
+<span class="kd">class</span> <span class="nc">Foo</span> <span class="p">{</span> <span class="p">}</span>
+
+<span class="c1">// Bar.kt</span>
+<span class="kd">class</span> <span class="nc">Bar</span> <span class="p">{</span> <span class="p">}</span>
+<span class="k">fun</span> <span class="nc">Runnable</span><span class="p">.</span><span class="nf">toBar</span><span class="p">():</span> <span class="nc">Bar</span> <span class="p">=</span> <span class="c1">// …</span>
+
+<span class="c1">// Map.kt</span>
+<span class="k">fun</span> <span class="p">&lt;</span><span class="nc">T</span><span class="p">,</span> <span class="nc">O</span><span class="p">&gt;</span> <span class="nf">Set</span><span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;.</span><span class="nf">map</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="p">(</span><span class="nc">T</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nc">O</span><span class="p">):</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">O</span><span class="p">&gt;</span> <span class="p">=</span> <span class="c1">// …</span>
+<span class="k">fun</span> <span class="p">&lt;</span><span class="nc">T</span><span class="p">,</span> <span class="nc">O</span><span class="p">&gt;</span> <span class="nf">List</span><span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;.</span><span class="nf">map</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="p">(</span><span class="nc">T</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="nc">O</span><span class="p">):</span> <span class="nc">List</span><span class="p">&lt;</span><span class="nc">O</span><span class="p">&gt;</span> <span class="p">=</span> <span class="c1">// …</span>
+</code></pre></div></div>
+
+<h2 id="结构">结构</h2>
+
+<p><code>.kt</code> 文件按顺序包含以下内容：</p>
+
+<ul>
+  <li>版权和/或许可证标题（可选）</li>
+  <li>文件级注释</li>
+  <li>包声明</li>
+  <li>import 语句</li>
+  <li>顶级声明</li>
+</ul>
+
+<h3 id="import-语句">import 语句</h3>
+
+<ul>
+  <li>类，函数和属性的导入语句组合在一个列表中并对ASCII进行排序。</li>
+  <li>不允许使用通配符导入（任何类型）。</li>
+</ul>
+
+<h3 id="顶级声明">顶级声明</h3>
+
+<p><code>.kt</code> 文件可以在顶层声明一个或多个类，函数，属性或类型别名。</p>
+
+<p>文件的内容应该集中在一个主题上。比如单个公共类型或在多个接收器类型上执行相同操作的一组扩展功能。不相关的声明应该分成不同的的文件，并且应该最小化单个文件中的公共声明。</p>
+
+<p>对文件内容的数量和顺序没有明确的限制。</p>
+
+<p>源文件通常是从上往下阅读，这意味着顺序通常应该反映出放着在头部的声明将有助于对放在底部的声明的理解。不同形式的文件可以选择以不同的排序方式。比如，有的文件可以包含100个属性，有的是10个函数，而有的只是是单个类。</p>
+
+<p>最重要的是安排的顺序应该有一些自洽的逻辑，如果被问到，维护者可以解释它。例如，新函数不能习惯性地添加到类的末尾，因为这将产生“按时间顺序添加”排序，这不是有逻辑的排序。</p>
+
+<p>对类里面的成员的排序也是同样道理。</p>
+
+<h2 id="格式">格式</h2>
+
+<h3 id="大括号">大括号</h3>
+
+<p>当<code>when</code>和<code>if</code>语句体没有其他<code>if/else</code>分支并且适合单行时，不需要大括号。</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="nf">isEmpty</span><span class="p">())</span> <span class="k">return</span>
+
+<span class="k">when</span> <span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="mi">0</span> <span class="p">-&gt;</span> <span class="k">return</span>
+    <span class="c1">// …</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>其余情况大括号都是必须的，<code>if</code>，<code>for</code>，<code>when</code>，<code>do</code>和<code>while</code>语句都需要大括号，即使块是空的或只包含一个语句。</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="nf">isEmpty</span><span class="p">())</span>
+    <span class="k">return</span>  <span class="c1">// WRONG!</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="nf">isEmpty</span><span class="p">())</span> <span class="p">{</span>
+    <span class="k">return</span>  <span class="c1">// Okay</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="非空块">非空块</h3>
+
+<p>对于非空块和类块的结构，大括号遵循 <a href="https://zh.wikipedia.org/wiki/%E7%BC%A9%E8%BF%9B%E9%A3%8E%E6%A0%BC">K&amp;R 风格</a></p>
+
+<ul>
+  <li>开括号前没有断行</li>
+  <li>开括号后断行</li>
+  <li>闭括号前断行</li>
+  <li>闭括号后断行，仅在该大括号终止一个语句或终止函数，构造函数或命名类的主体时。例如，如果后面跟着else或逗号，则在大括号后没有换行符。</li>
+</ul>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">return</span> <span class="nc">Runnable</span> <span class="p">{</span>
+    <span class="k">while</span> <span class="p">(</span><span class="nf">condition</span><span class="p">())</span> <span class="p">{</span>
+        <span class="nf">foo</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">return</span> <span class="kd">object</span> <span class="err">: </span><span class="nc">MyClass</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">foo</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nf">condition</span><span class="p">())</span> <span class="p">{</span>
+            <span class="k">try</span> <span class="p">{</span>
+                <span class="nf">something</span><span class="p">()</span>
+            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="nc">ProblemException</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nf">recover</span><span class="p">()</span>
+            <span class="p">}</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nf">otherCondition</span><span class="p">())</span> <span class="p">{</span>
+            <span class="nf">somethingElse</span><span class="p">()</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nf">lastThing</span><span class="p">()</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="空块">空块</h3>
+
+<p>空块的结构也必须遵循 K&amp;R 风格</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">try</span> <span class="p">{</span>
+    <span class="nf">doSomething</span><span class="p">()</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="nc">Exception</span><span class="p">)</span> <span class="p">{}</span> <span class="c1">// WRONG!</span>
+<span class="k">try</span> <span class="p">{</span>
+    <span class="nf">doSomething</span><span class="p">()</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="nc">Exception</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">}</span> <span class="c1">// Okay</span>
+</code></pre></div></div>
+
+<h3 id="表达式">表达式</h3>
+
+<p>仅当整个表达式适合一行时，<code>if/else</code> 条件表达式可以省略大括号。</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">value</span> <span class="p">=</span> <span class="k">if</span> <span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="nf">isEmpty</span><span class="p">())</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">1</span>  <span class="c1">// Okay</span>
+<span class="kd">val</span> <span class="py">value</span> <span class="p">=</span> <span class="k">if</span> <span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="nf">isEmpty</span><span class="p">())</span>  <span class="c1">// WRONG!</span>
+                <span class="mi">0</span>
+            <span class="k">else</span>
+                <span class="mi">1</span>
+<span class="kd">val</span> <span class="py">value</span> <span class="p">=</span> <span class="k">if</span> <span class="p">(</span><span class="n">string</span><span class="p">.</span><span class="nf">isEmpty</span><span class="p">())</span> <span class="p">{</span> <span class="c1">// Okay</span>
+    <span class="mi">0</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="mi">1</span>
+<span class="p">***</span>
+</code></pre></div></div>
+
+<h3 id="缩进">缩进</h3>
+
+<p>每次打开新的块或块状构造时，缩进增加<strong>四</strong>个空格。 当块结束时，缩进返回到先前的缩进级别。缩进级别适用于整个块中的代码和注释。g</p>
+
+<h3 id="每行一个语句">每行一个语句</h3>
+
+<p>每个语句后面都有一个换行符。 <strong>不使用分号</strong>。</p>
+
+<h3 id="换行">换行</h3>
+
+<p>代码的列限制为100个字符。 除非另有说明，否则任何超出此限制的行都必须换行，如下所述。</p>
+
+<p>例外：</p>
+
+<ul>
+  <li>无法遵守列限制的行（例如，KDoc中的长URL）</li>
+  <li>包和 import 语句</li>
+  <li>注释中的命令行可以剪切并粘贴到shell中</li>
+</ul>
+
+<h4 id="何时断行">何时断行</h4>
+
+<p>换行的主要指引是：偏向在更高的句法层面断行：</p>
+
+<ol>
+  <li>当在非赋值运算符处断行时，断点出现在符号之前，这也包括其他类操作符的符号，比如 <code>.</code> 、<code>::</code></li>
+  <li>当在赋值运算符处断行时，断行在符号后面。</li>
+  <li>方法或构造函数总和其左括号<code>(</code>在一起</li>
+  <li>逗号<code>,</code> 和其前面的标记符在一起</li>
+  <li>lambda箭头<code>-&gt;</code>保持附加到它之前的参数列表。</li>
+</ol>
+
+<p>注意：换行的主要目标是拥有清晰的代码，而不一定是适合最小行数的代码。</p>
+
+<h4 id="延续缩进continuation-indent">延续缩进（Continuation indent）</h4>
+
+<p>换行时，第一行（每个延续行）之后的每一行从原始行缩进至少两个基础缩进（比如 <code>2*2</code> 或 <code>4*2</code>）</p>
+
+<p>当存在多个连续断行时，根据需要，缩进可以变化超过两个基础缩进。 通常，当且仅当它们以语法并行元素开头时，两个连续行使用相同的缩进级别。</p>
+
+<h3 id="函数">函数</h3>
+
+<p>当函数签名不适合单行时，将每个参数声明分解为自己的行。 以此格式定义的参数应使用基础缩进（2 或 4）。 右括号<code>)</code>和返回类型放在它们自己的行上，没有额外的缩进。</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;</span> <span class="nf">Iterable</span><span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;.</span><span class="nf">joinToString</span><span class="p">(</span>
+    <span class="n">separator</span><span class="p">:</span> <span class="nc">CharSequence</span> <span class="p">=</span> <span class="s">", "</span><span class="p">,</span>
+    <span class="n">prefix</span><span class="p">:</span> <span class="nc">CharSequence</span> <span class="p">=</span> <span class="s">""</span><span class="p">,</span>
+    <span class="n">postfix</span><span class="p">:</span> <span class="nc">CharSequence</span> <span class="p">=</span> <span class="s">""</span>
+<span class="p">):</span> <span class="nc">String</span> <span class="p">{</span>
+    <span class="c1">// …</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="函数表达式">函数表达式</h3>
+
+<p>当函数只包含单个表达式时，它可以表示为函数表达式（<a href="https://kotlinlang.org/docs/reference/functions.html#single-expression-functions">expression function</a>）。</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">override</span> <span class="k">fun</span> <span class="nf">toString</span><span class="p">():</span> <span class="nc">String</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s">"Hey"</span>
+<span class="p">}</span>
+<span class="k">override</span> <span class="k">fun</span> <span class="nf">toString</span><span class="p">():</span> <span class="nc">String</span> <span class="p">=</span> <span class="s">"Hey"</span>
+</code></pre></div></div>
+
+<p>函数表达式不应包含两行。 如果表达式函数增长到需要换行，则使用普通函数体，适用返回声明和普通表达式换行规则。</p>
+
+<h3 id="属性">属性</h3>
+
+<p>当属性初始值不适合单行时，在等号 <code>=</code> 之后中断并使用延续缩进。</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">private</span> <span class="kd">val</span> <span class="py">defaultCharset</span><span class="p">:</span> <span class="nc">Charset</span><span class="p">?</span> <span class="p">=</span>
+        <span class="nc">EncodingRegistry</span><span class="p">.</span><span class="nf">getInstance</span><span class="p">().</span><span class="nf">getDefaultCharsetForPropertiesFiles</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>声明<code>get</code>或<code>set</code>函数的属性应该使用基础缩进将它们放在各自的行上。使用与函数相同的规则格式化它们。</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="py">directory</span><span class="p">:</span> <span class="nc">File</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span>
+    <span class="k">set</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// …</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+
+<p>只读属性可以使用适合单行的较短语法。</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">defaultExtension</span><span class="p">:</span> <span class="nc">String</span> <span class="k">get</span><span class="p">()</span> <span class="p">=</span> <span class="s">"kt"</span>
+</code></pre></div></div>
+
+<h2 id="留白">留白</h2>
+
+<h3 id="空行">空行</h3>
+
+<p>单个空行可以出现在：</p>
+
+<ol>
+  <li>在类的连续成员之间：属性，构造函数，函数，嵌套类等。出现在连续成员间的空行用来创建这些成员之间的逻辑分组。空行是可选的</li>
+  <li>在语句之间，根据需要将代码组织成逻辑子部分。</li>
+  <li>其他待讨论</li>
+</ol>
+
+<h3 id="空格">空格</h3>
+
+<p>除了语言或其他样式规则所要求的内容之外，除了文字，注释和KDoc之外，单个ASCII空格也仅出现在以下位置：</p>
+
+<p>将关键字和其后面的 <code>(</code> 分隔开，例如<code>if</code>，<code>for</code>或<code>catch</code></p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// WRONG!</span>
+<span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="mi">0</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">}</span>
+<span class="c1">// Okay</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="mi">0</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>将关键字和其后面的大括号<code>}</code>隔开</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// WRONG!</span>
+<span class="p">}</span><span class="k">else</span> <span class="p">{</span>
+<span class="p">}</span>
+<span class="c1">// Okay</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>在任何开大括号<code>{</code>之前。</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// WRONG!</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">list</span><span class="p">.</span><span class="nf">isEmpty</span><span class="p">()){</span>
+<span class="p">}</span>
+<span class="c1">// Okay</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">list</span><span class="p">.</span><span class="nf">isEmpty</span><span class="p">())</span> <span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>在二元操作符的两边</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// WRONG!</span>
+<span class="kd">val</span> <span class="py">two</span> <span class="p">=</span> <span class="mi">1</span><span class="p">+</span><span class="mi">1</span>
+<span class="c1">// Okay</span>
+<span class="kd">val</span> <span class="py">two</span> <span class="p">=</span> <span class="mi">1</span> <span class="p">+</span> <span class="mi">1</span>
+</code></pre></div></div>
+
+<p>其他: <code>-&gt;</code>、<code>..</code>、<code>:</code>、<code>,</code>、<code>where</code></p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// WRONG!</span>
+<span class="n">ints</span><span class="p">.</span><span class="nf">map</span> <span class="p">{</span> <span class="n">value-</span><span class="p">&gt;</span><span class="n">value</span><span class="p">.</span><span class="nf">toString</span><span class="p">()</span> <span class="p">}</span>
+<span class="c1">// Okay</span>
+<span class="n">ints</span><span class="p">.</span><span class="nf">map</span> <span class="p">{</span> <span class="n">value</span> <span class="p">-&gt;</span> <span class="n">value</span><span class="p">.</span><span class="nf">toString</span><span class="p">()</span> <span class="p">}</span>
+
+<span class="c1">// WRONG</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="mi">1</span> <span class="o">..</span> <span class="mi">4</span><span class="p">)</span> <span class="nf">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="c1">// Okay</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">..</span><span class="mi">4</span><span class="p">)</span> <span class="nf">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+<span class="c1">// WRONG!</span>
+<span class="kd">class</span> <span class="nc">Foo</span><span class="p">:</span> <span class="nc">Runnable</span>
+<span class="c1">// Okay</span>
+<span class="kd">class</span> <span class="nc">Foo</span> <span class="p">:</span> <span class="nc">Runnable</span>
+<span class="c1">// WRONG</span>
+<span class="k">fun</span> <span class="p">&lt;</span><span class="nc">T</span><span class="p">:</span> <span class="nc">Comparable</span><span class="p">&gt;</span> <span class="nf">max</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nc">T</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nc">T</span><span class="p">)</span>
+<span class="c1">// Okay</span>
+<span class="k">fun</span> <span class="p">&lt;</span><span class="nc">T</span> <span class="p">:</span> <span class="nc">Comparable</span><span class="p">&gt;</span> <span class="nf">max</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nc">T</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nc">T</span><span class="p">)</span>
+<span class="c1">// WRONG</span>
+<span class="k">fun</span> <span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;</span> <span class="nf">max</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nc">T</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nc">T</span><span class="p">)</span> <span class="k">where</span> <span class="nc">T</span><span class="p">:</span> <span class="nc">Comparable</span><span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;</span>
+<span class="c1">// Okay</span>
+<span class="k">fun</span> <span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;</span> <span class="nf">max</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nc">T</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nc">T</span><span class="p">)</span> <span class="k">where</span> <span class="nc">T</span> <span class="p">:</span> <span class="nc">Comparable</span><span class="p">&lt;</span><span class="nc">T</span><span class="p">&gt;</span>
+
+<span class="c1">// WRONG!</span>
+<span class="kd">val</span> <span class="py">oneAndTwo</span> <span class="p">=</span> <span class="nf">listOf</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1">// Okay</span>
+<span class="kd">val</span> <span class="py">oneAndTwo</span> <span class="p">=</span> <span class="nf">listOf</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="c1">// WRONG!</span>
+<span class="kd">class</span> <span class="nc">Foo</span> <span class="p">:</span><span class="nc">Runnable</span>
+<span class="c1">// Okay</span>
+<span class="kd">class</span> <span class="nc">Foo</span> <span class="p">:</span> <span class="nc">Runnable</span>
+</code></pre></div></div>
+
+<p>双斜线注释的两边</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// WRONG!</span>
+<span class="kd">var</span> <span class="py">debugging</span> <span class="p">=</span> <span class="k">false</span><span class="c1">//disabled by default</span>
+<span class="c1">// Okay</span>
+<span class="kd">var</span> <span class="py">debugging</span> <span class="p">=</span> <span class="k">false</span> <span class="c1">// disabled by default</span>
+</code></pre></div></div>
+
+<h2 id="特殊结构">特殊结构</h2>
+
+<h3 id="enum-类">Enum 类</h3>
+
+<p>Enum 没有函数其常量也无需文档可以格式为一行</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">enum</span> <span class="kd">class</span> <span class="nc">Answer</span> <span class="p">{</span> <span class="nc">YES</span><span class="p">,</span> <span class="nc">NO</span><span class="p">,</span> <span class="nc">MAYBE</span> <span class="p">}</span>
+</code></pre></div></div>
+
+<p>当 Enum 中的常量放在单独的行上时，它们之间不需要空行，除非它们定义了 body。</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">enum</span> <span class="kd">class</span> <span class="nc">Answer</span> <span class="p">{</span>
+    <span class="nc">YES</span><span class="p">,</span>
+    <span class="nc">NO</span><span class="p">,</span>
+
+    <span class="nc">MAYBE</span> <span class="p">{</span>
+        <span class="k">override</span> <span class="k">fun</span> <span class="nf">toString</span><span class="p">()</span> <span class="p">=</span> <span class="s">"""¯\_(ツ)_/¯"""</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="注解">注解</h3>
+
+<p>成员或类型注解放置在被注解结构的前一行，</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Retention</span><span class="p">(</span><span class="nc">SOURCE</span><span class="p">)</span>
+<span class="nd">@Target</span><span class="p">(</span><span class="nc">FUNCTION</span><span class="p">,</span> <span class="nc">PROPERTY_SETTER</span><span class="p">,</span> <span class="nc">FIELD</span><span class="p">)</span>
+<span class="k">annotation</span> <span class="kd">class</span> <span class="nc">Global</span>
+</code></pre></div></div>
+
+<p>如果注解没有参数可以放置在同一行</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@JvmField</span> <span class="nd">@Volatile</span>
+<span class="kd">var</span> <span class="py">disposable</span><span class="p">:</span> <span class="nc">Disposable</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span>
+</code></pre></div></div>
+
+<p>如果只有一个没有参数的注解，则它可以与被注解结构放在同一行</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Volatile</span> <span class="kd">var</span> <span class="py">disposable</span><span class="p">:</span> <span class="nc">Disposable</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span>
+
+<span class="nd">@Test</span> <span class="k">fun</span> <span class="nf">selectAll</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// …</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="隐式的返回和属性类型">隐式的返回和属性类型</h3>
+
+<p>如果表达式函数的函数体或属性初始值的设定项是标量，或者可以从主体明确推断返回类型，则可以省略它。</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">override</span> <span class="k">fun</span> <span class="nf">toString</span><span class="p">():</span> <span class="nc">String</span> <span class="p">=</span> <span class="s">"Hey"</span>
+<span class="c1">// becomes</span>
+<span class="k">override</span> <span class="k">fun</span> <span class="nf">toString</span><span class="p">()</span> <span class="p">=</span> <span class="s">"Hey"</span>
+
+<span class="k">private</span> <span class="kd">val</span> <span class="py">ICON</span><span class="p">:</span> <span class="nc">Icon</span> <span class="p">=</span> <span class="nc">IconLoader</span><span class="p">.</span><span class="nf">getIcon</span><span class="p">(</span><span class="s">"/icons/kotlin.png"</span><span class="p">)</span>
+<span class="c1">// becomes</span>
+<span class="k">private</span> <span class="kd">val</span> <span class="py">ICON</span> <span class="p">=</span> <span class="nc">IconLoader</span><span class="p">.</span><span class="nf">getIcon</span><span class="p">(</span><span class="s">"/icons/kotlin.png"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>编写库时，如果它是公共API的一部分，请保留显式类型声明。</p>
+
+<h2 id="命名-1">命名</h2>
+
+<p>标识符仅使用ASCII字母、数字、下划线（仅在下面提到的少数情况），因此，每个有效的标识符名称都可以通过正则表达式<code>\w+</code>匹配。
+不使用特殊前缀或后缀，如:<code>name_</code>，<code>mName</code>，<code>s_name</code>和<code>kName</code></p>
+
+<h3 id="包命名">包命名</h3>
+
+<p>包名都是小写的，连续的单词简单地连接在一起（没有下划线）。</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Okay</span>
+<span class="k">package</span> <span class="nn">com.example.deepspace</span>
+<span class="c1">// WRONG!</span>
+<span class="k">package</span> <span class="nn">com.example.deepSpace</span>
+<span class="c1">// WRONG!</span>
+<span class="k">package</span> <span class="nn">com.example.deep_space</span>
+</code></pre></div></div>
+
+<h3 id="类型命名">类型命名</h3>
+
+<p>类名用 <em>PascalCase</em>，通常是名词或名词短语。 例如，<code>Character</code>或<code>ImmutableList</code>。 接口名称也可以是名词或名词短语（例如，<code>List</code>），但有时可能是形容词或形容词短语（例如，<code>Readable</code>）。</p>
+
+<p>测试类的名称从它们正在测试的类的名称开始，以<code>Test</code>结束。 例如，<code>HashTest</code>或<code>HashIntegrationTest</code>。</p>
+
+<h3 id="函数命名">函数命名</h3>
+
+<p>函数命名用 <em>camelCase</em> 通常是动词或动词短语。 例如，<code>sendMessage</code>或<code>stop</code>。</p>
+
+<p>允许下划线出现在测试函数名称中以分隔名称的逻辑组件</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Test</span> <span class="k">fun</span> <span class="nf">pop_emptyStack</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// …</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="常量命名">常量命名</h3>
+
+<p>常量命名用 <em>UPPER_SNAKE_CASE</em>，全部用大写字母，单词用下划线分隔。</p>
+
+<p>常量是<code>val</code>声明的属性，没有自定义get函数，其内容不可变(immutable)，并且其函数没有可检测的副作用。 这包括不可变类型和不可变类型的不可变集合，以及标记为<code>const</code>的标量和字符串。如果实例的任何可观察状态可以更改，则它不是常量。仅仅打算永远不会改变对象是不够的。</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">const</span> <span class="kd">val</span> <span class="py">NUMBER</span> <span class="p">=</span> <span class="mi">5</span>
+<span class="kd">val</span> <span class="py">NAMES</span> <span class="p">=</span> <span class="nf">listOf</span><span class="p">(</span><span class="s">"Alice"</span><span class="p">,</span> <span class="s">"Bob"</span><span class="p">)</span>
+<span class="kd">val</span> <span class="py">AGES</span> <span class="p">=</span> <span class="nf">mapOf</span><span class="p">(</span><span class="s">"Alice"</span> <span class="n">to</span> <span class="mi">35</span><span class="p">,</span> <span class="s">"Bob"</span> <span class="n">to</span> <span class="mi">32</span><span class="p">)</span>
+<span class="kd">val</span> <span class="py">COMMA_JOINER</span> <span class="p">=</span> <span class="nc">Joiner</span><span class="p">.</span><span class="nf">on</span><span class="p">(</span><span class="sc">','</span><span class="p">)</span> <span class="c1">// Joiner is immutable</span>
+<span class="kd">val</span> <span class="py">EMPTY_ARRAY</span> <span class="p">=</span> <span class="n">arrayOf</span><span class="p">&lt;</span><span class="nc">SomeMutableType</span><span class="p">&gt;()</span>
+</code></pre></div></div>
+
+<p>名称通常是名词或名词短语。常量值只能在对象内部定义或作为顶级声明定义。满足常量要求但在类内定义的值必须使用非常量名称。标量值的常量必须使用<code>const</code>修饰符。</p>
+
+<h3 id="非常量命名">非常量命名</h3>
+
+<p>非常量名称是用camelCase编写的。 这些适用于实例属性，局部属性和参数名称。通常是名词或名词短语。</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">variable</span> <span class="p">=</span> <span class="s">"var"</span>
+<span class="kd">val</span> <span class="py">nonConstScalar</span> <span class="p">=</span> <span class="s">"non-const"</span>
+<span class="kd">val</span> <span class="py">mutableCollection</span><span class="p">:</span> <span class="nc">MutableSet</span><span class="p">&lt;</span><span class="nc">String</span><span class="p">&gt;</span> <span class="p">=</span> <span class="nc">HashSet</span><span class="p">()</span>
+<span class="kd">val</span> <span class="py">mutableElements</span> <span class="p">=</span> <span class="nf">listOf</span><span class="p">(</span><span class="n">mutableInstance</span><span class="p">)</span>
+<span class="kd">val</span> <span class="py">mutableValues</span> <span class="p">=</span> <span class="nf">mapOf</span><span class="p">(</span><span class="s">"Alice"</span> <span class="n">to</span> <span class="n">mutableInstance</span><span class="p">,</span> <span class="s">"Bob"</span> <span class="n">to</span> <span class="n">mutableInstance2</span><span class="p">)</span>
+<span class="kd">val</span> <span class="py">logger</span> <span class="p">=</span> <span class="nc">Logger</span><span class="p">.</span><span class="nf">getLogger</span><span class="p">(</span><span class="nc">MyClass</span><span class="o">::</span><span class="k">class</span><span class="p">.</span><span class="n">java</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+<span class="kd">val</span> <span class="py">nonEmptyArray</span> <span class="p">=</span> <span class="nf">arrayOf</span><span class="p">(</span><span class="s">"these"</span><span class="p">,</span> <span class="s">"can"</span><span class="p">,</span> <span class="s">"change"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="后备属性">后备属性</h3>
+
+<p><a href="https://kotlinlang.org/docs/reference/properties.html#backing-properties">后备属性</a>，kotlin 引入的概念。当需要后备属性时，其名称应该与属性的名称完全匹配，但前缀为下划线。</p>
+
+<p>private var _table: Map&lt;String, Int&gt;? = null</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">table</span><span class="p">:</span> <span class="nc">Map</span><span class="p">&lt;</span><span class="nc">String</span><span class="p">,</span> <span class="nc">Int</span><span class="p">&gt;</span>
+    <span class="k">get</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">_table</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">_table</span> <span class="p">=</span> <span class="nc">HashMap</span><span class="p">()</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">_table</span> <span class="o">?:</span> <span class="k">throw</span> <span class="nc">AssertionError</span><span class="p">()</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="类型变量命名">类型变量命名</h3>
+
+<p>每个类型变量都以两种样式之一命名：</p>
+
+<ul>
+  <li>单个大写字母，可选地后跟单个数字（例如<code>E</code>，<code>T</code>，<code>X</code>，<code>T2</code>）</li>
+  <li>用于类的形式的名称，后跟大写字母T（例如<code>RequestT</code>，<code>FooBarT</code>）</li>
+</ul>
+
+<h3 id="驼峰命名转换规则">驼峰命名转换规则</h3>
+
+<p>有时，将英语短语转换为驼峰大小写的方法不止一种，例如当存在首字母缩略词或“IPv6”或“iOS”等不寻常的结构时。 要提高可预测性，请使用以下方案。</p>
+
+<ol>
+  <li>将短语转换为纯ASCII并删除任何撇号。 例如，“Müller’s algorithm” 可能成为 “Muellers algorithm”</li>
+  <li>将此结果划分为单词，拆分空格和任何剩余的标点符号（通常为连字符）。</li>
+  <li>现在小写所有内容（包括首字母缩略词），然后只大写第一个字符</li>
+  <li>最后，将所有单词连接成一个标识符。</li>
+</ol>
+
+<table>
+  <tbody>
+    <tr>
+      <td>句子</td>
+      <td>正确</td>
+      <td>错误</td>
+    </tr>
+    <tr>
+      <td>“XML Http Request”</td>
+      <td><code>XmlHttpRequest</code></td>
+      <td><code>XMLHTTPRequest</code></td>
+    </tr>
+    <tr>
+      <td>“new customer ID”</td>
+      <td><code>newCustomerId</code></td>
+      <td><code>newCustomerID</code></td>
+    </tr>
+    <tr>
+      <td>“inner stopwatch”</td>
+      <td><code>innerStopwatch</code></td>
+      <td><code>innerStopWatch</code></td>
+    </tr>
+    <tr>
+      <td>“supports IPv6 on iOS”</td>
+      <td><code>supportsIpv6OnIos</code></td>
+      <td><code>supportsIPv6OnIOS</code></td>
+    </tr>
+    <tr>
+      <td>“YouTube importer”</td>
+      <td><code>YouTubeImporter</code></td>
+      <td><code>YoutubeImporter</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="注释">注释</h2>
+
+<p>在此示例中可以看到KDoc块的基本形式：</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * Multiple lines of KDoc text are written here,
+ * wrapped normally…
+ */</span>
+<span class="k">fun</span> <span class="nf">method</span><span class="p">(</span><span class="n">arg</span><span class="p">:</span> <span class="nc">String</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// …</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>单行示例：</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/** An especially short bit of KDoc. */</span>
+</code></pre></div></div>
+
+<p>基本形式总是可以接受的。当整个KDoc块（包括注释标记）可以适合单行时，可以替换单行形式。请注意，这仅适用于没有<code>@return</code>等块标记的情况。</p>
+
+
+</article>
+<div class="tag-container" >
+    
+    <div class="chip">
+        <a href="/tags#kotlin-ref">
+            kotlin
+        </a>
+    </div>
+    
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Programming/Kotlin/kotlin-style"
+ var disqus_config = function () {
+     this.page.title = "Kotlin Style"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Programming/Kotlin/kotlin-style/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

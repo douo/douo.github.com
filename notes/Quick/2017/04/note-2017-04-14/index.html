@@ -1,0 +1,508 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    2017年04月14日杂记 | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">2017年04月14日杂记</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 18-05-28">2017-04-14</span>
+    
+</div>
+
+<article>
+    <h3 id="android-中的框架模式">Android 中的框架模式</h3>
+
+<p>职责划分的问题。一个 Android UI 应用的职责到底有哪些？</p>
+
+<p>想象一个好友页，需要展示用户的基本信息，还有提供两个按钮分别对话和删除或添加按钮（需要更加用户是否是好友来判断）。实现这个页需要的职责有：</p>
+
+<ol>
+  <li>将设计稿转换为手机上的界面元素。比如写 layout 文件</li>
+  <li>响应用户事件，比如按钮被按下</li>
+  <li>将用户信息填入界面，甚至更改界面元素的关系，比如显示添加或者删除按钮。</li>
+  <li>实现对话、删除、添加按钮该做什么</li>
+  <li>获取用户信息，一般来说是个异步耗时操作</li>
+  <li>界面需要反映正在读取中这个操作</li>
+  <li>需对错误进行处理</li>
+  <li>需要对 Android 的生命周期进行处理。</li>
+</ol>
+
+<h3 id="mvc">MVC</h3>
+
+<p>》<img src="https://nirajrules.files.wordpress.com/2009/07/mvcmvp2.jpg" alt="" /></p>
+
+<ul>
+  <li>View：先对是最简单的 View，相当于 layout 文件，尽量保持『愚蠢』（dump），基本就是单纯的布局界面元素</li>
+  <li>Controller： Acitvity，部分更改 View 的功能，和业务逻辑。</li>
+  <li>Model：数据模型，数据来源，持久化</li>
+</ul>
+
+<p>对于 MVC 来说，View 是最简单只负责第一个职责。Controller 相当于 Activity，需要做的事情就多了，需要读取用户信息，读取过程中需要启动一个 ProgressBar 来告知用户正在读取中。还要为按钮添加监听器。每个按钮的本地业务逻辑也会放在这里。读取完成后，将信息填入各个 View 里，控制第二个按钮是显示<strong>添加</strong>还是<strong>删除</strong>。还可能读取失败就需要显示一个 Toast 告知。还有处理个各个生命周期回调，比如 onDestroy 的时候关闭与数据源的连接等等。</p>
+
+<p>Model 层，包括数据对象，和数据源继续交互，比如获取数据，更改数据。比如添加好友，可能就需要添加好友 API，这也是一个异步操作。</p>
+
+<p>如上图，Model 的更新需要通知 View，但 Android 中并没做到这一点。</p>
+
+<h3 id="mvp">MVP</h3>
+
+<ul>
+  <li>View: layout 和 Activity</li>
+  <li>Presenter：响应 View 的事件，通知 View 更新，通知 Model 修改，接收 Model 改变的通知</li>
+  <li>Model：</li>
+</ul>
+
+<p>对于 MVP，View 多了 Activity，做的事情相对多了一些。layout 负责布局，Activity 也算是一个 Controller，只是变得简单了，不再主动控制读取数据。而是定义一个 <code>UserView</code> 接口用于隔离 View 和 Presenter。比如，</p>
+
+<ul>
+  <li>setUser</li>
+  <li>showLoading</li>
+  <li>showContent</li>
+  <li>showError</li>
+</ul>
+
+<p>这样就把 Activity 和 Presenter 隔离开了，Persenter 负责读取数据，告知 View 显示读取中，至于怎么显示，是弹出 ProgressBarDialog 还是在页面内转菊花，Presenter 就不管了。Presenter 不保存 Activity 的引用，只是保存 UserView 接口。而 Activity 则需要保存 Presenter，一旦发生用户事件，Activity 需要通知 Presenter 进行处理(实际上还有系统事件也要 Presenter 处理。)，比如说</p>
+
+<pre><code>mConversationButton.click(()-&gt;{mPresenter.onConversationButtonClick()});
+</code></pre>
+
+<p>第二个按钮情况就有点复杂了，它根据用户状态的不同，涉及不同的业务逻辑。是不是该在 Activity 中写：</p>
+
+<pre><code>mAddOrDelButton.click(()-&gt;{user.isFriend?mPresenter.onDelButtonClick():mPresenter.onAddButtonClick()});
+</code></pre>
+
+<p>实际上这就涉及 View 的厚度问题，简单的逻辑放入 View 中无可厚非，不过 Passive View 来说，还是放在 Pensenter 合理写。</p>
+
+<p>mAddOrDelButton.click(()-&gt;{mPresenter.mAddOrDelButtonClick()});</p>
+
+<p>View 层要保持简单，保存愚蠢，所谓的 Passive View，涉及的业务逻辑的东西就应该放入 Presenter，Presenter 负责做各种脏活。</p>
+
+<p>MVP purists would argue that the presenter should never have any references to any Android APIs or code.
+MVP 中 Activity 只是作为 dump view 的一部分。MVP 中也有 Controller， Controller is the component that handles the click events and calls the corresponding Presenter methods.所以把他归入 View 层。</p>
+
+<p><a href="http://hannesdorfmann.com/mosby/mvp/">MVP – Mosby</a></p>
+
+<p>对 Presenter 来说 View 是一个接口，mocking 更容易</p>
+
+<h3 id="mvvm">MVVM</h3>
+
+<ul>
+  <li>View： layout 和 Activity</li>
+  <li>ViewModel：两个职责，传递用户动作；更新 View。</li>
+</ul>
+
+<p>MVVM is attractive for platforms which support bi-directional binding with less effort.</p>
+
+<p>利用数据双向绑定功能，让 Presenter 变薄，只起到一个同步 View 和 Model 中介的角色，所以便叫 ViewModel。</p>
+
+<p>ViewModel 不像 Presenter 拥有 View 的引用，不依赖于 View</p>
+
+<p>https://github.com/inloop/AndroidViewModel</p>
+
+<p><a href="https://willowtreeapps.com/ideas/mvvm-on-android-what-you-need-to-know/">MVVM on Android: What You Need to Know</a></p>
+
+<h3 id="注解减少代码量">注解减少代码量</h3>
+
+<ul>
+  <li><a href="https://github.com/sockeqwe/fragmentargs">sockeqwe/fragmentargs: Annotation Processor for setting arguments in android fragments</a></li>
+  <li></li>
+</ul>
+
+<p>https://nirajrules.wordpress.com/2009/07/18/mvc-vs-mvp-vs-mvvm/</p>
+
+<h3 id="medium">Medium</h3>
+
+<ul>
+  <li><a href="https://github.com/Flipboard/bottomsheet">Flipboard/bottomsheet: Android component which presents a dismissible view from the bottom of the screen</a></li>
+  <li><a href="https://github.com/drewnoakes/metadata-extractor">drewnoakes/metadata-extractor: Extracts Exif, IPTC, XMP, ICC and other metadata from image files</a></li>
+  <li><a href="https://github.com/square/phrase">square/phrase: Phrase is an Android string resource templating library</a></li>
+  <li><a href="https://github.com/bumptech/glide">bumptech/glide: An image loading and caching library for Android focused on smooth scrolling</a></li>
+  <li><a href="https://github.com/sephiroth74/ImageViewZoom">sephiroth74/ImageViewZoom: Android ImageView widget with zoom and pan capabilities</a></li>
+  <li><a href="https://github.com/chrisjenx/Calligraphy">chrisjenx/Calligraphy: Custom fonts in Android the easy way…</a></li>
+  <li><a href="https://github.com/JakeWharton/timber">JakeWharton/timber: A logger with a small, extensible API which provides utility on top of Android’s normal Log class.</a></li>
+  <li>okhttp3</li>
+  <li>retrofit/retrofit2</li>
+  <li>rxjava</li>
+</ul>
+
+<p>其他</p>
+
+<ul>
+  <li><a href="https://mvnrepository.com/artifact/com.adobe.xmp/xmpcore">Maven Repository: com.adobe.xmp » xmpcore</a></li>
+  <li><a href="https://try.crashlytics.com/">The most powerful, yet lightest weight crash reporting solution for iOS and Android developers. | Crashlytics</a></li>
+  <li><a href="https://fabric.io/kits?show_signup=true&amp;utm_campaign=fabric-marketing&amp;utm_medium=natural">Fabric</a></li>
+</ul>
+
+<h3 id="类图">类图</h3>
+
+<p>类图的危险，在于专注于类的结构而忽略行为</p>
+
+<pre><code> ---------
+|  Name   |
+ ---------
+|  Props  |
+ ---------
+|   Ops   |
+ ---------
+</code></pre>
+
+<h4 id="属性properties">属性（Properties）</h4>
+
+<p>属性语法：<code>visibility name: type multiplicity = default {property-string}</code>，例子：<code>- name: String [1] = "Untitled" {readOnly}</code></p>
+
+<h4 id="操作operations">操作（Operations）</h4>
+
+<p>操作是类知道要执行的动作。<code>visibility name (parameter-list) : return-type {property-string}
+</code>，比如：<code>+ balanceOn (date: Date) : Money</code></p>
+
+<p>不更改系统状态的操作称为 <em>query</em>，更改系统状态的操作称为 <em>modifier</em></p>
+
+<h4 id="关系">关系</h4>
+
+<h5 id="关联association">关联（Association）</h5>
+
+<p><img src="http://g.gravizo.com/g?
+    class a;
+    class b;
+    a --&gt; b;" alt="" /></p>
+
+<p>实线带箭头，由源类指向目标类。属性其实也是一种关联关系。虽然两种表示法都差不多，但关联关系，能在关系的两边都表示多重性（multiplicities）。</p>
+
+<p>一般来说用原生类型或者一些简单的类型用属性表示，重要的类型用关联关系表示。</p>
+
+<h5 id="双向关联bidirectional-association">双向关联（bidirectional association）</h5>
+
+<p>实现两端带箭头：</p>
+
+<p><img src="http://g.gravizo.com/g?
+    class a;
+    class b;
+    a &lt;--&gt; b;" alt="" /></p>
+
+<h5 id="泛化generaliztation">泛化（Generaliztation）</h5>
+
+<p><img src="http://g.gravizo.com/g?
+    class People;
+    class Student;
+    People &lt;|-- Student;" alt="" /></p>
+
+<p>超类是子类的泛化。见 <a href="https://zh.wikipedia.org/wiki/%E5%B9%BF%E4%B9%89%E5%8C%96">广义化 - 维基百科，自由的百科全书</a></p>
+
+<p>泛化是传递的。</p>
+
+<h5 id="分类classification">分类（Classification）</h5>
+
+<p>实例化</p>
+
+<h5 id="依赖dependency">依赖（Dependency）</h5>
+
+<p><img src="http://g.gravizo.com/g?
+    class a;
+    class b;
+    a ..&gt; b;" alt="" /></p>
+
+<p>如果一个关系中，B 的更改会导致 A 的更改，那么称为 A 依赖 B，比如 B 更改了 A 调用的方法名。</p>
+
+<p>依赖关系不是传递的，比如 B 依赖 C，当 A 不一定依赖 C，</p>
+
+<h5 id="聚合与组合aggregation-and-composition">聚合与组合（Aggregation and Composition）</h5>
+
+<h4 id="多重性multiplicity">多重性（Multiplicity）</h4>
+
+<p>Multiplicity：由两个值组成：<code>n..m</code>，如果 n = m，可以简化为 n。另外 <code>0..*</code> 可以简化为 <code>*</code></p>
+
+<ul>
+  <li>可选：0.</li>
+  <li>必须：低位值不为 0</li>
+  <li>单值：1.</li>
+  <li>多值：高位值不为 1，一般为 *</li>
+</ul>
+
+<h4 id="可见性visibility">可见性（Visibility）</h4>
+
+<p>visibility: + (public), – (private), ~ (package), and # (protected).</p>
+
+<h3 id="用例图">用例图</h3>
+
+<h3 id="java-8">Java 8</h3>
+
+<p>Android Studio 2.4 支持 Java 8 ，</p>
+
+<p><img src="https://developer.android.com/studio/preview/features/images/desugar_2x.png" alt="" /></p>
+
+<p>对于 lambda 表达式，方法引用，等等语法改进支持到任意平台，其他 java 8 API 支持 API 24 以上支持。</p>
+
+<p>与 retrolambda 最大的区别是，Android Studio 是在 .class 文件上做出来。通过一个工具 <code>desugar</code>。而 retrolambda 是在源码上做处理，不能支持一些用 java 8 特性编译后的库。</p>
+
+<p><a href="https://developer.android.com/studio/preview/features/java8-support.html?utm_source=android-studio#migrate">Use Java 8 language features | Android Studio</a></p>
+
+</article>
+<div class="tag-container" >
+    
+    <div class="chip">
+        <a href="/tags#java8-ref">
+            java8
+        </a>
+    </div>
+    
+    <div class="chip">
+        <a href="/tags#architecture-ref">
+            architecture
+        </a>
+    </div>
+    
+    <div class="chip">
+        <a href="/tags#android-ref">
+            android
+        </a>
+    </div>
+    
+    <div class="chip">
+        <a href="/tags#desugar-ref">
+            desugar
+        </a>
+    </div>
+    
+    <div class="chip">
+        <a href="/tags#uml-ref">
+            uml
+        </a>
+    </div>
+    
+    <div class="chip">
+        <a href="/tags#类图-ref">
+            类图
+        </a>
+    </div>
+    
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Quick/2017/04/note-2017-04-14"
+ var disqus_config = function () {
+     this.page.title = "2017年04月14日杂记"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Quick/2017/04/note-2017-04-14/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

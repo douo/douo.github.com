@@ -1,0 +1,409 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    配置 RUHOH 环境 | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">配置 RUHOH 环境</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-11-30">2014-02-09</span>
+    
+</div>
+
+<article>
+    <h3 id="emacs">Emacs</h3>
+
+<p><a href="http://ftp.gnu.org/gnu/emacs/windows/">Emacs for Windows</a></p>
+
+<p><a href="http://aquamacs.org/，需要将">Aquamacs</a>  for Mac</p>
+
+<h4 id="个人配置">个人配置</h4>
+
+<p>将 <a href="https://github.com/douo/lims_dot_emacs">lims_dot_emacs</a> clone 到 <code>~/.emacs.d</code> 重启 emacs 便配置好一切。</p>
+
+<h4 id="配置-capslock-为-ctrl">配置 CapsLock 为 Ctrl</h4>
+
+<p>Mac 可在设置 -&gt; 键盘 -&gt; 修饰键里直接修改。</p>
+
+<p>Win 需要改注册表，将下面的代码保存成 <code>.reg</code> 导入便可。</p>
+
+<pre><code>REGEDIT4
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Keyboard Layout]
+"Scancode Map"=hex:00,00,00,00,00,00,00,00,02,00,00,00,1d,00,3a,00,00,00,00,00
+</code></pre>
+
+<p>详见，<a href="http://www.emacswiki.org/emacs/MovingTheCtrlKey">MovingTheCtrlKey</a></p>
+
+<pre><code>(load "~/.emacs.d/init.el")
+</code></pre>
+
+<p>写入 <code>~/.emacs</code>，让 Aquamacs 加载 emacs 的配置文件。</p>
+
+<h3 id="cygwin">Cygwin</h3>
+
+<p>Win 下需要 Cygwin 环境，在<a href="http://cygwin.com/install.html">这里</a>下载安装。</p>
+
+<p>使用 <a href="https://github.com/transcode-open/apt-cyg">apt-cyg</a> 安装管理包更方便。</p>
+
+<p>需要用到下面这些包：</p>
+
+<pre><code>ruby
+emacs emacs-win32
+git  git-completion
+zsh
+curl wget
+openssh
+make gcc
+libyaml
+libcrypt devel #redcarpet
+libiconv devel # nogokiri
+</code></pre>
+
+<p>emacs-win32 安装后可以在 Cygwin 中直接打开 Win 下 Emacs  的 GUI，仍然在 Cygwin 环境下，不过经测试不支持输入法，对汉字的支持也不好（默认字体）。</p>
+
+<h4 id="tree">tree</h4>
+
+<p>cygwin 下没有 tree ，手动编译便可。在<a href="http://mama.indstate.edu/users/ice/tree/">这里</a>下载源码，根据 <code>INSTALL</code> 文件的指引来安装。</p>
+
+<h4 id="gem-222">gem 2.2.2</h4>
+
+<p><code>gem 2.2.2</code> + <code>ruby 1.9.3p484 (2013-11-22)</code> 在 Cygwin 下有 bug，安装提示出错：</p>
+
+<pre><code>ERROR:  While executing gem ... (ArgumentError)
+    invalid byte sequence in UTF-8
+</code></pre>
+
+<p>将 <code>/usr/share/ruby/2.0.0/win32/registry.rb</code> 的 172 行注释掉便可。具体见 <a href="https://bugs.ruby-lang.org/issues/8508">issue 8508</a>。</p>
+
+<h4 id="nokogiri">nokogiri</h4>
+
+<p>2015-03-04，nokogiri(1.6.6.2) 安装失败，见 https://groups.google.com/forum/#!topic/nokogiri-talk/BigaPrf2AwE</p>
+
+<pre><code>- RUBYGEMS VERSION: 2.4.6
+- RUBY VERSION: 2.0.0 (2014-11-13 patchlevel 598) [x86_64-cygwin]
+</code></pre>
+
+<h3 id="iterm2">iTerm2</h3>
+
+<p>在 Mac 下 <a href="http://www.iterm2.com/#/section/home">iTerm2</a> 是一个更强大的终端，现已习惯用这个。</p>
+
+<p>解决 option key 的映射问题：<a href="https://stackoverflow.com/questions/196357/making-iterm-to-translate-meta-key-in-the-same-way-as-in-other-oses">osx - Making iTerm to translate ‘meta-key’ in the same way as in other OSes - Stack Overflow</a></p>
+
+<h3 id="oh-my-zsh">oh-my-zsh</h3>
+
+<p>Cygwin 下配置好 zsh 环境：</p>
+
+<pre><code># Create initial /etc/zshenv
+[[ ! -e /etc/zshenv ]] &amp;&amp; echo export PATH=/usr/bin:\$PATH &gt; /etc/zshenv
+   # setting up zsh as default
+   sed -i "s/$USER\:\/bin\/bash/$USER\:\/bin\/zsh/g" /etc/passwd
+</code></pre>
+
+<p><strong>新版本</strong>的 Cygwin 可直接修改 <code>/etc/nsswitch.conf</code> 切换 Shell。</p>
+
+<p><a href="http://www.iterm2.com/#/section/home">iTerm2</a> 可用下面的命令将 shell 更改为 zsh：</p>
+
+<pre><code>chsh -s `which zsh`
+</code></pre>
+
+<p>安装 <a href="https://github.com/robbyrussell/oh-my-zsh">oh-my-zsh</a></p>
+
+<pre><code>   git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+   cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
+</code></pre>
+
+<p>主题</p>
+
+<pre><code>ZSH_THEME="blinks"
+</code></pre>
+
+<p>插件</p>
+
+<p>CygWin：</p>
+
+<pre><code>plugins=(git ruby gem ssh-agent)
+</code></pre>
+
+<p>iTerm2：</p>
+
+<pre><code>plugins=(git osx brew ruby gem)
+</code></pre>
+
+<h3 id="ruhohrb">ruhoh.rb</h3>
+
+<p><a href="https://github.com/ruhoh/ruhoh.rb">ruhoh.rb</a> 用的是<a href="https://github.com/douo/ruhoh.rb">我的 fork</a>，主要是多了个指定工作路径的选项，这个不好通过插件来扩展。</p>
+
+<p>然后用 gem 安装，补上缺失的 gems 就行。</p>
+
+<p><code>.zshrc</code> 要配置一下：</p>
+
+<pre><code>DOUO=$HOME/.douo  # 我的个人配置文件目录
+PATH=$HOME/bin:$PATH # 添加用户可执行文件路径
+source $DOUO/ruhoh.sh # ruhoh 的配置
+</code></pre>
+
+<p><a href="https://gist.github.com/douo/4452974">ruhoh.sh</a> 为ruhoh 提供一些快捷命令。</p>
+
+<h3 id="vagrant">Vagrant</h3>
+
+<p>Windows 下还是使用 <a href="https://www.vagrantup.com/docs/">Vagrant</a> 来搭建 Ruhoh 方便。用的是基于标准 Ubuntu 14.04.2 打包的 box。</p>
+
+<p>配置需要加上端口转发，还有自动启动 Ruhoh 服务的 provision。 具体<a href="https://gist.github.com/douo/d06dcf0714b0652c9194">Vagrantfile</a></p>
+
+<p>在 Box 的目录下加上两个批处理文件</p>
+
+<p>vp.bat</p>
+
+<pre><code>vagrant up
+</code></pre>
+
+<p>vh.bat</p>
+
+<pre><code>vagrant halt
+</code></pre>
+
+<p>在将其加入环境变量中，分别在运行窗口直接运行。</p>
+
+<p>默认 SSH 端口是 <code>2222</code>，用户密码是<code>vagrant:vagrant</code>。通过下面的命令将 cygwin 的 pub key 加入 vagrant</p>
+
+<p><code>ssh-copy-id -i ~/.ssh/id_rsa.pub vagrant@127.0.0.1 -p 2222</code></p>
+
+<p>以后可直接连入</p>
+
+<p><code>ssh -p 2222 vagrant@localhost</code></p>
+
+</article>
+<div class="tag-container" >
+    
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Tools/ruhoh-env"
+ var disqus_config = function () {
+     this.page.title = "配置 RUHOH 环境"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Tools/ruhoh-env/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

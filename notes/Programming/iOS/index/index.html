@@ -1,0 +1,467 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    iOS | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">iOS</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-12-09">2012-08-11</span>
+    
+</div>
+
+<article>
+    <h3 id="strong-weak">strong weak</h3>
+
+<p>automatic reference counting</p>
+
+<p>不同於垃圾收集機制，當對象失去最後一個strong 指針，就會馬上被釋放，沒有延遲。</p>
+
+<h3 id="foundation-框架">Foundation 框架</h3>
+
+<h3 id="nsobject">NSObject</h3>
+
+<p>所有對象的基類</p>
+
+<h3 id="nsstring">NSString</h3>
+
+<p>Unicode 編碼的任意語言的字符串</p>
+
+<p>在ios 中代替 c 語言的char *</p>
+
+<p>immutable</p>
+
+<h4 id="连接字符串">连接字符串</h4>
+
+<h3 id="nsmutablestring">NSMutableString</h3>
+
+<p>mutable 的 NSString</p>
+
+<h3 id="nsnumber">NSNumber</h3>
+
+<p>封裝了所有原生類型</p>
+
+<h3 id="nsvalue">NSValue</h3>
+
+<p>封裝其他非對象數據</p>
+
+<h3 id="nsdata">NSData</h3>
+
+<p>二進制數據</p>
+
+<h3 id="nsdate">NSDate</h3>
+
+<p>時間</p>
+
+<h3 id="nsarray">NSArray</h3>
+
+<p>有序的對象集合，immutable</p>
+
+<p>不能放 nil ，可以用NSNull 代替。</p>
+
+<h3 id="nsmutablearray">NSMutableArray</h3>
+
+<p>Mutable 繼承  NSArray</p>
+
+<h3 id="nsdictionary">NSDictionary</h3>
+
+<p>immutable hash 表</p>
+
+<h3 id="nsmutablediction">NSMutableDiction</h3>
+
+<pre><code>//遍历 key 和 value
+NSEnumerator *enumerator = [dic keyEnumerator];
+id key;
+NSLog(@"%@",template);
+while ((key = [enumerator nextObject]))
+{
+	NSLog(@"&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;@@@&gt;&gt;&gt;%@:%@", key,[dic valueForKey:key]);
+
+}
+</code></pre>
+
+<h3 id="nsset">NSSet</h3>
+
+<p>不可變的無序集合
+不同同時保存兩個相同的對象</p>
+
+<h3 id="nsmutableset">NSMutableSet</h3>
+
+<h3 id="nsorderedset">NSOrderedSet</h3>
+
+<p>NSSet + NSArray 有序不能有重複對象</p>
+
+<h3 id="nsmutableorderedset">NSMutableOrderedSet</h3>
+
+<h3 id="枚舉">枚舉</h3>
+<h3 id="property-list">Property List</h3>
+
+<p>NSArray ， NSDictionary，NSNumber，NString，NSDate，NSData</p>
+
+<h4 id="nsuserdefaults">NSUserDefaults</h4>
+
+<p>只能存放 Property List 的輕量數據庫</p>
+
+<p>類似 Android 的 sharedperference</p>
+
+<h3 id="app-launch-sequence">App Launch Sequence</h3>
+
+<p>http://oleb.net/blog/2011/06/app-launch-sequence-ios/</p>
+
+<p><code>application:didFinishLaunchingWithOptions:</code></p>
+
+<p>与C一样，以main 作为入口函数。下面是 xcode 默认生成的入口函数，加了些
+注释。</p>
+
+<pre><code>int main(int argc, char *argv[]) //是命令行传递的参数。
+{
+	// 创建一个Cocoa程序必须的自动回收池
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+	// 后面另有论述
+    int retVal = UIApplicationMain(argc, argv, nil, nil);
+	// 释放 自动回收池
+    [pool release];
+    return retVal;
+}
+</code></pre>
+
+<p><code>int argc, char *argv[]</code></p>
+
+<h4 id="uiapplicationmain">UIApplicationMain</h4>
+
+<p><a href="http://oleb.net/media/ios-4-app-launch-flow.png"><img src="http://oleb.net/media/ios-4-app-launch-flow.png" alt="" title="IMAG0007" /></a></p>
+
+<p><code>UIApplicationMain(argc, argv, nil, nil)</code> 第三个参数，是UIApplication
+子类的类名，为<code>nil</code>则创建默认的UIApplication实例。</p>
+
+<p>第四个参数是application delegate的类名，如
+<code>NSStringFromClass([SBAppDelegate class])</code></p>
+
+<h3 id="nsnotificationcenter">NSNotificationCenter</h3>
+
+<p>每一个运行中的 Cocoa 程序都有一个默认的 notification center
+就是设计模式中的观察者模式，可以看作一个信息的中转中心。</p>
+
+<pre><code>+ (NSNotificationCenter *)defaultCenter
+</code></pre>
+
+<p>返回notification center ，类
+方法,返回全局对象</p>
+
+<pre><code>- (void)addObserver:(id)anObserver
+           selector:(SEL)aSelector
+               name:(NSString *)notificationName
+             object:(id)anObject
+</code></pre>
+
+<p>注册anObserver对象:接受名字为notificationName, 发送者为anObject的
+notification. 当anObject发送名字为notificationName的notification时, 将
+会调用anObserver的aSelector方法,参数为该notification</p>
+
+<ul>
+  <li>如果notificationName为nil. 那么notification center将anObject发送的所有notification转发给observer</li>
+  <li>
+    <p>如果anObject为nil.那么notification center将所有名字为notificationName的notification转发给observer</p>
+
+    <ul>
+      <li>(void)postNotification:(NSNotification *)notification</li>
+    </ul>
+  </li>
+</ul>
+
+<p>发送notification至notification center</p>
+
+<pre><code>- (void)postNotificationName:(NSString *)aName
+	  object:(id)anObject
+</code></pre>
+
+<p>创建并发送一个notification</p>
+
+<pre><code>- (void)removeObserver:(id)observer
+</code></pre>
+
+<p>移除observer</p>
+
+<p>一个实例</p>
+
+<pre><code>// 注册一个观察者
+[[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(handleNotification:)
+                                                 name:kFetcherNotifi
+                                               object:nil];
+
+// 向消息中心发送消息，消息中心将通知所有注册了kFetcherNotifi的观察者
+[[NSNotificationCenter defaultCenter] postNotificationName:kFetcherNotifi
+                                                        object:self
+                                                      userInfo:dict];
+													  
+// 实际就是调用观察者中注册的方法，以 NSNotification 作为参数
+- (void)handleNotification:(NSNotification *)notif {
+    [notif userInfo]  // 获取 userInfo   
+</code></pre>
+
+<h3 id="nstimer">NSTimer</h3>
+
+<p>NSTimer 有四个静态工厂方法，使用TImer可以分为两种方式</p>
+
+<pre><code>//这种方式返回一个新的NSTimer对象，并将它以default 模式加入到当前的run loop 当中
+
+NSTimer *  timer = [NSTimer scheduledTimerWithTimeInterval:timeSeq[timeSeqCursor++] target:self selector:@selector(requeue) userInfo:nil repeats:NO];
+
+//这种方式返回一个新的NSTimer 对象，但不会将timer加入到 RunLoop 中，需
+//要手动调用 runloop 的 addTimer 方法
+
+NSTimer *  timer = [NSTimer timerWithTimeInterval:timeSeq[timeSeqCursor++] target:self selector:@selector(requeue) userInfo:nil repeats:NO];
+
+[[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+</code></pre>
+
+<p>NSTimer 可以分为重复(repeating)和不重复(non-repeating)，不重复的Timer
+到期后将会被自动移除run loop 后被release。重复的Timer需要手动用
+<code>[timer invalidate]</code>来从 run loop 移除。</p>
+
+<p><code>[timer fire]</code> 将会立刻除非timer，调用fire后，如果是重复的Timer将不会
+影响到他的调度周期，而不重复的Timer 强制fire后，会自动被 invalidated。</p>
+
+<h3 id="keyvalueobjectmapping">KeyValueObjectMapping</h3>
+
+<p>rich text</p>
+
+<ul>
+  <li>OHAttributedLabel</li>
+</ul>
+
+</article>
+<div class="tag-container" >
+    
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Programming/iOS/index"
+ var disqus_config = function () {
+     this.page.title = "iOS"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Programming/iOS/index/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

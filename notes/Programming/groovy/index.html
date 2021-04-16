@@ -1,0 +1,621 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    Groovy | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">Groovy</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-11-30">2015-04-29</span>
+    
+</div>
+
+<article>
+    <h3 id="groovy-的语法细节">Groovy 的语法细节</h3>
+
+<p>Groovy 不是解释性语言，运行一个脚本时，会先编译为 .class 文件，再交给 JVM 运行。</p>
+
+<ol>
+  <li>groovy 文件先被 Groovy parser 解析为抽象语法树（AST）</li>
+  <li>groovy class generator 将 AST 生成为 bytecode，可能有一个或多个 class 文件</li>
+  <li>JVM 运行这些 class 文件</li>
+</ol>
+
+<blockquote>
+  <p>What makes dynamic languages so powerful is their dynamic method dispatch.</p>
+</blockquote>
+
+<p>Groovy 是一个可选类型的语言（optional type）</p>
+
+<p>默认导入这些包</p>
+
+<ul>
+  <li>java.io.*</li>
+  <li>java.lang.*</li>
+  <li>java.math.BigDecimal</li>
+  <li>java.math.BigInteger</li>
+  <li>java.net.*</li>
+  <li>java.util.*</li>
+  <li>groovy.lang.*</li>
+  <li>groovy.util.*</li>
+</ul>
+
+<p>方法调用不造成二义性时可以省略括号</p>
+
+<h4 id="原生类型">原生类型</h4>
+
+<p>groovy 所有原生类型都被当成对象处理，默认情况下浮点数会被当成 <code>BigDecimal</code> 处理</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th style="text-align: left">Literal</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Integer</td>
+      <td style="text-align: left">14, 0x123, 0b01</td>
+    </tr>
+    <tr>
+      <td>Long</td>
+      <td style="text-align: left">100L, 100l</td>
+    </tr>
+    <tr>
+      <td>Float</td>
+      <td style="text-align: left">1.23F, 1.23f</td>
+    </tr>
+    <tr>
+      <td>Double</td>
+      <td style="text-align: left">1.23d, 1.23D</td>
+    </tr>
+    <tr>
+      <td>BigInteger</td>
+      <td style="text-align: left">123g, 123G</td>
+    </tr>
+    <tr>
+      <td>BigDecimal</td>
+      <td style="text-align: left">1.23 1.4E4, 1.23g</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="字符串文法">字符串文法</h4>
+
+<ul>
+  <li><code>'</code> 表示普通字符串（String），不支持引用变量</li>
+  <li><code>"</code> 如果有引用变量则被当成 GString</li>
+  <li><code>"""</code>或 <code>'''</code> 同 <code>"</code>或 <code>'</code>，可用于表示多行文本</li>
+</ul>
+
+<h4 id="操作符重载">操作符重载</h4>
+
+<p>和 Ruby 一样，Groovy 的操作符也是方法调用的简化，比如 <code>1 + 2</code> 等于 <code>1.plus(2)</code>，所以操作符可以用于任何对象上面。 当然我更喜欢 Ruby 的形式  <code>1.+ 1</code></p>
+
+<p><a href="http://groovy-lang.org/operators.html#Operator-Overloading">The Apache Groovy programming language - Operators</a></p>
+
+<h4 id="集合">集合</h4>
+
+<h5 id="列表">列表</h5>
+
+<p><code>[]</code> 不是创建数组，而是创建一个空列表</p>
+
+<p>支持和数组一样的下标访问，支持负数下标，表示倒数第几个</p>
+
+<p>比较奇怪的是一些列表的操作方法（each、find、collect、etc）都是定义在对象类里的：<a href="http://docs.groovy-lang.org/latest/html/groovy-jdk/java/lang/Object.html">Object (Groovy JDK enhancements)</a></p>
+
+<ul>
+  <li>collect = map</li>
+  <li>inject = reduce</li>
+</ul>
+
+<p><code>+</code> 为列表添加元素会创建一个新列表，而 <code>&lt;&lt;</code> 则添加进元列表</p>
+
+<p><code>*[]</code> 可以展开列表</p>
+
+<h5 id="range">Range</h5>
+
+<p>可以用 <code>..</code>(<code>[]</code>) 或 <code>..&lt;</code>(<code>[)</code>) 创建序列的值。</p>
+
+<p>也可以用于裁剪列表</p>
+
+<p>这个操作可以用于对象，只要对象</p>
+
+<ol>
+  <li>实现了 next 和 previous 方法</li>
+  <li>实现了 Comparable 接口</li>
+</ol>
+
+<h5 id="-操作符"><code>*.</code> 操作符</h5>
+
+<p><code>obj*.xxx  == obj.collect{it.xxx}</code></p>
+
+<h5 id="map">Map</h5>
+
+<p>用 <code>[:]</code> 创建 Map。[key:val]，key 在这里表示文字，等同于字符串”key”，所以要表示变量需要用括号转义<code>(key)</code>，括号内的内容会被当成表达式。</p>
+
+<pre><code>def a = 'Bob'
+def ages = [a: 43]
+assert ages['Bob'] == null // `Bob` is not found
+assert ages['a'] == 43     // because `a` is a literal!
+
+ages = [(a): 43]            // now we escape `a` by using parenthesis
+assert ages['Bob'] == 43   // and the value is found!
+</code></pre>
+
+<p><code>*:[:]</code> 可以展开 map</p>
+
+<h4 id="流程控制">流程控制</h4>
+
+<p>任何非 void 对象都可以用于流程控制语句，作为条件判断。取值用的是 <code>Object#asBoolean</code></p>
+
+<p>switch 语句：</p>
+
+<pre><code>switch (candidate) {
+  case classifier1 : handle1() ; break 
+  case classifier2 : handle2() ; break
+  default : handleDefault()
+}
+</code></pre>
+
+<p>等同于</p>
+
+<pre><code>if (classifier1.isCase(candidate)) handle1() 
+else if (classifier2.isCase(candidate)) handle2()
+else handleDefault()
+</code></pre>
+
+<p>所以 switch 语句也可用于任意对象中</p>
+
+<h5 id="in-操作符">in 操作符</h5>
+
+<p>a in b，相当于 b.isCase(a)</p>
+
+<h4 id="类">类</h4>
+
+<p>对于类成员变量的访问，可用用下标操作符<code>[]</code>与<code>.</code>操作符可以互通，[‘str’] 等同于调用 <code>get(String)</code>，[int] 等同于调用 <code>getAt(int)</code></p>
+
+<p>用 <code>.@</code> 可以避免<code>.</code>与<code>[]</code>和 accessor 的互通，直接访问字段。</p>
+
+<p>实例化对象也有几种方法</p>
+
+<pre><code>def first = new VendorWithCtor('Canoo','ULC')
+def second = ['Canoo','ULC'] as VendorWithCtor
+VendorWithCtor third = ['Canoo','ULC']
+</code></pre>
+
+<h5 id="类文件">类文件</h5>
+
+<ol>
+  <li><code>.groovy</code> 文件可以没有类声明，groovy 会生成一个 Script 的子类，并把文件的内容放入 run 方法内。这个 Script 子类里面还会生成一个 main 方法作为入口。</li>
+  <li><code>.groovy</code> 文件可以有多个 public 类声明，文件名不必和类名相同</li>
+  <li>可以混合两者</li>
+</ol>
+
+<h5 id="trait">trait</h5>
+
+<p><a href="http://docs.groovy-lang.org/next/html/documentation/core-traits.html">Traits</a> 可以被看作是具有方法实现和状态的接口，使用<code>trait</code>关键字定义。而且 trait 可以在运行时动态插入实例，类定义的时候用 <code>implements</code> 和接口一样引入 trait。</p>
+
+<ul>
+  <li>一个类可以实现多个trait。</li>
+  <li>实现类可重写trait中的默认方法。</li>
+  <li>trait可以继承另一个trait使用关键字extends，若要继承多个则使用implements关键字。</li>
+  <li>可以在运行时动态实现trais，使用关键字as。</li>
+</ul>
+
+<h5 id="expando">Expando</h5>
+
+<p>Map 与 Expando 的区别</p>
+
+<pre><code>a = new Expando()
+a.b = 1
+a.c = {println it+b} 
+a.c(1) // 2
+
+a = [:]
+a.b = 1
+a.c = {println it+b}
+a.c(1) // 报错，找不到 b
+</code></pre>
+
+<h4 id="mop">MOP</h4>
+
+<p>每当Groovy调用一个方法时，它不会直接调用它，而是要求一个中间层来代替它。  中间层通过钩子允许我们更改方法调用的行为。这个中间层就是 MOP（meta object proctol），MOP 作为方法派发的中心枢纽提供动态编程的能力。MOP 是 Groovy 运行时系统如何处理方法调用请求的规则的集合，以及如何控制中间层。在 Groovy 中编写的每个方法调用是真正的调用MOP，无论调用目标是使用 Groovy 还是 Java 进行编译。 这同样适用于静态和实例方法调用，构造函数调用和属性访问，即使目标是与调用者相同的对象。如果是在 java 中的方法调用，groovy 的动态性就无法发挥作用了。</p>
+
+<p>MOP需要大量信息才能为其服务的每个方法调用找到正确的调用目标。 该信息存储在所谓的 MetaClass 中。</p>
+
+<p>MOP 做的事情大概就是对于每个方法调用，检查目标对象是否有对应的方法，如果没有则将调用转移给钩子方法：</p>
+
+<h5 id="钩子方法hook">钩子方法（hook）</h5>
+
+<ol>
+  <li><code>Object methodMissing(String name, Object arguments)</code></li>
+  <li><code>Object propertyMissing(String name)</code></li>
+</ol>
+
+<h5 id="metaclass">metaClass</h5>
+
+<p>所有由 Groovy 编译的类都实现 GroovyObject 接口，这个接口有如下几个方法</p>
+
+<ul>
+  <li><code>MetaClass getMetaClass()</code></li>
+  <li><code>void      setMetaClass(MetaClass metaClass)</code></li>
+  <li><code>invokeMethod(String methodName, Object args)</code></li>
+  <li><code>Object getProperty(String propertyName)</code></li>
+  <li><code>void setProperty(String propertyName, Object newValue)</code></li>
+</ul>
+
+<p>MOP 有如下特性</p>
+
+<ul>
+  <li>每一次访问属性等同于调用 getProperty 方法</li>
+  <li>每一次修改属性等同于调用 setProperty 方法</li>
+  <li>每个未知方法的调用都调用 invokeMethod 方法。 如果该方法是已知的，那只有当类实现GroovyObject和标记接口GroovyInterceptable时，才调用invokeMethod 方法</li>
+</ul>
+
+<p>具体的实现由 MetaClass 代理，GroovyObject 只是调用 MetaClass 中相同的方法而已。</p>
+
+<pre><code>`getMetaClass().invokeMethod(this, "foo", EMPTY_PARAMS_ARRAY)`
+</code></pre>
+
+<p>每个类都有一个对应 metaclass 实例给类的实例共享。 metaclass 维护了类的方法和属性和一部分附加方法：<a href="http://docs.groovy-lang.org/2.4.0/html/gapi/org/codehaus/groovy/runtime/DefaultGroovyMethods.html">DefaultGroovyMethods (groovy 2.4.0 API)</a>。这样我们才可以在类的方法体内调用 println 之类的像关键字一样的方法。</p>
+
+<p>也可以单独为一个实例设置 MetaClass。</p>
+
+<p>metaclass 有几种</p>
+
+<ol>
+  <li>MetaClassImpl</li>
+  <li>ExpandoMetaClass</li>
+  <li>ProxyMetaClass</li>
+</ol>
+
+<p>ExpandoMetaClass，可以动态扩展属性和方法。如果修改通过 metaClass 给一个类扩展属性或方法。那么这个类的 metaClass 会变成 ExpandoMetaClass</p>
+
+<pre><code>assert String.metaClass =~ /MetaClassImpl/
+String.metaClass.low    = {-&gt; delegate.toLowerCase() }
+assert String.metaClass =~ /ExpandoMetaClass/
+assert "DiErK".low() == "dierk"
+</code></pre>
+
+<p>ProxyMetaClass，代理模式，可以在方法的调用前后插入代码。</p>
+
+<h5 id="monkey-patch">Monkey patch</h5>
+
+<p>groovy 用自定义 metaclass 来实现 monkey patch。ruby 用打开类来实现，并用 <code>refine</code> 来限定 monkey patch 的作用域域。</p>
+
+<p>而 groovy 用的是 <code>Object#use(CategoryClass,Closure)</code></p>
+
+<p>CategoryClass 里面的静态方法：</p>
+
+<pre><code>static ReturnType methodName(Receiver self, optionalArgs) {...}
+</code></pre>
+
+<p>在 Closure 作用域中会被变成</p>
+
+<pre><code>ReturnType methodName(optionalArgs) {...}
+</code></pre>
+
+<p>比如 <code>TimeCategory</code>，为 Integer 扩展了很多方法</p>
+
+<pre><code>use TimeCategory, {
+    Date   xmas = janFirst1970 + 1.year - 7.days
+    assert xmas.month == Calendar.DECEMBER
+    assert xmas.date  == 25
+}
+</code></pre>
+
+<p>另外还可以用 <a href="http://groovy-lang.org/metaprogramming.html#module-descriptor">module descriptor</a></p>
+
+<p>用 <code>@Category</code> 注解：</p>
+
+<pre><code>@Category(Integer)
+class IntegerMarshal {
+   String marshal() {
+     toString()
+   } 
+}
+</code></pre>
+
+<h4 id="闭包">闭包</h4>
+
+<blockquote>
+  <p>Java has no concept of “a particular piece of code” unless it’s buried in a method.
+each piece of code needs its own (pos- sibly anonymous) class, and life gets very messy.</p>
+</blockquote>
+
+<p>方法可以当成闭包：</p>
+
+<pre><code>def c = receiver.&amp;method
+</code></pre>
+
+<p>方法会被 MethodClosure 包起来，对于方法重载，groovy 会根据不同参数，在运行时判断调用哪个方法。</p>
+
+<p>闭包的调用可以为<code>c.call()</code>或<code>c()</code></p>
+
+<p>闭包参数可以声明默认值：<code>{x=1 -&gt; println x}</code></p>
+
+<p>闭包有一个函数来实现柯里化：<code>c.curry(...params)</code></p>
+
+<pre><code>def mult = { x,y - &gt;return x*y }
+def twoTimes = mult.curry(2)
+assert twoTimes(5) == 10
+</code></pre>
+
+<p>it 闭包内预定义的变量，表示传入闭包的第一个参数。</p>
+
+<h5 id="作用域">作用域</h5>
+
+<p>局部变量，会在声明期（declaration time）绑定到闭包里，所以局部变量会和 Closure 的实例变量一样优先被解析。不过如果局部变量和 Closure 的实例变量声明相同的名字调用改变量时会报错。</p>
+
+<p>若不是上述变量，则会在，下面三个引用中查找。</p>
+
+<ol>
+  <li>this，表示声明闭包时所在外部的类，this 等同于 getThisObject() 也可简化为 thisObject</li>
+  <li>owner, 表示声明闭包时所在外部的对象，可以是闭包或者是类</li>
+  <li>delegate, 可以在运行时更改的一个引用，默认等于 owner</li>
+</ol>
+
+<p>默认情况是 OWNER_FIRST，不过可以通过 Closure#resolveStrategy 进行配置。而 this 总是最后解析的。见 <a href="http://groovy-lang.org/closures.html#closure-this">The Apache Groovy programming language - Closures</a></p>
+
+<p>groovy 对早返回比较无力，不像 ruby 有 Proc 和 lambda 的区别</p>
+
+<h4 id="annotations">Annotations</h4>
+
+<h4 id="正则表达式">正则表达式</h4>
+
+<p>语言级别支持</p>
+
+<ul>
+  <li><code>//</code> 表示正则表达式，不过只是字符串，<code>~//</code> 才是 Pattern</li>
+  <li><code>=~</code> find</li>
+  <li><code>==~</code> match</li>
+</ul>
+
+<h4 id="ast">AST</h4>
+
+<h3 id="groovy-的最佳实践">Groovy 的最佳实践</h3>
+
+<p>http://groovy-lang.org/groovy-dev-kit.html</p>
+
+</article>
+<div class="tag-container" >
+    
+    <div class="chip">
+        <a href="/tags#groovy-ref">
+            groovy
+        </a>
+    </div>
+    
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Programming/groovy"
+ var disqus_config = function () {
+     this.page.title = "Groovy"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Programming/groovy/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

@@ -1,0 +1,588 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    2020年11月24日杂记 | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">2020年11月24日杂记</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 21-01-24">2020-11-24</span>
+    
+</div>
+
+<article>
+    <p>在 Mac 正确的配置 python 环境还是件很头疼的事</p>
+
+<p><img src="https://opensource.com/sites/default/files/uploads/python_environment_xkcd.png" alt="" /></p>
+
+<h1 id="pyenv">pyenv</h1>
+
+<p>最终选择 <a href="https://github.com/pyenv/pyenv">pyenv/pyenv: Simple Python version management</a>，不过还是要 <code>brew install python</code> 作为其他第三方工具的依赖。</p>
+
+<ul>
+  <li>确保安装了 xcode 命令行工具：<code>xcode-select --install</code></li>
+  <li>安装 <code>pyenv</code> ：<code>brew install pyenv</code></li>
+  <li>
+    <p>安装编译依赖</p>
+
+    <pre><code>  brew install zlib sqlite
+  export LDFLAGS="-L/usr/local/opt/zlib/lib -L/usr/local/opt/sqlite/lib"
+  export CPPFLAGS="-I/usr/local/opt/zlib/include -I/usr/local/opt/sqlite/include"
+</code></pre>
+  </li>
+  <li>安装 python <code>pyenv install 3.9.0</code></li>
+  <li>
+    <p>配置环境变量：
+<code>.zshenv</code> 可以替换 <code>.zshrc</code> 如果仅要在 shell 中生效的话，见 https://unix.stackexchange.com/a/71258</p>
+
+    <pre><code>  echo 'export PYENV_ROOT="$HOME/.pyenv"' &gt;&gt; ~/.zshenv
+  echo 'export PATH="$PYENV_ROOT/bin:$PATH"' &gt;&gt; ~/.zshenv
+  echo -e 'if command -v pyenv 1&gt;/dev/null 2&gt;&amp;1; then\n  eval "$(pyenv init -)"\nfi' &gt;&gt; ~/.zshenv
+</code></pre>
+  </li>
+  <li><code>pyenv global 3.9.0</code> 设置默认的 python 版本</li>
+  <li><code>pyenv local 3.8.6</code> 对于特定目录使用 3.8.6，会在当前目录生成一个 <code>.python_version</code> 文件</li>
+</ul>
+
+<h2 id="问题">问题</h2>
+
+<p>openpose 编译 python api 不支持 pyenv，需自己手动指定。</p>
+
+<p>阅读 pybind11/tools/FindPythonLibsNew.cmake 后发现，需要手动指定 PYTHON_EXECUTABLES，其他相应变量都会自动生成：</p>
+
+<pre><code>cmake -D BUILD_PYTHON:BOOL=ON -DPYTHON_EXECUTABLE=$HOME/.pyenv/versions/3.9.0/bin/python3.9 -S . -B ./build
+</code></pre>
+
+<p>FYI: <a href="https://cmake.org/cmake/help/latest/module/FindPython.html?highlight=findpython#artifacts-specification">FindPython — CMake 3.19.1 Documentation</a></p>
+
+<h1 id="虚拟环境">虚拟环境</h1>
+
+<p><a href="https://github.com/pyenv/pyenv-virtualenv">pyenv/pyenv-virtualenv: a pyenv plugin to manage virtualenv (a.k.a. python-virtualenv)</a></p>
+
+<ul>
+  <li>git clone https://github.com/pyenv/pyenv-virtualenv.git $(pyenv root)/plugins/pyenv-virtualenv</li>
+  <li>echo ‘eval “$(pyenv virtualenv-init -)”’ » ~/.zshrc</li>
+</ul>
+
+<h2 id="例子">例子</h2>
+
+<p>比如 <code>scikit-learn-0.23.2</code> 不支持 python 3.9。创建一个 3.8.6 的虚拟环境</p>
+
+<pre><code>pyenv virtualenv 3.8.6 ml-venv
+pyenv local ml-venv # 项目目录下执行
+</code></pre>
+
+<h2 id="emacslsp-mode">Emacs/lsp-mode</h2>
+
+<p>目前的方式还需要手动，选择虚拟环境的路径，先配置 pyvenv</p>
+
+<pre><code>(use-package pyvenv
+  :ensure t
+  :init
+  (setenv "WORKON_HOME" "~/.pyenv/versions")) ;;
+</code></pre>
+
+<p>然后可通过 pyvenv-workon 选择 pyenv 所有版本，选择后（或者直接 pyvenv-activate 目录），会将虚拟环境的python目录设置到环境变量 VIRTUAL_ENV。 lsp-mode 的 pyls 会读取这个变量，切换到这个 python 环境。通过这样曲线的形式来实现 lsp-mode 对虚拟环境的支持。</p>
+
+<h1 id="问题-1">问题</h1>
+
+<p>环境 MacOS 11.0</p>
+<h2 id="安装-numpy">安装 numpy</h2>
+
+<p>遇到 ：<a href="https://github.com/numpy/numpy/issues/15947#issuecomment-686159427">#15947 (comment)</a></p>
+
+<h2 id="安装-scipy">安装 scipy</h2>
+
+<p>遇到：https://stackoverflow.com/questions/41241468/error-pip-install-scipy</p>
+
+<h2 id="解决">解决</h2>
+
+<pre><code>brew install openblas
+brew install gcc # 为了 gfortran，直接安装 gfortran 会报错 `[ld cannot find -lgcc_s](https://bugsfixes.blogspot.com/2016/02/mac-ld-library-not-found-for-lgccs104.html)`
+brew install swig
+</code></pre>
+
+<p>建  <code>~/.numpy-site.cfg</code>：</p>
+
+<pre><code>[DEFAULT]
+library_dirs = /usr/local/lib
+include_dirs = /usr/local/include
+
+
+[openblas]
+libraries = openblas
+library_dirs = /usr/local/opt/openblas/lib
+include_dirs = /usr/local/opt/openblas/include
+</code></pre>
+
+<p>这是最重要的步骤，主要的报错就是找不到头文件和共享库</p>
+
+<ul>
+  <li>试过环境变量 <code>CFLAGS</code>、<code>LDFLAGS</code>、<code>LD_LIBRARY_PATH</code>、<code>LIBRARY_PATH</code>，不行</li>
+  <li><code>pip --global-option</code> <a href="https://stackoverflow.com/questions/18783390/python-pip-specify-a-library-directory-and-an-include-directory/22942120#22942120">shared libraries - python pip specify a library directory and an include directory - Stack Overflow</a>，不起作用</li>
+  <li>最终主要是参考了 homebrew 的 formula：<a href="https://github.com/Homebrew/homebrew-core/blob/master/Formula/numpy.rb">numpy.rb</a>、<a href="https://github.com/Homebrew/homebrew-core/blob/master/Formula/scipy.rb">scipy.rb</a></li>
+</ul>
+
+<h2 id="scikit-image">scikit-image</h2>
+
+<p>没有一个没坑的:<a href="https://github.com/scikit-learn/scikit-learn/issues/13371">#13371</a>、<a href="https://github.com/scikit-image/scikit-image/issues/5051">#5051</a></p>
+
+<pre><code>brew install libomp
+
+export CC=/usr/bin/clang
+export CXX=/usr/bin/clang++
+export CPPFLAGS="$CPPFLAGS -Xpreprocessor -fopenmp"
+export CFLAGS="$CFLAGS -I/usr/local/opt/libomp/include -Wno-implicit-function-declaration"
+export CXXFLAGS="$CXXFLAGS -I/usr/local/opt/libomp/include"
+export LDFLAGS="$LDFLAGS -L/usr/local/opt/libomp/lib -lomp"
+export DYLD_LIBRARY_PATH=/usr/local/opt/libomp/lib
+</code></pre>
+
+<h2 id="tensorflow">tensorflow</h2>
+
+<p>Big Surf 需手动安装 whl <a href="https://github.com/tensorflow/tensorflow/issues/31058">No Matching Distribution Found for Tensorflow · Issue #31058 · tensorflow/tensorflow</a></p>
+
+<p>安装 tensorflow 2.3.1，其依赖的 grpcio、h5py、scipy 版本太旧编译报错，也都需全部手动安装 whl。</p>
+
+<h2 id="其他方案">其他方案</h2>
+
+<p>numpy 这样也能安装成功</p>
+
+<pre><code>brew install openblas
+OPENBLAS="$(brew --prefix openblas)" pip install scipy
+</code></pre>
+
+<h1 id="import">import</h1>
+
+<p>https://blog.csdn.net/weixin_38256474/article/details/81228492
+https://www.devdungeon.com/content/python-import-syspath-and-pythonpath-tutorial</p>
+
+<p>概念</p>
+
+<ul>
+  <li>模块 module，.py、.pyo、.pyc、.pyd、.so、.dll</li>
+  <li>包 package, 包含有 module 的目录，通过 <strong>init</strong>.py 标示</li>
+  <li><strong>init</strong>.py 包的描述文件</li>
+</ul>
+
+<p>从 sys.path 和 PYTHONPATH 查找模块或包</p>
+
+<h1 id="conda">conda</h1>
+
+<p>Package, dependency and environment management for any language</p>
+
+<p>相当于 pip + virtualenv</p>
+
+<p>合理是预编译好的包，不同的 cpu 架构可能有支持上的问题</p>
+
+<h2 id="miniconda">Miniconda</h2>
+
+<h2 id="anaconda">Anaconda</h2>
+
+<ul>
+  <li>
+    <h2 id="预装了-1500-个科学计算包占-3gb-空间">预装了 1500 个科学计算包，占 3GB 空间</h2>
+  </li>
+</ul>
+
+<h2 id="mamba">mamba</h2>
+
+<p>conda 加强版 https://github.com/mamba-org/mamba</p>
+
+<ol>
+  <li>多线程下载</li>
+  <li>更快的依赖解析</li>
+  <li>c++ 实现</li>
+</ol>
+
+<h2 id="conda-forge">conda-forge</h2>
+
+<p>社区维护的 conda channel，相当于社区版 anaconda?</p>
+
+<h1 id="resources">Resources</h1>
+
+<p>https://realpython.com/effective-python-environment/#package-management</p>
+
+<h1 id="basic">Basic</h1>
+
+<h2 id="scope">Scope</h2>
+
+<ol>
+  <li>本地作用域，function 或 lambda 表达式</li>
+  <li>外部作用域（Enclosing scope），比如闭包，或上层作用域</li>
+  <li>全局作用域（Global），在程序或模块的最外层定义的变量</li>
+  <li>内置作用域（Build-in），比如关键字，内置函数</li>
+</ol>
+
+<p>python 查找变量也是按照这个顺序。值得注意的是 python 没有块作用域，即除了 <code>function</code> 或 <code>lambda</code> 之外的代码块是没有本地作用域，比如 <code>while</code> <code>try-except</code>，特别是 <code>for</code> 语句中声明的变量，仍然在本地作用域。</p>
+
+<p>Python 作用域通过 <code>dictionaries</code> 实现的，这些 <code>dictionaries</code> 通常也叫 <strong>namespaces</strong>。
+module 的变量名存放与 <code>__dict__</code>，比如： <code>sys.__dict__</code>，如果当前程序的话：<code>globals()</code>、<code>dir()</code></p>
+
+<p>在非全局作用域，为全局变量赋值是需要 <code>global</code> 关键字，访问全局变量则不用。
+同样的，嵌套作用域要修改，外部作用域的变量，需要用 <code>nonlocal</code>，这里可以发现使用来 <code>nonlocal</code> 关键字表示要为闭包保存外部环境的引用。</p>
+
+<p>几个特殊情况</p>
+
+<ul>
+  <li>python 没有块作用域，列表推导式（Comprehension）却是有的。</li>
+  <li>except 表达式中声明的变量</li>
+  <li>类，拥有自己的本地作用域 <code>__dict__</code></li>
+  <li>实例，也拥有自己的 <code>__dict__</code>，所以在类的定义中，要访问实例的作用域需要 <code>self</code></li>
+  <li>另外，<strong>类的作用域并不是方法的外部作用域</strong>，类的方法需要通过类的引用才能访问到类的作用域。</li>
+  <li>通过实例变量查找变量，会先从实例本地作用域，到类本地作用域，如果找不到会抛出 <code>AttributeError</code>.</li>
+</ul>
+
+<h2 id="列表推导式comprehension">列表推导式（Comprehension）</h2>
+
+<p>通过表达式生成新的列表：</p>
+
+<pre><code>new_list = [expression for member in iterable]
+</code></pre>
+
+<p><code>expression</code> 可以访问 <code>member</code>，还支持 <code>filter</code>:</p>
+
+<pre><code>new_list = [expression for member in iterable if conditional]
+</code></pre>
+
+<p>集合（元素具有唯一性）推导式：</p>
+
+<pre><code>new_set =  {expression for member in iterable}
+</code></pre>
+
+<p>字典推导式：</p>
+
+<pre><code>squares = {i: i * i for i in range(10)}
+</code></pre>
+
+<p>生成器（reduce）：</p>
+
+<pre><code>sum(i * i for i in range(1000000000))
+</code></pre>
+
+<h2 id="模块与包">模块与包</h2>
+
+<p>三种定义 python 模块的方式：</p>
+
+<ol>
+  <li>python 声明，如名为 mod 的python 模块，即文件名为 <code>mod.py</code> 的 python 脚本</li>
+  <li>c 实现，运行时动态加载</li>
+  <li>解析器的内置模块，如 <code>itertools</code></li>
+</ol>
+
+<h3 id="模块搜索路径">模块搜索路径</h3>
+
+<ol>
+  <li>当前路径</li>
+  <li><code>PYTHONPATH</code> 环境变量</li>
+  <li>安装时设置的特殊位置，如：<code>site-package</code></li>
+</ol>
+
+<h3 id="包">包</h3>
+
+<p>一个文件夹以树状结构（文件系统）组织模块的集合：</p>
+
+<pre><code>import pkg.mod1, pkg.mod2
+</code></pre>
+
+<p><code>import pkg</code> 不会自动把 pkg 内的模块导入。而是执行 <code>__init__.py</code></p>
+
+<pre><code>from pkg import *
+</code></pre>
+
+<p>能把 <code>__init__.py</code> 中声明的模块导入：</p>
+
+<pre><code>__all__ = [
+        'mod1',
+        'mod2',
+        'mod3',
+        'mod4'
+        ]
+</code></pre>
+
+<h2 id="thread">Thread</h2>
+
+<p>由于与<code>GIL</code>的交互实际上限制了一次运行一个Python线程。还有一个 <code>multiprocessing</code> 使用子进程并发的包代替。</p>
+
+<p>基本的启动线程的形式：</p>
+
+<pre><code>x = threading.Thread(target=thread_function, args=(1,))
+x.start()
+</code></pre>
+
+<p>线程池：</p>
+
+<pre><code>import concurrent.futures
+with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
+        executor.map(thread_function, range(3))
+</code></pre>
+
+<p>加锁：</p>
+
+<pre><code>lock = threading.Lock()
+with lock:
+    ....
+    ....
+</code></pre>
+
+<ul>
+  <li>信号：<code>event = threading.Event()</code></li>
+  <li>信号量：<code>threading.Semaphore</code></li>
+  <li>定时器：<code>threading.Timer</code></li>
+</ul>
+
+<h2 id="gil">GIL</h2>
+
+<p>Global Interpreter Lock</p>
+
+<p>python 用引用计数来做 GC，GIL 就是来保证引用计数过程中的线程安全。</p>
+
+<h2 id="coroutines">Coroutines</h2>
+
+<p>同步代码实现并发，并不一定是多线程、多进程。 <code>asyncio</code> 是一个单线程单进程模型。</p>
+
+<ul>
+  <li><code>async def</code> 声明 native coroutine 或 <code>asynchronous generator</code></li>
+  <li><code>await</code> 挂起当前函数，等待指定函数执行完成</li>
+</ul>
+
+</article>
+<div class="tag-container" >
+    
+    <div class="chip">
+        <a href="/tags#python-ref">
+            python
+        </a>
+    </div>
+    
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Quick/2020/11/note-2020-11-24"
+ var disqus_config = function () {
+     this.page.title = "2020年11月24日杂记"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Quick/2020/11/note-2020-11-24/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

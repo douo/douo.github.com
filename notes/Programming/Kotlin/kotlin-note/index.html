@@ -1,0 +1,856 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    Kotlin Note | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">Kotlin Note</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 18-11-09">2018-06-14</span>
+    
+</div>
+
+<article>
+    <ul>
+  <li>静态类型</li>
+  <li>类型推定</li>
+</ul>
+
+<p>Kotlin 哲学，务实、简洁、安全、与 java 互操。</p>
+
+<p>没有 <code>static</code> 关键字</p>
+
+<h2 id="运算符">运算符</h2>
+
+<p><code>*[...]</code> spread operator</p>
+
+<h2 id="变量">变量</h2>
+
+<ul>
+  <li><code>val</code>，value，常量</li>
+  <li><code>var</code>，variable，变量</li>
+</ul>
+
+<p>调用构造方法可以不用 <code>new</code> 关键字。</p>
+
+<h3 id="字符串">字符串</h3>
+
+<p>字符串模板，<code>"Hello $name You age is ${a+b}"</code></p>
+
+<p>使用三双引号，必要避免正则表达式转义：<code>"""regex"""</code></p>
+
+<h2 id="when">when</h2>
+
+<h2 id="整合类型检查与转换">整合类型检查与转换</h2>
+
+<pre><code>if (e is Num) {
+    // e 自动当成 Num
+    //val n = e as Num
+}
+</code></pre>
+
+<h2 id="range-语法糖">range 语法糖</h2>
+
+<pre><code>for(i in 1..100) // [1,...,100]
+for(i in 100 downTo 1 step 2) [100,98,...,2]
+for(i in 1 until 100) [1,...,99]
+</code></pre>
+
+<h2 id="fun">fun</h2>
+
+<p>参数支持默认参数，和指定参数名</p>
+
+<p>monkey patch:  <code>receiverClass.newFun()</code>  为 <code>receiverClass</code> 增加一个实例方法</p>
+
+<ul>
+  <li><code>vararg</code> 声明一个参数是可变长度的</li>
+  <li><code>infix</code> 声明一个函数，可以使用 ruby 那样的函数调用方式，方法名称立即放置在目标对象名称和参数之间，没有额外的分隔符。 <code>1 to 2</code></li>
+</ul>
+
+<p>局部函数</p>
+
+<pre><code>fun a(){
+   fun b(){}
+}
+</code></pre>
+
+<h2 id="returns-and-jumps">Returns and jumps</h2>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">loop@</span> <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">..</span><span class="mi">100</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="k">in</span> <span class="mi">1</span><span class="o">..</span><span class="mi">100</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">..</span><span class="p">.)</span> <span class="k">break</span><span class="nd">@loop</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">foo</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nf">listOf</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">).</span><span class="n">forEach</span> <span class="nd">lit@</span><span class="p">{</span>
+        <span class="c1">// lambda 内的 return 默认是返回外部函数</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">it</span> <span class="p">==</span> <span class="mi">3</span><span class="p">)</span> <span class="k">return</span><span class="nd">@lit</span> <span class="c1">// local return to the caller of the lambda, i.e. the forEach loop</span>
+        <span class="nf">print</span><span class="p">(</span><span class="n">it</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">" done with explicit label"</span><span class="p">)</span>
+    
+<span class="k">fun</span> <span class="nf">foo</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nf">listOf</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">).</span><span class="nf">forEach</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">it</span> <span class="p">==</span> <span class="mi">3</span><span class="p">)</span> <span class="k">return</span><span class="nd">@forEach</span> <span class="c1">// local return to the caller of the lambda, i.e. the forEach loop</span>
+        <span class="nf">print</span><span class="p">(</span><span class="n">it</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">" done with implicit label"</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>如果是带有返回值的<code>return@a 1</code>:”return <code>1</code> at label <code>@a</code>”</p>
+
+<h2 id="集合">集合</h2>
+
+<ul>
+  <li>Kotlin没有定义自己的集合类，而是通过扩展函数和属性使用更丰富的API来增强Java集合类。</li>
+</ul>
+
+<h2 id="类">类</h2>
+
+<p>复写方法需要用修饰符 <code>override</code></p>
+
+<p>super 使用尖括号，来指定方法所属的父类 <code>super&lt;Father&gt;.name()</code></p>
+
+<p>kotlin 的继承的看法来自 Effective Java：</p>
+
+<blockquote>
+  <p>design and document for inheritance or else prohibit it.</p>
+</blockquote>
+
+<p><code>open</code> 关键字修饰的类和方法才可以被继承和重写。</p>
+
+<p><code>override</code> 修饰的方法，同意继承父类方法可以被继承，需要 `final** 关键字修饰</p>
+
+<h3 id="访问控制修饰符">访问控制修饰符</h3>
+
+<p>与 java 的区别有：</p>
+
+<ol>
+  <li>默认是 public</li>
+  <li>internal 对应 java 的默认（package）</li>
+  <li>protected 不再拥有包范围内的可访问性</li>
+  <li>外部类看不到内部类的私有成员，内部类默认不持有外部类的引用，除非用<code>inner</code>关键字修饰。使用<code>this@Outer</code>，访问外部类</li>
+</ol>
+
+<h3 id="sealed">sealed</h3>
+
+<pre><code>sealed class Expr {
+    class Num(val value: Int) : Expr()
+    class Sum(val left: Expr, val right: Expr) : Expr()
+}
+</code></pre>
+
+<p>可以限制子类，Expr 只能被 Num 和 Sum 继承。</p>
+
+<h3 id="构造函数">构造函数</h3>
+
+<p>直接在 <code>class</code> 关键字后定义构造函数</p>
+
+<pre><code>class User(val nickname: String)
+</code></pre>
+
+<p>这称为<strong>主构造函数（primary constructor）</strong>，既定义了构造函数的参数，同时参数也被定义为类的属性。等同于如下代码：</p>
+
+<pre><code>class User constructor(_nickname: String) {
+    val nickname: String
+    init {
+        nickname = _nickname
+    } 
+}
+</code></pre>
+
+<p>主构造函数不能有函数体，所以需要 init block.</p>
+
+<p><code>constructor</code> keyword begins the declaration of a primary or secondary constructor. The <code>init</code> keyword introduces an initializer block.</p>
+
+<p>kotlin 通过 <code>constructor</code> 关键字定义构造函数。跟在类名后定义的构造函数称为主构造函数，在类内部定义的构造函数称为次构造函数（secondary constructors）。</p>
+
+<pre><code>class MyButton : View {
+    constructor(ctx: Context)
+        : super(ctx) {
+// ... }
+    constructor(ctx: Context, attr: AttributeSet)
+        :  super(ctx, attr) {
+        // ...
+        } 
+}
+</code></pre>
+
+<p>是否调用父类方法，采用了与继承相同的操作符<code>:</code>，如果是调用本类的其他方法，也是接在 <code>:</code> 后面，使用 <code>this</code> 关键字。</p>
+
+<h3 id="backing-field">Backing Field</h3>
+
+<p><code>field</code> 关键字，用在 getter 和 setter 的作用域中，表示当前成员变量实际存储字段的访问，避免递归调用。</p>
+
+<pre><code>class User{
+    var firstName : String  
+        get() = field
+        set(value) {field = value}
+    
+   var lastName : String  
+        get() = field
+        set(value) {field = value}
+}
+</code></pre>
+
+<h3 id="data-classes">data classes</h3>
+
+<pre><code>data class Client(val name: String, val postalCode: Int)
+</code></pre>
+
+<p><code>data</code> 修饰的类，kotlin 会针对各个属性，生成 <code>equals</code>、<code>hashCode</code>、<code>toString</code> 等方法。
+对于不可变的 data 类，还提供一个 <code>copy</code> 方便修改生成新实例。</p>
+
+<h3 id="class-delegation">class delegation</h3>
+
+<p>kotlin 可以直接实现装饰器模式，通过 <code>by</code> 关键字。</p>
+
+<pre><code>class DelegatingCollection&lt;T&gt;(
+        innerList: Collection&lt;T&gt; = ArrayList&lt;T&gt;()
+) : Collection&lt;T&gt; by innerList {
+</code></pre>
+
+<h3 id="object-关键字">object 关键字</h3>
+
+<p><code>object</code> 定义一个类，并产生一个实例。实际是为该类生成一个 `INSTANCE** 常量。</p>
+
+<ul>
+  <li>用于定义单例，定义的<strong>同时</strong>便创建实例。没有构造函数，因为没有意义。</li>
+  <li>`companion** 伴生对象，定义在类内部，可以访问类的私有变量，等同于类的静态方法。（kotlin 没有了 static 关键字）。可或不匿名。</li>
+  <li>用于定义内部匿名类。不是单例，每次定义代码执行都会创建一个<strong>新实例</strong></li>
+</ul>
+
+<h3 id="标准库方法">标准库方法</h3>
+
+<ul>
+  <li>run</li>
+  <li>let</li>
+  <li>apply</li>
+  <li>also</li>
+  <li>with</li>
+</ul>
+
+<p><img src="https://user-gold-cdn.xitu.io/2018/1/24/16123d48e78959f5?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="" /></p>
+
+<p>另外还有</p>
+
+<ul>
+  <li>repeat</li>
+  <li>takeIf</li>
+  <li>takeUnless</li>
+</ul>
+
+<h2 id="lambda">lambda</h2>
+
+<ul>
+  <li>标准语法：<code>{x: Int, y: Int -&gt; x + y}</code></li>
+  <li>省略<code>{ expr }</code></li>
+  <li>默认参数名，<code>{ it }</code>，与 groovy 相同</li>
+  <li>成员引用（member ref）,<code>Class::Member</code>，对于非类函数可以这样引用：<code>::fun</code>，构造函数: <code>::Class</code>，绑定引用: <code>instance::fun</code></li>
+</ul>
+
+<p>调用 lambda，</p>
+
+<ul>
+  <li><code>{ expr }()</code></li>
+  <li>infix <code>run</code> 方法：<code>run { expr }</code></li>
+  <li>如果方法只有一个 lamdbda 参数，可以将 lambda 放在方法调用后面，如果仅有一参数还可以可省略方法调用的括号：<code>people.maxBy { it.age }</code></li>
+</ul>
+
+<p>lambda 通用具有闭包的特点，捕获定义时的上下文变量，只不过比起 java 只能捕获 <code>final</code>，kotlin 捕获的变量是可以修改的。kotlin 实现原理实际是使用一个 Wrapper 类。</p>
+
+<h3 id="sequences">Sequences</h3>
+
+<p>java 8 的 <code>Stream</code>，懒操作</p>
+
+<pre><code>people.asSequence()
+    .map(Person::name)
+    .filter { it.startsWith("A") }
+    .toList()
+</code></pre>
+
+<p><code>generateSequence</code>创建序列</p>
+
+<h3 id="receivers">receivers</h3>
+
+<p>通过 <code>with</code> 和 <code>apply</code> 方法可以设置 lambda 的 receiver。</p>
+
+<pre><code>with(instance){
+  this // instance
+  func // instance.func
+}
+
+instance.apply{
+  // same
+}
+</code></pre>
+
+<h3 id="高阶函数">高阶函数</h3>
+
+<h4 id="inline">inline</h4>
+
+<p>mark a function with the inline modifier, the compiler won’t generate a function call when this function is used and instead will replace every call to the function with the actual code implementing the function.</p>
+
+<p>内联函数支持非本地返回</p>
+
+<p><code>noinline</code>，标记内联函数的 lambda 参数不可内联
+<code>crossinlne</code> ，标记内联函数的 lambda 参数不可局部返回</p>
+
+<h2 id="类型系统">类型系统</h2>
+
+<h3 id="nullable">nullable</h3>
+
+<p>Kotlin 的类型不允许空， <code>Type? = Type or null</code></p>
+
+<ul>
+  <li><code>?.</code>，safe-call。<code>s?.toUpperCase()</code></li>
+  <li><code>?:</code>，猫王运算符（Elvis oerator）。<code>a?:0"</code>，<code>a</code> 不为空返回 <code>a</code> 否则返回 <code>0</code></li>
+  <li><code>as?</code>，safe casts。<code>foo as? Type</code>，等于 <code>foo as Type</code> 或 <code>null</code></li>
+  <li><code>!!</code>，非空检查。<code>sNotNull:String = s!!</code>，等于 <code>s</code> 或抛出 NPE(<code>KotlinNullPointerException</code>)</li>
+  <li><code>let</code>，实例方法传入 <code>lambda</code>，在 lambda 中绑定该实例。<code>foo?.let{ ...it... /*not null*/}</code>，为空的时候 lambda 不执行</li>
+  <li><code>lateinit</code>  关键字，允许定义变量未初始化，初始化前使用会抛出异常。<code>private lateinit var myService: MyService</code></li>
+</ul>
+
+<h3 id="基本类型">基本类型</h3>
+
+<ul>
+  <li><code>Int</code> 一般情况被编译为 java 的原生类型，除非是作为类型参数，会被当做 <code>Integer</code>。相同的还有包括其他 java 原生类型</li>
+  <li>可空类型的原生类型也会被当成原型类</li>
+  <li><code>Any</code>，是所有非空类型的超类。</li>
+  <li><code>Unit</code> java 中的 <code>void</code>。可用于声明函数无返回值：<code>fun f(): Unit{}</code>。</li>
+  <li><code>Nothing</code> 表示没有返回值。</li>
+</ul>
+
+<h3 id="操作符重载">操作符重载</h3>
+
+<h4 id="conventions">conventions</h4>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">data class</span> <span class="nc">Point</span><span class="p">(</span><span class="kd">val</span> <span class="py">x</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="kd">val</span> <span class="py">y</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">operator</span> <span class="k">fun</span> <span class="nf">plus</span><span class="p">(</span><span class="n">other</span><span class="p">:</span> <span class="nc">Point</span><span class="p">):</span> <span class="nc">Point</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nc">Point</span><span class="p">(</span><span class="n">x</span> <span class="p">+</span> <span class="n">other</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="p">+</span> <span class="n">other</span><span class="p">.</span><span class="n">y</span><span class="p">)</span>
+  <span class="p">}</span> 
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>也可以定义为扩展函数</p>
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">operator</span> <span class="k">fun</span> <span class="nc">Point</span><span class="p">.</span><span class="nf">plus</span><span class="p">(</span><span class="n">other</span><span class="p">:</span> <span class="nc">Point</span><span class="p">):</span> <span class="nc">Point</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nc">Point</span><span class="p">(</span><span class="n">x</span> <span class="p">+</span> <span class="n">other</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="p">+</span> <span class="n">other</span><span class="p">.</span><span class="n">y</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>操作符重载支持不同类型，但 kotlin 不能主动实现交换律，即便运算是可交换的。</p>
+
+<h4 id="compound-assignment-operators">compound assignment operators.</h4>
+
+<p><code>+=</code> 对于 <code>plusAssign</code>，<code>-=</code> …</p>
+
+<h4 id="一元运算符">一元运算符</h4>
+
+<p>一元运算符也可以重载</p>
+
+<h4 id="相同判断">相同判断</h4>
+
+<p><code>a==b</code> 等价于 <code>a?.equals(b) ?: (b == null)</code></p>
+
+<p><code>===</code>  identity equals。判断是否是相同对象，<strong>不可被重载</strong></p>
+
+<h4 id="ab-index-operator">a[b] index operator</h4>
+
+<p>与 ruby 一样</p>
+
+<ul>
+  <li><code>[]</code> get,正常多参数 x[a,b] 等价于 x.get(a,b)</li>
+  <li><code>[]=</code> set</li>
+</ul>
+
+<h4 id="destructuring-declarations">destructuring declarations.</h4>
+
+<p><code>val (a,b) = p</code>  等价于  <code>val a = p.component1() val b = p.component2()</code>，对于 data 类来说 1、2 就是成员属性定义的顺序。对于非 data 类，也可以手动声明</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Point</span><span class="p">(</span><span class="kd">val</span> <span class="py">x</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="kd">val</span> <span class="py">y</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">operator</span> <span class="k">fun</span> <span class="nf">component1</span><span class="p">()</span> <span class="p">=</span> <span class="n">x</span>
+    <span class="k">operator</span> <span class="k">fun</span> <span class="nf">component2</span><span class="p">()</span> <span class="p">=</span> <span class="n">y</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="泛型">泛型</h3>
+
+<p>未加限制的泛型默认是可为空的，等价于<code>Any?</code></p>
+
+<h4 id="reified具体化">Reified（具体化）</h4>
+
+<p>Reified(具体的) type parameters，</p>
+
+<pre><code> inline fun &lt;reified T&gt; isA(value: Any) = value is T
+</code></pre>
+
+<p>可以在函数体类型变量进行检查，类型变量不会被擦除。可以进行如下操作。</p>
+
+<ul>
+  <li>In type checks and casts (is, !is, as, as?)</li>
+  <li>To use the Kotlin reflection APIs, as we’ll discuss in chapter 10 (::class)</li>
+  <li>To get the corresponding java.lang.Class (::class.java)</li>
+  <li>As a type argument to call other functions</li>
+</ul>
+
+<p><code>reified</code> 关键字只能用于内联函数</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">items</span> <span class="p">=</span> <span class="nf">listOf</span><span class="p">(</span><span class="s">"one"</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s">"three"</span><span class="p">)</span>
+<span class="nf">println</span><span class="p">(</span><span class="n">items</span><span class="p">.</span><span class="n">filterIsInstance</span><span class="p">&lt;</span><span class="nc">String</span><span class="p">&gt;())</span>
+<span class="na">[one, three]</span>
+</code></pre></div></div>
+
+<h4 id="可变性">可变性</h4>
+
+<p>非空类型是可空类型的子类型，<code>A</code> 是 <code>A?</code> 的子类型</p>
+
+<ul>
+  <li>协变，A 是 B 的子类型，f(A) 是 f(B) 的子类型（满足里氏替换原则），则称 f() 是协变的。参数类似是协变的，在kotlin 用 <code>out</code> 修饰，表示类只会产出 <code>out</code> 类型的对象，而不能消费。</li>
+  <li>逆变，</li>
+  <li>
+    <p>不变</p>
+
+    <pre><code>interface Function1&lt;in P, out R&gt; {
+  operator fun invoke(p: P): R
+}
+ 
+val f = object : Function1&lt;Number, String&gt; {
+  override fun invoke(p: Number): String = p.toString()
+}
+//P 是逆变，Int 是 Number 的子类型，
+//R 是协变，Any 是 String 的父类型
+//所以 Function1&lt;Int, Any&gt; 是 Function1&lt;Number, String&gt; 的父类型，满足里氏替换。 
+var f2 : Function1&lt;Int, Any&gt; = f
+</code></pre>
+  </li>
+</ul>
+
+<p>declaration-site variance，在类定义的时候使用 <code>interface Function1&lt;in P, out R&gt;</code>。use-site variance，  java 的  <code>? extends</code> <code>? super</code>  每次使用类型变量的时候都可以声明，kotlin 可以在返回值声明 <code>out</code>，参数声明 <code>in</code></p>
+
+<h4 id="-star-projection"><code>&lt;*&gt;</code> Star projection</h4>
+
+<blockquote>
+  <blockquote>
+    <p>star-projection syntax you can use to indicate that you have no information about a generic argument.</p>
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <blockquote>
+    <p>MutableList&lt;*&gt; is a list that contains elements of a specific type, but you don’t know what type it is.</p>
+  </blockquote>
+</blockquote>
+
+<p>以 Function1 为例 <code>Function1&lt;*, *&gt;</code> 被编译器认为是 <code>Function1&lt;in Nothing,out Any?&gt;</code>。
+如果不依赖特定的参数化类型的话，就可以使用<code>&lt;*&gt;</code>，可避免使用 use-site variance</p>
+
+<pre><code>fun printFirst(list: List&lt;*&gt;) {
+    if (list.isNotEmpty()) {
+        println(list.first())
+    }
+}
+</code></pre>
+
+<h3 id="dsl">DSL</h3>
+
+<ul>
+  <li>reciever</li>
+  <li>invoke</li>
+</ul>
+
+<h3 id="coroutines">Coroutines</h3>
+
+<p>避免 callback hell</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">requestToken</span>
+<span class="n">createPost</span>
+<span class="n">processPost</span>
+</code></pre></div></div>
+
+<p>Future/Promise/Rx</p>
+
+<p>避免学太多 combinator</p>
+
+<h4 id="suspending-functions">suspending functions</h4>
+
+<p>composition</p>
+
+<h4 id="coroutine-buidle">coroutine buidle</h4>
+
+<ul>
+  <li>launch</li>
+</ul>
+
+<h4 id="async--await">async / await</h4>
+
+<p>async/await 是 C# 家族的设计，</p>
+
+<p>kotlin 用的是 <code>suspend</code> 关键字，</p>
+
+<ul>
+  <li>避免 await 关键字，</li>
+  <li>不返回 future</li>
+  <li>为模仿序列化的执行而设计 by default</li>
+</ul>
+
+<p>async 在 kotlin 只是一个方法，await 是 <code>Deferred</code> 的方法</p>
+
+<h4 id="coroutines-1">coroutines</h4>
+
+<h4 id="java-interop">java interop</h4>
+
+<h4 id="generator">generator</h4>
+
+<ul>
+  <li>buildSequence</li>
+  <li>yield</li>
+</ul>
+
+<h4 id="jvm">jvm</h4>
+
+<h4 id="continuation-passing-stylecps">continuation passing style(CPS)</h4>
+
+<ul>
+  <li>action</li>
+  <li>continuation</li>
+</ul>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">requestToken</span> <span class="c1">//action</span>
+<span class="n">createPost</span> <span class="c1">// continuation</span>
+</code></pre></div></div>
+
+<p>cps == callbacks</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">requestToken</span><span class="p">{</span> <span class="n">token</span> <span class="p">-&gt;</span>  <span class="c1">// action</span>
+  <span class="nf">createPost</span><span class="p">(</span><span class="n">token</span><span class="p">,</span><span class="n">item</span><span class="p">)</span> <span class="c1">//continuation</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="coroutines-direst-style">coroutines direst style</h4>
+
+<p>Continuation<T></T></p>
+
+<p>suspendCoroutine  regular function to suspend function</p>
+
+<h4 id="coroutine-context">Coroutine context</h4>
+
+<p>what thread it resumes on</p>
+
+<p>map of element</p>
+
+<p>dispatcher</p>
+
+<h4 id="job">job</h4>
+
+<p>CoroutineContext.Element</p>
+
+<p>join
+cancel，通过 isActive 去判断</p>
+
+<h4 id="communicating-sequential-processescsp">Communicating Sequential Processes(CSP)</h4>
+
+<ul>
+  <li>Channel<T></T></li>
+  <li>Actors, named coroutine &amp; inbox channel</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>Receiver</th>
+      <th>Suspending function</th>
+      <th>Select clause</th>
+      <th>Non-suspending version</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Job</td>
+      <td>join</td>
+      <td>onJoin</td>
+      <td>isCompleted</td>
+    </tr>
+    <tr>
+      <td>Deferred</td>
+      <td>await</td>
+      <td>onAwait</td>
+      <td>isCompleted</td>
+    </tr>
+    <tr>
+      <td>SendChannel</td>
+      <td>send</td>
+      <td>onSend</td>
+      <td>offer</td>
+    </tr>
+    <tr>
+      <td>ReceiveChannel</td>
+      <td>receive</td>
+      <td>onReceive</td>
+      <td>poll</td>
+    </tr>
+    <tr>
+      <td>ReceiveChannel</td>
+      <td>receiveOrNull</td>
+      <td>onReceiveOrNull</td>
+      <td>poll</td>
+    </tr>
+    <tr>
+      <td>Mutex</td>
+      <td>lock</td>
+      <td>onLock</td>
+      <td>tryLock</td>
+    </tr>
+    <tr>
+      <td>none</td>
+      <td>delay</td>
+      <td>onTimeout</td>
+      <td>none</td>
+    </tr>
+  </tbody>
+</table>
+
+
+</article>
+<div class="tag-container" >
+    
+    <div class="chip">
+        <a href="/tags#kotlin-ref">
+            kotlin
+        </a>
+    </div>
+    
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Programming/Kotlin/kotlin-note"
+ var disqus_config = function () {
+     this.page.title = "Kotlin Note"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Programming/Kotlin/kotlin-note/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

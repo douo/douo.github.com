@@ -1,0 +1,422 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    Service | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">Service</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-11-30">2015-07-11</span>
+    
+</div>
+
+<article>
+    <p>A Service is an application component that can perform long-running operations in the background and does not provide a user interface.</p>
+
+<p>Service 本质上有两种形态</p>
+
+<p>Started，通过 startService 启动</p>
+
+<p>Bound，服务可以绑定给 组件（bindService 是 Context 的方法）。服务提供 CS 接口给组件，组件通过接口与服务交流</p>
+
+<p>两种形态可以同时工作，主要就是解决这个问题</p>
+
+<h3 id="base">Base</h3>
+
+<p>写一个服务需要这些基本的回调方法：</p>
+
+<ul>
+  <li><strong>onStartCommand()</strong>，组件通过 startService() 启动服务，系统就会调用这个方法（不过服务是否在运行，每次都会调用）。通过 stopSelf 和 stopService 来终止服务，单单使用 bound 形式的服务，无需实现这个方法。</li>
+  <li><strong>onBind()</strong>，当其他组件通过 bindService 来绑定到这个服务时，系统会调用这个方法。这个方法一定要实现，不过如果无需 bound 形式，那返回 null 就好。</li>
+  <li><strong>onCreate</strong>，服务创建时调用的方法（在 onStartCommand 和 onBind 之前调用，如果服务已经在运行，则不会再调用 onCreate）。不像 Activity，onCreate 不用先调用父方法。</li>
+  <li><strong>onDestroy</strong>，Activity 类似，调用这个方法意味着服务将被销毁，在这里释放资源</li>
+</ul>
+
+<p><strong>如果通过 start 启动服务，那服务只有调用 stopXXX 才会被终止。</strong></p>
+
+<p><strong>如果通过 bounded 启动服务，那当没有组件绑定它的时候，系统将自动销毁它。</strong></p>
+
+<p>内存不足时，系统会杀死服务来释放资源:</p>
+
+<ul>
+  <li>普通服务（started 或 bounded 组件也在后台），运行越久越容易被杀</li>
+  <li>bounded，只有绑定的 Activity 在前台 不容易被杀死</li>
+  <li>setforeground，最不容易被杀死</li>
+</ul>
+
+<p>!#TODO service 要考虑被被系统杀死和恢复</p>
+
+<h4 id="声明服务">声明服务</h4>
+
+<pre><code>&lt;manifest ... &gt;
+  ...
+  &lt;application ... &gt;
+      &lt;service android:name=".ExampleService" /&gt;
+      ...
+  &lt;/application&gt;
+&lt;/manifest&gt;
+</code></pre>
+
+<p>!#TODO 详细见 <a href="https://developer.android.com/guide/topics/manifest/service-element.html"><code>&lt;service&gt;</code></a></p>
+
+<h4 id="started-service">Started Service</h4>
+
+<p><code>Context#startService</code>，实际上不是启动服务的命令，而是利用 Intent 向服务发送命令，是否启动服务由系统决定，调用者不知道这个方法是否会导致服务启动。应该理解为，向服务发送命令，这个命令可以是让服务开始做一件事，也可以让服务停止做一件事。甚至可以停用服务，这个取决于 <code>Service#onStartCommand</code> 的处理。 <a href="http://android-developers.blogspot.se/2010/02/service-api-changes-starting-with.html">过时的 onStart 就是这样处理的</a>，服务被系统杀死释放资源后，会重启只调用 onCreate 而没有 onStart，改进后会调用 onStartCommand 并传递 null intent，就是启动服务但不发送命令的意思。</p>
+
+<p>记得只要服务和应用是在同一个进程执行的话，服务的生命周期方法都是在<strong>主线程</strong>执行的。</p>
+
+<p>IntentService，是个方便的子类，提供 <code>onHandleIntent</code> 方法用於异步执行。</p>
+
+<p><code>onStartCommand</code> 的返回值用于告诉 Android 服务若被杀死后该怎么处理。几种不同 Start Id 的区别：</p>
+
+<h5 id="start_not_sticky"><code>START_NOT_STICKY</code></h5>
+
+<p>不会重启</p>
+
+<p>First run</p>
+
+<pre><code>07-23 22:06:37.033  15457-15457/? D/ServiceDemo﹕ onCreate
+07-23 22:06:37.034  15457-15457/? D/ServiceDemo﹕ onStartCommand:1 flags:0
+07-23 22:06:37.035  15457-15457/? D/ServiceDemo﹕ Dumping Intent start
+    Data:http://dourok.info/demo
+    Action:Test
+    [key=value]
+    Dumping Intent end
+07-23 22:06:51.348  15457-15457/? D/Servi
+</code></pre>
+
+<p>killed</p>
+
+<pre><code>07-23 22:07:48.389    1157-1744/? W/ActivityManager﹕ Scheduling restart of crashed service info.dourok.android.demo/.services.ServiceDemo in 1000ms
+</code></pre>
+
+<h5 id="start_sticky">START_STICKY</h5>
+
+<p>重启，但 Intent 为空</p>
+
+<p>First run</p>
+
+<pre><code>07-23 22:01:03.369  10762-10762/? D/ServiceDemo﹕ onCreate
+07-23 22:01:03.370  10762-10762/? D/ServiceDemo﹕ onStartCommand:1 flags:0
+07-23 22:01:03.373  10762-10762/? D/ServiceDemo﹕ Dumping Intent start
+    Data:http://dourok.info/demo
+    Action:Test
+    [key=value]
+    Dumping Intent end
+</code></pre>
+
+<p>killed</p>
+
+<pre><code>07-23 22:02:16.695    1157-2100/? W/ActivityManager﹕ Scheduling restart of crashed service info.dourok.android.demo/.services.ServiceDemo in 1000ms
+07-23 22:02:17.541  12814-12814/? D/ServiceDemo﹕ onCreate
+07-23 22:02:17.541  12814-12814/? D/ServiceDemo﹕ onStartCommand:2 flags:0
+07-23 22:02:17.547  12814-12814/? D/ServiceDemo﹕ null
+</code></pre>
+
+<h5 id="start_redeliver_intent"><code>START_REDELIVER_INTENT</code></h5>
+
+<p>重启，并返回上一次的 intent</p>
+
+<p>First run</p>
+
+<pre><code>07-23 22:15:43.459  22569-22569/? D/ServiceDemo﹕ onCreate
+07-23 22:15:43.460  22569-22569/? D/ServiceDemo﹕ onStartCommand:1 flags:0
+07-23 22:15:43.461  22569-22569/? D/ServiceDemo﹕ Dumping Intent start
+    Data:http://dourok.info/demo
+    Action:Test
+    [key=value]
+    Dumping Intent end
+</code></pre>
+
+<p>killed</p>
+
+<pre><code>07-23 22:15:57.568    1157-2107/? W/ActivityManager﹕ Scheduling restart of crashed service info.dourok.android.demo/.services.ServiceDemo in 28518ms
+07-23 22:16:26.141    1157-1207/? I/ActivityManager﹕ Start proc info.dourok.android.demo for service info.dourok.android.demo/.services.ServiceDemo: pid=23724 uid=10272 gids={50272, 9997} abi=armeabi-v7a
+07-23 22:16:26.222  23724-23724/? D/ServiceDemo﹕ onCreate
+07-23 22:16:26.222  23724-23724/? D/ServiceDemo﹕ onStartCommand:1 flags:1
+07-23 22:16:26.225  23724-23724/? D/ServiceDemo﹕ Dumping Intent start
+    Data:http://dourok.info/demo
+    Action:Test
+    [key=value]
+    Dumping Intent end
+</code></pre>
+
+<p>IntentService 只有两种选择，不重启或重启并带回 Intent。</p>
+
+<p>即便创建 Service 的 Activity 被销毁了，Service 还是运行着，即使 Service 不做任何事。多次运行 Activity Service#onStartCommand 也会被调用多次，但 onCreate 只有一次。重新运行程序，杀掉重启应用。服务也会重启的。这是 onStartCommand 会被调用两次，一次是系统重启，一次是 Activity 调用。</p>
+
+<p>关于 flags：</p>
+<ul>
+  <li>0</li>
+  <li>1 START_FLAG_REDELIVERY 服务在调用 stopSelf 之前被杀掉，系统重启它将会带这个标志</li>
+  <li>2 START_FLAG_RETRY  Intent 没有到达或没有 onStartCommand 没有返回，系统重新发送 Intent 将会带这个标志。onStartCommand 没有返回，Service 跟发送的组件不在同一个进程，才可能发送。我尝试在 onStartCommand 写个死循环并在新进程里运行服务。大约20秒左右，log 打出 Service 执行超时，然后居然死机，log 打出类似<a href="https://gist.github.com/vciancio/8d0d3f53d57e82780f61">这样的</a>。居然帮我找到 L50t 死机的原因。换另一台手机，大概一分钟后提示 ANR，然后强制关掉后，<strong>并没有重新启动服务。</strong>所以我也没办法重现找个标志了。</li>
+</ul>
+
+<p>生命周期比 Activity 更简单:</p>
+
+<p><img src="https://developer.android.com/images/service_lifecycle.png" alt="" /></p>
+
+<h5 id="回调">回调</h5>
+
+<p>通过 Broadcast 回调</p>
+
+<h4 id="bind-service">Bind Service</h4>
+
+<p>setForeground 避免被杀</p>
+
+<h4 id="回调-1">回调</h4>
+
+<p>local ref</p>
+
+<p>Message</p>
+
+<h3 id="startforeground">startForeground</h3>
+
+<p>提升服务优先级到前台进程，前台进程最不容易被回收，Android将进程分为6个等级,它们按优先级顺序由高到低依次是:</p>
+
+<ol>
+  <li>前台进程( FOREGROUND_APP)</li>
+  <li>可视进程(VISIBLE_APP )</li>
+  <li>次要服务进程(SECONDARY_SERVER )</li>
+  <li>后台进程 (HIDDEN_APP)</li>
+  <li>内容供应节点(CONTENT_PROVIDER)</li>
+  <li>空进程(EMPTY_APP)</li>
+</ol>
+
+<p>但是需要<strong>强制显示一个不可移除的通知</strong></p>
+
+
+</article>
+<div class="tag-container" >
+    
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Programming/Android/service"
+ var disqus_config = function () {
+     this.page.title = "Service"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Programming/Android/service/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

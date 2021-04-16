@@ -1,0 +1,355 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    为 Ruhoh 生成文章目录 | DouO's Blog</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">为 Ruhoh 生成文章目录</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-11-30">2012-11-20</span>
+
+    <span><a href="/categories#coder-ref" class="category category-coder waves-effect waves-light">coder</a></span>
+    
+</div>
+
+    <article>
+        
+<p>为文章生成目录，即所谓的 TOC（Table of Contents）， 可以在前台或后台实现。显然在前台，即用 javascript 实时生成目录，更简单明了，而且 <a href="https://twitter.com/#!/brianclapper">@brianclapper</a> 早已提供一个在 Octopress 上实现的<a href="http://brizzled.clapper.org/blog/2012/02/04/generating-a-table-of-contents-in-octopress/">方法</a>，在 ruhoh 上可以用 widgets 实现，但是要实现根据 page 参数来开启关闭还是比较麻烦，因为现在 ruhoh 的 widgets 不能读取到 page 的数据，不过这也只是小问题，不是我选择后台实现的原因。</p>
+
+<p>为何要在后台生成目录？首先，我觉得目录应该和正文一样是属于文章的一部，所以我不能接受需要一个 javascript 解析器才能把文章显示完整。另外，我一开始是希望能有很高的灵活性，支持三种开启目录的模式，分别是自动，强制开启，强制关闭，后来觉得只有标题超过一定的数量才生成目录，也就是自动这一个模式就已足够，最重要的是这一部分的代码之前我已经实现好了。还有，用插件实现编译一次搞定，不用每次访问都浪费计算资源去生成目录，这也算是优点之一吧。</p>
+
+<p>一开始没想那么多，直接用 Markdown Converter 来生成目录，把目录代码直接加入到 Markdown 转换后的最终文档上，但是这种做法有很大的缺陷，目录不能与文章内容分离出来放在页面的其他地方，毫无灵活性可言。理想中的做法，是可以用<code>{{page.toc}}</code>在模板中指定目录的位置，通过 partial 来定制 toc 的模板，后来做了笔记系统需要两个不同风格的目录，这个问题更不能回避了。</p>
+
+<p>为了通过 mustache 标签来载入 TOC，就得牺牲一下效率了，因为 ruhoh 的编译流程所限，不能做到将 Converter 工作后的产生的数据，为 Mustache 解析器所用。这样表达好像不清楚，换句话说因为目录的数据是需要 Markdown Converter 来生成，就是说将 markdown 转换为 html 后，才知道目录是长什么样的，而这个过程是在 mustache 的 render 方法里，所以 mustache 无法获取到 Converter 里的数据，于是当模板需要目录的时候，只能再去解析一遍 Markdown 文件，也是说一个 Markdown 文件必须经过两次解析才能生成目标页面，不过目前效率还远远不是问题。</p>
+
+<p>实现的细节，代码见 <a href="https://github.com/douo/douo.ruhoh.com/blob/master/plugins/toc_render.rb">toc_render.rb</a> 和 <a href="https://github.com/douo/douo.ruhoh.com/blob/master/plugins/custom.rb">custom.rb</a>，<a href="https://github.com/douo/douo.ruhoh.com/blob/master/plugins/toc_render.rb">toc_render.rb</a> 是生成 TOC 的 Markdown 解析器，<a href="https://github.com/douo/douo.ruhoh.com/blob/master/plugins/custom.rb">custom.rb</a> 定义了 mustache helper <code>{{page.toc}}</code>。另外还有 <a href="https://github.com/douo/douo.ruhoh.com/blob/master/plugins/converters/limdown.rb">limdown.rb</a>，是生成页面最终效果的 Markdown Converter，它为每个 header 加上 id。</p>
+
+<p>以文章<a href="/2012/08/20/something-about-ruhoh">Ruhoh 札记</a>为例，它的目录数据是这样的：</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="ss">:level</span><span class="o">=&gt;</span><span class="mi">0</span><span class="p">,</span>
+ <span class="ss">:children</span><span class="o">=&gt;</span>
+  <span class="p">[{</span><span class="ss">:text</span><span class="o">=&gt;</span><span class="s2">"ruhoh"</span><span class="p">,</span> <span class="ss">:level</span><span class="o">=&gt;</span><span class="mi">3</span><span class="p">,</span> <span class="ss">:count</span><span class="o">=&gt;</span><span class="mi">0</span><span class="p">,</span> <span class="ss">:anchor</span><span class="o">=&gt;</span><span class="s2">"toc_0"</span><span class="p">,</span> <span class="ss">:children</span><span class="o">=&gt;</span><span class="p">[]},</span>
+   <span class="p">{</span><span class="ss">:text</span><span class="o">=&gt;</span><span class="s2">"评论"</span><span class="p">,</span> <span class="ss">:level</span><span class="o">=&gt;</span><span class="mi">3</span><span class="p">,</span> <span class="ss">:count</span><span class="o">=&gt;</span><span class="mi">1</span><span class="p">,</span> <span class="ss">:anchor</span><span class="o">=&gt;</span><span class="s2">"toc_1"</span><span class="p">,</span> <span class="ss">:children</span><span class="o">=&gt;</span><span class="p">[]},</span>
+   <span class="p">{</span><span class="ss">:text</span><span class="o">=&gt;</span><span class="s2">"主题"</span><span class="p">,</span> <span class="ss">:level</span><span class="o">=&gt;</span><span class="mi">3</span><span class="p">,</span> <span class="ss">:count</span><span class="o">=&gt;</span><span class="mi">2</span><span class="p">,</span> <span class="ss">:anchor</span><span class="o">=&gt;</span><span class="s2">"toc_2"</span><span class="p">,</span> <span class="ss">:children</span><span class="o">=&gt;</span><span class="p">[]},</span>
+   <span class="p">{</span><span class="ss">:text</span><span class="o">=&gt;</span><span class="s2">"mustache"</span><span class="p">,</span> <span class="ss">:level</span><span class="o">=&gt;</span><span class="mi">3</span><span class="p">,</span> <span class="ss">:count</span><span class="o">=&gt;</span><span class="mi">3</span><span class="p">,</span> <span class="ss">:anchor</span><span class="o">=&gt;</span><span class="s2">"toc_3"</span><span class="p">,</span> <span class="ss">:children</span><span class="o">=&gt;</span><span class="p">[]},</span>
+   <span class="p">{</span><span class="ss">:text</span><span class="o">=&gt;</span><span class="s2">"Markdown"</span><span class="p">,</span> <span class="ss">:level</span><span class="o">=&gt;</span><span class="mi">3</span><span class="p">,</span> <span class="ss">:count</span><span class="o">=&gt;</span><span class="mi">4</span><span class="p">,</span> <span class="ss">:anchor</span><span class="o">=&gt;</span><span class="s2">"toc_4"</span><span class="p">,</span> <span class="ss">:children</span><span class="o">=&gt;</span><span class="p">[]},</span>
+   <span class="p">{</span><span class="ss">:text</span><span class="o">=&gt;</span><span class="s2">"RSS &amp;amp; Sitemap"</span><span class="p">,</span>
+    <span class="ss">:level</span><span class="o">=&gt;</span><span class="mi">3</span><span class="p">,</span>
+    <span class="ss">:count</span><span class="o">=&gt;</span><span class="mi">5</span><span class="p">,</span>
+    <span class="ss">:anchor</span><span class="o">=&gt;</span><span class="s2">"toc_5"</span><span class="p">,</span>
+    <span class="ss">:children</span><span class="o">=&gt;</span><span class="p">[]},</span>
+   <span class="p">{</span><span class="ss">:text</span><span class="o">=&gt;</span><span class="s2">"搬家"</span><span class="p">,</span> <span class="ss">:level</span><span class="o">=&gt;</span><span class="mi">3</span><span class="p">,</span> <span class="ss">:count</span><span class="o">=&gt;</span><span class="mi">6</span><span class="p">,</span> <span class="ss">:anchor</span><span class="o">=&gt;</span><span class="s2">"toc_6"</span><span class="p">,</span> <span class="ss">:children</span><span class="o">=&gt;</span><span class="p">[]},</span>
+   <span class="p">{</span><span class="ss">:text</span><span class="o">=&gt;</span><span class="s2">"部署"</span><span class="p">,</span> <span class="ss">:level</span><span class="o">=&gt;</span><span class="mi">3</span><span class="p">,</span> <span class="ss">:count</span><span class="o">=&gt;</span><span class="mi">7</span><span class="p">,</span> <span class="ss">:anchor</span><span class="o">=&gt;</span><span class="s2">"toc_7"</span><span class="p">,</span> <span class="ss">:children</span><span class="o">=&gt;</span><span class="p">[]},</span>
+   <span class="p">{</span><span class="ss">:text</span><span class="o">=&gt;</span><span class="s2">"其他"</span><span class="p">,</span>
+    <span class="ss">:level</span><span class="o">=&gt;</span><span class="mi">3</span><span class="p">,</span>
+    <span class="ss">:count</span><span class="o">=&gt;</span><span class="mi">8</span><span class="p">,</span>
+    <span class="ss">:anchor</span><span class="o">=&gt;</span><span class="s2">"toc_8"</span><span class="p">,</span>
+    <span class="ss">:children</span><span class="o">=&gt;</span>
+     <span class="p">[{</span><span class="ss">:text</span><span class="o">=&gt;</span><span class="s2">"Mathjax"</span><span class="p">,</span>
+       <span class="ss">:level</span><span class="o">=&gt;</span><span class="mi">4</span><span class="p">,</span>
+       <span class="ss">:count</span><span class="o">=&gt;</span><span class="mi">9</span><span class="p">,</span>
+       <span class="ss">:anchor</span><span class="o">=&gt;</span><span class="s2">"toc_9"</span><span class="p">,</span>
+       <span class="ss">:children</span><span class="o">=&gt;</span><span class="p">[]},</span>
+      <span class="p">{</span><span class="ss">:text</span><span class="o">=&gt;</span><span class="s2">"自动刷新"</span><span class="p">,</span> <span class="ss">:level</span><span class="o">=&gt;</span><span class="mi">4</span><span class="p">,</span> <span class="ss">:count</span><span class="o">=&gt;</span><span class="mi">10</span><span class="p">,</span> <span class="ss">:anchor</span><span class="o">=&gt;</span><span class="s2">"toc_10"</span><span class="p">,</span> <span class="ss">:children</span><span class="o">=&gt;</span><span class="p">[]},</span>
+      <span class="p">{</span><span class="ss">:text</span><span class="o">=&gt;</span><span class="s2">"TODO"</span><span class="p">,</span>
+       <span class="ss">:level</span><span class="o">=&gt;</span><span class="mi">4</span><span class="p">,</span>
+       <span class="ss">:count</span><span class="o">=&gt;</span><span class="mi">11</span><span class="p">,</span>
+       <span class="ss">:anchor</span><span class="o">=&gt;</span><span class="s2">"toc_11"</span><span class="p">,</span>
+       <span class="ss">:children</span><span class="o">=&gt;</span><span class="p">[]}]}]}</span>
+</code></pre></div></div>
+
+<p>这是一个树结构，也是一个递归结构，在 Mustache 中需要递归载入 partial 来能表现这种数据结构。比如笔记系统所使用的两个 partial。</p>
+
+<p>note_toc.mustache:</p>
+
+<div class="language-mustache highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">{{#</span> <span class="nv">page</span><span class="p">.</span><span class="nv">toc</span> <span class="k">}}</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"span3 toc"</span><span class="nt">&gt;&lt;ol</span> <span class="na">class=</span><span class="s">"toc-list"</span><span class="nt">&gt;</span>
+   <span class="k">{{#</span><span class="nn">children</span><span class="k">}}</span>
+     <span class="k">{{&gt;</span> <span class="nv">toc_li</span><span class="k">}}</span>
+   <span class="k">{{/</span><span class="nn">children</span><span class="k">}}</span>
+<span class="nt">&lt;/div&gt;</span>
+<span class="k">{{/</span> <span class="nv">page</span><span class="p">.</span><span class="nv">toc</span><span class="k">}}</span>
+</code></pre></div></div>
+
+<p>toc_li.mustache:</p>
+
+<div class="language-mustache highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#</span><span class="k">{{</span><span class="nv">anchor</span><span class="k">}}</span><span class="s">"</span><span class="nt">&gt;</span><span class="k">{{{</span><span class="nv">text</span><span class="k">}}}</span><span class="nt">&lt;/a&gt;</span>
+<span class="nt">&lt;ul&gt;</span>
+   <span class="k">{{#</span><span class="nn">children</span><span class="k">}}</span>
+     <span class="k">{{&gt;</span> <span class="nv">toc_li</span><span class="k">}}</span>
+   <span class="k">{{/</span><span class="nn">children</span><span class="k">}}</span>
+<span class="nt">&lt;/ul&gt;</span>
+<span class="nt">&lt;/li&gt;</span>
+</code></pre></div></div>
+
+
+    </article>
+    <div class="tag-container" >
+        
+        <div class="chip">
+        <a href="/tags#ruhoh-ref">
+            ruhoh
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#ruby-ref">
+            ruby
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#markdown-ref">
+            markdown
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#toc-ref">
+            toc
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#mustache-ref">
+            mustache
+        </a>
+        </div>
+        
+    </div>
+<div class="post-pager">
+    
+    <a href="/2012/11/05/too-many-books-to-read/">上一篇：囤书成瘾</a>
+    
+    
+    <a href="/2012/12/06/life-doesn-t-make-sense/" style="float:right;" >下一篇：Life Doesn't Make Sense</a>
+    
+</div>
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/2012/11/20/generating-a-toc-in-ruhoh"
+ var disqus_config = function () {
+     this.page.title = "为 Ruhoh 生成文章目录"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/2012/11/20/generating-a-toc-in-ruhoh/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

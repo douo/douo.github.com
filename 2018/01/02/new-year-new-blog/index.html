@@ -1,0 +1,425 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    新年新博客 | DouO's Blog</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">新年新博客</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 18-09-27">2018-01-02</span>
+
+    
+</div>
+
+    <article>
+        <h3 id="迁移-jekyll">迁移 Jekyll</h3>
+<p>网站在 18 年元旦终于重做的差不多了，五年前买的主机在去年 12 月过期了，促使我终于将拖了一年多的 Jekyll 迁移计划落地。Ruhoh 从 14 年就再没有更新，虽然用起来没什么大问题，但总有一些小毛病，比如生成速度过慢(Jekyll 也不快，15 款高配 MBP 全站生成都大概要 10秒)，实时预览的功能也没有 Jekyll 的增长式构建那么强大。作为一个小众的静态博客生成系统基本也没什么生态，迁移到主流的 Jekyll 是迟早的事，只不过我对 Ruhoh 做了不少定制，迁移要在 Jekyll 这边重新实现一遍挺费时间的。</p>
+
+<p>最大的问题就是笔记系统，Jekyll 和 Ruhoh 都支持页面资源的归类和管理，Jekyll 中叫 Collection，Ruhoh 叫 Resource。Jekyll 的理念是所有 Collection 生而平等，但有些 Collection 更平等。比如其他 Collection 就不像 Posts 那样自带标签汇总。Ruhoh 的 Resource 才是真平等，通过插件扩展的能力也更强大当然也更繁琐。之前的笔记和日记就是通过自定义 Resource 实现的。</p>
+
+<p>用 Jekyll 实现笔记系统我没有对 Collection 进行扩展，通过配置来实现部分功能，舍弃了父类别也能生成页面的功能。笔记的树结构 json 通过 generator 插件实现。标签归纳也得自己实现。固定连接反而是最简单的，一条配置搞定：</p>
+
+<pre><code>scope:
+  type: "notes"
+values:
+  layout: "note"
+  permalink: "/:collection/:path/"
+</code></pre>
+
+<p>另外还有一些自定义插件，比如 LaTeX， <code>Kramdown</code> 是默认支持的。至于 <a href="https://graphviz.gitlab.io/">graphviz</a>，我发现 Kramdown 的定制比 Redcarpet 麻烦。最后还是决定用自定义 liquid <a href="https://jekyllrb.com/docs/plugins/#tags">tags</a> 实现。</p>
+
+<pre><code>{% graphviz %}
+digraph G {
+	subgraph cluster_0 {
+	....
+
+	start [shape=Mdiamond];
+	end [shape=Msquare];
+}
+{% endgraphviz %}
+</code></pre>
+
+<div class="graphviz" data-graph="
+digraph G {
+
+	subgraph cluster_0 {
+		style=filled;
+		color=lightgrey;
+		node [style=filled,color=white];
+		a0 -&gt; a1 -&gt; a2 -&gt; a3;
+		label = &quot;process #1&quot;;
+	}
+
+	subgraph cluster_1 {
+		node [style=filled];
+		b0 -&gt; b1 -&gt; b2 -&gt; b3;
+		label = &quot;process #2&quot;;
+		color=blue
+	}
+	start -&gt; a0;
+	start -&gt; b0;
+	a1 -&gt; b3;
+	b2 -&gt; a3;
+	a3 -&gt; a0;
+	a3 -&gt; end;
+	b3 -&gt; end;
+
+	start [shape=Mdiamond];
+	end [shape=Msquare];
+}
+">
+        </div>
+
+<p>还有一个就是<a href="https://github.com/douo/douo.github.com/blob/develop/_plugins/ruhoh_jekyll.rb">迁移脚本</a>，首先将文章的文件名转换为符合 Jekyll 规则。 Ruhoh 用的模板语言是 <a href="https://mustache.github.io">Mustache</a>，眼看 Mustache 被微信小程序选用了有机会火了，又被我放弃了…… Markdown 引擎是 <a href="https://github.com/vmg/redcarpet">Redcarpet</a>，Jekyll 则是 <a href="https://shopify.github.io/liquid/">Liquid</a> 和 <a href="https://kramdown.gettalong.org/">Kramdown</a>，所以还需对内文做一些转换和过滤。还是最重要的一点是将页面引用的本地资源进行整理。</p>
+
+<h3 id="resource-管理">Resource 管理</h3>
+
+<p>对页面资源进行管理是由来已久的想法。要求每篇文章（Document）的都有一个独立的资源目录，然后目录内的文件都可以在正文内通过相对路径访问。这样就不用再将所有资源都挤在 media 文件夹，还得用一个`` 来获取 media 的相对路径。实现是通过一个 <a href="https://github.com/douo/douo.github.com/blob/develop/_plugins/resource_generator.rb">generator</a> 将资源拷贝到相应路径实现的，最终的目录结构如下：</p>
+
+<pre><code>_res
+├── notes
+│   ├── Programming
+│   │   ├── Android
+│   │   │   └── loader
+│   │   │       ├── Loader.png
+│   │   │       └── loader_event.png
+│   ├── Reading
+│   │   └── computer-systems-a-programmer-s-perspective
+│   │       └── CSAPP
+│   │           ├── CSAPP-5.10&amp;5.11.png
+│   │           ├── CSAPP-5.5&amp;5.6.png
+│   │           ├── address_translation.png
+│   │           └── process_address_space.png
+└── posts
+    ├── 2013-08-16-the-pain-of-note
+    │   └── note_system_review.js
+    ├── 2013-10-22-the-pain-of-note-2
+    │   └── categories.org
+    ├── 2016-12-24-hierarchy-fragment-pager-adapter
+    │   ├── b_aa_ba_ca.png
+    │   ├── b_ba_baa_baaa.png
+    │   └── b_ba_ca.png
+    ├── 2017-10-20-lambda-in-android
+    │   └── desugar_diagram.png
+</code></pre>
+
+<h3 id="命令行接口">命令行接口</h3>
+
+<p>Jekyll 是没有对资源进行操作的命令行接口的，这点还是 Ruhoh 做得比较好，可以对每个 Resource/Collection 的命令行接口进行定制。</p>
+
+<p>Jekyll 要可以通过 Commands 插件实现命令行接口。见 <a href="https://github.com/douo/douo.github.com/tree/develop/jekyll-moon">jekyll-moon</a>，目前扩展了 <code>create</code> 命令，实现了创建 post 和 note。接下来还需要实现创建资源目录、内文搜索，list 等。</p>
+
+<h3 id="主题">主题</h3>
+
+<p>后台的事说得差不多，接下来说说前台。主题和网站结构重新做了设计。基于 <a href="http://materializecss.com/">Materialize</a> 主题也是像素级照搬。不过也算实现了一直很想做的 MD 设计。</p>
+
+<p>用了 ES6 和 Sass，Jekyll 默认支持 Sass 处理器。至于 Es6 用的是 jekyll-babel，babel-source（5.8.35） 快两年没更新了，看来 Rubier 还是喜好 coffee-script 多一些。</p>
+
+<h3 id="搜索">搜索</h3>
+
+<p>网站最大的突破是终于有了能用的搜索，基于 <a href="https://lunrjs.com/">Lunr</a> 实现的浏览器端的搜索。目前只对标题和标签进行索引。</p>
+
+<p>Lunr 默认不支持中文，它的建立索引的过程是先通过分词器进行处理，<a href="https://github.com/olivernn/lunr.js/blob/master/lib/tokenizer.js">tokenizer.js</a></p>
+
+<p>再对每个 token，通过 pipeline 进行处理，默认有三个 pipeline：</p>
+
+<pre><code>builder.pipeline.add(
+    lunr.trimmer, // 过来所以非 \W 字符，中文会在这里被过滤掉
+    lunr.stopWordFilter, // 过滤停止词
+    lunr.stemmer // 返回词干
+  )
+</code></pre>
+
+<p>考虑到中文分词的复杂性，所以我将分词放在 Ruby 端处理，找了一遍没有找到特别合适的分词器，主要是不想有 native extension，在 travis-ci 上部署不方便。所以目前只是单纯将中文与英文分隔开而已，见 <a href="https://github.com/douo/douo.github.com/blob/develop/_plugins/index_generator.rb">index_generator.rb</a>。要搜索中文最好还是得手动加上通配符，Lunr 的搜索用法可参考 <a href="https://lunrjs.com/guides/searching.html">Searching : Lunr</a></p>
+
+<h3 id="自动部署">自动部署</h3>
+<p>GitHub 虽然支持 Jekyll，但我加了不少 Jekyll 插件，想直接用 GitHub 来部署是不可能的。不过也不是没有办法的，比如用免费的持续集成服务 <a href="https://travis-ci.org">travis-ci.org</a> 来实现持续部署，Travis 支持部署到 GitHub Page，几行配置搞定：</p>
+
+<pre><code>deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN # Set in travis-ci.org dashboard
+  local_dir: ${TRAVIS_BUILD_DIR}/_site
+  target_branch: master
+  on:
+    branch: develop
+</code></pre>
+
+<p>Jekyll 的持续集成可参考官方文档 <a href="https://jekyllrb.com/docs/continuous-integration/travis-ci/">Travis CI | jekyll</a></p>
+
+<h3 id="支持-https-的免费主机">支持 HTTPS 的免费主机</h3>
+
+<p>到这里基本实现了 <code>push</code> 后自动构建并部署到 https://douo.github.com 由 GitHub 来免费托管，也可以绑定自己的域名2，一切看起来都很美好。但要为自己的域名添加免费 HTTPS 支持就没那么容易。幸好 <a href="https://www.netlify.com/">Netlify</a> 恰能提供这样的服务，并支持绑定免费的 <a href="https://letsencrypt.org/">Let’s Encrypt - Free SSL/TLS Certificates</a> 证书，具体可参考：<a href="https://jaeger.itscoder.com/web/2017/08/30/github-page-https">GitHub Page 博客自定义域名添加 HTTPS 支持</a>。</p>
+
+<h3 id="更新">更新</h3>
+
+<ul>
+  <li>2018年05月29日，引入 webpack 管理前端资源，使用 <a href="https://github.com/clenemt/clenemt.com.git">clenemt</a> 的配置。</li>
+  <li>2018年09月27日，github 已经支持<a href="https://blog.github.com/2018-05-01-github-pages-custom-domains-https/">自定义域名 https</a>，所以从 netlify 迁回 github 了，netlify 速度实在太慢。</li>
+</ul>
+
+
+    </article>
+    <div class="tag-container" >
+        
+        <div class="chip">
+        <a href="/tags#jekyll-ref">
+            jekyll
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#ruhoh-ref">
+            ruhoh
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#lunr-ref">
+            lunr
+        </a>
+        </div>
+        
+    </div>
+<div class="post-pager">
+    
+    <a href="/2017/10/20/lambda-in-android/">上一篇：Lambda in Android</a>
+    
+    
+    <a href="/2018/07/08/clean-architecture/" style="float:right;" >下一篇：读 Clean Architecture</a>
+    
+</div>
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/2018/01/02/new-year-new-blog"
+ var disqus_config = function () {
+     this.page.title = "新年新博客"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/2018/01/02/new-year-new-blog/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+    <script src="https://cdn.bootcss.com/viz.js/1.8.2/viz-lite.js"></script>
+<script>
+ $(".graphviz").each(function(a,b){b.appendChild(Viz($(b).data("graph"), { format: "png-image-element" }))});
+</script>
+
+    
+
+    
+</body>
+
+</html>
+

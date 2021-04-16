@@ -1,0 +1,462 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    2017年09月29日杂记 | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">2017年09月29日杂记</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-11-30">2017-09-29</span>
+    
+</div>
+
+<article>
+    <h3 id="android-如何实现支持-lambda-表达式">Android 如何实现支持 lambda 表达式</h3>
+
+<p>lambda 表达式是 java 8 新引入的语言特性，使用了通过 java 7 新引入的字节码指令 invokedynamic 来实现的（参考 <a href="http://wiki.jvmlangsummit.com/images/7/7b/Goetz-jvmls-lambda.pdf">Goetz-jvmls-lambda.pdf</a>）。但在 dalvik 中并没有相应的指令，所以直接将 java 8 的字节码翻译为 dalvik 字节码目前是是不可行的。不过从 java lambda 的实现上来讲，实际上就是内部匿名类的语法糖。</p>
+
+<p>既然是语法糖，那就是一个代码转换的事，把这个过程抽离出来另外实现，就可以在低版本的 jdk 中实现对 lambda 的支持。<a href="https://github.com/orfjackal/retrolambda">retrolambda</a>，就是在字节码层面实现这个转换。retrolambda 的具体实现是基于 java 8 对 lambda 的底层实现来做的。在编译时，java 主要为当前类生成一个方法，方法体（method body）就是 lambda body，这个方法称为 desugar 方法。运行时，第一次执行到这条 lambda 语句的时候，invokedynamic 调用引导方法（BSM），引导方法生成一个实现了具体函数式接口（Functional Interface，只有一个抽象方法的接口）的 VM 匿名类，这个类主要用于捕获 lambda 所需要的变量。第二步，把这个对象的构造函数和 invokdynamic 绑定起来，最后调用这个构造函数返回这个匿名类的实例，也就是所谓的 lambda object（以后再执行这条 invokedynamic 指令就是直接调用构造函数返回实例了）。调用的时候，再把接口方法需要的参数和捕获的变量传递给 desugar 方法来完成 lambda 的应用（可参考<a href="http://dourok.info/2017/10/08/understanding-invokedynamic">理解 invokedynamic</a>）。</p>
+
+<p>retrolambda 的做法是，源文件先用 java 8 编译，lambda body 转换为当前类的 desugar 方法编译器已经处理好了。接着解析编译后的 class 文件，遇到一条 invokedynamic 指令，就模仿它调用它的引导方法（<a href="https://github.com/orfjackal/retrolambda/blob/master/retrolambda/src/main/java/net/orfjackal/retrolambda/lambdas/LambdaReifier.java#L26">LambdaReifier.reifyLambdaClass</a>），把引导方法生成的匿名类作为当前类的匿名类保存下来，接下来还会对这些类再做一些变换，包括用单例优化无状态的 lambda 对象，将构造函数替换为工厂方法（<a href="https://github.com/orfjackal/retrolambda/blob/master/retrolambda/src/main/java/net/orfjackal/retrolambda/lambdas/BackportLambdaClass.java#L60">BackportLambdaClass#visitEnd</a>）。最后把 invokedynamic 替换为对该匿名类的实例化语句，就是这样把 invokedynamic 替换为等价的兼容代码。不过， retrolambda 的实现依赖于 java 对 lambda 的具体实现，后续的 java 版本不用匿名类了，那么 retrolambda 也就不能用了。</p>
+
+<p>在 Android Studio 3.0 之前，要在基于 java 的 Android 开发中使用 lambda 表达一般都是用 retrolambda 来转换为 dalvik 能处理的字节码来实现的（就不提夭折的 Jack 了）。 不过 Android Studio 3.0 后，IDE 已经支持实现这个转换了，简称 desugar。具体如何开启可参看官方文档：<a href="https://developer.android.com/studio/write/java8-support.html">Use Java 8 language features</a>。IDE 的 desugar 过程比 retrolamda 的主要区别就是时机不同，原理上大致是一样的，IDE 的实现可见 <a href="https://android.googlesource.com/platform/external/desugar/+/master/java/com/google/devtools/build/android/desugar/LambdaDesugaring.java#394">LambdaDesugaring#visitInvokeDynamicInsn</a>。 retrolambda 只能对当前项目进行转换，IDE 是在转换为 dex 之前做的转换，也就是说 IDE 还支持第三方用 java 8 编译的库。</p>
+
+<p><img src="desugar_diagram.png" alt="android 构建流程图" /></p>
+
+<p>原图见 <a href="https://sites.google.com/a/android.com/tools/tech-docs/new-build-system/build-workflow">Build Workflow - Android Studio Project Site</a></p>
+
+<p>总之，Android 对 lambda 的实现与 java 8 并未太大区别，最主要的区别 java 8 的匿名类在运行时生成，而 Android 是在编译时生成（这样还可以避免了对 serializable lambda 的特殊对待）。</p>
+
+<h3 id="lambda-表达式">lambda 表达式</h3>
+
+<p>lambda 表达式在 java 中就是用于创建函数式接口实例（lambda object）的表达式，lambda 的实际使用中，主要将其分为两种类型，其一，无状态的（stateless） lambda 表达式，指的就是没有自由变量的 lambda 表达式。相对的，另一类就是有自由变量的 lambda 表达式。</p>
+
+<p>什么是自由变量，把一道 lambda 表达式从其上下文抽离出来看一下：<code>L1 = s -&gt; Integer.valueOf(s)</code>。表达式中的两个量 Integer 和 s，Integer 是常量，而 s 在参数列表中声明了（类型省略），这里称 s 是一个绑定变量，所有量都是确定的，所以 L1 就是无状态的 lambda 表达式（可以认为它的调用不会产生任何副作用）。</p>
+
+<p>另外一个例子：<code>() -&gt; System.out.println(Arrays.toString(args))</code>。<code>args</code> 是什么？脱离了上下文就无法确定了，如果在上下文中看，就很清楚 <code>args</code> 是什么了：</p>
+
+<pre><code>public static void main(String[] args) {
+    Runnable r = () -&gt; System.out.println(Arrays.toString(args));
+    r.run();
+}
+</code></pre>
+
+<p><code>args</code> 在这里就是自由变量。要对 lambda 表达式求值前所有自由变量都是得已知的，java 中所有自由变量都必须在编译期确认（另外一种不同的实现可参考 <a href="http://groovy-lang.org/closures.html#_delegate_of_a_closure">Groovy</a>），为自由变量确定值的过程称为变量捕获（capturing），把变量捕获后和 lambda 表达式绑定在一起的结构就是闭包（closure），lambda 对象实例就是一个闭包。java 中就是通过匿名类来存放这些捕获这些变量，而且是以 final 引用的形式。</p>
+
+<p>先看一下最简单的无状态 lambda：</p>
+
+<pre><code>public class LambdaTest {
+    public void testStateless() {
+        Runnable r = (() -&gt; System.out.println("pure"));
+        r.run();
+    }
+}
+</code></pre>
+
+<p>编译后再反编译，可以看到，变成了两个类（可以在 <code>build/intermediates/transforms/desugar</code> 中找到）：</p>
+
+<p>LambdaTest:</p>
+
+<pre><code>public class LambdaTest {
+    public void testStateless() {
+        Runnable r = LambdaTest$$Lambda$0.$instance;
+        r.run();
+    }
+    
+    static void lambda$testPure$0$LambdaTest(){
+        System.out.println("pure");
+    }
+}
+</code></pre>
+
+<p>LambdaTest$$Lambda$0:</p>
+
+<pre><code>final class LambdaTest$$Lambda$0 implements Runnable {
+  static final Runnable $instance = new LambdaTest$$Lambda$0();
+
+  private LambdaTest$$Lambda$0() {
+  }
+
+  public void run() {
+    LambdaTest.lambda$testPure$0$LambdaTest();
+  }
+}
+</code></pre>
+
+<p>lambda body 变成了 LambdaTest 中的一个静态方法，也就是所谓的 desugar 方法，另外还生成了一个类 <code>LambdaTest$$Lambda$0</code> 实现了函数式接口，在其实现方法里再去调用 desugar 方法，无状态 lambda 对象不需要保存额外的参数，这里用单例进行优化。</p>
+
+<p>如果捕获了变量，已局部变量和形式参数为例，无论是局部变量还是上下文方法的形式参数，它们的值和类型都是编译时确定的：</p>
+
+<pre><code>public void capturingLocal(String strp) {
+    String str = "lexical";
+    Runnable r = () -&gt; System.out.println(str + strp);
+    r.run();
+  }
+</code></pre>
+
+<p>LambdaTest$$Lambda$1：</p>
+
+<pre><code>final class LambdaTest$$Lambda$1 implements Runnable {
+  private final String arg$1;
+  private final String arg$2;
+
+  LambdaTest$$Lambda$1(String var1, String var2) {
+    this.arg$1 = var1;
+    this.arg$2 = var2;
+  }
+
+  public void run() {
+    LambdaTest.lambda$capturingLocal$1$LambdaTest(this.arg$1, this.arg$2);
+  }
+}
+</code></pre>
+
+<p>原先的 lambda 表达式赋值语句变成了 <code>Runnable r = new LambdaTest$$Lambda$1(str, strp)</code>，自由变量都通过 lambda 对象构造器进行捕获并保存起来，对 lambda 求值的时候再传递给 desugar 方法，这里 Runnable 的方法没有形式参数，如果有形式参数的话，这些捕获的变量会排在形式参数后面再传递给 desugar 方法。</p>
+
+<p>如果在 lambda 中引用了对象字段：</p>
+
+<pre><code>private String stri = "instance";
+public void capturingInstance() {
+    Runnable r = () -&gt; System.out.println(stri);
+    r.run();
+}
+</code></pre>
+
+<p>LambdaTest$$Lambda$4:</p>
+
+<pre><code>final class LambdaTest$$Lambda$4 implements Runnable {
+  private final LambdaTest arg$1;
+
+  LambdaTest$$Lambda$4(LambdaTest var1) {
+    this.arg$1 = var1;
+  }
+
+  public void run() {
+    this.arg$1.lambda$capturingInstance$4$LambdaTest();
+  }
+}
+</code></pre>
+
+<p>可以看到 lambda 对象保存了上下文类的引用，无论是实例变量还是实例方法，实际上都有一个隐性的接收者就是 <code>this</code>，当然也可以显性的声明，在 lambda body 中的 this 引用指向的就是其上下文的类，而不是 lambda 对象。在这里 lambda 表达捕获的变量就是实例变量的接收者 <code>this</code> 而不是实例变量本身。而且可以看到 lambda 的 desugar 方法变成了实例方法，用这种方式，lambda body 几乎不用做任何转换只需照搬进方法体就行。还包括对 <code>super</code> 的处理，lambda 对象无法捕获 super，只能通过调用 this 的实例方法来实现对 super 的调用，可见用 desugar 方法来实现是十分便利的。</p>
+
+<p><code>this</code> 的捕获，对于 Android 开发来说特别要注意，<strong>在 Activity 中使用 lambda 表达式的话，意味着会通过 final 引用的形象将当前 Activity 实例传递到外部去，稍不注意便会引起泄露。一个显而易见的技巧，将实例字段赋值给局部变量，就不会捕获 this 引用了。当然对于生命周期相关的对象来说还是不安全的，比如 View。</strong></p>
+
+<h3 id="方法引用">方法引用</h3>
+
+<p>方法引用基本可以当成是 lambda 表达式的一个特例，方法引用都可以用相应的 lambda 表达式来代替，有一个例外就是带有泛型方法的函数式接口，能用方法引用但不能用 lambda 表达式，见 <a href="https://stackoverflow.com/questions/22588518/lambda-expression-and-generic-method">java - Lambda Expression and generic method - Stack Overflow</a>。方法引用也分为捕获与非捕获，对于无须捕获接的方法引用主要有：</p>
+
+<ul>
+  <li>静态方法</li>
+  <li>构造器</li>
+  <li>未绑定的实例方法</li>
+</ul>
+
+<p>什么是未绑定的实例方法？方法引用语法可以大致认为是<code>接收者::方法名</code>这样的形式，方法可以是实例方法或者是静态方法，当方法是实例方法而接收者是类引用时，这时接收者就是一个未绑定的接收者：</p>
+
+<pre><code>list.filter(String::isEmpty)
+</code></pre>
+
+<p><code>isEmpty</code> 是实例方法，而接收者是类引用，在这里接收者在运行会被替换为被替换为 list 内的元素，等价于这样的 lambda 表达式：</p>
+
+<pre><code>list.filter(s -&gt; s.isEmpty())
+</code></pre>
+
+<p>注意非绑定的实例方法引用是有二义性的，java 根据方法的声明去推定 <code>isEmpty</code> 是实例方法还是静态方法，以下面的类为例：</p>
+
+<pre><code>public class C{
+   public static boolean isEmpty(C c);
+   public boolean isEmpty();
+}
+</code></pre>
+
+<p>如上面的方法声明两个方法对于表达式 <code>list.filter(C::isEmpty)</code> 来说都是合法的，java 也就无法推断出这里是指哪个方法引用，所以编译器报错。</p>
+
+<p>需要捕获的方法引用，也就是已绑定实例的方法引用，包括实例方法，内部类（数组）的构造器，super 方法。接收者就是闭包所要捕获的变量。但要注意一点方法引用是没有隐式声明的 <code>this</code> 引用的。比如下面两个方法，从语义上来说是等价的，</p>
+
+<pre><code>public void capturingInstance() {
+    Predicate&lt;String&gt; c = s -&gt; stri.equals(s);
+}
+
+public void capturingIntanceMethod() {
+    Predicate&lt;String&gt; c = stri::equals;
+}
+</code></pre>
+
+<p>但是他们捕获的引用却不一样，<strong>上文可知 lambda 表达式捕获的是隐式声明的 <code>this</code>，而方法引用捕获的却是直接接收者</strong>：</p>
+
+<pre><code>final class LambdaTest$$Lambda$8 implements Predicate {
+  private final String arg$1;
+
+  private LambdaTest$$Lambda$8(String var1) {
+    this.arg$1 = var1;
+  }
+
+  static Predicate get$Lambda(String var0) {
+    return new LambdaTest$$Lambda$8(var0);
+  }
+
+  public boolean test(Object var1) {
+    return this.arg$1.equals((String)var1);
+  }
+}
+</code></pre>
+
+<p>还有一点，使用方法引用，因为方法已经是现成的，大部分情况就没必要重新生成一个 desugar 方法。</p>
+
+<p>但有例外，super 和可变参数，需要一个桥接方法。对于 super 来说，lambda 对象是无法不会当前类的 super 引用的，所以需要借由当前类的实例方法来实现对 super 的引用。</p>
+
+<p>接收者也可以是表达式：</p>
+
+<pre><code> Predicate&lt;String&gt; c = (stri.equals("abc") ? "abc" : "bcd")::equals;
+</code></pre>
+
+<p>在这里捕获的是表达式求值的结果而不是表达式。</p>
+
+<p><strong>所以对于 Activity 来说，要格外注意下面几种情况可能导致引用泄露</strong>：</p>
+
+<ul>
+  <li><code>this</code> 关键字的方法引用</li>
+  <li><code>super</code> 关键字的方法引用</li>
+  <li>非静态内部类的构造器引用</li>
+  <li>Activity 实例变量可变参数方法引用</li>
+</ul>
+
+<p>可参考  <a href="http://cr.openjdk.java.net/~briangoetz/lambda/lambda-translation.html">Translation of Lambda Expressions</a>。</p>
+
+<h3 id="类型推断与泛型">类型推断与泛型</h3>
+
+
+</article>
+<div class="tag-container" >
+    
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Quick/2017/09/note-2017-09-29"
+ var disqus_config = function () {
+     this.page.title = "2017年09月29日杂记"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Quick/2017/09/note-2017-09-29/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

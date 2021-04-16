@@ -1,0 +1,431 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    读 Clean Architecture | DouO's Blog</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">读 Clean Architecture</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 18-09-27">2018-07-08</span>
+
+    <span><a href="/categories#coder-ref" class="category category-coder waves-effect waves-light">coder</a></span>
+    
+</div>
+
+    <article>
+        <h1 id="架构是什么">架构是什么？</h1>
+
+<blockquote>
+  <p>The boxes on a PowerPoint diagram are not a software system’s architecture.</p>
+</blockquote>
+
+<p>近来读了 Uncle Bob 的 《清晰架构》(Clean Architecture)，副标题叫『一个工匠的软件结构与设计指南』，自称为工匠的 Uncle Bob 全名叫 <a href="https://en.wikipedia.org/wiki/Robert_C._Martin">Robert C. Martin</a>，是一位有 50 多年经验的软件工程师和作者。他是 SOLID 原则的命名者，同时也是《<a href="https://book.douban.com/subject/1140457/">敏捷软件开发</a>》、《<a href="https://book.douban.com/subject/4199741/">代码整洁之道</a>》的作者。《清晰架构》是 17 年出版的书也算是今年读的比较新的书了。全书分 35 章，近 400 页，虽说也不算特别多，不过啃下英文版也颇为吃力。本书听起来像是专业软件架构论述，其实更像是作者的杂谈，不少内容都可以在作者过去的博客找到。其中的软件开发哲学的故事让我很感兴趣。</p>
+
+<p>那么什么是架构呢？作为一个常常把架构挂在嘴边的人，要给架构下个定义还真不容易。书中 Uncle Bob 给了一个很棒的定义：</p>
+
+<blockquote>
+  <p>软件架构是指，设计软件的人为软件赋予的形状，这个形状是指系统如何被划分为<strong>组件(Components)</strong>，各个组件如何<strong>排列（Arrangement）</strong>，组件之间如何<strong>沟通（Communication）</strong>。</p>
+</blockquote>
+
+<p><a href="https://www.inoreader.com/article/3a9c6e7ec00599d2-clean-architecture1">搞笑搞软工</a>用了公司的组织架构来类比，我觉得非常形象：一个中型公司有董事会、董事长、董事会、总经理、部门、组等，以及各部门里面的员工，由此形成组织架构图。可以看出所有的架构一定有三个东西：</p>
+
+<ul>
+  <li>构成组织的单元，也就是不同职能的员工。</li>
+  <li>人员的安排，阶层式、扁平式、矩阵式，等等。</li>
+  <li>人员沟通的方式，直接沟通、透过部门主管或PM与其他部门或外部客户与厂商沟通、禁止沟通、圣上垂询才可开口等。</li>
+</ul>
+
+<p>除了组织架构外，公司还有他的业务，业务与架构是决定一家公司的两个维度，两者看似正交，实际当我们看到一家公司的架构图，我们大概也能猜出一星半点公司的业务，法务部或行政部可能看不出什么，但移动开发部很明显喊着公司有着移动开发的业务（<a href="http://blog.cleancoder.com/uncle-bob/2011/09/30/Screaming-Architecture.html">Screaming Architecture</a>）。往往业务的发展会导致架构的演化，架构的演化反过来促进业务的发展。</p>
+
+<p>软件系统也是同样的道理，软件有两个量（Value）：</p>
+
+<ul>
+  <li>软件的功能或行为，就是业务</li>
+  <li>软件的形状或设计，也就是所谓的架构</li>
+</ul>
+
+<p>功能衡量系统能不能满足需求？架构意味着系统是否易于变化。功能架构孰重要？作者在书中用了控制变量法来说明这个问题，假设有两个系统：</p>
+
+<ol>
+  <li>一个系统能完全的满足需求但是不可变。</li>
+  <li>一个系统完全不可用，但是易于改变。</li>
+</ol>
+
+<p>大部分人直觉上会选择那个马上就能跑起来的系统。但哪个系统更没用呢？第一个系统虽然能用，但是一旦需求变化了便不能用了，可能有点比较难想象，换句话说是修改系统的成本高于修改系统的收益，因为他非常难以更改。第二个系统虽然不能满足业务需要，但是它可以持续改善并最终变得有用。</p>
+
+<p>若说架构比功能还有价值，又不合常理，一个精雕细琢的没有价值的软件，没有金主会为它埋单哪能诞生？除非是『软件艺术家』的自发行为。对一家软件公司来说，软件是其产品，产品要带来收益，所以功能仍是软件的第一价值，功能是软件能产生价值的部分。关系到我们的金主能不能赚到钱。架构退而次之是软件的第二价值，影响到软件的生命周期中的各种成本，间接地影响金主的收益。两者在软件不同的生命周期发挥着不同的作用，功能更多的是其紧急且重要部分，架构更多的是重要非紧急部分。</p>
+
+<p>关于架构的意义：</p>
+
+<blockquote>
+  <p>为了能够最小化创建和维护软件的成本。</p>
+</blockquote>
+
+<p>真实的软件开发是一个挣扎（Struggle）的过程，程序员会想着多快好省实现需求解决 Bug，产品会在软件的开发阶段多次变更需求，市场会卡着上线时间。倘若把功能是否实现作为标准，理性又短视的程序员会最小化自己的投入，只顾着实现软件的功能和应付变更，忽视任何架构方面的问题，一个不好的架构下各种混乱的依赖下的相互作用其维护成本可能是指数增长的，最终项目全变成意大利面条式的代码（Spaghetti code），挖坑的人可能已经换了一批又一批，而这些技术债务的主体并不是欠下债务的程序员，而是软件的所有人。一个本应为公司带来技术积累的项目，反而成为公司的历史包袱。</p>
+
+<p>可能有勇士在某个时间点（维护成本不断增加直到高于重构成本的那个拐点）会提出重构可以解决问题。但重构只是可以解决一部分问题，可能还会引入新的问题。对于这种情况，作者这样说：如果最后才考虑架构，那么系统的开发成本会更高，并且最终几乎不可能成为系统的一部分。如果允许这种情况发生，则意味着软件开发团队没有做足够的努力。我们站在 PM 的角度看，他只关心需求，他们不懂也没有能力评估架构的重要性，因为这对他们来说是无关的细节。所以架构师必须要责任去强调架构的重要性，在开发过程中争取足够的时间进行架构设计。</p>
+
+<p>有一点是确定，架构设计和单元测试确实会使项目的开发变慢，而债务也不一定是坏事，在一些时间点欠点技术债是可以获得更好的投资回报率。这一点在现实生活中可以找到很多应用，比如贷款买房，炒股加杠杆。在资源有限的情况下，功能和设计确实是一对矛盾，架构师的职责换一种表述就是利用其专业知识为功能和设计分配资源以获得最佳的回报率。</p>
+
+<p>对于架构师的职责作者这样说，设计良好的架构，使系统易于理解、开发、维护和部署。最终目标是最大限度地降低系统的生命周期成本并最大限度地提高程序员的生产力。</p>
+
+<h1 id="架构设计之道">架构设计之道</h1>
+
+<blockquote>
+  <p>Change is the only constant.</p>
+</blockquote>
+
+<p>如果说软件开发中有不变的真理，那就是<strong>变化不可避免</strong>。为了应付变化。软件工程师总结出许多原则，比如封装变化，针对接口编程，依赖抽象，最少知识原则等等。</p>
+
+<p>记得很久以前开始思考软件的设计的时候，最常犯的错误就是，为了减少代码量而设计，特别是滥用继承，导致代码僵化重构后面对变化更加痛苦，如果当时了解了种种原则，生活肯定容易许多。</p>
+
+<p>本书用了三分之一的篇幅来讲这些原则。包括用于指导如何设计<strong>类</strong>的 <a href="https://zh.wikipedia.org/wiki/SOLID_(%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1)">SOLID 原则</a>，和指导如何设计组件的六个原则。这里<strong>类</strong>不单单是面向对象的概念，而是更加泛化地指一组函数和数据，也称为模块（module）。 而组件指的是，指的是独立的可部署单元，是模块的集合。比如 java 中的 jar，ruby 的 gem。</p>
+
+<p>SOLID 原则指导类的设计应该容忍变化、易于理解。组件原则指导组件的内聚和组件间的耦合，其实也是 java 的分包原则。</p>
+
+<p>组件内聚：</p>
+
+<ol>
+  <li>重用发布等价原则（Release/Reuse Equivalency Principle）</li>
+  <li>共同封闭原则（Common Closure Principle）</li>
+  <li>共同重用原则（Common Reuse Principle）</li>
+</ol>
+
+<p>组件耦合：</p>
+
+<ol>
+  <li>无环依赖原则 ADP（Acycle Dependencies Principle）</li>
+  <li>稳定依赖原则 SDP（Stable Dependencies Principle）</li>
+  <li>稳定抽象原则 SAP（Stable Abstractions Principle）</li>
+</ol>
+
+<p>篇幅所限就不进行解释了，作者还介绍了两个度量组件稳定性和抽象性的量：</p>
+
+<ul>
+  <li>不稳定性：\(I = F_{out}/(F_{in}+F_{out})\)，\(F_{in}\) 传入依赖；\(F_{out}\) 传出依赖。依赖关系应该，高 I 值依赖低 I 值。</li>
+  <li>抽象性：\(A = N_a/N_c\)，\(N_c\) 类的数目；\(N_a\) 抽象类或接口的数目。</li>
+</ul>
+
+<p>作者还聊了编程范式的发展，他的观点也挺有意思：编程的发展，是一个添加限制的过程。三种范式都从我们身上夺走了一些东西。每一种都限制了我们编写代码的方式。</p>
+
+<ul>
+  <li>结构化编程，对直接控制转移进行了限制</li>
+  <li>面向对象编程，对间接控制转移进行了控制</li>
+  <li>函数式编程，对变量分配进行了限制</li>
+</ul>
+
+<p>面向对象最核心的就是增强了多态，引入多态后，高级函数依赖于低级函数的接口，而不是具体实现。把对具体实现的依赖分离出来。低级的实现，可以被独立部署更替。这就是依赖反转。对架构师来说提供了使用多态性来获得对系统中每个源代码依赖关系的绝对控制的能力。</p>
+
+<p>另外，Dijkstra 《Go To Statement Considered Harmful》的<a href="https://zh.wikipedia.org/wiki/%E8%A2%AB%E8%AE%A4%E4%B8%BA%E6%9C%89%E5%AE%B3">故事</a>也值得了解一下。</p>
+
+<h1 id="清晰架构">清晰架构</h1>
+
+<blockquote>
+  <p>Every problem in computer science can be solved with a layer of indirection (besides the problem of too many layers of indirection)</p>
+</blockquote>
+
+<p>清晰架构，在 2011 年作者的博客就有提到这个名词 <a href="http://blog.cleancoder.com/uncle-bob/2011/11/22/Clean-Architecture.html">Clean Architecture</a>，另一篇引用比较多的博文 <a href="http://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html">The Clean Architecture</a> 写于 12 年，内容所讲的就是本书的清晰架构。</p>
+
+<p>所以，清晰架构不是什么新东西，他是六边形架构(Hexagonal Architecture)的一个变体，基于以往多种架构的发展和归纳，提出来的一个新架构模型。</p>
+
+<p>传统的分层架构是垂直形式的层次架构，清晰架构是由外往内的圆环状层次架构：</p>
+
+<p><img src="https://cdn-images-1.medium.com/max/1200/0*JD606Sqx6RYZLKdu." alt="图片来源：https://android.jlelse.eu/thoughts-on-clean-architecture-b8449d9d02df" /></p>
+
+<p>这样架构有几个特点：</p>
+
+<ol>
+  <li>一个核心</li>
+  <li>抽象性往内递增</li>
+  <li>外层依赖内层</li>
+  <li>层与层之间通过接口与适配器进行交流</li>
+  <li>框架、数据库、UI 等都是细节</li>
+</ol>
+
+<p>核心的实体指的就是领域内的关键业务逻辑，最不可能发生变化的部分，比如苹果总是往下掉；保险总有承保人、投保人、被保险人、受益人；还贷的等额本息、等额本金算法。关键业务逻辑应该是系统中最独立和可重用的代码。</p>
+
+<p>第二层是用例，用例是应用程序的业务逻辑。用例关注与输入数据并产生输出数据，但用例对象不应去关心数据如何传递给用户或其他任何组件。</p>
+
+<p>接着是接口适配层，将实体和用例转化为更适用外层使用的形式。将外部数据转化为用例或实体使用的内部形式。这一层最强大的工具就是依赖倒置，以 MVP 为例，更新界面的时候，控制流的方向 Presenter -&gt; UI，而依赖关系却是 UI 依赖于 Presenter 层（实现了 Presenter 层相应的 View 接口）</p>
+
+<p><img src="dip.png" alt="依赖倒置使得依赖关系与控制流的方向相反" /></p>
+
+<p>UI 在外层这个理所当然了，名字本身就说明了它直接和用户打交道，而且 UI 是掌控在设计和产品手里，越不能控制的东西越要小心其变化。</p>
+
+<p>传统的分层结构，数据库总是处于最底层，但其中数据才是关键，数据库不是。关系型数据库只不过是把数据按 b+ 树这样的结构存储起来，然后通过 SQL 来操作数据。我们也可以使用文件存储数据，甚至可以脱离硬盘直接在内存里面用数组、链表、树、图等数据结构组织我们的数据，毕竟内存价格越来越便宜了（五年一个取样，就可以无视近几年 PC 内存的涨幅了😆）。其中关键的点就是<strong>推迟决定</strong>，我们很难在初期对我们的数据使用场景做个准确的预测，数据库作为细节隔离在核心系统外，以后因为性能规模等等问题变动数据库更加容易。</p>
+
+<p>但框架呢？框架总是鼓励我们和应用程序紧密的耦合在一起，它提供一种模式，只要我们服从这个模式就能获得极大的便利，代价就是这个框架和我们应用的各个层次紧密地耦合在一起。这有什么风险？其一，框架也许可以帮助您完成应用程序的一些早期功能。 但是随着产品的成熟，它可能会超出框架的功能。其二，框架可能会朝着你没有帮助的方向发展，你甚至可能会发现 API 消失、改变了，因为控制权在作者而不是在你手上。其三就是总有新框架出来，你可能希望切换到更新更好的框架。</p>
+
+<p>最近一个朋友维护老项目遇到一个 <a href="https://github.com/loopj/android-async-http">android-async-http</a> 的<a href="https://github.com/loopj/android-async-http/issues/1001">问题</a>向我求助，android-async-http！！！这个不是我一开始做 Android 项目用的网络库吗？起码也是 11、12 年的事了。虽然是个不错的库但也不维护几年了吧。遇到底层的 Bug 别提有多棘手了，而且维护的价值已不大，投入太多时间又觉得亏，最终只能用一些额外的措施把它掩盖过去。</p>
+
+<p>但分离框架，谈何容易呢。这几年写的 App，数据层也从手写 Dao 到 greenDao 到 DBFlow 再到现在的 Room。Room 虽然有官方加持，但以谷歌的尿性被弃用也是随时的事。如果引入 Room，最内层的 Entity 就得使用 Room 的注解便会对 Room 的依赖。如果要分离呢，就需要在数据层也定义一套 Entity，层层之间的数据传递还需要做转换，把核心的 Entity 转换为数据层的 Entity，这样做就很清晰架构了<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup>，但是有必要吗？</p>
+
+<p>架构的矛盾在于，我们不应该预见抽象的必要性。知道 YAGNI（You aren’t gonna need it）吗？这是个饱含智慧的理念：“你不需要它。”。因为过度工程往往比不够工程化更糟糕。典型的移动应用程序与典型的企业应用程序有很大不同。它要小得多，并且通常需要快速交付。记住架构是演化的，不能简单地在项目的开始时决定实施哪些边界以及忽略哪些边界。相反，随着系统的发展，边界会慢慢变的清晰，你会关注到它，再权衡实施和忽略的成本，在实施成本低于忽略成本的拐点时做出决定。</p>
+
+<p>不能手里有个锤子看到什么都是钉子。就像当初学设计模式一样，学了之后又要让你忘掉它。</p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p><a href="https://github.com/android10/Android-CleanArchitecture">Android-CleanArchitecture</a> 就是这样的设计，但在 <a href="https://fernandocejas.com/2018/05/07/architecting-android-reloaded/">Kotlin 版</a>已经不用了。 <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+    </article>
+    <div class="tag-container" >
+        
+        <div class="chip">
+        <a href="/tags#架构-ref">
+            架构
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#软件工程-ref">
+            软件工程
+        </a>
+        </div>
+        
+    </div>
+<div class="post-pager">
+    
+    <a href="/2018/01/02/new-year-new-blog/">上一篇：新年新博客</a>
+    
+    
+    <a href="/2018/09/26/night-ride-to-phoenix-mountine/" style="float:right;" >下一篇：夜骑凤凰山</a>
+    
+</div>
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/2018/07/08/clean-architecture"
+ var disqus_config = function () {
+     this.page.title = "读 Clean Architecture"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/2018/07/08/clean-architecture/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+    <script type="text/javascript" async
+ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+    
+</body>
+
+</html>
+

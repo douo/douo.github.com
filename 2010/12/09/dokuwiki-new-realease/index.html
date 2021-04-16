@@ -1,0 +1,368 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    dokuwiki新版本"Anteater"支持UTF-8文件名 | DouO's Blog</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">dokuwiki新版本"Anteater"支持UTF-8文件名</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-01-13">2010-12-09</span>
+
+    <span><a href="/categories#coder-ref" class="category category-coder waves-effect waves-light">coder</a></span>
+    
+</div>
+
+    <article>
+        <p>dokuwiki是一款免数据库基于文件的wiki系统，原本其保存文件的命名方式是，对于非ASCII字符的字符用其UTF-8编码按URL编码方式保存。比如一个中文的条目，你看到它保存的文件名可能是
+「%E5%A4%9A%E9%87%8D%E5%AF%B9%E6%95%B0%E5%87%BD%E6%95%B0.txt」。
+这么一大串实际上只有6个汉字，让人好生不爽呀。</p>
+
+<p>近日整理博客的时候发现，dokuwiki有了新版本「<a href="http://www.splitbrain.org/projects/dokuwiki">Anteater</a>」，立马换上去。而后，在<a href="http://www.easyboxlite.com/index.php?">EasyBoxLite建站</a>的[dokuwiki新版本发布</p>
+<ul>
+  <li>2010-11-07
+「Anteater」](http://www.easyboxlite.com/index.php?post/2010/11/08/dokuwiki_new_release_2010-11-07_Anteater)上发现，新版的dokuwiki支持用utf-8编码命名文件了，相当给力！这样在FTP上面就可以正确显示出中文文件名，友好多了。在配置管理器页面的<strong>非
+ASCII
+文件名的编码方法</strong>(<a href="http://www.dokuwiki.org/config:fnencode">fnencode</a>)可以做更改，默认的还是原来URL编码，还一个选项是「安全」，这个没有试验过估计dokuwiki用自己的方式对utf8字符再编码，据说比URL编码更短，比UTF8安全，但人不可读的。这也是在说UTF8编码不是安全的，在一些服务器上面可能不能正常工作，比如说我的Win7——文件名是Unicode-16LE编码的；还有我的SSH服务器（CentOS）——没有中文字符集或者说所有非ASCII字符的会变成问号
+:?: ，这些服务器都可能会出问题。</li>
+</ul>
+
+<p>还有一点，将文件名的编码设置成utf-8的格式，那些之前用URL编码保存的文件dokuwiki是不会帮你重命名的，也就说之前的写好的wiki条目都访问不了，是很郁闷的一件事啊！于是乎趁php还未手生写了个批量重命名的php脚本。脚本如下：</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span> 
+<span class="cm">/*  
+*  fixfn.php  
+*  !!!注意，转换前千万个一定要备份原数据!!!!  
+*  跟要修改的data文件夹放在同目录，一般是dokuwiki的根目录。  
+*  也可以放在任意位置，但要自己修改dokuwiki的data文件夹位置,在最下面的$ds变量指定  
+*  访问执行一次便可。  
+*  对文件名里有"%"符号的文件才会有影响  
+*  重复运行虽无影响,但运行完还是删了好  
+*  如果文件名中"%"出现在不应该出现的地方,那文件名肯定会错乱滴  
+*  !!!注意，转换前千万个一定要备份原数据!!!!  
+*/</span>
+<span class="k">function</span> <span class="n">simpleHexToNum</span><span class="p">(</span><span class="nv">$s</span><span class="p">){</span>
+	<span class="nv">$s</span><span class="o">=</span><span class="nb">strtoupper</span><span class="p">(</span><span class="nv">$s</span><span class="p">);</span>
+	<span class="nv">$x</span> <span class="o">=</span> <span class="nb">ord</span><span class="p">(</span><span class="nv">$s</span><span class="p">);</span>
+	
+    <span class="k">if</span><span class="p">(</span><span class="nv">$x</span><span class="o">&gt;=</span><span class="nb">ord</span><span class="p">(</span><span class="s2">"0"</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nv">$x</span><span class="o">&lt;=</span><span class="nb">ord</span><span class="p">(</span><span class="s2">"9"</span><span class="p">)){</span>
+       <span class="k">return</span> <span class="nv">$x</span><span class="o">-</span><span class="nb">ord</span><span class="p">(</span><span class="s1">'0'</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">if</span><span class="p">(</span><span class="nv">$x</span><span class="o">&gt;=</span><span class="nb">ord</span><span class="p">(</span><span class="s1">'A'</span><span class="p">)</span><span class="o">&amp;&amp;</span><span class="nv">$x</span><span class="o">&lt;=</span><span class="nb">ord</span><span class="p">(</span><span class="s1">'F'</span><span class="p">)){</span>
+       <span class="k">return</span> <span class="nv">$x</span><span class="o">-</span><span class="nb">ord</span><span class="p">(</span><span class="s1">'A'</span><span class="p">)</span><span class="o">+</span><span class="mi">10</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">function</span> <span class="n">toUTF8</span><span class="p">(</span><span class="nv">$str</span><span class="p">){</span>  <span class="c1">//文件名中百分号(%)后面必须跟着两位16进制数才能正常工作  </span>
+	<span class="nv">$len</span> <span class="o">=</span> <span class="nb">strlen</span><span class="p">(</span><span class="nv">$str</span><span class="p">);</span>
+	<span class="nv">$result</span> <span class="o">=</span><span class="s1">''</span><span class="p">;</span>
+	<span class="nv">$i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+	<span class="k">while</span><span class="p">(</span><span class="nv">$i</span><span class="o">&lt;</span><span class="nv">$len</span><span class="p">){</span>
+		<span class="k">if</span><span class="p">(</span><span class="nv">$str</span><span class="p">[</span><span class="nv">$i</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"%"</span><span class="p">){</span>
+			<span class="nv">$i</span><span class="o">++</span><span class="p">;</span>
+			<span class="nv">$d</span> <span class="o">=</span> <span class="nf">simpleHexToNum</span><span class="p">(</span><span class="nv">$str</span><span class="p">[</span><span class="nv">$i</span><span class="o">++</span><span class="p">])</span><span class="o">*</span><span class="mi">16</span><span class="o">+</span><span class="nf">simpleHexToNum</span><span class="p">(</span><span class="nv">$str</span><span class="p">[</span><span class="nv">$i</span><span class="o">++</span><span class="p">]);</span> <span class="c1">//DIG</span>
+			<span class="nv">$result</span> <span class="o">=</span><span class="nv">$result</span> <span class="mf">.</span> <span class="nb">chr</span><span class="p">(</span><span class="nv">$d</span><span class="p">);</span>
+		<span class="p">}</span><span class="k">else</span><span class="p">{</span>
+			<span class="nv">$result</span> <span class="o">=</span><span class="nv">$result</span> <span class="mf">.</span> <span class="nv">$str</span><span class="p">[</span><span class="nv">$i</span><span class="o">++</span><span class="p">];</span>
+		<span class="p">}</span>
+
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nv">$result</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">function</span> <span class="n">rename_data</span><span class="p">(</span><span class="nv">$path</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="nb">is_dir</span><span class="p">(</span><span class="nv">$path</span><span class="p">)){</span>
+				<span class="k">echo</span> <span class="nv">$path</span> <span class="mf">.</span> <span class="s2">"&lt;br /&gt;"</span><span class="p">;</span>
+                <span class="nv">$dp</span><span class="o">=</span><span class="nb">dir</span><span class="p">(</span><span class="nv">$path</span><span class="p">);</span>
+                <span class="k">while</span><span class="p">(</span><span class="nv">$file</span><span class="o">=</span><span class="nv">$dp</span><span class="o">-&gt;</span><span class="nf">read</span><span class="p">())</span>
+                        <span class="k">if</span><span class="p">(</span><span class="nv">$file</span><span class="o">!=</span><span class="s1">'.'</span><span class="o">&amp;&amp;</span><span class="nv">$file</span><span class="o">!=</span><span class="s1">'..'</span><span class="p">){</span>
+							<span class="c1">//	$nfile = toUTF8($file); //亲测可用  </span>
+								<span class="nv">$nfile</span> <span class="o">=</span> <span class="nb">urldecode</span><span class="p">(</span><span class="nv">$file</span><span class="p">);</span>   <span class="c1">//php自带urldeconde,这个健壮性会好很多吧 ...汗  </span>
+								<span class="k">echo</span> <span class="s2">"rename &lt;strong&gt;"</span> <span class="mf">.</span> <span class="nv">$file</span><span class="mf">.</span><span class="s2">"&lt;/strong&gt; to &lt;strong&gt;"</span> <span class="mf">.</span><span class="nv">$nfile</span> <span class="mf">.</span> <span class="s2">"&lt;/strong&gt;&lt;br /&gt;"</span><span class="p">;</span>
+								<span class="k">echo</span>  <span class="nb">rename</span><span class="p">(</span><span class="nv">$path</span><span class="mf">.</span><span class="s2">"/"</span><span class="mf">.</span><span class="nv">$file</span> <span class="p">,</span> <span class="nv">$path</span><span class="mf">.</span><span class="s2">"/"</span><span class="mf">.</span><span class="nv">$nfile</span><span class="p">)</span><span class="o">?</span><span class="s2">"&lt;font color=</span><span class="se">\"</span><span class="s2">#00FF00</span><span class="se">\"</span><span class="s2">&gt;success&lt;/font&gt;"</span><span class="o">:</span><span class="s2">"&lt;font color=</span><span class="se">\"</span><span class="s2">#FF0000</span><span class="se">\"</span><span class="s2">&gt;fail&lt;/font&gt;"</span> <span class="p">;</span>
+								<span class="k">echo</span> <span class="s2">"&lt;br /&gt;"</span><span class="p">;</span>
+                                <span class="nf">rename_data</span><span class="p">(</span><span class="nv">$path</span><span class="mf">.</span><span class="s1">'/'</span><span class="mf">.</span><span class="nv">$nfile</span><span class="p">);</span>
+						<span class="p">}</span>
+                <span class="nv">$dp</span><span class="o">-&gt;</span><span class="nf">close</span><span class="p">();</span>
+        <span class="p">}</span>
+        
+<span class="p">}</span>
+<span class="k">echo</span> <span class="s2">"&lt;html&gt;&lt;head&gt;&lt;meta http-equiv=</span><span class="se">\"</span><span class="s2">Content-Type</span><span class="se">\"</span><span class="s2"> content=</span><span class="se">\"</span><span class="s2">text/html; charset=UTF-8</span><span class="se">\"</span><span class="s2">&gt;&lt;/head&gt;"</span><span class="p">;</span>
+
+<span class="c1">//可能要动手修改的地方  </span>
+<span class="nv">$ds</span> <span class="o">=</span><span class="nb">dirname</span><span class="p">(</span><span class="k">__FILE__</span><span class="p">)</span> <span class="mf">.</span> <span class="s2">"/data"</span><span class="p">;</span>  <span class="c1">//默认同目录下的data文件夹  </span>
+<span class="c1">//$ds = "/xxxx/dourok.info/wiki/data";  //自己指定data文件夹  </span>
+<span class="nf">rename_data</span><span class="p">(</span><span class="nv">$ds</span><span class="p">);</span> 
+
+
+<span class="k">echo</span> <span class="s2">"&lt;font color=</span><span class="se">\"</span><span class="s2">#FF0000</span><span class="se">\"</span><span class="s2">&gt;if everything running fine,delete this php file&lt;/font&gt;&lt;/html&gt;"</span><span class="p">;</span>
+<span class="cp">?&gt;</span>
+</code></pre></div></div>
+
+<p>对跟我一样只有FTP权限的童鞋应该有帮助，将上面的代码复制下来，保存成php文件如fixfn.php，最好UTF8编码的，上传到服务器，位置见代码注释，访问一下搞定。再次提醒一定得<strong>备份原数据</strong>啊！php菜鸟一个，你们懂的。</p>
+
+<p>突然想来一段FML:
+今天，本来是想把dokuwiki的老数据拉到本地系统上来改名的，用Java写好了代码才想起windows文件名不是utf-8，于是乎再将数据跟代码传到我的ssh服务器上，上面有java环境，运行下才发现服务器不支持非ASCII字符，我一早知道又给忘了，无奈只能用php重写，实现了url解码成功改完名后，才发现php有urldecode…FML</p>
+
+    </article>
+    <div class="tag-container" >
+        
+        <div class="chip">
+        <a href="/tags#dokuwiki-ref">
+            dokuwiki
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#FML-ref">
+            FML
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#php-ref">
+            php
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#UTF-8-ref">
+            UTF-8
+        </a>
+        </div>
+        
+    </div>
+<div class="post-pager">
+    
+    <a href="/2010/12/04/random-words-my-chosen/">上一篇：Random Words My Chosen</a>
+    
+    
+    <a href="/2010/12/30/groovy-introduce/" style="float:right;" >下一篇：Groovy初接触</a>
+    
+</div>
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/2010/12/09/dokuwiki-new-realease"
+ var disqus_config = function () {
+     this.page.title = "dokuwiki新版本"Anteater"支持UTF-8文件名"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/2010/12/09/dokuwiki-new-realease/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

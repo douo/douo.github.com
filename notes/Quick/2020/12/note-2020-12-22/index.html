@@ -1,0 +1,432 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    2020年12月22日杂记 | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">2020年12月22日杂记</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 21-03-19">2020-12-22</span>
+    
+</div>
+
+<article>
+    <h1 id="passwall">Passwall</h1>
+
+<p>一个 tcp 请求的生命周期：</p>
+
+<pre><code>Domain -&gt; dnsmasq(route#53)-不匹配任何名单-&gt; 本地 dns -&gt; ip &lt;
+               ｜_&gt; 匹配代理名单 -&gt; tproxy -&gt; 远程 dns -&gt; ip -&gt; 写入相应 ipset nameset &lt;
+               ｜_&gt; 匹配直连名单 -&gt; 本地 dns -&gt; ip -&gt; 写入相应 ipset nameset &lt;
+
+ip -&gt; iptables
+        |_&gt; 匹配代理 nameset -&gt; rediect -&gt; tproxy
+        |_&gt; 直接转发
+</code></pre>
+
+<h2 id="名单">名单</h2>
+
+<p>passwall 预配置有多个名单和支持自定义名单，也包括未匹配名单的数据。当中总体上可分为两种：</p>
+
+<ol>
+  <li>代理名单</li>
+  <li>直连名单</li>
+</ol>
+
+<p>按名单项的类型又可分为</p>
+
+<ol>
+  <li>ip</li>
+  <li>域名</li>
+</ol>
+
+<p>ip 直接导入 ipset 对应的集合中，配合 iptables 实现各个代理策略。</p>
+
+<p>域名，需要通过 dnsmasq 查询后，由 dnsmasq 添加到对应的 ipset 集合中。</p>
+
+<p>dnsmasq 又通过域名所在名单的不同，选择不同的上游 ns 服务器。</p>
+
+<p>ns 服务器也分为两种：</p>
+
+<ol>
+  <li>本地 ns</li>
+  <li>远程 ns</li>
+</ol>
+
+<h2 id="名单-1">名单</h2>
+
+<h2 id="dns">DNS</h2>
+
+<p>对域名进行分流解析，也就是白名单用一个 dns，黑名单用一个 dns。</p>
+
+<p>DNS 端口是写死的。DOH 端口是 7912，本地 DNS 是 7913， other(china_ng_gfw) 是 7914</p>
+
+<h3 id="dnsmasq">dnsmasq</h3>
+
+<p>https://stackoverflow.com/a/37449551/851344</p>
+
+<p>dnsmasq 是路由默认的 dns 服务。也是 dhcp 下发的默认 dns 地址。</p>
+
+<p>dnsmasq 的上游有两个 dns，一个是本地 dns，一个是远程 dns。</p>
+
+<p>配合黑白名单， dnsmasq 将黑名单里的域名通过远程 dns 查询。白名单的域名通过本地 dns 查询。</p>
+
+<p>当然实际 passwall 的名单不只两个。但总的来说就是黑白名单两类。</p>
+
+<p>最后 dnsmasq 再将查询到的地址，根据对应名单的性质添加进相应的 ipset 中。</p>
+
+<h3 id="local-dns">Local Dns</h3>
+
+<p>用来解析白名单的 dns，默认是 <code>DEFAULT_DNS</code>，是指在 <code>/tmp/resolv.conf.d/resolv.conf.auto</code>、 <code>/tmp/resolv.conf.auto</code> 配置的 dns，</p>
+
+<p>若未配置则取 <code>119.29.29.29</code></p>
+
+<p>见 <a href="https://github.com/xiaorouji/openwrt-passwall/blob/main/luci-app-passwall/root/usr/share/passwall/app.sh#L317">openwrt-passwall/app.sh at main · xiaorouji/openwrt-passwall</a></p>
+
+<h3 id="doh">DOH</h3>
+
+<p>用了 <a href="https://github.com/aarond10/https_dns_proxy">aarond10/https_dns_proxy: A lightweight DNS-over-HTTPS proxy.</a> ，将 udp 的请求转发到 doh 服务器。</p>
+
+<p>但是 <code>https_dns_proxy</code> 配置成只接受本地链接（127.0.0.1），其他主机的 dns 请求是如何转发的？</p>
+
+<p>新版用 [xray-doh]，来实现转发 doh，还支持通过 socks 代理。直接 tcp 链接是通过:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">"streamSettings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+         </span><span class="nl">"sockopt"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+           </span><span class="nl">"mark"</span><span class="p">:</span><span class="w"> </span><span class="mi">255</span><span class="w">
+         </span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>然后在 iptables 控制 mark 0xff 不走代理。</p>
+
+<h1 id="socks5">Socks5</h1>
+
+<p>https://tools.ietf.org/html/rfc1928</p>
+
+<h2 id="iptables">iptables</h2>
+
+<p>Nat 表 , Prerouting 链创建一条子链 PSW：</p>
+
+<pre><code>Pkts.	Traffic	Target	Prot.	In	Out	Source	Destination	Options	Comment
+16.95 K	1.08 MB	RETURN	all	*	*	0.0.0.0/0	0.0.0.0/0	match-set laniplist dst	-
+0 	0 B	RETURN	all	*	*	0.0.0.0/0	0.0.0.0/0	match-set vpsiplist dst	-
+474 	33.11 KB	RETURN	all	*	*	0.0.0.0/0	0.0.0.0/0	match-set whitelist dst	-
+0 	0 B	REDIRECT	tcp	*	*	0.0.0.0/0	0.0.0.0/0	multiport dports 22,25,53,143,465,587,993,995,80,443 match-set shuntlist dst redir ports 1041	'默认'
+427 	26.02 KB	REDIRECT	tcp	*	*	0.0.0.0/0	0.0.0.0/0	multiport dports 22,25,53,143,465,587,993,995,80,443 match-set blacklist dst redir ports 1041	'默认'
+18.34 K	1.11 MB	REDIRECT	tcp	*	*	0.0.0.0/0	0.0.0.0/0	multiport dports 22,25,53,143,465,587,993,995,80,443 ! match-set chnroute dst redir ports 1041	'默认'
+4.93 K	344.18 KB	RETURN	tcp	*	*	0.0.0.0/0	0.0.0.0/0	-	'默认'
+</code></pre>
+
+<h2 id="haproxy-负载均衡">haproxy 负载均衡</h2>
+
+<p>passwall 生成的负载均衡配置文件：</p>
+
+<pre><code>global
+    log         127.0.0.1 local2
+    chroot      /usr/bin
+    maxconn     60000
+    stats socket  /var/etc/passwall/haproxy/haproxy.sock
+    user        root
+    daemon
+
+defaults
+    mode                    tcp
+    log                     global
+    option                  tcplog
+    option                  dontlognull
+    option http-server-close
+    #option forwardfor       except 127.0.0.0/8
+    option                  redispatch
+    retries                 2
+    timeout http-request    10s
+    timeout queue           1m
+    timeout connect         10s
+    timeout client          1m
+    timeout server          1m
+    timeout http-keep-alive 10s
+    timeout check           10s
+    maxconn                 3000
+
+listen 1181
+    mode tcp
+    bind 0.0.0.0:1181
+    server g1.dourok.info:443 g1.dourok.info:443 weight 5 check inter 1500 rise 1 fall 3
+    server g2.dourok.info:443 g2.dourok.info:443 weight 5 check inter 1500 rise 1 fall 3
+listen console
+    bind 0.0.0.0:1188
+    mode http
+    stats refresh 30s
+    stats uri /
+    stats admin if TRUE
+    stats auth
+</code></pre>
+
+<p>我以为 backend 是本地的 tcp 端口，比如多个本地 xray 服务监听不同短空，一个 haproxy frontend。
+    结果是 backend 是 xray 服务端的地址，与域名无关的可以用这种方式（tcp mode），与域名有关的，比如 xless 估计用不了，另外 xray 配置文件也没有涉及 haproxy 对应的端口，不清楚这样做的目的是什么。</p>
+
+<h2 id="rule-list">Rule list</h2>
+
+<p><code>/usr/bin/lua/luci/model/cbi/passwall/client/rule_list.lua</code></p>
+
+<p>重点在这个函数</p>
+
+<div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="nc">m</span><span class="p">.</span><span class="nf">on_apply</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
+<span class="n">luci</span><span class="p">.</span><span class="n">sys</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="s2">"/etc/init.d/passwall reload &gt; /dev/null 2&gt;&amp;1 &amp;"</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div></div>
+<p>reload 未实现，所以每次保存列表都会重启服务</p>
+
+<h2 id="fake-ip">Fake Ip</h2>
+
+<p>Socks5 是支持将整个请求打包给代理服务器。</p>
+
+<h3 id="tuntap">TUN/TAP</h3>
+
+<h2 id="redirect-与-tproxy-的区别">Redirect 与 TProxy 的区别</h2>
+
+</article>
+<div class="tag-container" >
+    
+    <div class="chip">
+        <a href="/tags#passwall-ref">
+            passwall
+        </a>
+    </div>
+    
+    <div class="chip">
+        <a href="/tags#dns-ref">
+            dns
+        </a>
+    </div>
+    
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Quick/2020/12/note-2020-12-22"
+ var disqus_config = function () {
+     this.page.title = "2020年12月22日杂记"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Quick/2020/12/note-2020-12-22/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

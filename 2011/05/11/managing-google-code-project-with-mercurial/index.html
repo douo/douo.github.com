@@ -1,0 +1,358 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    如何用Mercurial开始GoogleCode项目 | DouO's Blog</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">如何用Mercurial开始GoogleCode项目</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-01-13">2011-05-11</span>
+
+    <span><a href="/categories#otaku-ref" class="category category-otaku waves-effect waves-light">otaku</a></span>
+    
+</div>
+
+    <article>
+        <p>最近打算对自己乱糟糟的代码整理规划下，把一些项目提交到在线的代码仓库。因为自己还算是一个windows用户，所以还是放弃github，选择google
+code
+加上看起来比较好用的Mercurial（<a href="http://www.cnblogs.com/greenmile/archive/2010/04/20/VCS.html">CVS，GIT，Mercurial和SVN比较</a>），Netbeans对Mercurial也有很好的支持。</p>
+
+<p>Mercurial用起来还是很方便的，见<a href="http://blog.dreasgrech.com/2010/07/managing-google-code-project-with.html">Managing a Google Code project with
+Mercurial</a>。下面的内容就是翻译整理自这文章，权当记录一下。</p>
+
+<h3 id="安装mercurial">安装Mercurial</h3>
+
+<p>首先，需要在你的机器上安装Mercurial，从这里 http://mercurial.selenic.com/downloads/  选择适合自己系统的版本下载安装。Ubuntu用户可以直接<code>sudo apt-get install mercurial</code>。搞定后，打开命令行窗口，键入<code>hg version</code>，如果出现类似下面信息的话就OK了。</p>
+
+<pre><code>分布式软件配置管理工具 - 水银 (版本 1.7.5)
+(see http://mercurial.selenic.com for more information)
+</code></pre>
+
+<p>Copyright (C) 2005-2010 Matt Mackall and others
+This is free software; see the source for copying conditions. There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.`</p>
+
+<p>找不到命令的话请检查下环境变量。</p>
+
+<h3 id="设置默认用户">设置默认用户</h3>
+
+<p>当Mercurial成功安装后，还需要设置一个用户作为你提交到仓库的默认用户。
+windows用户的话，需要在用户目录（%USERPROFILE%）创建一个名为Mercurial.ini或者.hgrc的配置文件。比如创建<code>C:\Users\Andreas\Mercurial.ini</code>
+Linux在$HOME目录创建.hgrc文件 然后在创建好的文件里加上下面内容</p>
+
+<pre><code>[ui]
+username = 你的名字 &lt;你的邮箱&gt;
+</code></pre>
+
+<p>可以在<a href="http://www.selenic.com/mercurial/hgrc.5.html">这里</a>找到配置文件的更多选项。</p>
+
+<h3 id="创建项目">创建项目</h3>
+
+<p>点这个链接<a href="http://code.google.com/hosting/createProject">Google Project
+Hosting</a>创建新项目，记得在版本控制工具（Version
+control
+system）选项上选择Mercurial。填完其他项目后就可以创建自己的项目主页了。你的项目大概如：http://code.google.com/p/myhgproject/。
+接下来需要先建立本地仓库（repository），再把所有东西提交到在线仓库。首先，打开项目主页下的source标签页，或者这个地址http://code.google.com/p/myhgproject/source/checkout
+然后复制页面上的命令： <code>hg clone https://myhgproject.googlecode.com/hg/ myhgproject</code>
+在本地电脑上打开命令行窗口，进入到想要放着项目的文件夹如~/myproject，执行上面的命令。这个命令将会添加一个在线仓库的副本到本地机器上。这时应该在~/myproject下可以看到Mercurial创建的文件夹myhgproject。现在里面只有个.hg文件夹，接下来就可以把准备提交的项目文件复制到myhgproject下。</p>
+
+<p>现在myhgproject文件夹下已经有项目需要的所有文件夹了，再接下来就要把这些文件添加到本地仓库中，命令行窗口进入myhgproject，执行hg
+add，如果有新文件的话就会看到一堆anding xxx的信息。hg add
+命令的作用就是把新文件标记为要添加到下一次要提交的仓库中(新添加的文件状态就会由?变为a，可用hg
+status查看)，所以接下来就是把这些文件提交到本地仓库中， 使用命令：
+<code>hg commit -m 「Initial commit」</code> -m
+后面的参数是指你这次提交的的一些信息。比如，现在是第一次添加，所以可以说明Initial
+commit来说明是第一次提交的意思。</p>
+
+<p>注意，到现在本地的代码还未提交到在线仓库。接下来才是要把本地的代码提交到在线仓库，不过首先你要知道你的google为你生成的
+googlecode.com密码.在项目的source页面下可以看到这个链接：<a href="http://code.google.com/hosting/settings">http://code.google.com/hosting/settings</a>。现在就可以使用你的google用户名和这个密码提交更改到在线仓库了。比如用户名是andreas，密码是AbCdEfGHiJ12。可以用这个命令提交：
+<code>hg push https://andreas:AbCdEfGHiJ12@myhgproject.googlecode.com/hg/</code>
+现在应该可以在在线仓库看到你项目的所有文件了。以后每次做更改后想要提交都需要先提交到本地仓库，用这个命令：
+<code>hg commit -m "这次提交的一些信息"</code> 也可以不加-m这个参数。如果要添加新文件的话记得先
+<code>hg add</code> 然后就可以继续这个命令提交到在线仓库
+<code>hg push https://andreas:AbCdEfGHiJ12@myhgproject.googlecode.com/hg/</code></p>
+
+<h3 id="不想每次提交都打地址">不想每次提交都打地址？</h3>
+
+<p>没问题，其实可以直接键入 <code>hg push</code>
+不过服务器会要求你输入密码，输入上面的密码后才可以成功提交。如果连密码也不想输，也可以。
+打开项目文件夹了的.hg文件夹，可以看到里面有个hgrc文件，如果没有的话也可以自己创建。
+在里面加入你的密码</p>
+
+<pre><code>[paths]
+default = https://andreas:AbCdEfGHiJ12@myhgproject.googlecode.com/hg/
+</code></pre>
+
+<p>明文保存的，要小心密码被泄露。</p>
+
+<h3 id="svn转到mercurial">SVN转到Mercurial</h3>
+
+<p>可以参考这里<a href="http://leeiio.me/googlecode-converting-svn-to-hg/">在Google Code上用 Mercurial 取代 Subversion
+管理你的项目</a>，我也没细看。</p>
+
+<p>知道hg就是汞Hg吧 :lol:</p>
+
+    </article>
+    <div class="tag-container" >
+        
+        <div class="chip">
+        <a href="/tags#google-ref">
+            google
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#Google Code-ref">
+            Google Code
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#hg-ref">
+            hg
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#Mercurial-ref">
+            Mercurial
+        </a>
+        </div>
+        
+    </div>
+<div class="post-pager">
+    
+    <a href="/2011/05/09/im-back/">上一篇：I'm Back!</a>
+    
+    
+    <a href="/2011/05/24/update-css/" style="float:right;" >下一篇：更新了下CSS</a>
+    
+</div>
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/2011/05/11/managing-google-code-project-with-mercurial"
+ var disqus_config = function () {
+     this.page.title = "如何用Mercurial开始GoogleCode项目"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/2011/05/11/managing-google-code-project-with-mercurial/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

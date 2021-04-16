@@ -1,0 +1,286 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    初尝 Android Studio | DouO's Blog</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">初尝 Android Studio</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-01-13">2013-05-29</span>
+
+    <span><a href="/categories#coder-ref" class="category category-coder waves-effect waves-light">coder</a></span>
+    
+</div>
+
+    <article>
+        <p>Google I/O 2013 放出的新 Android IDE，基于 IntelliJ IDEA，现在还只是早期预览版本。断断续续用了几天后，得出一个结论，强烈不建议用来作正式开发工具。当然，这个其实看它的版本名就知道。一方面是不完善，从建立一个新项目到打包运行，遇到问题不断。另一方面，也是最不可接受的一点，就是打包速度慢。一台 E5200 的 Win7，一次 clean 要<strong>10秒</strong>以上，然后 compileDebug 要<strong>30秒</strong>。一台 i5-3550 同时配备有固态硬盘的 Hackintosh， clean 一次仍要<strong>5秒</strong>，compileDebug 要<strong>15秒</strong>。而且花在 checkSource 上的时间很多。做一个小改动再重新运行也要等很久，这一点严重拖慢开发效率（有这个空隙总会不自觉地去刷刷 reader，从而导致更多的拖延）。目前没有方法，一方面可能是 groovy 、gradle 本身的局限，一方面是现在这个 New Build System 也还不完善，现在版本才是0.3，还是有很大的改进空间的。另外，用 <a href="http://www.gradle.org/docs/current/userguide/gradle_daemon.html">daemon</a> 模式也可以加速。</p>
+
+<p>不过，Android Studio 还是很让人期待的，特别是看过 <a href="http://www.youtube.com/watch?v=lmv1dTnhLH4">“What’s new in Android Developer Tools”</a> 里面介绍的那些很酷的特性。终于可以摆脱 Eclipse 的一些顽疾和那老气沉沉的 UI 了（我是 Swing 爱好者，没做 Android 之前 Netbeans 才是我的日常IDE，可惜 ADT 没 Netbeans 的份）。摆脱了 Eclipse 后，Android IDE 才能有更大发挥，比如说新 Layout Design ，不必再望 Interface Builder 空叹了。而 JetBrains 也是声名在外，上次它在国内做活动的时候，差点买了 AppCode 和 RubyMine。至于 IntelliJ IDEA 我算是久仰其名，未见其面吧，其实也试用过，不过当时是非 Android 官方支持的，不敢随便就切换过去。最值得一提的是，从 Eclipse 切换 到 IntelliJ IDEA 的成本其实不高，有一些<a href="http://confluence.jetbrains.com/display/IDEADEV/Structure+of+IntelliJ+IDEA+Project">概念</a>的混淆。但都有 Emacs Keymap，还有最蛋疼的一点，现在　Android　Studio　还只是个<strong>「编辑器」</strong>，最容易导致问题的打包、依赖问题，现在做到　New Build System 了，目前还没整合进 Android Studio。所以打包依赖问题，不但要在 IDE 里配置一遍，还要自己写上一遍 <code>build.gradle</code>。</p>
+
+<p>以加入 ActionBarSherlock 为例，一开始不了解，尝试了多种方法，四处碰壁。用配置 IDE 的方法只能解决编码时的引用问题，最后只有 <a href="http://stackoverflow.com/a/16639227/851344">@froger_mcs</a> 的方法是可成功打包运行的。才发现要用 Android Studio 了解下 gradle 是必须的（在这之前我还没听说过 gradle）看一下 <a href="http://www.gradle.org/docs/current/userguide/userguide_single.html#overview">Gradle User Guide</a>，最少看完第六章，就有点概念了。后来再看了 I/O 的讲座 <a href="https://www.youtube.com/watch?v=LCJAgPkpmR0">“The New Android SDK Build System”</a>，豁然开朗。才知道原来 Android 推出了个新的基于 gradle 的构建系统。<a href="http://tools.android.com/tech-docs/new-build-system/user-guide">这里</a>是详细的文档。还有，New Android Build System 需要 gradle 1.6， brew 只能下载到 1.5。</p>
+
+<p>IntelliJ IDEA 默认的 Emacs Keymap 比 Eclipse 默认的好用，虽然还比不上 Emacs+，比如<code>c-x c-b</code> 不好用，但胜在足够稳定，贴合系统。不过在 Mac 下就没那么好了，option 键仍与 meta 键冲突（Aquamacs 中不会有这个问题），最后只能用一个新的 keyboard layout 屏蔽掉 option 输入字符快捷键（option 配合字母键输入特殊字符，我怎么觉得是个不怎么实用的功能），才能作为 meta 键使用。具体操作按照 <a href="http://stackoverflow.com/questions/11876485/how-to-disable-typing-special-characters-when-pressing-option-key-in-mac-os-x">@dan</a> 的方法实现。但是这个 layout 不能在 Aquamacs 中输入字符，来回切换也麻烦。</p>
+
+<p>还有 git ，IntelliJ IDEA 默认就支持 git，我之前就配置好 cygwin 下的 git 环境。它还能自动检测到 cygwin ，并用 cygwin 的 git 来提交。<code>.gitignore</code> 不知该如何写，直接把仓库建在 src 目录下是最方便的。</p>
+
+<p>之前用 Eclipse Helios 总会遇到一些假死和突然崩溃，很可能是 ADT 的 bug。升级到 Juno 后好像不会了，不过 Juno 要配合 Emacs+ 也需要一番折腾，现在回想起来现在用的 Eclipse 好像已经足够稳定了，相比 Xcode ，ADT 还是有所欠缺，特别是可视化编辑方面，却也足够满足基本需求的，除了一些个人坏癖好现在没什么理由切换到 Android Studio 去做白老鼠。不过现在增量更新很方便，下载个放着也没什么不好。我还是继续坚持使用，有什么问题会及时记录到<a href="/notes/tools/android-studio">笔记</a>里。</p>
+
+
+    </article>
+    <div class="tag-container" >
+        
+        <div class="chip">
+        <a href="/tags#Android-ref">
+            Android
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#Android Studio-ref">
+            Android Studio
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#gradle-ref">
+            gradle
+        </a>
+        </div>
+        
+    </div>
+<div class="post-pager">
+    
+    <a href="/2013/03/17/for-whom-the-blog-tolls/">上一篇：博客为谁而写</a>
+    
+    
+    <a href="/2013/08/16/the-pain-of-note/" style="float:right;" >下一篇：笔记之舛·序</a>
+    
+</div>
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/2013/05/29/first-glance-in-android-studio"
+ var disqus_config = function () {
+     this.page.title = "初尝 Android Studio"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/2013/05/29/first-glance-in-android-studio/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

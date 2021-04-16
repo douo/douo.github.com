@@ -1,0 +1,493 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    2017年08月17日杂记 | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">2017年08月17日杂记</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-12-01">2017-08-17</span>
+    
+</div>
+
+<article>
+    <p><a href="https://juejin.im/post/5811cad4570c3500680d4a1f">计算机程序的思维逻辑 (35) - 泛型 (上) - 基本概念和原理 - 掘金</a>
+<a href="https://juejin.im/post/581676edda2f60005dc54e58">计算机程序的思维逻辑 (36) - 泛型 (中) - 解析通配符 - 掘金</a>
+<a href="https://juejin.im/post/5819ba13128fe10055a7149b">计算机程序的思维逻辑 (37) - 泛型 (下) - 细节和局限性 - 掘金</a></p>
+
+<h3 id="泛型">泛型</h3>
+
+<p>参数化类型</p>
+
+<p>泛型类 class Name<T>，初始化 new Name<String></String></T></p>
+
+<p>泛型方法 modifier <T> void method(T a)，调用 method("s")，无需声明类型，编译器会做类型推定。</T></p>
+
+<h3 id="泛型的好处">泛型的好处</h3>
+
+<ul>
+  <li>可读性</li>
+  <li>类型安全</li>
+</ul>
+
+<h3 id="上限">上限</h3>
+
+<p><strong>递归类型限制</strong>，T表示一种数据类型，必须实现Comparable接口，且必须可以与相同类型的元素进行比较。</p>
+
+<pre><code>public static &lt;T extends Comparable&lt;T&gt;&gt; T max(T[] arr){
+
+//...
+
+}
+</code></pre>
+
+<p>Name<Number> 和 Name<Integer> 之间不是继承关系</Integer></Number></p>
+
+<pre><code>class Name&lt;T&gt; {
+       public void copyFrom(Name&lt;T&gt; other){}
+}
+
+Name&lt;Number&gt; nameN;
+Name&lt;Integer&gt; nameI
+nameN.copyFrom(nameI); //虽然操作是合理的，但是编译器不允许这样的炒作
+</code></pre>
+
+<p>需声明为如下代码，才能通过编译。</p>
+
+<pre><code>class Name&lt;T&gt; {
+       public &lt;O extends T&gt; void copyFrom(Name&lt;O&gt; other){}
+}
+</code></pre>
+
+<p>为什么编译器不允许，这样的操作。假设 Name<Number> 和 Name<Integer> 之间也满足参数类型之间的继承关系，那么 Name<Integer> 可以强制转换为 Name<Number>， Name<Number> 的参数化类型也可以使用 Double 的其他之类，这样原先  Name<Integer> 的类型安全就被破坏了。</Integer></Number></Number></Integer></Integer></Number></p>
+
+<h4 id="通配符">通配符</h4>
+
+<p><code>public &lt;O extends T&gt; void copyFrom(Name&lt;O&gt; other){}</code> 可以用通配符进行简化，没必要声明一个 O 类型出来那么啰嗦。</p>
+
+<pre><code>public void copyFrom(Name&lt;? extends T&gt; other){}
+</code></pre>
+
+<p>通配符类型的引用，其方法不允许传递任何类型，因为其实际类型是未知的，从而避免了破坏类型安全。返回值依赖于类型参数，也不能用通配符。</p>
+
+<pre><code>public static void swap(DynamicArray&lt;?&gt; arr, int i, int j){
+    Object tmp = arr.get(i);
+    arr.set(i, arr.get(j)); //相同类型不能通过编译
+    arr.set(j, tmp); // Object 也不能通过编译
+}
+
+public static &lt;D&gt; void copy(DynamicArray&lt;D&gt; dest,
+    DynamicArray&lt;? extends D&gt; src){
+    for(int i=0; i&lt;src.size(); i++){
+        dest.add(src.get(i)); //非通配符类型便没有问题
+    }
+}
+</code></pre>
+
+<h4 id="超类型通配符">超类型通配符</h4>
+
+<p><code>&lt;? super T&gt;</code> 超类型是写入安全的
+DynamicArray&lt;? super Integer&gt; arr，表示 arr 是泛型类型是 Integer 的父类，arr.set(Integer) 是安全的，因为 Integer 肯定可以转化为他的父类。</p>
+
+<h3 id="泛型数组">泛型数组</h3>
+
+<p>Java 不支持直接创建泛型数组，因为类型擦除，类型擦除后字节码数组的类型信息，所以同样的也不支持构建泛型实例 new T()，不但是因为类型擦除，编译器也无法保证每个类都要无参构造函数。</p>
+
+<p>要创建泛型数组可以通过反射：<code>Array.newInstance(Class&lt;?&gt;,int)</code>，再强制转换为泛型数组。</p>
+
+<p>虽然不支持，但类型擦除下，似乎也可以做到支持泛型数组。</p>
+
+<h3 id="泛型中的协变与逆变">泛型中的协变与逆变</h3>
+
+<p>逆变与协变用来描述类型转换（type transformation）后的继承关系，其定义：如果 A、B 表示类型，f(⋅) 表示类型转换，\(≤\)表示继承关系（比如，A≤B 表示A是由B派生出来的子类）；</p>
+
+<ul>
+  <li>\(f(⋅)\) 是逆变（contravariant）的，当\(A≤B\)时有 \(f(B)≤f(A)\)成立；</li>
+  <li>\(f(⋅)\) 是协变（covariant）的，当\(A≤B\)时有\(f(A)≤f(B)\)成立；</li>
+  <li>\(f(⋅)\) 是不变（invariant）的，当\(A≤B\)时上述两个式子均不成立，即\(f(A)\)与\(f(B)\)相互之间没有继承关系。</li>
+</ul>
+
+<p>在 Java 中， Number 与 Integer 是继承关系，但 List<Number> 与 List<Integer> 之间没有继承关系。所以当$$ f(⋅)=List&lt;⋅&gt;? $$ 时，$$ f(⋅) $$ 是**不变的**。</Integer></Number></p>
+
+<p>但是实际上这样造成了很大的不方便，比如 <code>double sum(List&lt;Number&gt;)</code>，一个用于计算数值列表累计的方法。参数却不能传递<code>List&lt;Integer&gt;</code>。我们知道继承是要满足里氏替换原则的，那么 <code>List&lt;Integer&gt;</code> 能当成 <code>List&lt;Number&gt;</code> 用吗？明显是不能的，<code>List&lt;Number&gt;#add(Double)</code> 是合法的，但如果此时的实际类型是 List<Integer> 那就破坏了泛型的约束。</Integer></p>
+
+<p>这里可以可看到，泛型类作为生产者的时候他是协变的，比如 <code>List&lt;Number&gt;#get</code> 提供的是 Number，<code>List&lt;Integer&gt;#get</code> 提供 Integer 也可以当成 Number 用。在 Java 中可以用 <code>&lt;? extends Number&gt;</code> 表示。</p>
+
+<p>泛型类作为消费者时，<code>List&lt;Integer&gt;#addAll</code>，消费的是 List 其参数类型是 Integer 及其子类。<code>List&lt;Number&gt;#addAll</code>，消费的是 List 其参数类型是 Number 及其子类。这里可发现 <code>List&lt;Number&gt;#addAll</code> 反而可被当成 <code>List&lt;Integer&gt;#addAll</code> 用。<strong>可以看到泛型类作为消费者时是逆变的</strong>，在 Java 中可以用 &lt;? super Number&gt; 表示，表示参数类型是 Number 及其父类，那么它消费任何 Number 及其子类都是安全的。</p>
+
+<ul>
+  <li><a href="https://www.cnblogs.com/en-heng/p/5041124.html">Java中的逆变与协变 - Treant - 博客园</a></li>
+  <li><a href="https://briangordon.github.io/2014/09/covariance-and-contravariance.html">Covariance and contravariance rules in Java</a></li>
+</ul>
+
+<h3 id="递归类型限制">递归类型限制</h3>
+
+<p>[Groking Enum (aka Enum&lt;E extends Enum<E>&gt;)](http://madbean.com/2004/mb2004-3/)</E></p>
+
+<pre><code>/**
+ * 如何在 Builder 中实现继承和链式调用
+ * Created by tiaolins on 2017/8/19.
+ */
+
+public class Builder&lt;T extends Builder&lt;T&gt;&gt; {
+
+  public Builder setAlphabet() {
+    return this;
+  }
+
+  /**
+   * 因为这种情况，链式方法要返回的类型是不确定的。
+   * 所以可以使用泛型，让其返回类型由子类传递给 Builder
+   * 这个类型就是子类本身，所以他的上界可以确定为 Builder
+   * 这里也就可以用强制类型转换
+   * 但是泛型只保证 T 是 Builder 的子类，并不能保证 T 是子类本身
+   * 比如 class XyzBuilder extends Builder&lt;AbcBuilder&gt;
+   * 这里破坏了类型安全编译器会给出警告
+   * 但是Builder 声明为递归泛型 Builder&lt;T extends Builder&lt;T&gt;&gt;
+   * 可以避免这种情况
+   * 怎么理解？
+   * &lt;T extends Builder&gt; 是什么意思？ T 是 Builder 的子类型
+   * Builder&lt;T&gt; ，这里的 T 不是类型变量了，而是一天具体类型 T，
+   * 整句看起来就是，T 是 Builder 的子类型，同时这个Builder 是以 T 为参数的 Builder 类型
+   * XyzBuilder extends Builder&lt;AbcBuilder&gt;，Xyz 是 Builder 的类型，但是 Builder 却不是 Xyz 的参数化类型。
+   */
+  public T setGeneric() {
+    return self();
+  }
+
+  /**
+   * 可以把 this 封装在返回值为 T 的方法里
+   * 这样可以避免到处强制类型转换，当然 self 方法还是不能避免强制类型转换
+   * self 方法可以声明为抽象方法，这样就可以避免强制类型转换，但是每个可供继承的
+   * Builder 子类都必须保持这个方法的抽象性，这样这些子类还得另外提供一个实现类，略显繁琐。
+   * @return
+   */
+  public T self() {
+    return (T) this;
+  }
+
+  public Object build() {
+    return new Object();
+  }
+
+  public static class AbcBuilder&lt;T extends AbcBuilder&lt;T&gt;&gt; extends Builder&lt;T&gt; {
+
+    /**
+     * java 中的方法返回值是协变的，所以可以覆盖父类的链式方法，
+     * 让子类返回自己的类型。但是这种方法在子类还有重新定义一次方法，未免太过繁琐。
+     */
+    @Override public AbcBuilder setAlphabet() {
+      super.setAlphabet();
+      return this;
+    }
+
+    public T setAbcGeneric() {
+      return self();
+    }
+
+    public AbcBuilder setAbc() {
+      return this;
+    }
+  }
+
+  public static class AbBuilder extends AbcBuilder&lt;AbBuilder&gt;{
+    public AbBuilder setAb(){
+      return this;
+    }
+  }
+
+  public static class XyzBuilder extends Builder&lt;AbcBuilder&gt; {
+
+  }
+
+  public static void test() {
+    new AbcBuilder().setAlphabet().setAbc().build();
+    new AbBuilder().setGeneric().setAbcGeneric().setAb().build();
+  }
+}
+</code></pre>
+
+<h3 id="类型擦除type-erasure">类型擦除（type erasure）？</h3>
+
+<pre><code>import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+
+public abstract class SuperClass&lt;T&gt; {
+
+    private final Type type;
+
+    protected SuperClass(){
+        ParameterizedType parameterizedType =
+                (ParameterizedType) getClass().getGenericSuperclass();
+        type = parameterizedType.getActualTypeArguments()[0];
+    }
+
+    public void tellMyType(){
+        System.out.println("Hi, my type parameter is " + type);
+    }    
+}
+</code></pre>
+
+<p>虽然类型擦除了，当然仍然保留了类型的元数据可供，运行时反射使用。</p>
+
+<blockquote>
+  <p>Java 5对Java类文件的格式做了修订，添加了Signature属性，用来包含不在JVM类型系统中的类型信息。比如以java.util.List接口为例，在其类文件中的Signature属性的声明是&lt;E:Ljava/lang/Object;&gt;Ljava/lang/Object;Ljava/util/Collection&lt;TE;&gt;;; ，这就说明List接口有一个类型参数E。在运行时刻，JVM会读取Signature属性的内容并提供给反射API来使用。</p>
+</blockquote>
+
+</article>
+<div class="tag-container" >
+    
+    <div class="chip">
+        <a href="/tags#泛型-ref">
+            泛型
+        </a>
+    </div>
+    
+    <div class="chip">
+        <a href="/tags#协变-ref">
+            协变
+        </a>
+    </div>
+    
+    <div class="chip">
+        <a href="/tags#逆变-ref">
+            逆变
+        </a>
+    </div>
+    
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Quick/2017/08/note-2017-08-17"
+ var disqus_config = function () {
+     this.page.title = "2017年08月17日杂记"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Quick/2017/08/note-2017-08-17/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+    <script type="text/javascript" async
+ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+    
+</body>
+
+</html>
+

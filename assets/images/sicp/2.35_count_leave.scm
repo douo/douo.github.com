@@ -1,0 +1,3 @@
+(define (count-leave )
+  (accumulate ())
+  )

@@ -1,0 +1,842 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    Cordova | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">Cordova</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-11-30">2016-03-11</span>
+    
+</div>
+
+<article>
+    <h3 id="如何在已有的项目中嵌入-cordova">如何在已有的项目中嵌入 Cordova</h3>
+
+<p>http://www.catharinegeek.com/embed-cordova-webview-in-android-native-app/</p>
+
+<ol>
+  <li>导入 <a href="https://github.com/apache/cordova-android">cordova framework</a>，可通过 ant 打包一个 jar 再导入 as
+1.1 也可通过 As 直接导入 framework 文件夹作为模块</li>
+  <li>用 cordova 创建一个项目</li>
+  <li>复制必要文件
+3.1. www 文件夹：<code>platforms/android/assets/www -&gt; src/main/assets/www</code>
+3.2. android 插件文件夹 <code>platforms/android/src/[plugin_folder] -&gt; src/main/java/</code>
+3.3. config.xml <code>platforms/android/res/xml/config.xml -&gt; src/main/res/xml/</code></li>
+</ol>
+
+<p>每次新增插件都要复制一遍</p>
+
+<h3 id="自定义插件">自定义插件</h3>
+
+<h4 id="java">Java</h4>
+
+<p>创建一个类并继承 CordovaPlugin，实现 excute 方法用来分发 js 端的消息到具体的实现的方法。</p>
+
+<p>以 <code>nl.xservices.plugins.Toast</code> 为例</p>
+
+<pre><code>public class Toast extends CordovaPlugin {
+...
+    public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
+    ...
+    final JSONObject options = args.getJSONObject(0);
+    ...
+    }
+}
+</code></pre>
+
+<p>在 <code>res/xml/config.xml</code>，添加</p>
+
+<pre><code>&lt;feature name="Toast"&gt;
+    &lt;param name="android-package" value="nl.xservices.plugins.Toast" /&gt;
+&lt;/feature&gt;
+</code></pre>
+
+<h4 id="js">Js</h4>
+
+<p>在页面根目录下新建插件文件 <code>plugin/cordova-plugin-x-toast/www/Toast.js</code></p>
+
+<p>在 cordova/plugin_list 中注册插件</p>
+
+<pre><code>module.exports = [
+      ...
+      {
+            "file": "plugins/cordova-plugin-x-toast/www/Toast.js",
+            "id": "cordova-plugin-x-toast.Toast",
+            "clobbers": [
+                "window.plugins.toast"
+            ]
+        }
+      ...
+      ]
+    module.exports.metadata =
+        // TOP OF METADATA
+        {
+            ...
+            "cordova-plugin-x-toast": "2.4.2",
+            ...
+  };
+</code></pre>
+
+<h3 id="cordovajs">cordova.js</h3>
+
+<h4 id="模块化原理">模块化原理</h4>
+
+<h5 id="modules"><code>modules</code></h5>
+
+<p>定义了 3 个表用于保存模块，类似模拟出 nodejs 的模块系统。</p>
+
+<ul>
+  <li>modules 全局的列表</li>
+  <li>inProgressModules，在加载module的过程中保存 module 在 requireStack 中的位置</li>
+  <li>requireStack，在加载module的过程中，保存当前 module，</li>
+</ul>
+
+<p>inProgressModules 和 requireStack 用于检测是否循环依赖</p>
+
+<h5 id="define"><code>define</code></h5>
+
+<p>定义一个模块：<code>cordova.define("cordova-plugin-x-toast.Toast", function(require, exports, module) {...})</code></p>
+
+<p>一个模块包括了：</p>
+
+<pre><code>modules[id] = {
+    id: id,  // id
+    factory: factory  //工厂方法
+};
+</code></pre>
+
+<p>define 本身还有一个<code>delete</code>方法，和一个到 modules 的引用。</p>
+
+<p>要访问全局 modules:<code>define.moduleMap</code></p>
+
+<h5 id="require"><code>require</code></h5>
+
+<p>加载 module：</p>
+
+<ol>
+  <li>检查是否已经加载过，已经加载过着直接返回 module.exports;</li>
+  <li>push 入 requireStack</li>
+  <li>调用 factory 方法</li>
+  <li>返回 module.exports</li>
+  <li>清理 inProgressModules，requireStack</li>
+  <li>清理 factory 方法，用于标记 module 是否加载过</li>
+</ol>
+
+<p>换句话说，require 的时候会检查 module 有没有 build。build 后下次 require 就可有直接用，不用再调用工厂方法了。</p>
+
+<h5 id="factory">factory</h5>
+
+<p><code>define</code> 的第二个参数就是工厂方法，工厂方法有三个传入参数:</p>
+
+<pre><code>factory(localRequire, module.exports, module);
+</code></pre>
+
+<p>require 与 localRequire 的区别就在于 localRequire 支持相对路径 <code>.</code>。 require 用于当前模块导入其他模块，工厂方法里也可以 require，所以一次 require 可能最后是生成一颗 module 树。</p>
+
+<p>module.exports 就是 require 后返回的对象。</p>
+
+<p>module 模块对象，有一个 id 和一个 exports 方法（factory 方法被删除掉）。</p>
+
+<h5 id="例子">例子</h5>
+
+<pre><code>cordova.define("cordova-plugin-x-dsbridge.DSBridge", function(require, exports, module) {
+    var exec = require('cordova/exec')
+    var DSBridge = function() {};
+    
+    DSBridge.prototype.test = function(successCallback, errorCallback) {
+        exec(successCallback, errorCallback, "DSBridge", "test", []);
+    };
+    module.exports = new DSBridge();
+});
+</code></pre>
+
+<p>使用:</p>
+
+<pre><code>var dsb = cordova.require("cordova-plugin-x-dsbridge.DSBridge");
+</code></pre>
+
+<h4 id="事件机制">事件机制</h4>
+
+<p>cordova 对 document 和 windows 的 add/remove EventListner 重新定义，对于每个新增的监听器，只有 cordova 这边没有定义，才会传递给原来的方法。</p>
+
+<pre><code>var m_window_addEventListener = window.addEventListener;
+window.addEventListener = function(evt, handler, capture) {
+    var e = evt.toLowerCase();
+    if (typeof windowEventHandlers[e] != 'undefined') {
+        windowEventHandlers[e].subscribe(handler);
+    } else {
+        m_window_addEventListener.call(window, evt, handler, capture);
+    }
+};
+</code></pre>
+
+<p>cordova 通过这样实现自定义的事件。</p>
+
+<pre><code>   /**
+     * Methods to add/remove your own addEventListener hijacking on document + window.
+     */
+    addWindowEventHandler:function(event) {
+        return (windowEventHandlers[event] = channel.create(event));
+    },
+    addStickyDocumentEventHandler:function(event) {
+        return (documentEventHandlers[event] = channel.createSticky(event));
+    },
+    addDocumentEventHandler:function(event) {
+        return (documentEventHandlers[event] = channel.create(event));
+    },
+    removeWindowEventHandler:function(event) {
+        delete windowEventHandlers[event];
+    },
+    removeDocumentEventHandler:function(event) {
+        delete documentEventHandlers[event];
+    },
+    
+    /**
+     * Method to fire event from native code
+     * bNoDetach is required for events which cause an exception which needs to be caught in native code
+     */
+    fireDocumentEvent: function(type, data, bNoDetach)
+    
+    fireWindowEvent: function(type, data) 
+</code></pre>
+
+<p>可以这么说，所有 cordova 事件都对应着一个 channel。</p>
+
+<p>addConstructor: function(func) 注册一个函数在 onCordovaReady 时回调，在 deviceready 之前调用。</p>
+
+<p>如：</p>
+
+<pre><code>Toast.install = function () {
+  if (!window.plugins) {
+    window.plugins = {};
+  }
+
+  window.plugins.toast = new Toast();
+  return window.plugins.toast;
+};
+
+cordova.addConstructor(Toast.install);
+</code></pre>
+
+<p>具体见 Channel 模块</p>
+
+<h4 id="回调机制">回调机制</h4>
+
+<p>同样在 cordova 中实现，维护一个全局的 callbacks 集合。</p>
+
+<pre><code>callbackId: Math.floor(Math.random() * 2000000000),  //是随机生成的 id，作为当前 cordova 实例所有 callbackId 的起始值，以后每增加一个 callback 便自加一。
+callbacks:  {},  // 存放 callbacks 的地方
+callbackStatus: { //所有 callback 的状态
+    NO_RESULT: 0,
+    OK: 1,
+    CLASS_NOT_FOUND_EXCEPTION: 2,
+    ILLEGAL_ACCESS_EXCEPTION: 3,
+    INSTANTIATION_EXCEPTION: 4,
+    MALFORMED_URL_EXCEPTION: 5,
+    IO_EXCEPTION: 6,
+    INVALID_ACTION: 7,
+    JSON_EXCEPTION: 8,
+    ERROR: 9
+},
+</code></pre>
+
+<p>callbacks 的结构：</p>
+
+<pre><code>cordova.callbacks[callbackId] = {success:success, fail:fail};
+</code></pre>
+
+<p>提供 3 个执行回调的方法，供原生端调用回调。通过 id 去定位回调</p>
+
+<pre><code>/**
+ * Called by native code when returning successful result from an action.
+ */
+callbackSuccess: function(callbackId, args)
+/**
+ * Called by native code when returning error result from an action.
+ */
+callbackError: function(callbackId, args)
+/**
+ * Called by native code when returning the result from an action.
+ */
+callbackFromNative: function(callbackId, isSuccess, status, args, keepCallback) 
+</code></pre>
+
+<h4 id="模块">模块</h4>
+
+<p>cordova 有两个 api provider</p>
+
+<ul>
+  <li>nativeapiprovider, 通过 addJavascriptInterface  暴露给 js 调用</li>
+  <li>promptbasednativeapi，通过 prompt 向 android 传递字符串，通过解析字符串达到调用 api 的效果。</li>
+</ul>
+
+<h5 id="cordovaandroidnativeapiprovider">cordova/android/nativeapiprovider</h5>
+
+<p>Exports the ExposedJsApi.java object if available, otherwise exports the PromptBasedNativeApi.</p>
+
+<p><code>_cordovaNative</code>，在 js 这边是找不到实现的代码的，因为它是通过 Android WebView#addJavascriptInterface 设置。暴露 ExposedJsApi 给 js 这边调用。用于 js 向 native 传递消息的底层接口。</p>
+
+<pre><code>/*
+ * Any exposed Javascript API MUST implement these three things!
+ */
+public interface ExposedJsApi {
+    public String exec(int bridgeSecret, String service, String action, String callbackId, String arguments) throws JSONException, IllegalAccessException;
+    public void setNativeToJsBridgeMode(int bridgeSecret, int value) throws IllegalAccessException;
+    public String retrieveJsMessages(int bridgeSecret, boolean fromOnlineEvent) throws IllegalAccessException;
+}
+</code></pre>
+
+<p>具体实现是在 SystemExposedJsApi。</p>
+
+<h5 id="cordovaandroidpromptbasednativeapi">cordova/android/promptbasednativeapi</h5>
+
+<p>Implements the API of ExposedJsApi.java, but uses prompt() to communicate.
+ This is used pre-JellyBean, where addJavascriptInterface() is disabled.</p>
+
+<p>在 js 中调用 prompt，参数会传递到 WebChromeClient#onJsPrompt。使用这样的机制传递消息，可以避免在 4.2 之前，addJavascriptInterface 导致的 bug。</p>
+
+<p>见：http://www.jianshu.com/p/93cea79a2443</p>
+
+<h5 id="argscheck">argscheck</h5>
+
+<p>用于检测参数，只对下面的类型有效，传入参数  spec 与 args 要一一对应。</p>
+
+<pre><code>var typeMap = {
+    'A': 'Array',
+    'D': 'Date',
+    'N': 'Number',
+    'S': 'String',
+    'F': 'Function',
+    'O': 'Object'
+};
+</code></pre>
+
+<h5 id="cordovabase64">“cordova/base64”</h5>
+
+<p>base64 工具</p>
+
+<h5 id="builder">*builder</h5>
+
+<p>each： 在上下文中对 objects 自己的属性都传递到 func
+clobber: 让 obj.key 返回 value</p>
+
+<p>include： 将 objects 的 key 打入 parent 里面，递归</p>
+
+<p>recursiveMerge：将 src 现有的属性合并入 target ；如果两边有相同属性名的对象，那么会合并而不是覆盖。</p>
+
+<p>在 modulemapper 中使用</p>
+
+<h5 id="utils">utils</h5>
+
+<p>实现了一个兼容的 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/__defineGetter__">defineGetterSetter</a></p>
+
+<h5 id="channel">channel</h5>
+
+<p>订阅者模式。也就是 js 中事件的分发模式</p>
+
+<pre><code>//在 androidExec.init 中触发，通过 prompt 获取到 bridgeSecret 后
+ *      deviceready           Cordova native code is initialized and Cordova APIs can be called from JavaScript
+
+ *      pause                 App has moved to background
+ *      resume                App has returned to foreground
+</code></pre>
+
+<p>一个 Channel 对象，有一个 字符串类型的 type 和 一个用于标记 sticky（在事件触发后再新增的订阅者会立刻被通知，对于只触发一次的事件有用，比如 deviceready）</p>
+
+<p>需要注意的是，页面加载过程中，cordova 事件的加载顺序（* 表示 sticky）：</p>
+
+<ul>
+  <li>onDOMContentLoaded*         Internal event that is received when the web page is loaded and parsed.</li>
+  <li>onNativeReady*              Internal event that indicates the Cordova native side is ready.</li>
+  <li>onCordovaReady*             Internal event fired when all Cordova JavaScript objects have been created.</li>
+  <li>onDeviceReady*              User event fired to indicate that Cordova is ready</li>
+  <li>onResume                    User event fired to indicate a start/resume lifecycle event</li>
+  <li>onPause                     User event fired to indicate a pause lifecycle event</li>
+</ul>
+
+<h5 id="exec">exec</h5>
+
+<pre><code>jsToNativeModes = {
+        PROMPT: 0,
+        JS_OBJECT: 1
+    },
+    nativeToJsModes = {
+        // Polls for messages using the JS-&gt;Native bridge.
+        POLLING: 0,
+        // For LOAD_URL to be viable, it would need to have a work-around for
+        // the bug where the soft-keyboard gets dismissed when a message is sent.
+        LOAD_URL: 1,
+        // For the ONLINE_EVENT to be viable, it would need to intercept all event
+        // listeners (both through addEventListener and window.ononline) as well
+        // as set the navigator property itself.
+        ONLINE_EVENT: 2
+    },
+</code></pre>
+
+<ul>
+  <li>nextTick 用于异步执行 func，如果支持 Promise 则用 Promise 机制，不然便用 setTimeout</li>
+  <li>messagesFromNative 保存原生返回的消息列表</li>
+</ul>
+
+<p>向原生发送消息的代码在</p>
+
+<pre><code>function androidExec(success, fail, service, action, args)
+</code></pre>
+
+<p>每次调用生成一个新的 callbackid</p>
+
+<pre><code>var callbackId = service + cordova.callbackId++,
+</code></pre>
+
+<ul>
+  <li>bridgeSecret</li>
+  <li>Msg</li>
+</ul>
+
+<h5 id="platform">platform</h5>
+
+<h4 id="argscheck-1">argscheck</h4>
+
+<h4 id="modulemapper">modulemapper</h4>
+
+<h4 id="pluginloader">pluginloader</h4>
+
+<h3 id="nodejs">Node.js</h3>
+
+<p>https://nqdeng.github.io/7-days-nodejs/</p>
+
+<p>导入模块</p>
+
+<pre><code>var http = require("http");
+</code></pre>
+
+<p>server.js</p>
+
+<pre><code>var http = require("http");
+
+function start() {
+  function onRequest(request, response) { // 事件驱动
+    console.log("Request received.");
+    response.writeHead(200, {"Content-Type": "text/plain"});
+    response.write("Hello World");
+    response.end();
+  }
+
+  http.createServer(onRequest).listen(8888);
+  console.log("Server has started.");
+}
+
+exports.start = start;  // 导出函数
+</code></pre>
+
+<pre><code>var server = require("./server");  //相对路径，忽略后缀。执行这个文件里的代码，文件当成一个类，exports 表示开放的函数
+                                   //多次 require 不会执行多次，都是返回同一个对象
+server.start();
+</code></pre>
+
+<h3 id="白名单机制">白名单机制</h3>
+
+<p>Cordova 默认是不允许打开 http/https 的。</p>
+
+<p>需要通过插件 https://github.com/apache/cordova-plugin-whitelist 配置白名单通配符。</p>
+
+<h3 id="java-1">Java</h3>
+
+<p>Cordova Android，主要做 3 件事</p>
+
+<ul>
+  <li>处理 js 与 native 的消息传递，NativeToJsMessageQueue</li>
+  <li>插件管理，PluginManager、ConfigXmlParser</li>
+  <li>暴露 Android 核心功能给 js，CoreAndroid</li>
+  <li>
+    <p>增强 WebView 的功能</p>
+  </li>
+  <li>如何处理跳转到下一页后前一页的请求。</li>
+</ul>
+
+<p>Cordova#sendJavascript</p>
+
+<p>brdgeSecret</p>
+
+<h4 id="cordovabridge">CordovaBridge</h4>
+
+<h5 id="prompt">Prompt</h5>
+
+<ol>
+  <li>gap</li>
+  <li>gap_bridge_mode</li>
+  <li>gap_poll</li>
+  <li>gap_init java 在这里生成 bridgeSecret 返回给 js</li>
+</ol>
+
+<h4 id="pluginmanager">PluginManager</h4>
+
+<p>负责实际代码的执行</p>
+
+<p>向插件分发事件（广播模式，每个 plugin 都会收到）</p>
+
+<p>PluginEntry</p>
+
+<ul>
+  <li>服务名</li>
+  <li>实现类名</li>
+  <li>onload 标志，表示插件是否应该在 pluginmanager 初始化的时候创建。</li>
+  <li>CordovaPlugin</li>
+</ul>
+
+<p>CordovaPlugin，实际执行代码的类</p>
+
+<p>按启动时间可分为两种：</p>
+
+<ol>
+  <li>onload 时自动加载（PluginManager#startupPlugins）</li>
+  <li>懒性加载，exec 的时候才加载（PluginManager#getPlugin 懒性方法）</li>
+</ol>
+
+<p>Plugin 有点像不带 ui 的 fragment</p>
+
+<p><strong>multitasking</strong> ？？</p>
+
+<h4 id="callbackcontext">CallbackContext</h4>
+
+<p>用于向 js 发送回调。由 CordovaWebview 负责发送。发送内容由 PluginResult 携带。</p>
+
+<h4 id="coreandroid">CoreAndroid</h4>
+
+<p><code>org.apache.cordova.CoreAndroid#loadPage</code></p>
+
+<p>没有开放使用</p>
+
+<p>通过 <code>messageChannel</code> 事件获取一个 callback 向 js 发生核心事件，包括按钮事件，pause、resume 等</p>
+
+<h4 id="cordovawebview">CordovaWebView</h4>
+
+<p>showWebPage 参数不能带过去</p>
+
+<h4 id="cordovawebviewengine">CordovaWebViewEngine</h4>
+
+<p>CordovaWebView 和 SystemWebView 之间的胶水类</p>
+
+<p>操作实际的 WebView 视图，封装一个 SystemWebivew 对象</p>
+
+<pre><code>// AppCache
+settings.setAppCacheMaxSize(5 * 1048576);
+settings.setAppCachePath(databasePath);
+settings.setAppCacheEnabled(true);
+</code></pre>
+
+<p>在这里暴露 SystemExposedJsApi 给 webview</p>
+
+<h4 id="nativetojsmessagequeue">NativeToJsMessageQueue</h4>
+
+<p>通过 JsMessage 构造需要的数据</p>
+
+<p>将 PluginResult 转换为 JsMessage 存入队列，通过 Bridge 触发 js 来读取队列</p>
+
+<h5 id="enqueue">enqueue</h5>
+
+<p>CordovaWebViewImpl#sendPluginResult -&gt;</p>
+
+<p>NativeToJsMessageQueue#addPluginResult -&gt; NativeToJsMessageQueue#equeueMessage -&gt; queue(LinkedList<JsMessage>)  Thread[JavaBridge,9,main]</JsMessage></p>
+
+<h6 id="pop">pop</h6>
+
+<p>SystemExposedJsApi#retrieveJsMessages -&gt; CordovaBridge#jsRetrieveJsMessages -&gt; NativeToJsMessageQueue#popAndEncode Thread[JavaBridge,9,main]</p>
+
+<p>触发的源头来自 cordova.js:</p>
+
+<pre><code>function pollOnce(opt_fromOnlineEvent) {
+    if (bridgeSecret &lt; 0) {
+        // This can happen when the NativeToJsMessageQueue resets the online state on page transitions.
+        // We know there's nothing to retrieve, so no need to poll.
+        return;
+    }
+    var msgs = nativeApiProvider.get().retrieveJsMessages(bridgeSecret, !!opt_fromOnlineEvent);
+    if (msgs) {
+        messagesFromNative.push(msgs);
+        // Process sync since we know we're already top-of-stack.
+        processMessages();
+    }
+}
+</code></pre>
+
+<p>pollOnce 的触发又回到 Java，每次 enqueue 后还会调用</p>
+
+<pre><code>NativeToJsMessageQueue#equeueMessage -&gt; BridgeMode#onNativeToJsMessageAvailable
+</code></pre>
+
+<p>onNativeToJsMessageAvailable 最终会让 js 调用 pollOnce</p>
+
+<p>总共四种 BridgeMode</p>
+
+<ul>
+  <li>NoOpBridgeMode，由 js 端通过定时轮询来获取消息。 # 在 CordovaWebView 加入</li>
+  <li>LoadUrlBridgeMode，loadUrl(“javascript:” + js, false) 来直接调用js。# 在 CordovaWebView 加入</li>
+  <li>OnlineEventsBridgeMode，需要实现 OnlineEventsBridgeModeDelegate，所以在 CordovaWebViewEngine 加入，通过切换 setNetworkAvailable 来通知 js 是否有新的事件</li>
+  <li>EvalBridgeMode,</li>
+</ul>
+
+<p>OnlineEventsBridgeMode 有一个严重的 bug，</p>
+
+<ol>
+  <li>NetworkAvailable 是一个全局的状态，</li>
+  <li>NetworkAvailable 的状态，OnlineEventsBridgeMode 自己维护，因为系统没有提供 API 来获取这个状态</li>
+  <li>多个 Actvity 也就有多个 CordovaWebViewEngine 也就有多个 OnlineEventsBridgeMode，也就有多个 NetworkAvailable 状态</li>
+  <li>当 Activity A 的状态是 online 跳转到 Activity B 其将状态改为 offline</li>
+  <li>回到 Activity A ，它仍认为 NetworkAvailable 的状态为 online</li>
+  <li>为了触发 js 端拉取消息，onNativeToJsMessageAvailable 将 NetworkAvailable 的状态为 offline</li>
+  <li>全局 NetworkAvailable 已经是 false， 所以 ActivityA 的更改无效，不会触发到 js 的事件。</li>
+  <li>最终导致 Activity A 的 nativeToJs 队列阻塞</li>
+</ol>
+
+<h4 id="cordovaresourceapi">CordovaResourceApi</h4>
+
+<h3 id="其他">其他</h3>
+
+<h4 id="x5">X5</h4>
+
+<p>腾讯推出的 Web 引擎。基于 Blink。</p>
+
+<h4 id="crossway">crossway</h4>
+
+<p>https://github.com/crosswalk-project/cordova-plugin-crosswalk-webview</p>
+
+<h4 id="ionic">ionic</h4>
+
+<p>Ionic Native is a TypeScript wrapper for Cordova/PhoneGap plugins</p>
+
+</article>
+<div class="tag-container" >
+    
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Programming/Android/cordova"
+ var disqus_config = function () {
+     this.page.title = "Cordova"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Programming/Android/cordova/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

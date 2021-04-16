@@ -1,0 +1,364 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    站点日志 | DouO's Blog</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">站点日志</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <p>这里只记录一些比较大的改动和想法，更详细的记录请查看<a href="https://github.com/douo/douo.github.com/commits/develop">这里</a></p>
+
+<h3 id="todo">TODO</h3>
+
+<h4 id="博客">博客</h4>
+
+<ul>
+  <li>使用 html 的简化模板 haml&gt;slim(支持haml似乎更好)</li>
+  <li>用 [swiftype][2] 做站内搜索，分为 posts 和 notes，设计 schema</li>
+</ul>
+
+<h4 id="筆記">筆記</h4>
+
+<ul>
+  <li>專門描述應用內引用的語法，參考wiki語法，实现文内引用到文中其他小节的便利方法</li>
+  <li>反向链接</li>
+  <li>看看能不能利用 Evernote api ，把笔记输出到 evernote 中</li>
+</ul>
+
+<h3 id="2021-04-16">2021-04-16</h3>
+
+<p>迁移到私有库</p>
+
+<h3 id="2020-06-10">2020-06-10</h3>
+
+<p>加入<a href="https://github.com/gjtorikian/jekyll-last-modified-at">jekyll-last-modified-at</a> 页面显示最新修改时间（发布时间 tooltip）。然后做了个笔记的简单主页，显示最新发布、最新修改和 todo，通过 front matter 的 todo 属性来过滤。</p>
+
+<h3 id="2019-02-13">2019-02-13</h3>
+
+<p>支持 mermaid，图表表达复杂逻辑比文本更有力。标记语言比图片更易维护。</p>
+
+<h3 id="2018-01-02">2018-01-02</h3>
+
+<p>用 Jekyll 重新实现，见 <a href="/2018/01/02/new-year-new-blog/">新年新博客</a></p>
+
+<h3 id="2015-04-10">2015-04-10</h3>
+
+<h3 id="2015-04-10-1">2015-04-10</h3>
+
+<p>移除 pure，用 <a href="https://snugug.github.io/RWD-with-Sass-Compass/#/nested-grid-inner-1-scss">RWD-with-Sass-Compass</a> 重构。</p>
+
+<p>使用 <code>typo.css</code></p>
+
+<h3 id="2014-05-04">2014-05-04</h3>
+
+<h3 id="2014-02-06">2014-02-06</h3>
+
+<p>为日记实现卡片式布局，实现了一个逆向的 collated 方法，方便把新日记排在前面，添加了 <a href="http://masonry.desandro.com/">masonry</a>，通过它来实现瀑布流式的卡片布局。</p>
+
+<h3 id="2014-01-11">2014-01-11</h3>
+
+<p>修复笔记的排序功能，有子节点的项排在前面，相同的按字符表顺序大的排在前面</p>
+
+<h3 id="2014-01-10">2014-01-10</h3>
+
+<p>写了一个脚本批量更新速记的结构，这是其中一个：</p>
+
+<pre><code>quick.each do |m|
+  path = m.data['pointer']['realpath']
+  name = File.basename path
+  dir = File.dirname path
+  date = m.data['date']
+  title = date.strftime(notes.config['quick_title'])
+  nn = name.gsub('untitled','note')
+  c = File.read(path)
+  w = c.gsub(/^title:\s*$/,"title: #{title}")
+  File.open(path, 'w:UTF-8') { |f| f.puts w }
+  FileUtils.mv(path,File.join(dir,nn))
+end &amp;&amp; nil
+</code></pre>
+
+<p>完成笔记的命令行接口：</p>
+
+<pre><code>{
+    "command" =&gt; "new &lt;(category title)/title&gt;",
+    "desc" =&gt; "Create a new note. Specific category and title or just title. if no title will create quick note",
+  },
+  {
+    "command" =&gt; "drafts",
+    "desc" =&gt; "List all drafts.",
+  },
+  {
+    "command" =&gt; "list",
+    "desc" =&gt; "List all resources.",
+  }
+}
+</code></pre>
+
+<p>更新 categories.org ，Other 替换为 Uncategory，为快捷笔记增加一个新分类 Quick</p>
+
+<h3 id="2013-10-11">2013-10-11</h3>
+
+<p>用 semantic-ui 为笔记建了个简单的主题。接下来等有时间再来打造前端的开发工具链。guard 似乎在 cygwin 下用不了。</p>
+
+<h3 id="2013-10-10">2013-10-10</h3>
+
+<pre><code>双十节。
+</code></pre>
+
+<p>更改日志记录的排序方式，新的记录排在前面。另外改动实在太多了，无法一一表述了，更新到 ruhoh 2.5 ，旧的代码也尽量往新的结构优化，基本上也完成的差不多，还有少许bug。</p>
+
+<h3 id="2013-03-30">2013-03-30</h3>
+
+<p>扩展了 markdown 的 image 语法</p>
+
+<p>原本是</p>
+
+<pre><code>![Alt text](/path/to/img.jpg "Optional title")
+</code></pre>
+
+<p>现在是</p>
+
+<pre><code>![-&lt;&gt;Alt text](/path/to/img.jpg "Optional title")
+</code></pre>
+
+<p>将 ALt text 的第一个字符作为标志，其中<code>-</code> =&gt; <code>无样式</code>，<code>&lt;</code> =&gt; <code>pull-left</code>， <code>&gt;</code> =&gt; <code>pull-right</code>。其他字符则当成 Alt text 的字符，显示默认样式 <code>display</code>。</p>
+
+<h3 id="2013-02-21">2013-02-21</h3>
+
+<p>为笔记数据即<code>ruhoh.db.notes</code>生成树状索引，collection_view#navigation 不用再每次调用都重新生成。</p>
+
+<h3 id="2013-02-18">2013-02-18</h3>
+
+<p>ruhoh 2 的分类目录文章列表没有按照日期排序，增加个<code>Ruhoh::Resources::Page::CollectionView#categories_sorted</code> 返回排序好的列表</p>
+
+<h3 id="2013-02-08">2013-02-08</h3>
+
+<p>面包屑导航</p>
+
+<h3 id="2013-02-07">2013-02-07</h3>
+
+<p>通过递归导入 partial 实现让 mustache 展示递归结构的数据，重构了笔记 navigation 和 toc 的 mustache 接口</p>
+
+<h3 id="2013-01-20">2013-01-20</h3>
+
+<p>升级到ruhoh2.0，ruhoh2 抽象了一个resource的概念，可以极大的减少diary和
+notes与ruhoh系统的耦合，但仍然不能作为附加插件存在，在 <code>resource_interface</code> 和 <code>preview</code> 中仍然需要一些硬编码。不过其实实现这个并
+不困难。posts，pages，diary，notes 都是继承自Page。</p>
+
+<h3 id="2012-11-22">2012-11-22</h3>
+
+<p>重新設計博客的響應式導航欄，用一個導航欄實現兩種佈局，現在感覺良好。</p>
+
+<h3 id="2012-11-17">2012-11-17</h3>
+
+<p>移除 toc plus widget，把js文件加入到主题中。</p>
+
+<h3 id="2012-11-16">2012-11-16</h3>
+
+<p>正式開始新站點的日誌記錄，重新實現了一個更有靈活性的TOC插件，為筆記系統添加了樣式，twitter-bootstrap 的經典結構。</p>
+
+
+
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

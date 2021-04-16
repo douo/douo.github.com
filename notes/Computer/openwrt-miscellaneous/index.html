@@ -1,0 +1,1340 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    Openwrt 折腾 | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">Openwrt 折腾</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 21-03-14">2020-02-04</span>
+    
+</div>
+
+<article>
+    <h1 id="编译">编译</h1>
+
+<h2 id="docker">Docker</h2>
+
+<p>用 <a href="https://github.com/P3TERX/openwrt-build-env">P3TERX/openwrt-build-env</a> ，host mbp macOS 10.15，没什么问题，就是特别慢。</p>
+
+<p>表现在两个方面：</p>
+
+<ol>
+  <li>进入 openwrt 的 git 目录特别慢，估计 zsh 的 git 插件速度慢，原因可能是 io 速度慢</li>
+  <li>编译慢，首次 <code>make V=s</code> 要 12 小时</li>
+</ol>
+
+<p>可能是 io 性能问题，openwrt 是挂载在 apfs case-sensitive 的宗卷上的，怀疑是 osxfs 有性能问题。测试了下单纯写入 1G 随机数据，结果似乎问题不大：</p>
+
+<pre><code>dd if=/dev/urandom of=sample.bin bs=1G count=1 iflag=fullblock
+1+0 records in
+1+0 records out
+1073741824 bytes (1.1 GB, 1.0 GiB) copied, 5.85614 s, 183 MB/s
+</code></pre>
+
+<p>不在 osxfs 目录下编译，<code>make V=s -j$(nproc)</code> <strong>速度就快很多了。</strong></p>
+
+<p>另外，进入 git 目录很慢，估计本质原因也是 osxfs 的性能问题，关闭 zsh 的 track dirty 可以解决</p>
+
+<pre><code>git config --global --add oh-my-zsh.hide-dirty 1
+</code></pre>
+
+<p>见：https://stackoverflow.com/questions/12765344/oh-my-zsh-slow-but-only-for-certain-git-repo</p>
+
+<h2 id="mac">Mac</h2>
+
+<p><a href="https://oldwiki.archive.openwrt.org/doc/howto/buildroot.exigence.macosx">OpenWrt Buildroot – Installation on macOS [Old OpenWrt Wiki]</a></p>
+
+<blockquote>
+  <p>This is called the “host compilation toolchain”, and the machine it is running on is called the “host system”. The host compilation toolchain is provided by the Linux distribution running on the host system, and has nothing to do with the actual build system.</p>
+</blockquote>
+
+<blockquote>
+  <p>Embedded systems use a different processor and require a cross-compilation toolchain - a compilation toolchain that runs on a host system but that generates code for a target system (and target processor’s instruction set architecture (ISA)).</p>
+</blockquote>
+
+<p>直接在 Mac 下编译一开始很顺利，结果居然编译内核的时候报错了，提示缺少某些头文件，openwrt 不是先编译 toolchain 的吗？难道是 download 不全导致的？不知道是什么地方出问题，提了个 issue，暂时应该无法解决：</p>
+
+<p><a href="https://bugs.openwrt.org/index.php?do=details&amp;task_id=2817">FS#2817 : compiler complain ‘asm/types.h’ file not found when compile kernel on osx 10.15</a></p>
+
+<h2 id="github-action">Github Action</h2>
+
+<p>最后还是用 github action 来云编译。</p>
+
+<p>自己 fork 了一份 <a href="https://github.com/douo/openwrt">openwrt 源码</a>和自定义的 <a href="https://ogithub.com/douo/openwrt-package">openwrt-package</a>（fork 自 <a href="https://github.com/Lienol/openwrt-package">Lienol/openwrt-package</a>）</p>
+
+<p>速度很不错，1小时40分左右搞定。见：<a href="https://github.com/douo/openwrt/actions">Actions · douo/openwrt</a></p>
+
+<p>参考：</p>
+
+<ul>
+  <li><a href="https://github.com/KFERMercer/OpenWrt-CI">KFERMercer/OpenWrt-CI: OpenWrt CI 在线集成自动编译环境</a></li>
+  <li><a href="https://github.com/P3TERX/Actions-OpenWrt">P3TERX/Actions-OpenWrt: Build OpenWrt using GitHub Actions | 使用 GitHub Actions 编译 OpenWrt</a></li>
+</ul>
+
+<h3 id="问题">问题</h3>
+
+<ol>
+  <li>几乎每次编出来的 ext4 镜像都有损坏，挂载根目录的时候只能 read-only。找了个 arch live usb， fsck 一下就解决了，有时解决不了。然后我用 vbox 跑一下，却没有问题，怀疑是硬件问题。</li>
+  <li>直接把 <code>.config</code> 上传的话，执行 feed 脚本的时候会被重置，原来的<code>.config</code> 会被命名为 <code>.config.old</code>，需要重新改回来。注意更新 <code>.config</code> 的时候，需要本地 update/install feeds 后再 <code>make menuconfig</code>.</li>
+</ol>
+
+<h2 id="单独编译-ipk">单独编译 ipk</h2>
+
+<p>一次全量编译后：</p>
+
+<pre><code>make target/linux/compile V=s
+make $package_path/compile V=s
+</code></pre>
+
+<h2 id="其他">其他</h2>
+
+<p><code>&lt;buildroot&gt;/files</code> 下的文件可以编译到，镜像文件根目录相应的位置上，比如 <code>/etc/config/ ⇒ &lt;buildroot&gt;/files/etc/config/my_config.</code></p>
+
+<h1 id="安装">安装</h1>
+
+<p>我用的设备是咸鱼上收的二手软路由小马 v1 ：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">T</th>
+      <th style="text-align: center">V</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">CPU</td>
+      <td style="text-align: center">Intel(R) Pentium(R) CPU  N3700  @ 1.60GHz</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Memory</td>
+      <td style="text-align: center">4g</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Disk</td>
+      <td style="text-align: center">8g</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">NIC</td>
+      <td style="text-align: center">四网口千兆</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>这个性能拿来做家用路由绝对是过剩的。</p>
+
+<p>N3700 详细：</p>
+
+<pre><code>Architecture:                    x86_64
+CPU op-mode(s):                  32-bit, 64-bit
+Byte Order:                      Little Endian
+Address sizes:                   36 bits physical, 48 bits virtual
+CPU(s):                          4
+On-line CPU(s) list:             0-3
+Thread(s) per core:              1
+Core(s) per socket:              4
+Socket(s):                       1
+Vendor ID:                       GenuineIntel
+CPU family:                      6
+Model:                           76
+Modennl name:                      Intel(R) Pentium(R) CPU  N3700  @ 1.60GHz
+Stepping:                        3
+CPU MHz:                         1057.534
+CPU max MHz:                     2400.0000
+CPU min MHz:                     480.0000
+BogoMIPS:                        3200.00
+Virtualization:                  VT-x
+L1d cache:                       96 KiB
+L1i cache:                       128 KiB
+L2 cache:                        2 MiB
+Vulnerability Itlb multihit:     Not affected
+Vulnerability L1tf:              Not affected
+Vulnerability Mds:               Vulnerable: Clear CPU buffers attempted, no microcode; SMT disabled
+Vulnerability Meltdown:          Mitigation; PTI
+Vulnerability Spec store bypass: Not affected
+Vulnerability Spectre v1:        Mitigation; usercopy/swapgs barriers and __user pointer sanitization
+Vulnerability Spectre v2:        Mitigation; Full generic retpoline, STIBP disabled, RSB filling
+Vulnerability Tsx async abort:   Not affected
+Flags:                           fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx rdtscp lm cons
+                                 tant_tsc arch_perfmon pebs bts rep_good nopl xtopology tsc_reliable nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_c
+                                 pl vmx est tm2 ssse3 cx16 xtpr pdcm sse4_1 sse4_2 movbe popcnt tsc_deadline_timer aes rdrand lahf_lm 3dnowprefetch epb pti tpr_shadow vnmi flexpr
+                                 iority ept vpid tsc_adjust smep erms dtherm ida arat
+</code></pre>
+
+<h2 id="dd">dd</h2>
+
+<p>写入命令</p>
+
+<ul>
+  <li><code>dd if=*.img of=/dev/sdx</code></li>
+  <li><code>gunzip -c *.img.gz | dd of=/dev/sdx</code></li>
+</ul>
+
+<p>用 <code>dd</code> 写入 ext4 镜像，基本上写出来的文件系统总有损坏，我在 virtualbox 里写却没有问题，基本可以排除是编译的镜像出问题。如果是写入 squashfs 镜像又没问题，日常使用也没发觉固态有什么问题，很少不解</p>
+
+<p><code>dd</code> 还有一个问题就是分区表在编译时就固定了，实在是不适合作为 x86_64 的 pc 生态。ssd 的大部分空间都被浪费了。当然也可以手动扩容，或建个新分区挂载。</p>
+
+<h3 id="分区扩容">分区扩容</h3>
+
+<p>opkg install fdisk
+opkg install resize2fs</p>
+
+<p>执行<code>fdisk -l</code>，就会看到软路由的sdx盘被分成了两个分区，你会发现第二个分区只有256M，这里就可以调节第二个分区的大小，将硬盘的剩余容量全部划分到第二个分区：</p>
+
+<ol>
+  <li><code>fdisk -l /dev/sdx</code> 将第二个分区的起始扇区号<code>start</code>的值记下来</li>
+  <li><code>fdisk /dev/sdx</code> 进入修改硬盘分区信息，删除分区（<code>d</code>） 2 后重建(<code>n</code>)</li>
+  <li>选择分区后会让你输入分区开始扇区号，这里输入之前记下来的扇区号</li>
+  <li>输入<code>w</code>，这时候会提示你 <code>Partition #2 contains a ext4 signature. Do you want to remove the signature?</code>，这一步很重要，这里要选no，保留 ext4 信息</li>
+  <li>分区完成后执行 <code>resize2fs /dev/sdx2</code>，分区扩容就大功告成了。</li>
+</ol>
+
+<h2 id="手动">手动</h2>
+
+<p>编译出来 openwrt-combined-ext4.img 其实就是基于 MBR 分区表 grub 引导的 linux，两个分区分别挂载到 <code>/boot</code> 和 <code>/</code>。手动的意思就是在目标机器上的硬盘按这个分区表分好区，然后把镜像的相应内容拷到硬盘相应对位置上。然后还需要手动写引导，可以通过 live os 安装 grub 搞定。</p>
+
+<p>不过我的做法是先用 <code>dd</code> 写入 squashfs 的镜像，这时 grub 就已经安装好了，然后剩下的空间在建个 ext4 分区，日常用的系统就安装在这里。保留 squashfs 的系统作为应急和安装使用。</p>
+
+<p>实际分区表如下：</p>
+
+<pre><code>Device     Boot  Start      End  Sectors  Size Id Type
+/dev/sdb1  *       512    33279    32768   16M 83 Linux
+/dev/sdb2        33792   558079   524288  256M 83 Linux
+/dev/sdb3       559104 15649199 15090096  7.2G 83 Linux
+</code></pre>
+
+<p>拷贝我用 <code>rsync</code>，挂载镜像需要用到 <code>losetup</code>、<code>fdisk</code>、<code>blkid</code> 也是必须的。确保 squashfs 系统已经有安装这些工具。</p>
+
+<h3 id="过程">过程</h3>
+
+<p>引导进入 squashfs 系统。</p>
+
+<pre><code># 个人电脑
+scp openwrt-x86-64-combined-ext4.img.gz root@192.168.1.1:/tmp/ # 上传镜像到路由
+# 路由
+cd /tmp
+gunzip openwrt-x86-64-combined-ext4.img.gz
+losetup -Pf openwrt-x86-64-combined-ext4.img # 一般挂载在 loop1，lsblk 可以看到
+mkdir -p /tmp/boot; mount /dev/loop1p1 /tmp/boot # 挂载 /boot
+mkdir -p /tmp/root; mount /dev/loop1p2 /tmp/root # 挂载 /
+mkdir -p /tmp/hboot; mount /dev/sdx1 /tmp/hboot # 挂载本机 boot
+mkdir -p /tmp/hroot; mount /dev/sdx3 /tmp/hroot # 挂载准备安装的 root
+
+rsync -av --delete /tmp/root/ /tmp/hroot # 同步镜像根目录，不放心可以先 mkfs.ext4 /dev/sdx3
+
+# 第一次需要修改引导
+cp -r /tmp/hboot/boot /tmp/hboot/boot_bk # 第一次的话先备份下 squashfs 的引导
+# 修改 grub menu
+mv /tmp/hboot/boot/vmlinuz /tmp/hboot/boot/vmlinuz-squashfs # 第一次重命名 squashfs 内核
+sed -i 's/"vmlinuz/"vmlinuz-squashfs/' /tmp/hboot/boot/grub/grub.cfg # 更新内核位置
+sed -i 's/"OpenWrt/"OpenWrt squashfs/' /tmp/hboot/boot/grub/grub.cfg # 第一次重命名 grub 的菜单项
+cp /tmp/boot/boot/vmlinuz /tmp/hboot/boot/ # 更新内核
+export partuuid=`blkid | sed -n -r  's/\/dev\/sd.3.*PARTUUID="([^"]*)"/\1/gp'` # 获取本机新 root 分区的 partuuid
+ sed -n '/menuentry/,+6{s/PARTUUID=[a-zA-Z0-9-]*/'PARTUUID="$partuuid"'/g;p}' /tmp/boot/boot/grub/grub.cfg # 输出替换 partuuid 后的 grub 菜单项
+vi /tmp/hboot/boot/grub/grub.cfg #把输出的菜单项追加到前面
+# 非第一次直接更新内核就可以
+# cp /tmp/boot/boot/vmlinuz /tmp/hboot/boot/ # 更新内核
+</code></pre>
+
+<p>也可以直接上传 <code>openwrt-x86-64-rootfs-ext4.img.gz</code> 和 <code>openwrt-x86-64-vmlinuz</code> ，就可以避免依赖 <code>losetup</code></p>
+
+<h2 id="文件系统">文件系统</h2>
+
+<h3 id="squashfs-与-ext4"><code>squashfs</code> 与 <code>ext4</code></h3>
+
+<p><code>squashfs</code> 是只读的，对系统的修改保存是通过 <code>overlayfs</code> 来实现的，openwrt 还有另外一个可写的 <code>jffs2</code> 分区，通过 <code>overlayfs</code> 将两个分区合并为一个，写入的内容在 <code>jffs2</code> 上，覆盖到<code>squashfs</code>上，这样的好处是恢复出厂设置（failsafe）相当简单，把overlayfs的内容抹掉即可。</p>
+
+<p>这种分区方式有两个问题，<code>squashfs</code> 是只读的，所以 opkg 升级包后，旧版本的包还会留在 squashfs 上。另外 opkg 不知道 jffs2 分区的剩余容量，所以写满了的话会很尴尬，很可能需要重刷了。做分区调整估计没那么容易。</p>
+
+<p><code>ext4</code> 是可读写的，修改扩容都很方便，应用程序可以知道分区还有多少剩余容量，不过不支持损耗均衡(wear leveling)。</p>
+
+<p>选择哪个格式在于，failsafe 和 wear leveling 对你是否重要。</p>
+
+<p>在我看来，嵌入式设备选择 squashfs 无疑，但 x86_64 的软路由，一般配的硬盘都有 4g 起步，损耗均衡一般ssd固件已经做了支持。所以我选择 ext4 更方便折腾一下。</p>
+
+<h3 id="flash-layout">flash layout</h3>
+
+<p>squashfs 挂载在 /rom , jffs2 挂载在  /overlay</p>
+
+<p>Whenever the system is asked to look for an existing file in /, it first looks in /overlay, and if not there, then in /rom. In this way /overlay overrides /rom and creates the effect of a writable / while much of the content is safely and efficiently stored in the read-only /rom.</p>
+
+<table class="inline">
+	<tbody><tr class="row0">
+		<th class="col0"> Layer0 </th><td class="col1 centeralign" colspan="6">  raw flash  </td>
+	</tr>
+	<tr class="row1">
+		<th class="col0"> Layer1 </th><td class="col1 centeralign" rowspan="3">  bootloader <br />
+partition(s)  </td><td class="col2 centeralign" rowspan="3">  optional <br />
+SoC <br />
+specific <br />
+partition(s)  </td><td class="col3 centeralign" colspan="3">  OpenWrt firmware partition  </td><td class="col6 centeralign" rowspan="3">  optional <br />
+SoC <br />
+specific <br />
+partition(s)  </td>
+	</tr>
+	<tr class="row2">
+		<th class="col0"> Layer2 </th><td class="col1 centeralign" rowspan="2">  Linux Kernel  </td><td class="col2 centeralign" colspan="2">  <strong><code>rootfs</code></strong> <br />
+mounted: “<code>/</code>”, <a href="/docs/techref/filesystems#overlayfs" class="wikilink1" title="docs:techref:filesystems">OverlayFS</a> with <code>/overlay</code>  </td>
+	</tr>
+	<tr class="row3">
+		<th class="col0"> Layer3 </th><td class="col1 centeralign">  <strong><code>/dev/root</code></strong> <br />
+mounted: “<code>/rom</code>”, <a href="/docs/techref/filesystems#squashfs" class="wikilink1" title="docs:techref:filesystems">SquashFS</a> <br />
+size depends on selected packages  </td><td class="col2 centeralign">  <strong><code>rootfs_data</code></strong> <br />
+mounted: “<code>/overlay</code>”, <a href="/docs/techref/filesystems#squashfs" class="wikilink1" title="docs:techref:filesystems">JFFS2</a> <br />
+“free” space  </td>
+	</tr>
+</tbody></table>
+
+<ul>
+  <li>https://wiki.openwrt.org/doc/techref/filesystems</li>
+  <li>https://zh.wikipedia.org/wiki/OverlayFS</li>
+  <li>https://openwrt.org/docs/techref/flash.layout</li>
+</ul>
+
+<h1 id="系统">系统</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"> </th>
+      <th style="text-align: center"> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">版本</td>
+      <td style="text-align: center">21.02-SNAPSHOT r15879-4bc6b7ef7c</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">内核</td>
+      <td style="text-align: center">Linux OpenWrt 5.4.99</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Luci</td>
+      <td style="text-align: center">git-21.062.56276-2e1f950</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="时间">时间</h2>
+
+<p><code>Unitiles → Zoneinfo → zoneinfo-asia</code></p>
+
+<h2 id="日志">日志</h2>
+
+<p>logread</p>
+
+<h2 id="shell">shell</h2>
+
+<p>默认 shell 是 <a href="https://zh.wikipedia.org/wiki/Almquist_shell">ash</a></p>
+
+<p>让 ash 好用一些：</p>
+
+<ul>
+  <li><code>Base system → busybox → Settings → History saving/ Reverse history search / Tab completion</code></li>
+  <li><code>Base system → busybox → Shell → Use $HISTFILESIZE</code></li>
+</ul>
+
+<p>软路由，没什么限制，直接编进去 <code>bash</code> 或 <code>zsh</code> 更好</p>
+
+<h2 id="dns">dns</h2>
+
+<h3 id="adguard-home">ADGuard Home</h3>
+
+<p>用 ADG 替换 dnsmasq、odhcp。</p>
+
+<p>先停用  dnsmasq、odhcp：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/etc/init.d/dnsmasq disable
+/etc/init.d/dnsmasq stop
+/etc/init.d/odhcpd disable
+/etc/init.d/odhcpd stop
+</code></pre></div></div>
+
+<p>再配置 ADG，dns 端口可以改为 53。同时配置启用 dhcp。</p>
+
+<h2 id="opkg">opkg</h2>
+
+<p>更新 opkg</p>
+
+<pre><code>opkg update
+opkg install lscpu
+opkg install lsblk
+opkg install bash
+opkg install zsh
+opkg install git-http # https://stackoverflow.com/questions/22506989/openwrt-git-clone-fatal-unable-to-find-remote-helper-for-http
+</code></pre>
+
+<p>更改 <code>/etc/passwd</code> 让 root 用 <code>zsh</code>(或 <code>bash</code>) 登录，然后安装 <code>oh-my-zsh</code></p>
+
+<h2 id="luci">luci</h2>
+
+<p>luci 建议直接在 openwrt 环境里开发调试，需要先关掉 lua cache</p>
+
+<pre><code>uci set luci.ccache.enable=0; uci commit luci
+</code></pre>
+
+<p>参考文档：</p>
+
+<ul>
+  <li><a href="https://github.com/openwrt/luci/wiki/CBI">CBI · openwrt/luci Wiki</a></li>
+  <li><a href="https://github.com/openwrt/luci/wiki/Datatypes#integer">Datatypes · openwrt/luci Wiki</a></li>
+  <li><a href="https://htmlpreview.github.io/?https://raw.githubusercontent.com/openwrt/luci/master/docs/api/modules/luci.dispatcher.html">Luci LuaDoc</a></li>
+</ul>
+
+<h2 id="uci">uci</h2>
+
+<p><code>uci</code> 是一个命令行工具，表示统一配置接口（Unified Configuration Interface ），旨在集中化 OpenWrt 的配置。luci 应该就是 lua 实现的 uci WebUI</p>
+
+<p><code>uci</code> 的配置文件存放于 <code>/etc/config/</code> ，可以直接通过文本编辑器或 <code>uci</code> 修改。这些配置文件还需要被 <code>/etc/init.d</code> 里面的脚本转化为实际程序需要的配置文件，也就是说在 uci 就是把各种程序需要的各式各样的配置文件封装成一套统一标准。</p>
+
+<p>uci 的配置文件如下所示：</p>
+
+<pre><code>package 'example'
+
+config 'example' 'test'
+        option   'string'      'some value'
+        option   'boolean'     '1'
+        list     'collection'  'first item'
+        list     'collection'  'second item'
+</code></pre>
+
+<p>其中<code>config example 'test'</code> 分别对应 section type name，name 和 option id 允许<code>a-zA-Z0-9_</code>不能用连字符 <code>-</code>，section 可以 unnamed，可以通过 config.section[index] 或者 config.cfgid 来访问，cfgid 是自动生成的。</p>
+
+<p>uci-defaults 是存放系统第一次启动时执行的脚步，由 <code>/etc/init.d/boot</code> 控制。</p>
+
+<ul>
+  <li><a href="https://openwrt.org/docs/guide-user/base-system/uci?s[]=uci">OpenWrt Project: The UCI system</a></li>
+  <li><a href="https://www.cnblogs.com/gnuhpc/p/3293643.html">【OpenWRT之旅】LuCI探究 - gnuhpc - 博客园</a></li>
+</ul>
+
+<p>另外还有 ucitrack 值得注意一下：</p>
+
+<blockquote>
+  <p>The ucitrack mechanism simply maps config file names to init scripts or custom commands.
+It is solely used by LuCI for reloading the correct services when a given config file was changed by the ui.</p>
+
+  <p>You can find the entire implementation in the /sbin/luci-reload script. Thats the only part using /etc/config/ucitrack and it is only invoked by LuCI.</p>
+</blockquote>
+
+<h2 id="init">init</h2>
+
+<p>uci 配置好后，由 /etc/init.d/ 里的脚本来，转换为实际程序需要的配置，并启动服务：</p>
+
+<p>一个 /etc/init.d/example 脚本如下：</p>
+
+<pre><code>#!/bin/sh /etc/rc.common
+# Example script
+# Copyright (C) 2007 OpenWrt.org
+
+START=10 # 决定这个脚本在系统启动时，执行的顺序,符号链接到 /etc/rc.d/S10example ，enable/disable 控制
+STOP=15 # 同上
+
+start() {
+        echo start
+        # commands to launch application
+}
+
+stop() {
+        echo stop
+        # commands to kill application
+}
+</code></pre>
+
+<p>通过 <code>/etc/rc.common</code> 来调用。有定义 <code>start</code> 和 <code>stop</code> 就会被认为是合法的脚本，比如上面的脚本，用 <code>restart</code> 命令，是会输出</p>
+
+<pre><code>stop
+start
+</code></pre>
+
+<p>OpenWrt 用 <a href="https://openwrt.org/docs/techref/procd">procd</a> 来管理服务的，服务大多数是用 procd 来写的。procd 的 init 脚本如下</p>
+
+<pre><code>#!/bin/sh /etc/rc.common
+# Example script
+# Copyright (C) 2007 OpenWrt.org
+
+
+USE_PROCD=1 # 告诉 rc.commom 这是一个 procd init 脚本，api 见 /lib/functions/procd.sh
+START=10
+
+
+# 必须函数，stop_service 可选
+start_service() {
+    # service 应该运行在前台
+    procd_open_instance [instance_name]
+
+    procd_set_param command /sbin/your_service_daemon -b -a --foo
+    procd_append_param command -bar 42 # append command parameters
+
+    # respawn automatically if something died, be careful if you have an alternative process supervisor
+    # if process dies sooner than respawn_threshold, it is considered crashed and after 5 retries the service is stopped
+    procd_set_param respawn ${respawn_threshold:-3600} ${respawn_timeout:-5} ${respawn_retry:-5}
+
+    procd_set_param env SOME_VARIABLE=funtimes  # pass environment variables to your process
+    procd_set_param limits core="unlimited"  # If you need to set ulimit for your process
+    procd_set_param file /var/etc/your_service.conf # /etc/init.d/your_service reload will restart the daemon if these files have changed
+    procd_set_param netdev dev # likewise, except if dev's ifindex changes.
+    procd_set_param data name=value ... # likewise, except if this data changes.
+    procd_set_param stdout 1 # forward stdout of the command to logd
+    procdlo_set_param stderr 1 # same for stderr
+    procd_set_param user nobody # run service as user nobody
+    procd_set_param pidfile /var/run/somefile.pid # write a pid file on instance start and remove it on stop
+    procd_close_instance
+}
+</code></pre>
+
+<p><code>/lib/funcitions</code> 下存放着 init 脚本可以调用的 api。 procd 的 API 参考 <a href="https://openwrt.org/docs/guide-developer/procd-init-scripts#debugging">OpenWrt Project: procd init script parameters</a></p>
+
+<h2 id="gfw">GFW</h2>
+
+<ul>
+  <li>v2ray</li>
+  <li>trojan-go</li>
+</ul>
+
+<h3 id="luci-app-passwall">luci-app-passwall</h3>
+
+<p>依赖了 <code>curl</code>、<code>wget</code>，Makefile 里面没有声明</p>
+
+<p>在谷歌云上部署了 trojan + kcptun，passwall 只支持 ssr 的 kcptun</p>
+
+<p>###</p>
+
+<h3 id="自建服务器">自建服务器</h3>
+
+<p>方案 trojan -&gt; kcptun -&gt; udp2raw ，trojan 没做什么特殊配置，经测试 upd2raw 对速度影响很小。主要调整在 kcptun。</p>
+
+<p>最终的配置：</p>
+
+<ul>
+  <li>服务器：<code>-mode fast2  --sndwnd 1024 --rcvwnd 1024 -dscp 46 -mtu 1300</code></li>
+  <li>客户端：<code>-mode fast2  --sndwnd 128 --rcvwnd 1024 -dscp 46 -mtu 1300</code></li>
+</ul>
+
+<p><code>--dscp 46</code> 是 VoIP 用的 dscp 码，用于对抗 QoS。</p>
+
+<p>用 iperf3 建立 kcptune 测试环境是很有必要的。</p>
+
+<p>一般是测试下载速度，先调整调节窗口，服务器窗口都设置为 2048，客户端的上传窗口设置保持默认，慢慢增大客户端的接收窗口 <code>rcvwnd</code> 从 32 慢慢 2 次幂增加。</p>
+
+<p>FEC，没做什么调整，用 <code>mtr</code> 看了下丢包率，一直 20% 几，就保持 10/3 不变。</p>
+
+<p>参考：</p>
+
+<ul>
+  <li><a href="https://lvii.gitbooks.io/outman/content/kcptun.html">HOW ：kcptun · outman</a></li>
+  <li><a href="https://github.com/skywind3000/kcp/wiki">Home · skywind3000/kcp Wiki</a></li>
+  <li><a href="https://www.do1999.com/64.html">Kcptun配置调节法，让你的VPS带宽最高效率的使用 - Let me Attente</a></li>
+  <li><a href="https://zh.wikipedia.org/wiki/%E5%89%8D%E5%90%91%E9%8C%AF%E8%AA%A4%E6%9B%B4%E6%AD%A3">前向纠错 - 维基百科，自由的百科全书</a></li>
+</ul>
+
+<p>新版的 kcptun 已经支持 upd2raw 的功能了（–tcp）。测试了下不知道 ktptun 被特征还是怎么，实际效果与加多一层 udp2raw 相去甚远。</p>
+
+<h4 id="qos">QoS</h4>
+
+<p>基本上可以确定，汕头移动光宽带（100M）晚高峰存在 QoS，</p>
+
+<p>日期：20200213 21:30</p>
+
+<p>测试命令<code>iperf3 谷歌云香港节点 + -c -p 443 -P 40 -t 20 -R</code></p>
+
+<p>下载：</p>
+
+<pre><code># ip 直连（tcp）
+[SUM]   0.00-20.04  sec  8.28 MBytes  3.46 Mbits/sec  2988             sender
+[SUM]   0.00-20.00  sec  6.64 MBytes  2.78 Mbits/sec                  receiver
+
+# tinyfecvpn（udp）
+[SUM]   0.00-24.38  sec   347 KBytes   117 Kbits/sec  176             sender
+[SUM]   0.00-20.00  sec   102 KBytes  41.8 Kbits/sec                  receiver
+
+# tinyfecvpn + udp2raw（faketcp）
+[SUM]   0.00-20.08  sec   289 KBytes   118 Kbits/sec   92             sender
+[SUM]   0.00-20.00  sec  99.8 KBytes  40.9 Kbits/sec                  receiver
+</code></pre>
+
+<p>上传：</p>
+
+<pre><code># ip 直连（tcp）
+[SUM]   0.00-20.00  sec  46.8 MBytes  19.6 Mbits/sec  3442             sender
+[SUM]   0.00-22.24  sec  45.8 MBytes  17.3 Mbits/sec                  receiver
+</code></pre>
+
+<p>可以看到 ip 直连的情况下上传基本上可以跑满，下行流量被限制的很死。</p>
+
+<p>非直接tcp ip 直连，tinyfecvpn 的 udp 加速和 faketcp 也没起到什么作用，上传下载都被限制的很惨。且与端口无关，<code>udp2raw</code> 使用 443 端口依旧没有改善。用 <code>--raw-mode icmp</code> 也没有改善。</p>
+
+<p>另外连上 tinyfecvpn， <code>ping</code> 网关的话则延迟很低，50-100ms。很大概率是被故意限制了。</p>
+
+<h4 id="一些测试数据">一些测试数据</h4>
+
+<p>ping 丢包率：</p>
+
+<pre><code>--- ping statistics ---
+187 packets transmitted, 116 packets received, 37% packet loss
+</code></pre>
+
+<p>tcppingv2 tcp 443 端口丢包率</p>
+
+<pre><code>100 packets transmitted, 86 received.
+</code></pre>
+
+<p>https://github.com/xtaci/kcptun/issues/137
+https://github.com/xtaci/kcptun/issues/167</p>
+
+<p>深夜的测试，直连 443 端口，tcp</p>
+
+<pre><code>iperf3 -c host -p 443 -P 5 -t 20
+...
+[Sum]   0.00-20.00  sec  46.3 MBytes  19.4 Mbits/sec  1673             sender
+[SUM]   0.00-20.00  sec  45.3 MBytes  19.0 Mbits/sec                  receiver
+</code></pre>
+
+<p>用 kcp fast2模式 其他默认：</p>
+
+<pre><code>iperf3 -c localhost -p 443 -P 5 -t 20
+...
+[SUM]   0.00-20.00  sec  26.4 MBytes  11.1 Mbits/sec  172             sender
+[SUM]   0.00-20.00  sec  24.3 MBytes  10.2 Mbits/sec                  receiver
+</code></pre>
+
+<p>-mode fast -datashard 5 -parityshard 5</p>
+
+<pre><code>[SUM]   0.00-20.00  sec  18.2 MBytes  7.62 Mbits/sec   27             sender
+[SUM]   0.00-20.00  sec  11.8 MBytes  4.96 Mbits/sec                  receiver
+</code></pre>
+
+<p>-mode manual -nodelay 0 -resend 0 -nc 1 -interval 40 -nocomp -dscp 46 -mtu 1400 -crypt aes-128 -datashard 70 -parityshard 30</p>
+
+<pre><code>[SUM]   0.00-20.00  sec  30.5 MBytes  12.8 Mbits/sec    0             sender
+[SUM]   0.00-20.00  sec  17.6 MBytes  7.40 Mbits/sec                  receiver
+</code></pre>
+
+<p>用 iperf3 直接测试 udp 的时候发现大部分几乎所有的 udp 包都被丢弃，到不了主机。</p>
+
+<p>下午的测试：</p>
+
+<p>直连</p>
+
+<pre><code>[SUM]   0.00-20.00  sec  44.5 MBytes  18.7 Mbits/sec  1206             sender
+[SUM]   0.00-20.00  sec  43.5 MBytes  18.3 Mbits/sec                  receiver
+</code></pre>
+
+<p>kcptun fast2 mtu 1200：</p>
+
+<pre><code>[SUM]   0.00-20.00  sec  35.6 MBytes  14.9 Mbits/sec    7             sender
+[SUM]   0.00-20.00  sec  17.9 MBytes  7.49 Mbits/sec                  receiver
+</code></pre>
+
+<p>加上 <a href="https://github.com/wangyu-/udp2raw-tunnel/blob/master/doc/README.zh-cn.md">udp2raw</a></p>
+
+<pre><code>[SUM]   0.00-20.00  sec  33.4 MBytes  14.0 Mbits/sec    8             sender
+[SUM]   0.00-20.00  sec  17.6 MBytes  7.36 Mbits/sec                  receiver
+</code></pre>
+
+<p>虽然最终效果差不多，速度没啥改善，同样原理的还有 <a href="https://blog.chionlab.moe/2017/04/06/kcptun-with-fake-tcp/">kcptun-raw：应对UDP QoS，重新实现kcptun的一次尝试 | ChionLab</a> 和 <a href="https://github.com/ccsexyz/kcpraw">ccsexyz/kcpraw</a></p>
+
+<p>深感自己网络知识的不足和不够系统，计算机网络和TCP/IP详解 toread list 里面呆了多少年都没进展</p>
+
+<h4 id="luci-app-kcptun">luci-app-kcptun</h4>
+
+<p>一开始不能通过 luci 来启动服务，只能通过 /etc/init.d/kcptun 来启动。后面又可以了，忘记是不是需要手动 enable 一下。</p>
+
+<h2 id="网络">网络</h2>
+
+<h3 id="smartdns">smartdns</h3>
+
+<p>dns 里面的门道还是挺多的，比如 dns 欺骗，用可信的 dns 查询域名返回的结果仍然会被篡改，所有敏感使用 DoT、DoH 是必须的。面对 dns 服务器被墙，dns 请求走翻墙线路也是必须的。翻墙后的 dns 请求国内网站又会返回错误的 cdn 地址。chinadns 就是这个场景的解决方案。</p>
+
+<p>还有 dns 劫持（Hijack），则是在 dns 服务器上做手脚，对于翻墙来说影响不大，出门在外用不可信的 wifi 需要小心 。</p>
+
+<p>自建 dns 服务器还要小心 dns 毒化（poisioning），实际上也是 dns 欺骗，上游服务器返回错误的ip 污染了自建服务器的 cache。smartdns 在这方面还要作一些折腾。 TODO</p>
+
+<p><code>/etc/config/smartdns</code> 配置如下:</p>
+
+<pre><code>config smartdns
+	option server_name 'smartdns'
+	option port '6053'
+	option tcp_server '1'
+	option ipv6_server '1'
+	option dualstack_ip_selection '0'
+	option prefetch_domain '1'
+	option serve_expired '0'
+	option redirect 'dnsmasq-upstream'
+	option cache_size '2048'
+	option rr_ttl_min '300'
+	option rr_ttl_max '3600'
+	option seconddns_tcp_server '1'
+	option seconddns_no_rule_addr '0'
+	option seconddns_no_rule_nameserver '0'
+	option seconddns_no_rule_ipset '0'
+	option seconddns_no_rule_soa '0'
+	option force_aaaa_soa '0'
+	option coredump '0'
+	option seconddns_enabled '1'
+	option seconddns_port '7913'
+	option seconddns_server_group 'us'
+	option seconddns_no_speed_check '1'
+	option seconddns_no_dualstack_selection '1'
+	option seconddns_no_cache '1'
+	option enabled '1'
+	list old_redirect 'dnsmasq-upstream'
+	list old_port '6053'
+	list old_enabled '1'
+
+config server
+	option enabled '1'
+	option type 'udp'
+	option ip '114.114.114.114'
+	option port '53'
+	option name '114'
+
+config server
+	option enabled '1'
+	option type 'udp'
+	option ip '119.29.29.29'
+	option port '53'
+	option name 'DNSPOD #1'
+
+config server
+	option enabled '1'
+	option ip '8.8.8.8'
+	option port '853'
+	option type 'tls'
+	option server_group 'us'
+	option blacklist_ip '0'
+	option no_check_certificate '0'
+	option name 'Google DoT #1'
+
+config server
+	option enabled '1'
+	option ip '8.8.4.4'
+	option port '853'
+	option type 'tls'
+	option server_group 'us'
+	option blacklist_ip '0'
+	option no_check_certificate '0'
+	option name 'Google DoT #2'
+
+config server
+	option enabled '1'
+	option ip 'https://cloudflare-dns.com/dns-query'
+	option type 'https'
+	option name 'Cloudflare DoH'
+	option server_group 'us'
+	option blacklist_ip '0'
+	option no_check_certificate '0'
+
+config server
+	option enabled '1'
+	option ip 'https://dns.quad9.net/dns-query'
+	option type 'https'
+	option name 'Quad9 DoH'
+	option server_group 'us'
+	option blacklist_ip '0'
+	option no_check_certificate '0'
+
+config server
+	option enabled '1'
+	option name 'Quad9 DoT'
+	option ip '149.112.112.112'
+	option port '853'
+	option type 'tls'
+	option server_group 'us'
+	option blacklist_ip '0'
+	option no_check_certificate '0'
+
+config server
+	option enabled '1'
+	option type 'udp'
+	option name 'LN_UNICOM #1'
+	option ip '202.96.69.38'
+	option port '53'
+
+config server
+	option enabled '1'
+	option type 'udp'
+	option name 'USTC #1'
+	option ip '202.141.160.95'
+	option port '53'
+
+config server
+	option enabled '1'
+	option type 'udp'
+	option name 'QINGHUA #1'
+	option ip '166.111.8.28'
+	option port '53'
+
+config server
+	option enabled '1'
+	option type 'udp'
+	option ip '180.76.76.76'
+	option port '53'
+	option name 'Baidu'
+
+config server
+	option enabled '1'
+	option type 'udp'
+	option name 'ALI#1'
+	option ip '223.5.5.5'
+	option port '53'
+</code></pre>
+
+<p>6053 用于解析国内服务器，第二组服务器  7913 用于科学上网。配合 passwall 的 DNS Mode:<code>Use local port 7913 as DNS</code>。通过<code>作为dnsmasq的上游</code>来启用，推测这种方式的兼容性应该较好，比如解锁网易云音乐或 passwall 都涉及对 dnsmasq 的依赖，见<code>/tmp/dnsmasq.d</code> 完全用 smartdns 替换，还需要折腾。</p>
+
+<p>之前使用了 frp 将 nas 的部分服务暴露到外网，根据不同域名通过 nginx 进行转发。如果在内网的话，可以直接将域名重绑定到实际的服务器，不用再绕一圈。通过<code>对特定域名IP地址指定</code>就可以实现这个需求。示例：</p>
+
+<pre><code>address /xxx.dourok.info/192.168.1.xxx
+</code></pre>
+
+<p>如果还保留 dnsmasq 服务，记得关闭 dnsmasq 的<code>重绑定保护(Rebind protection)</code>功能。</p>
+
+<p>smartdns <a href="https://www.moenyi.cn/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%89%E8%A3%85smartdns.html">让负载均衡废了</a>：</p>
+
+<blockquote>
+  <p>现在已经改回运营商的dns了，之前认为smartdns 会为我解析出连接最快的、ping值最低的ip，用了一段时间以后发现，ipv4地址确实是找到最快的那个，但是也只是返回了一个ip地址，App Store，一些bt下载什么的 感觉只是获取到一个ip，不能完成多并发下载，导致下载速度一直很慢，所以决定放弃使用了</p>
+</blockquote>
+
+<h3 id="dns-1">dns</h3>
+
+<ul>
+  <li>pdnsd 本地持久化缓存 dns 查询结果，已停止更新</li>
+  <li><a href="https://github.com/zfl9/chinadns-ng">zfl9/chinadns-ng: chinadns next generation, refactoring with epoll and ipset</a> 中国特色防污染DNS解析工具。</li>
+  <li>dns2socks</li>
+</ul>
+
+<blockquote>
+  <p>用户对DNS解析花费的时长比较敏感，这个问题可以通过在本地增加DNS缓存并修改增大DNS解析结果的TTL部分解</p>
+</blockquote>
+
+<h3 id="ip">ip</h3>
+
+<p><code>ip</code> 是 <code>ifconfig</code> 和 <code>route</code> 继任者。要多用 <code>ip</code> 避免再用<code>ifconfig</code> 和 <code>route</code> 了，mac 可以用 <code>brew install iproute2mac</code> 获取 <code>ip</code> 命令。</p>
+
+<p>默认编译选的是 <code>ip-tiny</code> 没有 tuntap ，需要重新安装下 <code>ip-full</code>，<code>luci-app-passwall</code> 依赖了 <code>ip-tiny</code> 不知道能不能安 <code>ip-full</code>。手动安装了下。</p>
+
+<h3 id="流量监控">流量监控</h3>
+
+<ul>
+  <li>bandwidthd</li>
+  <li>wrtbwmon</li>
+</ul>
+
+<h3 id="路由表">路由表</h3>
+
+<p>所谓路由表，指的是路由器或者其他互联网网络设备上存储的表，该表中存有到达特定网络终端的路径，在某些情况下，还有一些与这些路径相关的度量。路由器的主要工作就是为经过路由器的每个数据包寻找一条最佳的传输路径，并将该数据有效地传送到目的站点。由此可见，选择最佳路径的策略即路由算法是路由器的关键所在。为了完成这项工作，在路由器中保存着各种传输路径的相关数据——路由表（Routing Table），供路由选择时使用，表中包含的信息决定了数据转发的策略。打个比方，路由表就像我们平时使用的地图一样，标识着各种路线，路由表中保存着子网的标志信息、网上路由器的个数和下一个路由器的名字等内容。路由表根据其建立的方法，可以分为动态路由表和静态路由表。</p>
+
+<p>linux 系统中，可以自定义从 1－252个路由表，其中，linux系统维护了4个路由表：</p>
+
+<ul>
+  <li>0#表： 系统保留表</li>
+  <li>253#表： defulte table 没特别指定的默认路由都放在改表</li>
+  <li>254#表： main table 没指明路由表的所有路由放在该表</li>
+  <li>255#表： locale table 保存本地接口地址，广播地址、NAT地址 由系统维护，用户不得更改</li>
+</ul>
+
+<p>路由表的查看可有以下二种方法：</p>
+
+<pre><code>ip route list table table_number
+ip route list table table_name
+</code></pre>
+
+<p>路由表序号和表名的对应关系在 <code>/etc/iproute2/rt_tables</code> 文件中，可手动编辑。路由表添加完毕即时生效，下面为实例：</p>
+
+<pre><code>ip route add default via 192.168.1.1 table 1 在一号表中添加默认路由为192.168.1.1
+ip route add 192.168.0.0/24 via 192.168.1.2 table 1 在一号表中添加一条到192.168.0.0网段的路由为192.168.1.2
+</code></pre>
+
+<h3 id="策略路由">策略路由</h3>
+
+<p>In some circumstances we want to route packets differently depending not only on destination addresses, but also on other packet fields: source address, IP protocol, transport protocol ports or even packet payload. This task is called ‘policy routing’.</p>
+
+<h3 id="pppoe">PPPoE</h3>
+
+<p>调高设置 PPPoE 心跳包的间隔和次数，默认情况下容易断线。</p>
+
+<pre><code>uci set network.wan.keepalive='30 60'  //'[threshold] [interval]'
+uci commit
+/etc/init.d/network restart
+</code></pre>
+
+<h3 id="bbr">bbr</h3>
+
+<pre><code>sudo sysctl net.ipv4.tcp_congestion_control # 当前拥挤控制算法
+sudo sysctl net.ipv4.tcp_available_congestion_control # 可用拥挤控制算法
+sudo sysctl -w net.ipv4.tcp_congestion_control = Bbr # 启用
+sudo sysctl -p
+</code></pre>
+
+<h4 id="问题-1">问题</h4>
+
+<p>编译的时候忘了加 <code>bbr</code>，手动安装 <code>kmod-tcp-bbr</code> 后，居然 kernel panic 了。</p>
+
+<p>关键信息 <code>divide error: 0000 smp pti</code> <code>"tcp_ack"</code></p>
+
+<p><img src="bbr_kernel_panic.jpg" alt="bbr_kernel_panic" /></p>
+
+<h3 id="firewall">firewall</h3>
+
+<h4 id="zone">zone</h4>
+
+<p>zone 的概念和应用还有待理解 TODO</p>
+
+<h3 id="tinyfecvpn">tinyfecvpn</h3>
+
+<h4 id="tuntap">tun/tap</h4>
+
+<h2 id="其他-1">其他</h2>
+
+<h3 id="ps4-加速">PS4 加速</h3>
+
+<p>常用翻墙工具都是基于 tcp 协议的，游戏需要的大多数是 upd，虽然有 udp over tcp 的方案，但这样就失去了 udp 的优势，实际使用效果也不会好。所以 ps4 我用的是 vpn 的方案：tinyfecvpn + udp2raw。实际体验很好，以 APEX 为例，延迟不到 100ms，被 QoS 的时候还能以幻灯片的玩，不会断线。缺点就是所有流量都会被加速。</p>
+
+<h4 id="服务器">服务器</h4>
+
+<p>开启 ip 转发：</p>
+
+<pre><code>sudo sysctl -w net.ipv4.ip_forward=1
+sudo sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf # 重启生效
+sudo sysctl -p
+</code></pre>
+
+<p>安装我自己编译的 <a href="https://github.com/douo/tinyfecVPN/releases/download/v20200212_douo/tinyvpn_amd64">tinyfecvpn</a></p>
+
+<p>cat /usr/lib/systemd/system/tinyvpn.service:</p>
+
+<pre><code>[Unit]
+Description=tinyvpn Service
+After=network.target
+Wants=network.target
+[Service]
+Type=simple
+PIDFile=/var/run/tinyvpn.pid
+User=root
+ExecStart=/usr/bin/tinyvpn -s -l 0.0.0.0:33733 -f20:10 -k "${password}" --sub-net 10.22.22.0 # --report 10
+Restart=on-abnormal
+[Install]
+WantedBy=multi-user.target
+</code></pre>
+
+<p>用 iptables 启用 SNAT：</p>
+
+<pre><code>sudo iptables -t nat -A POSTROUTING -s 10.22.0.0/16 ! -d 10.22.0.0/16 -j MASQUERADE
+</code></pre>
+
+<p><a href="https://github.com/wangyu-/udp2raw-tunnel/releases/download/20190716.test.0/udp2raw_binaries.tar.gz">udp2raw</a> 串联 tinyvpn 的 33733 端口。</p>
+
+<p>/usr/lib/systemd/system/udp2raw_tinyvpn.service :</p>
+
+<pre><code>[Unit]
+Description=udp2raw_tinyvpn Service
+After=network.target
+Wants=network.target
+[Service]
+Type=simple
+PIDFile=/var/run/udp2raw_tinyvpn.pid
+User=root
+ExecStart=/usr/bin/udp2raw -s -l0.0.0.0:33731 -r127.0.0.1:33733 -k "${password}" --raw-mode faketcp --cipher-mode aes128cbc -a --fix-gro
+Restart=on-abnormal
+[Install]
+WantedBy=multi-user.target
+</code></pre>
+
+<h4 id="客户端">客户端</h4>
+
+<p>因为我的软路由有四个网口，一个接 WAN，一个 LAN 接 AP。还剩下来个让他走 VPN，在 <code>/etc/config/network</code> 建个网桥：</p>
+
+<pre><code>config interface 'LAN_VPN'
+	option type 'bridge'
+	option ifname 'eth2 eth3'
+	option proto 'static'
+	option netmask '255.255.255.0'
+	option ipaddr '192.168.202.1'
+</code></pre>
+
+<p>VPN 是 tuntap 设备，需要 <code>kmod-tun</code>。
+设置默认 tun 设备</p>
+
+<pre><code>#在运行tinyfecVPN前执行如下命令。只需执行一次，只要不重启就一直有效。
+ip tuntap add tun100 mode tun
+ifconfig tun100 up
+</code></pre>
+
+<p>再建个接口</p>
+
+<pre><code>config interface 'WAN_VPN'
+	option proto 'none'
+	option ifname 'tun100'
+</code></pre>
+
+<p>然后，安装我自己编译的 <a href="https://github.com/douo/tinyfecVPN/releases/download/v20200212_douo/tinyvpn_amd64">tinyfecvpn</a>，移动到 <code>/usr/bin/tinyvpn</code></p>
+
+<p>若用命令行的话命令如下：</p>
+
+<pre><code>tinyvpn -c -r127.0.0.1:33733 -f20:10 -k "chao" --sub-net 10.22.22.0 --tun-dev tun100 --keep-reconnect --report 10
+</code></pre>
+
+<p>不过我自己赶制了一个 luci 控制界面，<a href="https://github.com/douo/luci-app-tinyfecvpn/">douo/luci-app-tinyfecvpn: 适用于 OpenWRT/LEDE 的 tinyFecVPN LuCI 控制界面</a>，直接就在 luci 里配置</p>
+
+<p>接着安装 <a href="https://github.com/wangyu-/udp2raw-tunnel/releases/download/20190716.test.0/udp2raw_binaries.tar.gz">udp2raw</a> 串联 tinyvpn 的 33733 端口。同样用我自己 fork 的 luci 控制界面：<a href="https://github.com/douo/luci-app-udp2raw">douo/luci-app-udp2raw: OpenWrt/LEDE LuCI for udp2raw-tunnel</a></p>
+
+<p>添加策略路由,让特定 ip 段的来源走 vpn 的网关。</p>
+
+<pre><code>ip ro replace table 10 throw 10.22.0.0/16
+ip ro replace table 10 throw 192.168.0.0/16
+ip ro replace table 10 unreachable 0.0.0.0/0  metric 2
+ip ro replace default via 10.22.22.1 dev tun100 table 10
+Ip rule add from 192.168.202.0/24 table 10
+</code></pre>
+
+<p>最好规范一点先为表格命名：<code>/etc/iproute2/rt_tables</code> 里添加一行 <code>202 lanvpn</code></p>
+
+<p>再通过 uci 添加，保证一直生效：</p>
+
+<pre><code>uci add network route
+uci set network.@route[-1].interface="LAN_VPN"
+uci set network.@route[-1].table='lanvpn'
+uci set network.@route[-1].target='10.22.0.0/24'
+uci set network.@route[-1].type='throw'
+
+uci add network route
+uci set network.@route[-1].interface="LAN_VPN"
+uci set network.@route[-1].table='lanvpn'
+uci set network.@route[-1].target='192.168.0.0/24'
+uci set network.@route[-1].type='throw'
+
+uci add network route
+uci set network.@route[-1].interface="LAN_VPN"
+uci set network.@route[-1].table='lanvpn'
+uci set network.@route[-1].target='0.0.0.0/0'
+uci set network.@route[-1].type='unreachable'
+uci set network.@route[-1].metric='2'
+
+uci add network route
+uci set network.@route[-1].interface="WAN_VPN"
+uci set network.@route[-1].table='lanvpn'
+uci set network.@route[-1].target=0.0.0.0/0'
+uci set network.@route[-1].gateway='10.22.22.1'
+uci set network.@route[-1].ssource='10.22.22.2'
+
+uci add network rule
+uci set network.@rule[-1].src="192.168.202.0/24"
+uci set network.@rule[-1].lookup="lanvpn"
+</code></pre>
+
+<p>参考：</p>
+<ul>
+  <li><a href="https://github.com/wangyu-/tinyfecVPN/wiki/%E7%94%A8openwrt%E8%B7%AF%E7%94%B1%E5%99%A8%E6%90%AD%E5%BB%BA%E9%80%8F%E6%98%8E%E4%BB%A3%E7%90%86%EF%BC%8C%E5%8A%A0%E9%80%9F%E5%B1%80%E5%9F%9F%E7%BD%91%E5%86%85%E6%89%80%E6%9C%89%E8%AE%BE%E5%A4%87">用openwrt路由器搭建透明代理，加速局域网内所有设备 · wangyu-/tinyfecVPN Wiki</a></li>
+</ul>
+
+<h3 id="luci-app-unblockmusick">luci-app-unblockmusick</h3>
+
+<p>需要禁用 ipv6 不然，mac 无法生效</p>
+
+<pre><code>/etc/init.d/odhcpd disable
+/etc/init.d/odhcpd stop
+</code></pre>
+
+<h3 id="netdata">netdata</h3>
+
+<p>日志 <code>Cannot open file '/proc/sysvipc/shm'</code> 泛滥。 修改配置文件 <code>/etc/netdata/netdata.conf</code></p>
+
+<pre><code>[plugintw:proc:ipc]
+  # message queues = yes
+  semaphore totals = no
+  # shared memory totals = yes
+  # msg filename to monitor = /proc/sysvipc/msg
+  # shm filename to monitor = /proc/sysvipc/shm
+  # max dimensions in memory allowed = 50
+</code></pre>
+
+<p><code>/etc/init.d/netdata restart</code></p>
+
+<h3 id="局域网访问光猫">局域网访问光猫</h3>
+
+<p>光猫处于“桥接”状态时，其既可传递PPPoE封包，也运行着DHCP协议，只要路由器发出DHCP请求，就可以获得一个192.168.1.0/24的地址。</p>
+
+<p>首先确保光猫 dhcp 分配的网段不要和局域网的网段冲突，比如光猫我改成 <code>192.168.0.0/24</code>，局域网继续保持  <code>192.168.1.0/24</code>。</p>
+
+<p>接着给原来作为 wan 使用的端口添加一个新接口，比如我这里是 <code>eth1</code>, 记得禁用 <code>defaultroute</code> 不如会可能会替换掉wan 的默认网关导致上不了网。</p>
+
+<pre><code>config interface 'Modern'
+	option ifname 'eth1'
+	option proto 'dhcp'
+	option defaultroute '0'
+</code></pre>
+
+<p>这样在局域网的机器就能够通过 <code>192.168.0.1</code> 访问到光猫了，如果不行<code>ip ro show</code>确保路由表里有这一行</p>
+
+<pre><code>192.168.0.0/24 dev eth1 proto kernel scope link src 192.168.0.3
+</code></pre>
+
+<p>没有就手动添加，<code>192.168.0.3</code> 就是路由分配到的地址。</p>
+
+<p>需要禁用 DNS 功能，不然会将 192.168.0.1 作为 dns 服务器写入 <code>/tmp/resolv.conf.auto</code></p>
+
+<p>参考：</p>
+
+<ul>
+  <li><a href="https://blog.csdn.net/weixin_43593122/article/details/86672045">OpenWrt——进行PPPoE拨号时透过路由器访问光猫的方法_运维_123-wqy的博客-CSDN博客</a></li>
+</ul>
+
+<h3 id="限制智能家电访问内网">限制智能家电访问内网</h3>
+
+<p>TODO</p>
+
+<p>基本思路是通过 dhcp 配置，自动分配的 IP 段为 <code>192.168.1.64/26</code> 这样就可以不用 ipset 直接用 iptables 禁止这个 ip 段不能访问某些内网的敏感机器。</p>
+
+<h3 id="ipv6">ipv6</h3>
+
+<h3 id="upnp">upnp</h3>
+
+<p><a href="http://www.h3c.com/cn/d_201206/922127_30005_0.htm">UPnP基本原理以及在NAT中的应用-新华三集团-H3C</a></p>
+
+<p>暂时还是不启用 upnp 服务。upnp 的主要用途还是自动实现路由的端口转发，这个功能还是比较危险的。特别是那么多的 IoT 设备。另外 ISP 没有提供外网 ip 的话（比如移动宽带），开了端口转发对于 P2P 也是没有意义。</p>
+
+<p>这里是指 wan 口，如果是 lan 口的话没有这些安全风险但有没有什么实际作用呢？</p>
+
+<p><a href="https://openwrt.org/docs/guide-user/firewall/upnp/start">[OpenWrt Wiki] UPnP (aka Universal Plug and Play)</a></p>
+
+</article>
+<div class="tag-container" >
+    
+    <div class="chip">
+        <a href="/tags#openwrt-ref">
+            openwrt
+        </a>
+    </div>
+    
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Computer/openwrt-miscellaneous"
+ var disqus_config = function () {
+     this.page.title = "Openwrt 折腾"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Computer/openwrt-miscellaneous/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

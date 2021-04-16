@@ -1,0 +1,360 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    cwac-wakeful | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">cwac-wakeful</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-11-30">2013-11-04</span>
+    
+</div>
+
+<article>
+    <h3 id="定时启动服务">定时启动服务</h3>
+
+<h4 id="cwac-wakeful-简析">cwac-wakeful 简析</h4>
+
+<p>cwac-wakeful 其实很简单。 <code>WakefulIntentService</code> 继承自 <code>IntentService</code>，加上一个 <code>WakeLock</code> 处理机制， <code>doWakefulWork(Intent intent) </code> 等同于 <code>onHandleIntent(Intent intent)</code> ，当服务启动时会获取 <code>WakeLock</code>, 在 <code>onHandleIntent()</code> 中调用 <code>doWakefulWork</code> ，当其返回时便会释放<code>WakeLock</code>。所以 <code>doWakefulWork</code> 的代码不是在UI线程执行，可以直接处理耗时操作，在 <code>doWakefulWork</code>  开启一个新线程要小心，方法一旦返回就会释放掉<code>WakeLock</code></p>
+
+<p>另外还提供一些便利的方法，实现一个 AlarmManager 的简单模式。
+AlarmListener 和 AlarmReceiver，两者需要配合使用。</p>
+
+<pre><code>public interface AlarmListener {
+		// 设置闹钟
+		void scheduleAlarms(AlarmManager mgr, PendingIntent pi, Context ctxt);
+		// 闹钟时间到的时候调用
+		void sendWakefulWork(Context ctxt);
+
+		long getMaxAge();
+	}
+</code></pre>
+
+<p>AlarmReceiver 同时接收 <code>BOOT_COMPLETED</code> 和 <code>ALARM</code> 的广播。需要加入这个一段声明，</p>
+
+<pre><code>&lt;receiver android:name="com.commonsware.cwac.wakeful.AlarmReceiver"&gt;
+			&lt;intent-filter&gt;
+				&lt;action android:name="android.intent.action.BOOT_COMPLETED"/&gt;
+			&lt;/intent-filter&gt;
+
+			&lt;meta-data
+				android:name="com.commonsware.cwac.wakeful"
+				android:resource="@xml/wakeful"/&gt;
+		&lt;/receiver&gt;
+
+		&lt;service android:name=".AppService"&gt;
+		&lt;/service&gt;
+</code></pre>
+
+<p>xml/wakeful 格式如下：用于声明自己实现的 AlarmListener</p>
+
+<pre><code>&lt;WakefulIntentService
+  listener="com.commonsware.cwac.wakeful.demo.AppListener"
+/&gt;
+</code></pre>
+
+<p><code>WakefulIntentService#scheduleAlarms</code> 向<code>AlarmManager</code> 注册
+<code>AlarmReceiver</code> 。</p>
+
+<pre><code>// 注意传递进来的 listener 与响应 alarm 的listener 不是同一个对象
+public static void scheduleAlarms(AlarmListener listener, Context ctxt,
+			boolean force) {
+		Log.v("WakefulIntentService", "scheduleAlarms");
+		SharedPreferences prefs = ctxt.getSharedPreferences(NAME, 0);
+		long lastAlarm = prefs.getLong(LAST_ALARM, 0);
+		// 当前时间与最后一次ALARM触发时间差小于maxAge，这个方法会被忽略。
+		if (lastAlarm == 0
+				|| force
+				|| (System.currentTimeMillis() &gt; lastAlarm &amp;&amp; System
+						.currentTimeMillis() - lastAlarm &gt; listener.getMaxAge())) {
+			AlarmManager mgr = (AlarmManager) ctxt
+					.getSystemService(Context.ALARM_SERVICE);
+			Intent i = new Intent(ctxt, AlarmReceiver.class);
+			PendingIntent pi = PendingIntent.getBroadcast(ctxt, 0, i, 0);
+
+			listener.scheduleAlarms(mgr, pi, ctxt);
+		}
+	}
+</code></pre>
+
+<p>AlarmReceiver 的 onReceive 方法</p>
+
+<pre><code>public void onReceive(Context ctxt, Intent intent) {
+	// 这里会创建一个新的 listener 对象，也就是说无法利用 Listener 直接通过内存传递参数
+    AlarmListener listener=getListener(ctxt);
+    Log.i("onReceive",ctxt+"");
+    if (listener!=null) {
+      if (intent.getAction()==null) { // 根据这个来判定广播是来着 Alarm 还是 来自 BOOT_COMPLETED
+    	  // 处理 Alarm 的广播
+        SharedPreferences prefs=ctxt.getSharedPreferences(WakefulIntentService.NAME, 0);
+
+        prefs
+          .edit()
+          .putLong(WakefulIntentService.LAST_ALARM, System.currentTimeMillis())
+          .commit();
+        
+        listener.sendWakefulWork(ctxt);
+      }
+      else {
+        WakefulIntentService.scheduleAlarms(listener, ctxt, true);
+      }
+    }
+  }
+</code></pre>
+
+<p>用起来有点别扭，DEMO#1 是 AlarmReceiver 的例子。用自己的 Receiver 来处
+理会更灵活一点， DEMO#2 是例子。</p>
+
+<p>cancelAlarms 也需要注意一下：</p>
+
+<pre><code>public static void cancelAlarms(Context ctxt) {
+		AlarmManager mgr = (AlarmManager) ctxt
+				.getSystemService(Context.ALARM_SERVICE);
+		Intent i = new Intent(ctxt, AlarmReceiver.class);
+		PendingIntent pi = PendingIntent.getBroadcast(ctxt, 0, i, 0);
+		// Intent.filterEquals 来判定是否取消，这里  AlarmReceiver.class 是相同的，跟传入的 context 无关
+		// 实际会取消所有 WakefulIntentService 注册的 Alarm
+		mgr.cancel(pi);
+	}
+</code></pre>
+
+</article>
+<div class="tag-container" >
+    
+    <div class="chip">
+        <a href="/tags#cwac-wakeful-ref">
+            cwac-wakeful
+        </a>
+    </div>
+    
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Programming/Android/cwac-wakeful"
+ var disqus_config = function () {
+     this.page.title = "cwac-wakeful"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Programming/Android/cwac-wakeful/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

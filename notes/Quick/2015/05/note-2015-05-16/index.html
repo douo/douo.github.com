@@ -1,0 +1,362 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    2015年05月16日杂记 | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">2015年05月16日杂记</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 20-06-10">2015-05-16</span>
+    
+</div>
+
+<article>
+    <h3 id="scrollingview">ScrollingView</h3>
+
+<p><a href="https://developer.android.com/reference/android/support/v4/view/ScrollingView.html">ScrollingView | Android Developers</a></p>
+
+<h3 id="recycleview-是什么">RecycleView 是什么</h3>
+
+<p>A flexible view for providing a limited window into a large data set.</p>
+
+<p>ListView GridView 的代替者</p>
+
+<ul>
+  <li>Adapter <a href="https://developer.android.com/reference/android/support/v7/widget/RecyclerView.Adapter.html">RecyclerView.Adapter</a></li>
+  <li>Position, 数据在数据集的位置</li>
+  <li>Index, ChildView 的位置 getChildAt(int)</li>
+  <li>Binding, 绑定数据到界面的过程（Data.get(pos) -&gt; getChildAt(idx)）</li>
+  <li>Recycle(View)，回收，可复用的 View，处于刚刚显示完数据后暂时处于缓存中为接下来展示相同类型的数据做准备，避免了重复创建和填充界面的开销</li>
+  <li>Scrap(View)，碎片，从 layout 中分离，接下来可能重用，也可能是标记为 dirty</li>
+  <li>Dirty(View)，已经脏了的 View，必须经过重新计算才能显示出来</li>
+</ul>
+
+<p><img src="https://developer.xamarin.com/guides/android/platform_features/android_l/recyclerview/Images/04-view-recycling-sml.png" alt="" /></p>
+
+<ol>
+  <li>When a view scrolls out of sight and is no longer displayed, it becomes a scrap view.</li>
+  <li>The scrap view is placed in a pool and becomes a recycle view. This pool is a cache of views that display the same type of data.</li>
+  <li>When a new item is to be displayed, a view is taken from the recycle pool for reuse. Because this view must be re-bound by the adapter before being displayed, it is called a dirty view.</li>
+  <li>The dirty view is recycled: the adapter locates the data for the next item to be displayed and copies this data to the views for this item. References for these views are retrieved from the view holder associated with the recycled view.</li>
+  <li>The recycled view is added to the list of items in the RecyclerView that are about to go on-screen.</li>
+  <li>The recycled view goes on-screen as the user scrolls the RecyclerView to the next item in the list. Meanwhile, another view scrolls out of sight and is recycled according to the above steps.</li>
+</ol>
+
+<p>为什么要有 Adapter 和 LayoutManager</p>
+
+<p>为什么要有不同的 Position</p>
+
+<p>layout position，LayoutManager 视角中的位置
+adapter position，最新数据集中的位置</p>
+
+<p>考虑中动画中，数据集已经更新，而界面还未更新，这是可以通过这两个位置获得想要的数据</p>
+
+<p>setChoiceMode(int) is gone</p>
+
+<p>ViewHolder 负责单个 Item 的各种事件。</p>
+
+<h4 id="数据更新">数据更新</h4>
+
+<ul>
+  <li>
+    <p>DiffUtil，Myers差分算法，空间复杂度 O(N)，时间复杂度O(N + D^2)，N 列表项数量，D 是实际变更。DiffUtil.DiffResult 用于存放计算后的变更集（插入，移除，移动，更新）。禁用 move 检测可以提高效率，前提是列表有着固定的排序条件。</p>
+  </li>
+  <li>
+    <p>SortedList 一个可变的有序列表，数据存放在一个数组中，添加元素时，回检测元素是否存在，是的话会触发更新通知，而不是添加通知。因为列表一直是有序的，使用不会触发 move</p>
+  </li>
+</ul>
+
+<h4 id="layoutmanager">LayoutManager</h4>
+
+<p>Anchor position,</p>
+
+<p>onLayoutChildren</p>
+
+<ol>
+  <li>find the  anchor position</li>
+  <li>calculate how many items should be in visible portion</li>
+</ol>
+
+<p>scroll</p>
+
+<p>small, only shift
+large, recycle -&gt; fill</p>
+
+<ul>
+  <li>recycle,manager by a poll(shared across multiple recyclerview)</li>
+  <li>scrap, manager by a heap. detachAndScrapAttachedViews</li>
+</ul>
+
+<p>retrieve a view</p>
+
+<ul>
+  <li>recycler.getViewForPosition(int)</li>
+  <li>found in scrap，不用经过 adapter（very cheap）view 不用 created 和 rebind.
+use in re-attach in a same layout pass</li>
+  <li>found in recycled pool，需要 rebind, adapter.bindViewHolder</li>
+  <li>not found, adapter.createViewHolder</li>
+</ul>
+
+<p>predictive animations</p>
+
+<p>会在动画播放前预加载项</p>
+
+<ul>
+  <li>pre-layout</li>
+  <li>real-layout</li>
+</ul>
+
+<p>wiresareobsolete.com/2014/09/building-a-recyclerview-layoutmanager-part-I</p>
+
+<p>###　RecycleView　的应用</p>
+
+<p>setHasFixedSize(true); 如果每个 item 都是固定大小的那设置这个可以提高效率</p>
+
+<p>Scrollable View 的 Header 动画实现也不算太优雅，得通过 dummy header 实现</p>
+
+</article>
+<div class="tag-container" >
+    
+    <div class="chip">
+        <a href="/tags#Android-ref">
+            Android
+        </a>
+    </div>
+    
+    <div class="chip">
+        <a href="/tags#RecycleView-ref">
+            RecycleView
+        </a>
+    </div>
+    
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Quick/2015/05/note-2015-05-16"
+ var disqus_config = function () {
+     this.page.title = "2015年05月16日杂记"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Quick/2015/05/note-2015-05-16/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

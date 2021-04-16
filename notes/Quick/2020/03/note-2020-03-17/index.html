@@ -1,0 +1,1220 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    2020年03月17日杂记 | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">2020年03月17日杂记</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 20-06-10">2020-03-17</span>
+    
+</div>
+
+<article>
+    <h2 id="比分">比分</h2>
+
+<p><a href="http://webview.7m.com.cn/xiangmuziyuan/prd/7MliveScores/International/Indonesia/APPlite/v1.0/index.html#g=1&amp;p=%E5%8D%B3%E6%97%B6%E6%AF%94%E5%88%86">原始需求</a></p>
+
+<h3 id="头部栏">头部栏</h3>
+
+<ul>
+  <li>左侧显示<strong>标签集</strong></li>
+  <li>右侧显示<strong>图标按钮集</strong></li>
+  <li>屏幕空间不足时，<strong>图标按钮集</strong>折叠为弹出菜单</li>
+</ul>
+
+<h4 id="标签集">标签集</h4>
+
+<ul>
+  <li>依次显示<strong>即时比分</strong>、<strong>赛程</strong></li>
+  <li>默认选择<strong>即时比分</strong></li>
+  <li>标签处于选择状态时，高亮颜色和突出字体，底部显示高亮色条</li>
+  <li>切换标签时，高亮色条需动态移动到目标高亮选项的相应位置</li>
+</ul>
+
+<h3 id="底部导航栏">底部导航栏</h3>
+
+<ul>
+  <li>按顺序显示比分、关注、<del>联赛</del><strong>赛事</strong>、更多</li>
+  <li>默认选择比分项</li>
+  <li>选择的项高亮显示</li>
+</ul>
+
+<h3 id="标签页">标签页</h3>
+
+<ul>
+  <li>单指可拖动切换</li>
+  <li>单指滑动切换</li>
+  <li>切换时，标签集高亮当前标签页对应标签</li>
+</ul>
+
+<h2 id="即时比分">即时比分</h2>
+
+<p><a href="http://webview.7m.com.cn/xiangmuziyuan/prd/7MliveScores/International/Indonesia/APPlite/v1.0/index.html#g=1&amp;p=%E5%8D%B3%E6%97%B6%E6%AF%94%E5%88%86">原始需求</a></p>
+
+<ul>
+  <li>头部栏<strong>标签页</strong>高亮<strong>即时比分</strong></li>
+  <li>头部栏<strong>图标按钮集</strong>显示筛选赛事图标</li>
+  <li>头部栏下显示<strong>筛选栏</strong></li>
+  <li><strong>筛选栏</strong>下显示即时比分列表</li>
+</ul>
+
+<h3 id="筛选栏">筛选栏</h3>
+
+<ul>
+  <li>左侧显示筛选标签</li>
+  <li>右侧显示折叠按钮</li>
+</ul>
+
+<h4 id="筛选标签集">筛选标签集</h4>
+
+<ul>
+  <li>按顺序显示全部、进行中、未开始、已结束</li>
+  <li>默认选择全部</li>
+  <li>进行中标签需实时显示当前进行中比赛数量（被赛事筛选后的比赛数量）</li>
+  <li>选择标签，需高亮显示被选择标签，同时取消当前已选择标签的选择状态</li>
+  <li>选择标签，列表内容同时被更换</li>
+  <li>全部，显示满足赛事筛选的所有比赛</li>
+  <li>进行中，显示满足赛事筛选的状态为（1上半场、 2中场、 3下半场、11点球）</li>
+  <li>未开始，显示满足赛事筛选的状态为 17未开始 的所有比赛</li>
+  <li>已结束，显示满足赛事筛选的状态为 4完场 的所有比赛</li>
+</ul>
+
+<h4 id="折叠按钮">折叠按钮</h4>
+
+<ul>
+  <li>可切换两种状态的图标按钮</li>
+  <li>两种状态分别为：全部展开、全部折叠</li>
+  <li>默认全部展开</li>
+  <li>列表未全部折叠时，按钮处于<strong>全部展开</strong>状态</li>
+  <li>折叠状态仅在当前会话保存</li>
+</ul>
+
+<h3 id="即时比分列表">即时比分列表</h3>
+
+<ul>
+  <li>显示满足赛事筛选和筛选栏条件的所有即时比赛</li>
+  <li>为赛事-&gt;比赛分组列表</li>
+  <li>先对分组按赛事进行排序，分组内再按比赛进行排序</li>
+  <li>加载中显示加载动画</li>
+  <li>列表支持下拉刷新</li>
+  <li>报错时显示出错 UI</li>
+  <li>无数据时显示无数据 UI</li>
+  <li>分组头部项，到达并超过列表视图顶部时，需置顶显示。直到被下一个分组头部项替换</li>
+</ul>
+
+<h4 id="赛事项">赛事项</h4>
+
+<ul>
+  <li>可处于展开和折叠两种状态</li>
+  <li>默认处于展开状态</li>
+  <li>所有状态下左侧显示<strong>赛事信息</strong>，右侧显示展开<strong>状态指示箭头</strong></li>
+  <li>赛事信息包括，所属国家国旗&amp;国家名，赛事简称</li>
+  <li>todo 国家信息缺失的赛事显示</li>
+  <li>折叠状态下，状态指示箭头左侧显示比赛数量
+#- 比赛数量，有进行中比赛时，同时显示进行中和所有比赛数量，并高亮显示。无则显示所有比赛数量，无需高亮</li>
+  <li>点击赛事信息进入赛事详情页</li>
+  <li>点击赛事信息外区域，切换折叠状态</li>
+  <li>各赛事的展开与否互不影响</li>
+  <li>展开收起时需以动效形式显示</li>
+</ul>
+
+<h4 id="比赛项">比赛项</h4>
+
+<ul>
+  <li>依次显示比赛状态，队伍信息，比分，关注状态指示图标</li>
+  <li>下方显示补充信息，可多行显示，为空则不显示</li>
+</ul>
+
+<h5 id="比赛状态">比赛状态</h5>
+
+<p>所有状态如下：</p>
+
+<ul>
+  <li>未开始的状态：
+    <ul>
+      <li>17未开始（显示开赛时间：日-月-时-分）注：月份采用印尼语简称</li>
+    </ul>
+  </li>
+  <li>进行中的状态：
+    <ul>
+      <li>1上半场，显示进程时间+<code>'</code>，符号持续跳动，伤停补时时，显示<code>45+'</code>，且符号持续闪动</li>
+      <li>3下半场，显示进程时间+<code>'</code>，符号持续跳动，伤停补时时，显示<code>90+‘</code>，且符号持续闪动</li>
+      <li>2中场（显示状态名）</li>
+      <li>8加时中（显示状态名）</li>
+      <li>11点球（显示状态名）</li>
+    </ul>
+  </li>
+  <li>已完场的状态：
+    <ul>
+      <li>4完场 （显示状态名、半场比分）</li>
+    </ul>
+  </li>
+  <li>异常状态：
+    <ul>
+      <li>5中断（显示状态名）</li>
+      <li>6取消（显示状态名）</li>
+      <li>13延期（显示状态名）</li>
+      <li>14腰斩（显示状态名）</li>
+      <li>15待定（显示状态名）</li>
+    </ul>
+  </li>
+</ul>
+
+<p>持续跳动指，分钟指示符<code>'</code>以一定的频率闪烁（暂定 1s）</p>
+
+<h5 id="队伍信息">队伍信息</h5>
+
+<ul>
+  <li>队伍名分上下两行显示，主队（A队）名称位于第一行，客队（B队）第二行</li>
+  <li>队伍名称后显示排名,如果没有则不显示</li>
+  <li>排名后显示红牌数据，无红牌时不显示，一张时显示红牌标示，大于一张时显示红牌标示及红牌数量</li>
+  <li>队伍信息在一行显示，信息过长时，队伍名称超出部分显示省略号</li>
+</ul>
+
+<h5 id="比分-1">比分</h5>
+
+<ul>
+  <li>未开赛的比分显示横杠</li>
+  <li>已开赛默认显示0，比分实时更新</li>
+  <li>完场显示90分钟(含伤停补时)赛果</li>
+</ul>
+
+<h6 id="关注状态指示图标">关注状态指示图标</h6>
+
+<ul>
+  <li>关注图标有三种状态分别为、未关注、已关注、不可关注</li>
+  <li>已关注、未关注对应比赛是、否存在比赛关注列表的状态</li>
+  <li>4完场的比赛，显示不可关注状态</li>
+  <li>点击处于已关注、未关注两个状态中的图标可以互相切换，不可关注不可点击</li>
+  <li>状态的切换需要动效</li>
+  <li>切换关注时，先进行状态切换，再同步切换动作到服务器</li>
+  <li>todo 请求服务器失败时，是否需要回滚操作、还是静默处理，建议静默处理。</li>
+</ul>
+
+<h4 id="赛事排序">赛事排序</h4>
+
+<ul>
+  <li>分组排序如下：世界杯（149）&gt; 欧洲杯（87）&gt; 东南亚足球锦标（243）&gt; 欧冠（74）&gt; 英超（92）&gt; 意甲（34）&gt; 德甲（39）&gt; 西甲（85）&gt; 法甲（93）&gt; 欧联（58）&gt; 印尼总统杯（1190）&gt; 印尼甲（321）&gt; 其他赛事</li>
+  <li><strong>其它赛事</strong>指未具体列出的其他赛事</li>
+  <li>关于“其他赛事”的排序：先按赛事等级排序：顶级&gt;1级&gt;2级&gt;3级&gt;4级&gt;5级，同级别的顺序不作要求。</li>
+</ul>
+
+<h4 id="比赛排序">比赛排序</h4>
+
+<ul>
+  <li>先按比赛状态排序：进行中&gt;未开始&gt;已结束&gt;其他</li>
+  <li>相同状态时，“进行中”与“未开始”按开赛时间升序排序，“已结束”&amp;“其他”按开赛时间降序排序</li>
+  <li>相同时间按ID降序排序</li>
+</ul>
+
+<h3 id="即时比分-更新">即时比分-更新</h3>
+
+<ul>
+  <li>即时比分列表定时轮询获取更新数据，间隔为更新完成后的自然间隔，非绝对间隔</li>
+  <li>wifi 状态下 2s 一次查询，非 wifi 状态，间隔时间由设置决定，默认 10s</li>
+  <li>更新包行为包括，更新比赛信息、更新比赛状态、新增比赛、新增赛事、删除比赛、删除赛事</li>
+  <li>更新信息后需同步到列表</li>
+  <li>更新信息有进球时，需高亮当前进球比赛，高亮 8s</li>
+</ul>
+
+<p>状态变更行为定义：</p>
+
+<ul>
+  <li>进球：更新比分 - 本地比分 &gt; 0</li>
+  <li>取消进球：更新比分 - 本地比分 &lt; 0</li>
+  <li>红牌：更新红牌 - 本地红牌 &gt; 0</li>
+  <li>红牌无效：更新红牌 - 本地红牌 &lt; 0</li>
+  <li>开赛：比赛状态由 0｜17 -&gt; 1</li>
+  <li>完场：比赛状态由 * -&gt; 4</li>
+</ul>
+
+<h2 id="进球提示">进球提示</h2>
+
+<p><a href="http://webview.7m.com.cn/xiangmuziyuan/prd/7MliveScores/International/Indonesia/APPlite/v1.0/index.html#g=1&amp;p=%E8%BF%9B%E7%90%83%E6%8F%90%E7%A4%BA">原始需求</a></p>
+
+<ul>
+  <li>在即时比分列表与关注列表提示</li>
+  <li>默认提示当前列表中所有比赛，可在设置配置仅提示当前列表关注比赛</li>
+  <li>提示包括：有进球/取消进球/红牌/红牌无效</li>
+  <li>显示提示5s</li>
+  <li>提示底部显示。在最顶部图层显示，不可点击</li>
+  <li>提示内容包括赛事所属国家国旗&amp;国家名，赛事简称，比赛状态、队伍信息和当前比分</li>
+  <li>进球的球队和分数需要高亮显示，并在分数后显示足球图标（可动态）</li>
+  <li>显示时需有提示音和震动，由<strong>设置</strong>控制</li>
+  <li>如果同时有多场进球，则纵列显示，最多同时2场，新的从下往上顶；</li>
+  <li>todo 同时超出 2 场</li>
+</ul>
+
+<h2 id="赛程">赛程</h2>
+
+<p><a href="http://webview.7m.com.cn/xiangmuziyuan/prd/7MliveScores/International/Indonesia/APPlite/v1.0/index.html#g=1&amp;p=%E8%B5%9B%E7%A8%8B">原始需求</a></p>
+
+<ul>
+  <li>头部栏<strong>标签页</strong>高亮<strong>赛程</strong></li>
+  <li>头部栏<strong>图标按钮集</strong>显示日历图标与筛选赛事图标</li>
+  <li>头部栏下显示<strong>筛选栏</strong></li>
+  <li><strong>筛选栏</strong>下显示比赛列表</li>
+</ul>
+
+<h4 id="日历选择窗">日历选择窗</h4>
+
+<p>点击日历图标弹出日历选择窗</p>
+
+<ul>
+  <li>日历选择范围为 2005/01/01 00:00:00 GMT+8 至当前时间七天内（含今天）GMT+8</li>
+  <li>超出范围的日期不可选</li>
+  <li>缺省选择今天</li>
+  <li>头部支持左右切换月份</li>
+  <li>点击日期即选择该日期为当前列表日期，同时关闭日历选择窗</li>
+</ul>
+
+<h3 id="筛选栏-1">筛选栏</h3>
+
+<ul>
+  <li>左侧显示日期选择指示器</li>
+  <li>右侧显示折叠按钮</li>
+</ul>
+
+<h4 id="日期选择指示器">日期选择指示器</h4>
+
+<ul>
+  <li>水平排列当前选择日期和其前后3天的日期按钮</li>
+  <li>默认高亮当前日期按钮并置于中间</li>
+  <li>今天日期特殊显示如： today，非今天显示日期</li>
+  <li>点选时，高亮当前日期按钮，并将日期滑动到中间</li>
+  <li>超出范围的日期不可选</li>
+</ul>
+
+<h4 id="折叠按钮-1">折叠按钮</h4>
+
+<ul>
+  <li>可切换两种状态的图标按钮</li>
+  <li>两种状态分别为：全部展开、全部折叠</li>
+  <li>默认全部展开</li>
+  <li>列表未全部折叠时，按钮处于<strong>全部展开</strong>状态</li>
+  <li>折叠状态仅在当前会话保存</li>
+</ul>
+
+<h3 id="赛程列表">赛程列表</h3>
+
+<ul>
+  <li>显示当前日期且满足联赛筛选的比赛</li>
+  <li>todo 当前日期为今日之前显示的是当天0点到隔天中午12点的完场比赛（已转完场的比赛，不包含未转完场）<strong>读完场接口？</strong></li>
+  <li>todo 今日显示的是当天的0点至中午12点前的完场（已转完场的比赛，不包含未转完场））<strong>即时数据中今天已完场赛事？</strong></li>
+  <li>todo 今日的明天显示的是当天12点到第二天中午12点的赛程 <strong>读赛程接口？</strong></li>
+  <li>todo 今日的明天之后的日期显示的是当天0点到隔天中午12点的赛程</li>
+  <li><strong>列表支持两指切换，往右滑往前切换一天；往左滑往后切换一天</strong></li>
+  <li>加载中显示加载动画</li>
+  <li>列表支持下拉刷新</li>
+  <li>报错时显示出错 UI</li>
+  <li>无数据时显示无数据 UI</li>
+  <li>
+    <p>分组头部项，到达并超过列表视图顶部时，需置顶显示。直到被下一个分组头部项替换</p>
+  </li>
+  <li>完场接口，颗粒度为日，返回 GMT+8 当日0时到24时的完场比赛</li>
+  <li>赛程接口，颗粒度为日，返回 GMT+8 未来 1 至 7 天的0时到24时的比赛</li>
+  <li>完场数据，需等到 GMT+8 第二天凌晨5点才生成</li>
+</ul>
+
+<p>建议：按本地时区日，逻辑更复杂且需要多次调用接口</p>
+
+<h2 id="赛事筛选">赛事筛选</h2>
+
+<p><a href="http://webview.7m.com.cn/xiangmuziyuan/prd/7MliveScores/International/Indonesia/APPlite/v1.0/index.html#g=1&amp;p=%E8%B5%9B%E4%BA%8B%E7%AD%9B%E9%80%89">原始需求</a></p>
+
+<ul>
+  <li>带入待筛选赛事集，todo 数据或数据流</li>
+  <li>带入标签页码，默认为推荐</li>
+  <li>带入已选择赛事集，默认为空</li>
+</ul>
+
+<h3 id="即时比分-赛事筛选">即时比分-赛事筛选</h3>
+
+<ul>
+  <li>当前即时比分列表所有比赛的赛事集</li>
+  <li>缺省筛选为7m推荐赛事</li>
+  <li>筛选选择需保存到本地</li>
+</ul>
+
+<p>当前即时比分列表的赛事集，与已保存的赛事集不一致时：</p>
+
+<ul>
+  <li>取两个集合的交集，并更新本地保存结果</li>
+  <li>若交集为空，则重置为缺省？</li>
+</ul>
+
+<h3 id="赛程-赛事筛选">赛程-赛事筛选</h3>
+
+<ul>
+  <li>当前日期的比赛列表的所有比赛的赛事集</li>
+  <li>缺省筛选为所有赛事</li>
+  <li>筛选结果无需保存到本地，切换日期后失效</li>
+</ul>
+
+<h3 id="头部栏-1">头部栏</h3>
+
+<p>头部栏显示搜索输入框，和确定按钮</p>
+
+<h4 id="搜索">搜索</h4>
+
+<ul>
+  <li>输入即时筛选当前标签页的数据</li>
+  <li>关键字模糊匹配，先匹配赛事国家信息。未匹配的再匹配赛事全称</li>
+  <li>搜索栏获得焦点是弹出输入法，隐藏底部栏</li>
+</ul>
+
+<p>todo 交互</p>
+
+<h4 id="确定按钮">确定按钮</h4>
+
+<ul>
+  <li>返回当前标签页码与已选择赛事集</li>
+  <li>无选择任何赛事时，不可按？</li>
+</ul>
+
+<h3 id="标签栏">标签栏</h3>
+
+<ul>
+  <li>头部栏下显示</li>
+  <li>左侧显示标签集</li>
+  <li>右侧显示折叠按钮</li>
+</ul>
+
+<h4 id="标签集-1">标签集</h4>
+
+<ul>
+  <li>依次显示<strong>全部</strong>、<strong>推荐</strong></li>
+  <li>默认选择<strong>推荐</strong></li>
+  <li>标签处于选择状态时，高亮颜色，底部显示高亮色条</li>
+  <li>标签切换时，替换列表数据</li>
+</ul>
+
+<h4 id="折叠按钮-2">折叠按钮</h4>
+
+<ul>
+  <li>可切换两种状态的图标按钮</li>
+  <li>两种状态分别为：全部展开、全部折叠</li>
+  <li>默认全部展开</li>
+  <li>列表未全部折叠时，按钮处于<strong>全部展开</strong>状态</li>
+  <li>折叠状态仅在当前会话保存</li>
+</ul>
+
+<h3 id="标签页-1">标签页</h3>
+
+<ul>
+  <li>标签页显示赛事列表</li>
+  <li>全部，列出待筛选赛事集的所有赛事</li>
+  <li>推荐，仅列出全部中7M推荐的赛事</li>
+  <li>每个标签页的选择状态都是独立的</li>
+  <li>切换标签页时重置当前标签页的选择状态到默认状态</li>
+  <li>默认状态指，标签页属于带入标签页码，则为已选择赛事集，不是则默认全选</li>
+</ul>
+
+<h3 id="赛事列表">赛事列表</h3>
+
+<ul>
+  <li>为国家 -&gt; 赛事分组列表</li>
+  <li>分组头部项，到达并超过列表视图顶部时，需置顶显示。直到被下一个分组头部项替换</li>
+</ul>
+
+<h4 id="国家项">国家项</h4>
+
+<ul>
+  <li>可处于展开和折叠两种状态</li>
+  <li>默认处于展开状态</li>
+  <li>所有状态下左侧显示<strong>国家信息</strong>、赛事数量、右侧显示展开<strong>状态指示箭头</strong></li>
+  <li>国家信息包括，所属国家国旗&amp;国家名</li>
+  <li>赛事数量，已勾选的赛事数量 / 全部赛事数量。已勾选的数量高亮</li>
+  <li>点击切换折叠状态</li>
+  <li>各分组的展开与否互不影响</li>
+  <li>展开收起时需以动效形式显示</li>
+</ul>
+
+<h5 id="排序">排序</h5>
+
+<p>所属国家：按照国家名称的英文字符A-Z进行排序；</p>
+
+<h4 id="赛事项-1">赛事项</h4>
+
+<ul>
+  <li>依次显示赛事信息、选择状态指示图标</li>
+  <li>赛事信息显示，比赛的赛事logo和全称、统计比赛数量</li>
+  <li>赛事全称过长可换行</li>
+  <li>logo 不存在时显示缺省图标</li>
+  <li>可通过点击切换选择和未选中状态</li>
+</ul>
+
+<h5 id="排序-1">排序</h5>
+
+<p>赛事名称：按照赛事名称的英文字符A-Z进行排序</p>
+
+<h3 id="底部栏">底部栏</h3>
+
+<ul>
+  <li>底部固定显示</li>
+  <li>左侧显示全选、反选按钮，右侧显示隐藏比赛统计</li>
+  <li>全选，选择当前标签页所有赛事</li>
+  <li>反选，选择当前选择的补集</li>
+  <li>隐藏比赛统计显示当前标签页未选择赛事的比赛数量和</li>
+</ul>
+
+<h2 id="关注">关注</h2>
+
+<p><a href="http://webview.7m.com.cn/xiangmuziyuan/prd/7MliveScores/International/Indonesia/APPlite/v1.0/index.html#g=1&amp;p=%E6%AF%94%E8%B5%9B%E5%85%B3%E6%B3%A8%E5%88%97%E8%A1%A8">原始需求</a></p>
+
+<h3 id="头部栏-2">头部栏</h3>
+
+<ul>
+  <li>左侧显示<strong>标签集</strong></li>
+  <li>右侧显示<strong>图标按钮集</strong></li>
+</ul>
+
+<h4 id="标签集-2">标签集</h4>
+
+<ul>
+  <li>依次显示<strong>比赛</strong>、<strong>赛事</strong>、<strong>球队</strong></li>
+  <li>默认选择<strong>比赛</strong></li>
+  <li>标签处于选择状态时，高亮颜色和突出字体，底部显示高亮色条</li>
+  <li>切换标签时，高亮色条需动态移动到目标高亮选项的相应位置</li>
+</ul>
+
+<h3 id="底部导航栏-1">底部导航栏</h3>
+
+<ul>
+  <li>按顺序显示比分、关注、<del>联赛</del><strong>赛事</strong>、更多</li>
+  <li>高亮选择关注项</li>
+</ul>
+
+<h3 id="标签页-2">标签页</h3>
+
+<ul>
+  <li>单指可拖动切换</li>
+  <li>单指滑动切换</li>
+  <li>切换时，标签集高亮当前标签页对应标签</li>
+</ul>
+
+<h3 id="比赛">比赛</h3>
+
+<ul>
+  <li>高亮比赛标签</li>
+  <li>图标按钮集显示折叠按钮</li>
+</ul>
+
+<h4 id="折叠按钮-3">折叠按钮</h4>
+
+<ul>
+  <li>可切换两种状态的图标按钮</li>
+  <li>两种状态分别为：全部展开、全部折叠</li>
+  <li>默认全部展开</li>
+  <li>列表未全部折叠时，按钮处于<strong>全部展开</strong>状态</li>
+</ul>
+
+<h4 id="比赛列表">比赛列表</h4>
+
+<ul>
+  <li>列出当前用户关注的比赛（比分页和赛程的关注比赛）</li>
+  <li>关注比赛到完场后24小时，会自动取消关注（触发时间为获取关注数据时间）</li>
+  <li>列表逻辑同即时比分列表</li>
+  <li>用户点击取消关注后该场比赛从当前列表隐藏；</li>
+  <li><strong>此页面同样会显示进球提示</strong></li>
+  <li>关注记录在手机持久化存储；</li>
+  <li>无数据时显示，无数据页</li>
+</ul>
+
+<h5 id="无数据页">无数据页</h5>
+
+<ul>
+  <li>点击跳转比分页的“即时比分”tab</li>
+  <li>下方显示关注教程</li>
+</ul>
+
+<h3 id="赛事">赛事</h3>
+
+<ul>
+  <li>高亮赛事标签</li>
+  <li>图标按钮集不显示按钮</li>
+</ul>
+
+<h4 id="赛事列表-1">赛事列表</h4>
+
+<ul>
+  <li>列出当前用户关注的赛事</li>
+  <li>关注赛事持久化保存</li>
+  <li>点击跳转该赛事主页</li>
+</ul>
+
+<h5 id="赛事项-2">赛事项</h5>
+
+<ul>
+  <li>依次显示赛事信息、选择状态指示图标</li>
+  <li>赛事信息显示，比赛的赛事logo和全称</li>
+  <li>赛事全称过长可换行</li>
+  <li>logo 不存在时显示缺省图标</li>
+  <li>用户点击取消关注后该赛事从当前列表移除；</li>
+</ul>
+
+<h5 id="无数据页-1">无数据页</h5>
+
+<ul>
+  <li>点击跳转联赛页（资料库）</li>
+  <li>下方显示关注教程</li>
+</ul>
+
+<h3 id="球队">球队</h3>
+
+<ul>
+  <li>高亮球队标签</li>
+  <li>图标按钮集不显示按钮</li>
+</ul>
+
+<h4 id="球队列表">球队列表</h4>
+
+<ul>
+  <li>列出当前用户关注的球队</li>
+  <li>关注球队持久化保存</li>
+  <li>点击跳转该球队主页</li>
+</ul>
+
+<h5 id="球队项">球队项</h5>
+
+<ul>
+  <li>依次显示球队信息、选择状态指示图标</li>
+  <li>赛事信息显示，球队logo和全称</li>
+  <li>全称过长可换行</li>
+  <li>logo 不存在时显示缺省图标</li>
+  <li>用户点击取消关注后该球队从当前列表移除；</li>
+</ul>
+
+<h5 id="无数据页-2">无数据页</h5>
+
+<ul>
+  <li>点击跳转球队页（资料库）</li>
+  <li>下方显示关注教程</li>
+</ul>
+
+<h2 id="比赛内页">比赛内页</h2>
+
+<p><a href="http://webview.7m.com.cn/xiangmuziyuan/prd/7MliveScores/International/Indonesia/APPlite/v1.0/index.html#g=1&amp;p=%E6%AF%94%E8%B5%9B%E5%86%85%E9%A1%B5-%E5%A4%B4%E9%83%A8%E6%AF%94%E8%B5%9B%E4%BF%A1%E6%81%AF%E6%A0%8F">原始需求</a></p>
+
+<h3 id="头部比赛信息栏">头部比赛信息栏</h3>
+
+<ul>
+  <li>展开和折叠两种状态</li>
+  <li>状态的转换过程，需协同滚动，滚动位置到达头部栏时，转换完成</li>
+  <li>转换过程中，显示或消失的元素，默认渐隐渐现处理</li>
+  <li>转换过程中，位置或大小变化需连续变化</li>
+</ul>
+
+<h4 id="头部栏-3">头部栏</h4>
+
+<p>展开状态：</p>
+
+<ul>
+  <li>左侧依次显示返回按钮、赛事信息</li>
+  <li>右侧显示图标按钮集</li>
+  <li>赛事信息，依次显示国旗、国家、赛事简称</li>
+</ul>
+
+<p>折叠状态</p>
+
+<ul>
+  <li>左侧显示返回按钮</li>
+  <li>比赛信息居中显示</li>
+  <li>右侧显示图标按钮集</li>
+</ul>
+
+<h4 id="图标按钮集">图标按钮集</h4>
+
+<ul>
+  <li>依次显示分享图标按钮、关注状态指示图标</li>
+  <li>点击分享，使用系统 Android Sharesheet 分享同场比赛印尼webapp链接</li>
+  <li>关注图标，有已关注、未关注两种状态</li>
+  <li>关注图标，完场/异常状态隐藏、其他状态显示</li>
+  <li>关注图标，可切换当前比赛关注状态</li>
+</ul>
+
+<h4 id="比赛信息">比赛信息</h4>
+
+<p>展开状态：</p>
+
+<ul>
+  <li>左边显示主队队伍信息（中立场以服务器返回数据 homeTeam 栏为准）</li>
+  <li>右边显示客队队伍信息</li>
+  <li>中间显示比赛状态</li>
+  <li>队伍信息，显示队伍图标、队伍名称、主队标示（非主队不显示）</li>
+  <li>点击队伍信息，跳转资料库球队主页</li>
+  <li>下方显示补充信息，可多行显示，为空则不显示</li>
+</ul>
+
+<h5 id="比赛状态-1">比赛状态</h5>
+
+<ul>
+  <li>上方显示开赛时间（真实开赛时间/开赛时间），月份采用印尼语简称</li>
+  <li>下方显示状态信息</li>
+</ul>
+
+<p>状态信息：</p>
+
+<ul>
+  <li>未开始的状态：
+    <ul>
+      <li>17未开始，距离开赛时间X
+        <ul>
+          <li>X ＜ 24小时的，显示倒计时：1:03:34 前端页面即时跳动，</li>
+          <li>24 ≤ X ＜ 48小时的，显示：明天开赛</li>
+          <li>48 ≤ X ＜ 72小时的，显示：后天开赛</li>
+          <li>72 ≤ X 小时的，显示：N天后开赛</li>
+          <li>在 0:00:00 瞬间与在接收状态更新时之间的时间间隔，保持 0:00:00</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>进行中的状态：
+    <ul>
+      <li>左右显示即时比分</li>
+      <li>中间显示进行状态</li>
+      <li>1上半场，显示进程时间+<code>'</code>，伤停补时时，显示<code>45+'</code>，符号持续跳动，上半场标示：1st</li>
+      <li>3下半场，显示进程时间+<code>'</code>，伤停补时时，显示<code>90+'</code>，符号持续跳动，下半场标示：2nd，下方显示半场比分</li>
+      <li>2中场（显示状态名），下方显示半场比分</li>
+      <li>8加时中（显示状态名），下方显示半场比分</li>
+      <li>11点球（显示状态名），下方显示半场比分</li>
+    </ul>
+  </li>
+  <li>已完场的状态
+    <ul>
+      <li>左右显示即时比分</li>
+      <li>4完场状态 显示 FT、下方显示半场比分</li>
+    </ul>
+  </li>
+  <li>异常状态：
+    <ul>
+      <li>5中断（显示状态名）</li>
+      <li>6取消（显示状态名）</li>
+      <li>13延期（显示状态名）</li>
+      <li>14腰斩（显示状态名）</li>
+      <li>15待定（显示状态名）</li>
+    </ul>
+  </li>
+</ul>
+
+<p>折叠状态：</p>
+
+<ul>
+  <li>仅显示队伍图标及比赛状态</li>
+  <li>比赛状态，隐藏开赛时间</li>
+  <li>比赛状态，隐藏半场比分</li>
+  <li>其他显示元素，尺寸相应缩小</li>
+</ul>
+
+<h3 id="标签集-3">标签集</h3>
+
+<ul>
+  <li>依次显示实况、统计、阵容、分析、指数</li>
+  <li>除了实况和分析，其他标签无数据则不显示</li>
+  <li>进行中&amp;完场 默认高亮实况标签，其他状态默认分析标签</li>
+  <li>标签显示开关后台可控制</li>
+</ul>
+
+<h3 id="实况">实况</h3>
+
+<p><a href="http://webview.7m.com.cn/xiangmuziyuan/prd/7MliveScores/International/Indonesia/APPlite/v1.0/index.html#g=1&amp;p=%E6%AF%94%E8%B5%9B%E5%86%85%E9%A1%B5-%E5%AE%9E%E5%86%B5tab&amp;hi=1">原始需求</a></p>
+
+<ul>
+  <li>依次显示实况统计、比赛情况、赛场情况</li>
+  <li>某一项无数据则不显示</li>
+  <li>实况数据是否需要定时刷新？</li>
+</ul>
+
+<h4 id="实况统计">实况统计</h4>
+
+<ul>
+  <li>开赛后显示该场比赛几个主要统计数据，包括：进攻、危险进攻、控球率、角球、红牌、黄牌、射正球门数、射偏球门数</li>
+  <li>数据欠缺，则显示横杆“-”，计算时按 0 计算</li>
+  <li>进攻、危险进攻、控球率、射正球门数、射偏球门数，高亮为主队数据（左边队伍）</li>
+</ul>
+
+<h4 id="比赛情况">比赛情况</h4>
+
+<ul>
+  <li>显示比赛进球情况和球员替换数据</li>
+  <li>新发生的事件排在上方</li>
+  <li>事件类型： 1：进球 2：点球 3：乌龙球 4：黄牌 5：两黄变一红 6：红牌 7：替换球员</li>
+  <li>发生事件的球队，主队显示在左边，客队显示在右边，无则不显示</li>
+  <li>中间显示显示事件时间，补时时间独立显示，事件类型为 1：进球 2：点球 3：乌龙球 时显示进球后比分</li>
+  <li>事件类型为：1：进球 2：点球 3：乌龙球 4：黄牌 5：两黄变一红 6：红牌，显示事件标示图标，及相应球员</li>
+  <li>事件类型为： 7：替换球员 显示事件标示图标，显示换上球员及换下球员</li>
+</ul>
+
+<h4 id="赛场情况">赛场情况</h4>
+
+<ul>
+  <li>显示赛场情况数据</li>
+  <li>具体项及顺序由服务器控制</li>
+  <li>无数据则整块隐藏</li>
+</ul>
+
+<h3 id="统计">统计</h3>
+
+<p><a href="http://webview.7m.com.cn/xiangmuziyuan/prd/7MliveScores/International/Indonesia/APPlite/v1.0/index.html#g=1&amp;p=%E6%AF%94%E8%B5%9B%E5%86%85%E9%A1%B5-%E7%BB%9F%E8%AE%A1tab&amp;hi=1">原始需求</a></p>
+
+<ul>
+  <li>具体项及顺序由服务器控制</li>
+  <li>统计类型分为标记项、数值项、控球率、及射门数据（射偏、射正）</li>
+  <li>主队和客队，有各自的高亮色</li>
+  <li>标记项、数值项，左右显示统计标示，中间显示统计名</li>
+  <li>标记项，高亮被标记球队，非标记球队不显示标示</li>
+  <li>数值项，标示显示数值，数值较高的高亮显示</li>
+  <li>控球率，显示百分比标示，各队百分比用各队高亮色显示</li>
+  <li>射门数据，显示在射门数值项下，无射门数据则按服务器顺序</li>
+  <li>射门数据，先显示射偏再显示射正，无射正数据时不显示射偏，无射偏数据时，隐藏射偏文本，保留底色</li>
+</ul>
+
+<h3 id="阵容">阵容</h3>
+
+<p><a href="http://webview.7m.com.cn/xiangmuziyuan/prd/7MliveScores/International/Indonesia/APPlite/v1.0/index.html#g=1&amp;p=%E6%AF%94%E8%B5%9B%E5%86%85%E9%A1%B5-%E9%98%B5%E5%AE%B9tab&amp;hi=1">原始需求</a></p>
+
+<p>复用7M中文版5.0改版的阵容页（h5）</p>
+
+<h3 id="分析">分析</h3>
+
+<p><a href="http://webview.7m.com.cn/xiangmuziyuan/prd/7MliveScores/International/Indonesia/APPlite/v1.0/index.html#g=1&amp;p=%E6%AF%94%E8%B5%9B%E5%86%85%E9%A1%B5-%E5%88%86%E6%9E%90tab&amp;hi=1">原始需求</a></p>
+
+<p>复用7M中文版5.0改版的资料分析页（H5）</p>
+
+<h3 id="指数">指数</h3>
+
+<p><a href="http://webview.7m.com.cn/xiangmuziyuan/prd/7MliveScores/International/Indonesia/APPlite/v1.0/index.html#g=1&amp;p=%E6%AF%94%E8%B5%9B%E5%86%85%E9%A1%B5-%E6%8C%87%E6%95%B0tab&amp;hi=1">原始需求</a></p>
+
+<ul>
+  <li>头部显示指数类型，依次为亚指、欧指、大小</li>
+  <li>默认选择亚指</li>
+  <li>切换指数类型，更新指数信息</li>
+  <li>指数信息，复用7M中文版5.0改版的指数页（H5）</li>
+  <li>点击指数项进入指数数据变化列表</li>
+</ul>
+
+<h4 id="指数数据变化列表">指数数据变化列表</h4>
+
+<ul>
+  <li>带入比赛信息</li>
+  <li>带入指数类型</li>
+  <li>带入指数公司</li>
+  <li>依次显示标题、比赛信息、指数类型标签集、指数表</li>
+</ul>
+
+<h5 id="头部栏-4">头部栏</h5>
+
+<ul>
+  <li>显示标题：指数数据变化</li>
+</ul>
+
+<h5 id="比赛信息-1">比赛信息</h5>
+
+<ul>
+  <li>左边依次显示主队名、比分、客队名</li>
+  <li>点击队名可跳转到资料库相应球队页</li>
+  <li>右边依次显示赛事简称、开赛日期</li>
+  <li>如已完赛，右边下方显示完赛标示：‘完’</li>
+  <li>todo 队名过长如何显示，建议重新设计</li>
+</ul>
+
+<h5 id="指数类型标签集">指数类型标签集</h5>
+
+<ul>
+  <li>默认高亮带入指数类型</li>
+  <li>切换列表重置指数表</li>
+</ul>
+
+<h5 id="指数表">指数表</h5>
+
+<ul>
+  <li>切换指数类型表头需同步变化</li>
+  <li>亚指表头分别为：公司、主胜、让球、客胜、变化时间</li>
+  <li>欧指表头分别为：公司、客胜、主胜、返还率、变化时间</li>
+  <li>大小表头分别为：公司、大分、总分、小分、变化时间</li>
+  <li>公司项，显示当前指数类型的公司列表。默认选带入公司，重置表格时默认选第一个</li>
+  <li>公司项，需显示是否走地标示</li>
+  <li>赔率项（2、4列），需与上一个历史记录对比，上升显示红色，下降显示绿色，不变或无上一个记录则显示默认色</li>
+</ul>
+
+<h2 id="资料库">资料库</h2>
+
+<p><a href="http://webview.7m.com.cn/xiangmuziyuan/prd/7MliveScores/International/Indonesia/APPlite/v1.0/index.html#g=1&amp;p=%E9%9C%80%E6%B1%82%E6%8F%8F%E8%BF%B0&amp;hi=1">原始需求</a></p>
+
+<h3 id="头部栏-5">头部栏</h3>
+
+<ul>
+  <li>左侧显示标题：赛事</li>
+  <li>右侧显示<strong>刷新按钮</strong></li>
+</ul>
+
+<h3 id="正文">正文</h3>
+
+<p>新增推荐赛事和赛事、球队关注，其他同中文 5.4 需求</p>
+
+<h4 id="推荐赛事">推荐赛事</h4>
+
+<ul>
+  <li>赛事logo+赛事名</li>
+  <li>点击跳转该赛事资料库-赛程页</li>
+  <li>允许左右滑动</li>
+  <li>数据通过接口返回</li>
+</ul>
+
+<h4 id="关注-1">关注</h4>
+
+<ul>
+  <li>vue 模块新增关注按钮</li>
+  <li>原生提供关注接口</li>
+</ul>
+
+<h3 id="底部导航栏-2">底部导航栏</h3>
+
+<ul>
+  <li>按顺序显示比分、关注、<del>联赛</del><strong>赛事</strong>、更多</li>
+  <li>高亮选择赛事项</li>
+</ul>
+
+<h2 id="更多">更多</h2>
+
+<p><a href="http://webview.7m.com.cn/xiangmuziyuan/prd/7MliveScores/International/Indonesia/APPlite/v1.0/index.html#g=1&amp;p=%E6%9B%B4%E5%A4%9A%E5%88%97%E8%A1%A8&amp;hi=1">原始需求</a></p>
+
+<h3 id="头部栏-6">头部栏</h3>
+
+<p>显示标题<strong>更多</strong></p>
+
+<h3 id="正文-1">正文</h3>
+
+<ul>
+  <li><del>用户未开启推送时，顶部置顶显示，推送引导点击打开当前APP的系统推送设置页面。</del>（安卓无推送权限）</li>
+  <li>联系我们，点击调用系统邮箱软件，收件地址为我们的印尼对外客服邮箱地址。</li>
+  <li>分享 7Msports lite，直接分享谷歌市场地址(同谷歌市场逻辑) todo</li>
+</ul>
+
+<h4 id="关于">关于</h4>
+
+<p>todo</p>
+
+<h4 id="设置">设置</h4>
+
+<ul>
+  <li>震动，默认打开。控制推送与进球提示震动</li>
+  <li>铃声，默认打开，控制推送与进球提示声音</li>
+  <li>防止屏幕休眠，默认打开，使用 app 期间禁用屏幕休眠</li>
+  <li>仅通知关注比赛，默认关闭，仅控制进球提示</li>
+  <li>清除缓存，需显示当前使用缓存，打开弹出确认框，再执行操作</li>
+</ul>
+
+<h5 id="推送设置">推送设置</h5>
+
+<ul>
+  <li>推送总开关：控制是否接收友盟推送</li>
+  <li>推送子开关：控制赛事提醒、开赛提醒、进球提醒</li>
+  <li>推送设置保存：从推送页返回时进行保存，并静默同步到服务器</li>
+</ul>
+
+<h4 id="帮助与反馈">帮助与反馈</h4>
+
+<p>复用国际部需求</p>
+
+<h2 id="其他">其他</h2>
+
+<h3 id="权限">权限</h3>
+
+<ul>
+  <li>业务无需申请运行时权限</li>
+  <li>实际申请运行时权限由第三方库决定</li>
+</ul>
+
+<h3 id="登陆">登陆</h3>
+
+<ul>
+  <li>Android 9 及以上取伪随机唯一标示符</li>
+  <li>Android 9 以下取 imei 为唯一标示符</li>
+  <li>服务器使用唯一标示符识别匿名登陆</li>
+</ul>
+
+<h3 id="隐私政策提示">隐私政策提示</h3>
+
+<ul>
+  <li>首次打开 App 时显示</li>
+  <li>点击不同意，弹出提示弹窗，关闭弹窗，停留在当前隐私页面</li>
+  <li>todo 完整版隐私提示，在线还是本地</li>
+</ul>
+
+<h3 id="新用户引导">新用户引导</h3>
+
+<ul>
+  <li>用户首进入APP主界面时显示</li>
+  <li>点击屏幕<strong>任意位置</strong>切换下一张，最后一张点击后关闭</li>
+</ul>
+
+<h3 id="跳转">跳转</h3>
+
+<p>App 统一使用 deep link 进行跳转</p>
+
+<ul>
+  <li>比赛内页：/match/{mid}</li>
+  <li>todo</li>
+</ul>
+
+<h3 id="推送">推送</h3>
+
+<ul>
+  <li>推送类型:1新闻,3比赛信息</li>
+  <li>推送统一使用 deep link</li>
+  <li>推送需携带：标题、正文、与跳转链接</li>
+  <li>
+    <p>todo</p>
+
+    <p>{"msg_id":"通知ID","display_type":"notification","random_min":0,"body":{"ticker":"描述","title":"标题","text":"内容",
+  "play_vibrate":"true","play_lights":"true","play_sound":"true","after_open":"go_custom",
+  "custom":"{\"type\":类型,\"data\":{app跳转所需数据}}"},"extra":{"customerdata":"{\"type\":类型,\"data\":{app跳转所需数据}}"}}</p>
+
+    <p>{“msg_id”:”ul58048149561513263000”,”display_type”:”notification”,”random_min”:0,”body”:{“ticker”:”斯馬納得分了！\r\n斯馬納 1-1 艾立敘歐斯克”,”title”:”斯馬納得分了！”,”text”:”斯馬納 1-1 艾立敘歐斯克”,”play_vibrate”:”true”,”play_lights”:”true”,”play_sound”:”true”,”after_open”:”go_custom”,”custom”:”{"type":3,"data":{"sporttype":"1","id":"1626181"}}”},”extra”:{“customerdata”:”{"type":3,"data":{"sporttype":"1","id":"1626181"}}”}}
+  {“msg_id”:”ul50692149561644356800”,”display_type”:”notification”,”random_min”:0,”body”:{“ticker”:”林同得分了！\r\n林同 2-2 越電信B隊”,”title”:”林同得分了！”,”text”:”林同 2-2 越電信B隊”,”play_vibrate”:”true”,”play_lights”:”true”,”play_sound”:”true”,”after_open”:”go_custom”,”custom”:”{"type":3,"data":{"sporttype":"1","id":"1732968"}}”},”extra”:{“customerdata”:”{"type":3,"data":{"sporttype":"1","id":"1732968"}}”}}
+  {“msg_id”:”ul74733149621930838400”,”display_type”:”notification”,”random_min”:0,”body”:{“ticker”:”公馬吉利根得分無效！\r\n公馬吉利根 0-0 沃特斯FC”,”title”:”公馬吉利根得分無效！”,”text”:”公馬吉利根 0-0 沃特斯FC”,”play_vibrate”:”true”,”play_lights”:”true”,”play_sound”:”true”,”after_open”:”go_custom”,”custom”:”{"type":3,"data":{"sporttype":"1","id":"1733631","matchevent":"100","teamevent":"1"}}”},”extra”:{“customerdata”:”{"type":3,"data":{"sporttype":"1","id":"1733631","matchevent":"100","teamevent":"1"}}”}}</p>
+  </li>
+</ul>
+
+<h3 id="广告">广告</h3>
+
+<h4 id="比分页">比分页</h4>
+
+<h4 id="置顶广告">置顶广告</h4>
+
+</article>
+<div class="tag-container" >
+    
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Quick/2020/03/note-2020-03-17"
+ var disqus_config = function () {
+     this.page.title = "2020年03月17日杂记"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Quick/2020/03/note-2020-03-17/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

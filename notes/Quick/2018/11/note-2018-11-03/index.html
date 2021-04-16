@@ -1,0 +1,323 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    2018年11月03日杂记 | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">2018年11月03日杂记</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 18-11-09">2018-11-03</span>
+    
+</div>
+
+<article>
+    <p>coroutineScope {</p>
+
+<p>}</p>
+
+<p>state</p>
+
+<p>share by communication</p>
+
+<p>Limiting concurrency</p>
+
+<p>Select</p>
+
+<p>Job CoroutineContext</p>
+
+<p>suspend vs scope</p>
+
+<h3 id="scope">Scope</h3>
+
+<p>所有 Coroutine 都有一个所属的 Scope。</p>
+
+<pre><code>fun main() = runBlocking { // this: CoroutineScope
+    launch { // launch new coroutine in the scope of runBlocking
+        delay(1000L)
+        println("World!")
+    }
+    println("Hello,")
+}
+// launch 虽然是异步的，hello 会立刻输出，但 runBlocking 需要等到 launch 完成才会完成
+</code></pre>
+
+<p><code>runBlocking</code> 对应的非阻塞函数是  <code>coroutineScope</code></p>
+
+<p>所有的 coroutine builder（launch async etc） 都是 CoroutineScope 的扩展函数。</p>
+
+<p>CoroutineScope 封装了一个 CoroutineContext</p>
+
+<pre><code>    override fun updateThreadContext(context: CoroutineContext): String {
+        val coroutineName = context[CoroutineName]?.name ?: "coroutine"
+        val currentThread = Thread.currentThread()
+        val oldName = currentThread.name
+        var lastIndex = oldName.lastIndexOf(DEBUG_THREAD_NAME_SEPARATOR)
+        if (lastIndex &lt; 0) lastIndex = oldName.length
+        currentThread.name = buildString(lastIndex + coroutineName.length + 10) {
+            append(oldName.substring(0, lastIndex))
+            append(DEBUG_THREAD_NAME_SEPARATOR)
+            append(coroutineName)
+            append('#')
+            append(id)
+        }
+        return oldName
+    }
+</code></pre>
+
+<h3 id="coroutinecontext">CoroutineContext</h3>
+
+<p>https://proandroiddev.com/demystifying-coroutinecontext-1ce5b68407ad</p>
+
+<p>context 是 Element 的集合(indexed set of Element instances)。这个集合类似于 Map，可以通过 Key 引用，这样的设计相比用一个 Map的好处就是类型安全，不用做类型转换。</p>
+
+<p><code>fun &lt;E : Element&gt; get(key: Key&lt;E&gt;): E?</code>，传递 Key 拿到的就是类型 E 了。</p>
+
+<p>Element 也实现 CoroutineContext 接口，可以理解为只有一个 Element 的 Context，除了 EmptyCoroutineContext，其他单一功能的 Context 都实现了 Element。</p>
+
+<ul>
+  <li>ContinuationInterceptor，Dispatcher 的父类，为 Continuation 所调用，管理底层执行线程</li>
+  <li>Job，coroutine 的生命周期模型</li>
+  <li>CoroutineExceptionHandler，处理 Coroutine 中未被捕获的异常，相当于 <code>Thread.UncaughtExceptionHandler()</code></li>
+  <li>CoroutineName</li>
+  <li>CoroutineId</li>
+  <li>etc</li>
+</ul>
+
+<p>这些类都有一个伴生对象（companion object）key，这样 Key 可以直接通过 Element 的类型名引用，在 CorotineScope 中可以通过这些 key 拿到某个 context，比如  <code>coroutineContext[Job]</code> 拿到当前 job，也就是说这些 Context 都是唯一的</p>
+
+<p><code>plus</code>，合并两个 CoroutineContext，左边与右边相同 Key 的 Element 会被右边覆盖。EmptyCoroutineContext 相当于加法运算中的幺元，</p>
+
+</article>
+<div class="tag-container" >
+    
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Quick/2018/11/note-2018-11-03"
+ var disqus_config = function () {
+     this.page.title = "2018年11月03日杂记"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Quick/2018/11/note-2018-11-03/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

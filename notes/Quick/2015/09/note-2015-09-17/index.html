@@ -1,0 +1,387 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    2015年09月17日杂记 | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">2015年09月17日杂记</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-11-30">2015-09-17</span>
+    
+</div>
+
+<article>
+    <h3 id="volley">Volley</h3>
+
+<p>RequestQueue manage works thread</p>
+
+<p>类似 AsyncHttpClient 接口</p>
+
+<p>add（） 就调用接口，首先加载缓存没有接入 network dispatch threads pool</p>
+
+<p>无论 add 在哪个线程调用，回调都在主线程</p>
+
+<h4 id="分开处理-onsuccess-和-onerror">分开处理 onSuccess 和 onError</h4>
+
+<h4 id="cancel">cancel</h4>
+
+<p>cancelAll 可传递 context 可以在 onStop 方法取消所有 request</p>
+
+<p>也支持 tag 标记多个 request，通过 tag 取消</p>
+
+<p>Volley 底层默认使用 com.android.volley.toolbox.BasicNetwork</p>
+
+<p>BasicNetwork 根据不同系统，使用不同的HttpStack</p>
+
+<p>if (Build.VERSION.SDK_INT &gt;= 9) {
+                stack = new HurlStack();
+            } else {
+                // Prior to Gingerbread, HttpUrlConnection was unreliable.
+                // See: http://android-developers.blogspot.com/2011/09/androids-http-clients.html
+                stack = new HttpClientStack(AndroidHttpClient.newInstance(userAgent));
+				}</p>
+
+<h4 id="singleton">Singleton</h4>
+
+<p>如果只是做一次请求，可在 RequestQueue Start 后再调用 stop 将其废弃</p>
+
+<p>推荐使用 singleTon 模式，传入 ApplicationContext</p>
+
+<p>内置有一些常用的 Request</p>
+
+<p>String Image JsonObject</p>
+
+<p>ImageLoader 支持自定义 cache 和 合并（coalescing），暂不能理解合并</p>
+
+<p>还有一个 NetworkImageView</p>
+
+<h4 id="post-data">post data</h4>
+
+<p>Volley 的 post params 得通过匿名类来实现</p>
+
+<p>@Override
+   protected Map&lt;String, String&gt; getParams() {
+       Map&lt;String, String&gt; params = new HashMap&lt;String, String&gt;();
+	   params.put(“name”, “Androidhive”);
+	   params.put(“email”, “abc@androidhive.info”);
+	   params.put(“password”, “password123”);
+	   return params;
+   }</p>
+
+<p>好处？只调用一次无须保持对 params 的引用，惰性求值？</p>
+
+<p>这个方法是在 getBody 中调用。</p>
+
+<h4 id="image">Image</h4>
+
+<p>如果图片需要缩放，LruImage 是分两次请求，第一次获取 header，计算合适 inSampleSize 后，再请求整张图片，最后根据参数决定是否对图片缩放至指定大小。</p>
+
+<p>ImageRequest， 是一次请求将图片载入内存（所以 ImageRequest 有个静态锁对象，保证同时只有一张完整数据图片在内存中），之后再计算 inSampleSize，可传入ImageView 的 size 和 ScaleType 进行计算，最后再缩放至实际大小。ImageRequest 的请求更少，内存占用大，没有并行处理能力。</p>
+
+<p>ImageRequest 默认重试 3次。 IMAGE_MAX_RETRIES</p>
+
+<p>LruImage 没有重试能力</p>
+
+<p>实际的性能差异，可能需要做些测试。</p>
+
+<h5 id="cache">Cache</h5>
+
+<p>ImageRequest 的 Cache 貌似有 bug，它没有重写 Request 的 getCacheKey 方法，</p>
+
+<pre><code>public String getCacheKey() {
+    return mMethod + ":" + mUrl;
+}
+</code></pre>
+
+<p><del>所以是以 Http Method 和 url 来作为 key 的，而图片还有 size ，也就是说请求过的图片，第二次请求不同 size 也将会返回第一次的图片</del></p>
+
+<p>Cache 是 cache 整张原始图片的 data。</p>
+
+<h4 id="multipart">MultiPart</h4>
+
+<p>无 multipart 支持</p>
+
+<h4 id="流程">流程</h4>
+
+<p>Volley 一次请求的流程，见时序图：</p>
+
+<p><img src="volley_progress.png" alt="Volley 一次请求的流程" /></p>
+
+<h4 id="缺陷">缺陷</h4>
+
+<p>Volley 的缺点很明显，就是 getBody 是 Request 的方法，但 Request 更适合用于处理返回值的，不同的返回类型有不同的 Request 子类。倘若有不同的 post 类型，比如 form 或者 multipart 处理起来就略麻烦一些。</p>
+
+<p>OkHttp 这方面的支持很好，我写了个新 Request 可以直接使用 Okhttp 的 RequestBody</p>
+
+<h3 id="okhttp">okhttp</h3>
+
+<p>是基于 java.net.Socket 层面的 http lib</p>
+
+<p>https://github.com/square/okhttp/blob/master/pom.xml#L79 的依赖较大</p>
+
+<h4 id="request">Request</h4>
+
+<p>you’re describing the request at a high-level: “fetch me this URL with these headers.”</p>
+
+<h4 id="responses">Responses</h4>
+
+<p>如果用了 compression， OkHttp will drop the corresponding response headers Content-Encoding and Content-Length</p>
+
+<h4 id="retring">Retring</h4>
+
+<p>OkHttp will retry the request with a different route if one is available.</p>
+
+<p>Dispatch</p>
+
+<h4 id="caching">Caching</h4>
+
+<p>Most applications should call new OkHttpClient() exactly once, configure it with their cache</p>
+
+<h4 id="cancel-1">Cancel</h4>
+
+<h4 id="timeouts">Timeouts</h4>
+
+<p>client = new OkHttpClient();
+    client.setConnectTimeout(10, TimeUnit.SECONDS);
+    client.setWriteTimeout(10, TimeUnit.SECONDS);
+    client.setReadTimeout(30, TimeUnit.SECONDS);</p>
+
+<h4 id="interceptors">Interceptors</h4>
+
+<p><img src="https://raw.githubusercontent.com/wiki/square/okhttp/interceptors@2x.png" alt="" /></p>
+
+
+</article>
+<div class="tag-container" >
+    
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Quick/2015/09/note-2015-09-17"
+ var disqus_config = function () {
+     this.page.title = "2015年09月17日杂记"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Quick/2015/09/note-2015-09-17/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

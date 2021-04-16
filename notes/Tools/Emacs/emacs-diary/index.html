@@ -1,0 +1,446 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    Emacs 日记 | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">Emacs 日记</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 20-12-10">2013-01-05</span>
+    
+</div>
+
+<article>
+    <h3 id="2011-12-27">2011-12-27</h3>
+
+<p><code>c-h i     打开Manual</code></p>
+
+<p><code>c-h c-h 或 c-h ? 打开help for help 列出Emacs 所有帮助功能</code></p>
+
+<p>最常用的还是</p>
+
+<p><code>c-h f 查询函数</code></p>
+
+<p><code>c-h v 查询变量</code></p>
+
+<p><code>c-h k 查询按键绑定</code></p>
+
+<p><code>c-h F 查询命令的文档，而不是函数的描述，对进一步了解命令很有帮助</code></p>
+
+<p>另外info这个这个命令也是可以打开Manual的，另外其它info开头的命令都是跟manual有关的。</p>
+
+<p>在Manual也就是info模式中，按h，是可以查看Info模式的使用帮助的。</p>
+
+<p>命令<code>describe-mode（c-h m）</code>，是来查看当前模式的帮助的，在Info模式中使用，也可以看到Info模式的操作说明。</p>
+
+<h3 id="2011-12-28">2011-12-28</h3>
+
+<p>使用 Emacs 宏的计数器</p>
+
+<p><code>C-x ( C-x C-k C-i C-x )</code></p>
+
+<h3 id="2012-01-05">2012-01-05</h3>
+
+<p>emacs 調用外部命令的方法有三种:</p>
+
+<p><code>M-!</code>   shell-command	 直接执行shell命令,Emacs一般同步执行命令,也就是说Emacs会锁住整个UI等待命令执行完毕.这时可以用C-g给命令发送中断命令(SIGINT),如果再按一次C-g则强制中断命令(SIGKILL).</p>
+
+<p>如果命令后有’&amp;’,则异步执行命令.在Windows上也是可以的.</p>
+
+<p>完整函数 (shell-command COMMAND &amp;optional OUTPUT-BUFFER ERROR-BUFFER)</p>
+
+<p>OUTPUT-BUFFER 可以指定command的输出位置,指定1的话,可以将output插入到当前buffer. M-1 M-! 也可以达到同样效果.</p>
+
+<p><code>M-&amp;</code>   async-shell-command 异步执行shell命令,实际是在命令后面加上’&amp;’后再调用 shell-command .</p>
+
+<p>但异步命令有个问题,如果为异步命令指定了output-buffer,Emacs又会block整个UI. 所以要使用异步命令必须打开一个 <em>Async Shell Command</em> 的buffer.不知是不是bug.</p>
+
+<p><code>M-|</code>  shell-command-on-region  貌似在Windows下有bug.选择region之后还有输命令.</p>
+
+<p>以上命令都在WIn7下用sleep和dir和echo命令测试过.</p>
+
+<pre><code>dir
+</code></pre>
+
+<h3 id="2012-02-02">2012-02-02</h3>
+
+<h4 id="picture-mode">PICTURE-MODE</h4>
+
+<p>C-o 可以在当前行下插入空白行</p>
+
+<p>C-c C-c 返回前一个模式</p>
+
+<p>其他的看 C-h m 吧</p>
+
+<h3 id="2012-02-07">2012-02-07</h3>
+
+<h4 id="缩进">缩进</h4>
+
+<p>C-x tab indent-rigidly 可以强制缩进</p>
+
+<h4 id="插入">插入</h4>
+
+<div class="language-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">defun</span> <span class="nv">insert-code</span> <span class="p">(</span><span class="nv">beg</span> <span class="nv">end</span> <span class="nv">code</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">interactive</span> <span class="p">(</span><span class="nb">list</span> <span class="p">(</span><span class="nv">point</span><span class="p">)</span> <span class="p">(</span><span class="nv">mark</span><span class="p">)</span> <span class="p">(</span><span class="nv">read-string</span> <span class="s">"what's language?"</span><span class="p">)))</span>
+
+  <span class="p">(</span><span class="nv">goto-char</span> <span class="p">(</span><span class="nb">max</span> <span class="nv">beg</span> <span class="nv">end</span><span class="p">))</span>
+  <span class="p">(</span><span class="nv">insert</span> <span class="p">(</span><span class="nv">concat</span> <span class="s">"&lt;/"</span> <span class="s">"code&gt;"</span><span class="p">))</span>
+  <span class="p">(</span><span class="nv">goto-char</span> <span class="p">(</span><span class="nb">min</span> <span class="nv">beg</span> <span class="nv">end</span><span class="p">))</span>
+  <span class="p">(</span><span class="nv">insert</span> <span class="s">"&lt;code "</span> <span class="nv">code</span> <span class="s">"&gt;"</span><span class="p">)</span>
+  <span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="2012-03-24">2012-03-24</h3>
+
+<p>C-x r k 剪切一个矩形块</p>
+
+<p>C-x r y 粘贴一个矩形块</p>
+
+<p>C-x r o 插入一个矩形块</p>
+
+<p>C-x r c 清除一个矩形块(使其变成空白)</p>
+
+<p>C-x r t 在选定区域的所有列前插入样的字符</p>
+
+<h3 id="2012-03-31">2012-03-31</h3>
+
+<h4 id="undo">Undo</h4>
+
+<p>默认的撤销有3个快捷键</p>
+
+<ul>
+  <li>
+    <p>C-x u</p>
+  </li>
+  <li>
+    <p>C-/</p>
+  </li>
+  <li>
+    <p>C-_ (个人常用这个)</p>
+  </li>
+</ul>
+
+<p>emacs的撤销机制与现代的编辑器有很大的不同,最让人困惑的就是没有redo,一旦问起人们最常见的回答就是undo undo = redo.但是如果你真的非常诚实地按了两次undo，emacs就真的非常诚实的只undo了2次。</p>
+
+<p>谈这个问题之前,先说说我的理解,在buffer中做编辑，而每一次改动都会被emacs记录下来，存放到buffer的改动历史列表中，这个列表就称为状态列表S吧，因为实际上每次改动操作都把buffer从当前状态s_0映射到一个新状态s_1上.所谓改动可以这样定义：</p>
+
+<pre><code>T : C^n
+∀s_0,s_1 ∈ T
+</code></pre>
+
+<p>改动是一个函数集 <code>F: {f:s0 -&gt; s1|s0!=s1}</code></p>
+
+<p>在emacs中每一个编辑操作,新的状态s_n+1会被追加到buffer的状态列表S中。undo也是属于这个函数集，所以它并不能直接改动状态列表S，下面说说我对undo的理解。</p>
+
+<p>想象这样一个这个状态列表S</p>
+
+<pre><code>s_0 -- s_1 -- s_2 -- ... -- s_n
+                             ^
+                             |
+                          当前视图
+</code></pre>
+
+<p>第一次调用undo时,先想象已经有一个指针p_u，p_u -&gt; s_n,undo执行这样一个过程U：p_u自减,(此时p_u -&gt; s_n-1).再将p_u指向的状态复制一份,插入状态队列的头部( 就是将s_n 映射到 s_n-1)，现在队列变成下面那样：</p>
+
+<pre><code>                            p_u
+                             |
+                             v
+s_0 -- s_1 -- s_2 -- ... -- s_n-1 -- s_n -- s_n+1(:s_n-1)
+                                               ^
+                                               |
+                                            当前视图
+</code></pre>
+
+<p>表面看起来就是 <code>undo: s_n  -&gt; s_n-1</code>.</p>
+
+<p>再一次 undo ,此时p_u还是指向s_n-1,继续执行上面的过程U。第二次undo，列表S变成下面那样:</p>
+
+<pre><code>                              p_u
+                               v
+ s_0 -- s_1 -- s_2 -- ... -- s_n-2 -- ... -- s_n+2(:s_n-2)
+                                                  ^
+                                                  |
+                                               当前视图
+</code></pre>
+
+<p>表面看起来就是 undo^2: s_n   -&gt; s_n-2</p>
+
+<p>FIXME 实际上，连续执行undo，emacs 会把它当成一个连续操作，也可以想象成第一次undo使buffer处在undo mode中，这时只要执行任意操作(比如移动光标,C-g也不错)就可以中断这个连续操作，结束undo mode.具体就是重置p_u(p_u -&gt; 当前状态),中断连续undo后，如果此时再undo,列表S变成下面那样:</p>
+
+<pre><code>                                 p_u
+                                  V
+s_0 -- s_1 -- s_2 -- ... -- s_n+1(:s_n-1) -- s_n+2(:s_n-2) -- s_n+3(:s_n-1)
+                                                                  ^
+                                                                  |
+                                                               当前视图
+</code></pre>
+
+<p>表面看起来就是 <code>undo^2 * redo: s_n  -&gt; s_n-1 -&gt; s_n-2  -&gt;(redo) s_n-1</code></p>
+
+<p>回到redo = undo undo的问题，更应该这样表述redo = undo(undo)   实际上的undo操作就是 undo 重置p_u undo。所以在emacs中几次undo后想要做redo，推荐的操作就是 undo undo undo … C-g redo redo(实际上还是undo的操作) 。</p>
+
+<p>在buffer中做任何操作，包括 undo redo在内，每个操作所产生的状态都会被记录下来，可以看出buffer的状态列表是只增不减的（暂时这样认为,实际上总长度是有限制的，由</p>
+
+<pre><code>`undo-limit'
+`undo-strong-limit'
+`undo-outer-limit'
+</code></pre>
+
+<p>控制），所以在buffer中所做的任何编辑都不会丢失的，有些同学会认为列表来保存历史状态是不是太浪费，分明就是一颗树嘛，但是emacs为什么不这么做（我不知道emacs的内部实现是不是用树结构），但如果用树来表示，那么undo就不能满足上面的F的定义了，undo不再是一个T上的映射，而变成一个移动当前视图指针的操作，所以我觉得emacs用列表示历史状态,空间上是一种浪费，但概念上确是一种简化。</p>
+
+<p>当然，如果想这么做确实有个扩展可以帮忙。 <a href="http://www.dr-qubit.org/download.php?file=undo-tree/undo-tree.el">undo-tree</a></p>
+
+<p>据我所知这个扩展提供一树结构显示状态列表的视图. 见 http://linuxtoy.org/archives/emacs-undo-tree.html</p>
+
+<p>看起来很不错的样子，不过当你看到有n多个节点n多个分支的树想必也没什么食欲吧.</p>
+
+<h3 id="2013-01-30">2013-01-30</h3>
+
+<h4 id="月相">月相</h4>
+
+<p>M-x lunar-phases 可以显示最近三个月的月相</p>
+
+<h3 id="2020-12-02">2020-12-02</h3>
+
+<p>用 <code>C-\</code> 代替 <code>C-SPC</code> 作为 mac 的输入法切换快捷键，感觉不错。可以解放 <code>C-SPC</code> 给 emacs 用。</p>
+
+</article>
+<div class="tag-container" >
+    
+    <div class="chip">
+        <a href="/tags#月亮-ref">
+            月亮
+        </a>
+    </div>
+    
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Tools/Emacs/emacs-diary"
+ var disqus_config = function () {
+     this.page.title = "Emacs 日记"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Tools/Emacs/emacs-diary/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

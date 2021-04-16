@@ -1,0 +1,679 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    CodeColorer中文帮助 | DouO's Blog</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">CodeColorer中文帮助</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-01-13">2010-08-03</span>
+
+    <span><a href="/categories#otaku-ref" class="category category-otaku waves-effect waves-light">otaku</a></span>
+    
+</div>
+
+    <article>
+        <h2 id="写在前面">写在前面</h2>
+
+<p>用WordPress以来，一直都用CodeColorer插件用来实现代码高亮，不过一直没花时间去看说明，用起来很苦恼。所以今天决定花点时间认真学习下，并根据作者的说明总结下各个属性的作用，还添加了些例子，以后忘了理解起来也方便些。不过都是些苦力活啦。</p>
+
+<h3 id="codecolorer">CodeColorer</h3>
+
+<p>CodeColorer是一款基于<a href="http://qbnz.com/highlighter/">GeSHi</a>库的WordPress代码语法高亮插件。功能简单，使用方便，是一款比较轻量的插件。CodeColorer支持<code>placeholderfor0code</code>
+和</p>
+
+<pre><code>&lt;code lang="lang"&gt;code&lt;/code&gt;
+</code></pre>
+
+<p>两种语法。<a href="http://kpumuk.info/projects/wordpress-plugins/codecolorer/">这里是插件的主页</a>，本文据此翻译修改而成。</p>
+
+<h2 id="属性说明及例子">属性说明及例子</h2>
+
+<p>属性列表如下,括号内是参数类型.string是字符串；integer是整数；boolean是布尔型(开关)，可接受「true”
+“false”, “on” “off”, 整数 1 or 0.</p>
+
+<ul>
+  <li><a href="#lang"><code>lang</code></a> (string) – 代码使用的语言。</li>
+  <li><a href="#tab_size"><code>tab_size</code></a> (integer) –
+用以替换制表符的空格数，可在设置界面更改。</li>
+  <li><a href="#line_numbers"><code>line_numbers</code></a> (boolean) –
+是否显示行号，可在设置界面更改。</li>
+  <li><a href="#first_line"><code>first_line</code></a> (integer) –
+指定代码块第一行的行号</li>
+  <li><a href="#highlight"><code>highlight</code></a> (string) –
+用于指定整行高亮的代码行行数，参数是用半角逗号分隔的数字串(如
+1,5,8,9)。</li>
+  <li><a href="#no_links"><code>no_links</code></a> (boolean) –
+当值为false时，关键字将会添加一个到官方文档的链接，可在设置界面更改。</li>
+  <li><a href="#lines"><code>lines</code></a> (integer)
+–指定代码块显示的行数，当值设置为-1时，不出现纵向滚动条，可在设置界面更改。</li>
+  <li><a href="#width"><code>width</code></a> (integer or string) –
+代码块宽度，可在设置界面更改。</li>
+  <li><a href="#width"><code>height</code></a> (integer or string) –
+代码块高度，当这个高度可显示的行数比lines指定的值大才会生效，可在设置界面更改。</li>
+  <li><code>rss_width</code> (integer or string) –
+代码块在RSS输出时的宽度，可在设置界面更改。</li>
+  <li><a href="#theme"><code>theme</code></a> (string) – 代码块颜色风格 (default,
+blackboard, dawn, mac-classic, twitlight,
+vibrant)，可在设置界面更改。</li>
+  <li><a href="#inline"><code>inline</code></a> (boolean) –
+内嵌模式开关，用于将一行代码插入到文本中。</li>
+  <li><a href="#strict"><code>strict</code></a> (boolean) – 严格模式的开关。</li>
+  <li><a href="#nowrap"><code>nowrap</code></a> (boolean) –
+当值指定为false时，过长的行将会被自动换行，以避免出现横向滚动条。</li>
+  <li><a href="#noborder"><code>noborder</code></a> (boolean) – 是否显示边框的开关。</li>
+  <li><a href="#no_cc"><code>no_cc</code></a> (boolean) –
+当值为true时，code标签将会被解析，但代码块不会有格式。</li>
+  <li><code>class</code> (string) – 添加一个新的CSS。</li>
+  <li><code>escaped</code> (string) – 当值为false，代码块里的html转义字符不会被转义，如<code>&amp;lt;</code>不会转义为&lt;，默认为false。</li>
+</ul>
+
+<h3 id="lang">lang</h3>
+
+<pre><code>&lt;code lang="java"&gt;
+package dourok.info.test;
+public class Main {
+	public static void main(String args[]){
+		System.out.println("WTF");
+	}
+}
+&lt;/code&gt;
+</code></pre>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">dourok.info.test</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span> <span class="n">args</span><span class="o">[]){</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"WTF"</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="tab_size">tab_size</h3>
+
+<p>tab_size替换制表符的空格数，下面是1的例子。</p>
+
+<pre><code>&lt;code tab_size="1" lang="java"&gt;
+package dourok.info.test;
+
+public class Main {
+    public static void main(String args[]){
+        System.out.println("WTF");
+    }
+}
+</code></pre>
+
+<pre><code>package dourok.info.test;
+
+public class Main {
+ public static void main(String args[]){
+  System.out.println("WTF");
+ }
+}
+</code></pre>
+
+<h3 id="line_numbers">line_numbers</h3>
+
+<p>line_numbers显示行号的开关：</p>
+
+<pre><code>&lt;code line_numbers="true" lang="java"&gt;
+package dourok.info.test;
+
+public class Main {
+    public static void main(String args[]){
+        System.out.println("WTF");
+    }
+}
+</code></pre>
+
+<pre><code>package dourok.info.test;
+
+public class Main {
+    public static void main(String args[]){
+        System.out.println("WTF");
+    }
+}
+</code></pre>
+
+<h3 id="first_line">first_line</h3>
+
+<p>first_line第一行的行号数，下面是first_line=”3”的例子：</p>
+
+<pre><code>&lt;code first_line="3" lang="java"&gt;
+package dourok.info.test;
+
+public class Main {
+    public static void main(String args[]){
+        System.out.println("WTF");
+    }
+}
+package dourok.info.test;
+</code></pre>
+
+<pre><code>public class Main {
+    public static void main(String args[]){
+        System.out.println("WTF");
+    }
+}
+</code></pre>
+<h3 id="highlight">highlight</h3>
+
+<p>highlight模式，高亮代码段中的某几行，如例子 highlight=”1,5”
+高亮行数以半角逗号分隔：</p>
+
+<pre><code>&lt;code highlight="1,5" lang="java"&gt;
+package dourok.info.test;
+
+public class Main {
+    public static void main(String args[]){
+        System.out.println("WTF");
+    }
+}
+</code></pre>
+
+<pre><code>package dourok.info.test;
+
+public class Main {
+    public static void main(String args[]){
+        System.out.println("WTF");
+    }
+}
+</code></pre>
+
+<h3 id="no_links">no_links</h3>
+
+<p>当no_links为false时会为一下关键字添加一个到官方文档的链接，默认为false，下面是no_links=true的例子，System没了链接：</p>
+
+<pre><code>&lt;code no_links="true" lang="java"&gt;
+package dourok.info.test;
+
+public class Main {
+    public static void main(String args[]){
+        System.out.println("WTF");
+    }
+}
+</code></pre>
+
+<p>no_links有个BUG，当我在这个代码块指定为true时，后面的代码块也没了链接。</p>
+
+<pre><code>package dourok.info.test;
+
+public class Main {
+    public static void main(String args[]){
+        System.out.println("WTF");
+    }
+}
+</code></pre>
+
+<h3 id="lines">lines</h3>
+
+<p>lines作者说明是显示固定行数,多于这个行数便会出现纵向滚动条,实际实验当指定行数小于代码行数时,代码块变成成为固定行数(该行数可在CodeColorer里面更改),而无论实际代码多少行.应该是bug.不过将lines=”-1”去掉纵向滚动条还是有效的</p>
+
+<pre><code>&lt;code no_links="false" lines="5" lang="java"&gt;
+package dourok.info.test;
+
+public class Main {
+    public static void main(String args[]){
+        System.out.println("WTF");
+    }
+}
+</code></pre>
+
+<pre><code>package dourok.info.test;
+
+public class Main {
+    public static void main(String args[]){
+        System.out.println("WTF");
+    }
+}
+</code></pre>
+
+<h3 id="width">width</h3>
+
+<p>width 指定代码块的宽度,多于这个宽度会出现横向滚动条 height
+指定代码块的高度,单位是像素.当这个值比lines大时才会生效 width= “217”
+height= “217”</p>
+
+<pre><code>code lines="1" width= "217"  height= "217" lang="java"&gt;
+package dourok.info.test;
+
+public class Main {
+    public static void main(String args[]){
+        System.out.println("WTF");
+    }
+}
+</code></pre>
+
+<pre><code>package dourok.info.test;
+
+public class Main {
+    public static void main(String args[]){
+        System.out.println("WTF");
+    }
+}
+</code></pre>
+
+<h3 id="theme">theme</h3>
+
+<pre><code>&lt;code theme="dawn" lang="java"&gt;
+package dourok.info.test;
+
+public class Main {
+    public static void main(String args[]){
+        System.out.println("WTF");
+    }
+}
+</code></pre>
+
+<pre><code>package dourok.info.test;
+
+public class Main {
+    public static void main(String args[]){
+        System.out.println("WTF");
+    }
+}
+</code></pre>
+
+<h3 id="inline">inline</h3>
+
+<p>inline模式,为true时去掉代码块，主要用来把代码内嵌到文本中，inline模式的默认主题跟一般模式是分开的，如下例子，详见设置页面。</p>
+
+<pre><code>&lt;code inline="true" lang="java"&gt;
+package dourok.info.test;
+
+public class Main {
+    public static void main(String args[]){
+        System.out.println("WTF");
+    }
+}
+</code></pre>
+
+<pre><code>package dourok.info.test;
+
+public class Main {
+    public static void main(String args[]){
+        System.out.println("WTF");
+    }
+}
+</code></pre>
+
+<h3 id="strict">strict</h3>
+
+<p>strict
+严格模式(strict-mode)的开关,不大清楚什么意思?根据下面的例子理解下或者看下这里的<a href="http://qbnz.com/highlighter/geshi-doc.html#using-strict-mode">说明</a>
+strict=”false”</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"&lt;?php echo rand(1, 100) ?&gt;"</span> <span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<p>strict=」true」</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"</span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nb">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span> <span class="cp">?&gt;</span><span class="s">"</span> <span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<h3 id="nowrap">nowrap</h3>
+
+<p>nowrap自动换行的开关,默认是不换行(nowrap=”true”),当代码宽度超过代码块宽度时,会出现横向滚动条.
+下面的例子是nowrap=”false”的情形</p>
+
+<pre><code>&lt;code nowrap="false" lang="java"&gt;
+package dourok.info.test;
+
+public class Main {
+    public static void main(String args[]){
+        System.out.println("This is a very very very very very very very very very very very very very very very very very very very very very very very very long String");
+    }
+}
+</code></pre>
+
+<pre><code>package dourok.info.test;
+
+public class Main {
+    public static void main(String args[]){
+        System.out.println("This is a very very very very very very very very very very very very very very very very very very very very very very very very long String");
+    }
+}
+</code></pre>
+
+<h3 id="noborder">noborder</h3>
+
+<p>noborder 是否显示边框的开关</p>
+
+<pre><code>&lt;code noborder="true" lang="java"&gt;
+package dourok.info.test;
+
+public class Main {
+    public static void main(String args[]){
+        System.out.println("WTF");
+    }
+}
+</code></pre>
+
+<pre><code>package dourok.info.test;
+
+public class Main {
+    public static void main(String args[]){
+        System.out.println("WTF");
+    }
+}
+</code></pre>
+
+<h3 id="no_cc">no_cc</h3>
+
+<p>no_cc 是否高亮关键字,实际测试是取消codeColorer的效果,例子如下</p>
+
+<pre><code>&lt;code no_cc="true" lang="java"&gt;
+package dourok.info.test;
+public class Main {
+    public static void main(String args[]){
+        System.out.println("WTF");
+    }
+}
+</code></pre>
+
+<pre><code>package dourok.info.test; public class Main { public static void main(String args[]){ System.out.println("WTF"); } }
+</code></pre>
+<p>短标签(Short Codes)
+——————-</p>
+
+<p>上面提过可以用<code>[cc]</code>来代替<code>&lt;code&gt;</code>，可以避免使用code标签。作者还提供了跟简洁的语法<code>[ccMODE_LANG]</code>来定义代码块。LANG就是指定语法高亮的语言，MODE可以是下面几个模式的一个或多个：</p>
+
+<ul>
+  <li>i – inline</li>
+  <li>e – escaped</li>
+  <li>s – strict</li>
+  <li>n – line_numbers</li>
+  <li>b – no_border</li>
+  <li>w – no_wrap</li>
+  <li>l – no_links</li>
+</ul>
+
+<p>模式分大小写，小写表示打开，相应的大写表示关闭，比如<code>[cciL_java]</code>就如同<code>&lt;code inline="true" no_links=false&gt;</code>，注意关闭标签要一致<code>[/cciL_java]</code>，当然后面还可以再带属性。最后再看下实际的例子：</p>
+
+<pre><code>[ccsW theme="dawn"]&lt;code nowrap="false" lang="java"&gt;
+package dourok.info.test;
+
+public class Main {
+	public static void main(String args[]){
+		System.out.println("This is a very very very very very very very very very very very very long String");
+	}
+}&lt;/code&gt;
+[/ccsW]
+</code></pre>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;code</span> <span class="na">nowrap=</span><span class="s">"false"</span> <span class="na">lang=</span><span class="s">"java"</span><span class="nt">&gt;</span>
+package dourok.info.test;
+
+public class Main {
+	public static void main(String args[]){
+		System.out.println("This is a very very very very very very very very very very very very long String");
+	}
+}<span class="nt">&lt;/code&gt;</span>
+</code></pre></div></div>
+
+<p>如果要显示<code>&lt;code&gt;&lt;/code&gt;</code>，就得用短标签将其包围起来，如果要显示短标签<code>[cc][/cc]</code>就得用不同的短标签将其包围起来。不知这样说的够明白没。</p>
+
+    </article>
+    <div class="tag-container" >
+        
+        <div class="chip">
+        <a href="/tags#CodeColorer-ref">
+            CodeColorer
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#wordpress插件-ref">
+            wordpress插件
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#插件翻译-ref">
+            插件翻译
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#语法高亮-ref">
+            语法高亮
+        </a>
+        </div>
+        
+    </div>
+<div class="post-pager">
+    
+    <a href="/2010/07/30/proguard-remove-busy-loop/">上一篇：ProGuard混淆丢掉空循环</a>
+    
+    
+    <a href="/2010/08/08/prototype-clearance/" style="float:right;" >下一篇：原型体(Prototype)通关</a>
+    
+</div>
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/2010/08/03/codecolorer-doc-cn"
+ var disqus_config = function () {
+     this.page.title = "CodeColorer中文帮助"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/2010/08/03/codecolorer-doc-cn/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

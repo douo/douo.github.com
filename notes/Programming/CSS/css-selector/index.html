@@ -1,0 +1,417 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    CSS 选择器 | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">CSS 选择器</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-11-30">2014-05-31</span>
+    
+</div>
+
+<article>
+    <h3 id="选择器">选择器</h3>
+
+<p>http://www.ruanyifeng.com/blog/2009/03/css_selectors.html</p>
+
+<p>http://www.w3school.com.cn/css/css_selector_type.asp</p>
+
+<h4 id="类型选择器type-selector">类型选择器（type selector）</h4>
+
+<p>直接匹配某个 HTML 元素</p>
+
+<pre><code>    html {color:black;}
+    h1 {color:blue;}
+    h2 {color:silver;}
+</code></pre>
+
+<p>可以将任意多个选择器分组在一起</p>
+
+<pre><code>h1, h2, h3, h4, h5, h6 {color:blue;}
+</code></pre>
+
+<h4 id="类选择器">类选择器</h4>
+
+<p>类选择器允许以一种独立于文档元素的方式来指定样式。</p>
+
+<pre><code>&lt;h1 class="important"&gt;
+This heading is very important.
+&lt;/h1&gt;
+
+*.important {color:red;}
+</code></pre>
+
+<p>结合元素选择器</p>
+
+<pre><code>p.important {color:red;}
+</code></pre>
+
+<p>多类选择器</p>
+
+<pre><code>&lt;p class="important warning"&gt;
+This paragraph is a very important warning.
+&lt;/p&gt;
+
+.important.warning {background:silver;}
+</code></pre>
+
+<h4 id="id-选择器">ID 选择器</h4>
+
+<p>允许以一种独立于文档元素的方式来指定样式</p>
+
+<pre><code>&lt;p id="intro"&gt;This is a paragraph of introduction.&lt;/p&gt;
+
+*#intro {font-weight:bold;}
+</code></pre>
+
+<p>类选择器还是 ID 选择器？</p>
+
+<ol>
+  <li>只能在文档中使用一次</li>
+  <li>不能使用 ID 词列表，ID 选择器不能结合使用</li>
+  <li>ID 能包含更多含义</li>
+</ol>
+
+<h4 id="属性选择器attribute-selector">属性选择器（Attribute Selector）</h4>
+
+<p>属性选择器可以根据元素的属性及属性值来选择元素。</p>
+
+<pre><code>*[title] {color:red;} /* 把包含标题（title）的所有元素变为红色 */
+</code></pre>
+
+<p>还可以根据多个属性进行选择，只需将属性选择器链接在一起即可</p>
+
+<pre><code>a[href][title] {color:red;}
+</code></pre>
+
+<p>根据具体属性值选择</p>
+
+<p>[attribute]	用于选取带有指定属性的元素。
+[attribute=value]	用于选取带有指定属性和值的元素。
+[attribute~=value]	用于选取属性值中包含指定词汇的元素。
+[attribute|=value]	用于选取带有以指定值开头的属性值的元素，该值必须是整个单词。
+[attribute^=value]	匹配属性值以指定值开头的每个元素。
+[attribute$=value]	匹配属性值以指定值结尾的每个元素。
+[attribute*=value]	匹配属性值中包含指定值的每个元素。</p>
+
+<h4 id="后代选择器descendant-selector">后代选择器（descendant selector）</h4>
+
+<p>后代选择器可以选择作为某元素后代的元素</p>
+
+<pre><code>h1 em {color:red;}
+</code></pre>
+
+<p>在后代选择器中，规则左边的选择器一端包括两个或多个用空格分隔的选择器。选择器之间的空格是一种结合符（combinator）。每个空格结合符可以解释为“… 在 … 找到”、“… 作为 … 的一部分”、“… 作为 … 的后代”，但是要求必须从右向左读选择器。</p>
+
+<p>后代选择器有一个易被忽视的方面，即两个元素之间的层次间隔可以是无限的。</p>
+
+<h4 id="子元素选择器child-selectors">子元素选择器（Child selectors）</h4>
+
+<p>与后代选择器相比，子元素选择器（Child selectors）只能选择作为某元素子元素的元素。</p>
+
+<pre><code>h1 &gt; strong {color:red;}  /*选择作为 h1 元素子元素的所有 strong 元素*/
+</code></pre>
+
+<h5 id="相邻兄弟选择器adjacent-sibling-selector">相邻兄弟选择器（Adjacent sibling selector）</h5>
+
+<p>可选择紧接在另一元素后的元素，且二者有相同父元素。</p>
+
+<pre><code>h1 + p {margin-top:50px;}
+</code></pre>
+
+<h5 id="伪类-pseudo-classes">伪类 (Pseudo-classes)</h5>
+
+<pre><code>selector : pseudo-class {property: value}
+</code></pre>
+
+<p>:first-child 伪类来选择元素的第一个子元素，这个特定伪类很容易遭到误解，下面例子将 first text 变为红色，因为 p 是 body 的第一个子元素。</p>
+
+<pre><code>&lt;html&gt;
+&lt;head&gt;
+&lt;style type="text/css"&gt;
+p:first-child {
+color: red;
+} 
+&lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;p&gt;first text&lt;/p&gt;
+&lt;p&gt;second text&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>所有伪类</p>
+
+<pre><code>:active	向被激活的元素添加样式。	1
+:focus	向拥有键盘输入焦点的元素添加样式。	2
+:hover	当鼠标悬浮在元素上方时，向元素添加样式。	1
+:link	向未被访问的链接添加样式。	1
+:visited	向已被访问的链接添加样式。	1
+:first-child	向元素的第一个子元素添加样式。	2
+:lang	向带有指定 lang 属性的元素添加样式。	2
+</code></pre>
+
+<h4 id="伪元素-pseudo-elements">伪元素 (Pseudo-elements)</h4>
+
+<p>CSS 伪元素用于向某些选择器设置特殊效果。</p>
+
+<pre><code>selector:pseudo-element {property:value;}
+</code></pre>
+
+<p>全部伪元素</p>
+
+<pre><code>:first-letter	向文本的第一个字母添加特殊样式。	1
+:first-line	向文本的首行添加特殊样式。	1
+:before	在元素之前添加内容。	2
+:after	在元素之后添加内容。	2
+</code></pre>
+
+</article>
+<div class="tag-container" >
+    
+    <div class="chip">
+        <a href="/tags#css-ref">
+            css
+        </a>
+    </div>
+    
+    <div class="chip">
+        <a href="/tags#css selector-ref">
+            css selector
+        </a>
+    </div>
+    
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Programming/CSS/css-selector"
+ var disqus_config = function () {
+     this.page.title = "CSS 选择器"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Programming/CSS/css-selector/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

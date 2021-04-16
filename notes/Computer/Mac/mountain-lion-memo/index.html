@@ -1,0 +1,445 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    山狮备忘 | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">山狮备忘</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-11-30">2013-04-14</span>
+    
+</div>
+
+<article>
+    <h3 id="配置">配置</h3>
+
+<pre><code>Mobo：GA-Z77-D3H
+CPU： i5 3450
+GC： MSI HAWK r6850
+MEN： 8G 1600Mzh
+</code></pre>
+
+<h3 id="安装">安装</h3>
+
+<p>通过 Clover 引导进入（不同的引导应该没有影响）已有的10.8.1系统后，可以直接挂载原版<code>InstallESD</code> 安装。因为我显卡的原因需要移除<code>ATI6000Controller.kext</code>来避免重启进入安装界面后白屏。关于如果修改可以见<code>InstallESD</code></p>
+
+<p><a href="http://www.insanelymac.com/forum/topic/282787-clover-v2-instructions/page__st__20#entry1869539">How to modify InstallESD.dmg</a></p>
+
+<p><a href="http://bbs.pcbeta.com/viewthread-1230436-1-1.html">Clover 引导原版 InstallESD.dmg全盘安装指路</a></p>
+
+<h3 id="clover">Clover</h3>
+
+<p>kexts 放于<code>EFI/kexts/10.8</code></p>
+
+<p><code>FakeSMC.kext</code> 还有 <code>AtherosL1cEthernet.kext</code>驱动有线网卡</p>
+
+<h4 id="configplist">config.plist</h4>
+<p>使用这个配置可以引导老 10.8.1 的系统，显卡驱动也能被加载。</p>
+<pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;
+&lt;plist version="1.0"&gt;
+&lt;dict&gt;
+	&lt;key&gt;PCI&lt;/key&gt;
+	&lt;dict&gt;
+		&lt;key&gt;USBInjection&lt;/key&gt;
+		&lt;string&gt;Yes&lt;/string&gt;
+		&lt;key&gt;USBFixOwnership&lt;/key&gt;
+		&lt;string&gt;Yes&lt;/string&gt;
+		&lt;key&gt;InjectClockID&lt;/key&gt;
+		&lt;string&gt;Yes&lt;/string&gt;
+	&lt;/dict&gt;
+	&lt;key&gt;SystemParameters&lt;/key&gt;
+	&lt;dict&gt;
+		&lt;key&gt;boot-args&lt;/key&gt;
+		&lt;string&gt;-v npci=0x2000 slide=0 WithKexts&lt;/string&gt;
+		&lt;key&gt;prev-lang:kbd&lt;/key&gt;
+		&lt;string&gt;zh-CN:0&lt;/string&gt;
+		&lt;key&gt;InjectSystemID&lt;/key&gt;
+		&lt;string&gt;Yes&lt;/string&gt;
+	&lt;/dict&gt;
+	&lt;key&gt;Graphics&lt;/key&gt;
+	&lt;dict&gt;
+	        &lt;key&gt;GraphicsInjector&lt;/key&gt;
+		&lt;string&gt;Yes&lt;/string&gt;
+		&lt;key&gt;PatchVBios&lt;/key&gt;
+		&lt;string&gt;Yes&lt;/string&gt;
+		&lt;key&gt;FBName&lt;/key&gt;
+		&lt;string&gt;Futomaki&lt;/string&gt;
+	&lt;/dict&gt;
+&lt;/dict&gt;
+&lt;/plist&gt;
+</code></pre>
+<p>http://www.insanelymac.com/forum/topic/282787-clover-v2-instructions/page__st__20#entry1869539
+这里有一些配置的解释</p>
+
+<h4 id="drivers64uefi">drivers64UEFI</h4>
+
+<p>加<code>*</code>号为我正在使用efi，可以正确引导。</p>
+
+<pre><code>文件名	功能说明	备注
+*1	CsmVideoDxe-64.efi	增强显卡在EFI模式下的兼容性	源自Intel EFI规范，与分辨率的实现相关
+*2	DataHubDxe-64.efi	Data Hub可抓取data集合成SMBios	源自Intel EFI规范
+2	EmuVariableRuntimeDxe.efi	针对某些 Phoenix UEFI 本本	例如DELL Vostro，某些ThinkPad
+*3	FSInject-64.efi	为强制加载某些kext或注入提供支持	kext patcher，如ATIConnectorInfo patch
+*4	HFSPlus64.efi	识别OSX分区	OSX必备，与VBoxHfs.efi通用
+5	NTFS64.efi	识别Win分区	单碟多系统必备
+*6	OsxAptioFixDrv-64.efi	针对AMI Aptio UEFI 台式主板多见	技嘉、华硕、华擎等，解决找不到内核问题
+*7	OsxFatBinaryDrv-64.efi	胖二进制，对多架构提供支持，
+如OSX的boot.efi	OSX必备，或称通用二进制Universal Binary
+即Intel/PPC
+8	OsxLowMemFixDrv-64.efi	针对 Insyde H2O UEFI 的本本	修复低位内存问题
+*9	PartitionDxe-64.efi	提供对MBR、GPT等多分区表的支持	源自Intel EFI规范
+10	Ps2MouseDxe-64.efi	PS鼠标	源自Intel EFI规范，待测试
+11	UsbMouseDxe-64.efi	USB鼠标	源自Intel EFI规范，鼠标仍不可用
+12	VBoxExt2-64.efi	识别Linux分区	源自VBox，Ext4未能识别
+13	VBoxHfs.efi	识别OSX分区	源自VBox，GUI界面不显示HFS卷名
+14	XhciDxe-64.efi	USB3.0支持	USB2.0的情况正常，据说NEC Reneas勿选
+</code></pre>
+
+<h3 id="问题">问题</h3>
+
+<p>安装完成后，如何恢复显卡驱动？</p>
+
+<p>http://www.insanelymac.com/forum/topic/282787-clover-v2-instructions/#entry1853099</p>
+
+<p>http://www.insanelymac.com/forum/topic/282787-clover-v2-instructions/#entry1853010</p>
+
+<h3 id="实验一">实验一</h3>
+
+<p>clover usb 引导</p>
+
+<p>http://tonymacx64.blogspot.hk/2013/03/guide-how-to-build-reliable-usb.html</p>
+
+<p>http://arstechnica.com/apple/2012/07/how-to-create-a-bootable-backup-mountain-lion-install-disk/
+diy 方式制造启动盘</p>
+
+<p>命令行挂载 dmg <code>hdiutil attach /path/to/diskimage.dmg</code></p>
+
+<p>kextcache 失败</p>
+
+<p>MBR 方式安装的黑苹果能否用 Clover 启动</p>
+
+<p>开机慢 http://bbs.pcbeta.com/viewthread-1082297-1-1.html</p>
+
+<h3 id="dsdt">DSDT</h3>
+
+<p>区分系统描述表（Differentiated System Description Table (DSDT)）
+OEM厂商必须为ACPI兼容的OS提供一个DSDT。这个DSDT包含Differentiated Definition Block，它能提供关于基本系统的实现和配置信息。OS总是在ACPI Namespace中插入DSDT信息，当系统启动的时候，而且绝不会删除它。</p>
+
+<p>SSDT – Secondary System Description Table</p>
+
+<p>http://bbs.pcbeta.com/forum.php?mod=viewthread&amp;tid=1288363</p>
+
+<p><a href="http://bbs.pcbeta.com/viewthread-484842-1-1.html">使用ACPI Patcher制作DSDT补丁</a></p>
+
+<h3 id="clover-1">Clover</h3>
+
+<p>如果要加载额外的 kext 一定要有以下三项条件，</p>
+<ol>
+  <li>/efi/drivers/FSInject.efi。</li>
+  <li>适当文件夹位置的 kexts 驱动。</li>
+  <li>开机选用加载选项 “Boot Mac OS X with extra kexts (skips cache)”。</li>
+</ol>
+
+<p>其他功能：
+/EFI/drivers32 文件夹：
+/EFI/drivers64 文件夹：
+进入 GUI 之前会载入的额外 EFI-drivers，通常使用于 mouse 及 其他系统格式的驱动，如果未使用可直接移除。</p>
+
+<p>/EFI/misc 文件夹：
+为开机按 F2 开机纪录 及 F10截图 储存位置，Fat32 专用，HFS+ 不可用。</p>
+
+<p>F1：帮助选单。
+F2：储存开机纪录（Fat32专用）。
+F4：储存原始 DSDT（Fat32专用）。
+F10：储存开机截图（Fat32专用）。
+F12：退出光盘。
+?：显示分区信息。</p>
+
+<p>cool: http://bbs.pcbeta.com/forum.php?mod=viewthread&amp;tid=1197452</p>
+
+<p>https://github.com/STLVNUB/CloverGrower/blob/master/Files/HFSPlus/x64/HFSPlus.efi</p>
+
+<h4 id="启动参数">启动参数</h4>
+
+<p>npci=0x2000 http://legacy.tonymacx86.com/viewtopic.php?p=222908</p>
+
+<p>OSX的安装</p>
+
+<p>0）恢复：用硬盘安装助手将懒人版镜像恢复到事先准备好的分区中，如果U盘空间足够，推荐划一分区存放OSX安装文件
+1）准备：将原/Extra/Extensions中的kext拷贝到Clover UEFI U盘的/EFI/BOOT/kexts/10.8中
+2）启动：用准备好的Clover U盘启动，按F8选择 UEFI：USB 字样，在Clover界面中找到安装盘，按空格，
+                用方向键移动光栅至（skip cache）一项， 回车进入安装</p>
+
+<h3 id="阶段总结">阶段总结</h3>
+
+<p>可以进入u盘 clover uefi 模式</p>
+
+<p>下载了 ntfs.efi hfsplus.efi</p>
+
+<p>clover 引导 安装程序出错，提示 ‘error loading drivers’</p>
+
+<p>clover 引导到已经装好的mac，一开始可以成功引导，忘记改了什么，现在进入
+登陆界面前就重启</p>
+
+<h3 id="显卡问题">显卡问题</h3>
+
+<p>尝试 GraphicsInjector</p>
+
+<p>如果你之前有执行过以下操作：
+①、在 com.apple.Boot.plist 加入过 EFI 代码
+②、安装、使用过任何显卡驱动
+③、在 DSDT 中加入相关显卡代码的</p>
+
+<p>请将它们一并移除/恢复，祝您顺利驱动！</p>
+
+<p>尝试 白屏修复</p>
+
+<p>http://bbs.pcbeta.com/viewthread-1310849-1-1.html</p>
+
+<p><a href="http://bbs.pcbeta.com/viewthread-1060313-1-1.html">ATI 5系和6系显卡驱动&amp;修改FB探讨</a></p>
+
+<h4 id="成功">成功</h4>
+
+<p>http://bbs.pcbeta.com/forum.php?mod=viewthread&amp;tid=1314577
+http://bbs.pcbeta.com/forum.php?mod=viewthread&amp;tid=1314269</p>
+
+<p>http://bbs.pcbeta.com/viewthread-1296580-1-1.html</p>
+
+<p>http://www.insanelymac.com/forum/topic/285756-hd-7xxx-can-we-eliminate-the-sleep-trick/page__st__120</p>
+
+
+</article>
+<div class="tag-container" >
+    
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Computer/Mac/mountain-lion-memo"
+ var disqus_config = function () {
+     this.page.title = "山狮备忘"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Computer/Mac/mountain-lion-memo/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

@@ -1,0 +1,369 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    笔记之舛·破 | DouO's Blog</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">笔记之舛·破</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-01-13">2013-10-22</span>
+
+    <span><a href="/categories#coder-ref" class="category category-coder waves-effect waves-light">coder</a></span>
+    
+</div>
+
+    <article>
+        <p>这篇文章还有<a href="/2013/08/16/the-pain-of-note">上一篇</a>，文章写得太长看起来太累，还是一分为二较好。这篇就直接说说用 ruhoh 来搭建自己的笔记系统（同文中 notes）的不足和一些解决的想法。去年还在<a href="/2012/08/20/something-about-ruhoh">这里</a>大谈静态生成页面的种种好处，如今想来未免太过理想。</p>
+
+<h3 id="优雅的命令行">优雅的命令行</h3>
+
+<p>Ruhoh 提供了完善的命令行接口，实际使用中会发现，操作文档是在 Terminal，编辑文档是在 Emacs，预览文档是在 Chrome，经常需要不断地切换上下文，悲催的是这三个软件都是操作系统般的存在，特别是 Chrome 很容易走神。一旦切换后走神，就会走得很远，短时间内都回不来。这样带来了很大的上下文切换成本，要保持专注就得尽量把时间控制在编辑器内(全命令行自然更少干扰，不过全命令行操作的理想早已离我远去了)。首先要简化操作文档的命令行，个人使用 <code>ruhoh</code> 这个命名空间就可以省略，之前就做个一次<a href="https://gist.github.com/douo/4452974">简化</a>，但是 notes 方面的操作命令还是很不方便需要进一步修改。至于预览切换方面，得益于 Markdown 的可读性，更多问题像是强迫症，一点点改动就要切换去看效果了，必须暗示自己只有格式方面的修改才需要去看预览。把命令行接口整合进 Emacs 确实是可行的，但是作为一个这么美好的愿景，当前还是想想就好。</p>
+
+<h3 id="git-有时也是累赘">Git 有时也是累赘</h3>
+
+<p>git 是一个非常流行的版本控制工具，功能强大适用广泛。但有时太强大也不是好事，notes 最需要的还是同步功能，也就是说 git 只是用来构建一个分布式仓库，版本控制反而不是很重要，但现在做一次同步太过繁琐（add、commit、push），每次还都必须写上 comment，而且提交到服务器后都会自动编译发布，一次同步要花费几十秒十分恼人。</p>
+
+<pre><code># time git push
+0.02s user 0.02s system 0% cpu 21.367 total
+</code></pre>
+
+<p>同样要简化同步命令，考虑为每个 resource 增加一个一次完成同步的指令（我承认自动 comment 没有意义，但是 comment 本身在大多数情况下对于 notes 也是没有意义的）一步到位，抛弃重复繁琐的操作。对于同步速度的影响，一个是物理网速，这个无解，另一个是每次同步后还要编译发布，这个可以考虑分离同步和发布，同步的时候推送到同步分支，发布的时候推送到 master 分支，这个优化下 git hook 应该可以解决，只是又增加了逻辑复杂度。</p>
+
+<h3 id="搜索">搜索</h3>
+
+<p>notes 最遗憾的一点就是搜索的缺失了，没有之一。想想看一个所谓知识仓库没了检索功能，就等于是马儿没了腿，不要说跑得快了就连跑也跑不起来，只能沦为摆设了。静态生成的网站在搜索方面确实是硬伤，但还是有一些办法的，比如说谷歌的定制搜索，这对于一般的博客还是足够的，但对于一个个人使用的几乎无人访问的 notes 来说，谷歌的收录能做到多及时能做到多全面呢？确实是个疑问。</p>
+
+<h4 id="swiftype">Swiftype</h4>
+
+<p>谷歌之外还有别的搜索公司（某百：是我吗？是说我吗？）， <a href="https://swiftype.com/">swiftype</a>， 一个专门做站内搜索的公司，免费账号每周一抓，对于博客来说还可以接受，对于笔记来说有点滞后了，最多 1000 份文档，似乎也不是那么难突破。中文支持也是个问题，有待验证。</p>
+
+<p>很吸引人的一点就是 swiftype 的 API。swiftype 可以分 documentType 自己设计 schema，这一点很酷。然后可以自己提交，这样就不用让服务器定时抓取了吗? 仍然有待深究。</p>
+
+<h4 id="evernote">Evernote</h4>
+
+<p>Evernote 怎么乱入了？其实还有一个办法就是通过 <a href="http://dev.evernote.com/doc/start/ruby.php">Evernote  API</a>，每次发布的时候同步输出到 Evernote ， 在 Evernote 中做搜索。如果真的可行的话，这也不失为一个好办法。</p>
+
+<h3 id="结构">结构</h3>
+
+<p>搜索方面的遗憾，通过结构还是可以弥补少许回来的，一个良好的结构不但看起来赏心悦目，对检索也起到很大的帮助。notes 中的结构实际就是分类问题。组织信息是一门很高深的学问。分类学本身就<a href="http://en.wikipedia.org/wiki/Taxonomy_(general)">是一个学科</a>，做好分类是很不容易的，如何保证每个子类是互斥的，当我创建笔记的时候分类作为必填的字段，要怎么分类才能降低为新笔记定位分类的难度。为了降低选择困难症的困扰，我决定把分类单独提取出来，对于笔记来说分类只能从一份受控词表选择。这个分类表我另外维护，根据自己的兴趣和专业先设计好分类，<a href="categories.org">categories.org</a> 是这份非常初期的分类描述文件，一旦有修改的需求，必须先修改这份表，笔记里才能够使用。</p>
+
+<h3 id="更丰富的元数据">更丰富的元数据</h3>
+
+<p>实际上去掉分类、标题和一些自动生成的元数据这里的元数据就是专指标签，作为手动生成的元数据，我觉得还要是遵循够用就好的原则，减少人力投入，所以想了几个还是只有标签是必须。标签对于检索和归纳都起到很重要的作要。 ruhoh 支持标签，但仅仅是纯手写的标签没有任何辅助，而实际我们打标签的时候更偏向于使用已使用过的标签，不然很容易打上同义词或者文本上细微差别意义完全一样的标签。所以，我希望加一个标签建议功能。需要监听目录的时候，实时更新一个标签列表文件，这个倒容易，接入 Emacs 的自动完成功能可能会麻烦一点。</p>
+
+<h3 id="不要用一个工具来解决所有问题">不要用一个工具来解决所有问题</h3>
+
+<p>notes 只是一个写作和归档的平台，这远远不够。记笔记，说是一件事其实还有多个方面的，知识管理，记忆，辅助学习。企图用 notes 来解决，未免是一种自我束缚。各个细分的领域还有各种专用的工具发挥着强大的作用。</p>
+
+<h4 id="evernote-1">Evernote</h4>
+
+<p>Evernote 确实有把所有事情都包揽给自己做的野心，作为未来人类大脑外部存储器的种子选手，等到有一天可以无缝对接了，那就无敌了，可惜理想很丰满，现实很骨感，那一天还远远看不到。</p>
+
+<p>不过，Evernote 还是有很多优点的，全平台支持，强大的元数据管理，内文搜索，各种便利的工具（附件，拍照，剪切，收藏，地理位置等等），文本段加密，开放 API。看起来让人很心动吧。可惜两个缺点让我要逐步摆脱对其的使用。</p>
+
+<p>所见即所得的编辑模式，让人在写作的时候还需要考虑<strong>样式</strong>这个问题，这样说可能会觉得无所谓小问题而已，但当为一个看不到的未关闭的标签导致格式失控而抓狂的时候，才会明白这个问题到底有多小。另外有 Emacs 这样的编辑器为何还要用 evernote 那相对繁琐的编辑器呢。</p>
+
+<p>Evernote 确实很合适来做知识管理，但是 notes 这方面并不差，瑕不掩瑜，再加上编辑器的优势，权衡之下我甚至觉得 notes 的得分更高些。另一方面，快速记录，是 notes 的短板，特别是移动端，可以说直接出局。而 Evernote 有了各种便利工具的辅助，快速记录方面可以说做的非常强大。但是，软件庞大，启动缓慢，甚至连移动 App 也是那么庞大，拿来做便签或者快速记录就显地臃肿了，这方面有个专家，就是 Google Keep。</p>
+
+<h4 id="keep">Keep</h4>
+
+<p>Keep 非常快，非常简约，特别是在 Android 平台，作为谷歌亲儿子，不用他都觉得亏。其他平台目前貌似只有 web app 或第三方可用。</p>
+
+<p>但是有两个缺点，让人觉得 Keep 只适合做临时快速记录的工具。</p>
+
+<p>其一，作为记录个人信息的 App 竟没有提供加锁的功能，至少可以为封存的文档加个访问密码吧。</p>
+
+<p>其二，经历过 Reader 关闭事件的同学，都知道谷歌的服务有多危险吧，作为随时可能成为谷歌众多关闭服务的一员，我竟找不到一个可以导出 Keep 的选项。</p>
+
+<p>其他的，比如辅助工具的缺乏，好比网页剪切无能，就当是为快速所做的牺牲吧。还别忘了无所不在的墙，偶尔让你抽风一次估计就得哭了。</p>
+
+<h4 id="xmind">XMind</h4>
+
+<p>免费开源的脑图工具，贫苦大众的最佳选择。免费版的功能已经足够好了，用 Google Drive 解决同步问题。</p>
+
+<h3 id="还是习惯的问题">还是习惯的问题</h3>
+
+<p>说到底，工具毕竟是工具。人才是重点，说了这么多工具的弱点，其实最应该反思的还是人性的弱点，又恰恰是我没有反省的（懒惰、短视、贪婪，太多劣根性了）。一个好的习惯，才能发挥工具的价值。希望以习惯为切入点，总结出一个记录流程，并依其执行，什么时候整理，什么时候回顾，都做好计划。<strong>计划并坚持</strong>，一个好的使用习惯才是最关键的。</p>
+
+<h3 id="公开还是让人担忧">公开还是让人担忧</h3>
+
+<p>差点忘了提这个，无可否认隐私是重要的，什么都公开并不能说明有多么好或者多么坦荡。首先，当自己写一个东西时，意识到写完就会被人看到，肯定会有所顾忌的。即便是有了顾忌，还是有可能不小心泄露出一些不能公开的信息也会造成不必要的困扰。</p>
+
+<p>ruhoh 现在把位于 resource 内的 draft 文件夹内的文档都当成 draft 而忽略了 draft type。对于 notes 这种目录结构敏感的集合来说，还是用 draft type 属性比较合理。而默认笔记都是不公布的，移除掉 draft 这个属性才可以发布出来。</p>
+
+    </article>
+    <div class="tag-container" >
+        
+        <div class="chip">
+        <a href="/tags#ruhoh-ref">
+            ruhoh
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#笔记-ref">
+            笔记
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#Evernote-ref">
+            Evernote
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#google keep-ref">
+            google keep
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#swiftype-ref">
+            swiftype
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#todo-ref">
+            todo
+        </a>
+        </div>
+        
+    </div>
+<div class="post-pager">
+    
+    <a href="/2013/10/07/staticfile-org/">上一篇：staticfile.org</a>
+    
+    
+    <a href="/2014/02/05/the-year-of-the-snake/" style="float:right;" >下一篇：癸巳年小结</a>
+    
+</div>
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/2013/10/22/the-pain-of-note-2"
+ var disqus_config = function () {
+     this.page.title = "笔记之舛·破"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/2013/10/22/the-pain-of-note-2/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

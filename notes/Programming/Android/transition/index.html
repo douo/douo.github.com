@@ -1,0 +1,466 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    Transition | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">Transition</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-11-30">2017-03-14</span>
+    
+</div>
+
+<article>
+    <h3 id="transition">Transition</h3>
+
+<p>On the next display frame, the framework</p>
+
+<p>过场动画（transition），在 Kitkat 引入新 API。是 Android 用来定义场景切换之间的过渡效果。场景切换包括 Activity 之间的，Fragment 切换，甚至 PopupWindow 还有 Scene 之间，</p>
+
+<h3 id="内容过渡content-transition">内容过渡（content transition）</h3>
+
+<h4 id="activity">Activity</h4>
+
+<p>Activity 实际也就是 Windows 两个最顶层 UI 之间的切换效果。</p>
+
+<p>Activity A 到 Acitivity B 之间的有四种效果：</p>
+
+<ol>
+  <li>Enter，A -&gt; B, B enter.</li>
+  <li>Exit，A -&gt; B, A exit.</li>
+  <li>
+    <p>Return, A &lt;- B, B return. 
+   只有 B 调用<code>finishAfterTransition</code>，B 才会出现这个过渡效果，直接 <code>finish</code> 就是无过渡效果。onBackPress 调用 <code>finishAfterTransition</code>
+   如果未设置 ReturnTransition，那么 TransitionManager 将会复用 EnterTransition</p>
+  </li>
+  <li>Reenter, A &lt;- B, a reenter.
+   如果未设置 ReenterTransition，那么 TransitionManager 将会复用 ExitTransition</li>
+</ol>
+
+<p>例子 A Activity:</p>
+
+<pre><code>Slide slideTransition = null;
+slideTransition = new Slide();
+slideTransition.setSlideEdge(Gravity.LEFT);
+slideTransition.setDuration(500);
+slideTransition.excludeTarget(v, true);
+getWindow().setReenterTransition(slideTransition);
+getWindow().setExitTransition(slideTransition);
+</code></pre>
+
+<p>B Activity</p>
+
+<pre><code>supportFinishAfterTransition();
+</code></pre>
+
+<h4 id="fragment">Fragment</h4>
+
+<p>Fragment 的 transition 接口是在 Api 22 添加的。Fragment 也有 4 种效果：</p>
+
+<ol>
+  <li>Enter，初始化场景，由无到有的过渡效果，</li>
+  <li>Exit，场景切出，比如 removed hidden detached（ 不是 popping the back stack 导致的，比如代码直接调用相应的方法）</li>
+  <li>Return，场景切出，用于 removed hidden detached（popping the back stack）</li>
+  <li>Reenter，因 popping back stack 导致的场景切入</li>
+</ol>
+
+<p>例子：</p>
+
+<pre><code>getSupportFragmentManager()
+                        .beginTransaction()
+                        .add(R.id.fragment_container, A)
+                        .addToBackStack(null)
+                        .commit();
+</code></pre>
+
+<p>上面的代码一次执行，A 会使用 Enter 效果。第二次执行，A1 会使用 Enter 效果，A 会 Exit 效果。接下来按返回键，A1 Return，A Reenter。</p>
+
+<h4 id="popupwindow">PopupWindow</h4>
+
+<p>Android M 之后，PopupWindow 也对 Transition 做了支持。PopupWindow 有两种效果。</p>
+
+<ol>
+  <li>Enter, show 的过渡效果</li>
+  <li>Exit，dismiss 的过渡效果</li>
+</ol>
+
+<p>ExitTransition，在 API 24 有 bug ，通过 <code>showAtLocation</code> 显示的 PopupWindow，dismiss 的时候是不会有 ExitTransition 的。具体见：<a href="https://code.google.com/p/android/issues/detail?id=227766">Issue 227766 - android - No Exit Transition occurs on PopupWindows when using PopupWindow.showAtLocation on L - Android Open Source Project - Issue Tracker - Google Project Hosting</a></p>
+
+<h4 id="总结">总结</h4>
+
+<p>重新考虑 Activity 之间的过渡，A -&gt; B，实际是四个场景两个过渡，场景 1 ：『A 可见』，通过 exit transition  进入场景 2：『A 消失』。另外一个过渡是场景 3：『B 不可见』通过 Enter Transition 到 场景 4 『B 可见』。</p>
+
+<p>这一种可见与不可见之间的过渡，称之为<strong>内容过渡</strong>（Content Transition）。content Transition 从无到有，从有到无。 Activity、Fragment 之间还有 PopupWindow 显示消失的 Transition 便是 <strong>内容过渡</strong>。</p>
+
+<p>这类过渡决定了内容里视图如何离开或进入场景。这一类可见与否的转换专门有个 Transition 子集 Visibility 来实现。</p>
+
+<pre><code>    Visibility
+       |
+       |-- Fade
+       |-- Slide
+       |-- Explode
+</code></pre>
+
+<p>另外 Widows 有个 <code>FEATURE_CONTENT_TRANSITIONS</code>，为 Activity 多次 setContentView 之间提供过渡效果<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup>，对 AppCompatActivity 无效。</p>
+
+<h3 id="共享元素过渡shared-element-transition">共享元素过渡（Shared Element Transition）</h3>
+
+<h4 id="scene场景">Scene（场景）</h4>
+
+<p>Transtion 框架类比舞台的概念，<code>Transition</code> 用来表示两幕戏之间的过渡效果，过幕的时候，布景要移动，角色要化妆等等。这些过幕效果由 <code>TransitionManager</code> 统筹。比如 Activity 的过渡，Window 就是舞台，两个 Activity 的 ContentView 就是场景。</p>
+
+<p>Scene 框架提供了一个更通用的抽象，SceneRoot 是一个 <code>ViewGroup</code> 也就是舞台， <code>Scene</code> 是一个场景，它也是一个 <code>ViewGroup</code> 可以从 layout 或 ViewGroup 构造。ViewGroup 内的各种子类信息，相当于舞台上的布景角色。Scene 就是用来存放这个 ViewGroup，</p>
+
+<p><code>TransitionManage.go(Scene,Transition)</code> 就是用新的场景 B（Scene）通过过渡效果换掉舞台上已有的场景 B（Scene）。</p>
+
+<p>Scene 定义了应用程序的UI的给定状态，而<em>过渡</em>定义了两个场景之间的动画变化。Transition 在起始和结束场景中捕获每个视图的状态，并根据两个场景之间视图的差异来创建动画</p>
+
+<h3 id="shared-element">Shared Element</h3>
+
+<p>另外一类便是，shared element</p>
+
+<p>How and where are shared element views drawn during the transition?</p>
+
+<p>shared element view instances are not actually “shared” across Activities/Fragments.</p>
+
+<p>shared elements are drawn on top of the entire view hierarchy in the window’s ViewOverlay by default</p>
+
+<p>viewgroup</p>
+
+<p>Activity 的 shared element 是在 ViewOverlay 绘制的。所以  shared element 可能会覆盖掉 UI</p>
+
+<p>Shared elements are animated by the called Activity/Fragment’s enter and return shared element transitions</p>
+
+<p>The final transitions, shared element exit/return, are a little different. These are used in the calling Activity to execute a Transition before the shared element is transferred.</p>
+
+<p>changeTransform</p>
+
+<p>共享元素过渡只能在 Activity 之间或 Fragments 之间，不能再 Activity 与 Fragment 之间。</p>
+
+<p>见 FragmentTransition 源码，所有 shared element 相关的代码都会有下面这句判断</p>
+
+<pre><code>    if (inFragment == null || outFragment == null) {
+        return null; // no transition
+    }
+</code></pre>
+
+<p>而且 Fragment 之间还得处于同一个视图容器，</p>
+
+<pre><code>   if (fragmentManager.mContainer.onHasView()) {
+        sceneRoot = (ViewGroup) fragmentManager.mContainer.onFindViewById(containerId);
+    }
+    if (sceneRoot == null) {
+        return;
+    }
+</code></pre>
+
+<h4 id="深入源码">深入源码</h4>
+
+<p>Transition 有两种状态，开始态与终止态，在开始态中记录下各个 View 需要过渡的属性值，在终止态中也记录下各个 View 需要过渡的属性值，最后计算这些属性值得变化动画，并播放出来。</p>
+
+<p><code>TransitionValue</code> 和 View 是一一对应的，用来存放 View 需要过渡的属性的值</p>
+
+<p><code>TransitionValueMap</code> 是存放各个 View 和 TransitionValue 的地方，保存 View 和 Transition 一一对应的关系。两个状态都各有一个 <code>TransitionValueMap</code>，分别是 <code>mStartValues</code> 和 <code>mEndValues</code>。</p>
+
+<p>Transition 如何断定两个状态的 View 是同一个 View，并不单单看是否是同一个实例，Transition 有四种判断方法，分别是 transitionName 、同一个实例、id、itemId，默认的顺序如下：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span><span class="o">[]</span> <span class="no">DEFAULT_MATCH_ORDER</span> <span class="o">=</span> <span class="o">{</span>
+        <span class="no">MATCH_NAME</span><span class="o">,</span>
+        <span class="no">MATCH_INSTANCE</span><span class="o">,</span>
+        <span class="no">MATCH_ID</span><span class="o">,</span>
+        <span class="no">MATCH_ITEM_ID</span><span class="o">,</span> <span class="c1">// 对于 ListView</span>
+    <span class="o">};</span>
+</code></pre></div></div>
+
+<p>Transition 有个 setMatchOrders 方法，可以更改默认顺序。<code>TransitionValueMap</code> 还相当于一索引表，保存了这些 match 类型和 View 的对应关系。</p>
+
+<p>判断两个 TransitionValue 是同一个 View后，便各自传入列表 <code>mStartValuesList</code> 和 <code>mEndValuesList</code> 中。所以这个两个列表中的 <code>TransitionValue</code> 是一一对应的（索引相同），至于那些至于 startValue 或者 endValue 的 View，另外一个列表对应的位置便是 <code>null</code>。 最后遍历两个列表，传入子类的 <code>createAnimator(ViewGroup sceneRoot, TransitionValues startValues, TransitionValues endValues)</code> 方法。</p>
+
+<p>TransitionValue 是可以在多个 Transition 中共享的，所以 key 的取值必须注意唯一性<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote" rel="footnote">2</a></sup>。</p>
+
+<p><code>TransitionManage.go(Scene,Transition)</code>，做了三件事，</p>
+
+<ol>
+  <li>捕获 sceneRoot 中 view 的状态，作为起始态（sceneChangeSetup）</li>
+  <li>清空 sceneRoot，将新 Scene 的视图添加进 sceneRoot （scene.enter）</li>
+  <li>在 preDraw 回调中，再次捕获 sceneRoot 的属性，作为终止态（sceneChangeRunTransition）
+3.1 开始过渡动画。</li>
+</ol>
+
+<p><code>TransitionManager.beginDelayedTransition</code> 也是同样的道理，只是没有第二步。这是个很常用的方法，Activity、Fragment 之间的过渡效果，最终也是调用它实现的。</p>
+
+<p>ExitTransitionCoordinator</p>
+
+<h3 id="其他">其他</h3>
+
+<h4 id="listview-或-recycleview-transition-到-viewpager-activity">ListView 或 RecycleView transition 到 ViewPager Activity</h4>
+
+<p>用 <code>ActivityCompat.postponeEnterTransition(this);</code> 和  <code>ActivityCompat.startPostponedEnterTransition(ImagePreviewActivity.this)</code> 来延迟 transition 的执行，等到 shared element 加载到 view tree 后才开始 transition</p>
+
+<p><strong>默认的 transition 什么时候执行？</strong></p>
+
+<p>https://stackoverflow.com/questions/27304834/viewpager-fragments-shared-element-transitions</p>
+
+<p>https://stackoverflow.com/questions/27304834/viewpager-fragments-shared-element-transitions</p>
+
+<ul>
+  <li>ListView 或 RecycleView 等延时初始化的 UI 如何设置 EnterTransition –&gt; https://plus.google.com/+ChrisBanes/posts/GnciVAgf9LC</li>
+  <li>AdapterView 如何展开</li>
+  <li>有 sharedElement 之间的过渡动画</li>
+  <li>transition 在什么时候执行？ 绘制下一个画面之前（preDraw 回调）</li>
+</ul>
+
+<h3 id="xml">xml</h3>
+
+<p>transition manager 也支持用 xml 定义。</p>
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>见 <a href="https://stackoverflow.com/questions/28975840/feature-activity-transitions-vs-feature-content-transitions">StackOverFlow</a> <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2" role="doc-endnote">
+      <p>见 <a href="http://grepcode.com/file/repository.grepcode.com/java/ext/com.google.android/android/5.1.1_r1/android/transition/TransitionSet.java#448">TransitionSet.java#448</a> <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+</article>
+<div class="tag-container" >
+    
+    <div class="chip">
+        <a href="/tags#transition-ref">
+            transition
+        </a>
+    </div>
+    
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Programming/Android/transition"
+ var disqus_config = function () {
+     this.page.title = "Transition"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Programming/Android/transition/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

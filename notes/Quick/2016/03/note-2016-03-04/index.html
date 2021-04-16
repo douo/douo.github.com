@@ -1,0 +1,398 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    2016年03月04日杂记 | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">2016年03月04日杂记</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-11-30">2016-03-04</span>
+    
+</div>
+
+<article>
+    <h3 id="activity">Activity</h3>
+
+<h4 id="bundle-结构">Bundle 结构</h4>
+
+<pre><code>Bundle[{
+    android:viewHierarchyState
+        =Bundle[{
+            android:views={
+                16908290=android.view.AbsSavedState$1@b0e11200,
+                2131558485=android.view.AbsSavedState$1@b0e11200,
+                2131558486=android.view.AbsSavedState$1@b0e11200,
+                2131558512=TextView.SavedState{b103b178 start=-1 end=-1 text=5137},
+                2131558513=android.view.AbsSavedState$1@b0e11200
+            }
+        }
+        ],
+    rand=5137
+}]
+</code></pre>
+
+<h4 id="onsaveinstancestate">onSaveInstanceState</h4>
+
+<p>不会导致 onDestroy 的 onStop 之前调用，Android 不知道 Activity 退到后台后还会不会恢复。</p>
+
+<p>会导致 onDestroy 的 onStop ，比如按 back 键或者 finish。Android 知道 onStop 后将会 onDestroy</p>
+
+<h4 id="onrestoreinstancestate">onRestoreInstanceState</h4>
+
+<p>onRestoreInstanceState 仅当 onCreate saveInstanceState 不为 null 时才会调用，也就是说这个方法可以断言 Activity 是处于恢复状态中；而 onCreate 需要判断 saveInstanceState 是否为 null</p>
+
+<ul>
+  <li>所处的生命周期不同，onRestoreInstanceState 在 onStart 与 onResume 之间调用，也就是此时 UI 已经初始化好了，Activity 也获得当前窗口的控制权，就差绘制在屏幕上了；而 onCreate 中甚至可以在 setContentView 之前恢复状态。</li>
+  <li>这个方法也是 Activity 恢复当前存储的 View’s SaveState 的地方{@link android.view.Window#restoreHierarchyState}</li>
+</ul>
+
+<h5 id="什么时候能触发">什么时候能触发</h5>
+
+<ul>
+  <li>onConfigurationChange</li>
+  <li>将 Activity 置于后台，然后杀死进程，再重新切换回去。能模拟 Activity 在后台被杀的情况。</li>
+</ul>
+
+<h4 id="view-什么时候恢复">View 什么时候恢复</h4>
+
+<pre><code>protected void onRestoreInstanceState(Bundle savedInstanceState) {
+    if (mWindow != null) {
+        Bundle windowState = savedInstanceState.getBundle(WINDOW_HIERARCHY_TAG);
+        if (windowState != null) {
+            mWindow.restoreHierarchyState(windowState);
+        }
+    }
+}
+</code></pre>
+
+<p>PhoneWindow#restoreHierarchyState</p>
+
+<pre><code>@Override
+public void restoreHierarchyState(Bundle savedInstanceState) {
+    if (mContentParent == null) {
+        return;
+    }
+
+
+    // 恢复 View 状态
+    SparseArray&lt;Parcelable&gt; savedStates
+            = savedInstanceState.getSparseParcelableArray(VIEWS_TAG);
+    if (savedStates != null) {
+        mContentParent.restoreHierarchyState(savedStates);
+    }
+
+    // 恢复焦点
+    // restore the focused view
+    int focusedViewId = savedInstanceState.getInt(FOCUSED_ID_TAG, View.NO_ID);
+    if (focusedViewId != View.NO_ID) {
+        View needsFocus = mContentParent.findViewById(focusedViewId);
+        if (needsFocus != null) {
+            needsFocus.requestFocus();
+        } else {
+            Log.w(TAG,
+                    "Previously focused view reported id " + focusedViewId
+                            + " during save, but can't be found during restore.");
+        }
+    }
+
+    // restore the panels
+    SparseArray&lt;Parcelable&gt; panelStates = savedInstanceState.getSparseParcelableArray(PANELS_TAG);
+    if (panelStates != null) {
+        restorePanelState(panelStates);
+    }
+
+    if (mDecorContentParent != null) {
+        SparseArray&lt;Parcelable&gt; actionBarStates =
+                savedInstanceState.getSparseParcelableArray(ACTION_BAR_TAG);
+        if (actionBarStates != null) {
+            doPendingInvalidatePanelMenu();
+            mDecorContentParent.restoreToolbarHierarchyState(actionBarStates);
+        } else {
+            Log.w(TAG, "Missing saved instance states for action bar views! " +
+                    "State will not be restored.");
+        }
+    }
+}
+</code></pre>
+
+<h4 id="saveinstancestate-应该保存什么">SaveInstanceState 应该保存什么？</h4>
+
+<ul>
+  <li>用户操作</li>
+  <li>onSaveInstanceState() function has to be used for saving small objects, not for heavy objects.</li>
+</ul>
+
+<p>以 ImageView 为例，ImageView 中的 Drawable 是不会被保存的。</p>
+
+<p>ScrollView 的滚动位置就是一个要保存的经典例子</p>
+
+<p>在 PhoneWindow 中也可看到当前焦点也会被保存。所以总的来说就是要保存用户操作。</p>
+
+<p>但是 Android 是鼓励 <strong>Edit in place</strong> 逻辑的。也就是说编辑即生效。比如 CheckBox 但我们打勾的时候，这个数据就实时写入，更新到 SharePerferecn 或数据库中。</p>
+
+<p>![Keep 截图]((Screenshot_2016-03-10-22-34-59.png)</p>
+
+<p>当然，对于 EditText 可能不必要加个 TextWatcher 每次文本有变动就更新到数据源。那么我们可以在 onStop 方法更新到数据源。因为在 onStop 之前 Activity 是不会被系统回收掉的。文档鼓励是在 onPause <strong>因为 3.0 之前 onStop 可能不被调用就会被干掉。比如说 Actvity 已经不是不在顶部，但仍然可见。这时也可能被杀掉…</strong> 3.0 之后两个方法任意一个保存数据都没什么区别，但个人选择 onStop 可以减少保存数据的频率。FYI：http://stackoverflow.com/a/29496430 但是注意这里应该选择异步方法更新数据，才不会阻塞到 UI。</p>
+
+<p>既然数据在 onPause 或 onStop 中已经保存。那也就没必要再 onSaveInstanceState 中再保存一次。Actvity 重建的时候再从数据源获取数据更新到 UI 就可以。</p>
+
+<p>但是不是所有数据源都像 SharePreference 或本地数据库那样低的写入成本。如果数据源在网络怎么办。更新数据的成本大，而且很多时候更新数据源意味着发布数据，这就不能套上 <strong>Edit in place</strong> 的逻辑了。</p>
+
+<p><img src="Screenshot_2016-03-10-22-29-59.png" alt="Google plus 评论截图" /></p>
+
+<p>这些临时数据即属于用户操作，又不能或者没必要缓存起来，那就应该在 onSaveInstanceState 中保存了。</p>
+
+<p>需要用户长时间输入的数据，那就应该设计一个草稿箱了。</p>
+
+<h3 id="fragment">Fragment</h3>
+
+<h4 id="没有-onrestoreinstancestate">没有 onRestoreInstanceState</h4>
+
+<h4 id="fragmenttransactiondetachattach">FragmentTransaction#detach()/attach()</h4>
+
+<p>detach 会使 fragment 到 destroy view 状态，其 view 树 会分发 save instance state 事件但 fragment 本身不会调用 save instance state。</p>
+
+<p>Fragment 仍然是同一个实例</p>
+
+<h5 id="代码要怎么写">代码要怎么写</h5>
+
+<p>通过网络获取数据后，更新到 Fragment 的界面。Fragment detach/attch 友好的代码要怎么写</p>
+
+<h3 id="view">View</h3>
+
+<p>http://trickyandroid.com/</p>
+
+</article>
+<div class="tag-container" >
+    
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Quick/2016/03/note-2016-03-04"
+ var disqus_config = function () {
+     this.page.title = "2016年03月04日杂记"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Quick/2016/03/note-2016-03-04/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

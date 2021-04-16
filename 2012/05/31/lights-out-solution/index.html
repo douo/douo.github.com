@@ -1,0 +1,368 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    LightsOut 解法小探 | DouO's Blog</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">LightsOut 解法小探</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-12-01">2012-05-31</span>
+
+    <span><a href="/categories#coder-ref" class="category category-coder waves-effect waves-light">coder</a></span>
+    
+</div>
+
+    <article>
+        <p><a href="wp-content/uploads/2012/05/light_out_banner.png"><img src="wp-content/uploads/2012/05/light_out_banner.png" alt="" title="light_out_banner" /></a></p>
+
+<p>Lights Out(关灯游戏) 是一款经典的老游戏，维基百科上说Lights Out
+是在1995年由 <a href="https://en.wikipedia.org/wiki/Tiger_Toys" title="Tiger Toys">Tiger
+Toys</a> 第一次发行。接触它却在去年的时候Gnome3的小游戏里。Lights
+Out 的规则很简单，游戏由一个 5 * 5
+格的棋盘构成，每格子都是一颗灯，灯肯定是有两种状态，亮或者暗。游戏一开始棋盘上会亮起一些灯，你的目标就是把所有亮起灯都关掉，亮起的灯点一下就会关掉，但游戏当然不会这么简单，点一下灯的时候还会有一些附加影响，准确的说就是点一下灯的时候会切换它和四周也就是是上下左右的灯的状态。找到了一个在线的Lights
+Out，<a href="http://www.addictinggames.com/puzzle-games/lightsout.jsp">http://www.addictinggames.com/puzzle-games/lightsout.jsp</a>。一般能过第五关就差不多了吧。</p>
+
+<p>不过即便是第一关，如果一开始摸不到基本的门道，乱点的话基本上想点回来是很难的，为什么？\(2^{25}\)等于多少
+，作为一个合格的码农应该脱口而出，33554432
+！好吧我承认我也是用计算器的。要玩这游戏首先要明白一个道理：你关的不是灯，是寂寞…噢不，是开关！先不管棋盘上的灯光状态如何，也不管一个开关可以控制多少颗灯，只要知道你点一下方块，就等于切换一次开关，开关就从状态1转换到状态0，再点一下方块，开关又从状态0切换回状态1。这里的0和1也就是开关开和关两种状态，明白这一点很重要，把所有开着的开关都关闭就是完成游戏，所有开着的开关都关闭，肯定没有灯是亮的是吧，但是反过来并不一定成立哦，后面会说到这个。它还可以继续往下推，第一点，<strong>每一个方块只有点第一下才是有意义的</strong>，点第二下也就切换会原始状态，点N下也就是来来回回切换而已。第二点，<strong>开关关闭的顺序无关紧要</strong>。从上往下点，从下往上点都没关系。</p>
+
+<p>如果你有迈克那么牛逼的话，相信现在已经能够透过亮着灯光看到后面隐藏的开关了吧，看不到也没关系先想象一下。我们知道一个开关控制着上下左右和本身的灯光，相对的，<strong>一颗灯亮与否，取决于它本身和四周开关的状态，当有奇数个开关开着的时候，灯就亮，偶数个的时候灯就是暗着的</strong>。再看看第一行，第一行上的一颗灯，能影响到它的开关有本身、左右，这三个都是第一
+行上的开关，另外还有下方位于第二行的开关，而上方的开关因为是第一行所以是不存在的。现在假设一下，第一行所有开关都被关闭了，那么此时第一行如果还有亮着的灯，能控制这些灯的开关就只剩下第二行的开关，一颗亮着的灯，显然第二行其对着的开关肯定是打开的，相反的，第一行的灯是暗的，那么第二行对应的开关肯定是关闭的，这样第二行打开的开关就是其上面的灯还亮着的那些。照着第一行亮着的灯把第二行的开关全部关掉，现在一行的灯应该是全暗的，第二行的开关也全部关闭了，第二行还亮着的灯也就只有第三开关能影响到了。同样的，此时第二、三行的情况就跟前面第一、二行的情形一样了。以此类推，第三、四、五行的开关都可以这样关掉，此时游戏也就解决了。终于有一条有用的结论了，<strong>当第一行的开关全部关闭后，其他行的开关通过一个唯一且固定的模式来把开关全部关闭，也就是说对应着上一行亮着的灯把下一行对应的开关关闭就行。</strong>有了这个结论，现在已经把游戏的难度降低不少了，我们只要猜对第一行打开的开关就可以把游戏K.O.了。这个结论，我们把问题猜测的规模从\(2^{25}=33554432\)降到\(2^5=32\)。当然这样有点无趣，也不会变得完全没有难度。
+但对于计算机来说，那确实是易过吃碗水，遍历第一行的所有可能性，再校验是不是一个解。</p>
+
+<p>但是这种方法不能脱离暴力搜索，始终有点丑陋。我在看Gnome Lights Out
+的源码的时候，发现了一篇论文讨论了如何用线性代数的方法来解决这个问题。非常简单的一个方法。</p>
+
+<p>首先我们随便找一个开局状态，1表示灯是亮的，0表示灯是暗的。如下所示，</p>
+
+<p><a href="wp-content/uploads/2012/05/light_out_state_1.png"><img src="wp-content/uploads/2012/05/light_out_state_1.png" alt="&lt;" title="light_out_state_1" /></a></p>
+
+\[\begin{vmatrix}1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\1 &amp; 1 &amp; 1 &amp; 1 &amp; 0 \\1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 \\1 &amp; 1 &amp; 1 &amp; 1 &amp; 0 \\1 &amp; 0 &amp; 0 &amp; 0 &amp; 0\\\end{vmatrix}\]
+
+<p>把这些数字放到一列里并标上号，就成了向量\(\vec b=(b_{1,1},b_{1,2},\cdots,b_{1,5},b_{2,1},\cdots,b_{5,5})^T\)</p>
+
+<p>当我们按一下开关，\(\vec b\)又会发生什么变化呢？比如按下位于坐标(1,1)的开关，记为\(s_{1,1}\)。当\(s_{1,1}\)按下时，他会改变\(b_{1,1} ,b_{1,2},b_{2,1}\)的状态，如果灯光原来的状态为0，那么就变成1，原来为1就变成0。这个刚好是GF(2)上的加法，GF(2)怎么说呢，其实和一般的数域没什么区别，因为只有两个元素
+0， 1 。那么在这个域上 1 + 1 就等于 0
+。我们把\(s_{1,1}\)也用向量表示，它就是这个样子的</p>
+
+\[\vec s_{1,1}=(1,1,0,0,0,1,0,\cdots,0)\]
+
+<p>当我们在游戏中点一下开关\(s_{1,1}\)，数学上就等于\(\vec b + \vec s_{1,1}\)
+。我们还可以继续表示其他开关的向量，比如，</p>
+
+\[\vec s_{1,2}=(1,1,1,0,0,0,1,\cdots,0)\]
+
+<p>\(\vec s_{5,5}=(0,\cdots,0,1,0,0,0,1,1)\)
+ 。</p>
+
+<p>前面我们说过，这个游戏的目的就是把全部打开着的开关都关闭了，开关的状态我们已经用\(s_{1,1},\cdots,s_{5,5}\)
+表示，不多不少刚好25个，如果我们用1来表示这个开关是打开，0来表示关闭，那么一个游戏初始的开关状态也可以用一个向量来表示，</p>
+
+<p>\(\vec x=(x_{1,1},x_{1,2},\cdots,x_{1,5},x_{2,1},\cdots,x_{5,5})^T\)
+。由于游戏的开关状态时未知的，是我们玩这个游戏的目的，所以这里用x表示。\(\vec x\)即是初始局面打开的开关，也是灯全暗变换到棋盘初始状态所需要点开的开关，所以我们也把\(\vec x\)称为一个策略。\(\vec b\)表示初始状态，\(\underline{0}\)灯光全暗的状态。</p>
+
+\[\vec b =\underline{0}+x_{1,1}\vec s_{1,1}+\cdots+x_{1,5}\vec s_{1,5}+x_{2,1}\vec s_{2,1}+\cdots+x_{5,5}\vec s_{5,5}\]
+
+<p>解上面的方程可以用下面这个线性方程来表示：\(A\vec x=\vec b\) 其中A是一个 25 * 25
+的矩阵：</p>
+
+\[A = \begin{vmatrix}B &amp; I &amp; O &amp; O &amp; O \\I &amp; B &amp; I &amp; O &amp; O \\O &amp; I &amp; B &amp; I &amp; O \\O &amp; O &amp; I &amp; B &amp; I \\O &amp; O &amp; O &amp; I &amp; B \\\end{vmatrix}\]
+
+<p>I是一个 5 * 5 的单位矩阵，O是一个 5 * 5
+其元全部为零的矩阵。而B是这样一个矩阵：</p>
+
+\[B = \begin{vmatrix}1 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \\1 &amp; 1 &amp; 1 &amp; 0 &amp; 0 \\0 &amp; 1 &amp; 1 &amp; 1 &amp; 0 \\0 &amp; 0 &amp; 1 &amp; 1 &amp; 1 \\0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 \\\end{vmatrix}\]
+
+<p>如果把 I, O, B 代入 A 那么 A 的每一列都对应着一个开关的s向量。</p>
+
+<p>采用高斯-若爾當消元法对A的增广矩阵\((A   \vec b)\)，就可以求出\(\vec x\) 。</p>
+
+<p>如果令 \(\vec b = \bf{0}\)，在 5 * 5
+的游戏规模下，解\(A\vec x=\bf{0}\)。除了 \(\vec x = \bf{0}\)外，还有另外两个解，分别是：</p>
+
+\[\vec x_{1}=(0,1,1,1,0,1,0,1,0,1,1,1,0,1,1,1,0,1,0,1,0,1,1,1,0)^T\]
+
+\[\vec x_{2}=(1,0,1,0,1,1,0,1,0,1,0,0,0,0,0,1,0,1,0,1,1,0,1,0,1)^T\]
+
+<p>由此可见，5 * 5
+游戏的解并不是唯一的，即便是灯光全暗，也不一定表示开关全部被关闭。另外，并不是所有可能性都有解。好了就先到这里，了解更多请见下面的链接：</p>
+
+<ul>
+  <li><a href="http://git.gnome.org/browse/gnome-games/tree/lightsoff">gnome game
+lightsout的源码</a></li>
+  <li><a href="www.math.ksu.edu/~dmaldona/math551/lights_out.pdf">Turning Lights Out with Linear
+Algebra</a></li>
+  <li><a href="http://mathworld.wolfram.com/LightsOutPuzzle.html">mathworld
+上的一个讨论</a></li>
+  <li><a href="http://www.cnblogs.com/pegasus/archive/2011/07/31/2123195.html">高斯-若尔当消元法的算法</a></li>
+</ul>
+
+    </article>
+    <div class="tag-container" >
+        
+        <div class="chip">
+        <a href="/tags#LightsOut-ref">
+            LightsOut
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#游戏-ref">
+            游戏
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#算法-ref">
+            算法
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#线性代数-ref">
+            线性代数
+        </a>
+        </div>
+        
+    </div>
+<div class="post-pager">
+    
+    <a href="/2012/04/29/lonely-android/">上一篇：Lonely Android</a>
+    
+    
+    <a href="/2012/06/24/madness_of_formatting/" style="float:right;" >下一篇：误删分区</a>
+    
+</div>
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/2012/05/31/lights-out-solution"
+ var disqus_config = function () {
+     this.page.title = "LightsOut 解法小探"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/2012/05/31/lights-out-solution/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+    <script type="text/javascript" async
+ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+    
+</body>
+
+</html>
+

@@ -1,0 +1,572 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    Objective-C | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">Objective-C</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-11-30">2012-11-02</span>
+    
+</div>
+
+<article>
+    <h3 id="类">类</h3>
+
+<pre><code>myRectangle = [[Rectangle alloc] init];   //alloc , init 都是NSObject的实例方法.alloc 开辟内存空间 init 初始化对象
+</code></pre>
+
+<p><em>TODO</em></p>
+
+<h4 id="声明">声明</h4>
+
+<p>分为 接口声明 .h</p>
+
+<pre><code>@interface ClassName : ItsSuperclass 
+	// Method and property declarations.
+@end 
+</code></pre>
+
+<p>和实现 .m</p>
+
+<pre><code>@implementation ClassName
+{
+	// Instance variable declarations.
+}
+// Method definitions.
+@end
+</code></pre>
+
+<p>在类内部使用<code>self</code>来表示当前实例。</p>
+
+<h4 id="属性property声明">属性（property）声明</h4>
+
+<pre><code>@property (attributes) Type propertyName;
+</code></pre>
+
+<p><strong>TODO</strong></p>
+
+<h4 id="静态成员">静态成员</h4>
+
+<h4 id="实例成员">实例成员</h4>
+
+<h4 id="實例化">實例化</h4>
+
+<p>數組中的元素都是strong</p>
+
+<p>所有類必須爲子類提供一個初始化方法</p>
+
+<p>init 方法應當返回 <strong>id</strong></p>
+
+<p>一個初始化的例句</p>
+
+<pre><code>@implementation MyObject
+- (id) init{
+	self = [super init]; // self 只是一個本地指針
+	if(self){ 
+		// initialize our subclass here
+	}
+	return self;
+}
+@end
+</code></pre>
+
+<h3 id="方法">方法</h3>
+
+<p>objc 用<code>:</code>来传递参数，参数可以出现在方法体的任意位置。让代码看起来更像是英语，如：</p>
+
+<pre><code>- (void) setColorToRed: (float)red Green: (float)green Blue:(float)blue; /* 宣告方法 */
+[myColor setColorToRed: 1.0 Green: 0.8 Blue: 0.2]; /* 呼叫方法 */
+</code></pre>
+
+<p>括号内声明 (类型) . 感觉好读,但是又好罗嗦.</p>
+
+<p><code>[receiver message]</code></p>
+
+<p><code>[nil message]</code>  向nil发送消息将返回nil。</p>
+
+<h4 id="類方法-vs-實例方法">類方法 vs 實例方法</h4>
+
+<p><strong>Struct 和 Object 的區別</strong></p>
+
+<h5 id="聲明">聲明</h5>
+
+<pre><code>- (BOOL) isRignt; // 實例方法，以 *-* 開始
+
++ (id)alloc;  //類方法，以*+* 開始
+</code></pre>
+
+<h5 id="作用">作用</h5>
+
+<p>類方法主要就是爲創建對象和工具方法使用</p>
+
+<h5 id="調用">調用</h5>
+
+<pre><code>[&lt;pointer to instance&gt; method]; //實例方法
+[Class method]; //類方法
+[[instance class] method] //調用instance 的類方法
+</code></pre>
+
+<p>self/super  同 java 的 this/super</p>
+
+<h3 id="nil">nil</h3>
+
+<p>nill  = 0</p>
+
+<p>所有synthesize 的實體變量都是nil</p>
+
+<p>if(obj)  可以判斷是否爲nil</p>
+
+<p>向nil發送消息，不會導致異常，實際上沒有任何代碼被執行。
+如果方法有返回值，那他將返回 0</p>
+
+<pre><code>int i = [obj methodWhichReturnsAnInt]  // 如果 obj爲nil，那麼i將等於0
+</code></pre>
+
+<p><strong>TODO</strong></p>
+
+<h3 id="作用域">作用域</h3>
+
+<p>与java相同的实例变量作用域</p>
+
+<pre><code>@private
+@protected
+@public
+@package
+</code></pre>
+
+<h3 id="dot-syntax">Dot Syntax</h3>
+
+<p><code>.</code> 操作符可以用来访问对象的accessor methods ，即java 中实例变量的get
+方法。</p>
+
+<pre><code>self.age = 10;
+</code></pre>
+
+<p>等于</p>
+
+<pre><code>[self setAge:10];
+</code></pre>
+
+<p>如果没有用 <code>self.</code>, 将自己访问实例变量本身。下面例子中, age 的 set 并
+没有被调用</p>
+
+<pre><code>age = 10;
+</code></pre>
+
+<h3 id="-符号">@ 符号</h3>
+
+<p>很多Objective-C 关键字都有个<code>@</code>作为前缀,目的是为了避免和C/C++的关键字冲突，让其面向对象的语法可以和C/C++共存。</p>
+
+<p>下面是部分关键字的列表</p>
+
+<ul>
+  <li>@implementation</li>
+  <li>@interface</li>
+  <li>@end</li>
+  <li>@synthesize</li>
+  <li>@dynamic</li>
+  <li>@public</li>
+  <li>@private</li>
+  <li>@property</li>
+</ul>
+
+<p>还可以作为值对象的速记语法</p>
+
+<pre><code>@"" // 是 NSString 的语法.
+
+NSNumber *myIntValue    = @32;
+NSNumber *myDoubleValue = @3.22346432;
+NSNumber *myBoolValue = @YES;
+NSNumber *myCharValue = @'V';
+NSNumber *myFloatValue = @3.2F  
+// 「U」、「L」、「LL」
+
+//  @[ ...] 创建数组
+NSArray *myArray = @[ @"Hello World", @67, [NSDate date] ];
+// 以下代码创建含三个键－值对的不可变字典对象
+NSDictionary *myDictionary = @{
+	@"name" :NSUserName(),
+	@"date" :[NSDate date],
+	@"processInfo" :[NSProcessInfo processInfo]
+};
+// 还可以使用下标访问字典中的对象
+NSString *theName = myDictionary[@"name"];
+
+//可以使用下标，将键－值对添加到可变字典中
+NSMutableDictionary *mutableDict = [[NSMutableDictionary alloc] init];
+mutableDict[@"name"] = @"John Doe";
+</code></pre>
+
+<p><code>%@</code> 用于格式化语法，打印出 Obj-C 对象的字符串表示，<code>descriptionWithLocale:</code>。注意，这个不是Obj-C语法的一部分，而是框架级的。</p>
+
+<p>详细见：http://stackoverflow.com/questions/25749/what-does-the-symbol-represent-in-objective-c</p>
+
+<h3 id="协议-代理-类别">协议 代理 类别</h3>
+
+<p>协议:</p>
+
+<pre><code>@protocol Locking
+- (void)lock;
+- (void)unLock;
+@end
+/*类似 java中的接口
+在类中这样声明表示,实现协议(接口)*/
+@interface MyClass:SuperClass &lt;Locking&gt;
+@end
+</code></pre>
+
+<h3 id="常量">常量</h3>
+
+<ul>
+  <li>使用c的预处理#define来设置常量。</li>
+  <li>
+    <p>const关键字</p>
+
+    <p>常量也是大小写混排的驼峰命名规则，首字母小写，另外，第一个字母是k。</p>
+  </li>
+</ul>
+
+<p>http://marshal.easymorse.com/archives/4149</p>
+
+<h3 id="程序入口">程序入口</h3>
+<p>Objc 的入口还是main函数，这是iOS程序的入口</p>
+
+<pre><code>int main(int argc, char *argv[])
+{
+    NSLog(@"%d,%s",argc,*argv);
+    @autoreleasepool {
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([DemoAppDelegate class]));
+    }
+}
+</code></pre>
+
+<h3 id="bool">BOOL</h3>
+
+<p>objc 的布爾類型，實際是用了typedef
+NO 等於 0 ，YES 爲非零</p>
+
+<h3 id="动态编程">动态编程</h3>
+
+<h4 id="id">id</h4>
+
+<p>id 是对象的标识符，类似于 java 中的 Object</p>
+
+<p>id 为一个 objc_object 的结构指针</p>
+
+<pre><code>typedef struct objc_object {
+	Class isa;
+} *id;
+</code></pre>
+
+<p>所以每个对象都有一个 isa 变量</p>
+
+<pre><code>- setMyValue:(id) foo;
+</code></pre>
+
+<p>该声明表示「foo」可以是任何类的实例。</p>
+
+<pre><code> - setMyValue:(id &lt;aProtocol&gt;) foo;
+</code></pre>
+
+<p>该声明表示「foo」可以是任何类的实例，但它必须符合「aProtocol」协议。</p>
+
+<pre><code>- setMyValue:(NSNumber*) foo;
+</code></pre>
+
+<h4 id="dynamic-binding-動態綁定">Dynamic Binding (動態綁定)</h4>
+
+<p>固定類型，只是方便debug，固定類型和id在運行時是沒有區別的。</p>
+
+<h4 id="object-typing">Object Typing</h4>
+
+<p>跟java 有不少區別，找課件</p>
+
+<p>isKindOfClass
+isMemberOfClass
+respondsToSelector</p>
+
+<p>@selector() 將方法名轉換爲 selector</p>
+
+<p>[obj respondsToSelector:@selector(method)];</p>
+
+<p>selector 非常酷，更有面向函數語言的感覺了。</p>
+
+<h3 id="运行时系统">运行时系统</h3>
+<h3 id="内存管理">内存管理</h3>
+
+<p>您应该将弱引用用于以下种类的引用：</p>
+
+<p>委托</p>
+
+<pre><code>@property(weak) id delegate;
+</code></pre>
+
+<p>您将在「设计模式」文章「采用设计模式使您的应用程序合理化」中了解有关委托和目标的信息。
+未引用顶级对象的 Outlet</p>
+
+<pre><code>@property(weak) IBOutlet NSString *theName;
+</code></pre>
+
+<p>Outlet 是对象之间的连接（或引用），归档在串联图或 nib 文件中，且在应用程序载入该串联图或 nib 文件时得到恢复。串联图或 nib 文件中顶级对象（通常是窗口、视图、视图控制器或其他控制器）的 outlet 应该为 strong（默认值，因此无标记）。
+目标</p>
+
+<pre><code>(void)setTarget:(id __weak)target
+</code></pre>
+
+<p>在块内对 self 的引用</p>
+
+<pre><code>__block typeof(self) tmpSelf = self;
+[self methodThatTakesABlock:^ {
+    [tmpSelf doSomething];
+}];
+</code></pre>
+
+<p>一个块对它所捕捉的变量构成强引用。如果在块内使用 self，该块对 self 构成强引用。因此，如果 self 也具有对该块的强引用（通常都有），将产生强引用循环。要避免循环，您需要在块外创建对 self 的 weak（或 __block）引用，如以上例子所示。</p>
+
+<h3 id="块">块</h3>
+
+<p><img src="objc/blocks_2x.png" alt="" /></p>
+
+<p>用typedef简化块的定义</p>
+
+<pre><code>typedef float (^MyBlockType)(float, float);
+ 
+MyBlockType myFirstBlock = // ... ;
+MyBlockType mySecondBlock = // ... ;
+</code></pre>
+
+</article>
+<div class="tag-container" >
+    
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Programming/iOS/Objective-C"
+ var disqus_config = function () {
+     this.page.title = "Objective-C"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Programming/iOS/Objective-C/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

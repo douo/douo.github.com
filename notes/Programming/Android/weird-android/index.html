@@ -1,0 +1,405 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    Weird Android | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">Weird Android</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-11-30">2013-04-19</span>
+    
+</div>
+
+<article>
+    <h3 id="froyo-自定义标题出现阴影fading-edge">froyo 自定义标题出现阴影（fading edge）</h3>
+
+<p>froyo 使用自定义标题默认窗口内容的上边缘会出现阴影（fading edge）,将<code>windowContentOverlay</code>设置为<code>null</code>可以去掉这阴影。</p>
+
+<pre><code>&lt;style name="MyTheme" parent="android:Theme.Light"&gt;
+        &lt;item name="android:windowTitleSize"&gt;48dp&lt;/item&gt;
+        &lt;item name="android:windowBackground"&gt;@color/mybg&lt;/item&gt;
+        &lt;item name="android:windowTitleBackgroundStyle"&gt;@style/mytitlebg&lt;/item&gt;
+        &lt;!-- remove content fadding edge of main framelayout (fix for froyo)--&gt;
+		&lt;item name="android:windowContentOverlay"&gt;@null&lt;/item&gt;
+&lt;/style&gt;
+</code></pre>
+
+<h3 id="scrollview-子view-layout_margin-失效">ScrollView 子View layout_margin 失效</h3>
+
+<p>下面这个布局文件，在 2.x 系统中不会出现margin，<code>LinearLayout</code> 直接位于 <code>ScrollView</code> 的 0,0 位置。</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		 &gt;
+	&lt;LinearLayout
+		android:layout_width="match_parent"
+		android:layout_marginLeft="18dp"
+		android:layout_marginRight="18dp"
+		android:layout_height="wrap_content" android:orientation="vertical"&gt;
+&lt;/LinearLayout&gt;&lt;/ScrollView&gt;
+</code></pre>
+
+<p>必须加上 <code>android:layout_gravity="top"</code> 才能让 <code>layout_margin</code> 发挥作用。</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		 &gt;
+	&lt;LinearLayout
+		android:layout_width="match_parent"
+		android:layout_marginLeft="18dp"
+		android:layout_marginRight="18dp"
+		android:layout_gravity="top"
+		android:layout_height="wrap_content" android:orientation="vertical"&gt;
+&lt;/LinearLayout&gt;&lt;/ScrollView&gt;
+</code></pre>
+
+<h3 id="mathabslong">Math.abs(long)</h3>
+
+<p>在多年编码的生涯中，android 这个 bug 也算是数一数二的了。</p>
+
+<p>在某些机型上，Math.abs(long) 会返回错误的结果，很难想到在这个常用的方法上会出现这么大的 bug。</p>
+
+<pre><code>Math.abs(-53683l)=4295020979
+Math.abs(-53843l)=4295021139
+Math.abs(-55843l)=4295023139
+...
+</code></pre>
+
+<p>准确的的讲是起源于客户反馈这两台设备上遇到奇怪的问题，怎么也想不出原因，最后终于在最不可能的情况下找到问题所在了：</p>
+
+<pre><code>Samsung Galaxy Ace/android 2.3
+Alcatel One Touch/android 2.3
+</code></pre>
+
+<p>具体的原因见，https://code.google.com/p/android/issues/detail?id=27007</p>
+
+<h3 id="如何在-edittext-上捕获到-keycode_del-事件">如何在 EditText 上捕获到 KEYCODE_DEL 事件</h3>
+
+<p>KeyListener 只是针对物理键盘的，Android 上的软键盘（IME）绕过了这个机制，所以要监听到 DEL 按键不是件容易的事。 SO 的<a href="http://stackoverflow.com/questions/4886858/android-edittext-deletebackspace-key-event/11377462#11377462">这个答案</a>提供了一个比较完善的方法来监听 DEL 事件，</p>
+
+<pre><code>private class ZanyInputConnection extends InputConnectionWrapper {
+
+    public ZanyInputConnection(InputConnection target, boolean mutable) {
+        super(target, mutable);
+    }
+
+    @Override
+    public boolean sendKeyEvent(KeyEvent event) {
+        if (event.getAction() == KeyEvent.ACTION_DOWN
+                &amp;&amp; event.getKeyCode() == KeyEvent.KEYCODE_DEL) {
+            ZanyEditText.this.setRandomBackgroundColor();
+            // Un-comment if you wish to cancel the backspace:
+            // return false;
+        }
+        return super.sendKeyEvent(event);
+    }
+
+
+    @Override
+    public boolean deleteSurroundingText(int beforeLength, int afterLength) {       
+        // magic: in latest Android, deleteSurroundingText(1, 0) will be called for backspace
+        if (beforeLength == 1 &amp;&amp; afterLength == 0) {
+            // backspace
+            return sendKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_DEL))
+                &amp;&amp; sendKeyEvent(new KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_DEL));
+        }
+
+        return super.deleteSurroundingText(beforeLength, afterLength);
+    }
+
+}
+</code></pre>
+
+<p>但是仍有问题，一般的 IME 按 删除键后会通过 sendKeyEvent 来发送 KeyEvent 这样可以正常捕获到。一些 IME 却不会发送 KeyEvent，比如 4.4 的原生英文输入法（LatinIME），取而代之是通过 deleteSurroundingText 来通知这个删除行为（见<a href="http://grepcode.com/file/repository.grepcode.com/java/ext/com.google.android/android-apps/4.4_r1/com/android/inputmethod/pinyin/EnglishInputProcessor.java#64">源码</a>），这个方法有一个问题，就是一旦 EditText 没有文本了，那用户按 del 键，deleteSurroundingText 也不会得到调用。所以一旦 EditText 没了文本，程序就无法知道用户按了 del 键没有。</p>
+
+<p><a href="http://stackoverflow.com/users/928054/carl">@Carl</a> 在<a href="http://stackoverflow.com/a/19980975/851344">这个答案</a>介绍了一个方法:</p>
+
+<pre><code>@Override
+public Editable getEditable() {
+  if(myEditable == null) {
+        //100 slash characters
+        myEditable =    Editable.Factory.getInstance().newEditable("////////////////////////////////////////////////////////////////////////////////////////////////////");
+        Selection.setSelection(myEditable, 100);
+    return myEditable;
+  }
+}
+</code></pre>
+
+<p>在没文本的时候也返回一些东西，让 del 键认为有东西可以删除，但是我测试后发现，没有文本的时候 del 键根本没调用 getEditable ，所以这个方法也是无效的。</p>
+
+<p>有一些 bug 与这个问题相关，<a href="https://code.google.com/p/android/issues/detail?id=42904">42904</a>、<a href="https://code.google.com/p/android/issues/detail?id=62306">62306</a></p>
+
+<h3 id="edittext-requestfocus-不能打开-soft-keyboard">EditText requestFocus 不能打开 soft keyboard</h3>
+
+<p>EditText requestFocus 不能打开 soft keyboard 应该是因为 Fragment 还没显示.</p>
+
+<p>要让 fragment 弹出键盘很不容易</p>
+
+<p>通过 global layout 来触发</p>
+
+<pre><code>v.getViewTreeObserver().addOnGlobalLayoutListener(
+				new OnGlobalLayoutListener() {
+					@Override
+					public void onGlobalLayout() {
+						Log.i("AnswerViewManager", "onGlobalLayout");
+						v.requestFocus();
+						InputMethodManager imm = (InputMethodManager) mContext
+								.getSystemService(Context.INPUT_METHOD_SERVICE);
+						imm.showSoftInput(v,
+								InputMethodManager.SHOW_IMPLICIT);
+						v.getViewTreeObserver()
+								.removeGlobalOnLayoutListener(this);
+					}
+				});
+</code></pre>
+
+</article>
+<div class="tag-container" >
+    
+    <div class="chip">
+        <a href="/tags#froyo-ref">
+            froyo
+        </a>
+    </div>
+    
+    <div class="chip">
+        <a href="/tags#ScrollView-ref">
+            ScrollView
+        </a>
+    </div>
+    
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Programming/Android/weird-android"
+ var disqus_config = function () {
+     this.page.title = "Weird Android"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Programming/Android/weird-android/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

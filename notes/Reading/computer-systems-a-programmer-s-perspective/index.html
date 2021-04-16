@@ -1,0 +1,2141 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    深入理解计算机系统 | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">深入理解计算机系统</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-12-10">2016-01-03</span>
+    
+</div>
+
+<article>
+    <h3 id="第一章">第一章</h3>
+
+<p>总览，主要有三个点</p>
+
+<p>源文件，预处理器-&gt;读取头文件等等，编译器-&gt;汇编程序，汇编器-&gt;机器语言，最后链接器-&gt;链接其他提供函数调用的文件最后成为可执行文件</p>
+
+<p>存储设备字塔结构，寄存器，L1，L2，L3高速缓存，内存，磁盘，网络。越高的存储设备越快，但越贵</p>
+
+<p>操作系统，的几个主要概念，进程，线程，虚拟存储器，文件</p>
+
+<h3 id="第二章">第二章</h3>
+
+<h4 id="进制">进制</h4>
+
+<ul>
+  <li>10-&gt;16: \(x=q_0\times16+r_0;q_0=q_1\times16+r_1...\)直到 \(q_{n} = 0\)，\(r_nr_{n-1}...r_0\)就是所求的16进制。</li>
+  <li>16-&gt;10: 16进制数 H 序列为\(h_nh_{n-1}..h_{1}h_0\)，那么十进制 \(n=16^n\times h_n+16^{n-1}\times h_{n-1}+...+h_0\)</li>
+  <li>2-&gt;10: 与 16 进制相似</li>
+  <li>10-&gt;2: 与 16 进制相似</li>
+</ul>
+
+<p>16 与 2 的一个特例，若 \(x=2^n\)，n为非负整数。将 n 表示为 i+4j，x 的 16 进制表示为 0xa0..0(j个0)。因为 16 进制中一个 0 等于 2 进制中 4 个 0，所以 j 为 n/4 的商，i 为余数，所以 a 的值为1（i=0），2（i=1），4（i=2），8（i=3）。</p>
+
+<h5 id="字长">字长</h5>
+
+<p>对于字长为 w 位的机器而言，虚拟地址的范围为 \(0～2^{w}-1\)，程序最多能访问 \(2^{w}\) 个字节。</p>
+
+<h5 id="大小端">大小端</h5>
+
+<p>大小端，即字节序问题，一个字节序列构成一个数或者字符，读取这个字节顺序（最低有效位到最高有效位）应该由左往右读还是由右往左读。<strong>最低有效位在最前面的方式（由左往右）叫小端法（little endian），最高有效位在最前面的方式（由右往左）叫大端法（big endian）。</strong></p>
+
+<p>以地址在 0x100 的 int 数值 0x1234567 为例，int 需要 4 个字节，0x100 是其所占用的地址中最小的一个。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>0x100</th>
+      <th>0x101</th>
+      <th>0x102</th>
+      <th>0x103</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>大端法</td>
+      <td>01</td>
+      <td>23</td>
+      <td>45</td>
+      <td>67</td>
+    </tr>
+    <tr>
+      <td>小端法</td>
+      <td>67</td>
+      <td>45</td>
+      <td>23</td>
+      <td>01</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>大多数 intel 兼容机使用小端法</strong></p>
+
+<h5 id="c-语言中的位运算">C 语言中的位运算</h5>
+
+<ul>
+  <li><code>~</code> 非</li>
+  <li><code>&amp;</code> 与</li>
+  <li><code>|</code> 或</li>
+  <li><code>^</code> 异或</li>
+</ul>
+
+<h5 id="移位运算">移位运算</h5>
+
+<ul>
+  <li>逻辑左移，向左移位补零：  \([x_n-1,x_n-2,...,x_0] &lt;&lt; k = [x_n-k-1,x_n-k-2,...,x_0,0,...,0]\)</li>
+  <li>逻辑右移，向右移位补零：  \([x_n-1,x_n-2,...,x_0] &gt;&gt; k = [0,...,0,x_n-1,x_n-2,...,x_k]\)</li>
+  <li>算术右移，向右移位补最高符号位： \([x_n-1,x_n-2,...,x_0] &gt;&gt;&gt; k = [x_n-1,...,x_n-1,x_n-1,x_n-2,...,x_k]\)</li>
+</ul>
+
+<p>C 中的位运算和移位是大小端无关的。<a href="https://stackoverflow.com/questions/7184789/does-bit-shift-depend-on-endianness">c - Does bit-shift depend on endianness? - Stack Overflow</a></p>
+
+<h4 id="布尔代数">布尔代数</h4>
+
+<p><a href="http://csapp.cs.cmu.edu/3e/waside/waside-boolean.pdf">DATA:BOOL</a></p>
+
+<p>整域 \(\mathbb{Z}\) 是一个<a href="https://en.wikipedia.org/wiki/Ring_of_integers">整环</a>，加法，乘法，加法逆运算，0和1分别为加法单位元与乘法单位元</p>
+
+<p>布尔代数，\(&lt;\{0, 1\}, \vert, \&amp;, ˜, 0, 1&gt;\)， 与整环的区别在于</p>
+
+<ol>
+  <li>加法到乘法的分配律。</li>
+  <li>-(减法)与~（取补）的区别</li>
+  <li>补律（Complement）</li>
+  <li>Idempotency</li>
+  <li>Absorption</li>
+  <li>摩根法则（DeMorgan’s laws）</li>
+</ol>
+
+<p>\(&lt;\{0, 1\},  \hat{}, \&amp;, I, 0, 1&gt;\) 就是一个环，等同于整数模 2 环。I 是一个运算，令 I(a) = a，满足 a^I(a) = a^a =0。异或 ^ 是加法，&amp; 是乘法。</p>
+
+<p>\(&lt;\{0, 1\}^w, \vert, \&amp;, ˜, 0^w, 1^w&gt;\) 是布尔代数</p>
+
+<p>\(&lt;\{0, 1\}^w,  \hat{}, \&amp;, ˜, 0^w, 1^w&gt;\) 布尔环</p>
+
+<p>集合 \(&lt;P(S), ∪, ∩, \overline{}, ∅, S&gt;\) 也是布尔代数</p>
+
+<h4 id="整数">整数</h4>
+
+<p>用 \(\vec x\) 表示二进制序列</p>
+
+<p>无符号（unsigned）编码:</p>
+
+\[B2U_w(\vec x)=\sum_{i=0}^{w-1}x_i2^i\]
+
+<p>补码(two’s-complement)编码</p>
+
+\[B2T_w(\vec x)=-x_{w-1}2^{w-1}+\sum_{i=0}^{w-2}x_i2^i\]
+
+<p>有符号与无符号的转换</p>
+
+\[B2U_w(\vec x) - B2T_w(\vec x) = 2^wx_{w-1}\\
+B2U_w(\vec x) = B2T_w(\vec x) + 2^wx_{w-1}\\
+\vec x = T2B_w(x)\\
+B2U_w(T2B_w(x)) = x + 2^wx_{w-1}\\\]
+
+\[\begin{equation}
+    T2U_w(x)=
+   \begin{cases}
+   x+2^w &amp;{x&lt;0}\\
+   x &amp;{x\geq 0}
+   \end{cases}
+  \end{equation}\]
+
+<h5 id="位扩展">位扩展</h5>
+
+<p>用算术右移扩展后的数值仍与原数值相等。可由\(B2T_{w+1}([x_{w-1},x_{w-1},...,x_0])=B2T_w([x_{w-1},...,x_0])\)证得。</p>
+
+<h5 id="位截断">位截断</h5>
+
+<p>将 w 位截断为 k 位时，直接丢弃高 w-k 位。</p>
+
+<ul>
+  <li>无符号 \(B2U_k([x_{k-1},...,x_0])=B2U_w([x_{w-1},...,x_0])mod 2^k\)</li>
+  <li>有符号 \(B2T_k([x_{k-1},...,x_0])=U2T_k(B2U_w([x_{w-1},...,x_0])mod 2^k)\)</li>
+</ul>
+
+<h4 id="整数运算">整数运算</h4>
+
+<p>\(+_w^u\) 表示 w 上的无符号加法。</p>
+
+\[\begin{equation}
+    x+_w^u y=
+   \begin{cases}
+   x+y &amp;{x+y&lt;2^w}\\
+   x+y-2^w &amp;{2^w \leq x+y &lt; 2^{w+1}}
+   \end{cases}
+  \end{equation}\]
+
+<p>因为 \(x &lt; 2^w,y&lt;2^w;\)所以 \(x+y-2^w &lt; x &lt; y\)，可由此法判断无符号加法是否产生溢出。</p>
+
+<p>补码加法</p>
+
+\[\begin{equation}
+    x+_w^t y=
+   \begin{cases}
+   x+y-2^w &amp;{2^{w-1}\leq x+y}\\
+   x+y &amp;{2^{w-1} \leq x+y &lt; 2^{w-1}}\\
+   x+y+2^w &amp;{x+y &lt; -2^{w-1}}
+   \end{cases}
+  \end{equation}\]
+
+<p>补码溢出:</p>
+
+<pre><code>//补码溢出有两种情况，两个负数相加产生负溢出，结果为正数，两个正数相加产生正溢出，结果为负数
+//检查符号位是否一致便可得出是否溢出
+int tadd_ok(int x,int y){
+    if(x&gt;0&amp;&amp;y&gt;0&amp;&amp;x+y&lt;0){
+        return 0;
+    }else if(x&lt;0&amp;&amp;y&lt;0&amp;&amp;x+y&gt;0){
+        return 0；
+    }else{
+        return 1;
+    }
+}
+</code></pre>
+
+<h4 id="补码的非">补码的非</h4>
+
+<p><code>-x = ~x+1</code></p>
+
+\[B2T_w(\tilde{}\vec x)=(1-x_{w-1})2^{w-1}+\sum_{i=0}^{w-2}(1-x_i)2^i\\
+B2T_w(\tilde{}\vec x)=(1-x_{w-1})2^{w-1}+\sum_{i=0}^{w-2}2^i+\sum_{i=0}^{w-2}x_i2^i\\
+B2T_w(\tilde{}\vec x)=2^{w-1}-x_{w-1}2^{w-1}+\sum_{i=0}^{w-2}2^i-\sum_{i=0}^{w-2}x_i2^i\\
+B2T_w(\tilde{}\vec x)=(-2^{w-1}+\sum_{i=0}^{w-2}2^i)-(-x_{w-1}2^{w-1}+\sum_{i=0}^{w-2}x_i2^i)\\
+B2T_w(\tilde{}\vec x)=(-2^{w-1}+2^{w-1}-1)-(-x_{w-1}2^{w-1}+\sum_{i=0}^{w-2}(x_i)2^i)\\
+B2T_w(\tilde{}\vec x)=-1-B2T_w(\vec x)\\
+-B2T_w(\vec x)=B2T_w(\tilde{}\vec x)+1\\\]
+
+<h4 id="乘法">乘法</h4>
+
+<p>无符号乘法，整数乘法的结果模2^w。</p>
+
+<p>补码乘法，也是一样，可由无符号乘法推导出来。</p>
+
+<p>乘以2的幂时，x*2k = x « k</p>
+
+<h5 id="乘以常数">乘以常数</h5>
+
+<p>大多数机器上乘法需要 10 个甚至更多个时钟周期。</p>
+
+<p>将常数分解成为，多个2^a的项相加的和。可将乘法转换为多个加/减法和移位操作。</p>
+
+<p><code>x*14=x*(2^3+2^2+2)</code> 会表示为 <code>(x&lt;&lt;3)+(x&lt;&lt;2)+(x&lt;&lt;1)</code> 或 <code>x*14=x*(2^4-2)</code> 会表示为 <code>(x&lt;&lt;4)-(x&lt;&lt;1)</code></p>
+
+<h4 id="除法">除法</h4>
+
+<p>偏置（biasing）</p>
+
+<h3 id="浮点数">浮点数</h3>
+
+<p>IEEE 浮点表示</p>
+
+<h3 id="第三章">第三章</h3>
+
+<ul>
+  <li>Intel IA32，1978</li>
+  <li>x86-64</li>
+</ul>
+
+<p>45年来，晶体管的数量保持18个月翻一翻。</p>
+
+<h4 id="gcc-工作流程">gcc 工作流程</h4>
+
+<ol>
+  <li>预处理器，插入 #include 文件，扩展 #define 的宏</li>
+  <li>编译器，编译成汇编文件<code>.s</code></li>
+  <li>汇编器，转化成目标(机器)代码<code>.o</code>文件</li>
+  <li>链接器，合并库函数，生成可执行文件</li>
+</ol>
+
+<p>ISA</p>
+
+<h4 id="汇编">汇编</h4>
+
+<h5 id="两种汇编代码格式">两种汇编代码格式</h5>
+
+<p>ATT 和 Intel，GCC 默认是 ATT，Microsoft 的工具默认是 Intel。</p>
+
+<h5 id="数据格式">数据格式</h5>
+
+<ul>
+  <li>bit = 1bit</li>
+  <li>nybble = 4 bits</li>
+  <li>byte = 8 bits</li>
+  <li>WORD = 16 bits</li>
+  <li>DWORD(double) = 32 bits</li>
+  <li>QWORD(quad) = 64 bits</li>
+</ul>
+
+<p>汇编指令有个后缀用来表示操作数的大小，比如 movl、movw、movb</p>
+
+<ul>
+  <li>b 表示 1 bit</li>
+  <li>w 表示 word</li>
+  <li>l 表示 long word，也是就 double word</li>
+</ul>
+
+<h5 id="寄存器">寄存器</h5>
+
+<p>IA32 有 8 个存储 32 位值的寄存器</p>
+
+<ul>
+  <li>%eax  %ax(%ah,%al)  # 被用来返回函数的值</li>
+  <li>%ecx  %cx(%ch,%cl)</li>
+  <li>%edx  %dx(%dh,%dl)</li>
+  <li>%ebx  %bx(%bh,%bl)</li>
+  <li>%esi  %si</li>
+  <li>%edi  %di</li>
+  <li>%esp  %sp(栈指针)</li>
+  <li>%ebp  %bp(帧指针)</li>
+</ul>
+
+<p>以 %eax 为例，%eax 表示寄存器中31到0所有的位， %ax 表示 [15,0],%ah[15,8], %al [7,0]</p>
+
+<h5 id="操作数operand">操作数（operand）</h5>
+
+<p>操作数，即执行一个操作所要引用的源数据值，及放置结果的目标位置。操作数有三种类型</p>
+
+<ol>
+  <li>立即数（immediate），书写方式是<code>$</code>后面跟一个整数。</li>
+  <li>寄存器（register），表示某个寄存器的内容，可以是双字 %eax、单字 %ax、字节 %ah</li>
+  <li>存储器（momory），根据有效地址访问某个存储器位置。</li>
+</ol>
+
+<h5 id="寻址模式">寻址模式</h5>
+
+<p>Imm（Eb，Ei，s），是通用的形式，其中 Imm 是立即数偏移，Eb 是基址寄存器，Ei 是变址寄存器，s 是一个比例因子(s 必须是 1、2、4、8)，这个地址可以计算为:</p>
+
+\[Imm + R[E_b] + R[E_i] * s\]
+
+<p>R[Eb] 表示寄存器 Eb 的值，Mb[Addr] 表示内存地址开始 b 个字节值的引用。</p>
+
+<p>具体寻址有如下形式：</p>
+
+<ul>
+  <li>立即数寻址， $Imm - Imm</li>
+  <li>寄存器寻址，Ea - R[Ea]</li>
+  <li>绝对寻址，Imm - M[Imm]</li>
+  <li>间接寻址，(Ea) - M[R[Ea]]</li>
+  <li>（基址+偏移量）寻址，Imm(Ea) - M[Imm+R[Ea]]</li>
+  <li>变址寻址，使用变址寄存器的都是变址寻址</li>
+  <li>比例变址寻址，使用比例因子的寻址</li>
+</ul>
+
+<h5 id="数据传送指令">数据传送指令</h5>
+
+<p><code>MOV S,D</code> 传送: D&lt;-S, <strong>S 和 D 不能都是指向存储器</strong></p>
+
+<p>从较小的源负责到较大的数据位置，需要扩展，包括 MOVS、MOVZ 两类。MOVS 表示符号扩展， MOVZ 表示零扩展。每个类也有三条指令，如<code>movsbw</code>、<code>movsbl</code>、<code>movswl</code>。</p>
+
+<p><code>pushl</code>和<code>popl</code>，分别表示将数据(双字)压入程序栈和从栈中弹出数据，IA32 的栈地址是向低地址方向增长的。所以 push %ebp 等价于</p>
+
+<pre><code>subl $4 %esp
+movl %ebp, (%esp)
+</code></pre>
+
+<h4 id="算术和逻辑操作">算术和逻辑操作</h4>
+
+<h5 id="leal">leal</h5>
+
+<p><code>leal S,D</code> D&lt;-&amp;S（加载有效地址）</p>
+
+<p>如 <code>movl 7(%edx,%edx,4), %eax</code> 是 R[%eax] = M[5<em>%edx+7]，而<code>leal 7(%edx,%edx,4), %eax</code> 是 R[%eax] = 5</em>%edx+7</p>
+
+<p><strong>除了 lea 外,其他操作符都有三种不同操作数的变种</strong></p>
+
+<h5 id="一元操作符">一元操作符</h5>
+
+<ul>
+  <li><code>INC D</code> 加一</li>
+  <li><code>DEC D</code> 减一</li>
+  <li><code>NEG D</code> 取负</li>
+  <li><code>NOT D</code> 取补</li>
+</ul>
+
+<h5 id="二元操作符">二元操作符</h5>
+
+<ul>
+  <li><code>ADD S,D</code> D &lt;- D + S</li>
+  <li><code>SUB S,D</code> 减</li>
+  <li><code>IMUL S,D</code> 乘</li>
+  <li><code>XOR S,D</code> 异或</li>
+  <li><code>OR S,D</code> 或</li>
+  <li><code>AND S,D</code> 与</li>
+</ul>
+
+<h5 id="移位操作">移位操作</h5>
+
+<ul>
+  <li><code>SAL k,D</code> 左移</li>
+  <li><code>SHL k,D</code> 左移</li>
+  <li><code>SAR k,D</code> 算术右移</li>
+  <li><code>SHR k,D</code> 逻辑右移</li>
+</ul>
+
+<p>移位量 k 用单个字节编码，因为只允许 0~31 的移位。k 可以是立即数，也可以是%cl（单字节寄存器，只允许以这个特定的寄存器作为操作数）</p>
+
+<h5 id="特殊的算术操作">特殊的算术操作</h5>
+
+<ul>
+  <li><code>imull S</code> 有符号64位乘法 <code>R[%edx]:R[%eax] &lt;- S * R[%eax]</code>，（同 imul 汇编器根据操作数数量判断具体是什么乘法指令）</li>
+  <li><code>mull S</code> 无符号64位乘法</li>
+  <li><code>cltd</code>  转换为四字 <code>R[%edx]:R[%eax] &lt;- SignExtend(R[%eax])</code></li>
+  <li><code>idivl S</code> 有符号除法 <code>R[%edx] &lt;- R[%edx]:R[%eax] mod S</code>、<code>R[%eax] &lt;- R[%edx]:R[%eax] / S</code></li>
+  <li><code>divl</code> 无符号除法</li>
+</ul>
+
+<p><code>cltd</code> 等价于</p>
+
+<pre><code>movl %edx %eda
+sarl $31 %edx
+</code></pre>
+
+<h4 id="控制">控制</h4>
+
+<h5 id="条件码">条件码</h5>
+
+<p>条件（condition）寄存器，描述最近的算术或逻辑操作的属性（除了 leal 外所有指令都会设置条件码）</p>
+
+<ul>
+  <li>CF 进位</li>
+  <li>ZF 零</li>
+  <li>SF 负数</li>
+  <li>OF 溢出</li>
+</ul>
+
+<p>还有一类指令只设置条件码不更新目标寄存器</p>
+
+<ul>
+  <li><code>CMP S2,S1</code>， S1 - S2（比较）</li>
+  <li><code>TEST S2,S1</code>, S1 &amp; S2(测试)</li>
+</ul>
+
+<p>条件一般不会直接读取，通过</p>
+
+<ol>
+  <li>根据条件码的某个组合，将某字节置 0 或 1</li>
+  <li>条件跳转到程序的其他部分</li>
+  <li>可以有条件的传送数据</li>
+</ol>
+
+<h5 id="set">SET</h5>
+
+<p><code>SET</code> 就是通过第一种方法使用条件码</p>
+
+<ul>
+  <li><code>sete D</code> D &lt;- ZF (相等)</li>
+  <li><code>setne D</code> D &lt;- ~ZF (不等)</li>
+</ul>
+
+<p>e 就是 equal 的缩写，还有一个同义名 <code>setz</code>,</p>
+
+<ul>
+  <li><code>sets D</code> D &lt;- SF (负数)</li>
+  <li><code>setns D</code></li>
+</ul>
+
+<p>有符号比较</p>
+
+<ul>
+  <li><code>setg D</code> D &lt;- ~(SF ^ OF) &amp; ~ZF (大于)</li>
+  <li><code>setge D</code> D &lt;- ~(SF ^ OF) (大于等于)</li>
+  <li><code>setl D</code> D &lt;- SF ^ OF</li>
+  <li><code>setle D</code> D &lt;- (SF ^ OF) | ZF</li>
+</ul>
+
+<p>以 <code>setg</code> 为例， 计算 <code>t = a - b</code>， <code>a</code>，<code>b</code> 位数可以不同。
+当 <code>a &gt; b</code>，<code>a - b </code> 不会溢出 <code>OF</code> 为 0 ， 结果是正的 <code>SF</code> 为 0。<code>a</code>、<code>b</code> 不相等 <code>ZF</code> 为 0，所以， <code>~(SF ^ OF) &amp; ~ZF = 1</code>
+若 <code>a &gt; b</code>, 但 <code>a - b</code> 溢出了（负溢出）， OF = 1, SF = 1, ZF = 0 ， 结果也是一样， <code>~(SF ^ OF) &amp; ~ZF = 1</code></p>
+
+<p><code>setg</code>(great) 等还有同义词 <code>setnle(not less equal)</code></p>
+
+<p>无符号比较</p>
+
+<ul>
+  <li><code>seta D</code> D &lt;- ~CF &amp; ~ZF (大于)</li>
+  <li><code>setae D</code> D &lt;- ~CF (大于等于)</li>
+  <li><code>setb D</code> D &lt;- CF</li>
+  <li><code>setbe D</code> D &lt;- CF | ZF</li>
+</ul>
+
+<p><code>seta(above)</code>  <code>setb(below)</code></p>
+
+<h4 id="跳转">跳转</h4>
+
+<p>jmp，无条件跳转，可以是直接跳转，也可以间接跳转。其他跳转指令都是有条件跳转，只能是直接跳转。</p>
+
+<p>直接跳转是跳转指令后跟着一个标号（label），如：</p>
+<pre><code>jmp .L1
+.L1:
+popl %edx
+</code></pre>
+<p>间接跳转是，<code>*</code>加操作数指示符，<code>jmp *%edx</code></p>
+
+<p>有条件跳转包括：<code>je</code>,<code>jne</code>,<code>js</code>,<code>jns</code>,<code>jg</code>,<code>jge</code>,<code>jl</code>,<code>jle</code>,<code>ja</code>,<code>jae</code>,<code>jb</code>,<code>jbe</code>，与 <code>SET</code> 相同。</p>
+
+<p>跳转指令的编码，最常用的是与程序计数器（Program Counter）相关的，将目标指令的地址与跳转指令的下一条指令的地址之间的差编码。</p>
+
+<h4 id="翻译条件分支">翻译条件分支</h4>
+
+<pre><code>if (test-expr)
+    then-statement
+else
+    else-statement
+</code></pre>
+<p>上面的 C 代码，转换汇编后通常是下面这种形式：</p>
+
+<pre><code>    t = test-expr
+    if(!t)
+        goto false
+    then-statement
+    goto done;
+false:
+    else-statement
+done:
+</code></pre>
+
+<h4 id="循环">循环</h4>
+
+<p>各种循环在大多数汇编器中都是思成 do-while 循环形式的代码</p>
+
+<h5 id="do-while-循环">do-while 循环</h5>
+
+<pre><code>do
+    body-statement
+while(test-expr)
+</code></pre>
+
+<p>do-while 的 body 最少会执行一次</p>
+
+<pre><code>loop:
+    body-statement
+    t = text-expr
+    if(t)
+        goto loop
+</code></pre>
+
+<h5 id="while-循环">while 循环</h5>
+
+<pre><code>while(test-expr)
+    body-statement
+</code></pre>
+
+<p>while 循环在第一次执行 body 之前就可能中断。</p>
+
+<pre><code>if(!test-expr)
+    goto done;
+do
+    body-statement
+while(test-expr)
+done:
+</code></pre>
+
+<h5 id="for-循环">for 循环</h5>
+
+<pre><code>for(init-expr;test-expr;update-expr)
+    body-statement
+</code></pre>
+
+<pre><code>init-expr;
+while(test-expr){
+    body-statmenet;
+    update-expr
+}
+</code></pre>
+
+<h4 id="条件传送指令">条件传送指令</h4>
+
+<p>现代处理器中，基于条件数据传送的指令优于条件控制转移（顺序执行比跳转跟高效），处理器使用流水线（pipelining）来获取高性能，流水线需要确定执行指令的序列，才能高效。遇到条件跳转时，处理器采用<em>分支预测逻辑</em>来猜测跳转指令的结果。预测错误会有很严重的惩罚（浪费20~40个时钟周期）。</p>
+
+<pre><code>T_ran = T_ok + 预测错误?T_mp:0
+T_avg(p) = (1-p)*T_ok + p *(T_ok + T_mp) = T_ok + pTmp # p 预测错误的概率
+
+</code></pre>
+
+<p>条件数据传送，会计算一个条件操作的两个结果，在根据条件选择结果。这样就避免了使用跳转命令。</p>
+
+<pre><code>int absdiff(int x, int y){
+    return x &lt; y? y - x : x - y
+}
+</code></pre>
+
+<p>会编译成类似下面的形式</p>
+
+<pre><code>int cmovdiff(int x, int y){
+    int tval = y - x;
+    int rval = x - y;
+    int test = x &lt; y;
+    if(test) rval = tval;
+    return rval;
+}
+</code></pre>
+
+<p>其中 <code>if(test) rval = tval</code> 就是一条<em>条件传送指令</em>：<code>cmovl S,R</code></p>
+
+<p>条件传送指令也包括：<code>cmove</code>,<code>cmovne</code>,<code>cmovs</code>,<code>cmovns</code>,<code>cmovg</code>,<code>cmovge</code>,<code>cmovl</code>,<code>cmovle</code>,<code>cmova</code>,<code>cmovae</code>,<code>cmovb</code>,<code>cmovbe</code>，与 <code>SET</code> 相同。</p>
+
+<p>汇编器可以从目标寄存器中推断出操作数的长度，所以条件传送指令无须显示地编码操作数长度（不同于 movw、movl）</p>
+
+<pre><code>    v = test-expr ? then-expr : else-expr
+</code></pre>
+
+<pre><code>    vt = then-expr
+    v = else-expr
+    t = test-expr
+    if(t) v = vt
+</code></pre>
+
+<h4 id="switch">switch</h4>
+
+<p>跳转表</p>
+
+<h4 id="过程">过程</h4>
+
+<h5 id="帧栈">帧栈</h5>
+
+<p>帧栈（stack frame）是程序栈的中的一个帧（frame），由两个指针界定，%esp 栈指针，指向程序栈同时也是当前帧栈的顶部；%ebp 帧指针指向当前帧的起始处。</p>
+
+<h5 id="转移控制">转移控制</h5>
+
+<h6 id="call">call</h6>
+
+<p><code>call Label</code>,<code>call *Operand</code>，过程调用，和 <code>jmp</code> 一样可以是直接调用或间接调用。</p>
+
+<p><code>call</code> 指令，将返回地址（call 后面那条指令的地址）入栈，并跳转到调用过程的起始处（%eip）</p>
+
+<h6 id="ret">ret</h6>
+
+<p>从栈中弹出返回地址，并跳转到该处。</p>
+
+<h6 id="leave">leave</h6>
+
+<p>为栈做好返回的准备，等同于</p>
+
+<pre><code>movl %ebp, %esp  # 将栈指针设置为当前帧的起始处
+popl %ebp        # 恢复保存的 %ebp（应该是调用者帧的帧指针？） ，同时栈指针指向调用者帧的顶部（尾巴）
+</code></pre>
+
+<h5 id="获取当前程序计数器的值">获取当前程序计数器的值</h5>
+
+<pre><code>    call next  # 将返回地址也就是 popl 的地址压入栈
+next:
+    popl %eax  # 从栈中弹出当前指令的地址
+</code></pre>
+
+<h5 id="寄存器使用惯例">寄存器使用惯例</h5>
+
+<p>%eax,%ecx,%edx 为调用者保存寄存器，意思就是 P 调用 Q 时，Q 认为这些寄存器的值已被 P 保存了，Q 可以随意覆盖。</p>
+
+<p>%edx,%ebi,%esi 为被调用值保存寄存器，Q 要覆盖这些寄存器，要先保存，并在返回之前恢复他们</p>
+
+<h5 id="过程实例">过程实例</h5>
+
+<p>容易搞混栈空间和程序空间。栈空间相关指针是 %esp %ebp ，程序空间是程序计数器 %eip</p>
+
+<p>call 做的两件事，一是将返回地址入栈（也就是 call 下面那条指令在程序空间中的地址入栈）；二是将 %eip 指向被调用者程序指令开始的地方。</p>
+
+<p>ret 使用之前当前帧栈已被释放，也就是说 %ebp 已经指向调用者帧栈，%esp 指向返回地址。 ret 将返回地址写入 %eip， 将控制权转移回调用者</p>
+
+<p>leave 就是用来释放当前帧栈，如若使用了被调用者保存寄存器，还要恢复相应的寄存器。</p>
+
+<p>函数建立的代码是</p>
+
+<pre><code>pushl %ebp  # 保存旧的 %ebp
+movl %esp, %ebp # 设置当前帧指针
+... # 保存要用到的被调用者保存寄存器
+subl $40, %esp # 可以用 subl 分配栈空间
+</code></pre>
+
+<h5 id="递归过程">递归过程</h5>
+
+<p>递归调用也是一样的，每次函数调用都有它自己私有的状态信息。</p>
+
+<h4 id="数组">数组</h4>
+
+<p><code>T A[N]</code> , L 是数据类型 T 的长度，A是指向数组开头的指针，值是 x_A ， 那么元素 i 存放的地址是 <code>x_A+L*i</code></p>
+
+<p>假设 x_A 存放在 %edx，i 存放在 %ecx，那么访问数组元素的指令可以是</p>
+
+<pre><code>movl (%edx, %ecx, L), %eax
+</code></pre>
+
+<h5 id="指针运算">指针运算</h5>
+
+<ul>
+  <li><code>*</code> 取值，后面跟着的表达式类型是指针</li>
+  <li><code>&amp;</code> 取址，得出后面表达式的地址，结果是指针</li>
+</ul>
+
+<p>Expr 等价于 *&amp;Expr</p>
+
+<p>A[i] 等同于 *(A+i)</p>
+
+<h5 id="嵌套数组二维数组">嵌套数组（二维数组）</h5>
+
+<p><code>int A[5][3];</code> 等同于</p>
+
+<pre><code>#define int row3_t[3]
+row3_t A[5]
+</code></pre>
+
+<p>多维数组 <code>T D[R][C]</code>, 对于数组元素 D[i][j]</p>
+
+\[\&amp;D[i][j] = x_D + L(C * i + j)\]
+
+<h4 id="异质数据结构">异质数据结构</h4>
+
+<h5 id="结构">结构</h5>
+
+<pre><code>struct rec{
+    int i;
+    int j;
+    int a[3];
+    int *p;
+}
+</code></pre>
+
+<p>这个结构包括 24 个字节 <code>4（i）+4(j) + 12(a) + 4(*p) = 24</code> <strong>数组是存储在结构中的，而不是存储数组指针</strong></p>
+
+<p>假设 r 是指向 rec 结构的指针，要访问 i，在 C 中是 <code>r-&gt;i</code> 等价于 <code>(*r).i</code></p>
+
+<p>编译成机器码后，r 存放在 %edx，访问 i 就是 (%edx), j 就是 4(%edx), i 存放在 %eax，a[i] 就是 8(%edx, %eax, 4)</p>
+
+<p>机器码中已不再有关于结构声明的任何信息</p>
+
+<h5 id="联合">联合</h5>
+
+<pre><code>union U3{
+ char c;
+ int i[2];
+ double v;
+}
+</code></pre>
+
+<p>联合用不同的字段来引用相同的存储器块，一个联合的大小总等于其最大字段的大小。 如 U3 的大小的 8。</p>
+
+<p>当结构中两个字段是互斥的，那么用联合可以节省内存。</p>
+
+<h5 id="对齐">对齐</h5>
+
+<p>在 Linux 中，short 类型的地址必须是 2 的倍数（二进制最后一位是 0），其他字节长度大于或等于四的类型其地址必须是 4 的倍数（二进制最后两位是 0）</p>
+
+<p>Windows 的对齐更严格，任何 K 字节基本对象的地址必须是 K 的倍数，比如 double 就应该是 8 的倍数</p>
+
+<p>对于结构（struct），如果不能满足对齐，编译器会插入一些没用的间隙来满足对齐。</p>
+
+<h5 id="缓冲区溢出">缓冲区溢出</h5>
+
+<p>数组越界，首先会访问到被调用者保存寄存器的值，如何是帧栈中保持的 %ebp（栈是高地址往低地址增加，数组是由低往高）</p>
+
+<h5 id="栈随机化">栈随机化</h5>
+
+<p>用来对抗缓冲区溢出攻击，使攻击者难以实现将程序跳转到目标位置。</p>
+
+<p><a href="http://stackoverflow.com/questions/14760587/how-does-a-nop-sled-work">c - How does a NOP sled work? - Stack Overflow</a></p>
+
+<h5 id="栈破坏检测">栈破坏检测</h5>
+
+<p>在帧栈中任何局部缓冲区与栈状态之间插入一个特殊的值，函数返回时通过对比这个值是否有变化来确定栈状态是不被修改了。</p>
+
+<h4 id="x86-64">x86-64</h4>
+
+<h5 id="寄存器-1">寄存器</h5>
+
+<p>总共 16 个寄存器，其中八个是 IA32 的 64 位扩展，命名为 <code>%rax ...</code>。另外新增八个命名为 <code>%r8~%r15</code></p>
+
+<p>与 IA32 不同，x86-64 没有帧指针，<code>%rbp</code> 作为通用寄存器使用。</p>
+
+<h5 id="寻址">寻址</h5>
+
+<p>PC 相对（PC-relative）操作数寻址</p>
+
+<h5 id="指令">指令</h5>
+
+<p>movabsq 传送一个完全的 64 位立即数到目标寄存器</p>
+
+<p>传送或产生 32 位寄存器的值也会将该寄存器的高 32 位置为 0，若是产生 16/8 位结果的指令，只影响 16/8 位目的寄存器</p>
+
+<h5 id="过程-1">过程</h5>
+
+<ul>
+  <li>有 6 个寄存器可以用来传递参数（%rdi %rsi %rdx %rcx %r8 %r9），与 IA32 不同只有传递参数多于6个，才需要放到栈中</li>
+  <li>没有帧指针</li>
+  <li>可以访问超过当前栈指针（%rsp） 128 个字节上的存储空间</li>
+</ul>
+
+<p>叶子过程，没有调用其他函数，且所有局部变量都能保存在寄存器中。</p>
+
+<h3 id="第四章">第四章</h3>
+
+<h4 id="y86">Y86</h4>
+
+<ul>
+  <li>寄存器： %eax %ecx %edx %ebx %esi %ebi %ebp %esp</li>
+  <li>条件码（CC）： ZF SF OF</li>
+  <li>Stat： 状态码</li>
+  <li>DMEM：存储器</li>
+</ul>
+
+<p>指令编码是不定长的（1到6个字节不等），但每条指令都有固定长度，所以能提供解析的唯一性。</p>
+
+<h5 id="异常">异常</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">值</th>
+      <th style="text-align: center">名字</th>
+      <th style="text-align: center">含义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">AOK</td>
+      <td style="text-align: center">正常操作</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2</td>
+      <td style="text-align: center">HLT</td>
+      <td style="text-align: center">处理器执行 halt 命令</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">3</td>
+      <td style="text-align: center">ADR</td>
+      <td style="text-align: center">遇到非法地址</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">4</td>
+      <td style="text-align: center">INS</td>
+      <td style="text-align: center">遇到非法指令</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="y86-程序">Y86 程序</h5>
+
+<p>4.3</p>
+<pre><code># Start 4(%ebp) Count 8(%ebp)
+pushl %ebp
+movl %ebp, %esp
+subl $12, %esp
+mrmovl 8(%ebp), %edx
+testl %edx, %edx
+jle L2
+subl $1 $edx
+rmmovl %edx, -4(%ebp)
+mrmovl 4(%ebp), %ecx
+irmovl $4, %ebx
+addl %ecx, %ebx
+rmmovl %ebx, -8(%ebp)
+call rSum
+mrmovl (%ecx), %ebx
+addl %ebx, %eax
+jmp done
+L2:
+irmovl 0 %eax
+done:
+rrmovl %ebp %esp
+popl %ebp
+ret
+</code></pre>
+
+<p>pushl %esp # 会把当前 %esp 的内容入栈，如何 %esp 再增加
+popl %esp # 会把栈顶的内容写入 %esp ， %esp 不再改变</p>
+
+<h4 id="hcl">HCL</h4>
+
+<p>HCL（hardware control language） 书中引入的一种简单但系统的语言，用来描述 Y86 处理器的控制逻辑。可以当成是一个简单版的 <a href="wiki">HDL</a>。</p>
+
+<p>HCL 将通过 hcl2c 转换成 c 语言，然后链接模拟器库(tty.a) 通过 gcc 生成一个可执行的模拟器。</p>
+
+<h5 id="信号声明">信号声明</h5>
+
+<p>只支持两种类型，<code>bool</code> 0或1，<code>int</code> 等同于 C 中的 int ， 表示所有多位的信号</p>
+
+<pre><code>boolsig name ’C-expr’
+intsig name ’C-expr
+</code></pre>
+
+<h5 id="quoted-text">Quoted Text</h5>
+
+<p>将 Text 直接转换为 C 语言</p>
+
+<pre><code>quoted 'string'
+</code></pre>
+
+<p>例子 <code>quoted '#include &lt;stdio.h&gt;'</code></p>
+
+<h5 id="布尔表达式">布尔表达式</h5>
+
+<p>结果是 0 或 1 的表达式。</p>
+
+<p>直接表达式：</p>
+
+<ul>
+  <li>0</li>
+  <li>1</li>
+  <li>name</li>
+</ul>
+
+<p>带 int 的布尔表达式：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">语法</th>
+      <th style="text-align: left">表述</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code>int-expr in {int-expr_1, int-expr_2,...,int-expr_k}</code></td>
+      <td style="text-align: left">int 表达式的值是否在集合中</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code>int-expr_1 == int-expr_2</code></td>
+      <td style="text-align: left">相等</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code>int-expr_1 != int-expr_2</code></td>
+      <td style="text-align: left">不等</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code>int-expr_1 &lt; int-expr_2</code></td>
+      <td style="text-align: left">小于</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code>int-expr_1 &lt;= int-expr_2</code></td>
+      <td style="text-align: left">小于等于</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code>int-expr_1 &gt; int-expr_2</code></td>
+      <td style="text-align: left">大于</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code>int-expr_1 &gt;= int-expr_2</code></td>
+      <td style="text-align: left">大于等于</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>布尔运算：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">语法</th>
+      <th style="text-align: left">表述</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code>!bool-expr</code></td>
+      <td style="text-align: left">NOT</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code>bool-expr_1 &amp;&amp; bool-expr_2</code></td>
+      <td style="text-align: left">AND</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code>bool-expr_1 || bool-expr_2</code></td>
+      <td style="text-align: left">OR</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="int-表达式">int 表达式</h5>
+
+<p>只有 3 中 int 表达式</p>
+
+<ol>
+  <li>数字字面量</li>
+  <li>信号名</li>
+  <li>case 表示式</li>
+</ol>
+
+<pre><code>[
+bool-expr_1 : int-expr_1
+bool-expr_2 : int-expr_2
+.
+.
+.
+bool-expr_k : int-expr_k
+]
+</code></pre>
+
+<p>类似 <code>switch...case</code> 语法但又不能（不要求互斥）， 按顺序执行 bool-expr，当 bool-expr 为 1 时，返回后面的 int-expr。全都为 0 时返回 0。</p>
+
+<h5 id="算术逻辑单元alu">算术逻辑单元（ALU）</h5>
+
+<p>组合电路，有三个输入，A，B 为数据输入， s 为控制输入。电路会对不同的控制输入执行不同的算术或逻辑操作。</p>
+
+<h5 id="存储器和时钟">存储器和时钟</h5>
+
+<ul>
+  <li>时钟寄存器，在一个时钟周期中，输出保持为 x，当一个新的时钟周期开始时，输入 y 才会被写到寄存器中，同时输出变为 y。Y86中时钟寄存器保存 PC，CC，Stat</li>
+  <li>RAM（存储器），存储多个字，通过地址来选择读哪个字或写哪个字。包括了寄存器文件，数据存储器。</li>
+  <li>寄存器文件，在 CPU 中存放<strong>程序</strong>寄存器内容的地方.</li>
+</ul>
+
+<h4 id="y86-顺序实现">Y86 顺序实现</h4>
+
+<ol>
+  <li>取指（fetch），将 PC 作为地址，读取指令字节</li>
+  <li>译码（decode），读取作为操作数的寄存器的值</li>
+  <li>执行（excute），通过 ALU 对操作数进行计算，也可能设置 CC</li>
+  <li>访存（memory），从存储器写入值，或读取值</li>
+  <li>写回（write back），将结果写回寄存器</li>
+  <li>更新 PC（PC update），更新 PC 到下一条指令的地址</li>
+</ol>
+
+<h5 id="seq-硬件结构">SEQ 硬件结构</h5>
+
+<h4 id="流水线">流水线</h4>
+
+<p>吞吐量/GIPS（每秒千兆条指令） = 1 指令/ 两条指令之间的间隔 × 1000 ps/1 ns</p>
+
+<p>延迟，完整执行一条指令的时间。</p>
+
+<h4 id="y86-流水线实现">Y86 流水线实现</h4>
+
+<p>流水线实现的 Y86 才初窥到一个处理器的设计有多复杂。</p>
+
+<h5 id="数据冒险">数据冒险</h5>
+
+<p>程序寄存器，解码阶段取操作数的值，可能被前面的指令更新，而前面的值还未写入程序寄存器里，那么当前解码阶段取的值就是错误的。</p>
+
+<p>解决的方法：</p>
+
+<ol>
+  <li>暂停，暂停指令的执行，等待前面指令的值写入程序寄存器。这样较浪费时钟周期。</li>
+  <li>转发，如果需要的值前面的指令已经计算出来，但还未写入程序寄存器，那么可以从前面流水线上读取该值。实际有五个转发源（e_valE、m_vaulM、M_valE、W_valM、W_valE）</li>
+  <li>如果需要的值还未计算出来，那么使用暂停（加载互锁）和转发来解决冒险。</li>
+</ol>
+
+<h3 id="第五章-优化">第五章 优化</h3>
+
+<h4 id="妨碍优化的因素">妨碍优化的因素</h4>
+
+<ol>
+  <li>存储器别名</li>
+  <li>函数调用（函数更改了全局状态）</li>
+</ol>
+
+<h4 id="量化程序性能">量化程序性能</h4>
+
+<p>最小二乘法，见 <a href="http://sbp810050504.blog.51cto.com/2799422/1269572">线性回归之——最小二乘法</a></p>
+
+<p>用每元素的周期数（Cycles Per Element， CPE）来表示程序性能。用 ax+b 来表示程序运行的时间，其中 x(循环的次数) 的系数 a 就是 CPE。</p>
+
+<h4 id="优化手段">优化手段</h4>
+
+<ul>
+  <li>消除循环低效率：<strong>代码移动</strong>（code motion），识别要运行多次但计算结果不会改变的计算，将计算移到不会多次计算的地方</li>
+  <li>减少过程调用，</li>
+  <li>消除不必要的存储器引用，通过指针读取值需要两次存储器读取，使用临时变量（保存在寄存器中），只需一次读取存储器。</li>
+</ul>
+
+<h4 id="关键路径">关键路径</h4>
+
+<p>循环寄存器间的数据相关链，指明程序需要周期数的下界，如图所示</p>
+
+<p><img src="CSAPP/CSAPP-5.5&amp;5.6.png" alt="CSAPP-5.5&amp;5.6.png" /></p>
+
+<p>5.6 比 5.5 需要更少的操作，执行时间却更长。这也是现代处理器一个反直觉的地方（指令集并行）</p>
+
+<h4 id="提高并行性">提高并行性</h4>
+
+<ul>
+  <li>循环展开（Loop Unrolling），将一次循环一次运算展开成一次循环多次运算</li>
+  <li>并行变换（loop parallelism），用来解决循环展开中一次循环多次计算仍然需要依赖一个单独的变量。</li>
+</ul>
+
+<p>k次循环展开和k次并行变换功能，在 CPU 功能单元未到最大负荷，关键路径分析才有效</p>
+
+<ul>
+  <li>重新结合变化（reassociation transformation），符合结合律的运算，通过改变运算的顺序，来避免在运算中对累计变量的依赖</li>
+</ul>
+
+<p>当并行变换的并行度 p 超过可用寄存器的数量，那么编译器就会采用溢出（splilling），寄存器不够用了，新的变量放到栈里，性能会急剧下降。</p>
+
+<h4 id="存储器性能">存储器性能</h4>
+
+<p>一个存储器的读的结果依赖于最近一个存储器的写，称为写/读相关（write/read dependency），会导致处理速度的下载</p>
+
+<p><img src="CSAPP/CSAPP-5.10&amp;5.11.png" alt="出现读写相关时，虚线会连通形成更长的关键路径" /></p>
+
+<h4 id="程序剖析profiling">程序剖析（profiling）</h4>
+
+<p>Amdahl 定律，</p>
+
+\[T_{new} = T_{old}*[(1-a)+a/k]
+S=\frac{1}{(1-a)+a/k}\]
+
+<h3 id="第六章-存储器层次结构">第六章 存储器层次结构</h3>
+
+<p>CPU 的三级高速缓存都是 SRAM。高速缓存可以在 CPU 芯片上也可以不是。</p>
+
+<h4 id="存储技术">存储技术</h4>
+
+<h5 id="ram">RAM</h5>
+
+<ul>
+  <li>SRAM，静态 RAM。只要有供电就保持不变。密集度低，造价贵，功耗大。</li>
+  <li>DRAM，动态 RAM，作为主存和显存。每个位的存储为对一个电容的充电。对干扰敏感，光线会导致电容电压的改变，相机传感器本质也是 DRAM。DRAM需要不断刷新。</li>
+  <li>FPM DRAM</li>
+  <li>EDO DRAM</li>
+  <li>SDRAM，同步 DRAM，与驱动存储控制器的外部时钟信号同步，最终效果是 SDRAM 比异步 DRAM 更快地输出超单元的内容。</li>
+  <li>DDR SDRAM(Double Date-rate Synchronous DRAM)，双倍数据速率同步 DRAM。DDR1，2，3 的区别是带宽的区别，分别是 2，4，8位（prefetch buffer）</li>
+  <li>Rambus DRAM</li>
+  <li>VRAM，显存</li>
+</ul>
+
+<h5 id="rom">ROM</h5>
+
+<p>DRAM 和 SRAM 属于易失性（volatile）存储器。ROM 属于非易失性存储器（nonvolatile memory），ROM 也就是只读存储器，虽然有的 ROM 可读又可写但由于历史原因仍统称为 ROM。</p>
+
+<ul>
+  <li>PROM，可编程 ROM，只能被编程一次，编程的时候存储器单元的熔丝会被熔断，也就是烧录的来源</li>
+  <li>EPROM，可擦写可编程 ROM</li>
+  <li>闪存，基于 EEPROM，电子可擦写可编程 ROM</li>
+</ul>
+
+<h5 id="磁盘存储">磁盘存储</h5>
+
+<p>转速（RPM）</p>
+
+<p>磁盘构造</p>
+
+<ul>
+  <li>盘片（platter）</li>
+  <li>表面（surface）</li>
+  <li>主轴（spindle）</li>
+  <li>磁道（trace）</li>
+  <li>扇区（sector）</li>
+  <li>扇区间隔（gap）</li>
+  <li>柱面（cylinder），<strong>所有</strong>盘片表面上到主轴距离相等的磁道的集合。</li>
+</ul>
+
+<p>磁盘容量</p>
+
+<ul>
+  <li>记录密度，磁道一英寸的段内可以放入的位数。</li>
+  <li>磁道密度，盘片半径一英寸内所有的磁道数。</li>
+  <li>面密度，记录密度×磁道密度</li>
+</ul>
+
+<p>离盘片中心越远的磁道越长，但是不同磁道的扇区数量却是一个常数，最初的磁盘为了保障扇区数量一致只能把间隔加大。浪费了空间。</p>
+
+<p>现代磁盘，使用多区记录（multiple zone recording）的技术。将盘片按一组柱面分为多个区，每个区的每个柱面上的磁道拥有相同数量的扇区。不过每个区中外面的磁道同样要加大间隔。</p>
+
+<p>磁盘容量 = 字节数/扇区 × 平均扇区数/磁道 × 磁道数/表面 × 表面数/盘片 × 盘片数/磁盘</p>
+
+<p>磁盘的容量单位</p>
+
+<pre><code>K = 10^3
+M = 10^6
+G = 10^9
+T = 10^12
+</code></pre>
+
+<p>内存的容量单位</p>
+
+<pre><code>K = 2^10
+M = 2^20
+G = 2^30
+T = 2^40
+</code></pre>
+
+<p>使用标明 TB 级的硬盘与实际容量的差别大概是 10%</p>
+
+<pre><code>(2.0**40 - 10.0**12) / 10.0**12
+=&gt; 0.099511627776
+</code></pre>
+
+<p>磁盘以扇区大小的块来读写数据。对扇区的访问时间有三个主要的部分</p>
+
+<ol>
+  <li>寻道时间，读写头定位到目标扇区所花的时间。<code>T_avg_seek</code> 是通过几千次对随机扇区的寻道时间求平均值来测量的。</li>
+  <li>旋转时间，等待扇区第一个位选择到读写头下。最差的旋转时间为 <code>1/RPM * 60</code>， <code>T_avg_rotation</code> 为最差旋转时间的一半。</li>
+  <li>传送数据，读/写一个扇区的时间， ``T_avg_rotation = 1/RPM * 1/(平均扇区数/磁道) * 60`</li>
+</ol>
+
+<p>逻辑块，把磁盘的数据地址抽象为一个逻辑块序列，每个逻辑块对应着一个扇区。磁盘中有磁盘控制器将逻辑块号翻译为扇区的物理地址（盘面，磁道，扇区）。</p>
+
+<p>I/O 总线，如 Intel 的 PCI（Peripheral Component Interconnect），外围设备互连总线。用来将外设（磁盘、显卡、显示器、键鼠、USB等等）链接到　CPU　和主存。</p>
+
+<p>CPU　通过存储器映射I/O　技术来向　I/O　设备发送命令。这个命令是异步的，CPU 发送命令后继续下一条指令，磁盘负责读取数据并直接送到主存（无须 CPU），称为直接存储器访问（DMA，Direct Memory Access）。DMA 传送完成后磁盘控制器通过给 CPU 发送一个中断信号来通知操作完成。</p>
+
+<p>实际上硬盘都有一些备用扇区形成一个备用柱面池，导致磁盘的容量比实际的要小。</p>
+
+<h5 id="固态硬盘">固态硬盘</h5>
+
+<p>固态硬盘中的闪存翻译层起到和磁盘控制器相同的角色。</p>
+
+<p>一个闪存由 B 个块组成，每个块有 P 个页。每次读写都是以页为单位的。但要写页的时候，只有该页所属的块被擦除后（全部被置1）才能写页。所有每次要写数据都要将所要写的页的块复制到一个新的块，然后再写页，再将要写的块擦除后将新的块的数据复制回来。</p>
+
+<p>每个块的擦写数量是有限的，大概 100,000 次后块就会被磨损。闪存翻译器通过平均磨损（wear leveling）的逻辑来最大化每个块的寿命。</p>
+
+<h4 id="局部性">局部性</h4>
+
+<p>良好的局部性（locality）指，倾向于引用最近引用过的数据项，或引用最近引用过的数据项附件的数据项。</p>
+
+<ul>
+  <li>时间局部性，重复引用同一个变量具有良好的时间局部性。</li>
+  <li>空间局部性，重复引用最近引用过的数据项附件的数据项。具有步长为 k 的引用模式的程序，步长越小，空间局部性越好。</li>
+</ul>
+
+<h4 id="存储器层次结构">存储器层次结构</h4>
+
+<p>从高层往底层走，设备变得更慢更便宜更大。最高层是 CPU 的寄存器 L0，然后 L1～L3 高速缓存，然后是 L4 DRAM，L5 磁盘/SSD 等等。</p>
+
+<p>对于每个 k ，k 层更快更小的存储设备作为位于 k+1 层更大更慢的存储设备的缓存。</p>
+
+<p>k 与 k+1 层之间的数据总是以块大小为传送单元（transfer unit）来回拷贝。</p>
+
+<p>缓存命中（cache hit），程序需要 k+1 层的数据 d 时，刚好在 k 层找到 d 的缓存。</p>
+
+<p>缓存不命中（cache miss），需要 k+1 层的数据 d 时，在 k 层没有 d 的缓存。 k 层会开始缓存 k+1 包含 d 的数据块，如果 k 层已经满了的话，现存的一个块会被覆盖掉，决定替换掉哪个块的策略称为缓存的替换策略（replacement policy），比如 LRU（最近最少使用）。</p>
+
+<p>缓存不命中包括，</p>
+
+<ol>
+  <li>冷不命中，刚启动的时候第 k 层的缓存是空的。</li>
+  <li>冲突不命中，由放置策略导致的不命中。</li>
+  <li>容量不命中，工作集的大小超过了缓存大小。</li>
+</ol>
+
+<h4 id="高速缓存">高速缓存</h4>
+
+<p>一个高速缓存的表现形式为（S，E，B，m），表示有 S=2^s 组（cache set），每个组里有 E 行（cache line），每行有一个大小为 B=2^b 字节的数据块（block），m 是可以映射到高速缓存上的地址长度。高速缓存大小 C = S * B * E</p>
+
+<p>S 和 B 都是 2 的幂，m = t + s + b, t 是标记位，组索引 s、块偏移位 b、标记位 t 唯一的标识出一个长度为 m 的主存地址。标记位位于行中，行中还有个 1bit 的有效位，表示该行数据是否有效。</p>
+
+<p>E 等于 1 的高速缓存，称为直接映射缓存。 E 大于 1 的称为组相联高速缓存。</p>
+
+<p>CPU 请求一个地址时，会向 L1 高速缓存请求。首先取地址中间 s 个组索引位，找到高速缓存中对应的组，然后根据标记位搜索组中的每一行，但找到标记位相同并且设置的有效位的行，那么就发生了高速缓存命中， CPU 得到了想要的数据。如果找不到，那就是高速缓存不命中。高速缓存要向存储器中缓存包含这个字的块，如果组中有空行，那就是一个很好的候选，如果没有空行，高速缓存必须替换掉原有的行，替换策略可以是随机替换，也有更好局部性的，LFU（Least-Frequently-Used）或 LRU（Least-Recently-Used）。</p>
+
+<p>地址 m 选择中间的位来作为组索引位，是为了相邻的地址块能够分散到各个组中。</p>
+
+<p>高速缓存写的方法有两种，</p>
+
+<p>直写（write-through），发送写的时候，立即将包含所写字的块更新到下一层存储器中。</p>
+
+<p>写回（write-back），只有当替换算法驱逐掉更新过的块，才将其更新到下一层中。能显著减少总线流量，当需要维护一个额外的 dirty bit。</p>
+
+<p>写不命中时，也有两种处理方法</p>
+
+<p>写分配（write-allocate），加载低一层的块到高速缓存中，然后更新高速缓存块。更好地利用写的空间局部性。但每次不命中都会导致块复制到缓存中。通常写回高速缓存都是写分配。</p>
+
+<p>非写分配（not-wiret-allocate）,直接把字写到低一层中。通常直写高速缓存都是非写分配。</p>
+
+<p>高速缓存的指标：</p>
+
+<ul>
+  <li>不命中率：一个程序执行或一部分执行期间，存储器引用不命中的比率，不命中数量/引用数量</li>
+  <li>命中率：1 - 不命中率</li>
+  <li>命中时间： 从高速缓存中传送一个字到 CPU 所需的时间</li>
+  <li>
+    <p>不命中处罚： 由于不命中所需的额外时间</p>
+  </li>
+  <li>高速缓存越大，命中率越高，但是越大的高速缓存可能会增加命中时间。</li>
+  <li>较大的块能更好得支撑空间局部性，但块越大传送时间就越长。现代系统通常高速缓存块包含 32～64 字节</li>
+  <li>相联度 E 越大，降低冲突不命中出现抖动的可能性。越高的 E 实现越昂贵，增加算法复制性，增加命中时间。一般追求命中时间高的用较低的 E，不命中处罚较大的用较高的 E，比如 Core i7 L1 和 L2 是 8 路相联，L3 是 16 路组相联。</li>
+</ul>
+
+<h3 id="第七章-链接">第七章 链接</h3>
+
+<h4 id="静态链接">静态链接</h4>
+
+<p>静态连接器（static linker），ld。有两个主要任务，</p>
+
+<ol>
+  <li>符号解析，符号引用和符号定义联系起来</li>
+  <li>重定位（relocation），</li>
+</ol>
+
+<p>目标文件，</p>
+
+<ol>
+  <li>可重定位目标文件</li>
+  <li>可执行目标文件</li>
+  <li>共享目标文件</li>
+</ol>
+
+<p>C 语言时代，代码工程化的确可怕</p>
+
+<p>属于 C 语言</p>
+
+<h5 id="符号解析">符号解析</h5>
+
+<p>先构建符号表，可重定位目标文件 m 为例，其符号表中有三种符号类型</p>
+
+<ol>
+  <li>全局符号，表示为不带 static 修饰的 C 全局函数及全局变量</li>
+  <li>由其他模块定义并被 m 引用的全局符号，由 external 修饰</li>
+  <li>由符号 m 定义和引用的本地符号，由 static 修饰的 C 全局函数及全局变量和<strong>局部变量</strong></li>
+</ol>
+
+<p>强符号，函数和已初始化全局变量；弱符号，未初始化的全局变量。</p>
+
+<p>链接规则：</p>
+
+<ol>
+  <li>不允许多个相同的强符号</li>
+  <li>一个强符号和多个弱符号同时存在，选择强符号</li>
+  <li>多个弱符号，任意选择一个</li>
+</ol>
+
+<p>静态库（static library），以存档(archive)形式保存在系统：<code>*.a</code> 是一直可重定位目标文件 (<code>*.o</code>)的集合。</p>
+
+<p>与静态库链接， Unix 链接器由左往右按照命令行参数出现的文件顺序扫描 <code>*.o</code> 和 <code>*.a</code></p>
+
+<p>链接器链接时维护三个集合</p>
+
+<ul>
+  <li>E，对可重定位目标文件集合</li>
+  <li>U，未定义符号集合</li>
+  <li>D，已定义符号集合</li>
+</ul>
+
+<p>对于对可重定位目标文件，直接添加入 E，并把所有未定义符号加入 U，已定义符号加入 D。
+对于静态库（*.a）扫描每个对可重定位目标文件，如果有定义符号 U，将其加入 E，并作对可重定位目标文件同样处理。</p>
+
+<h5 id="重定位">重定位</h5>
+
+<ul>
+  <li>重定位节（ELF 节）和符号定义，将所以相同类型的节合并为一个。这一步完成程序中每个指令和全局变量都有唯一的运行时地址。</li>
+  <li>重定位节中的符号引用，修改代码节和数据节中的符号引用，使其指向正确的运行时地址。</li>
+</ul>
+
+<h5 id="可执行目标文件">可执行目标文件</h5>
+
+<p>合并完成后最终生成一个可执行目标文件。</p>
+
+<p>可执行文件有一个 <code>.init</code> 节，是程序的入口点(entry point)，也就是程序运行时执行第一条指令的地址</p>
+
+<p>Unix 运行一个可执行目标文件的过程叫做加载（loading），首先将文件中的代码和数据从磁盘拷贝到存储器中，然后跳转到程序的入口点。启动代码调用 <code>atexit</code> 附加一系列在程序正常中止时应该调用的程序。然后调用程序的 main 函数。最后调用 <code>_exit</code> 将控制返回给操作系统。</p>
+
+<h4 id="动态链接">动态链接</h4>
+
+<p>静态库的缺点，库函数的代码会被复制到每个运行进程的文本段中，造成存储器的浪费。
+共享库（shared library），可以在运行时加载到任意地址并和一个在存储器中的程序链接起来，这个过程称为动态链接。
+共享库也称共享目标（shared object)，Unix 中常用 <code>.so</code> 后缀来表示，Windows 称为 DLL</p>
+
+<p>对于一个库只有一个 <code>.so</code> 文件，所有引用这个库的可执行目标文件共享这个 <code>.so</code>。共享库的 .text 节副本可以被不同的运行中进程共享。</p>
+
+<p>应用程序可以在运行时要求动态链接器加载和链接任意共享库。</p>
+
+<p>动态链接器有如下接口：</p>
+
+<pre><code>#include &lt;dlfcn.h&gt;
+
+// 成功返回指向句柄的指针，错误返回 NULL
+void *dlopen(const char *filename,int flag);
+
+// 返回指向符号的指针，错误返回 NULL
+void *dlsym(void *handle, char *symbol);
+
+// 如果没有其他共享库正在使用这个共享库，则关闭它。
+int dlclose(void *handle)
+
+// 返回错误消息
+const char *dlerror(void);
+</code></pre>
+
+<p>可见，C 也有动态编程的能力。难怪 Steve Yegge 将放在温和保守。</p>
+
+<p>JNI 也是通过 dlopen 或类似的接口加载 <code>.so</code>’</p>
+
+<h4 id="与位置无关代码pic">与位置无关代码（PIC）</h4>
+
+<h3 id="第八章-异常控制流exceptional-control-flow-ecf">第八章 异常控制流（Exceptional Control Flow, ECF）</h3>
+
+<h4 id="异常-1">异常</h4>
+
+<p>每个异常类型都分配了唯一的非负整数的异常号，系统启动时操作系统初始了一张异常表的跳转表，条目 k 中包含了异常 k 的处理程序的地址。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">名称</th>
+      <th>原有</th>
+      <th style="text-align: center">同步</th>
+      <th>返回</th>
+      <th>应用</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">中断（Interrupt）</td>
+      <td>来自 I/O 设备的信号</td>
+      <td style="text-align: center">异步</td>
+      <td>下一条指令</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center">陷阱（Trap）</td>
+      <td>有意的异常</td>
+      <td style="text-align: center">同步</td>
+      <td>下一条指令</td>
+      <td>在用户系统和内核间实现系统调用（System Call） 比如读文件（read），新进程（fork）</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">故障（Fault）</td>
+      <td>潜在可恢复的错误</td>
+      <td style="text-align: center">同步</td>
+      <td>可能返回当前指令</td>
+      <td>比如缺页异常，如果可恢复便返回，不然则进入 abort</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">终止（Abort）</td>
+      <td>不可恢复的错误</td>
+      <td style="text-align: center">同步</td>
+      <td>不会返回</td>
+      <td>硬件错误</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="linuxia32-系统中的异常">Linux/IA32 系统中的异常</h5>
+
+<p>除法异常（0），</p>
+
+<p>一般保护故障（13），比如程序引用了一个未定义的虚拟存储器区域，或者尝试写一个只读文本段。Linux Shell 通常称之为<strong>段异常（Segmentation faults）</strong></p>
+
+<p>缺页（14），会重新执行产生故障的指令，处理程序将物理存储器映射到虚拟存储器的一个页面后重新执行指令。</p>
+
+<h5 id="linuxia32-系统调用">Linux/IA32 系统调用</h5>
+
+<p>系统调用（128），当用户程序想要请求内核服务时使用，比如读写文件，创建新进程。每个系统调用类型也有唯一一个整数号，对应内核中跳转表的偏移号，成为系统调用号。系统调用通过 <code>int n</code>  的陷阱指令来提供。n 是 IA32 异常表中的任意一个索引，历史上，系统调用是通过异常128（0x80）提供的。系统调用号存放在 %eax，其他寄存器除 %esp 外可以存放另外六个参数。</p>
+
+<h4 id="进程">进程</h4>
+
+<p>进程，执行中的程序实例。程序是运行在某个进程的上下文（context）中，上下文是指程序所需的一系列状态组成的。</p>
+
+<p>进程提供给应用程序两个关键抽象：</p>
+
+<ol>
+  <li>独立的逻辑控制流（logical control flow），让程序好像独占地使用处理器</li>
+  <li>私有的地址空间（private address space），让程序好像独占地使用存储器系统</li>
+</ol>
+
+<h5 id="逻辑控制流">逻辑控制流</h5>
+
+<p>有多种不同的形式，如异常处理程序，进程，信号处理程序，线程和 Java 进程等等。</p>
+
+<p>实际进程是轮流使用处理器的，每个进程执行它的流的一部分，然后被抢占（preempted）（暂时挂起），然后轮到其他进程。</p>
+
+<p>一个逻辑流的执行时间与另一个流重叠，并发流（concurrent flow）。多个流并发执行的一般现象称为<strong>并发（concurrency）</strong>。一个进程和多个进程轮流执行称为<strong>多任务（multitasking）</strong></p>
+
+<p>如果两个流并发地运行在不同的处理器核或计算机上，那么称之为并行流（parallel flow）。</p>
+
+<h5 id="私有空间地址">私有空间地址</h5>
+
+<p>x86 Linux 进程的地址空间的组织结构:</p>
+
+<p><img src="CSAPP/process_address_space.png" alt="Linux 进程的地址空间" /></p>
+
+<p>模式位，用于切换用户/内核模式（也叫超级用户模式）。运行在内核模式中的进程可以执行指令集中的任何指令，访问系统中任何存储器位置。</p>
+
+<p><code>/proc</code> 文件系统将许多内核数据结构输出为一个用户程序可读的文本文件层次结构。如 <code>/proc/cpuinfo</code> 是 CPU 的类型信息。<code>/proc/&lt;process id&gt;/maps</code>，某进程所用的存储器段。</p>
+
+<p><code>/sys</code> 系统总线和设备的底层信息， Linux 2.6 加入。</p>
+
+<h5 id="上下文切换context-switches">上下文切换（Context Switches）</h5>
+
+<p>内核为每个进程维护一个上下文，包括目的寄存器、浮点寄存器、程序计数器，用户栈、状态寄存器，内核栈和各种内核数据结构，包括页表，进程表，进程已打开文件表。</p>
+
+<p>调度（scheduling)，内核决定抢占当前进程，并重新开始一个先前被抢占的进程。由调度器的代码处理。</p>
+
+<p>这个过程包括</p>
+
+<ol>
+  <li>保存当前进程上下文</li>
+  <li>恢复之前进程上下文</li>
+  <li>控制传递给新恢复的进程</li>
+</ol>
+
+<p>进程切换可能会导致高速缓存污染（cache pollution），进程 A 的缓存被 B 覆盖，回到 A 时，B的缓存又被 A 覆盖。</p>
+
+<h4 id="进程控制">进程控制</h4>
+
+<p>在程序员的角度，进程总处于下面三种状态：</p>
+
+<ol>
+  <li>运行（running），在 CPU 上执行，或者等待被执行</li>
+  <li>停止（stopped），挂起并且不会被调度，<code>SIGSTOP</code>、<code>SIGTSTP</code>，<code>SIGTTIN</code>、<code>SIGTTOU</code> 会导致进程挂起，直到接收到 <code>SIGCONT</code> 才恢复。</li>
+  <li>终止（terminated），有三种原因导致进程终止， 收到终止信号；从主程序返回；调用 exit 函数。</li>
+</ol>
+
+<h5 id="fork">Fork</h5>
+
+<p>父进程通过 <code>fork</code> 创建一个新的运行子进程：</p>
+
+<pre><code>#include&lt;sys/types.h&gt;
+#include&lt;unistd.h&gt;
+
+pid_t fork(void);
+</code></pre>
+
+<p>子进程得到父进程虚拟地址空间的相同拷贝，包括文本，数据和 bss 段、堆及用户栈，还有父进程任何打开文件描述符相同的拷贝。
+子进程拥有和父进程不同的 PID</p>
+
+<pre><code>#include&lt;sys/types.h&gt;
+#include&lt;unistd.h&gt;
+
+pid_t getpid(void); // 调用进程的 pid
+pid_t getppid(void); // 调用进程的父进程 pid
+</code></pre>
+
+<p><code>pid_t</code> 在 Linux 系统的 types.h 中被定义为 int</p>
+
+<p><code>fork</code> 调用一次，会返回两次。一次在父进程，返回子进程的 pid，一次在子进程返回 0。</p>
+
+<h5 id="回收reap">回收（reap）</h5>
+
+<p>进程终止后，内核仍保存其在已终止状态中，直到被父进程回收。已终止尚未回收前的进程称为僵尸进程（zombie）。</p>
+
+<p>一个进程通过 waitpid 函数来等待子进程终止或停止</p>
+
+<pre><code>#include&lt;sys/types.h&gt;
+#include&lt;sys/wait.h&gt;
+
+pid_t waitpid(pid_t pid, int *status, int options); 
+pid_ wait(int *status);    //等同与 waitpid(-1, &amp;status, 0)
+</code></pre>
+
+<p>等待子进程是一个集合，pid &gt; 0，集合只有一个子进程，为 pid； pid = -1，集合为所有子进程。</p>
+
+<p>waitpid 默认会使调用进程挂起。直到等待集合中的一个子进程终止。如果调用前就有集合中的子进程终止，那么 waitpid 会立刻返回。waitpid 返回终止进程的 pid，并导致内核将该终止进程清理掉。</p>
+
+<p>options 有两个状态位选择：</p>
+
+<ol>
+  <li>WNOHANG，等待集合中的子进程还没有终止，那么 waitpid 会立刻返回 0</li>
+  <li>WUNTRACED， 子进程被停止也会立刻返回，结束状态会被忽略 //TODO</li>
+  <li>WNOHANG|WUNTRACED</li>
+</ol>
+
+<p>status 非空时会放上导致子进程终止的状态信息</p>
+
+<h5 id="进程休眠">进程休眠</h5>
+
+<pre><code>#include&lt;unistd.h&gt;
+
+unsigned int sleep(unsigned int secs);
+int pause(void);
+</code></pre>
+
+<p>sleep 让进程挂起一段时间，时间到时返回 0，如果 sleep 提前被信号中断而返回，会返回剩下的要休眠的秒数（欲休眠时间-已休眠时间）。向进程发送中断信号回导致 sleep 返回。</p>
+
+<p>pause 让进程休眠，直到进程收到继续信号</p>
+
+<h5 id="程序与进程">程序与进程</h5>
+
+<ul>
+  <li>程序，是一堆代码和数据，execve 在当前进程的上下文中加载一个新程序，pid 仍然相同</li>
+  <li>进程，是执行中的程序的一个具体的实例，fork 在新进程中运行相同的程序</li>
+</ul>
+
+<h4 id="信号">信号</h4>
+
+<p><code>man 7 signal</code>，显示信号列表</p>
+
+<p>发送信号到进程由两个步骤组成：</p>
+
+<ol>
+  <li>发送信号，内核通过更新目的进程上下文的某个状态，传递一个信号到目的进程。</li>
+  <li>接收信号，内核强迫进程对信号的发送作出反应，进程可以忽略或终止或通过信号处理程序的用户层信号捕获这个信号</li>
+</ol>
+
+<p>发出而未接收的信号称为待处理信号（pending signal），一种信号类型最多只有一个待处理信号。（pending 是以位向量保存的）</p>
+
+<p>进程组，每个进程都属于进程组，进程组有进程组 ID，</p>
+
+<pre><code>#include &lt;unistd.h&gt;
+
+pid_t getpgrp(void); // 返回当前进程组 ID
+int setpgid(pid_t pid, pid_t pgid); //改变进程的进程组
+</code></pre>
+
+<p><code>kill</code> 可以向其他进程发送任意信号，如</p>
+
+<pre><code>kill -9 15213
+
+
+#include &lt;signal.h&gt;
+#include &lt;signal.h&gt;
+
+int kill(pid_t pid, int sig); //如果 pid 为负则向进程组abs(pid) 发送信号
+</code></pre>
+
+<p>接收信号：</p>
+
+<pre><code>#include &lt;signal.h&gt;
+typedef void (*sighandler_t)(int);
+
+sighandler_t signal(int signum,, sighandler_t handler)
+</code></pre>
+
+<p>handler 可以是</p>
+
+<ul>
+  <li>SIG_IGN，那么忽略信号</li>
+  <li>SIG_DFL,那么恢复信号的默认行为</li>
+  <li>用户自定义函数，该函数也称为信号处理程序（signal halder），只要进程接收到信号，那么便会调用该函数</li>
+</ul>
+
+<p><code>SIGSTOP</code> 和 <code>SIGKILL</code> 的默认行为不能被更改。</p>
+
+<ul>
+  <li>待处理信号会被阻塞，</li>
+  <li>待处理信号不会排队等待，任意类型至多只有一个待处理信号</li>
+  <li>系统调用会被中断，read、wait 等慢速系统调用，在信号处理程序返回后不会继续操作，并把 errno 设为 EINTR</li>
+</ul>
+
+<h4 id="非本地跳转nonlocal-jump">非本地跳转(nonlocal jump)</h4>
+
+<pre><code>#include&lt;setjmp.h&gt;
+
+int setjmp(jmp_buf env); //  在 env 缓冲区保存当前调用环境，返回 0
+int longjmp(jmp_buf env, int retval); // 从缓冲区恢复调用环境，并从最近一次初始化 env 的 setjmp 返回，retval 为 setjmp 的返回值
+</code></pre>
+
+<p><code>setjmp</code> 调用一次返回多次，<code>longjmp</code> 不返回。<code>setjmp</code> 相当于 Java 的 <code>catch</code> 子句， <code>longjmp</code> 相当于 <code>throw</code> 语句。</p>
+
+<h3 id="第九章-虚拟存储器vm">第九章 虚拟存储器（VM）</h3>
+
+<p>virtual addressing:</p>
+
+<pre><code>VA -&gt; MMU(address translation)  -&gt; PA
+</code></pre>
+
+<p>Virtual Page  P = 2^p</p>
+
+<p>Physical Page PP  P (page frame)</p>
+
+<p>DRAM &gt; 磁盘 100 000 倍，所以 DRAM 的缓存不命中很昂贵</p>
+
+<p>DRAM 缓存是全相连的</p>
+
+<p>DRAM 缓存不命中称为缺页（page fault）</p>
+
+<p>thrashing</p>
+
+<p>PTE</p>
+
+<p>地址翻译</p>
+
+<p>MAP:VAS-&gt;PAS 或空集</p>
+
+<p>VA</p>
+
+<ul>
+  <li>VPO 虚拟页面偏移</li>
+  <li>VPN 虚拟页号</li>
+  <li>TLBT TLB 标记</li>
+  <li>TLBI TLB 索引</li>
+</ul>
+
+<p>PA</p>
+
+<ul>
+  <li>PPO 物理页面偏移</li>
+  <li>PPN 物理页号</li>
+  <li>CO 缓存块内的字节偏移</li>
+  <li>CI 高速缓存索引</li>
+  <li>CT 高速缓存标记</li>
+</ul>
+
+<p>高速缓存和虚拟存储器</p>
+
+<p>高速缓存选择物理寻址</p>
+
+<p>TLB（翻译后备缓冲器，Translation Lookaside Buffer）,MMU 中 PTE 的小缓存</p>
+
+<p>TLB 翻译</p>
+
+<p>多级页表</p>
+
+<p>9.4</p>
+
+<p>0x3d7</p>
+
+<p>A
+ 1312        8        4
+ 0 0 | 0 0 1 1 |1 1 0 1| 0 1 1 1</p>
+
+<p>B</p>
+
+<p>VPN  0000 11|11    0x0F
+TLBI  11  0x3
+TLBT  00 0011 0x03  Y
+PPN  0D</p>
+
+<p>C</p>
+
+<p>00| 1101 | 01 0111  0x357</p>
+
+<p>CO  11 0x3
+CI   0101 0x5
+CT  0x0D
+Y
+1D</p>
+
+<p>虚拟地址</p>
+
+<p><img src="CSAPP/address_translation.png" alt="CSAPP-5.5&amp;5.6.png" /></p>
+
+<h4 id="linux-虚拟存储系统">Linux 虚拟存储系统</h4>
+
+<p>CR3 控制寄存器，保存 L1 页表的物理地址</p>
+
+<p>区域间用链表链接。</p>
+
+<h4 id="存储器映射">存储器映射</h4>
+
+<p>写时拷贝，不同进程的私有对象也可能共享同一个物理对象，但一个进程对一个对象发起写操作时才拷贝一个新的出来。</p>
+
+<h4 id="动态存储器分配">动态存储器分配</h4>
+
+<p>分配器 allocator</p>
+
+<p>8  0x8
+16 0x10
+16 0x10
+20 0x14</p>
+
+<p>12/8
+8/8
+16/8
+8/8</p>
+
+<h5 id="隐式空闲链表">隐式空闲链表</h5>
+
+<h5 id="显式空闲链表">显式空闲链表</h5>
+
+<p>双向空闲链表</p>
+
+<p>分离的空闲链表</p>
+
+<ol>
+  <li>简单分离存储</li>
+  <li>分离适配</li>
+  <li>伙伴系统</li>
+</ol>
+
+<h3 id="第十章-系统级io">第十章 系统级I/O</h3>
+
+<h4 id="unix-io">unix io</h4>
+
+<p>文件描述符</p>
+
+<ul>
+  <li>标准输入（STDIN_FILENO = 0）</li>
+  <li>标准输入（STDOUT_FILENO = 1）</li>
+  <li>
+    <p>标准错误（STDERR_FILENO = 2）</p>
+  </li>
+  <li><code>open</code> 函数总是回最低的没有打开的述符，比如说第一个打开的文件 <code>fd = 3</code></li>
+  <li><code>open</code> 相同的文件两次，有两个不同的 fd，对应不同的文件表项（各自有当前位置），相同的 v-node 表项。</li>
+</ul>
+
+<p>系统的内核空间维护着一个进程表（Process Table），进程表中的每一项称为 Process cotrol block，保存着进程的详细信息。这些信息可在 <code>/proc/pid</code> 查看。每个进程项都保存着一张描述符表（fd），每一个描述符表项都有一个指向系统的打开文件表（System Open File Table）中的一项。SOFT 的一项表示一个打开文件的链接，SOFT 中也有一个指向 v-node 表的指针。</p>
+
+<ol>
+  <li>描述符表，每个进程都有它独立的描述符表，每个文件描述符表项执行文件表中的一个项</li>
+  <li>打开文件表，打开文件的集合，所有进程共享。包括文件打开状态（读或写），偏移，引用计数，及 v-node 表项的指针</li>
+  <li>v-node 表，所有程共享，包括 stat 结构中的大多数信息（文件元数据）</li>
+</ol>
+
+<h4 id="vnode-与-inode-的区别">vnode 与 inode 的区别</h4>
+
+<p>vnode 是操作系统保存在内存中的文件描述信息。而 inode 是保存在磁盘中的文件描述信息，具体的实现跟文件系统的实现相关。vnode 是更高层的抽象，保存有 inode 的相关信息。</p>
+
+<h4 id="标准-io">标准 I/O</h4>
+
+<h3 id="第十一章-网络编程">第十一章 网络编程</h3>
+
+<p>封装</p>
+
+<h4 id="套接字">套接字</h4>
+
+<p>临时端口（ephemeral port）</p>
+
+<ul>
+  <li>迭代服务器（iterative server），一次一个地在客户端间迭代</li>
+  <li>并发服务器（concurrent server），同时处理多个客户端</li>
+</ul>
+
+<h4 id="web-服务器">Web 服务器</h4>
+
+<h3 id="第十二章-并发编程">第十二章 并发编程</h3>
+
+<ol>
+  <li>进程</li>
+</ol>
+
+<p>优点：模型清晰，共享文件表，不共享用户空间。</p>
+
+<p>缺点：共享状态信息困难，必须使用进程间通讯（IPC， interprocess communications）。</p>
+
+<p>Unix IPC，管道，FIFO， V</p>
+
+<ol>
+  <li>
+    <p>I/O 多路复用</p>
+
+    <pre><code> #include &lt;unistd.h&gt;
+ #include &lt;sys/types.h&gt;
+    
+ // n 表示描述符集合的数目， fdset 读集合是一个位图 b_k 表示描述符 k 是否位于读集合
+ // 返回已准备好的描述符的个数，同时指针 fdset 修改为指向准备好的描述符集合
+ int select(int n, fd_set * fdset, NULL, NULL, NULL);
+</code></pre>
+  </li>
+</ol>
+
+<p>事件驱动</p>
+
+<h4 id="线程">线程</h4>
+
+<p>p线程上下文：Thread ID、栈、栈指针、PC、通用目的寄存器和条件码</p>
+
+<p>共享进程的整个虚拟空间</p>
+
+<p>线程是可结合的（joinable）或分离的（detached）</p>
+
+<pre><code>#include &lt;pthread.h&gt;
+// 调用者线程等待线程 tid 结束
+int pthread_join(pthread_t tid, void **thread_return);
+</code></pre>
+
+<p>对等线程（peer thread）</p>
+
+<h5 id="共享变量">共享变量</h5>
+
+<p>变量 v 是共享的，当且仅当它的实例被一个以上的线程引用</p>
+
+<p>y y y</p>
+
+<p>n y y</p>
+
+<p>y n n</p>
+
+<p>y y y</p>
+
+<p>n y n</p>
+
+<p>n n y</p>
+
+<p>0 - 0
+0 - 0
+0 0 0
+0 1 0
+0 1 1
+1 1 1
+1 1 1
+1 - 1</p>
+<ul>
+  <li>1 1</li>
+</ul>
+
+<h5 id="信号量">信号量</h5>
+
+<p>Java Monitor</p>
+
+<h5 id="并行">并行</h5>
+
+<p>(顺序)(并发(并行))，</p>
+
+<p>加速比（speedup）：</p>
+
+<p>\(S_p = T_1 / T_p\)</p>
+<ul>
+  <li>p，处理器数目</li>
+  <li>T_k，在 k 个核上的执行时间</li>
+</ul>
+
+<p>效率</p>
+
+\[E_p = S_p/p\]
+
+<p>1 75% 2</p>
+
+<h4 id="其他并发问题">其他并发问题</h4>
+
+<p>线程安全，被多个并发线程反复调用时能产生正确的结果</p>
+
+<p>不安全函数的情况：</p>
+
+<ol>
+  <li>对全局变量的修改</li>
+  <li>保持跨越每多个调用状态的函数</li>
+  <li>返回指向静态变量的指针的函数</li>
+  <li>调用线程不安全函数的函数</li>
+</ol>
+
+<p>为什么 2 不能通过互斥锁保护</p>
+
+<p>3 可通过加锁-拷贝 （lock-and-copy） 达到线程安全</p>
+
+<p>可重入性函数（reentrant function），线程安全函数的真子集</p>
+
+<p>竞争(race)，一个线程的正确执行依赖于其要在另一个线程达到 y 之前到达其控制流中的 x。</p>
+
+<p>死锁，两个信号量的禁止区域重叠，便有可能导致死锁</p>
+
+<p>每对互斥锁（s，t），每个占用他们的线程都按照相同顺序进行加锁，那么程序就是无死锁的了</p>
+
+</article>
+<div class="tag-container" >
+    
+    <div class="chip">
+        <a href="/tags#深入理解计算机系统-ref">
+            深入理解计算机系统
+        </a>
+    </div>
+    
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Reading/computer-systems-a-programmer-s-perspective"
+ var disqus_config = function () {
+     this.page.title = "深入理解计算机系统"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Reading/computer-systems-a-programmer-s-perspective/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+    <script type="text/javascript" async
+ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+    
+</body>
+
+</html>
+

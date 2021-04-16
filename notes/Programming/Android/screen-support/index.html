@@ -1,0 +1,374 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    Screen Support | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">Screen Support</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-11-30">2013-02-19</span>
+    
+</div>
+
+<article>
+    <p><a href="https://developer.android.com/guide/practices/screens_support.html">官方文档</a></p>
+
+<p><a href="http://www.qhm123.com/2011/07/17/android-learning-fifth-screen-things-resolution-denity.html">Android手机屏幕那点事</a>总结的不错。</p>
+
+<h3 id="一些概念">一些概念</h3>
+
+<dl>
+  <dt><strong>屏幕尺寸(size)</strong></dt>
+  <dd>真实的尺寸，屏幕的对角线长度。
+	   android 把屏幕尺寸分为四种一般类型：small,normal,large,extra large(xlarge)
+  </dd>
+  <dt><strong>屏幕密度(density)</strong></dt>
+  <dd>一个物理面积内的像素数量，常用单位dpi（dots per inch）。
+      android 把屏幕像素分为四种一般类型：low(ldpi)，medium(mdpi)，high(hdpi)，extra high(xhdpi)
+  </dd>
+  <dt><strong>分辨率(resolution)</strong></dt>
+  <dd>屏幕的物理像素</dd>
+  <dt><strong>纵横比(aspect ratios)</strong></dt>
+  <dd>提供 long 和 notlong 两个限定值，long 表示屏幕变宽或者变高了，比如 portrait 是 notlong landscape 则是 long </dd>
+</dl>
+
+<p>应用只需按照尺寸和密度的分组来区分不同屏幕无需考虑具体分辨率。</p>
+
+<blockquote>
+  <p>two devices that report a screen density of hdpi might have real pixel densities that are slightly different. Android makes these differences abstract to applications, so you can provide UI designed for the generalized sizes and densities and let the system handle any final adjustments as necessary</p>
+</blockquote>
+
+<h3 id="计量单位">计量单位</h3>
+
+<dl>
+<dt><strong>dp/dip</strong></dt>
+<dd>device independent pixels(设备独立像素)。 不同设备有不同的显示效果,具体基于屏幕的物理密度，在160 dpi(像素每英寸)的屏幕上, 1dp等于1px 。 实际上dp = px * dpi/160。所以160dp无论屏幕的密度是多少都是1英寸的大小。在指定view的大小和位置时，应当以dp为单位,这样可以让UI在不同的屏幕上保持相同的尺寸。</dd>
+
+<dt><strong>sp</strong></dt>
+<dd>Scale-independent Pixels ，文档中说跟dp差不多，这个于dp的不同在于，字体大小在dp的基础上，可以根据用户的偏好设置，相应调整字体大小，所以是scale的。正如stackoverflow上说的，所有地方都应该用dp作为单位，除了字体，字体应该用sp。 这个值以px的关系,跟DisplayMetrics的scaledDensity属性有关.</dd>
+
+<dt><strong>pt</strong></dt>
+<dd>Points，物理长度单位，1/72 英寸。</dd>
+
+<dt><strong>px</strong></dt>
+<dd>实际的像素点，效率最高的单位。</dd>
+
+<dt><strong>mm</strong></dt>
+<dd>毫米，同样是物理长度单位。</dd>
+
+<dt><strong>in</strong></dt>
+<dd>英寸，屏幕物理长度单位。 1英寸=25.4mm。</dd>
+</dl>
+
+<blockquote>
+  <p>xlarge screens are at least 960dp x 720dp</p>
+</blockquote>
+
+<blockquote>
+  <p>large screens are at least 640dp x 480dp</p>
+</blockquote>
+
+<blockquote>
+  <p>normal screens are at least 470dp x 320dp</p>
+</blockquote>
+
+<blockquote>
+  <p>small screens are at least 426dp x 320dp</p>
+</blockquote>
+
+<p>下面是android 处理单位的转换算法：</p>
+
+<pre><code>switch (unit) {
+case COMPLEX_UNIT_PX:
+	return value;
+case COMPLEX_UNIT_DIP:
+	return value * metrics.density;
+case COMPLEX_UNIT_SP:
+	return value * metrics.scaledDensity;
+case COMPLEX_UNIT_PT:
+	return value * metrics.xdpi * (1.0f/72);
+case COMPLEX_UNIT_IN:
+	return value * metrics.xdpi;
+case COMPLEX_UNIT_MM:
+	return value * metrics.xdpi * (1.0f/25.4f);
+}
+return 0;
+</code></pre>
+
+<p>metrics，是类DisplayMetrics的实例,DisplayMetrics是一个描述显示设备基本信息的类。</p>
+
+<pre><code>//获取当前DisplayMetrics
+DisplayMetrics metrics = new DisplayMetrics();
+getWindowManager().getDefaultDisplay().getMetrics(metrics);
+</code></pre>
+
+<p><code>metrics.density</code>是dp直接相关缩放因子。density不是实际dpi/160，即这个值与真实屏幕尺寸（xdpi，ydpi。）无关的，应该是与屏幕密度的分组有关，</p>
+
+<pre><code>DisplayMetrics.DENSITY_LOW  // 120dp
+DisplayMetrics.DENSITY_MEDIUM //160dp
+DisplayMetrics.DENSITY_HIGH //240dp
+DisplayMetrics.DENSITY_XHIGH //320dp
+</code></pre>
+
+<p><code>metrics.densityDpi</code> 可以得到这个值，比如 hdpi 的设备， density 应该为 1.5</p>
+
+<h3 id="位图缩放">位图缩放</h3>
+
+<blockquote>
+  <p>if your application provides bitmap drawables only for the baseline, medium screen density (mdpi), then the system scales them up when on a high-density screen, and scales them down when on a low-density screen.</p>
+</blockquote>
+
+<p>位图放在 drawable 里会按实际像素处理，放在 drawable-?dpi 里的图片，在其他dpi的设备里显示会被缩放。</p>
+
+<p>比如一张大小为72x72的图片，放到 drawble-hdpi里，在不同dpi的设备显示大小如下：</p>
+
+<pre><code>hdpi 72x72px 48x48dp
+mdpi 48x48px 48x48dp
+</code></pre>
+
+<p>如果这张图片放到 drawable 里：</p>
+
+<pre><code>hdpi 72x72px 108x108dp
+mdpi 72x72px 72x72dp
+</code></pre>
+
+<p>因为 mdpi <code>1px = 1dp</code>，所以放到 drawble 里，跟放到 drawable-mdpi 一样。</p>
+
+<h3 id="多屏幕支持">多屏幕支持</h3>
+
+<p>如何具体应对多屏幕?</p>
+
+</article>
+<div class="tag-container" >
+    
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Programming/Android/screen-support"
+ var disqus_config = function () {
+     this.page.title = "Screen Support"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Programming/Android/screen-support/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

@@ -1,0 +1,511 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    Android Studio | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">Android Studio</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-11-30">2013-05-24</span>
+    
+</div>
+
+<article>
+    <h3 id="2016">2016</h3>
+
+<h4 id="inotify-watches-limit">Inotify Watches Limit</h4>
+
+<p>见 <a href="https://confluence.jetbrains.com/display/IDEADEV/Inotify+Watches+Limit">Inotify Watches Limit - IntelliJ IDEA - Confluence</a>，在 Arch Linux 下，需要放在 ` /etc/sysctl.d/*.conf ` 见 <a href="https://wiki.archlinux.org/index.php/sysctl">sysctl - ArchWiki</a></p>
+
+<h3 id="2014">2014</h3>
+
+<h3 id="基本设置">基本设置</h3>
+
+<h4 id="copyright">Copyright</h4>
+
+<pre><code>Copyright (c) $today.year. Tiou Lims, All rights reserved.
+</code></pre>
+
+<p>更改默认换行符</p>
+
+<p>https://www.jetbrains.com/idea/webhelp/configuring-line-separators.html</p>
+
+<p>将文件编码改为 utf-8</p>
+
+<p>Alt + Ctrl + I  修复当前行的缩进（Auto-Indent Lines）</p>
+
+<p>Alt + F7 Find Usage（全部项目）</p>
+
+<p>Alt +Ctrl　＋　F7 使用 popup 显示 FindUsage 结果</p>
+
+<p>Shift + Ctrl + F7 高亮结果</p>
+
+<p>Ctrl + F12  Structure 类似 Eclipse Quick Outline  （居然找不到关闭的快捷键）</p>
+
+<p>Ctrl + Alt + Shift + N 快速跳转到任一个 symbol</p>
+
+<h3 id="template">template</h3>
+
+<p>默认有 <code>sout</code> 使用 C-j 进行补全</p>
+
+<p>不明白eclipse 为什么用 sysout</p>
+
+<p>http://arhipov.blogspot.jp/2011/07/whats-cool-in-intellijidea-part-ii-live.html
+https://www.jetbrains.com/idea/features/code_generation.html</p>
+
+<h3 id="emacs-keymap">Emacs Keymap</h3>
+
+<h4 id="option-解决办法">option 解决办法</h4>
+
+<p>用一个新的 keyboard layout 屏蔽掉 option 的输入字符快捷键，才能在
+intellij 中作为meta 键使用。</p>
+
+<p>按照 @dan 的方法实现
+http://stackoverflow.com/questions/11876485/how-to-disable-typing-special-characters-when-pressing-option-key-in-mac-os-x</p>
+
+<p>但是新的 layout 不支持 aquamacs</p>
+
+<p>来回切换也麻烦</p>
+
+<h4 id="c-xb">C-X,B</h4>
+
+<p>2015-03-10，可以支持了 <code>C-X,B</code></p>
+
+<pre><code>Emacs Keymap 中 `C-X,B` 默认是打开 Switcher 的，但是 Switcher 不支持这种打开方式，这是个比较特殊的功能，详见官方文档：[Navigating Between Files and Tool Windows](https://www.jetbrains.com/idea/webhelp/navigating-between-files-and-tool-windows.html)
+
+Switcher 只能使用默认快捷键，`Ctrl+Tab`
+</code></pre>
+
+<h3 id="git">git</h3>
+
+<p>用我这个 <a href="https://gist.github.com/douo/9427014">.gitignore</a></p>
+
+<p>有个很方便的 VCS operations quick list(M-`, Ctrl + V for Mac))</p>
+
+<p>直接用 cygwin 的 git.ext</p>
+
+<p>http://shrubbery.homeip.net/c/display/W/Using+GIT+with+IntelliJ+IDEA</p>
+
+<h3 id="插件">插件</h3>
+
+<p><a href="https://github.com/avast/android-butterknife-zelezny">生成 butterknife 代码</a></p>
+
+<p>https://github.com/inmite/android-selector-chapek</p>
+
+<p>https://github.com/Haehnchen/idea-android-studio-plugin</p>
+
+<p>https://bitbucket.org/bric3/jd-intellij</p>
+
+<h3 id="2013">2013</h3>
+
+<h4 id="导入已存在项目">导入已存在项目</h4>
+
+<p>创建新模块（New Module），选择 Import Existing Project，然后从已存在的项目（Gradle Project）中导入一个模块，结果并不是引用这个模块，而是直接将模块整个模块复制到当前项目下。</p>
+
+<h4 id="打包-so-文件的技巧">打包 .so 文件的技巧</h4>
+
+<p>https://groups.google.com/forum/?fromgroups#!topic/adt-dev/nQobKd2Gl_8</p>
+
+<h4 id="overview">Overview</h4>
+
+<p>Google I/O 2013 放出的新 Android SDK，基于 Intellij IDEA。现在还只是早期预览版本。</p>
+
+<p>https://developer.android.com/sdk/installing/studio.html</p>
+
+<p>http://android-developers.blogspot.com/2013/05/android-studio-ide-built-for-android.html</p>
+
+<p>是否要切换到 Android Studio?</p>
+
+<h4 id="优点">优点</h4>
+
+<ul>
+  <li>跟 Eclipse 比较，UI 更舒服</li>
+  <li>很多激动人心的新特性，见 https://www.youtube.com/watch?v=lmv1dTnhLH4</li>
+  <li>Emacs 按键绑定，比Eclipse 默认的强，甚至比 Emacs plus 好用，没那么多Bug。</li>
+  <li>没有遇到过像 Eclipse 假死，崩溃的问题。</li>
+</ul>
+
+<h4 id="缺点">缺点</h4>
+
+<ul>
+  <li>android studio is not about build</li>
+  <li>logcat 颜色怎么设置</li>
+  <li>bug多，需要手动编辑 build.gradle</li>
+  <li>gradle 速度慢（运行一次要30+秒 单单一次清理也要 10+秒）(mac 15s  clean：5s) <code>--daemon</code> 会有所改善</li>
+  <li>emacs 按键仍不完整，如 c-x/c-b c-x/c-f 的弹出窗口不能用 c-g 取消</li>
+</ul>
+
+<h4 id="intellij-idea">intellij idea</h4>
+
+<p><a href="http://confluence.jetbrains.com/display/IntelliJIDEA/Quick+Start">Quick Start</a> 30天 Guide 是很好的入门阅读材料</p>
+
+<p>Help-&gt;Productivity Guide 提升效率的好帮手</p>
+
+<p>先熟悉 IntelliJ IDEA</p>
+
+<p>IntelliJ 的 project 概念跟 Eclipse 的 project 不一样.它的 module 才是类似于 Eclipse 的 project，而他的 project 则类似于 Eclipse 的 workspace</p>
+
+<p>https://developer.android.com/sdk/installing/studio-tips.html
+https://www.jetbrains.com/idea/index.html</p>
+
+<h5 id="项目结构">项目结构</h5>
+
+<p>http://confluence.jetbrains.com/display/IDEADEV/Structure+of+IntelliJ+IDEA+Project</p>
+
+<h5 id="project">Project</h5>
+
+<p>封装源码，库的一个组织单元。IntelliJ 所以操作的上下文环境，可以包含一个或者多个模块。</p>
+
+<h5 id="module">Module</h5>
+
+<p>模块是一个可单独运行，测试，debug 的离散单元。</p>
+
+<h5 id="library">Library</h5>
+
+<p>TODO 各个文件的作用</p>
+
+<h4 id="actionbarsherlock">ActionBarSherlock</h4>
+
+<p>尝试了多种情况，只有 @froger_mcs 的方法是可行的，说明也足够详细。
+http://stackoverflow.com/a/16639227/851344</p>
+
+<p>不过关于android-support-v4.jar，得按照留言中 @Akbar 的配置才行。</p>
+
+<p>不过运行的时候仍会提示错误</p>
+
+<p>Gradle 执行 aapt 出错，<code>CreateProcess error=8</code></p>
+
+<p>gradle clean</p>
+
+<p>再</p>
+
+<p>gradle compileDebug –info</p>
+
+<p>就没问题了.</p>
+
+<pre><code>错误: 编码GBK的不可映射字符
+</code></pre>
+
+<h4 id="gradle">Gradle</h4>
+
+<p>Gradle 是什么</p>
+
+<p>http://www.gradle.org/docs/current/userguide/userguide_single.html#overview</p>
+
+<p>http://stackoverflow.com/questions/1163173/why-use-gradle-instead-of-ant-or-maven</p>
+
+<p>new android sdk build system</p>
+
+<p>https://www.youtube.com/watch?v=LCJAgPkpmR0</p>
+
+<p>http://tools.android.com/tech-docs/new-build-system/user-guide</p>
+
+<p>貌似只支持1.6</p>
+
+<h5 id="gradle-wrapper">Gradle wrapper</h5>
+
+<p>The Gradle Wrapper allows you to execute Gradle builds on machines where Gradle is not installed.</p>
+
+<h4 id="bug">Bug</h4>
+
+<h5 id="1">1</h5>
+
+<p>运行项目找不到模块(module)</p>
+
+<h5 id="2">2</h5>
+
+<p>自己更改项目路径就会出现 There must not already be a project at this location.</p>
+
+<h5 id="3">3</h5>
+
+<p>http://tools.android.com/knownissues</p>
+
+<p>弄了一整天还是不能将源码导入作为andriod library ,提示</p>
+
+<pre><code>Gradle: 
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':shanbay-reader-android:compileDebug'.
+&gt; Compilation failed; see the compiler error output for details.
+
+* Try:
+Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output.
+</code></pre>
+
+<p>这个错误是因为找不到类 AsyncHttpClient，发现将 jar 添加进module后，build.gradle 里的 dependencies 里仍没有该文件。</p>
+
+<p>参考 http://binizzio.com/?p=227</p>
+
+<pre><code>compile fileTree(dir: 'libs', include: '*.jar')
+</code></pre>
+
+<p>仍然需要手动编辑 build.gradle</p>
+
+<p>然后必须<code>gradle clean</code> 不然还是会提示找不到类。</p>
+
+<p>参考:http://stackoverflow.com/questions/16718026/how-to-build-an-android-library-with-android-studio-and-gradle</p>
+
+<h3 id="概念">概念</h3>
+
+<p>Project，项目的格式</p>
+
+<ol>
+  <li>
+    <p>基于目录，项目目录下有<code>.idea</code> 目录，包含有一堆 xml 配置文件集合</p>
+  </li>
+  <li>
+    <p>基于文件，项目目录下有 <code>.ipr</code> 保存项目信息、<code>.iws</code> 保存个人工作区设置（personal workspace settings）</p>
+  </li>
+</ol>
+
+<p>Modules，一个可以编译、运行、调试的功能单元</p>
+
+<p>libraries</p>
+
+</article>
+<div class="tag-container" >
+    
+    <div class="chip">
+        <a href="/tags#grandle-ref">
+            grandle
+        </a>
+    </div>
+    
+    <div class="chip">
+        <a href="/tags#Google IO-ref">
+            Google IO
+        </a>
+    </div>
+    
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Tools/android-studio"
+ var disqus_config = function () {
+     this.page.title = "Android Studio"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Tools/android-studio/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

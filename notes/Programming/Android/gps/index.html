@@ -1,0 +1,491 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    GPS | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">GPS</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-11-30">2017-02-21</span>
+    
+</div>
+
+<article>
+    <h3 id="gps-简介">GPS 简介</h3>
+
+<p><a href="https://zh.wikipedia.org/wiki/%E5%85%A8%E7%90%83%E5%AE%9A%E4%BD%8D%E7%B3%BB%E7%BB%9F">GPS</a> 属于<a href="https://zh.wikipedia.org/wiki/%E5%8D%AB%E6%98%9F%E5%AF%BC%E8%88%AA%E7%B3%BB%E7%BB%9F">全球卫星导航系统</a>（global navigation satellite system）的一种。</p>
+
+<p>有源与无源定位，GPS 为无源定位，接收机不需要发出任何信号。</p>
+
+<p>卫星信号里包含有卫星的精确位置以及卫星发射信号的精确时间信息，接收机最少要收到四个卫星的信号，相当于从四个已知精确位置的点收到信号；而且可以通过接收机时钟得到时间差，从而知道四个信号从卫星到接收机的不准确距离（含同一个误差值，由接收机时钟误差造成），用这四个不准确距离和四个卫星的准确位置构建四个方程，解方程组就得到接收机位置。</p>
+
+<p>这里有个问题，为什么 Android GPS API 返回的卫星数据，是天顶角（Alt） 和方位角（Az），这是地平坐标系。这些位置信息如果是卫星返回的，不是应该返回绝对位置吗？比如说卫星在天球中的赤经和赤纬吗？如果说经程序转换，那么地平坐标系是基于观察者的坐标系，这时观察者的数据应该是未知。</p>
+
+<h4 id="精度">精度</h4>
+
+<p>C/A-code receivers ~ 5 -10 m.
+P/Y-code receivers ~ 2 -9 m</p>
+
+<p>DGPS(差分 GPS)</p>
+
+<p>C/A-code DGPS receivers ~0.7 -3 m.
+P/Y-code DGPS receivers ~0.5 -2.0 m.</p>
+
+<p>卫星的几何分布也会影响到定位精度。</p>
+
+<ul>
+  <li><a href="https://www.cnblogs.com/inteliot/archive/2012/08/14/2638185.html">GPS精度因子（GDOP,PDOP,HDOP,VDOP,TDOP）</a></li>
+  <li><a href="http://blog.sciencenet.cn/blog-640874-503434.html">科学网—什么叫几何精度因子（GDOP,PDOP,HDOP,VDOP,TDOP）</a></li>
+</ul>
+
+<h3 id="大地测量系统geodetic-datum">大地测量系统（Geodetic Datum）</h3>
+
+<p><a href="https://en.wikipedia.org/wiki/Geodetic_datum">大地测量系统</a>是指用于描述地球上一个地点位置的坐标系统，有多套标准，国内面对的一般有如下三种</p>
+
+<ol>
+  <li>WGS-84</li>
+</ol>
+
+<p>GPS全球定位系统使用而建立的坐标系统。在Android系统内取得的海拔高度预设是参照WGS84而不是当地平均海平面，使得用户在海边定位是可能发现自己的测量值位于海平面以下</p>
+
+<ol>
+  <li>GCJ-02</li>
+</ol>
+
+<p>又名火星坐标。</p>
+
+<blockquote>
+  <p>A marker with GCJ-02 coordinates will be displayed at the correct location on a GCJ-02 map. However, the offsets can result in a 100 - 700 meter error from the actual location if a WGS-84 marker (such as a GPS location) is placed on a GCJ-02 map, or vice versa.</p>
+</blockquote>
+
+<p>谷歌地图上的<strong>路网图</strong>用的是 GCJ-02，卫星地图（同谷歌地球）用的 是 WGS-84，所以显示出来会有 100-700m 的偏移。</p>
+
+<ol>
+  <li>BD-09</li>
+</ol>
+
+<p>百度标准的经纬度坐标，基于 GCJ-02。</p>
+
+<h4 id="坐标转换">坐标转换</h4>
+
+<p>WGS-84 和 GCJ-02 的转换可参考：<a href="http://blog.genglinxiao.com/%E4%B8%AD%E5%9B%BD%E5%9C%B0%E5%9B%BE%E5%9D%90%E6%A0%87%E5%81%8F%E7%A7%BB%E7%AE%97%E6%B3%95%E7%A0%B4%E8%A7%A3%E5%B0%8F%E5%8F%B2/">中国地图坐标(GCJ-02)偏移算法破解小史 – blog.genglinxiao.com</a></p>
+
+<p><a href="http://www.gpsspg.com/maps.htm">GPSspg</a>，提供各个地图的经纬度查询。以北纬 N39°54′26.54″ 东经 E116°23′28.84″  为例：</p>
+
+<ul>
+  <li>谷歌地图：39.9087677478,116.3975780499 (GCJ-02)</li>
+  <li>百度地图：39.9151190000,116.4039630000 (BD-09)</li>
+  <li>腾讯高德：39.9087311069,116.3975323161 (GCJ-02)</li>
+  <li>图吧地图：39.9081728469,116.3867845961</li>
+  <li>谷歌地球：39.9073728469,116.3913445961 (WGS-84)</li>
+</ul>
+
+<p>具体算法可参考:</p>
+
+<ul>
+  <li><a href="https://on4wp7.codeplex.com/SourceControl/changeset/view/21483#353936">Offline Navigation for Windows Phone 7 - Source Code</a></li>
+  <li><a href="https://github.com/douo/android-demo/blob/master/app/src/main/java/info/dourok/android/demo/utils/InternalGpsConverter.java">android-demo/InternalGpsConverter.java at master · douo/android-demo</a></li>
+</ul>
+
+<h3 id="gps-轨迹文件">GPS 轨迹文件</h3>
+
+<p>GPS 轨迹可以理解为是一个基于时间的 GPS 坐标点集合。常用的有两种：</p>
+
+<ol>
+  <li>GPX</li>
+</ol>
+
+<p><a href="https://zh.wikipedia.org/wiki/GPX">GPX（GPS Exchange Format）</a> 基于 XML，专门用来储存地理资讯。免费、开放、常用。规范见：<a href="http://www.topografix.com/GPX/1/1/">GPX 1.1 Schema Documentation</a></p>
+
+<ol>
+  <li>KML</li>
+</ol>
+
+<p><a href="https://zh.wikipedia.org/wiki/KML">KML</a> 也是基于 XML，由谷歌旗下的 Keyhole 维护，常用于谷歌系的软件。</p>
+
+<h3 id="android-location-框架">Android Location 框架</h3>
+
+<h4 id="location-callback">Location Callback</h4>
+
+<p>PendingIntent 可以通过这样的方式获取更新的 Location 对象</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Location</span> <span class="n">location</span> <span class="o">=</span> <span class="n">getIntent</span><span class="o">().</span><span class="na">getParcelableExtra</span><span class="o">(</span><span class="nc">LocationManager</span><span class="o">.</span><span class="na">KEY_LOCATION_CHANGED</span><span class="o">);</span>
+</code></pre></div></div>
+
+<h4 id="gps-卫星">Gps 卫星</h4>
+
+<p>GpsSatellite 用的是<a href="https://zh.wikipedia.org/wiki/%E5%9C%B0%E5%B9%B3%E5%9D%90%E6%A8%99%E7%B3%BB">地平坐标系</a> :</p>
+
+<p>高度角（Elevation/Altitude），有时就称为高度或仰角，是天体和观测者所在地的地平线的夹角。
+方位角（Azimuth），是沿着地平线测量的角度（由正北方为起点向东方测量）。</p>
+
+<h4 id="agps">AGPS</h4>
+
+<p>GPS 接收器可能最多需要 12.5 分钟（从 GPS 卫星下载历书和星历的时间）来计算出当前位置。</p>
+
+<p>辅助有两种类型：</p>
+
+<ol>
+  <li>
+    <p>基地台基本定位功能（Mobile Station Based）</p>
+
+    <p>通过网络服务器获取卫星的轨道和历书数据，避免从 GPS 卫星直接下载数据从而加快锁定卫星。
+通过网络获取精准的时间（NTP）。</p>
+  </li>
+  <li>
+    <p>基地台协助（Mobile Station Assisted）</p>
+
+    <p>设备上传本身的 GPS 数据，由服务器来技术位置。</p>
+  </li>
+</ol>
+
+<p>Android 可以通过 <code>LocationManager#sendExtraCommand</code>  操作 AGPS。以 5.1  为例，总共支持 3 条命令。</p>
+
+<ol>
+  <li><code>delete_aiding_data</code>，清除辅助定位数据，重置 GPS 状态到冷启动</li>
+  <li><code>force_time_injection</code>，命令从一个配置服务器中下载A-GPS 数据，这些数据将被GPS位置提供者使用</li>
+  <li><code>force_xtra_injection</code>，命令从配置的NTP 服务器检索当前时间并进行更新，用来进行GPS 计算。</li>
+</ol>
+
+<p><code>delete_aiding_data</code> 命令用于删除先前已下载的A-GPS 数据。这是唯一使用Bundle 参数的附加命令，Bundle 用于控制要删除的A-GPS 数据。Bundle 可以包含布尔型的键值对来指明要移除的数据。
+具体代码见：<a href="https://gitorious.org/android-eeepc/base.git/?p=android-eeepc:base.git;a=blob;f=location/java/com/android/internal/location/GpsLocationProvider.java;h=887574a66bad13cdfdd11d9325b74789f24ac912;hb=HEAD">GpsLocationProvider</a> 或 <a href="http://grepcode.com/file/repository.grepcode.com/java/ext/com.google.android/android/5.1.1_r1/com/android/server/location/GpsLocationProvider.java#GpsLocationProvider.sendExtraCommand%28java.lang.String%2Candroid.os.Bundle%29">grepcode(Android 5.1)</a>。</p>
+
+<ol>
+  <li>cold(冷启动)：没有之前的位置信息，没有星历，没有时间的估算。这种情况发生在初次使用定位时或电池没电导致星历丢失时。关机状态下将接收机移动200公里以上距离。</li>
+  <li>warm(温启动)：有历书信息，大致的位置和时间可知，没有星历信息。这种情况发生在本次定位距离上次超过两个小时时。</li>
+  <li>hot(热启动)：有星历信息，大致的时间和位置可知，通常比温启动的时间和位置信息精确。这种情况发生在本次定位与上次定位的时间间隔小于两个小时时。</li>
+</ol>
+
+<p>星历(Ephemeris)与历书(Almanac):</p>
+
+<p>为了缩短卫星锁定时间，GPS接收机需利用历书、当地位置的时间来预报卫星运行状态。</p>
+
+<p>历书与星历都是表示卫星运行的参数。历书包括全部卫星的大概位置，用于卫星预报；星历只是当前接收机观测到的卫星的精确位置，用于定位。</p>
+
+<p>NTP 服务器和 Xtra 服务器的配置文件保存在 <code>/etc/gps.conf</code>。</p>
+
+<p>参考：</p>
+
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/Assisted_GPS">Assisted GPS - Wikipedia</a></li>
+  <li><a href="https://www.cnblogs.com/l2rf/p/5113326.html">GpsLocationProvider中的sendExtraCommand方法</a></li>
+  <li><a href="https://docs.google.com/document/d/12JGuF553-Yswh7IRhAZ77I0tpfyuTb0N9SpJ7_GygGE/edit">gps.conf - Google 文件</a></li>
+</ul>
+
+<p>FYI：</p>
+
+<ul>
+  <li><a href="http://mobilesociety.typepad.com/mobile_life/2014/08/supl-reveals-my-identity-and-location-to-google.html">WirelessMoves: How SUPL Reveals My Identity And Location To Google When I Use GPS</a></li>
+  <li><a href="https://groups.google.com/forum/#!topic/gpstest_android/wOgMdQ0N_vU">How Does Android Use SUPL Server? - Google 網上論壇</a></li>
+</ul>
+
+<h4 id="nmea">NMEA</h4>
+
+<p><a href="https://www.nmea.org">NMEA</a> 是美国国家海洋电子协会（National Marine Electronics Association）的缩写。这里的 NMEA 是指一套规格用于定义各种海洋电子设备之间通讯的接口。这套标准的规格文件是收费的，可到<a href="https://www.nmea.org">官网</a>购买。不过网上也能找到这套规格的描述，比如 deal  的<a href="http://www.gpsinformation.org/dale/nmea.htm">文章</a>还有埃里克·雷蒙（Eric S. Raymond）的<a href="http://www.catb.org/gpsd/NMEA.html">披露</a>。埃里克·雷蒙现在是 <a href="https://en.wikipedia.org/wiki/Gpsd">gpsd</a> 的维护者。</p>
+
+<p>NMEA 的基本单元是一种称为句子（sentence）的数据行，句子有 ASCII 字符组成，由 <code>$</code> 符号开始，由换行符（carriage return/line）结束，句子最多有 80 个可见字符（+ 一个不可见的换行符）。句子有两种类型：</p>
+
+<ol>
+  <li>
+    <p>标准句子</p>
+
+    <p>标准句子由两个字符作为前缀，表示设备类型， 比如 GPS 接收器的前缀就是 <code>GP</code>，接着的三个字符表示句子的内容，由五个字符表示句子的类型。</p>
+  </li>
+  <li>
+    <p>专有（proprietary）句子</p>
+
+    <p>专有句子是由独立公司自己定义的句子，以 <code>P</code> 作为前缀，后面跟着三个字符用来表示厂商，比如 <code>PGRM</code> 是佳明（Garmin）的句子。</p>
+  </li>
+</ol>
+
+<p>句子内的数据项用<code>,</code>分隔。<code>*</code> 带上两位十六进制字符表示校验码。</p>
+
+<pre><code>  $GPGSV,2,1,08,01,40,083,46,02,17,308,41,12,07,344,39,14,22,228,45*75
+
+Where:
+      GSV          Satellites in view
+      2            Number of sentences for full data
+      1            sentence 1 of 2
+      08           Number of satellites in view
+
+      01           Satellite PRN number
+      40           Elevation, degrees
+      083          Azimuth, degrees
+      46           SNR - higher is better
+           for up to 4 satellites per sentence
+      *75          the checksum data, always begins with *
+</code></pre>
+
+<p>大部分 GPS 接收器支持的标准是 NMEA 0183 Version 2。</p>
+
+<p>用下面代码在真机上进行测试</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mLocationManager</span><span class="o">.</span><span class="na">addNmeaListener</span><span class="o">(</span><span class="k">new</span> <span class="nc">OnNmeaMessageListener</span><span class="o">()</span> <span class="o">{</span>
+                <span class="kt">long</span> <span class="n">firstTimestamp</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+                <span class="kt">int</span> <span class="n">count</span><span class="o">;</span>
+
+                <span class="nd">@Override</span>
+                <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onNmeaMessage</span><span class="o">(</span><span class="nc">String</span> <span class="n">message</span><span class="o">,</span> <span class="kt">long</span> <span class="n">timestamp</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="k">if</span> <span class="o">(</span><span class="n">firstTimestamp</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="n">firstTimestamp</span> <span class="o">=</span> <span class="n">timestamp</span><span class="o">;</span>
+                    <span class="o">}</span>
+                    <span class="n">count</span><span class="o">++;</span>
+                    <span class="nc">Log</span><span class="o">.</span><span class="na">d</span><span class="o">(</span><span class="no">TAG</span><span class="o">,</span> <span class="n">message</span><span class="o">);</span>
+                    <span class="k">if</span> <span class="o">(</span><span class="n">timestamp</span> <span class="o">!=</span> <span class="n">firstTimestamp</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="nc">Log</span><span class="o">.</span><span class="na">d</span><span class="o">(</span><span class="no">TAG</span><span class="o">,</span> <span class="s">"rate:"</span> <span class="o">+</span> <span class="o">(</span><span class="n">count</span> <span class="o">*</span> <span class="mi">1000</span> <span class="o">/</span> <span class="o">(</span><span class="n">timestamp</span> <span class="o">-</span> <span class="n">firstTimestamp</span><span class="o">))</span> <span class="o">+</span> <span class="s">"sen/s"</span><span class="o">);</span>
+                    <span class="o">}</span>
+                <span class="o">}</span>
+            <span class="o">});</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Nexus 6p，NMEA 的接收频率大概是 10 句每秒，接收的设备类型前缀有<code>GP</code>（GPS）和 <code>GL</code>（GLONASS）</li>
+  <li>P9 plus 上是 18 句每秒，前缀比较多：<code>QZ</code>（QZSS）、<code>GN</code>（GLONASS）、<code>IM</code>、<code>BD</code>(北斗)、<code>GP</code>（GPS）</li>
+</ul>
+
+</article>
+<div class="tag-container" >
+    
+    <div class="chip">
+        <a href="/tags#gps-ref">
+            gps
+        </a>
+    </div>
+    
+    <div class="chip">
+        <a href="/tags#location-ref">
+            location
+        </a>
+    </div>
+    
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Programming/Android/gps"
+ var disqus_config = function () {
+     this.page.title = "GPS"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Programming/Android/gps/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

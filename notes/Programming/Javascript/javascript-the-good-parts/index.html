@@ -1,0 +1,450 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    JavaScript The Good Parts | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">JavaScript The Good Parts</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-11-30">2014-04-16</span>
+    
+</div>
+
+<article>
+    <h3 id="object">Object</h3>
+
+<p>对象是一个可变的键控集合</p>
+
+<pre><code>var empty_object = {}; //最简单的对象
+var stooge = {name:"D"};
+</code></pre>
+
+<h4 id="retrieval">Retrieval</h4>
+
+<pre><code>var status = flight.status || "unknown";
+flight.equipment &amp;&amp; flight.equipment.model
+</code></pre>
+
+<h4 id="prototype">Prototype</h4>
+
+<blockquote>
+  <p>Every object is linked to a prototype object from which it can inherit properties.
+All object create from object literals art linked to <code>Object.prototype</code></p>
+</blockquote>
+
+<p>但</p>
+
+<pre><code>empty_object.prototype; //却是 undefined
+</code></pre>
+
+<p>实际上只有构造函数有 <code>prototype</code>，<code>Object</code> 是构造函数所以 <code>Object</code> 有 <code>prototype</code> 而 <code>empty_object</code> 没有（<a href="http://stackoverflow.com/a/14450766/851344">来源</a>）。不过可以通过 <code>Object.getPrototypeOf(empty_object)</code> 来获取 <code>empty_object</code> 的 <code>prototype</code>。</p>
+
+<p>实际上因为 Javascript 不能分辨哪个函数是构造函数，所以所有函数都有<code>prototype</code>。</p>
+
+<p>这里的构造函数可以理解成<strong>类</strong>， prototype 是类的属性，不是对象的属性。</p>
+
+<p>书里的 <code>beget</code> 就是将 <code>prototype</code> 赋与构造函数， 而不是对象。</p>
+
+<pre><code>if(typeof Object.beget != 'function'){
+    Object.beget = function(o){
+	var F = function(){};
+	F.prototype = o;
+	return new F();
+    }
+}
+</code></pre>
+
+<p>对于对象来说，protype 和对象的关系用的词是 <strong>linked to</strong>。我是这样理解的，从对象中找一个属性，如果对象没有该属性，则继续搜索对象的 <code>prototype</code>，没有则再搜索 <code>prototype</code> 的 <code>prototype</code>，直到 <code>Object.prototype</code>。</p>
+
+<p>通过 <code>delete</code> 从对象删除一个属性，不会影响到该对象的 <code>prototype</code>。</p>
+
+<h3 id="function">Function</h3>
+
+<p>每个方法接收两个参数：<code>this</code> 和 <code>arguments</code></p>
+
+<p>四种调用方法，</p>
+
+<ol>
+  <li>方法调用模式，作为对象的方法调用，如 <code>o.method</code></li>
+  <li>函数调用模式，全局方法或对象内方法，<code>add</code></li>
+  <li>构造器调用，方法前加上 <code>new</code> 的调用，一般采用驼峰式命名，<code>new People("D")</code></li>
+  <li><code>apply</code> 调用，<code>apply</code> 是 <code>Function</code> 对象的一个方法，通过 <code>apply</code> 可以直接绑定 <code>this</code> 传递参数列表，如<code>var array[3,4];var sum=add.apply(null,array);</code></li>
+</ol>
+
+<p><code>arguments</code> 不是真正的数组，它只有 <code>length</code> 属性，但并没有其他数组的方法。</p>
+
+<p>每个函数都有返回值，如果没有声明则返回 <code>undefined</code>。</p>
+
+<h4 id="构造函数">构造函数</h4>
+
+<p>如果在一个函数前面带上 new 来调用，那么将创建一个<strong>隐藏连接</strong>到该函数的 <code>prototype</code> 成员的新对象。<code>this</code> 会绑定到这个对象上。</p>
+
+<p>构造器，会改变 <code>return</code> 的行为，如果返回不是对象，则返回 <code>this</code>。</p>
+
+<h4 id="exception">Exception</h4>
+
+<p><code>throw</code> 需要一个 <code>exception</code> 对象：</p>
+
+<pre><code>throw{
+	name:'TypeError',
+	message:'msg'
+}
+
+try{
+ //
+}catch(e){} // exception obj
+</code></pre>
+
+<h4 id="basic-types-augmenting">Basic types Augmenting</h4>
+
+<p>给类型增加方法，类似于 Ruby 的 monkey patch。为 String 增加 <code>trim</code> 方法。</p>
+
+<pre><code>Function.prototype.method = function(name,func){
+	this.prototype[name] = func;
+	return this;
+}
+String.method('trim',function(){
+	return this.replace(/^\s+|\s+$/g,'');
+});
+</code></pre>
+
+<h4 id="recursion">Recursion</h4>
+
+<p>JavaScript 没有提供尾递归优化。</p>
+
+<h4 id="scope">Scope</h4>
+
+<p>JavaScript 没有 block 作用域，但是有函数作用域。所以，在函数开始的时候定义所有要用到的变量是个好习惯。</p>
+
+<h4 id="closure">Closure</h4>
+
+<p>闭包</p>
+
+<pre><code>var memorizer = function(memo,fundamental){
+	var shell = function(n){
+		var result = memo[n];
+		if(typeof result !== 'number'){
+		   result = fundamental(shell,n);
+		   memo[n] = result;
+	    }
+		return result
+	}
+	return shell;
+};
+</code></pre>
+
+<p>内部函数可以访问外部函数的变量：</p>
+
+<pre><code>var quo = function(status) {
+	return {
+		get_status: function() {
+			return status;
+		}
+	}
+}
+</code></pre>
+
+<p>调用 <code>quo</code> 后，<code>get_status</code> 方法仍能访问 <code>quo</code> 的 <code>status</code>，这样的函数可以访问它被创建时所处的上下文环境，称为闭包。</p>
+
+<h3 id="减少全局变量污染">减少全局变量污染</h3>
+
+<h4 id="只创建一个全局变量">只创建一个全局变量</h4>
+
+<pre><code>var MYAPP = {};
+</code></pre>
+
+<p>其他定义都在<code>MYAPP</code>下，如：</p>
+
+<pre><code>MYAPP.stooge = {};
+</code></pre>
+
+<h3 id="inheritance">Inheritance</h3>
+
+<h4 id="伪类">伪类</h4>
+
+<h4 id="原型">原型</h4>
+
+<p>将一个旧对象作新类的原型，来实现继承。</p>
+
+<h4 id="函数化">函数化</h4>
+
+<p>函数化仍有缺陷，下面是我作为练手实现的一个链表。</p>
+
+<pre><code>function node(name){
+    var name = name;
+    var next = null;
+    var that = {};
+    that.get_name = function(){
+	return name;
+    }
+    that.set_name = function(n){
+	name = n;
+    }
+    that.get_next = function(){
+	return next;
+    }
+    that.set_next = function(n){
+	if(typeof n == "string"){
+	    next = node(n);
+	}else{
+	    next = n;
+	}
+    }
+    that.is_tail = function(){
+	return next === null;
+    }
+    that.get_last = function(){
+	var root = this;
+	while(!root.is_tail()){
+	    root = root.get_next();
+	}
+	return root;
+    }
+    that.add = function(n){
+	this.get_last().set_next(n);
+    }
+    return that;
+}
+</code></pre>
+
+<p>在 <code>add</code> 方法中，如 Java 之类的面向对象语言，应该可以通过 <code>this.get_last()</code> 应该可以直接访问 <code>next</code> 字段。但是这里 Javascript 却无能为力。</p>
+
+<p>http://bonsaiden.github.io/JavaScript-Garden/zh/</p>
+
+<p>http://howtonode.org/object-graphs-2</p>
+
+
+</article>
+<div class="tag-container" >
+    
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Programming/Javascript/javascript-the-good-parts"
+ var disqus_config = function () {
+     this.page.title = "JavaScript The Good Parts"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Programming/Javascript/javascript-the-good-parts/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

@@ -1,0 +1,368 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    Activity | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">Activity</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-11-30">2012-08-18</span>
+    
+</div>
+
+<article>
+    <h3 id="lifecycle">lifecycle</h3>
+
+<ul>
+  <li>StartActivity, create start resume</li>
+  <li>finish, pause stop destroy</li>
+  <li>弹出对话框，不会造成状态变化，但会调用 onWindowFocusChanged，Activity 所在的 Window 会失去焦点</li>
+  <li>新的 Activity 进入前台， p s</li>
+  <li>home p s</li>
+  <li>锁屏 p s</li>
+  <li>onActivtyResult 在 Start 之前</li>
+</ul>
+
+<p>c d 整个生命周期
+s s 可见生命周期，
+r p 前台生命周期</p>
+
+<h4 id="onrestart">onRestart</h4>
+
+<p>onStop 后的 Activity 重新 Start，会在调用 onStart 之前调用 onRestart。</p>
+
+<h4 id="onstart">onStart</h4>
+
+<p>进入可见生命周期。</p>
+
+<h4 id="onresume">onResume</h4>
+
+<p>进入前台生命周期。</p>
+
+<h4 id="onpause">onPause</h4>
+
+<p><code>onPuase</code> 在 Activity 离开前台之前调用，接下来将会调用<code>onWindowFocusChanged(false)</code> ，<strong>新的 Activity 不会在当前 Activity 的 onPause 返回之前调用。</strong> Pause 之后 Activity 的状态是失去了焦点，但仍然可见。</p>
+
+<p><strong>弹出菜单或对话框，Activity 失去焦点，但不会调用 onPause。</strong></p>
+
+<p><code>onPause</code> 常用用于保存全局的数据，而 <code>onSaveInstanceState</code> 用于保存当前 Activity 的状态。</p>
+
+<h4 id="onstop">onStop</h4>
+
+<p>离开可见生命周期。</p>
+
+<h4 id="ondestroy">onDestroy</h4>
+
+<p><code>onDestroy</code> 要释放所有资源，包括任何创建后台线程。</p>
+
+<p>完全不可见。</p>
+
+<p><img src="https://developer.android.com/images/activity_lifecycle.png" alt="Activity Lifecycle" /></p>
+
+<p><strong>低内存的时候，可能 onDestroy/onStop 没被调用 activity 就被杀死</strong></p>
+
+<pre><code>onCreat 
+
+-onStart   						 
+|--onRestoreInstanceState
+|
+|--onPostCreate 在onRestoreInstanceState后调用，接收savestate参数
+|  	   	   	   	  	
+|-onResume 	   
+|--onPostResume	在这个状态，activity已经是可见的了，所有ui布局应该完成	
++--------- 	   	
+|  	   		   
+|-onPause  在这个方法内提交/保持用户的操作(用户可能就此离开)
+|--onSaveInstanceState
+|					  
+|onStop
+|onRetainNonConfigurationInstance  暂时保留引用。
+onDestroy
+</code></pre>
+
+<p>其他：
+onUserLeaveHint 当activity由用户操作进入stop状态时，会调用这个方法，书中说在用户按back 或home 键会调用，在 sense4.0 真机上只有home会调用。这个方法是个清除dialog的好地方</p>
+
+<p>如果耗时操作是与 Acitivty 无关， Activity 处在哪个状态都对操作无影响，那么应该把操作方到 Service 中。</p>
+
+<h3 id="configuration-changes">Configuration Changes</h3>
+
+<p>在 android:configChanges 声明的 configChange ，不会重启 Activity，而是调用 onConfigurationChanged(Configuration) 。</p>
+
+<h3 id="edit-in-place">Edit in Place</h3>
+
+<p>打开一个新实例界面时，同时创建它的数据库实例或文件实例。</p>
+
+<p>用户所有的编辑在 onPause 保存。</p>
+
+<h4 id="saving-persistent-state保存持久状态">Saving Persistent State保存持久状态</h4>
+
+<p>鼓励使用”edit in place” 用户模型，即更改立刻生效。</p>
+
+<p>提到了一个 Android 中的用户习惯，返回按钮意味著用户保存内容（如果有未保存的话）并离开当前 Activity，如果需要取消编辑要通过其他途径（比如一个取消按钮）。</p>
+
+<h3 id="tasks">Tasks</h3>
+
+<ol>
+  <li>stack of activities</li>
+  <li>include activities from several apps</li>
+  <li>not a process</li>
+</ol>
+
+<h4 id="multiple-tasks">Multiple Tasks</h4>
+
+<p>Creating a new task</p>
+
+<p><code>FLAG_ACTIVITY_NEW_TASK</code>。</p>
+
+<p>如果已有一个相同 affinity 的 task 存在，那么将这个 task 带到前台，然后再进行判断，如果Intent 更此 Task 的根 Activity 相同，则把 task 带到前台便完成；若找不到，那新的 Activity 将推入单前的 Task 中。</p>
+
+<h3 id="actionbar">ActionBar</h3>
+
+<ol>
+  <li>make the most common actions more visible</li>
+  <li>structure and place to the app</li>
+</ol>
+
+<p>structure navigation in app</p>
+
+<h3 id="activity-manager">Activity Manager</h3>
+
+<p>Activity Manager 管理的是整个系统层面的 Activity，提供获取内存信息，当前 Tasks，当前 Services，杀死进程等等的方法，主要用于任务管理 app 吧。</p>
+
+<h3 id="activityinfo">ActivityInfo</h3>
+
+</article>
+<div class="tag-container" >
+    
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Programming/Android/activity"
+ var disqus_config = function () {
+     this.page.title = "Activity"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Programming/Android/activity/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

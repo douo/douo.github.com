@@ -1,0 +1,371 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    浅谈 Recycle 机制 | DouO's Blog</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">浅谈 Recycle 机制</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-11-30">2014-07-15</span>
+
+    <span><a href="/categories#coder-ref" class="category category-coder waves-effect waves-light">coder</a></span>
+    
+</div>
+
+    <article>
+        <p>这里的 Recycle 机制并不是指 Java 虚拟机中的垃圾回收机制，而是 Android 框架里十分常用的一种设计模式。基本思想很简单，当一个对象不再使用时把它储藏起来，不让虚拟机回收，需要的时候再从仓库里拿出来重新使用，这就避免了对象被回收后再重分配的过程。对于在应用的生命周期内（或者在循环中）需要频繁创建的对象来说这个机制特别实用，可以显著减少对象创建的次数，从而减少 GC 的运行时间。运用得当便可改善应用的性能。唯一的不足只是需要手动为废弃对象调用 <code>recycle</code> 方法。</p>
+
+<p>如何实现？首先，我们需要一个仓库用于存放暂时不用的对象；需要新对象的时候我们不能使用 <code>new</code> 来分配一个新对象，所以还需要一个方法 <code>obtain</code> 来从仓库里获取对象；最后，便是 <code>recycle</code> 方法了，用于回收不再使用的对象。一个简单的实现如下所示，技术细节在注释里解释：</p>
+
+<pre><code>/**
+ * Created by Tiou on 2014/7/15.
+ * 一个实现 Recycle 机制的对象
+ */
+public class Data {
+    /**
+     * 对象池，就是上文所提到的对象仓库，用于暂时存放不用的对象。
+     * 用链表来实现对象池结构，直观，高效，易用。
+     * sPool 便是指向链表头部的引用
+     */
+    private static Data sPool;
+    /**
+     * 指向链表中的下一个元素，当 next 为 null 时表示已到达链表末端
+     */
+    private Data next;
+
+    /**
+     * 隐藏构造函数，避免对象被 new 关键字创建
+     */
+    private Data(){}
+
+    /**
+     * 从池里获取一个新对象，没有的话则返回一个新的实例
+     * @return 可用的新对象
+     */
+    public static Data obtain(){
+        if(sPool!=null){ // 池中有可用的对象
+            // 对于对象池来说顺序并没有关系
+            // 这里取链表的第一个对象，主要是因为方便
+            Data data = sPool;
+            sPool = sPool.next;
+            data.next = null;
+            return data;
+        }
+        return new Data();
+    }
+
+    /**
+     * 将当前对象回收，一旦对象被回收，便不能再使用，代码中也不应存有任何到该对象的引用
+     */
+    public void recycle(){
+        clear(); //清理对象
+        // 把当前对象作为首元素按入链表中
+        next = sPool;
+        sPool = this;
+    }
+
+    /**
+     * 重置对象到刚初始化时的状态
+     */
+    private void clear(){
+
+    }
+}
+</code></pre>
+
+<p>为什么说这是一个简单实现呢？因为这是一个不完善的实现。考虑一个场景，如果一次性 <code>obtain</code> 十万个对象，用完后再全部 <code>recycle</code>，以后每次可能规模就降到几十个，那这十万个对象的绝大多数就会停留在池里，既不会被用到，也不能被虚拟机回收，占用应用大量的内存。这是个十分糟糕的例子，但意思大致还是说得明白，池的容量不能无限大，不然便有内存泄漏的隐患。至于这个对象数量的上限该如何设置，这里并没有一个规定死的值，可灵活设置，简单说这是一个空间换时间的策略，可根据对象占用的空间，及应用具体需要用到的规模来设置一个合理值。</p>
+
+<p>另外，<code>obtain</code> 和 <code>recycle</code> 这两个方法都不是原子操作，在多线程的应用场景下，可能会发生各种奇怪的问题。所以我们还要为这两个方法加锁，保证其是多线程安全的。</p>
+
+<p>最终的效果在这个 <a href="https://gist.github.com/douo/ad91b597a61f6825ca35">gist</a>.</p>
+
+<p>至于具体的例子，这个机制在 Android 框架中实在是太常见了，都不用自己再造出什么例子。只要用过 <a href="https://developer.android.com/reference/android/os/Message.html">Message</a>, <a href="https://developer.android.com/reference/android/content/res/TypedArray.html">TypedArray</a>, <a href="https://developer.android.com/reference/android/os/Parcel.html">Parcel</a>，甚至各种 Event 类，等等…都或多或少接触过 recycle 这个方法。这个机制如此常用，以至于 Android 还在 support lib v4 里提供一个 <a href="https://developer.android.com/reference/android/support/v4/util/Pools.Pool.html">Pool</a> 工具包。</p>
+
+<p>大家可能会奇怪了：「我常常用 <code>Message</code>，也没调用过<code>recycle</code>，也不见得会怎样。」实际上不调用 <code>recycle</code> 确实不会在怎样，因为 <a href="https://developer.android.com/reference/android/os/Looper.html">Looper</a> 已经帮我们<a href="http://grepcode.com/file/repository.grepcode.com/java/ext/com.google.android/android/4.4.2_r1/android/os/Looper.java#153">处理好手尾了</a>，只要记得发送过的 <code>Message</code> 不能再用便可以。那自己手动回收会怎样？因为 Looper 在调用 <code>msg.recycle()</code> 前并没有作检查，<code>Message</code> 的对象池来者不拒，不会对进入池中的对象是否已存在进行检查，一旦同一个 <code>Message</code> 被回收两次，便会发生糟糕的结果，对象池将会被破坏，变成一条循环链表，该 <code>Message</code> 所在节点后面的元素将会被孤立，虽不会造成内存泄漏，但将影响虚拟机回收的回收效率。更糟糕的是，Message 的 Recycle 机制将会失效。</p>
+
+<p>大家可以试试下面的代码：</p>
+
+<pre><code>Message msg = Message.obtain();
+System.out.println("First obtain:"+System.identityHashCode(msg));
+msg.recycle();
+msg.recycle();
+System.out.println("After recycle twice");
+System.out.println("Second obtain:"+System.identityHashCode(Message.obtain()));
+System.out.println("Third obtain:"+System.identityHashCode(Message.obtain()));
+System.out.println("Fourth obtain:"+System.identityHashCode(Message.obtain()));
+</code></pre>
+
+<p>输出结果：</p>
+
+<pre><code>First obtain:1122593040
+After recycle twice
+Second obtain:1122593040
+Third obtain:1122593040
+Fourth obtain:1122846456
+</code></pre>
+
+<p>可以看到，连续两次 <code>obtain</code> 返回相同的对象，一旦出现这样的 Bug，要找问题在哪出来绝对是很困难的，所以，<strong>绝对不要手动调用</strong> <code>Message#recycle</code>. 不得不怀疑 Android 把这个方法声明为 <code>public</code> 是否合理的。</p>
+
+<p>顺便再提一下，Event 类的回收机制也是由系统控制的，所以不要在监听器触发的方法外保留对监听事件的引用。</p>
+
+<p>本文依据 <a href="http://book.douban.com/subject/24550976/">Android Programming - Pushing the Limits</a> 而作，该书同样犯了手动调用 <code>Message#recycle</code> 的错误，但仍不失为一本值得一读的技术书，诸君明辨。</p>
+
+
+    </article>
+    <div class="tag-container" >
+        
+        <div class="chip">
+        <a href="/tags#Android-ref">
+            Android
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#Object Recycling-ref">
+            Object Recycling
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#对象池-ref">
+            对象池
+        </a>
+        </div>
+        
+    </div>
+<div class="post-pager">
+    
+    <a href="/2014/06/20/offline-qrcode-chrome-extension/">上一篇：本地生成二维码的 Chrome 扩展</a>
+    
+    
+    <a href="/2014/09/05/ulna-styloid-process-fracture-after-a-month/" style="float:right;" >下一篇：手伤回顾</a>
+    
+</div>
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/2014/07/15/quick-overview-of-recycling-pattern-in-android"
+ var disqus_config = function () {
+     this.page.title = "浅谈 Recycle 机制"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/2014/07/15/quick-overview-of-recycling-pattern-in-android/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

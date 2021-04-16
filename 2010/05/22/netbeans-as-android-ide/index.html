@@ -1,0 +1,386 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    在Netbeans上配置Android开发环境 | DouO's Blog</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">在Netbeans上配置Android开发环境</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 17-11-30">2010-05-22</span>
+
+    <span><a href="/categories#coder-ref" class="category category-coder waves-effect waves-light">coder</a></span>
+    
+</div>
+
+    <article>
+        <h1 id="nbandroid">NBAndroid</h1>
+
+<p>突发奇想要看看Android应用程序的开发，在网上找了些文章，发现android的开发环境大多是Eclipse+ADT，其实在netbeans上也是可以的。有个netbeabs插件叫NBAndroid，如果想在Netbeans上开发Android应用第一步就是要安装它，下面是NBAndroid的项目主页
+<a href="http://kenai.com/projects/nbandroid">http://kenai.com/projects/nbandroid</a>。</p>
+
+<h1 id="安装与设置">安装与设置</h1>
+
+<p>要安装NBAdroid，推荐的方法是在NetBeans中注册NBAdroid的更新中心（Update
+Center），具体的步骤是：</p>
+
+<ul>
+  <li>打开工具(Tools )-&gt; 插件(Plugins) -&gt; 设置选项卡(Setting)</li>
+  <li>点”添加”按钮将这个链接<a href="http://kenai.com/downloads/nbandroid/updatecenter/updates.xml" title="「更新链接已更改」">http://kenai.com/downloads/nbandroid/updatecenter/updates.xml</a>加进去，改个名字，确定。</li>
+  <li>转到可用插件选项卡（Available
+Plugins），找到Android插件，安装。出现验证警告点继续就可以了。</li>
+</ul>
+
+<p><a href="wp-content/uploads/2010/05/11.png"><img src="wp-content/uploads/2010/05/11.png" alt="" title="添加NBAndroid更新中心" /></a>
+添加NBAndroid更新中心</p>
+
+<p><a href="wp-content/uploads/2010/05/21.png"><img src="wp-content/uploads/2010/05/21.png" alt="" title="安装NBAndroid" /></a>
+安装NBAndroid</p>
+
+<p><del>安装的步骤很简单，下载后将压缩包解压，然后把所有*.nbm的文件导入到netbeans便可。在netbeans中添加插件的方法也说一下，在”菜单栏”
+-&gt; 工具 -&gt; 插件
+在插件页面的”已下载”选项卡中可找到按钮”添加插件”，这个按钮便是可以用来添加nbm文件，如图1所示</del></p>
+
+<p>接下来，指定Android SDK的位置，方法:”菜单栏” -&gt; 工具 -&gt;
+选项，点击”Android”标签页。就可以看到类似下面的界面：
+<a href="wp-content/uploads/2010/05/android_tab.png"><img src="wp-content/uploads/2010/05/android_tab.png" alt="" title="Xfce下的UI，2011-10-26截图" /></a>
+选择SDK的目录便可。</p>
+
+<p>如果还没有Google Android SDK 的话要先下载Android
+SDK，下载页在<a href="http://developer.android.com/sdk/index.html">这里</a>。官方的安装说明在<a href="http://developer.android.com/sdk/installing.html">这里(英文)</a>。（网站已被墙，推荐Google
+搜索GappProxy）安装SDK的步骤要多一些，将下载后的压缩包解压到你要放的位置。运行SDK
+Setup.exe应该会看到下面的界面，记得在win7下得用管理员权限运行。
+<a href="wp-content/uploads/2010/05/nba3.png"><img src="wp-content/uploads/2010/05/nba3.png" alt="" title="nba3" /></a> 图3</p>
+
+<p>我这张图是更新后截的，没更新前只有Android SDK Tools,revision
+6一个项。嗯，没错更新服务器也被墙了，可在setting了设置Http
+代理服务器，因为GappProxy对Https的支持不好，下图那个选项也打上勾。</p>
+
+<p><a href="wp-content/uploads/2010/05/nba4.png"><img src="wp-content/uploads/2010/05/nba4.png" alt="" title="nba4" /></a> 图4</p>
+
+<p>更新好之后先别急着关掉，还要新建一个设备，选择Virtual
+Devices，单击”New”，建好之后就可以重新回到NetBeans了。
+<a href="wp-content/uploads/2010/05/nba5.png"><img src="wp-content/uploads/2010/05/nba5.png" alt="" title="nba5" /></a> 图5</p>
+
+<h1 id="一个简单例子">一个简单例子</h1>
+
+<p>现在就可以创建项目了，见图8，我创建了一个AndroidHelloWorld的程序。默认平台已经选好了Android。还有最好也更改下包名。</p>
+
+<p><a href="wp-content/uploads/2010/05/nba8.png"><img src="wp-content/uploads/2010/05/nba8.png" alt="" title="nba8" /></a> 图8</p>
+
+<p><a href="wp-content/uploads/2010/05/nba9.png"><img src="wp-content/uploads/2010/05/nba9.png" alt="" title="nba9" /></a> 图9</p>
+
+<p>项目初始化后，在MainActivity写了些测试代码如下：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="nc">Bundle</span> <span class="n">icicle</span><span class="o">)</span> <span class="o">{</span>
+<span class="n">setTitle</span><span class="o">(</span><span class="s">"Hello Android"</span><span class="o">);</span>
+<span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">icicle</span><span class="o">);</span>
+<span class="n">setContentView</span><span class="o">(</span><span class="k">new</span> <span class="nc">AnalogClock</span><span class="o">(</span><span class="k">this</span><span class="o">));</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>现在就可以运行了，不过第一次运行要启动模拟器，相当的久，我差不多花了2分钟。而且，我第一次运行时程序没有载入，重新运行一次便可以了，因为不用启动模拟器第二次的运行快很多了，差不多10来秒。记得不要把模拟器关了，不然下次运行要重启模拟器，又要花很多时间。OK，我的第一个Android程序诞生鸟～</p>
+
+<p><a href="wp-content/uploads/2010/05/nba10.png"><img src="wp-content/uploads/2010/05/nba10.png" alt="" title="nba10" /></a> 图10</p>
+
+<p>还有一点就是NBAndroid的R.java不能实时自动生成，作者说过是在pre-build的时候生成，所以改动资源要习惯下按F11生成下项目才可以更新R.java。</p>
+
+<p>哦，在项目属性还有一些可以设置的,比如选择模拟器。
+<a href="wp-content/uploads/2010/05/nba11.png"><img src="wp-content/uploads/2010/05/nba11.png" alt="" title="nba11" /></a> 图11</p>
+
+<p>NBAndroid还支持Logcat，在窗口 -&gt; 输出 -&gt; ADB Log
+可以打开Logcat窗口，不过只能够通过PID来过滤消息。我第一次开的时候还遇到Bug，假死了，重启NetBeans才能恢复。</p>
+
+<p>总的来说，NBAndroid相比Eclipse上的ADT不足的地方很多（<a href="http://kenai.com/jira/browse/NBANDROID">Issue
+Tracking</a>）。但相比Eclipse我又更喜欢Netbeans，所以到底用哪个IDE我也很纠结啊，不过最近一直是用Eclipse+ADT。NBAndroid的活跃度一直不高啊，很多Bug还没有修复，大家有心的话也去帮忙做点贡献吧。再发一下NBAndroid的项目地址<a href="http://kenai.com/projects/nbandroid">http://kenai.com/projects/nbandroid</a></p>
+
+<h1 id="查看源码attach-sources">查看源码（Attach Sources）</h1>
+
+<p>Netbeans7.1终于有像Eclipse一样的Attach
+Sources按钮，可以为android.jar附加源码了。虽然现在Netbeans 7.1
+还处在测试阶段，但这个功能太重要了，迫不及待要去尝鲜，不过其实现在也足够稳定了。
+<a href="1wp-content/uploads/2010/05/11.png"><img src="1wp-content/uploads/2010/05/11.png" alt="" title="attach_sources" /></a>
+先下载<a href="http://netbeans.org/community/releases/71/">Netbeans 7.1
+beta</a>，然后在这里：<a href="http://adt-addons.googlecode.com/svn/trunk/source/com.android.ide.eclipse.source.update/plugins/">http://adt-addons.googlecode.com/svn/trunk/source/com.android.ide.eclipse.source.update/plugins/</a>
+可以下载到打包好android各版本的源码，这是个jar档案需要解压出来。</p>
+
+<p>另外，如果已安装有旧版本的netbeans，如7.0；需要注意一个问题，如<a href="http://netbeans.org/bugzilla/show_bug.cgi?id=200698">Bug
+200698</a>里
+jn0101@netbeans.org
+的描述。如果7.1和旧版的netbeans共用一个userdir可能会导致”Attach
+Sources”按钮失效。我试过了确实会这样（linux下）。解决方法可以用<a href="http://wiki.netbeans.org/FaqAlternateUserdir">–userdir</a>给netbeans
+7.1重新指定一个新userdir。不过，我是直接把.netbeans文件删掉，当然有先备份，然后，先配置好7.1的nbandroid和为项目的android.jar附加源码。再把备份的7.0拷回来。再把7.0的一些config拷给7.1，如：Editors和Keymaps等等。这样两个版本都可以正常工作了。
+<a href="1wp-content/uploads/2010/05/21.png"><img src="1wp-content/uploads/2010/05/21.png" alt="" title="view_sources" /></a></p>
+
+<p>另外，意外的是在debug下还能工作的挺好的。
+<a href="1wp-content/uploads/2010/05/android_tab.png"><img src="wp-content/uploads/2010/05/android_tab.png" alt="" title="debug_view" /></a></p>
+
+<p><a href="http://kenai.com/jira/browse/NBANDROID-71">NBANDROID-71</a>基本可以算解决了。</p>
+
+<h1 id="一些可能有用的链接">一些可能有用的链接</h1>
+
+<ol>
+  <li><a href="http://developer.android.com/index.html">http://developer.android.com/index.html</a>
+Android开发者主页，（墙）</li>
+  <li><a href="http://androidappdocs.appspot.com/index.html">http://androidappdocs.appspot.com/index.html</a>没有被墙的开发者主页镜像</li>
+  <li><a href="http://kenai.com/projects/nbandroid/pages/Home">http://kenai.com/projects/nbandroid/pages/Home</a>NBAndroid
+Wiki</li>
+</ol>
+
+    </article>
+    <div class="tag-container" >
+        
+        <div class="chip">
+        <a href="/tags#Android-ref">
+            Android
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#NBAdroid-ref">
+            NBAdroid
+        </a>
+        </div>
+        
+        <div class="chip">
+        <a href="/tags#Netbeans-ref">
+            Netbeans
+        </a>
+        </div>
+        
+    </div>
+<div class="post-pager">
+    
+    <a href="/2010/05/15/a-logger-for-j2me/">上一篇：Java ME通用Logger包和控制台</a>
+    
+    
+    <a href="/2010/06/24/convert-gbk-to-unicode/" style="float:right;" >下一篇：从GBK到Unicode的中文字符映射</a>
+    
+</div>
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/2010/05/22/netbeans-as-android-ide"
+ var disqus_config = function () {
+     this.page.title = "在Netbeans上配置Android开发环境"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/2010/05/22/netbeans-as-android-ide/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

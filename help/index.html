@@ -1,0 +1,471 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    帮助 | DouO's Blog</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">帮助</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+    </a>
+    <div class="social">
+      <ul>
+        
+        <li>
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+        </li>
+        
+        <li>
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    </li>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <h2 id="markdown">Markdown</h2>
+
+<p>基于 <a href="https://kramdown.gettalong.org/syntax.html">kramdown</a>。同时支持 <a href="https://jekyllrb.com/docs/liquid/">Liquid</a> 模板语言进行扩展</p>
+
+<h3 id="math">Math</h3>
+
+<p>math 基于 mathjax，启用 mathjax 脚本，需要在 Front Matter 加入：</p>
+
+<pre><code>---
+...
+math: true
+---
+</code></pre>
+
+<h4 id="块">块</h4>
+
+<p>以 <code>$$</code> 包围的块：</p>
+
+<pre><code>$$
+\begin{align*}
+  &amp; \phi(x,y) = \phi \left(\sum_{i=1}^n x_ie_i, \sum_{j=1}^n y_je_j \right)
+  = \sum_{i=1}^n \sum_{j=1}^n x_i y_j \phi(e_i, e_j) = \\
+  &amp; (x_1, \ldots, x_n) \left( \begin{array}{ccc}
+      \phi(e_1, e_1) &amp; \cdots &amp; \phi(e_1, e_n) \\
+      \vdots &amp; \ddots &amp; \vdots \\
+      \phi(e_n, e_1) &amp; \cdots &amp; \phi(e_n, e_n)
+    \end{array} \right)
+  \left( \begin{array}{c}
+      y_1 \\
+      \vdots \\
+      y_n
+    \end{array} \right)
+\end{align*}
+$$
+
+</code></pre>
+
+\[\begin{align*}
+  &amp; \phi(x,y) = \phi \left(\sum_{i=1}^n x_ie_i, \sum_{j=1}^n y_je_j \right)
+  = \sum_{i=1}^n \sum_{j=1}^n x_i y_j \phi(e_i, e_j) = \\
+  &amp; (x_1, \ldots, x_n) \left( \begin{array}{ccc}
+      \phi(e_1, e_1) &amp; \cdots &amp; \phi(e_1, e_n) \\
+      \vdots &amp; \ddots &amp; \vdots \\
+      \phi(e_n, e_1) &amp; \cdots &amp; \phi(e_n, e_n)
+    \end{array} \right)
+  \left( \begin{array}{c}
+      y_1 \\
+      \vdots \\
+      y_n
+    \end{array} \right)
+\end{align*}\]
+
+<h4 id="行内">行内</h4>
+
+<pre><code>The following is a math block:
+
+$$ 5 + 5 $$
+
+But next comes a paragraph with an inline math statement: $$ 5 + 5 $$ 
+
+This is block: \$$ 5 + 5 $$ 
+
+This is block: \$\$ 5 + 5 $$ 
+
+</code></pre>
+<p>The following is a math block:</p>
+
+\[5 + 5\]
+
+<p>But next comes a paragraph with an inline math statement: \(5 + 5\)</p>
+
+<p>This is block: $$ 5 + 5 $$</p>
+
+<p>This is block: $$ 5 + 5 $$</p>
+
+<h4 id="fix表格">FIX:表格</h4>
+
+<p>强制 Kramdown 把 <code>|</code> 开头的行才作为表格处理，相关讨论 https://github.com/gettalong/kramdown/issues/151</p>
+
+<h2 id="liquid">Liquid</h2>
+
+<h3 id="标签逃逸">标签逃逸</h3>
+
+<pre><code>用 {% raw %} 标签 
+</code></pre>
+
+<h3 id="graphviz">Graphviz</h3>
+
+<p>要支持 <a href="https://www.graphviz.org/documentation/">graphviz</a> 需要在 Front Matter 加入</p>
+
+<pre><code>---
+...
+graphviz: true
+---
+</code></pre>
+
+<pre><code>{% graphviz %}
+digraph G {
+
+	subgraph cluster_0 {
+		style=filled;
+		color=lightgrey;
+		node [style=filled,color=white];
+		a0 -&gt; a1 -&gt; a2 -&gt; a3;
+		label = "process #1";
+	}
+
+	subgraph cluster_1 {
+		node [style=filled];
+		b0 -&gt; b1 -&gt; b2 -&gt; b3;
+		label = "process #2";
+		color=blue
+	}
+	start -&gt; a0;
+	start -&gt; b0;
+	a1 -&gt; b3;
+	b2 -&gt; a3;
+	a3 -&gt; a0;
+	a3 -&gt; end;
+	b3 -&gt; end;
+
+	start [shape=Mdiamond];
+	end [shape=Msquare];
+}
+{% endgraphviz %} 
+</code></pre>
+
+<div class="graphviz" data-graph="
+digraph G {
+
+	subgraph cluster_0 {
+		style=filled;
+		color=lightgrey;
+		node [style=filled,color=white];
+		a0 -&gt; a1 -&gt; a2 -&gt; a3;
+		label = &quot;process #1&quot;;
+	}
+
+	subgraph cluster_1 {
+		node [style=filled];
+		b0 -&gt; b1 -&gt; b2 -&gt; b3;
+		label = &quot;process #2&quot;;
+		color=blue
+	}
+	start -&gt; a0;
+	start -&gt; b0;
+	a1 -&gt; b3;
+	b2 -&gt; a3;
+	a3 -&gt; a0;
+	a3 -&gt; end;
+	b3 -&gt; end;
+
+	start [shape=Mdiamond];
+	end [shape=Msquare];
+}
+">
+        </div>
+
+<h3 id="mermaid">Mermaid</h3>
+
+<p><a href="https://mermaidjs.github.io/">Mermaid</a> 与 graphviz 有一定的重复，默认启用无需 Front Matter。</p>
+
+<pre><code>{% mermaid %}
+graph TD;
+  A--&gt;B;
+  A--&gt;C;
+  B--&gt;D;
+  C--&gt;D;
+
+  click A "http://google.com" "This is a link"
+  click B "http://google.com" "This is a link"
+  click C "http://google.com" "This is a link"
+  click D "http://google.com" "This is a link"
+{% endmermaid %}
+
+{% mermaid %}
+ classDiagram
+      Class01 &lt;|-- AveryLongClass : Cool
+      Class03 *-- Class04
+      Class05 o-- Class06
+      Class07 .. Class08
+      Class09 --&gt; C2 : Where am i?
+      Class09 --* C3
+      Class09 --|&gt; Class07
+      Class07 : equals()
+      Class07 : Object[] elementData
+      Class01 : size()
+      Class01 : int chimp
+      Class01 : int gorilla
+      Class08 &lt;--&gt; C2: Cool label
+{% endmermaid %}
+
+{% mermaid %}
+gantt
+    title A Gantt Diagram
+    dateFormat  YYYY-MM-DD
+    section Section
+    A task           :a1, 2014-01-01, 30d
+    Another task     :after a1  , 20d
+    section Another
+    Task in sec      :2014-01-12  , 12d
+    another task      : 24d
+{% endmermaid %}
+</code></pre>
+
+<div class="mermaid">
+graph TD;
+  A--&gt;B;
+  A--&gt;C;
+  B--&gt;D;
+  C--&gt;D;
+
+  click A "http://google.com" "This is a link"
+  click B "http://google.com" "This is a link"
+  click C "http://google.com" "This is a link"
+  click D "http://google.com" "This is a link"
+</div>
+
+<div class="mermaid">
+ classDiagram
+      Class01 &lt;|-- AveryLongClass : Cool
+      Class03 *-- Class04
+      Class05 o-- Class06
+      Class07 .. Class08
+      Class09 --&gt; C2 : Where am i?
+      Class09 --* C3
+      Class09 --|&gt; Class07
+      Class07 : equals()
+      Class07 : Object[] elementData
+      Class01 : size()
+      Class01 : int chimp
+      Class01 : int gorilla
+      Class08 &lt;--&gt; C2: Cool label
+</div>
+
+<div class="mermaid">
+gantt
+    title A Gantt Diagram
+    dateFormat  YYYY-MM-DD
+    section Section
+    A task           :a1, 2014-01-01, 30d
+    Another task     :after a1  , 20d
+    section Another
+    Task in sec      :2014-01-12  , 12d
+    another task      : 24d
+</div>
+
+
+
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+    <script src="https://cdn.bootcss.com/viz.js/1.8.2/viz-lite.js"></script>
+<script>
+ $(".graphviz").each(function(a,b){b.appendChild(Viz($(b).data("graph"), { format: "png-image-element" }))});
+</script>
+
+    
+
+    
+    <script type="text/javascript" async
+ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+    
+</body>
+
+</html>
+
