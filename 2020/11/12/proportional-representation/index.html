@@ -1,0 +1,612 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    谈谈比例代表制 | DouO's Blog</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">谈谈比例代表制</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li>
+      <div class="logo">
+        <a id="logo-container" href="/notes" class="brand-logo">
+          <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+        </a>
+        <div class="social">
+          
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+          
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+          
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+          
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+          
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+          
+        </div>
+    </li>
+    </div>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 21-04-25">2020-11-12</span>
+
+    <span><a href="/categories#otaku-ref" class="category category-otaku waves-effect waves-light">otaku</a></span>
+    
+</div>
+
+    <article>
+        <h1 id="缘由">缘由</h1>
+
+<p>最近尝试了下 Golang，练手 Goroutines 实现了个多连接的 http 下载工具 <a href="https://github.com/douo/gotit">gotit</a>。所谓的多连接下载，就是对支持 <code>http-range</code> 的资源的同时发起多个 http 请求，每个请求负责资源的不同部分，最终完成整个资源的下载。有一种情况是，下载中断后本地文件会留下多个不连续大小不一的未写入数据的空块。若重新恢复下载，如何为这些空块分配连接呢？考虑到连接数是可配置的，不应假定连接数与空块数存在相关性。一个容易想到的策略是:</p>
+
+<ul>
+  <li>当连接数小于等于空块数，空块按任意顺序排成队列，每个空闲链接向队列请求空块，直到队列为空。</li>
+  <li>当连接数大于空块数，为了让每个链接都得到分配，直觉的想法是较大的空块占用多一些连接，让每个连接负责的大小接近。</li>
+</ul>
+
+<p>举个例子，存在两个空块大小分别是<code>10M</code>、<code>5M</code>，可分配连接数为<code>3</code>，连接数大于空块数，根据策略二，基于空块的大小按比例分配连接，可算出<code>10M</code>得到<code>2</code>个连接，<code>5M</code>得到<code>1</code>个连接。这里不讨论这样的策略是否有效，而是另外一个问题，假设连接数变为<code>4</code>，继续按比例分配，<code>10M</code>得到<code>2.67</code>个连接<code>5M</code>得到<code>1.33</code>个，连接数是<strong>整数</strong>，一个连接可不能撕成 2个，肯定不能这样分配。那么多出来一个连接该给<code>10M</code>还是<code>5M</code>？如何分配这部分余数看似简单其实并不容易，难度在于如何找出最优解，甚至是如何定义最优解。这问题困扰了我相当长的时间，直到与比例代表制联系起来。</p>
+
+<h1 id="什么是比例代表制">什么是比例代表制</h1>
+
+<p>作为一个活到现在还没见过选票的<strong>“公民”</strong>要不是最近选举的新闻有点密集还真很难认识这个问题就是比例代表制中的整数分配问题（Apportionment）。所谓比例代表制，就是<a href="https://zh.wikipedia.org/wiki/%E4%BB%A3%E8%AD%B0%E6%B0%91%E4%B8%BB%E5%88%B6">代议制民主</a>中的两种主要选举方式之一。另外一种是多数制，也就是赢者通吃，票高者赢，可看下台湾高中的课件<a href="https://youtu.be/4dJAyy9Usew">選舉制度的類型</a>了解下。比例代表制常用于议会选举中，举一个粗略的例子，比如议会有 \(S\) 个席位，各党派按照获得的票数占总票数的比例分配议会的席位。把席位当作连接数，得票数当作空块大小，那么这两个问题就是等价的了。</p>
+
+<h1 id="最大余额法">最大余额法</h1>
+
+<h2 id="黑尔hare数额">黑尔（Hare）数额</h2>
+
+<p>19世纪中期，一位英国的大律师<a href="https://en.wikipedia.org/wiki/Thomas_Hare_(political_scientist)">黑尔</a>，提出一种方法。假定总投票数为 \(P\)，总席位为 \(S\)。那可以简单得出获得一席所需要的票数，在这里称为<strong>数额</strong>（Quota）\(Q\)。</p>
+
+\[Q=\frac{P}{S}\]
+
+<p>计票分为两轮，第一轮是各个党派根据<strong>数额</strong>和得票数取尽可能的席位，也就是得票数除以<strong>数额</strong>后取<strong>整数部分</strong>，比如党派 \(i\) 第一轮的得票数：</p>
+
+\[n_i=\Bigl\lfloor{\frac{P_i}{Q}}\Bigr\rfloor\]
+
+<p>党派 \(i\) 得票数的余数也可以被计算出来：</p>
+
+\[R_i=P_i-{n_i}Q\]
+
+<p>第二轮就是，根据各个党派得票数余数的大小，按从大到小顺序分配剩余席位，直到所有席位分配完成。所以这种方法也叫最大余额法。</p>
+
+<p>最近被取消的香港立法会选举其中的地区直选，就是以黑尔数额的比例代表制。看一下一个实际的例子，以<a href="https://zh.wikipedia.org/wiki/2012%E5%B9%B4%E9%A6%99%E6%B8%AF%E7%AB%8B%E6%B3%95%E6%9C%83%E9%81%B8%E8%88%89%E7%B5%90%E6%9E%9C">2012年立法会选举香港岛选区的结果</a>为例.</p>
+
+<p style="text-align: center;" id="table1"> 表 1</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">编号</th>
+      <th style="text-align: center">政党</th>
+      <th style="text-align: center">票数</th>
+      <th style="text-align: center">第一轮</th>
+      <th style="text-align: center">余额</th>
+      <th style="text-align: center">第二轮</th>
+      <th style="text-align: center">总席位</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">2</td>
+      <td style="text-align: center">民主党</td>
+      <td style="text-align: center">40,558</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">40,558</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">1</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">4</td>
+      <td style="text-align: center">人民力量</td>
+      <td style="text-align: center">18,667</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">18,667</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">0</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">5</td>
+      <td style="text-align: center">民建联</td>
+      <td style="text-align: center">33,901</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">33,901</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">1</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">7</td>
+      <td style="text-align: center">工党</td>
+      <td style="text-align: center">31,523</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">31,523</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">1</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">8</td>
+      <td style="text-align: center">新民党</td>
+      <td style="text-align: center">30,289</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">26,037</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">1</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">9</td>
+      <td style="text-align: center">工联会</td>
+      <td style="text-align: center">27,336</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">27,336</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">1</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">10</td>
+      <td style="text-align: center">公民党</td>
+      <td style="text-align: center"><strong>70,475</strong></td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">23,222</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">1</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">12</td>
+      <td style="text-align: center">民建联</td>
+      <td style="text-align: center">36,517</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">36,517</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">1</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">13</td>
+      <td style="text-align: center">自由党</td>
+      <td style="text-align: center">17,686</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">17,686</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">0</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>2012年香港岛选区总席位 \(S = 7\)，总有效选票\(P = 330766\)，根据黑尔配额公式可得 \(Q = P/S = 47252.3\) ，篇幅所限，表上省略了得票较低的名单。表上得票数大于 Q 的只有公民党，所有第一轮得票的政党只有公民党(Civic)：</p>
+
+<p>\(S_{Civic} =\Bigl\lfloor{P_{Civic}/Q}\Bigr\rfloor = 1\)<br />
+\(R_{Civic} = P_{Civic} - S_{Civic}*Q = 23165.7\)</p>
+
+<p>计算余数后继续第二轮分配。第二轮席位余下 6 席，所以再选余额数最大的六个政党，分别是民主党、民建联、工党、新民党、工联会、民建联。至此 7 个席位分配完毕。全部计算结果可见<a href="pr-tool.html?seats=7&amp;votes=2980,40558,16900,18667,70418,422,31523,30289,27336,70475,343,17686,3169&amp;method=hare&amp;calc">此</a>。</p>
+
+<p>可见这种方法是简单直观且容易理解，也有人认为这种方法是美国建国之父<a href="https://zh.wikipedia.org/wiki/%E4%BA%9A%E5%8E%86%E5%B1%B1%E5%A4%A7%C2%B7%E6%B1%89%E5%AF%86%E5%B0%94%E9%A1%BF">汉密尔顿</a>首先提出的，所以在美国也有叫汉密尔顿法（Hamilton’s Method of Apportionment）。然而这种看似简单直观似乎又公平的分配方法，并没有直觉认为的那么公平，这个后面再说。</p>
+
+<p>黑尔数额并不是最大余额法的唯一方法，不过这些方法的区别是在<strong>数额</strong>的计算，而第二轮余数分配的机制是一样的，所有这一类的分配方法都统称为最大余额法。</p>
+
+<h2 id="特罗普droop数额">特罗普（Droop）数额</h2>
+
+<p>同样是19世纪中期，同样是英国大律师<a href="https://en.wikipedia.org/wiki/Henry_Richmond_Droop">特罗普</a>，认为获取一个席位的票数也就是数额，并不是如黑尔所说的，而是：</p>
+
+\[Q=\frac{P}{S+1}\]
+
+<p>他是的理由如下，竞争两个席位的情况，得票数超过 \(1/3\) 的必将赢得一席，如果是三个席位，那么得票数超过 \(1/4\) 将赢得一席。通过归纳法可得出，争夺 \(S\) 个席位的选举中，得票数超过 \(P/(S+1)\)的党派都将赢得一席。所以特罗普对数额 \(Q\)的定位就是，获得一席所需要的最低票数。</p>
+
+<p>可以观察到，相比黑尔数额，特罗普数额的分母变大了，数额就变小了，也就是说获取一个席位的代价变低了。似乎对小党派更有利了。结合另外一种数额更低的，设计本意是为了偏袒小党派的<a href="https://zh.wikipedia.org/wiki/%E5%9B%A0%E4%BD%A9%E9%87%8C%E4%BA%9E%E5%88%A9%E6%95%B8%E9%A1%8D">因佩里亚利(Imperiali)数额</a></p>
+
+\[Q=\frac{P}{S+2}\]
+
+<p>来看看是否如此：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">政党</th>
+      <th style="text-align: center">得票数</th>
+      <th style="text-align: center">黑尔</th>
+      <th style="text-align: center">特罗普</th>
+      <th style="text-align: center">因佩里亚利</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">A</td>
+      <td style="text-align: center">30</td>
+      <td style="text-align: center">64</td>
+      <td style="text-align: center">64</td>
+      <td style="text-align: center">65</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">B</td>
+      <td style="text-align: center">12</td>
+      <td style="text-align: center">25</td>
+      <td style="text-align: center">26</td>
+      <td style="text-align: center">25</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">C</td>
+      <td style="text-align: center">5</td>
+      <td style="text-align: center">11</td>
+      <td style="text-align: center">10</td>
+      <td style="text-align: center">10</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>计算可看<a href="pr-tool.html?main=0&amp;seats=100&amp;votes=30,12,5&amp;method=hare&amp;calc">此</a>。</p>
+
+<p>在采用特罗普法或因佩里亚利法后,得票最少的 C 一席反而分别被 B 和 A 抢去。实践中也发现更小的数额反而更有利于得票多的大党派，这是因为更小的数额，导致第二轮剩下的席位变少了，小党派主要靠第二轮来取得席位，席位变少相应的获得席位的概率也就降低。</p>
+
+<h1 id="问题">问题</h1>
+
+<p>上面提到最大余额法并没有直觉上公平，其一便是不同数额的可以微调席位的分配。其二就是会出现非常反直觉的不公平结果。</p>
+
+<h2 id="悖论">悖论</h2>
+
+<p>美国为各州分配众议院席位的方法也是使用比例代表制分配。州相当于候选名单，州的人口就相当于选票。虽然现行的宪法规定众议院的席位固定为 435 席，但 20 世纪前众议院的席位并不是固定 435 席而是随人口的增长而增加。1880 的人口普查发现，总人口不变的情况下，众议院有 299 席位时，阿拉巴马州获得 8 个席位，当总席位增加到 300 时，阿拉巴马州反而失去一席剩下 7 席。制造一个例子很简单：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">政党</th>
+      <th style="text-align: center">得票数</th>
+      <th style="text-align: center">4 席</th>
+      <th style="text-align: center">5 席</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">A</td>
+      <td style="text-align: center">5</td>
+      <td style="text-align: center">2</td>
+      <td style="text-align: center">3</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">B</td>
+      <td style="text-align: center">3</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">2</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">C</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center"><strong>0</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>把场景换成议会的不公平就非常显而易见了，<strong>议会总席位增加一席，投票保持不变的情况下某个政党却会因此失去一席。</strong>这种现象便称为<strong>阿拉巴马悖论（Alabama Paradox）</strong>。这就是最大余额法不可避免的问题。</p>
+
+<p>阿拉巴马悖论，只存在理论计算中，现实中并未未发生，并不是阿拉巴马悖论不易发生，实际上预期每 8 次分配就会发生一次，而现实没发生原因是众议院不再采用最大余额法分配席位，实际上还有个前提就是要现实中两次投票的比例保持不变这概率也是几乎不可能😜。</p>
+
+<p>另外一个悖论就曾在现实出现，1900 年弗吉尼亚得到 10 席缅因州得到 3 席。而 1901 年，这一年尽管当年弗吉尼亚的人口增加速度大于缅因州，反而被缅因州抢去一席。弗吉尼亚 9 席缅因州 4 席，见：<a href="https://en.wikipedia.org/wiki/1901_United_States_House_of_Representatives_elections">1901年美国众议院选举-维基百科</a>。这就是所谓的<strong>人口悖论（Population paradox）</strong>，两个州的人口发生增长，增长率快州反而输给增长率慢的州一席。</p>
+
+<h2 id="配票">配票</h2>
+
+<p>回头重新看下2012年立法会区域直选香港岛区的结果（见<a href="#table1">表 1</a>），可以发现民建联（DBA）出现了两次。为什么要分两个名单参选呢，假设一下如果合并为一个名单会怎么样？演算<a href="pr-tool.html?seats=7&amp;votes=2980,40558,16900,18667,70418,422,31523,30289,27336,70475,343,17686,3169&amp;method=hare&amp;calc">一下</a>便可以发现，最终民建联只能得 1 个席位，而民主派的公民党反能获得 2 票。</p>
+
+<p>而民建联最终选择了分拆名单，避免了这种情况发生，这种行为就是<strong>配票</strong>，而且是相当成功的配票例子。但配票也需要对选票分配的预测相当有信心才能执行，切忌不自量力，历史上香港立法会、台湾立法委配票失败的例子也不少见。</p>
+
+<h2 id="余数相等">余数相等</h2>
+
+<p>最大余额法，出现余数相等的情况怎么办？构造这个情况并不难，假设有 n 个候选人竞选 S 个席位，\(V_i\) 为候选人 i 的票数，\(V_i=a_i*Q+C\) ，Q 为黑尔数额，可得出 \(S=\frac{nC}{Q}+\sum\limits_{i=1}^{n}a_i\)，构造任意 a、n、C、Q 满足以下条件便可：</p>
+
+\[\begin{align*}
+  &amp; C &lt; Q \\
+  &amp; \frac{nC}{Q}\in{\mathbb{Z}} \\
+  &amp; a_i\in{\mathbb{Z}}  \\
+\end{align*}\]
+
+<p>见此<a href="pr-tool.html?seats=34&amp;votes=18,33,48,63,93&amp;method=hare&amp;calc">例子</a>，出现这种情况只能更换数额算法，或不用最大余额法了。当然现实中是几乎不可能出现这种情况的。</p>
+
+<h1 id="最高均数法">最高均数法</h1>
+
+<p>另外一种与最大余额法相对于的就是最高均数法，而且最高均数法已被证明能避免最大余额法遇到的悖论。最高均数法取得席位的方式相当于依次对每个席位进行竞标，只是价格不是绝对而是相对，而且价格依取得的席位数增加而递减。以下表为例，三个政党竞选 4 个席位。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">政党</th>
+      <th style="text-align: center">得票数</th>
+      <th style="text-align: center">第一轮</th>
+      <th style="text-align: center">第二轮</th>
+      <th style="text-align: center">第三轮</th>
+      <th style="text-align: center">第四轮</th>
+      <th>总席位</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">A</td>
+      <td style="text-align: center">80</td>
+      <td style="text-align: center"><strong>80</strong></td>
+      <td style="text-align: center"><strong>40</strong></td>
+      <td style="text-align: center">26.67</td>
+      <td style="text-align: center"><strong>26.67</strong></td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">B</td>
+      <td style="text-align: center">32</td>
+      <td style="text-align: center">32</td>
+      <td style="text-align: center">32</td>
+      <td style="text-align: center"><strong>32</strong></td>
+      <td style="text-align: center">16</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">C</td>
+      <td style="text-align: center">14</td>
+      <td style="text-align: center">14</td>
+      <td style="text-align: center">14</td>
+      <td style="text-align: center">14</td>
+      <td style="text-align: center">14</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>第一轮 A 票数最高，A 得 1 席，A 的票数更新为 \(\frac{V_A}{2}\)，第二轮还是 A 最高，A 获得第二席，所以 A 票数更新为 \(\frac{V_A}{3}\)，第三轮 B 票数最高，B 获得第一席，B 票数更新为 \(\frac{V_B}{2}\)，依次类推，直到所有席位分配完成。</p>
+
+<p>可以看出，获得第 n 席的剩余票数为 \(\frac{V}{n+1}\)。换一句话说也就是，A 能获得 n 个席位，是因为其票数平均 n 分的均数最大，所以叫最高均数法。这是一个比较接近实际的<a href="pr-tool.html?main=1&amp;seats=541&amp;votes=136770988,134058815,29446445,19760114,67416861&amp;method=dHondt&amp;calc">例子</a>，数据来自 2004 年的印度大选。</p>
+
+<p>最高均数法也叫除数法，政党获得第 n 席的剩余票数等于得票数除以一个除数序列的第 n 项，这个序列可以一般化为 \(f(n)\)，\(f(n)=n+1\) 时，称为洪德法(d’Hondt)。其他不同的最高均数法，也就是 \(f(n)\) 的取值不同而已。</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">dHondt</span> <span class="o">=</span> <span class="p">(</span><span class="nx">s</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">s</span><span class="o">+</span><span class="mi">1</span>  <span class="c1">// 洪德法</span>
+<span class="kd">const</span> <span class="nx">sLague</span> <span class="o">=</span> <span class="p">(</span><span class="nx">s</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">s</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span> <span class="c1">// 聖拉古法（Sainte-Laguë）</span>
+<span class="kd">const</span> <span class="nx">imperiali</span> <span class="o">=</span> <span class="p">(</span><span class="nx">s</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span><span class="nx">s</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="c1">// 因佩里亚利（Imperiali）</span>
+<span class="kd">const</span> <span class="nx">modSLague</span> <span class="o">=</span> <span class="p">(</span><span class="nx">s</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">s</span><span class="o">==</span><span class="mi">0</span><span class="p">?</span><span class="mi">1</span><span class="p">:(</span><span class="mi">2</span><span class="o">*</span><span class="nx">s</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">5</span><span class="o">/</span><span class="mi">7</span> <span class="c1">// 改良圣拉古法</span>
+</code></pre></div></div>
+
+<p>不同的方法，最大的影响是\(f(n)\)的增长率，增长率越快越有利于小党派，相反则的有利大党派。大多方法都是一次函数，所以系数越大就越有利于小党派。除了<a href="https://en.wikipedia.org/wiki/Huntington%E2%80%93Hill_method">亨廷顿-希尔法（Huntington–Hill method）</a>：</p>
+
+\[f(n)=\sqrt{n(n+1)}\]
+
+<p>Huntington–Hill 的增长率其实是非常接近于 d’Hondt 的。它也是美国现行为各州分配众议院席位所用的方法。</p>
+
+<h1 id="数额法则">数额法则</h1>
+
+<p>最高均数法可以避免阿拉巴马悖论和人口悖论，基本上也是现行比例代表制选举中最常用的方法，但它也不是完美的。重新回过头来看这个问题，总投票数为 \(P\)，总席位为 \(S\)。政党 i 的得票为 \(V_i\)。在一个理想的世界里政党 i 的席位为：</p>
+
+\[A_i=S\frac{V_i}{P}\]
+
+<p>我们知道绝大多数情况下 \(A_i\) 是个小数，这个数称为 i 的<strong>自然数额（nature quota）</strong>。应用分配方法的目的就是对自然数额进行取整，而取整无外乎是向下取整或向上取整。</p>
+
+<p>这个就是数额法则的定义，<strong>分配给一方的席位数量应该为其自然数额的向上取整整数或向下取整整数。</strong>能称为法则想必是十分重要，但看似完美的最高均数法就违反了这个法则。</p>
+
+<h1 id="结语">结语</h1>
+
+<p>实际上 Balinski &amp; Young 已经证明了不违反数额法则同时又能避免悖论的分配方法是不可能的。也就是说整数分摊实际上没有严格意义上的公平解法。那么回最开始遇到的问题，寻找分配连接的最优解，如此绞尽脑汁也就情有可原了。不过公平不可能，最优解却是可能的。只需定义什么是最优，比如说实际席数与自然数额之间的距离最小便是最优（可见参考资料1、2），因为席位是整数搜索空间有限，只需遍历所有可能便可以找到最优，如果满足数额法则那么搜索的空间便更小了。</p>
+
+<p>正因为绝对公平的不可能，国家政策的制定者就可以通过调整这些方法让政策偏向大多数或者少数，比如说加大最大余额法的数额，或者最高均数法选择增长率较快的除数序列，来让少数派的得到发声机会。当然选择相反的策略，也能说成是阻止极端主义的发展。好像政府怎么做都是对的，不过阻止极端主义这方面还真有反例，魏玛共和国的帝国议会让纳粹崛起就是一个鲜明的<a href="https://zh.wikipedia.org/wiki/%E9%AD%8F%E7%91%AA%E5%85%B1%E5%92%8C%E5%9C%8B#%E5%88%B6%E5%BA%A6%E6%BC%8F%E6%B4%9E">反例</a>。</p>
+
+<ul>
+  <li>例子中所用的最大余额法实现见：<a href="./largest_remainder.js">largest_remainder.js</a></li>
+  <li>例子中所用的最高均数法实现见：<a href="./highest_average.js">highest_average.js</a></li>
+</ul>
+
+<h1 id="参考资料">参考资料</h1>
+
+<ul>
+  <li><a href="https://www.math.arizona.edu/~system/archives/voting-theory/">A Mathematical Exploration of Apportionment Procedures Around the World</a></li>
+  <li><a href="https://rangevoting.org/Apportion.html">RangeVoting.org - Apportionment and rounding schemes</a></li>
+  <li><a href="https://web.archive.org/web/20051222015727/http://db.math.ust.hk/articles/prop_rep/c_prop_rep.htm">比例代表制是甚麼？</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Apportionment_paradox">Apportionment paradox - Wikipedia</a></li>
+</ul>
+
+
+    </article>
+    <div class="tag-container" >
+        
+    </div>
+<div class="post-pager">
+    
+    <a href="/2018/09/26/night-ride-to-phoenix-mountine/">上一篇：夜骑凤凰山</a>
+    
+    
+</div>
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/2020/11/12/proportional-representation"
+ var disqus_config = function () {
+     this.page.title = "谈谈比例代表制"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/2020/11/12/proportional-representation/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+    <script src="https://cdn.bootcss.com/viz.js/1.8.2/viz-lite.js"></script>
+<script>
+ $(".graphviz").each(function(a,b){b.appendChild(Viz($(b).data("graph"), { format: "png-image-element" }))});
+</script>
+
+    
+
+    
+    <script type="text/javascript" async
+ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+    
+</body>
+
+</html>
+

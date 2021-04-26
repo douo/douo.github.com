@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Proportional Representation Tool</title>
+  </head>
+  <body>
+    <form>
+      <select id="main" name="main">
+        <option value="0">最大余额法</option>
+        <option value="1">最高均数法</option>
+      </select></br>
+      <label for="seats">席位数:</label></br>
+      <input type="number" id="seats" name="seats" ></input></br>
+      <label for="votes">投票结果:</label></br>
+      <textarea id="votes" name="votes" placeholder="1,2,3,4" ></textarea></br>
+      <label for="method">计算方法:</label></br>
+      <select id="method" name="method">
+        <option value="hare">Hare</option>
+        <option value="droop">Droop</option>
+        <option value="imperiali">Imperiali</option>
+      </select>
+      <select id="d-method" name="d-method">
+        <option value="dHondt">d'Hondt</option>
+        <option value="sLague">Sainte-Lague</option>
+        <option value="imperiali">Imperiali</option>
+        <option value="modSLague">Mod Sainte-Lague</option>
+      </select>
+      <br id="anchor"></br>
+      <button id="calc" type="button" onclick="doCal()">计算</button>
+    </form>
+    <h2>结果：</h2>
+    <div id="result">
+      <button id="axis">方向</button><br>
+      <div id="display">
+      </div>
+    </div>
+    <script src="./largest_remainder.js"></script>
+    <script src="./highest_average.js"></script>
+    <script src="./pr-tool.js"></script>
+  </body>
+</html>

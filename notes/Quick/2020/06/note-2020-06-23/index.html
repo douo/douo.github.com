@@ -42,55 +42,46 @@
   </nav>
   <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
   <ul id="nav-mobile" class="sidenav sidenav-fixed">
-    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
-      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
-    </a>
-    <div class="social">
-      <ul>
-        
-        <li>
+    <li>
+      <div class="logo">
+        <a id="logo-container" href="/notes" class="brand-logo">
+          <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+        </a>
+        <div class="social">
+          
           <a href="/rss.xml" title="订阅">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-feed"></use>
             </svg>
           </a>
-        </li>
-        
-        <li>
+          
           <a href="https://github.com/douo" title="Github">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-github"></use>
             </svg>
           </a>
-        </li>
-        
-        <li>
+          
           <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-stack-overflow"></use>
             </svg>
           </a>
-        </li>
-        
-        <li>
+          
           <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-google-plus"></use>
             </svg>
           </a>
-        </li>
-        
-        <li>
+          
           <a href="https://instagram.com/douo" title="Instagram">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-instagram"></use>
             </svg>
           </a>
-        </li>
-        
-      </ul>
-    </div>
+          
+        </div>
     </li>
+    </div>
     <li class="search">
       <div class="search-wrapper">
         <input id="search" placeholder="Search"><i class="material-icons">search</i>
@@ -138,7 +129,7 @@
   <div class="row">
 
     <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
-<span class="post-date tooltipped" data-tooltip="最后更新 20-09-13">2020-06-23</span>
+<span class="post-date tooltipped" data-tooltip="最后更新 21-04-09">2020-06-23</span>
     
 </div>
 
@@ -205,6 +196,7 @@ Proxifier  新增一个规则让域名 <code>e5.witontek.com</code> 走 charles 
 
 <p><code>curl -H 'Host: e5.witontek.com' -H 'Content-Type: application/json' -H 'Origin: https://e5.witontek.com' -H 'Accept: application/json, text/plain, */*' -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/605.1.15 (KHTML, like Gecko) MicroMessenger/6.8.0(0x16080000) MacWechat/2.4.1(0x12040110) NetType/WIFI WindowsWechat MicroMessenger/6.8.0(0x16080000) MacWechat/2.4.1(0x12040110) NetType/WIFI WindowsWechat' -H 'Referer: https://e5.witontek.com/ehospital5web/web-new/stdxyxydefsyy/front.html?interfaceType=wechat&amp;hospital_id=stdxyxydefsyyadmin&amp;action=common-index&amp;openid=ocQovxB5hRbnB7ptj88yYGhlu_Hw&amp;code=8373c4f4ac874e8a8fb0d6bf1d6b0b66&amp;r=0.30143476' -H 'Accept-Language: zh-cn' --data-binary '{"requestData":{"hospital_id":"stdxyxydefsyyadmin","clinic_date":"2020-06-29","schedule_id":"","clinic_time":"上午","department_code":"301060","doctor_code":"1131"},"pageSize":"0","pageNumber":"0","requestToken":"c717fa357ee747d484c740c02d75c308"}' --compressed 'https://e5.witontek.com/ehospital5/schedule/qryVisitTime?v=7941816960514363&amp;connect_redirect=1'
 </code></p>
+
 <h4 id="6预约">6.预约</h4>
 
 <p>实际只需要 3,4,5 三个 api ，就可以获取预约所需要的信息</p>

@@ -42,55 +42,46 @@
   </nav>
   <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
   <ul id="nav-mobile" class="sidenav sidenav-fixed">
-    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
-      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
-    </a>
-    <div class="social">
-      <ul>
-        
-        <li>
+    <li>
+      <div class="logo">
+        <a id="logo-container" href="/notes" class="brand-logo">
+          <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+        </a>
+        <div class="social">
+          
           <a href="/rss.xml" title="订阅">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-feed"></use>
             </svg>
           </a>
-        </li>
-        
-        <li>
+          
           <a href="https://github.com/douo" title="Github">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-github"></use>
             </svg>
           </a>
-        </li>
-        
-        <li>
+          
           <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-stack-overflow"></use>
             </svg>
           </a>
-        </li>
-        
-        <li>
+          
           <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-google-plus"></use>
             </svg>
           </a>
-        </li>
-        
-        <li>
+          
           <a href="https://instagram.com/douo" title="Instagram">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-instagram"></use>
             </svg>
           </a>
-        </li>
-        
-      </ul>
-    </div>
+          
+        </div>
     </li>
+    </div>
     <li class="search">
       <div class="search-wrapper">
         <input id="search" placeholder="Search"><i class="material-icons">search</i>
@@ -138,7 +129,7 @@
   <div class="row">
 
     <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
-<span class="post-date tooltipped" data-tooltip="最后更新 21-03-14">2020-02-04</span>
+<span class="post-date tooltipped" data-tooltip="最后更新 21-04-09">2020-02-04</span>
     
 </div>
 
@@ -1219,6 +1210,14 @@ uci set network.@rule[-1].lookup="lanvpn"
 <p>基本思路是通过 dhcp 配置，自动分配的 IP 段为 <code>192.168.1.64/26</code> 这样就可以不用 ipset 直接用 iptables 禁止这个 ip 段不能访问某些内网的敏感机器。</p>
 
 <h3 id="ipv6">ipv6</h3>
+
+<h4 id="slaac">SLAAC</h4>
+
+<h4 id="dhcpv6">DHCPv6</h4>
+
+<h4 id="adguardhome">AdguardHome</h4>
+
+<p>支持 slaac + dhcpv6，见 https://github.com/AdguardTeam/AdGuardHome/blob/master/AGHTechDoc.md#raslaac</p>
 
 <h3 id="upnp">upnp</h3>
 

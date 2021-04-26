@@ -42,55 +42,46 @@
   </nav>
   <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
   <ul id="nav-mobile" class="sidenav sidenav-fixed">
-    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
-      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
-    </a>
-    <div class="social">
-      <ul>
-        
-        <li>
+    <li>
+      <div class="logo">
+        <a id="logo-container" href="/notes" class="brand-logo">
+          <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+        </a>
+        <div class="social">
+          
           <a href="/rss.xml" title="订阅">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-feed"></use>
             </svg>
           </a>
-        </li>
-        
-        <li>
+          
           <a href="https://github.com/douo" title="Github">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-github"></use>
             </svg>
           </a>
-        </li>
-        
-        <li>
+          
           <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-stack-overflow"></use>
             </svg>
           </a>
-        </li>
-        
-        <li>
+          
           <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-google-plus"></use>
             </svg>
           </a>
-        </li>
-        
-        <li>
+          
           <a href="https://instagram.com/douo" title="Instagram">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-instagram"></use>
             </svg>
           </a>
-        </li>
-        
-      </ul>
-    </div>
+          
+        </div>
     </li>
+    </div>
     <li class="search">
       <div class="search-wrapper">
         <input id="search" placeholder="Search"><i class="material-icons">search</i>
@@ -138,7 +129,7 @@
   <div class="row">
 
     <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
-<span class="post-date tooltipped" data-tooltip="最后更新 21-03-19">2020-12-22</span>
+<span class="post-date tooltipped" data-tooltip="最后更新 21-04-02">2020-12-22</span>
     
 </div>
 
@@ -315,6 +306,75 @@ listen console
 <h3 id="tuntap">TUN/TAP</h3>
 
 <h2 id="redirect-与-tproxy-的区别">Redirect 与 TProxy 的区别</h2>
+
+<ul>
+  <li>REDIRECT 只在 nat PREROUTING、OUTPUT 有效。</li>
+  <li>TPROXY 自在 mangle PREROUTING 有效</li>
+</ul>
+
+<p>REDIRECT 相当于目标地址固定为 localhost 的 DNAT。REDIRECT 不能通过 getsockname 获取原始链接的目标地址。不过 TCP 链接仍然能通过 <code>SO_ORIGINAL_DST</code> 获取到原始目标地址。这也就是 REDIRECT 只支持  TCP 透明代理的原因。</p>
+
+<p>DNAT 与 REDIRECT 是可以获取到真实的源地址（实际发起请求的客户端的地址）。</p>
+
+<p>REDIRECT 的目标地址已经被改为 local，所有是不需要重新路由的，也没必要再打标签。</p>
+
+<pre><code>ip rule add fwmark 1 lookup 100
+ip route add local 0.0.0.0/0 dev lo table 100
+</code></pre>
+
+<p>TPROXY 不会修改传输层 Header。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Original destination was: 192.168.5.32:5301                                                       Connected by &lt;socket.socket <span class="nv">fd</span><span class="o">=</span>4, <span class="nv">family</span><span class="o">=</span>AddressFamily.AF_INET, <span class="nb">type</span><span class="o">=</span>SocketKind.SOCK_STREAM, <span class="nv">proto</span><span class="o">=</span>0,laddr<span class="o">=(</span><span class="s1">'192.168.50.32'</span>, 10025<span class="o">)</span>, <span class="nv">raddr</span><span class="o">=(</span><span class="s1">'192.168.50.211'</span>, 50312<span class="o">)&gt;</span>
+</code></pre></div></div>
+
+<h3 id="何谓透明">何谓透明</h3>
+
+<p>透明意味着不可见，透明代理中这里的主语指的是链接的发起端或接收端。客户端向真实的服务端ip发起请求，服务端看到的也是真实的ip。中间链路的作妖不可见。FIXME</p>
+
+<p>operating system functions as a router, but some (or all) traffic gets redirected for userspace processing.</p>
+
+<p>It is entirely possible to tell Linux 0.0.0.0/0 (‘everything’) is local, but this would leave it unable to connect to any remote address.</p>
+
+<pre><code>ip rule add fwmark 1 lookup 100
+ip route add local 0.0.0.0/0 dev lo table 100
+</code></pre>
+
+<p>让所有 ip 都经过本地回环，这样才能被本地监听 0.0.0.0:PORT 的应用程序收到包。</p>
+
+<pre><code>tcp        0      0 :::1041                 :::*                    LISTEN      2654/xray
+</code></pre>
+
+<h3 id="ip_transparent">IP_TRANSPARENT</h3>
+
+<p>https://man7.org/linux/man-pages/man7/ip.7.html</p>
+
+<ol>
+  <li>Binding to addresses that are not (usually) considered local</li>
+  <li>Receiving connections and packets from iptables TPROXY redirected sessions</li>
+</ol>
+
+<p>因为不论是 TCP 还是 UDP，编程模型都需要 bind 本机地址（或者 0.0.0.0），不是给本机的包，进程不收。但 2.6.24 的内核出了个 IP_TRANSPARENT 的 socket 选项，打开这个选项，就可以接收任意目的地址的包了。</p>
+
+<h3 id="-m-socket">-m socket</h3>
+
+<p>如<a href="https://ipset.netfilter.org/iptables-extensions.man.html#lbCB">文档</a>所说的:</p>
+
+<blockquote>
+  <p>It matches if there is an established or non-zero bound listening socket (possibly with  a  non-local  address).</p>
+</blockquote>
+
+<p>经验证 tcp 第一个包 syn 是不会触发 <code>-m socket</code> 后续的包就会触发。也就是说后续的包直接走 DIVERT 不会触发 TPROXY 规则了，不过仍然能被正确转发到目标透明代理的进程，因为“链接”已经被建立了？反正绕过了后续的规则最终起到提高效率的作用。面对无链接的 udp 貌似就不起作用了。</p>
+
+<h3 id="本地流量如何走透明代理">本地流量如何走透明代理</h3>
+<p>TPROXY 不能用于 OUTPUT 链，不可以通过给 OUTPUT 链给流量加标识。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>iptables <span class="nt">-t</span> mangle <span class="nt">-A</span> OUTPUT <span class="nt">-p</span> udp <span class="nt">-j</span> MARK <span class="nt">--set-mark</span> 1
+iptables <span class="nt">-t</span> mangle <span class="nt">-A</span> OUTPUT <span class="nt">-p</span> tcp <span class="nt">-j</span> MARK <span class="nt">--set-mark</span> 1
+</code></pre></div></div>
+
+<p>猜测是根据之前配置的路由规则，流量会被路由至 lo，这时就会走 PREROUTING 链。所以也能应用 TPROXY，经常测试应用 TPROXY 后就不会经过 OUTPUT 链了，所以也就不会有死循环的问题。</p>
+
+<p>测试</p>
 
 </article>
 <div class="tag-container" >

@@ -1,0 +1,337 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant-CN" class="borderbox" >
+   
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    2021年04月08日杂记 | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">2021年04月08日杂记</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li>
+      <div class="logo">
+        <a id="logo-container" href="/notes" class="brand-logo">
+          <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+        </a>
+        <div class="social">
+          
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+          
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+          
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+          
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+          
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+          
+        </div>
+    </li>
+    </div>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 21-04-25">2021-04-08</span>
+    
+</div>
+
+<article>
+    <p>数据包从发送端系统到接收端系统经过的通信链路和数据包交换的顺序称为通过网络的路由或路径。</p>
+
+<p>PON(passive optical networks) ，无源光纤网络</p>
+
+<p>电路交换（Circuit Switching），相当于需要预约的餐馆，用餐需要提前预约，到达后无需等待座位
+包交换（Packet），用餐不需预约，到达后需要等待空桌</p>
+
+<p>ISP 之间如何互相链接，低级 ISP 链接高级 ISP，最高级的 ISP 称为一级骨干网（tier-1 isp），高级 ISP 网络中供低级 ISP 接入的一组路由器称为 PoPs（Points of presence），低级 ISP 链接多个高级 ISP 称为 multi-homing。
+同级 ISP 之间相互链接称为 Peer，多个ISP 互相 Peer 的节点称为 IXP。另外还有 Content Provider ，比如谷歌的 Content Provider 网络，之间的设备跨越全球，独立于互联网相互链接，同时向外提供互联网服务，也有接入各个层级的 ISP。</p>
+
+<p>延迟
+节点通过路由发送数据包到另外一个节点时的延迟称为节点延迟（nodal delay），由四个延迟构成：</p>
+
+<ol>
+  <li>处理延迟（Processing），主要是路由检查数据包的标头并确定将数据包定向到何处，数量级微秒</li>
+  <li>排队延迟（Queuing），排队等待发送到链路，数量级微秒到毫秒</li>
+  <li>传输延迟（Transmission），基于分组转发的网络中，等到数据包接受完整才能转发（存储转发？），等于数据包大小除与传输速度，微秒到毫秒。</li>
+  <li>传播延迟（Propagation），比特在链路中传播的时间，大概就是光速。</li>
+</ol>
+
+<p>排队延迟是最有趣与复杂的部分。</p>
+
+<p>a 包每秒，L 包大小，R 传输速率。 La/R traffic intensity， TI 大于 1 时，队列会无限增长。</p>
+
+<p>但队列满了，路由就会丢弃新的数据包。</p>
+
+<p>吞吐（throughput），</p>
+
+<p>作者将因特网分为 5 层</p>
+
+<ol>
+  <li>应用层，包称为 message</li>
+  <li>传输层，包称为 segment</li>
+  <li>网络层，包称为 datagrams，源和目标之间的一系列路由器来路由 datagram。</li>
+  <li>链路层，包称为 frame，将 frame 从一个节点传播到另一个节点， Ethernet, WiFi 等</li>
+  <li>物理层，包视为独立的位，</li>
+</ol>
+
+<h2 id="packet-sniffer">packet sniffer</h2>
+
+<ol>
+  <li>packet capture library，复制链路层的帧 （libpcap）</li>
+  <li>packet analyzer</li>
+</ol>
+
+<h1 id="application">Application</h1>
+
+<p>传输层提供给应用层的四个维度：</p>
+
+<ol>
+  <li>可靠，TCP</li>
+  <li>吞吐，未能保证，实际可用</li>
+  <li>时效，未能保证，实际可用</li>
+  <li>安全，TLS（TLS 是在应用层实现的）</li>
+</ol>
+
+<h2 id="http">HTTP</h2>
+
+<p>stateless protocol</p>
+
+<p>RTT(round-trip time)</p>
+
+<h3 id="header">HEADER</h3>
+
+<p>HOST，预留给代理使用</p>
+
+<h3 id="http2">HTTP/2</h3>
+
+<p>HOL(Head of Line) blocking，持久链接的 http，所有请求用同一个链接，出现大对象传输阻塞了小对象传输，增加 UPD（user-perceived delay）。</p>
+
+<p>HTTP/1.1 会并发多个 TCP 链接来解决 HOL。</p>
+
+<p>HTTP/2 减少打开单个页面并发多个 TCP 链接的数量。</p>
+
+<p>用 framing mechanism 来减少 UPD。大概的机制是每个对象都被分为大小相等数量不等的帧组，然后遍历每个帧组每次传输一个帧。</p>
+
+<h2 id="email">EMail</h2>
+
+<p>SMTP，邮件服务器之间的协议。只允许传输 7-bit ASCII，用于推送邮件
+IMAP，客户端从邮件服务器获取邮件的协议</p>
+
+<h2 id="dns">DNS</h2>
+
+<p><a href="https://en.wikipedia.org/wiki/BIND">BIND</a></p>
+
+<h2 id="p2p">P2P</h2>
+
+<ul>
+  <li>Peer 优先获取最稀有的 chunk，</li>
+  <li>Peer 优先向传输率最高的 Peers 发送数据。最高的四个，称为 unchoked</li>
+  <li>Peer 每 30s 会随机选择一个 Peer 发送数据，称为 optimistically unchoked</li>
+</ul>
+
+<p>DHT</p>
+
+<h2 id="video-streaming--cdn2">Video Streaming &amp; CDN2</h2>
+
+<h1 id="transport-layer">Transport Layer</h1>
+
+</article>
+<div class="tag-container" >
+    
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Quick/2021/04/note-2021-04-08"
+ var disqus_config = function () {
+     this.page.title = "2021年04月08日杂记"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Quick/2021/04/note-2021-04-08/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    
+
+    
+</body>
+
+</html>
+

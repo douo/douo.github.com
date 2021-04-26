@@ -42,55 +42,46 @@
   </nav>
   <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
   <ul id="nav-mobile" class="sidenav sidenav-fixed">
-    <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
-      <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
-    </a>
-    <div class="social">
-      <ul>
-        
-        <li>
+    <li>
+      <div class="logo">
+        <a id="logo-container" href="/notes" class="brand-logo">
+          <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+        </a>
+        <div class="social">
+          
           <a href="/rss.xml" title="订阅">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-feed"></use>
             </svg>
           </a>
-        </li>
-        
-        <li>
+          
           <a href="https://github.com/douo" title="Github">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-github"></use>
             </svg>
           </a>
-        </li>
-        
-        <li>
+          
           <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-stack-overflow"></use>
             </svg>
           </a>
-        </li>
-        
-        <li>
+          
           <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-google-plus"></use>
             </svg>
           </a>
-        </li>
-        
-        <li>
+          
           <a href="https://instagram.com/douo" title="Instagram">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-instagram"></use>
             </svg>
           </a>
-        </li>
-        
-      </ul>
-    </div>
+          
+        </div>
     </li>
+    </div>
     <li class="search">
       <div class="search-wrapper">
         <input id="search" placeholder="Search"><i class="material-icons">search</i>
@@ -138,7 +129,7 @@
   <div class="row">
 
     <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
-<span class="post-date tooltipped" data-tooltip="最后更新 21-03-14">2016-12-08</span>
+<span class="post-date tooltipped" data-tooltip="最后更新 21-04-18">2016-12-08</span>
     
 </div>
 
@@ -270,6 +261,10 @@
 
 <p><a href="https://www.kernelcrash.com/blog/nfs-uidgid-mapping/2007/09/10/">NFS uid/gid mapping</a></p>
 
+<h4 id="kodi">Kodi</h4>
+
+<p>kodi 需要 insecure，见 <a href="https://kodi.wiki/view/NFS#NFS_sharing_from_Linux">3 NFS sharing from Linux</a></p>
+
 <h3 id="samba">Samba</h3>
 
 <p>启用  <code>smb</code> 和 <code>nmb</code>，不要去启用 <code>samba</code></p>
@@ -335,7 +330,7 @@ config.resilio.com
 
 <h2 id="transmission">Transmission</h2>
 
-<p>鉴于 bt 下载都是通过预分配空间再来写入数据来减少碎片，直接在存放媒体的 8t 叠瓦盘上下载就不太合适了，所以我用闲置的 ssd 来做下载盘，下载完成后再移入目标磁盘。通过开启 incomplete_dir 来实现这个功能。这个功能需要修改 /etc/transmission-damon/settings.json 。其实用了 ssd 预分配也可以关掉，毕竟 ssd 可以不管文件碎片化了，预分配浪费一次写入也对寿命无益，不过，0占位的文件可能已经被文件系统优化了，所以未经验证的认为影响应该不大。不过我还是关掉了。</p>
+<p>鉴于 bt 下载都是通过预分配空间再来写入数据来减少碎片，直接在存放媒体的 8t 叠瓦盘上下载就不太合适了，所以我用闲置的 ssd 来做下载盘，下载完成后再移入目标磁盘。通过开启 incomplete_dir 来实现这个功能。这个功能需要修改 <code>/var/lib/transmission/.config/transmission-daemon/settings.json</code> 。其实用了 ssd 预分配也可以关掉，毕竟 ssd 可以不管文件碎片化了，预分配浪费一次写入也对寿命无益，不过，0占位的文件可能已经被文件系统优化了，所以未经验证的认为影响应该不大。不过我还是关掉了。</p>
 
 <p>需要注意， 停止服务后，才能修改 settings.json 。不然 stop 的时候会重置 settings.json</p>
 
@@ -354,6 +349,10 @@ config.resilio.com
 <blockquote>
   <p>The incomplete-dir appears to be used only when the download-dir matches the entered folder when adding the torrent. You could argue that the free selection of download folder (which could be on another filesystem entirely) conflicts with using a single incomplete-dir. So I would suggest explicitly not using the incomplete-dir setting at all as it is not used when selecting a download folder that differs from download-dir anyway.</p>
 </blockquote>
+
+<h3 id="transmission-daemon-udp-failed-to-set-receive--send-buffer">transmission-daemon: UDP Failed to set receive / send buffer</h3>
+
+<p><a href="https://unix.stackexchange.com/questions/520625/transmission-daemon-udp-failed-to-set-receive-send-buffer">debian - transmission-daemon: UDP Failed to set receive / send buffer - Unix &amp; Linux Stack Exchange</a></p>
 
 <h3 id="transmission-tracker-add">transmission-tracker-add</h3>
 
@@ -393,16 +392,18 @@ config.resilio.com
 
 </code></pre></div></div>
 
-<p><a href="https://gist.github.com/douo/204923325f5f7526176108a39f038034">监听目录变化并自动导入 calibre</a></p>
+<p>脚本见 <a href="https://gist.github.com/douo/204923325f5f7526176108a39f038034">calibrew_helper</a>，监听目录变化并自动导入 calibre，需要安装 <code>inotify-tools</code>。</p>
+
+<p>需要依赖 pdfinfo: <code>sudo pacman -Syu poppler</code></p>
 
 <h2 id="内网穿透">内网穿透</h2>
 
 <p>选用 <code>frp</code>，配置见</p>
 
 <ul>
-  <li><a href="https://gist.github.com/douo/82c7acd38421f1726bf345cdf0a9bd63#file-frpc-ini">frpc.ini</a></li>
-  <li><a href="https://gist.github.com/douo/82c7acd38421f1726bf345cdf0a9bd63#file-frpc_tencent-ini">frpc_tencent.ini</a></li>
-  <li><a href="https://gist.github.com/douo/82c7acd38421f1726bf345cdf0a9bd63#file-nginx-conf">nginx.conf</a></li>
+  <li><a href="https://github.com/douo/sensitive/blob/master/nas/frpc.ini">frpc.ini</a></li>
+  <li><a href="https://github.com/douo/sensitive/blob/master/nas/frpc_tencent.ini">frpc_tencent.ini</a></li>
+  <li><a href="https://github.com/douo/sensitive/blob/master/nas/nginx.conf">nginx.conf</a></li>
 </ul>
 
 <p>端口：</p>
@@ -497,7 +498,9 @@ config.resilio.com
 
 <h2 id="硬盘管理">硬盘管理</h2>
 
-<p>见 :<a href="https://gist.github.com/douo/82c7acd38421f1726bf345cdf0a9bd63#file-fstab">fstab</a></p>
+<p>更新：内置 16G 固态已经损害。用 256 的 SSD 安装系统。再把 /var 独立分区，幸好还有一个 sata 接口可以作为启动盘。</p>
+
+<p>见 :<a href="https://github.com/douo/sensitive/blob/master/nas/fstab">fstab</a></p>
 
 <p>机械硬盘设置 30 分钟定时休眠：</p>
 
@@ -649,21 +652,6 @@ config.resilio.com
 <p>写入速度还是可以的</p>
 
 <p><img src="Untitled.png" alt="Untitled.png" />b</p>
-
-<h2 id="dnsmasqservice">dnsmasq.service</h2>
-
-<p>部署一个dns服务，在内网内，将域名解析到内网 nas 的 ip。同时也可以做 dns 加速</p>
-
-<p>编辑 /etc/dnsmasq.conf 可以轻易实现：</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># --address (and --server) work with IPv6 addresses too.</span>
-<span class="c">#address=/www.thekelleys.org.uk/fe80::20d:60ff:fe36:f83</span>
-<span class="nv">address</span><span class="o">=</span>/sync.dourok.info/192.168.1.211
-<span class="nv">address</span><span class="o">=</span>/nas.dourok.info/192.168.1.211
-<span class="nv">address</span><span class="o">=</span>/media.dourok.info/192.168.1.211
-<span class="nv">address</span><span class="o">=</span>/books.dourok.info/192.168.1.211
-<span class="nv">address</span><span class="o">=</span>/trans.dourok.info/192.168.1.211
-</code></pre></div></div>
 
 </article>
 <div class="tag-container" >

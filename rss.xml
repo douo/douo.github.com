@@ -1,5 +1,359 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="http://dourok.info/rss.xml" rel="self" type="application/atom+xml" /><link href="http://dourok.info/" rel="alternate" type="text/html" /><updated>2021-04-16T02:56:13+00:00</updated><id>http://dourok.info/rss.xml</id><title type="html">DouO’s Blog</title><subtitle>有時樹會倒下，某片天頃刻明亮
-</subtitle><entry><title type="html">夜骑凤凰山</title><link href="http://dourok.info/2018/09/26/night-ride-to-phoenix-mountine/" rel="alternate" type="text/html" title="夜骑凤凰山" /><published>2018-09-26T00:00:00+00:00</published><updated>2018-09-27T12:13:32+00:00</updated><id>http://dourok.info/2018/09/26/night-ride-to-phoenix-mountine</id><content type="html" xml:base="http://dourok.info/2018/09/26/night-ride-to-phoenix-mountine/">&lt;p&gt;&lt;img src=&quot;星空2.jpg&quot; alt=&quot;&quot; title=&quot;&amp;quot;纪念照&amp;quot;&quot; /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="http://dourok.info/rss.xml" rel="self" type="application/atom+xml" /><link href="http://dourok.info/" rel="alternate" type="text/html" /><updated>2021-04-26T17:00:23+00:00</updated><id>http://dourok.info/rss.xml</id><title type="html">DouO’s Blog</title><subtitle>有時樹會倒下，某片天頃刻明亮
+</subtitle><entry><title type="html">谈谈比例代表制</title><link href="http://dourok.info/2020/11/12/proportional-representation/" rel="alternate" type="text/html" title="谈谈比例代表制" /><published>2020-11-12T00:00:00+00:00</published><updated>2021-04-25T09:01:19+00:00</updated><id>http://dourok.info/2020/11/12/proportional-representation</id><content type="html" xml:base="http://dourok.info/2020/11/12/proportional-representation/">&lt;h1 id=&quot;缘由&quot;&gt;缘由&lt;/h1&gt;
+
+&lt;p&gt;最近尝试了下 Golang，练手 Goroutines 实现了个多连接的 http 下载工具 &lt;a href=&quot;https://github.com/douo/gotit&quot;&gt;gotit&lt;/a&gt;。所谓的多连接下载，就是对支持 &lt;code&gt;http-range&lt;/code&gt; 的资源的同时发起多个 http 请求，每个请求负责资源的不同部分，最终完成整个资源的下载。有一种情况是，下载中断后本地文件会留下多个不连续大小不一的未写入数据的空块。若重新恢复下载，如何为这些空块分配连接呢？考虑到连接数是可配置的，不应假定连接数与空块数存在相关性。一个容易想到的策略是:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;当连接数小于等于空块数，空块按任意顺序排成队列，每个空闲链接向队列请求空块，直到队列为空。&lt;/li&gt;
+  &lt;li&gt;当连接数大于空块数，为了让每个链接都得到分配，直觉的想法是较大的空块占用多一些连接，让每个连接负责的大小接近。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;举个例子，存在两个空块大小分别是&lt;code&gt;10M&lt;/code&gt;、&lt;code&gt;5M&lt;/code&gt;，可分配连接数为&lt;code&gt;3&lt;/code&gt;，连接数大于空块数，根据策略二，基于空块的大小按比例分配连接，可算出&lt;code&gt;10M&lt;/code&gt;得到&lt;code&gt;2&lt;/code&gt;个连接，&lt;code&gt;5M&lt;/code&gt;得到&lt;code&gt;1&lt;/code&gt;个连接。这里不讨论这样的策略是否有效，而是另外一个问题，假设连接数变为&lt;code&gt;4&lt;/code&gt;，继续按比例分配，&lt;code&gt;10M&lt;/code&gt;得到&lt;code&gt;2.67&lt;/code&gt;个连接&lt;code&gt;5M&lt;/code&gt;得到&lt;code&gt;1.33&lt;/code&gt;个，连接数是&lt;strong&gt;整数&lt;/strong&gt;，一个连接可不能撕成 2个，肯定不能这样分配。那么多出来一个连接该给&lt;code&gt;10M&lt;/code&gt;还是&lt;code&gt;5M&lt;/code&gt;？如何分配这部分余数看似简单其实并不容易，难度在于如何找出最优解，甚至是如何定义最优解。这问题困扰了我相当长的时间，直到与比例代表制联系起来。&lt;/p&gt;
+
+&lt;h1 id=&quot;什么是比例代表制&quot;&gt;什么是比例代表制&lt;/h1&gt;
+
+&lt;p&gt;作为一个活到现在还没见过选票的&lt;strong&gt;“公民”&lt;/strong&gt;要不是最近选举的新闻有点密集还真很难认识这个问题就是比例代表制中的整数分配问题（Apportionment）。所谓比例代表制，就是&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E4%BB%A3%E8%AD%B0%E6%B0%91%E4%B8%BB%E5%88%B6&quot;&gt;代议制民主&lt;/a&gt;中的两种主要选举方式之一。另外一种是多数制，也就是赢者通吃，票高者赢，可看下台湾高中的课件&lt;a href=&quot;https://youtu.be/4dJAyy9Usew&quot;&gt;選舉制度的類型&lt;/a&gt;了解下。比例代表制常用于议会选举中，举一个粗略的例子，比如议会有 \(S\) 个席位，各党派按照获得的票数占总票数的比例分配议会的席位。把席位当作连接数，得票数当作空块大小，那么这两个问题就是等价的了。&lt;/p&gt;
+
+&lt;h1 id=&quot;最大余额法&quot;&gt;最大余额法&lt;/h1&gt;
+
+&lt;h2 id=&quot;黑尔hare数额&quot;&gt;黑尔（Hare）数额&lt;/h2&gt;
+
+&lt;p&gt;19世纪中期，一位英国的大律师&lt;a href=&quot;https://en.wikipedia.org/wiki/Thomas_Hare_(political_scientist)&quot;&gt;黑尔&lt;/a&gt;，提出一种方法。假定总投票数为 \(P\)，总席位为 \(S\)。那可以简单得出获得一席所需要的票数，在这里称为&lt;strong&gt;数额&lt;/strong&gt;（Quota）\(Q\)。&lt;/p&gt;
+
+\[Q=\frac{P}{S}\]
+
+&lt;p&gt;计票分为两轮，第一轮是各个党派根据&lt;strong&gt;数额&lt;/strong&gt;和得票数取尽可能的席位，也就是得票数除以&lt;strong&gt;数额&lt;/strong&gt;后取&lt;strong&gt;整数部分&lt;/strong&gt;，比如党派 \(i\) 第一轮的得票数：&lt;/p&gt;
+
+\[n_i=\Bigl\lfloor{\frac{P_i}{Q}}\Bigr\rfloor\]
+
+&lt;p&gt;党派 \(i\) 得票数的余数也可以被计算出来：&lt;/p&gt;
+
+\[R_i=P_i-{n_i}Q\]
+
+&lt;p&gt;第二轮就是，根据各个党派得票数余数的大小，按从大到小顺序分配剩余席位，直到所有席位分配完成。所以这种方法也叫最大余额法。&lt;/p&gt;
+
+&lt;p&gt;最近被取消的香港立法会选举其中的地区直选，就是以黑尔数额的比例代表制。看一下一个实际的例子，以&lt;a href=&quot;https://zh.wikipedia.org/wiki/2012%E5%B9%B4%E9%A6%99%E6%B8%AF%E7%AB%8B%E6%B3%95%E6%9C%83%E9%81%B8%E8%88%89%E7%B5%90%E6%9E%9C&quot;&gt;2012年立法会选举香港岛选区的结果&lt;/a&gt;为例.&lt;/p&gt;
+
+&lt;p style=&quot;text-align: center;&quot; id=&quot;table1&quot;&gt; 表 1&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;编号&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;政党&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;票数&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;第一轮&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;余额&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;第二轮&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;总席位&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;2&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;民主党&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;40,558&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;40,558&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;4&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;人民力量&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;18,667&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;18,667&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;5&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;民建联&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;33,901&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;33,901&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;7&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;工党&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;31,523&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;31,523&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;8&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;新民党&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;30,289&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;26,037&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;9&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;工联会&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;27,336&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;27,336&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;10&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;公民党&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;strong&gt;70,475&lt;/strong&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;23,222&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;12&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;民建联&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;36,517&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;36,517&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;13&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;自由党&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;17,686&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;17,686&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;2012年香港岛选区总席位 \(S = 7\)，总有效选票\(P = 330766\)，根据黑尔配额公式可得 \(Q = P/S = 47252.3\) ，篇幅所限，表上省略了得票较低的名单。表上得票数大于 Q 的只有公民党，所有第一轮得票的政党只有公民党(Civic)：&lt;/p&gt;
+
+&lt;p&gt;\(S_{Civic} =\Bigl\lfloor{P_{Civic}/Q}\Bigr\rfloor = 1\)&lt;br /&gt;
+\(R_{Civic} = P_{Civic} - S_{Civic}*Q = 23165.7\)&lt;/p&gt;
+
+&lt;p&gt;计算余数后继续第二轮分配。第二轮席位余下 6 席，所以再选余额数最大的六个政党，分别是民主党、民建联、工党、新民党、工联会、民建联。至此 7 个席位分配完毕。全部计算结果可见&lt;a href=&quot;pr-tool.html?seats=7&amp;amp;votes=2980,40558,16900,18667,70418,422,31523,30289,27336,70475,343,17686,3169&amp;amp;method=hare&amp;amp;calc&quot;&gt;此&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;可见这种方法是简单直观且容易理解，也有人认为这种方法是美国建国之父&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E4%BA%9A%E5%8E%86%E5%B1%B1%E5%A4%A7%C2%B7%E6%B1%89%E5%AF%86%E5%B0%94%E9%A1%BF&quot;&gt;汉密尔顿&lt;/a&gt;首先提出的，所以在美国也有叫汉密尔顿法（Hamilton’s Method of Apportionment）。然而这种看似简单直观似乎又公平的分配方法，并没有直觉认为的那么公平，这个后面再说。&lt;/p&gt;
+
+&lt;p&gt;黑尔数额并不是最大余额法的唯一方法，不过这些方法的区别是在&lt;strong&gt;数额&lt;/strong&gt;的计算，而第二轮余数分配的机制是一样的，所有这一类的分配方法都统称为最大余额法。&lt;/p&gt;
+
+&lt;h2 id=&quot;特罗普droop数额&quot;&gt;特罗普（Droop）数额&lt;/h2&gt;
+
+&lt;p&gt;同样是19世纪中期，同样是英国大律师&lt;a href=&quot;https://en.wikipedia.org/wiki/Henry_Richmond_Droop&quot;&gt;特罗普&lt;/a&gt;，认为获取一个席位的票数也就是数额，并不是如黑尔所说的，而是：&lt;/p&gt;
+
+\[Q=\frac{P}{S+1}\]
+
+&lt;p&gt;他是的理由如下，竞争两个席位的情况，得票数超过 \(1/3\) 的必将赢得一席，如果是三个席位，那么得票数超过 \(1/4\) 将赢得一席。通过归纳法可得出，争夺 \(S\) 个席位的选举中，得票数超过 \(P/(S+1)\)的党派都将赢得一席。所以特罗普对数额 \(Q\)的定位就是，获得一席所需要的最低票数。&lt;/p&gt;
+
+&lt;p&gt;可以观察到，相比黑尔数额，特罗普数额的分母变大了，数额就变小了，也就是说获取一个席位的代价变低了。似乎对小党派更有利了。结合另外一种数额更低的，设计本意是为了偏袒小党派的&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E5%9B%A0%E4%BD%A9%E9%87%8C%E4%BA%9E%E5%88%A9%E6%95%B8%E9%A1%8D&quot;&gt;因佩里亚利(Imperiali)数额&lt;/a&gt;&lt;/p&gt;
+
+\[Q=\frac{P}{S+2}\]
+
+&lt;p&gt;来看看是否如此：&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;政党&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;得票数&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;黑尔&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;特罗普&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;因佩里亚利&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;A&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;30&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;64&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;64&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;65&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;B&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;12&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;25&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;26&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;25&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;C&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;5&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;11&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;10&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;10&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;计算可看&lt;a href=&quot;pr-tool.html?main=0&amp;amp;seats=100&amp;amp;votes=30,12,5&amp;amp;method=hare&amp;amp;calc&quot;&gt;此&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;在采用特罗普法或因佩里亚利法后,得票最少的 C 一席反而分别被 B 和 A 抢去。实践中也发现更小的数额反而更有利于得票多的大党派，这是因为更小的数额，导致第二轮剩下的席位变少了，小党派主要靠第二轮来取得席位，席位变少相应的获得席位的概率也就降低。&lt;/p&gt;
+
+&lt;h1 id=&quot;问题&quot;&gt;问题&lt;/h1&gt;
+
+&lt;p&gt;上面提到最大余额法并没有直觉上公平，其一便是不同数额的可以微调席位的分配。其二就是会出现非常反直觉的不公平结果。&lt;/p&gt;
+
+&lt;h2 id=&quot;悖论&quot;&gt;悖论&lt;/h2&gt;
+
+&lt;p&gt;美国为各州分配众议院席位的方法也是使用比例代表制分配。州相当于候选名单，州的人口就相当于选票。虽然现行的宪法规定众议院的席位固定为 435 席，但 20 世纪前众议院的席位并不是固定 435 席而是随人口的增长而增加。1880 的人口普查发现，总人口不变的情况下，众议院有 299 席位时，阿拉巴马州获得 8 个席位，当总席位增加到 300 时，阿拉巴马州反而失去一席剩下 7 席。制造一个例子很简单：&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;政党&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;得票数&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;4 席&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;5 席&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;A&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;5&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;2&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;3&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;B&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;3&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;C&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;strong&gt;0&lt;/strong&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;把场景换成议会的不公平就非常显而易见了，&lt;strong&gt;议会总席位增加一席，投票保持不变的情况下某个政党却会因此失去一席。&lt;/strong&gt;这种现象便称为&lt;strong&gt;阿拉巴马悖论（Alabama Paradox）&lt;/strong&gt;。这就是最大余额法不可避免的问题。&lt;/p&gt;
+
+&lt;p&gt;阿拉巴马悖论，只存在理论计算中，现实中并未未发生，并不是阿拉巴马悖论不易发生，实际上预期每 8 次分配就会发生一次，而现实没发生原因是众议院不再采用最大余额法分配席位，实际上还有个前提就是要现实中两次投票的比例保持不变这概率也是几乎不可能😜。&lt;/p&gt;
+
+&lt;p&gt;另外一个悖论就曾在现实出现，1900 年弗吉尼亚得到 10 席缅因州得到 3 席。而 1901 年，这一年尽管当年弗吉尼亚的人口增加速度大于缅因州，反而被缅因州抢去一席。弗吉尼亚 9 席缅因州 4 席，见：&lt;a href=&quot;https://en.wikipedia.org/wiki/1901_United_States_House_of_Representatives_elections&quot;&gt;1901年美国众议院选举-维基百科&lt;/a&gt;。这就是所谓的&lt;strong&gt;人口悖论（Population paradox）&lt;/strong&gt;，两个州的人口发生增长，增长率快州反而输给增长率慢的州一席。&lt;/p&gt;
+
+&lt;h2 id=&quot;配票&quot;&gt;配票&lt;/h2&gt;
+
+&lt;p&gt;回头重新看下2012年立法会区域直选香港岛区的结果（见&lt;a href=&quot;#table1&quot;&gt;表 1&lt;/a&gt;），可以发现民建联（DBA）出现了两次。为什么要分两个名单参选呢，假设一下如果合并为一个名单会怎么样？演算&lt;a href=&quot;pr-tool.html?seats=7&amp;amp;votes=2980,40558,16900,18667,70418,422,31523,30289,27336,70475,343,17686,3169&amp;amp;method=hare&amp;amp;calc&quot;&gt;一下&lt;/a&gt;便可以发现，最终民建联只能得 1 个席位，而民主派的公民党反能获得 2 票。&lt;/p&gt;
+
+&lt;p&gt;而民建联最终选择了分拆名单，避免了这种情况发生，这种行为就是&lt;strong&gt;配票&lt;/strong&gt;，而且是相当成功的配票例子。但配票也需要对选票分配的预测相当有信心才能执行，切忌不自量力，历史上香港立法会、台湾立法委配票失败的例子也不少见。&lt;/p&gt;
+
+&lt;h2 id=&quot;余数相等&quot;&gt;余数相等&lt;/h2&gt;
+
+&lt;p&gt;最大余额法，出现余数相等的情况怎么办？构造这个情况并不难，假设有 n 个候选人竞选 S 个席位，\(V_i\) 为候选人 i 的票数，\(V_i=a_i*Q+C\) ，Q 为黑尔数额，可得出 \(S=\frac{nC}{Q}+\sum\limits_{i=1}^{n}a_i\)，构造任意 a、n、C、Q 满足以下条件便可：&lt;/p&gt;
+
+\[\begin{align*}
+  &amp;amp; C &amp;lt; Q \\
+  &amp;amp; \frac{nC}{Q}\in{\mathbb{Z}} \\
+  &amp;amp; a_i\in{\mathbb{Z}}  \\
+\end{align*}\]
+
+&lt;p&gt;见此&lt;a href=&quot;pr-tool.html?seats=34&amp;amp;votes=18,33,48,63,93&amp;amp;method=hare&amp;amp;calc&quot;&gt;例子&lt;/a&gt;，出现这种情况只能更换数额算法，或不用最大余额法了。当然现实中是几乎不可能出现这种情况的。&lt;/p&gt;
+
+&lt;h1 id=&quot;最高均数法&quot;&gt;最高均数法&lt;/h1&gt;
+
+&lt;p&gt;另外一种与最大余额法相对于的就是最高均数法，而且最高均数法已被证明能避免最大余额法遇到的悖论。最高均数法取得席位的方式相当于依次对每个席位进行竞标，只是价格不是绝对而是相对，而且价格依取得的席位数增加而递减。以下表为例，三个政党竞选 4 个席位。&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;政党&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;得票数&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;第一轮&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;第二轮&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;第三轮&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;第四轮&lt;/th&gt;
+      &lt;th&gt;总席位&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;A&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;80&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;strong&gt;80&lt;/strong&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;strong&gt;40&lt;/strong&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;26.67&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;strong&gt;26.67&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;3&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;B&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;32&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;32&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;32&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;strong&gt;32&lt;/strong&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;16&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;C&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;14&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;14&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;14&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;14&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;14&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;第一轮 A 票数最高，A 得 1 席，A 的票数更新为 \(\frac{V_A}{2}\)，第二轮还是 A 最高，A 获得第二席，所以 A 票数更新为 \(\frac{V_A}{3}\)，第三轮 B 票数最高，B 获得第一席，B 票数更新为 \(\frac{V_B}{2}\)，依次类推，直到所有席位分配完成。&lt;/p&gt;
+
+&lt;p&gt;可以看出，获得第 n 席的剩余票数为 \(\frac{V}{n+1}\)。换一句话说也就是，A 能获得 n 个席位，是因为其票数平均 n 分的均数最大，所以叫最高均数法。这是一个比较接近实际的&lt;a href=&quot;pr-tool.html?main=1&amp;amp;seats=541&amp;amp;votes=136770988,134058815,29446445,19760114,67416861&amp;amp;method=dHondt&amp;amp;calc&quot;&gt;例子&lt;/a&gt;，数据来自 2004 年的印度大选。&lt;/p&gt;
+
+&lt;p&gt;最高均数法也叫除数法，政党获得第 n 席的剩余票数等于得票数除以一个除数序列的第 n 项，这个序列可以一般化为 \(f(n)\)，\(f(n)=n+1\) 时，称为洪德法(d’Hondt)。其他不同的最高均数法，也就是 \(f(n)\) 的取值不同而已。&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;dHondt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// 洪德法&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sLague&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 聖拉古法（Sainte-Laguë）&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;imperiali&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 因佩里亚利（Imperiali）&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;modSLague&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 改良圣拉古法&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;不同的方法，最大的影响是\(f(n)\)的增长率，增长率越快越有利于小党派，相反则的有利大党派。大多方法都是一次函数，所以系数越大就越有利于小党派。除了&lt;a href=&quot;https://en.wikipedia.org/wiki/Huntington%E2%80%93Hill_method&quot;&gt;亨廷顿-希尔法（Huntington–Hill method）&lt;/a&gt;：&lt;/p&gt;
+
+\[f(n)=\sqrt{n(n+1)}\]
+
+&lt;p&gt;Huntington–Hill 的增长率其实是非常接近于 d’Hondt 的。它也是美国现行为各州分配众议院席位所用的方法。&lt;/p&gt;
+
+&lt;h1 id=&quot;数额法则&quot;&gt;数额法则&lt;/h1&gt;
+
+&lt;p&gt;最高均数法可以避免阿拉巴马悖论和人口悖论，基本上也是现行比例代表制选举中最常用的方法，但它也不是完美的。重新回过头来看这个问题，总投票数为 \(P\)，总席位为 \(S\)。政党 i 的得票为 \(V_i\)。在一个理想的世界里政党 i 的席位为：&lt;/p&gt;
+
+\[A_i=S\frac{V_i}{P}\]
+
+&lt;p&gt;我们知道绝大多数情况下 \(A_i\) 是个小数，这个数称为 i 的&lt;strong&gt;自然数额（nature quota）&lt;/strong&gt;。应用分配方法的目的就是对自然数额进行取整，而取整无外乎是向下取整或向上取整。&lt;/p&gt;
+
+&lt;p&gt;这个就是数额法则的定义，&lt;strong&gt;分配给一方的席位数量应该为其自然数额的向上取整整数或向下取整整数。&lt;/strong&gt;能称为法则想必是十分重要，但看似完美的最高均数法就违反了这个法则。&lt;/p&gt;
+
+&lt;h1 id=&quot;结语&quot;&gt;结语&lt;/h1&gt;
+
+&lt;p&gt;实际上 Balinski &amp;amp; Young 已经证明了不违反数额法则同时又能避免悖论的分配方法是不可能的。也就是说整数分摊实际上没有严格意义上的公平解法。那么回最开始遇到的问题，寻找分配连接的最优解，如此绞尽脑汁也就情有可原了。不过公平不可能，最优解却是可能的。只需定义什么是最优，比如说实际席数与自然数额之间的距离最小便是最优（可见参考资料1、2），因为席位是整数搜索空间有限，只需遍历所有可能便可以找到最优，如果满足数额法则那么搜索的空间便更小了。&lt;/p&gt;
+
+&lt;p&gt;正因为绝对公平的不可能，国家政策的制定者就可以通过调整这些方法让政策偏向大多数或者少数，比如说加大最大余额法的数额，或者最高均数法选择增长率较快的除数序列，来让少数派的得到发声机会。当然选择相反的策略，也能说成是阻止极端主义的发展。好像政府怎么做都是对的，不过阻止极端主义这方面还真有反例，魏玛共和国的帝国议会让纳粹崛起就是一个鲜明的&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E9%AD%8F%E7%91%AA%E5%85%B1%E5%92%8C%E5%9C%8B#%E5%88%B6%E5%BA%A6%E6%BC%8F%E6%B4%9E&quot;&gt;反例&lt;/a&gt;。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;例子中所用的最大余额法实现见：&lt;a href=&quot;./largest_remainder.js&quot;&gt;largest_remainder.js&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;例子中所用的最高均数法实现见：&lt;a href=&quot;./highest_average.js&quot;&gt;highest_average.js&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;参考资料&quot;&gt;参考资料&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.math.arizona.edu/~system/archives/voting-theory/&quot;&gt;A Mathematical Exploration of Apportionment Procedures Around the World&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://rangevoting.org/Apportion.html&quot;&gt;RangeVoting.org - Apportionment and rounding schemes&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://web.archive.org/web/20051222015727/http://db.math.ust.hk/articles/prop_rep/c_prop_rep.htm&quot;&gt;比例代表制是甚麼？&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Apportionment_paradox&quot;&gt;Apportionment paradox - Wikipedia&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><category term="otaku" /><summary type="html">缘由 最近尝试了下 Golang，练手 Goroutines 实现了个多连接的 http 下载工具 gotit。所谓的多连接下载，就是对支持 http-range 的资源的同时发起多个 http 请求，每个请求负责资源的不同部分，最终完成整个资源的下载。有一种情况是，下载中断后本地文件会留下多个不连续大小不一的未写入数据的空块。若重新恢复下载，如何为这些空块分配连接呢？考虑到连接数是可配置的，不应假定连接数与空块数存在相关性。一个容易想到的策略是: 当连接数小于等于空块数，空块按任意顺序排成队列，每个空闲链接向队列请求空块，直到队列为空。 当连接数大于空块数，为了让每个链接都得到分配，直觉的想法是较大的空块占用多一些连接，让每个连接负责的大小接近。 举个例子，存在两个空块大小分别是10M、5M，可分配连接数为3，连接数大于空块数，根据策略二，基于空块的大小按比例分配连接，可算出10M得到2个连接，5M得到1个连接。这里不讨论这样的策略是否有效，而是另外一个问题，假设连接数变为4，继续按比例分配，10M得到2.67个连接5M得到1.33个，连接数是整数，一个连接可不能撕成 2个，肯定不能这样分配。那么多出来一个连接该给10M还是5M？如何分配这部分余数看似简单其实并不容易，难度在于如何找出最优解，甚至是如何定义最优解。这问题困扰了我相当长的时间，直到与比例代表制联系起来。 什么是比例代表制 作为一个活到现在还没见过选票的“公民”要不是最近选举的新闻有点密集还真很难认识这个问题就是比例代表制中的整数分配问题（Apportionment）。所谓比例代表制，就是代议制民主中的两种主要选举方式之一。另外一种是多数制，也就是赢者通吃，票高者赢，可看下台湾高中的课件選舉制度的類型了解下。比例代表制常用于议会选举中，举一个粗略的例子，比如议会有 \(S\) 个席位，各党派按照获得的票数占总票数的比例分配议会的席位。把席位当作连接数，得票数当作空块大小，那么这两个问题就是等价的了。 最大余额法 黑尔（Hare）数额 19世纪中期，一位英国的大律师黑尔，提出一种方法。假定总投票数为 \(P\)，总席位为 \(S\)。那可以简单得出获得一席所需要的票数，在这里称为数额（Quota）\(Q\)。 \[Q=\frac{P}{S}\] 计票分为两轮，第一轮是各个党派根据数额和得票数取尽可能的席位，也就是得票数除以数额后取整数部分，比如党派 \(i\) 第一轮的得票数： \[n_i=\Bigl\lfloor{\frac{P_i}{Q}}\Bigr\rfloor\] 党派 \(i\) 得票数的余数也可以被计算出来： \[R_i=P_i-{n_i}Q\] 第二轮就是，根据各个党派得票数余数的大小，按从大到小顺序分配剩余席位，直到所有席位分配完成。所以这种方法也叫最大余额法。 最近被取消的香港立法会选举其中的地区直选，就是以黑尔数额的比例代表制。看一下一个实际的例子，以2012年立法会选举香港岛选区的结果为例. 表 1 编号 政党 票数 第一轮 余额 第二轮 总席位 2 民主党 40,558 0 40,558 1 1 4 人民力量 18,667 0 18,667 0 0 5 民建联 33,901 0 33,901 1 1 7 工党 31,523 0 31,523 1 1 8 新民党 30,289 0 26,037 1 1 9 工联会 27,336 0 27,336 1 1 10 公民党 70,475 1 23,222 0 1 12 民建联 36,517 0 36,517 1 1 13 自由党 17,686 0 17,686 0 0 2012年香港岛选区总席位 \(S = 7\)，总有效选票\(P = 330766\)，根据黑尔配额公式可得 \(Q = P/S = 47252.3\) ，篇幅所限，表上省略了得票较低的名单。表上得票数大于 Q 的只有公民党，所有第一轮得票的政党只有公民党(Civic)： \(S_{Civic} =\Bigl\lfloor{P_{Civic}/Q}\Bigr\rfloor = 1\) \(R_{Civic} = P_{Civic} - S_{Civic}*Q = 23165.7\) 计算余数后继续第二轮分配。第二轮席位余下 6 席，所以再选余额数最大的六个政党，分别是民主党、民建联、工党、新民党、工联会、民建联。至此 7 个席位分配完毕。全部计算结果可见此。 可见这种方法是简单直观且容易理解，也有人认为这种方法是美国建国之父汉密尔顿首先提出的，所以在美国也有叫汉密尔顿法（Hamilton’s Method of Apportionment）。然而这种看似简单直观似乎又公平的分配方法，并没有直觉认为的那么公平，这个后面再说。 黑尔数额并不是最大余额法的唯一方法，不过这些方法的区别是在数额的计算，而第二轮余数分配的机制是一样的，所有这一类的分配方法都统称为最大余额法。 特罗普（Droop）数额 同样是19世纪中期，同样是英国大律师特罗普，认为获取一个席位的票数也就是数额，并不是如黑尔所说的，而是： \[Q=\frac{P}{S+1}\] 他是的理由如下，竞争两个席位的情况，得票数超过 \(1/3\) 的必将赢得一席，如果是三个席位，那么得票数超过 \(1/4\) 将赢得一席。通过归纳法可得出，争夺 \(S\) 个席位的选举中，得票数超过 \(P/(S+1)\)的党派都将赢得一席。所以特罗普对数额 \(Q\)的定位就是，获得一席所需要的最低票数。 可以观察到，相比黑尔数额，特罗普数额的分母变大了，数额就变小了，也就是说获取一个席位的代价变低了。似乎对小党派更有利了。结合另外一种数额更低的，设计本意是为了偏袒小党派的因佩里亚利(Imperiali)数额 \[Q=\frac{P}{S+2}\] 来看看是否如此： 政党 得票数 黑尔 特罗普 因佩里亚利 A 30 64 64 65 B 12 25 26 25 C 5 11 10 10 计算可看此。 在采用特罗普法或因佩里亚利法后,得票最少的 C 一席反而分别被 B 和 A 抢去。实践中也发现更小的数额反而更有利于得票多的大党派，这是因为更小的数额，导致第二轮剩下的席位变少了，小党派主要靠第二轮来取得席位，席位变少相应的获得席位的概率也就降低。 问题 上面提到最大余额法并没有直觉上公平，其一便是不同数额的可以微调席位的分配。其二就是会出现非常反直觉的不公平结果。 悖论 美国为各州分配众议院席位的方法也是使用比例代表制分配。州相当于候选名单，州的人口就相当于选票。虽然现行的宪法规定众议院的席位固定为 435 席，但 20 世纪前众议院的席位并不是固定 435 席而是随人口的增长而增加。1880 的人口普查发现，总人口不变的情况下，众议院有 299 席位时，阿拉巴马州获得 8 个席位，当总席位增加到 300 时，阿拉巴马州反而失去一席剩下 7 席。制造一个例子很简单： 政党 得票数 4 席 5 席 A 5 2 3 B 3 1 2 C 1 1 0 把场景换成议会的不公平就非常显而易见了，议会总席位增加一席，投票保持不变的情况下某个政党却会因此失去一席。这种现象便称为阿拉巴马悖论（Alabama Paradox）。这就是最大余额法不可避免的问题。 阿拉巴马悖论，只存在理论计算中，现实中并未未发生，并不是阿拉巴马悖论不易发生，实际上预期每 8 次分配就会发生一次，而现实没发生原因是众议院不再采用最大余额法分配席位，实际上还有个前提就是要现实中两次投票的比例保持不变这概率也是几乎不可能😜。 另外一个悖论就曾在现实出现，1900 年弗吉尼亚得到 10 席缅因州得到 3 席。而 1901 年，这一年尽管当年弗吉尼亚的人口增加速度大于缅因州，反而被缅因州抢去一席。弗吉尼亚 9 席缅因州 4 席，见：1901年美国众议院选举-维基百科。这就是所谓的人口悖论（Population paradox），两个州的人口发生增长，增长率快州反而输给增长率慢的州一席。 配票 回头重新看下2012年立法会区域直选香港岛区的结果（见表 1），可以发现民建联（DBA）出现了两次。为什么要分两个名单参选呢，假设一下如果合并为一个名单会怎么样？演算一下便可以发现，最终民建联只能得 1 个席位，而民主派的公民党反能获得 2 票。 而民建联最终选择了分拆名单，避免了这种情况发生，这种行为就是配票，而且是相当成功的配票例子。但配票也需要对选票分配的预测相当有信心才能执行，切忌不自量力，历史上香港立法会、台湾立法委配票失败的例子也不少见。 余数相等 最大余额法，出现余数相等的情况怎么办？构造这个情况并不难，假设有 n 个候选人竞选 S 个席位，\(V_i\) 为候选人 i 的票数，\(V_i=a_i*Q+C\) ，Q 为黑尔数额，可得出 \(S=\frac{nC}{Q}+\sum\limits_{i=1}^{n}a_i\)，构造任意 a、n、C、Q 满足以下条件便可： \[\begin{align*} &amp;amp; C &amp;lt; Q \\ &amp;amp; \frac{nC}{Q}\in{\mathbb{Z}} \\ &amp;amp; a_i\in{\mathbb{Z}} \\ \end{align*}\] 见此例子，出现这种情况只能更换数额算法，或不用最大余额法了。当然现实中是几乎不可能出现这种情况的。 最高均数法 另外一种与最大余额法相对于的就是最高均数法，而且最高均数法已被证明能避免最大余额法遇到的悖论。最高均数法取得席位的方式相当于依次对每个席位进行竞标，只是价格不是绝对而是相对，而且价格依取得的席位数增加而递减。以下表为例，三个政党竞选 4 个席位。 政党 得票数 第一轮 第二轮 第三轮 第四轮 总席位 A 80 80 40 26.67 26.67 3 B 32 32 32 32 16 1 C 14 14 14 14 14 0 第一轮 A 票数最高，A 得 1 席，A 的票数更新为 \(\frac{V_A}{2}\)，第二轮还是 A 最高，A 获得第二席，所以 A 票数更新为 \(\frac{V_A}{3}\)，第三轮 B 票数最高，B 获得第一席，B 票数更新为 \(\frac{V_B}{2}\)，依次类推，直到所有席位分配完成。 可以看出，获得第 n 席的剩余票数为 \(\frac{V}{n+1}\)。换一句话说也就是，A 能获得 n 个席位，是因为其票数平均 n 分的均数最大，所以叫最高均数法。这是一个比较接近实际的例子，数据来自 2004 年的印度大选。 最高均数法也叫除数法，政党获得第 n 席的剩余票数等于得票数除以一个除数序列的第 n 项，这个序列可以一般化为 \(f(n)\)，\(f(n)=n+1\) 时，称为洪德法(d’Hondt)。其他不同的最高均数法，也就是 \(f(n)\) 的取值不同而已。 const dHondt = (s) =&amp;gt; s+1 // 洪德法 const sLague = (s) =&amp;gt; s*2+1 // 聖拉古法（Sainte-Laguë） const imperiali = (s) =&amp;gt; (s+2)/2 // 因佩里亚利（Imperiali） const modSLague = (s) =&amp;gt; s==0?1:(2*s+1)*5/7 // 改良圣拉古法 不同的方法，最大的影响是\(f(n)\)的增长率，增长率越快越有利于小党派，相反则的有利大党派。大多方法都是一次函数，所以系数越大就越有利于小党派。除了亨廷顿-希尔法（Huntington–Hill method）： \[f(n)=\sqrt{n(n+1)}\] Huntington–Hill 的增长率其实是非常接近于 d’Hondt 的。它也是美国现行为各州分配众议院席位所用的方法。 数额法则 最高均数法可以避免阿拉巴马悖论和人口悖论，基本上也是现行比例代表制选举中最常用的方法，但它也不是完美的。重新回过头来看这个问题，总投票数为 \(P\)，总席位为 \(S\)。政党 i 的得票为 \(V_i\)。在一个理想的世界里政党 i 的席位为： \[A_i=S\frac{V_i}{P}\] 我们知道绝大多数情况下 \(A_i\) 是个小数，这个数称为 i 的自然数额（nature quota）。应用分配方法的目的就是对自然数额进行取整，而取整无外乎是向下取整或向上取整。 这个就是数额法则的定义，分配给一方的席位数量应该为其自然数额的向上取整整数或向下取整整数。能称为法则想必是十分重要，但看似完美的最高均数法就违反了这个法则。 结语 实际上 Balinski &amp;amp; Young 已经证明了不违反数额法则同时又能避免悖论的分配方法是不可能的。也就是说整数分摊实际上没有严格意义上的公平解法。那么回最开始遇到的问题，寻找分配连接的最优解，如此绞尽脑汁也就情有可原了。不过公平不可能，最优解却是可能的。只需定义什么是最优，比如说实际席数与自然数额之间的距离最小便是最优（可见参考资料1、2），因为席位是整数搜索空间有限，只需遍历所有可能便可以找到最优，如果满足数额法则那么搜索的空间便更小了。 正因为绝对公平的不可能，国家政策的制定者就可以通过调整这些方法让政策偏向大多数或者少数，比如说加大最大余额法的数额，或者最高均数法选择增长率较快的除数序列，来让少数派的得到发声机会。当然选择相反的策略，也能说成是阻止极端主义的发展。好像政府怎么做都是对的，不过阻止极端主义这方面还真有反例，魏玛共和国的帝国议会让纳粹崛起就是一个鲜明的反例。 例子中所用的最大余额法实现见：largest_remainder.js 例子中所用的最高均数法实现见：highest_average.js 参考资料 A Mathematical Exploration of Apportionment Procedures Around the World RangeVoting.org - Apportionment and rounding schemes 比例代表制是甚麼？ Apportionment paradox - Wikipedia</summary></entry><entry><title type="html">夜骑凤凰山</title><link href="http://dourok.info/2018/09/26/night-ride-to-phoenix-mountine/" rel="alternate" type="text/html" title="夜骑凤凰山" /><published>2018-09-26T00:00:00+00:00</published><updated>2018-09-27T12:13:32+00:00</updated><id>http://dourok.info/2018/09/26/night-ride-to-phoenix-mountine</id><content type="html" xml:base="http://dourok.info/2018/09/26/night-ride-to-phoenix-mountine/">&lt;p&gt;&lt;img src=&quot;星空2.jpg&quot; alt=&quot;&quot; title=&quot;&amp;quot;纪念照&amp;quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;20 号夜 6 点半从汕头市区出发夜骑凤凰山。19：17 到达樟林，335 省道莲华段的路况不是太好，路窄大车多，水泥路面多处破裂，50左右速度过一处不平路面时，这次颠簸感觉到前轮有被『蛇咬』的可能性，一路有点担心爆胎。到意东镇后，想到接下来要离开市区，靠边停车检查一下车况，发现前轮胎压不足。开始有点担心是不是破胎泄气，不过想到前轮上次打气不知道是什么时候，起码得一年以上，说不定买车就没打过（😎）。还是自然泄气的可能性大一点。刚好前方不远意东三路和北桥路红灯路口有一家新本店，便跑去打了气，店主人不错也没收钱，检查了下没什么问题就继续出发了，准备开一段再看看胎压，最坏情况就在凤凰山住宿。摩托车胎没有公路车胎那么矫情（事实证明磕了一下没影响，车在山上停了一夜气还是饱的）&lt;/p&gt;
 
@@ -2375,42 +2729,4 @@ allprojects {
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;见 &lt;a href=&quot;http://blog.joda.org/2014/02/turning-off-doclint-in-jdk-8-javadoc.html&quot;&gt;Stephen Colebourne’s blog: Turning off doclint in JDK 8 Javadoc&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><category term="coder" /><category term="android" /><category term="gradle" /><category term="jcenter" /><category term="maven" /><summary type="html">搜索下如何发布 Android 项目的信息，大部分都会找到这篇文章 Publishing Gradle Android Library to jCenter Repository，中文的指引可以看使用Gradle发布项目到JCenter仓库。不过，如果按照这些文章提供的 build.gradle，可能还会遇到一些坑。 调用 getBootClassPath() 出错 具体的错误信息是 Cannot call getBootClasspath() before setTargetInfo() is called. 这个是 gradle 的 android plugin 1.1.0 版本的 bug，见 Issue 152811 - android - Android Gradle Plugin 1.1.0 breaks Javadoc tasks。将插件更新到 1.1.1 以上版本就可以了。 classpath 'com.android.tools.build:gradle:1.1.2' GBK 编码问题 Windows 用户可能会遇到这个问题，因为你将文件设置为 UTF-8 编码，javadoc 默认的是系统编码，Windows 就是 GBK 编码。所以一旦 java 文件中出现中文注释就会报错，提示无法映射的GBK编码。 这个很容易解决，为 javadoc 指明编码就可以。在 gradle 可以这么做： options.encoding = &quot;utf-8&quot;，具体的任务代码如下： task javadoc(type: Javadoc) { ... options.encoding = &quot;utf-8&quot; ... } javadoc 的依赖问题 task javadoc(type: Javadoc) { source = android.sourceSets.main.java.srcDirs classpath += project.files(android.getBootClasspath().join(File.pathSeparator)) } 文章中的 javadoc 任务是这样的，重点在 classpath 那一行，这一行的意思是添加 Android 框架到 javadoc 的 classpath 中。不过，如果你的项目使用了其他第三方依赖，那 javadoc 任务很可能会执行失败的，因为上面的代码并没有这些添加第三方依赖到 classpath 中。比如我的项目，有下面这些依赖： dependencies { compile fileTree(dir: 'libs', include: ['*.jar']) compile 'com.google.code.gson:gson:2.3.1' compile 'com.android.support:gridlayout-v7:22.1.1' compile 'com.android.support:support-v4:22.1.1' compile 'com.android.support:appcompat-v7:22.1.1' } 跑起上面的 javadoc 就会报错，类似下面的错误： xxxx.java:20: 错误: 找不到符号 public static &amp;lt;T&amp;gt; T create(JsonElement json, Class&amp;lt;T&amp;gt; classOfModel) { ^ 符号: 类 JsonElement 位置: 类 xxxx 这时最简单的方法就是把第三方依赖加入 classpath： classpath += project.files(configurations.compile.files,android.getBootClasspath().join(File.pathSeparator)) 但是仍然报错 Error:Could not find com.android.support:gridlayout-v7:22.1.1. Searched in the following locations: USER_HOME/.m2/repository/com/android/support/gridlayout-v7/22.1.1/gridlayout-v7-22.1.1.pom USER_HOME/.m2/repository/com/android/support/gridlayout-v7/22.1.1/gridlayout-v7-22.1.1.jar https://jcenter.bintray.com/com/android/support/gridlayout-v7/22.1.1/gridlayout-v7-22.1.1.pom https://jcenter.bintray.com/com/android/support/gridlayout-v7/22.1.1/gridlayout-v7-22.1.1.jar ... 这时我的 repositories 是这样的： allprojects { repositories { mavenLocal() jcenter() } } 找不到 support 库，因为 support 库是 sdk 下载下来的，所以在这两个位置找不到也很正常。Android Plugin 自带的任务执行起来却不会报错，想必是做了特殊处理。 sdk 目录下也有个 maven repository，就是那些 support libs 所在的位置。 ANDROID_HOME\extras\android\m2repository 加进去再试一下 Properties properties = new Properties() properties.load(project.rootProject.file('local.properties').newDataInputStream()) // local.properties 有 sdk 的绝对位置 allprojects { repositories { maven { url properties.getProperty(&quot;sdk.dir&quot;)+&quot;/extras/android/m2repository&quot; } mavenLocal() jcenter() } } 依然报错，这次是找到那些库了，但因为 sdk 目录下的库是 aar 格式的，javadoc 不支持。所以问题到这里近乎无解了，幸好我在 stackoverflow 找到另一个 android 生成 javadoc 的方法。稍加改写就可以生成 javadoc 为 maven 所用： android.libraryVariants.all { variant -&amp;gt; println variant.javaCompile.classpath.files if(variant.name == 'release') { //我们只需 release 的 javadoc task(&quot;generate${variant.name.capitalize()}Javadoc&quot;, type: Javadoc) { // title = '' // description = '' source = variant.javaCompile.source classpath = files(variant.javaCompile.classpath.files, project.android.getBootClasspath()) options { encoding &quot;utf-8&quot; links &quot;http://docs.oracle.com/javase/7/docs/api/&quot; linksOffline &quot;http://d.android.com/reference&quot;, &quot;${android.sdkDirectory}/docs/reference&quot; } exclude '**/BuildConfig.java' exclude '**/R.java' } task(&quot;javadoc${variant.name.capitalize()}Jar&quot;, type: Jar, dependsOn: &quot;generate${variant.name.capitalize()}Javadoc&quot;) { classifier = 'javadoc' from tasks.getByName(&quot;generate${variant.name.capitalize()}Javadoc&quot;).destinationDir } artifacts { archives tasks.getByName(&quot;javadoc${variant.name.capitalize()}Jar&quot;) } } } 以 support-v4 为例，configurations.compile 和 variant.javaCompile.classpath 打印出来的位置是不同的，分别是 SDK_HOME\extras\android\m2repository\com\android\support\support-v4\22.1.1\support-v4-22.1.1.aar PROJECT_HOME/MODULE/build/intermediates/exploded-aar/com.android.support/support-v4/22.1.1/jars/libs/internal_impl-22.1.1.jar 看来 Android Plugin 确实有特殊处理。生成 javadoc 没问题其他的也基本没有什么问题，最终的 build.gradle 见 gist。 关于 javadoc 的坑写得十分啰嗦，主要是想和大家分享一些 gradle 的使用经验，其实 gradle 并不困难，主要是 Android Plugin 缺乏文档又鲜有例子，所以折腾起来比较难受。Android Plugin 的用户指南是在 New Build System 而 DSL 文档则是在 Android Plug-in for Gradle 右边有个下载 DSL 文档按钮。Gradle 可看官方的用户指南 Gradle User Guide，我还有一个乱糟糟的笔记 这个不足为看了。 如何上传到 JCenter 这个按照一开始提及文章的操作应该是没什么问题的，反正我没遇到问题，成功上传了 lru-image。其实，不用上传到 jcenter 单单运行 install 任务， gradle 会在 maven 的本地仓库中生成工件（artifact），只需将 mavenLocal 添加到 repositories，我们可以像发布到 JCenter 一样引用自己的库，方便打包那些多个项目共享又不想发布的私有库。 allprojects { repositories { mavenLocal() jcenter() } } Java 8 doclint 导致打包失败 把下面代码加入 build.gradle 后面： if (JavaVersion.current().isJava8Compatible()) { allprojects { tasks.withType(Javadoc) { options.addStringOption('Xdoclint:none', '-quiet') } } } 见 Stephen Colebourne’s blog: Turning off doclint in JDK 8 Javadoc</summary></entry><entry><title type="html">手伤回顾</title><link href="http://dourok.info/2014/09/05/ulna-styloid-process-fracture-after-a-month/" rel="alternate" type="text/html" title="手伤回顾" /><published>2014-09-05T00:00:00+00:00</published><updated>2017-01-13T15:18:50+00:00</updated><id>http://dourok.info/2014/09/05/ulna-styloid-process-fracture-after-a-month</id><content type="html" xml:base="http://dourok.info/2014/09/05/ulna-styloid-process-fracture-after-a-month/">&lt;p&gt;这是写于上个月的日记：&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;八月五号晚和朋友一起踩单车，从东里到隆都再到莲下，最后出国道324再回家，本来没想踩这么远，在东里踩了一段后，发现再继续只有这条路线而已，往回踩又没意思，于是只能继续硬着头皮踩下去。&lt;/p&gt;
-
-  &lt;p&gt;大概是因为侥幸心理作遂，朋友有带手电，我便不想带了。&lt;/p&gt;
-
-  &lt;p&gt;隆都那段路路况并不好，偶尔一段路面凹陷，避开了几处，还是有一处避不开，因为没有手电看不清路面，高速（20多）压过去，结果后胎被蛇咬了。泄风不快，不过跑了一段后还是停下来打算换胎。因为随身带的内胎是18/23，而后胎是25的，最后还是决定补胎为好，折腾了一段时间才补好继续上路。&lt;/p&gt;
-
-  &lt;p&gt;爆胎是其一，真正悲剧是发生在隆都到莲下那段路，一开始路况很糟糕且不说。后面的路面是极好的，因为刚修好，还没有通车。我便开始放松了起来，不自觉速度也快了，不过最多就是二十多，因为一直跟着山地后面。变换下姿势，因为觉得架子比较小，身体伸展不开，便把手放到最远端，手掌朝下按住手变顶部，没留神自己居然这个压到手刹上了，结果车轮抱死，只记得前轮好像打横了，其他还没反应过来整个人就飞出去了，可能是左手先着地，伤得最严重，接着是右手侧身落地，肘关节肿起一块，肩膀在地上磨了一小段，起了一块红点，肌肉痛，幸好衣服没破。右脚膝盖也磨掉一小块皮。&lt;/p&gt;
-
-  &lt;p&gt;起来后发现左手腕动不了，手腕还得放在大腿上支撑，不然痛得不行，剩下的路程只能一只手骑了，十多公里还是坚持下来了。快到的时候发现还被补了一刀，本来车子无大碍，就是手变被磨伤了，结果回来的路上把 cateye 码表弄丢了，估计是在等红灯的时候，一只手上下车很吃力，试了好几次，估计在那里蹭掉了。本来那个红灯可以不等的…看来人生的戏剧性就是体现在这样接二连三的悲剧中。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;当时还不知道这次受伤的严重性。隔天看了一个私人的中医推拿接骨医生，还拍了片，医生一开始说可能骨头裂了，看了一下片又说没有大碍，还说两次就能好，听到医生这样说确实心里轻松了很多，自觉还是挺幸运的。接下来两次推拿换药后，但疼痛对比一开始确实有所减轻，不过还是很痛，没有像医生所说的那样好了。月底刚好有朋友要结婚，以为到时应该能好，便兴奋地先把车票订了。第三次去才开始发现情况有些不对，疼痛没有继续减轻，&lt;strong&gt;最糟糕的是手腕没有办法&lt;a href=&quot;http://www.innerbody.com/image/musc03.html&quot;&gt;旋后（supination）&lt;/a&gt;，也就是没办法将掌心朝上，正常人的手腕起码可以转动 270° 以上，我的伤手只能转 100° 左右&lt;/strong&gt;。医生一开始说是因为包住了没法转，可拆掉纱布我还是转不了，这时医生才改口说没那么容易好，要继续包。我也只能半信半疑继续听从医生，一开始我想当然以为是关节没按好导致旋转障碍的，便打算给医生按多几次，希望可以按好。可以一次接一次，症状还是没有改善，医生说来说去也说不n出所以然，就是重复地说没那么快好。&lt;/p&gt;
-
-&lt;p&gt;发现手腕的旋转功能有问题后，这段时间我自己也在网上找资料，越找越担心，手腕是一个很复杂的关节，而手腕的受伤中，&lt;strong&gt;TFCC 损伤&lt;/strong&gt;和&lt;strong&gt;下尺桡关节脱位&lt;/strong&gt;，都是很容易被误诊漏诊的。而且错过急性期后，便很难恢复，得通过手术治疗而且恢复也不能保证。&lt;/p&gt;
-
-&lt;p&gt;这时我才在忧心忡忡中决定换医生，问的是镇上一个有些名气的老医生。一开始还是期待能被他按上一下就能恢复功能，可惜这种奇迹没有发生，医生让我往各个动一下试试，然后又包起来，说如果接下来没有好转那下次换药就再去拍片。当然下次也没什么明显好转，便去医院拍片，拍完片后，影像科的结论是&lt;strong&gt;尺骨茎突骨折&lt;/strong&gt;，拿到片后吃了一惊，医院拍得片跟在私人拍的片那个分辨率差距太大了，医院拍的片可以看到在尺骨茎突有一段斜亮线，而私人拍的片着弥漫着一片模糊，连茎突都看不太清楚。难怪一开始的医生会说没有大碍。原来是骨折还被他这样推拿折腾，想想都会冒冷汗，这是一个&lt;strong&gt;很大的教训&lt;/strong&gt;。&lt;/p&gt;
-
-&lt;p&gt;老医生看了片后，也认为是尺骨茎突骨折，他的意见是保守治疗，先保护起来（用纸板包住，同时把手吊起来），让骨头愈合。我请教他为什么会不能旋后，他也不确定是骨折导致的，我又问他是不是三角纤维软骨复合体受伤，他也说有可能，这一损伤需要做核磁共振，不过他也没说下尺桡关节会有什么问题。找不到具体原因我也很担心，不过还是听从医生先保守治疗，耐心等待骨头愈合。对老医生我也觉得担忧，第一印象就是记忆力非常差，同样的问题要几分钟内会连续问上两三次，而且下次去换药的时候他还忘记了我上次有来过…&lt;/p&gt;
-
-&lt;p&gt;到 9 月 5 号刚好一个月了，炎症已经减轻很多了，不动他也也基本不会痛了，但是手腕的旋后功能障碍依然没有任何改善，所以我开始担心了，保守治疗如果没有效果，接下来只能手术了，尺骨茎突骨折如果附带 TFCC 损伤，那便是很严重的了。&lt;/p&gt;
-
-&lt;p&gt;9 月 10 号刚好过去五周，再去找医生换药，医生说时间差不多了可以不用保护了，接下来贴膏药，吃药丸，熏药汤就可以。我告诉他手腕还是不能旋后，他拿起我两只手试了一下，发现左手不能转过去，这时才说，这样确实有问题，好像才刚知道我的手不能旋后一样，怎么一开始来的时候没有做这个测试，我觉很无奈。后来，他想了一下，给了我本市一个知名专家的电话，叫我联系他让他帮忙检查。&lt;/p&gt;
-
-&lt;p&gt;当晚我便联系了专家，简单说明情况后，专家问我受伤多久了，听到五周后，便说很麻烦，还重复了几次，让我明天去找他当面说明情况。听到医生这样说，可谓百感交集啊。拆掉纱布，才能好好地看清楚我的左手，对比了右手，发现两手明显有不同，左手尺骨的突出比右手高出一些，医生怎么没发现呢，怎么不考虑下是下尺桡关节脱位呢，再加上刚才专家的话，真的是越想越气愤，难道真的中彩了，要开刀的话，真不知道要埋怨谁。&lt;/p&gt;
-
-&lt;p&gt;今天去了医院和专家,也就是&lt;a href=&quot;http://www.haodf.com/doctor/DE4r0BCkuHzdeKoRgkJtvC5s9enjZ.htm&quot;&gt;邱主&lt;/a&gt;见了面，交流了下后，他让我拍了左手肘，左手腕，和右手腕，看了片他说骨头没什么问题，对比了左右手的下尺桡关节，左手的关节有间隙，而右手的下尺桡关节明显是靠在一起的，他的意见是说那里的韧带有点松，可能是这个原因导致的，因为没有确诊我便问他，进一步检查的意见，是否要做MRI，他说这个位置做 MRI 也没什么意思，要确诊得去做关节镜，汕头没有，得去广州。最后他认为这个问题，不算太严重，觉得没必要开刀，还是理疗为主（用护腕圈住）。听到邱主的结论，可以说有点失望吧，因为还是没有找到原因。不过专家说没有大问题，心情还是轻松了不少。专家还是很好人的，下午似乎是因为我才特意过来医院的。晚上回家后，自己硬掰了几下，发现旋转的角度有大了一点，希望以后继续掰可以慢慢恢复吧。&lt;/p&gt;
-
-&lt;p&gt;戏剧性地是原本没什么问题的右手腕，拍片后发现，「尺骨茎突旁见小骨块影，性质待定」…没什么不舒服就暂且不起管它吧，单纯尺骨茎突骨折是可以不用治疗的。&lt;/p&gt;
-
-&lt;p&gt;流水账般记录了这一个月的经历，若说教训的话，也是老调重弹了，便是受伤千万不能大意，去设备专业的医院检查，以免耽误了治疗的时间，悲伤的是误诊仍不能避免，只能降低概率，看来经过这一次对小诊所医生又多了一种不可靠的感觉。不过想深一下医生也没什么过错，主要是检查方面的大意。这段时间了解了很多相关知识，还整理了一些&lt;a href=&quot;/notes/quick/2014/09/note-2014-09-06&quot;&gt;笔记&lt;/a&gt;。现在，过了「&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E5%96%AA%E6%85%9F&quot;&gt;哀悼週期&lt;/a&gt;」，已经淡然。&lt;/p&gt;
-
-&lt;p&gt;另一个教训便是骑行的姿势，特别是手的位置，这样放完成是作死。还有装备一定一要带全买全，去了医院才知道那钱真不叫钱。对比起来一开始为装备付出的那些钱真不算什么。一寸短一寸险，保护措施要做足，学会防御性骑车。&lt;/p&gt;
-
-&lt;p&gt;一年后，手腕的旋转角度已经恢复正常了（可能病因是关节粘连吧），一开始三个月有注意锻炼，后来也没怎么理了。现在旋转到尽头后再用力尺骨末端会有酸痛感（两手都会，伤手严重点），仍不敢手掌托着地面来做俯卧撑。&lt;/p&gt;
-
-&lt;p&gt;期间，膝盖又出问题了（可能是髌骨软骨软化），用力就痛，肌肉萎缩，伤腿的大腿比健侧瘦了一圈，去做了 MRI，看了运动医学医生，还做了康复治疗。当然一年后的现在都好了不少了，单车继续骑。推荐这个专栏&lt;a href=&quot;http://zhuanlan.zhihu.com/sportsmedicine&quot;&gt;运动医学 - 知乎专栏&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><category term="life" /><category term="骨折" /><category term="骑行" /><summary type="html">这是写于上个月的日记： 八月五号晚和朋友一起踩单车，从东里到隆都再到莲下，最后出国道324再回家，本来没想踩这么远，在东里踩了一段后，发现再继续只有这条路线而已，往回踩又没意思，于是只能继续硬着头皮踩下去。 大概是因为侥幸心理作遂，朋友有带手电，我便不想带了。 隆都那段路路况并不好，偶尔一段路面凹陷，避开了几处，还是有一处避不开，因为没有手电看不清路面，高速（20多）压过去，结果后胎被蛇咬了。泄风不快，不过跑了一段后还是停下来打算换胎。因为随身带的内胎是18/23，而后胎是25的，最后还是决定补胎为好，折腾了一段时间才补好继续上路。 爆胎是其一，真正悲剧是发生在隆都到莲下那段路，一开始路况很糟糕且不说。后面的路面是极好的，因为刚修好，还没有通车。我便开始放松了起来，不自觉速度也快了，不过最多就是二十多，因为一直跟着山地后面。变换下姿势，因为觉得架子比较小，身体伸展不开，便把手放到最远端，手掌朝下按住手变顶部，没留神自己居然这个压到手刹上了，结果车轮抱死，只记得前轮好像打横了，其他还没反应过来整个人就飞出去了，可能是左手先着地，伤得最严重，接着是右手侧身落地，肘关节肿起一块，肩膀在地上磨了一小段，起了一块红点，肌肉痛，幸好衣服没破。右脚膝盖也磨掉一小块皮。 起来后发现左手腕动不了，手腕还得放在大腿上支撑，不然痛得不行，剩下的路程只能一只手骑了，十多公里还是坚持下来了。快到的时候发现还被补了一刀，本来车子无大碍，就是手变被磨伤了，结果回来的路上把 cateye 码表弄丢了，估计是在等红灯的时候，一只手上下车很吃力，试了好几次，估计在那里蹭掉了。本来那个红灯可以不等的…看来人生的戏剧性就是体现在这样接二连三的悲剧中。 当时还不知道这次受伤的严重性。隔天看了一个私人的中医推拿接骨医生，还拍了片，医生一开始说可能骨头裂了，看了一下片又说没有大碍，还说两次就能好，听到医生这样说确实心里轻松了很多，自觉还是挺幸运的。接下来两次推拿换药后，但疼痛对比一开始确实有所减轻，不过还是很痛，没有像医生所说的那样好了。月底刚好有朋友要结婚，以为到时应该能好，便兴奋地先把车票订了。第三次去才开始发现情况有些不对，疼痛没有继续减轻，最糟糕的是手腕没有办法旋后（supination），也就是没办法将掌心朝上，正常人的手腕起码可以转动 270° 以上，我的伤手只能转 100° 左右。医生一开始说是因为包住了没法转，可拆掉纱布我还是转不了，这时医生才改口说没那么容易好，要继续包。我也只能半信半疑继续听从医生，一开始我想当然以为是关节没按好导致旋转障碍的，便打算给医生按多几次，希望可以按好。可以一次接一次，症状还是没有改善，医生说来说去也说不n出所以然，就是重复地说没那么快好。 发现手腕的旋转功能有问题后，这段时间我自己也在网上找资料，越找越担心，手腕是一个很复杂的关节，而手腕的受伤中，TFCC 损伤和下尺桡关节脱位，都是很容易被误诊漏诊的。而且错过急性期后，便很难恢复，得通过手术治疗而且恢复也不能保证。 这时我才在忧心忡忡中决定换医生，问的是镇上一个有些名气的老医生。一开始还是期待能被他按上一下就能恢复功能，可惜这种奇迹没有发生，医生让我往各个动一下试试，然后又包起来，说如果接下来没有好转那下次换药就再去拍片。当然下次也没什么明显好转，便去医院拍片，拍完片后，影像科的结论是尺骨茎突骨折，拿到片后吃了一惊，医院拍得片跟在私人拍的片那个分辨率差距太大了，医院拍的片可以看到在尺骨茎突有一段斜亮线，而私人拍的片着弥漫着一片模糊，连茎突都看不太清楚。难怪一开始的医生会说没有大碍。原来是骨折还被他这样推拿折腾，想想都会冒冷汗，这是一个很大的教训。 老医生看了片后，也认为是尺骨茎突骨折，他的意见是保守治疗，先保护起来（用纸板包住，同时把手吊起来），让骨头愈合。我请教他为什么会不能旋后，他也不确定是骨折导致的，我又问他是不是三角纤维软骨复合体受伤，他也说有可能，这一损伤需要做核磁共振，不过他也没说下尺桡关节会有什么问题。找不到具体原因我也很担心，不过还是听从医生先保守治疗，耐心等待骨头愈合。对老医生我也觉得担忧，第一印象就是记忆力非常差，同样的问题要几分钟内会连续问上两三次，而且下次去换药的时候他还忘记了我上次有来过… 到 9 月 5 号刚好一个月了，炎症已经减轻很多了，不动他也也基本不会痛了，但是手腕的旋后功能障碍依然没有任何改善，所以我开始担心了，保守治疗如果没有效果，接下来只能手术了，尺骨茎突骨折如果附带 TFCC 损伤，那便是很严重的了。 9 月 10 号刚好过去五周，再去找医生换药，医生说时间差不多了可以不用保护了，接下来贴膏药，吃药丸，熏药汤就可以。我告诉他手腕还是不能旋后，他拿起我两只手试了一下，发现左手不能转过去，这时才说，这样确实有问题，好像才刚知道我的手不能旋后一样，怎么一开始来的时候没有做这个测试，我觉很无奈。后来，他想了一下，给了我本市一个知名专家的电话，叫我联系他让他帮忙检查。 当晚我便联系了专家，简单说明情况后，专家问我受伤多久了，听到五周后，便说很麻烦，还重复了几次，让我明天去找他当面说明情况。听到医生这样说，可谓百感交集啊。拆掉纱布，才能好好地看清楚我的左手，对比了右手，发现两手明显有不同，左手尺骨的突出比右手高出一些，医生怎么没发现呢，怎么不考虑下是下尺桡关节脱位呢，再加上刚才专家的话，真的是越想越气愤，难道真的中彩了，要开刀的话，真不知道要埋怨谁。 今天去了医院和专家,也就是邱主见了面，交流了下后，他让我拍了左手肘，左手腕，和右手腕，看了片他说骨头没什么问题，对比了左右手的下尺桡关节，左手的关节有间隙，而右手的下尺桡关节明显是靠在一起的，他的意见是说那里的韧带有点松，可能是这个原因导致的，因为没有确诊我便问他，进一步检查的意见，是否要做MRI，他说这个位置做 MRI 也没什么意思，要确诊得去做关节镜，汕头没有，得去广州。最后他认为这个问题，不算太严重，觉得没必要开刀，还是理疗为主（用护腕圈住）。听到邱主的结论，可以说有点失望吧，因为还是没有找到原因。不过专家说没有大问题，心情还是轻松了不少。专家还是很好人的，下午似乎是因为我才特意过来医院的。晚上回家后，自己硬掰了几下，发现旋转的角度有大了一点，希望以后继续掰可以慢慢恢复吧。 戏剧性地是原本没什么问题的右手腕，拍片后发现，「尺骨茎突旁见小骨块影，性质待定」…没什么不舒服就暂且不起管它吧，单纯尺骨茎突骨折是可以不用治疗的。 流水账般记录了这一个月的经历，若说教训的话，也是老调重弹了，便是受伤千万不能大意，去设备专业的医院检查，以免耽误了治疗的时间，悲伤的是误诊仍不能避免，只能降低概率，看来经过这一次对小诊所医生又多了一种不可靠的感觉。不过想深一下医生也没什么过错，主要是检查方面的大意。这段时间了解了很多相关知识，还整理了一些笔记。现在，过了「哀悼週期」，已经淡然。 另一个教训便是骑行的姿势，特别是手的位置，这样放完成是作死。还有装备一定一要带全买全，去了医院才知道那钱真不叫钱。对比起来一开始为装备付出的那些钱真不算什么。一寸短一寸险，保护措施要做足，学会防御性骑车。 一年后，手腕的旋转角度已经恢复正常了（可能病因是关节粘连吧），一开始三个月有注意锻炼，后来也没怎么理了。现在旋转到尽头后再用力尺骨末端会有酸痛感（两手都会，伤手严重点），仍不敢手掌托着地面来做俯卧撑。 期间，膝盖又出问题了（可能是髌骨软骨软化），用力就痛，肌肉萎缩，伤腿的大腿比健侧瘦了一圈，去做了 MRI，看了运动医学医生，还做了康复治疗。当然一年后的现在都好了不少了，单车继续骑。推荐这个专栏运动医学 - 知乎专栏</summary></entry></feed>
+&lt;p&gt;见 &lt;a href=&quot;http://blog.joda.org/2014/02/turning-off-doclint-in-jdk-8-javadoc.html&quot;&gt;Stephen Colebourne’s blog: Turning off doclint in JDK 8 Javadoc&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><category term="coder" /><category term="android" /><category term="gradle" /><category term="jcenter" /><category term="maven" /><summary type="html">搜索下如何发布 Android 项目的信息，大部分都会找到这篇文章 Publishing Gradle Android Library to jCenter Repository，中文的指引可以看使用Gradle发布项目到JCenter仓库。不过，如果按照这些文章提供的 build.gradle，可能还会遇到一些坑。 调用 getBootClassPath() 出错 具体的错误信息是 Cannot call getBootClasspath() before setTargetInfo() is called. 这个是 gradle 的 android plugin 1.1.0 版本的 bug，见 Issue 152811 - android - Android Gradle Plugin 1.1.0 breaks Javadoc tasks。将插件更新到 1.1.1 以上版本就可以了。 classpath 'com.android.tools.build:gradle:1.1.2' GBK 编码问题 Windows 用户可能会遇到这个问题，因为你将文件设置为 UTF-8 编码，javadoc 默认的是系统编码，Windows 就是 GBK 编码。所以一旦 java 文件中出现中文注释就会报错，提示无法映射的GBK编码。 这个很容易解决，为 javadoc 指明编码就可以。在 gradle 可以这么做： options.encoding = &quot;utf-8&quot;，具体的任务代码如下： task javadoc(type: Javadoc) { ... options.encoding = &quot;utf-8&quot; ... } javadoc 的依赖问题 task javadoc(type: Javadoc) { source = android.sourceSets.main.java.srcDirs classpath += project.files(android.getBootClasspath().join(File.pathSeparator)) } 文章中的 javadoc 任务是这样的，重点在 classpath 那一行，这一行的意思是添加 Android 框架到 javadoc 的 classpath 中。不过，如果你的项目使用了其他第三方依赖，那 javadoc 任务很可能会执行失败的，因为上面的代码并没有这些添加第三方依赖到 classpath 中。比如我的项目，有下面这些依赖： dependencies { compile fileTree(dir: 'libs', include: ['*.jar']) compile 'com.google.code.gson:gson:2.3.1' compile 'com.android.support:gridlayout-v7:22.1.1' compile 'com.android.support:support-v4:22.1.1' compile 'com.android.support:appcompat-v7:22.1.1' } 跑起上面的 javadoc 就会报错，类似下面的错误： xxxx.java:20: 错误: 找不到符号 public static &amp;lt;T&amp;gt; T create(JsonElement json, Class&amp;lt;T&amp;gt; classOfModel) { ^ 符号: 类 JsonElement 位置: 类 xxxx 这时最简单的方法就是把第三方依赖加入 classpath： classpath += project.files(configurations.compile.files,android.getBootClasspath().join(File.pathSeparator)) 但是仍然报错 Error:Could not find com.android.support:gridlayout-v7:22.1.1. Searched in the following locations: USER_HOME/.m2/repository/com/android/support/gridlayout-v7/22.1.1/gridlayout-v7-22.1.1.pom USER_HOME/.m2/repository/com/android/support/gridlayout-v7/22.1.1/gridlayout-v7-22.1.1.jar https://jcenter.bintray.com/com/android/support/gridlayout-v7/22.1.1/gridlayout-v7-22.1.1.pom https://jcenter.bintray.com/com/android/support/gridlayout-v7/22.1.1/gridlayout-v7-22.1.1.jar ... 这时我的 repositories 是这样的： allprojects { repositories { mavenLocal() jcenter() } } 找不到 support 库，因为 support 库是 sdk 下载下来的，所以在这两个位置找不到也很正常。Android Plugin 自带的任务执行起来却不会报错，想必是做了特殊处理。 sdk 目录下也有个 maven repository，就是那些 support libs 所在的位置。 ANDROID_HOME\extras\android\m2repository 加进去再试一下 Properties properties = new Properties() properties.load(project.rootProject.file('local.properties').newDataInputStream()) // local.properties 有 sdk 的绝对位置 allprojects { repositories { maven { url properties.getProperty(&quot;sdk.dir&quot;)+&quot;/extras/android/m2repository&quot; } mavenLocal() jcenter() } } 依然报错，这次是找到那些库了，但因为 sdk 目录下的库是 aar 格式的，javadoc 不支持。所以问题到这里近乎无解了，幸好我在 stackoverflow 找到另一个 android 生成 javadoc 的方法。稍加改写就可以生成 javadoc 为 maven 所用： android.libraryVariants.all { variant -&amp;gt; println variant.javaCompile.classpath.files if(variant.name == 'release') { //我们只需 release 的 javadoc task(&quot;generate${variant.name.capitalize()}Javadoc&quot;, type: Javadoc) { // title = '' // description = '' source = variant.javaCompile.source classpath = files(variant.javaCompile.classpath.files, project.android.getBootClasspath()) options { encoding &quot;utf-8&quot; links &quot;http://docs.oracle.com/javase/7/docs/api/&quot; linksOffline &quot;http://d.android.com/reference&quot;, &quot;${android.sdkDirectory}/docs/reference&quot; } exclude '**/BuildConfig.java' exclude '**/R.java' } task(&quot;javadoc${variant.name.capitalize()}Jar&quot;, type: Jar, dependsOn: &quot;generate${variant.name.capitalize()}Javadoc&quot;) { classifier = 'javadoc' from tasks.getByName(&quot;generate${variant.name.capitalize()}Javadoc&quot;).destinationDir } artifacts { archives tasks.getByName(&quot;javadoc${variant.name.capitalize()}Jar&quot;) } } } 以 support-v4 为例，configurations.compile 和 variant.javaCompile.classpath 打印出来的位置是不同的，分别是 SDK_HOME\extras\android\m2repository\com\android\support\support-v4\22.1.1\support-v4-22.1.1.aar PROJECT_HOME/MODULE/build/intermediates/exploded-aar/com.android.support/support-v4/22.1.1/jars/libs/internal_impl-22.1.1.jar 看来 Android Plugin 确实有特殊处理。生成 javadoc 没问题其他的也基本没有什么问题，最终的 build.gradle 见 gist。 关于 javadoc 的坑写得十分啰嗦，主要是想和大家分享一些 gradle 的使用经验，其实 gradle 并不困难，主要是 Android Plugin 缺乏文档又鲜有例子，所以折腾起来比较难受。Android Plugin 的用户指南是在 New Build System 而 DSL 文档则是在 Android Plug-in for Gradle 右边有个下载 DSL 文档按钮。Gradle 可看官方的用户指南 Gradle User Guide，我还有一个乱糟糟的笔记 这个不足为看了。 如何上传到 JCenter 这个按照一开始提及文章的操作应该是没什么问题的，反正我没遇到问题，成功上传了 lru-image。其实，不用上传到 jcenter 单单运行 install 任务， gradle 会在 maven 的本地仓库中生成工件（artifact），只需将 mavenLocal 添加到 repositories，我们可以像发布到 JCenter 一样引用自己的库，方便打包那些多个项目共享又不想发布的私有库。 allprojects { repositories { mavenLocal() jcenter() } } Java 8 doclint 导致打包失败 把下面代码加入 build.gradle 后面： if (JavaVersion.current().isJava8Compatible()) { allprojects { tasks.withType(Javadoc) { options.addStringOption('Xdoclint:none', '-quiet') } } } 见 Stephen Colebourne’s blog: Turning off doclint in JDK 8 Javadoc</summary></entry></feed>
