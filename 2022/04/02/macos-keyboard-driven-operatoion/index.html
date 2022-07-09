@@ -1,0 +1,325 @@
+
+<!DOCTYPE html>
+<html class="borderbox" >
+    
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    macOS 全键盘导航 | DouO's Blog</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+    <body>
+        <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">macOS 全键盘导航</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li>
+      <div class="logo">
+        <a id="logo-container" href="/notes" class="brand-logo">
+          <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+        </a>
+        <div class="social">
+          
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+          
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+          
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+          
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+          
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+          
+        </div>
+    </li>
+    </div>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 22-07-09">2022-04-02</span>
+
+    
+</div>
+
+    <article>
+         <h1 id="动机">动机</h1>
+<p>我不是键盘狂热者，只是个人是比较偏向于全键盘操作，至于鼠标键盘之间的效率问题，某些方面讲也是仁者见仁，智者见智的，推荐一下这篇文章： <a href="https://citreu.gitlab.io/2019/11/07/useless-mouse-in-programming/">使用鼠标可以提升编程效率吗? | NIL</a>。我认为键盘操作比起鼠标操作更能容忍高延迟的屏幕显示，也认可光标到达目标控件前的移动距离确实低效。不过，即便如今键盘操作能覆盖我八九成的工作场景，鼠标操作仍作为一种手段的方法而时常故意为之。</p>
+<p>对我而言最大的困扰其实是键鼠的切换成本。外接键盘鼠标的话，一次挪动手掌是需要肘与肩这样的大关节参与，而日常使用中整个操作序列难以避免的要散布着几个鼠标操作，非常难受。特别是 macOS 下，默认的应用/窗口切换行为有时还是很让人迷惑，难以避免要用光标辅助一下。</p>
+<p>当然做到全键盘操作，像聚焦（spotlight）、Alfred 之类工具是必不可少，我认为有点复杂度的生产工具都需要提供功能模糊搜索（fuzzy searching）甚至 <a href="https://github.com/magit/transient">transient.el</a> 这类的功能。但像这样的工具配置还有快捷键相关的就不在这文章讨论之类，这篇文章主要分享我如何用键盘覆盖鼠标大部分场景下导航操作（Navigation）的经验。</p>
+<h1 id="应用内导航">应用内导航</h1>
+<h2 id="应用内导航--一般化">一般化</h2>
+<p><img src="/data/BC/FE8B2E-F75F-4495-8F9E-6678AE9E146F/vimac_example.png" alt="/data/BC/FE8B2E-F75F-4495-8F9E-6678AE9E146F/vimac_example.png" /></p>
+<p>很大一部分 GUI Apps 对全键盘使用并不友好，快捷键时常只能覆盖部分场景，更别谈记忆快捷键的成本了，记住的只能是日常通用操作或天天使用的生产力工具，当然像  <del><a href="https://www.mediaatelier.com/CheatSheet/">cheatsheet</a></del> 之类的辅助工具可能有所帮助。但更好的是一套一般化的导航方案，比如说遍历窗口的所有可交互元素，并为其编号，通过键盘输入记号与其交互。</p>
+<p><a href="https://github.com/dexterleng/vimac">vimac</a> 就是类似的应用。它通过无障碍 API (Accessibility API)，去遍历当前窗口的元素 <a id="fnr.1" class="footref" href="#fn.1"><sup>1</sup></a>，采用 DFS 遍历为控件编上快捷键。触发的时候把光标移动到控件位置，并执行相应操作。</p>
+<p>除了左键单击外还支持以下按键行为 <a id="fnr.2" class="footref" href="#fn.2"><sup>2</sup></a>:</p>
+<ul>
+  <li>右键，Shift</li>
+  <li>双击，Command</li>
+  <li>移动光标，Option</li>
+</ul>
+<p>vimac 称之为 Hint 模式，默认按住空格键可以触发。另外 Hint 模式还遍历了以下区域的控件：</p>
+<ul>
+  <li>通知中心（notificationcenterui）</li>
+  <li>右侧菜单（extrasMenuBar）</li>
+  <li>App 菜单（menuBar）</li>
+</ul>
+<p>另外，名字有 <code>vi</code>, 自然少不了 <code>hjkl</code>。vimac 称之为 Scroll 模式。</p>
+<p>Scroll 模式同样会遍历当前窗口的所有子控件，并找到所有如下元素的可滚动控件<a id="fnr.3" class="footref" href="#fn.3"><sup>3</sup></a>：</p>
+<ul>
+  <li>AXScrollArea</li>
+</ul>
+<p>然后将焦点定位到第一个 ScrollArea <a id="fnr.4" class="footref" href="#fn.4"><sup>4</sup></a>，可按 ⇥(Tab) 能切换到不同 ScrollArea</p>
+<p>滚动是通过模拟鼠标滚轮实现的，比如 <code>gg</code>, <code>G</code> 滚动到顶部/底部，就是执行滚动 <code>Int16.max</code> 个像素。</p>
+<pre class="src" lang="swift">
+let event = CGEvent.init(scrollWheelEvent2Source: nil, units: .pixel, wheelCount: 2, wheel1: yAxis, wheel2: xAxis, wheel3: 0)!
+</pre>
+<p>vimac 的关键功能是通过无障碍 API 实现的，vimac 只能在支持无障碍 API 的应用上生效，好在原生控件是默认支持的，大部分场景下都能起作用。一些 App 需要特殊支持：</p>
+<ul>
+  <li>chromium，<a href="https://www.chromium.org/developers/design-documents/accessibility/#:~:text=Mac%20OS%20X%3A%20Chromium%20turns%20on%20or%20off%20accessibility%20support%20based%20on%20whether%20it%20sees%20a%20client%2C%20such%20as%20VoiceOver%2C%20has%20set%20the%20AXEnhancedUserInterface%20attribute%20on%20the%20main%20application%20window.">Accessibility Technical Documentation</a></li>
+  <li>electron，<a href="https://www.electronjs.org/docs/latest/tutorial/accessibility#:~:text=by%20setting%20the-,AXManualAccessibility,-attribute%20programmatically%3A">Accessibility | Electron</a></li>
+</ul>
+<h2 id="应用内导航--chrome">Chrome</h2>
+<p>浏览器需要单独拎出来说一说，重点当然是推荐 <a href="https://github.com/philc/vimium/">vimium</a> 这扩展。vimac 相当于简化版的 vimium. vimium 的交互对象不限于控件（超链接），还能触达文本，可惜对文本的操作只有复制如果能支持右键菜单那就更好了。总之能熟悉 vi 的话用起来应该是得心应手的，按 <code>?</code> 也能看到所有操作指南。</p>
+<p>vimium 基本上能覆盖我大部分需要使用鼠标的场景。特别需要提一下的是 macOS 上 Chrome 的一个坑，当 <code>⌘+l</code> 将焦点定位到地址栏后，竟没有快捷键让焦点回到页面。这个问题曾折腾了我不少时间，最终找到除了用鼠标点一下外的几种花式办法：</p>
+<ol>
+  <li>tab 一次次切换焦点，直到页面</li>
+  <li>地址栏执行 <code>javascript:</code></li>
+  <li><code>⌘+f</code> 搜索任意字符（但大概率会重置当前视口）</li>
+  <li><code>⌘+⌥+↑</code></li>
+</ol>
+<p>第四点对应的快捷键是， <code>⌘ Command</code> + <code>⌥ Option</code> + <code>↑</code> / <code>↓</code> 。其可以在地址栏、标签栏、书签、页面间切换焦点，虽然这个按键组合不太友好，但相比其他办法还是可以接受的。这是最近我整理资料才发现的，相当于 Windows/Linux 下的 <code>F6/Ctrl+F6</code>, 应该是后面版本才更新的。</p>
+<p>不过我养成用 vimium omnibar 代替地址栏操作的习惯后，就摆脱这困扰了。相信定位到地址栏的目的 80% 是复制当前地址，可以直接用 <code>yy</code> 搞定。如果需要编辑地址则 <code>ge</code> 搞定。</p>
+<p>vimium 覆盖不了的场景，频率最高的就是对于非 <code>iframe</code> 的其他可滚动元素，无法避免用鼠标点一下获得焦点，<code>hjkl</code> 才能对该滚动区域生效。至今还不能完美解决<a id="fnr.5" class="footref" href="#fn.5"><sup>5</sup></a>，还是比较难受的，具体见 <a href="https://github.com/philc/vimium/issues/425">Make it possible to focus a scrollable div without using the mouse · Issue #425</a></p>
+<p>另外，对于一些页面如果有快捷键冲突需要禁用 vimium, 比如 gmail, youtube&#8230; 那么 vimac 也是能派上用场的。</p>
+<h1 id="窗口导航">窗口导航</h1>
+<p>macOS 上的窗口导航可是个大坑。如果把 <code>⌘-⇥(Tab)</code> 当成窗口切换去用，肯定会遇到不少难以理解的迷惑行为。比如 WeChat 常常是唤不起窗口的。实际上 <code>⌘-⇥</code> 切换的是应用而不是窗口，而切换应用时部分状态的窗口是不会被带起的。</p>
+<p>这个坑的一大因素就是用户需要面对的窗口（或应用）状态繁多：</p>
+<ul>
+  <li>正常</li>
+  <li>全屏</li>
+  <li>隐藏（ <code>C-h</code> 隐藏当前应用的所有窗口）</li>
+  <li>最小化</li>
+  <li>无窗口</li>
+</ul>
+<p>切换应用时，能带起的是正常状态、全屏状态和隐藏状态下的窗口。但不一致的是 <code>⌘-`</code> 只能循环切换正常状态下的窗口，或在切换界面按下 <code>↓</code> 进入 App Exposé 也只能看到正常状态下的窗口。如果应用没有窗口或只有最小化的窗口也是能被切换，但切换后没有任何反应，也十分迷惑。</p>
+<p>但当使用场景进入到多屏幕多空间，同时应用拥有多个全屏窗口或者混合全屏窗口和普通窗口。切换行为才是最让人迷惑的，我到现在也没搞懂它的逻辑，反正我在屏幕 A 的应用 A 的普通窗口 A 切换同屏幕的其他应用窗口后，就再也无法通过  <code>⌘-⇥</code> 回到这个窗口，焦点会落在屏幕 C 的应用 A 的全屏窗口上。</p>
+<p>在这里我强烈推荐使用 <a href="https://alt-tab-macos.netlify.app/">AltTab</a> 代替 <code>⌘-⇥</code>，AltTab 的切换对象就是窗口，非常直观。同时支持所有状态的窗口，包括无窗口的应用，切换的行为相当于在 Dock 栏点击应用图标，会重新打开被关闭的窗口。对各种窗口状态与屏幕、空间都整理的比较清晰，可以微调过滤不要的窗口状态，同时在能在切换器界面显示窗口的状态与所在的空间。这个可能意义不大，但仍要截个图说明一下，因为我一开始也搞不清楚这些小图标的意思。</p>
+<p><img src="/data/49/F4E68C-2BB7-4E9D-ABB6-5EB033FA1EB9/2022-06-15_01-39-03_screenshot.png" alt="/data/49/F4E68C-2BB7-4E9D-ABB6-5EB033FA1EB9/2022-06-15_01-39-03_screenshot.png" /></p>
+<p>建议将 Shortcut 2 设置为 Active app 并绑定给  <code>⌘-`</code> 。全面替换掉系统的默认行为 ，用了一段时间基本没有什么不适，可能有一些 Bug 但利大于弊。</p>
+<p>另外 <a href="https://github.com/lwouis/alt-tab-macos">lwouis/alt-tab-macos</a> 也是一个相当活跃的项目，作者还在一直保持更新。</p>
+<h1 id="屏幕间导航">屏幕间导航</h1>
+<p>屏幕间导航并不是指切换显示设置里的主屏幕，不过说起这个主屏幕主要是要提一下另外一个迷惑行为，一般认为 Dock 栏和 <code>⌘-⇥(Tab)</code> 选择器是出现在主屏幕。实际上 Dock 栏和<code>⌘-⇥</code>选择器出现的屏幕是，主屏幕沿着 Dock 栏方位继续延伸直到到达整体屏幕空间的边缘，这时所在的屏幕才是 Dock 栏和<code>⌘-⇥</code>选择器出现的屏幕，更像是真正的主屏幕，这个屏幕在 AltTab 称之为 <b>Screen including menubar</b>。 虽然有点迷惑，但仔细想想也是合理的，毕竟 Dock 是需要边缘激活的。</p>
+<p>重新回到主题上，那屏幕间导航是什么意思？控制屏幕焦点的主体不就是眼睛吗，切换屏幕不就是转动一下眼球或脖子的功夫？话是这样说没错，但是我认为 macOS 是有一个当前全屏的概念的，这个屏幕并不是拥有当前输入焦点的窗口所在的屏幕，AltTab 称之为 <b>Active screen</b>，而是当前鼠标指针所在的屏幕，AltTab 称之 <b>Screen including mouse</b>，姑且称为<b>鼠标屏幕</b>。</p>
+<p>为什么需要定义这样一个概念，很遗憾这是 Mission Control 生效的屏幕，同时也是唤起 Spotlight 的屏幕。为了通过快捷键<code>C-→/C-←</code>切换期望的屏幕的空间（Space）<a id="fnr.6" class="footref" href="#fn.6"><sup>6</sup></a>，需要先切换当前的鼠标屏幕。屏幕间导航也就是指这个。</p>
+<p>所以几年前我写了一个小工具 <a href="https://github.com/douo/hopscotch">hopscotch</a>, 来实现通过快捷键切换鼠标屏幕。更早之前用的是 <a href="https://twitter.com/virushuo">@virushuo</a> 的 <a href="http://blog.xiqiao.info/2011/06/12/catchmouse-icon%E5%8F%8Aweb-%E8%AE%BE%E8%AE%A1/">CatchMouse</a> 来解决这个这个痛点，不过这个工具只能通过编号切换显示器，对于这种场景还是有点别扭。更符合直觉的上一个或下一个循环切换，就趁着 swiftui 刚出来，用它撸了个这个小工具，边学边做，做的比较粗糙，也就自己用而已。</p>
+<p>最近写这文章，就顺便把 AltTab 的活跃屏幕（Active scree）也搬运过来，实现快捷键将鼠标屏幕切换到活跃屏幕。这样，通过 <code>⌘-⇥</code> 切换键盘输入焦点后，就能一个快捷键把 Mission Control 的焦点也带过来，十分符合操作逻辑。只可惜找不到不用无障碍 API 获取其它应用窗口的坐标和尺寸的办法，所以要使用这个功能只能赋予 Accessibility 权限。</p>
+<p>用了 AltTab 后，其实 hopscotch 大部分作用场景是能被 AltTab 替代。主要区别是 Mission Control 是基于空间切换的，而 AltTab 是基于窗口切换的，目的都是为了切换到目标窗口，显然 AltTab 更为直接，但俗话说技多不压身啊，多个提供一种方法也没什么不好的。</p>
+<h1 id="footnotes">Footnotes</h1>
+<p><a id="fn.1" class="footnum" href="#fnr.1"><sup>1</sup></a> 见 <a href="https://github.com/dexterleng/vimac/blob/master/ViMac-Swift/Accessibility/HintMode/TraverseGenericElementService.swift#L40">vimac/TraverseGenericElementService.swift#L40</a></p>
+<p><a id="fn.2" class="footnum" href="#fnr.2"><sup>2</sup></a> 见 <a href="https://github.com/dexterleng/vimac/blob/46312736abf47e4ff748e57e9aae9b45c2008750/ViMac-Swift/Modes/HintModeController.swift#L32">vimac/HintModeController.swift#L32</a></p>
+<p><a id="fn.3" class="footnum" href="#fnr.3"><sup>3</sup></a> 见 <a href="https://github.com/dexterleng/vimac/blob/6f002183c738774c5012390e145f395c981cdddd/ViMac-Swift/Accessibility/QueryScrollAreasService.swift#L35">vimac/QueryScrollAreasService#L35</a></p>
+<p><a id="fn.4" class="footnum" href="#fnr.4"><sup>4</sup></a> 见 <a href="https://github.com/dexterleng/vimac/blob/6f002183c738774c5012390e145f395c981cdddd/ViMac-Swift/ViewControllers/ScrollModeActiveViewController.swift#L37">vimac/ScrollModeActiveViewController#L37</a></p>
+<p><a id="fn.5" class="footnum" href="#fnr.5"><sup>5</sup></a> 其实代码是有对滚动元素进行判断的，见 <a href="https://github.com/philc/vimium/blob/1bcc604ec1c1d5302883a7957ebe007d17feabf2/content_scripts/link_hints.js#L973">vimium/link_hints.js#973</a>, <a href="https://github.com/philc/vimium/blob/1bcc604ec1/content_scripts/scroller.js#L103">vimium/scroller.js#L103</a></p>
+<p><a id="fn.6" class="footnum" href="#fnr.6"><sup>6</sup></a> macOS 上的空间相当于虚拟桌面的意思，见<a href="https://support.apple.com/zh-cn/guide/mac-help/mh14112/mac">在 Mac 上的多个空间中工作</a>。</p>
+ 
+    </article>
+    <div class="tag-container" >
+        
+    </div>
+<div class="post-pager">
+    
+    <a href="/2020/11/12/proportional-representation/">上一篇：谈谈比例代表制</a>
+    
+    
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/2022/04/02/macos-keyboard-driven-operatoion"
+ var disqus_config = function () {
+     this.page.title = "macOS 全键盘导航"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/2022/04/02/macos-keyboard-driven-operatoion/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+        
+
+        
+
+        
+    </body>
+
+</html>

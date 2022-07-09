@@ -1,0 +1,378 @@
+
+<!DOCTYPE html>
+<html class="borderbox" >
+    
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    2021年12月22日杂记 | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+    <body>
+        <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">2021年12月22日杂记</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li>
+      <div class="logo">
+        <a id="logo-container" href="/notes" class="brand-logo">
+          <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+        </a>
+        <div class="social">
+          
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+          
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+          
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+          
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+          
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+          
+        </div>
+    </li>
+    </div>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 22-04-03">2021-12-22</span>
+    
+</div>
+
+<article>
+     <p>[2021-12-23 Thu 10:09]</p>
+<h1 id="opengl-es-3-0">opengl es 3.0</h1>
+<ul>
+  <li>vertex</li>
+  <li>primitive</li>
+  <li>rasteriazion</li>
+</ul>
+<p>egl 是本地窗口系统用 opengl es 之间的胶水（adapter）, <code>GLSurfaceView</code> 封装了与 egl 交互的逻辑</p>
+<h1 id="shader">shader</h1>
+<p>着色器变量的存储限定符（Storage Qualifiers）</p>
+<ul>
+  <li><code>const</code>, 常量</li>
+  <li><code>attribute</code>, opengl 代码传入，每个顶点分别对应一个值</li>
+  <li><code>uniform</code>, opengl 代码传入，所有顶点分别对应一个值</li>
+  <li><code>varing</code>, 从顶点着色器传入片元着色器的变量</li>
+</ul>
+<p><code>attribute</code>, <code>varing</code> GLSL1.30（OpenGL 3.0）弃用了，用 <code>in/out</code> 代替， 见 <a href="https://www.khronos.org/opengl/wiki/Type_Qualifier_(GLSL)#Removed_qualifiers">Removed qualifiers</a></p>
+<p>使用这个语法需要在 glsl 第一行声明 shader 版本。</p>
+<pre class="src" lang="glsl">
+#version 300 es
+layout(location = 0) in vec4 vPosition;
+void main(){
+   gl_Position = vPosition;
+}
+</pre>
+<p><code>layout(location = 0)</code> 直接指明变量的位置</p>
+<p>shader 需要编译并返回 shader 对象</p>
+<h1 id="program">program</h1>
+<p>program 对象可以任务是最终链接起来的流水线。编译好的 shader 对象通过附加到 program 链接起来。</p>
+<ol>
+  <li>Create a vertex shader object and a fragment shader object.</li>
+  <li>Attach source code to each of the shader objects.</li>
+  <li>Compile the shader objects.</li>
+  <li>Create a program object.</li>
+  <li>Attach the compiled shader objects to the program object.</li>
+  <li>Link the program object.</li>
+</ol>
+<pre class="src" lang="java">
+// the vertex shader to program
+GLES30.glAttachShader(it, vertexShader)
+// add the fragment shader to program
+GLES30.glAttachShader(it, fragmentShader)
+// creates OpenGL ES program executables
+GLES30.glLinkProgram(it)
+</pre>
+<h2 id="program--shape">shape</h2>
+<p>绘制一个 shape 需要：</p>
+<ul>
+  <li>Vertex Shader - OpenGL ES graphics code for rendering the vertices of a shape.</li>
+  <li>Fragment Shader - OpenGL ES code for rendering the face of a shape with colors or textures.</li>
+  <li>Program - An OpenGL ES object that contains the shaders you want to use for drawing one or more shapes.</li>
+</ul>
+<h1 id="glsl-opengl-shading-language-">GLSL(OpenGL Shading Language)</h1>
+<p>The first line of your OpenGL ES 3.0 vertex and fragment shaders will always declare a shader version.
+  Shaders that do not declare a version number are assumed to use revision 1.00 of the OpenGL ES Shading Language.</p>
+<p>关心下 glsl 是否图灵完备</p>
+<blockquote>
+  <p>&#8230;Shader models 1.x and 2.0 are indeed not Turing complete, because they lack a generalised iteration capability&#8230;
+    &#8230;Shader model 3.0, which is used in the latest PC hardware and on Xbox 360, has fully general looping abilities and is Turing complete in the theoretical sense&#8230;</p>
+</blockquote>
+<h2 id="glsl-opengl-shading-language---变量">变量</h2>
+<ul>
+  <li>必须有类型</li>
+  <li>主要三种类型分类，scalar-, vector-, matrix-</li>
+  <li>支持常量 <code>const</code></li>
+  <li>支持结构体，好像与 c 一致
+    <pre class="src" lang="C">
+struct fogStruct
+{
+  vec4 color;
+  float start;
+  float end;
+}
+    </pre>
+  </li>
+  <li>数组 <code>arr[]{}</code></li>
+  <li>操作符类 c</li>
+</ul>
+<h2 id="glsl-opengl-shading-language---函数">函数</h2>
+<p>与 c 最大的不同是参数传递的方式，通过修饰符来区分：</p>
+<ul>
+  <li><code>in</code> 值传递</li>
+  <li><code>inout</code> 相当于引用传递</li>
+  <li><code>out</code> 不传值，通过函数返回</li>
+</ul>
+<p>函数不支持递归</p>
+<p>内建函数</p>
+<h2 id="glsl-opengl-shading-language---控制流">控制流</h2>
+<p>同 C <code>if-then-else</code></p>
+<p>gles2.0 只支持可展开的循环，gles3.0 没这个限制</p>
+<p>支持 <code>for</code> <code>while</code> <code>do-while</code></p>
+<h2 id="glsl-opengl-shading-language---uniforms">Uniforms</h2>
+<p><code>uniforms</code> 修饰符表示，变量的值由应用程序通过 opengl 传进来。</p>
+<ul>
+  <li>global scope 定义</li>
+  <li>vertex 与 fragment shader 共享命名空间</li>
+  <li>uniform buffer objects  #TODO</li>
+  <li>uniform blocks 是没有命名空间的？</li>
+</ul>
+<h2 id="glsl-opengl-shading-language---shader-inputs-outpus">Shader Inputs/Outpus</h2>
+<ul>
+  <li>vertex
+    <pre class="src" lang="C">
+layout(location = 0) in vec4 a_position;
+    </pre>
+    <p>不指定 layout 会由 linker 自动分配位置
+      <code>out</code> 用于指定 vertex 输出到 fragment 的变量</p>
+  </li>
+  <li>fragment
+    <code>in</code> 指定 vertex 输出到 fragment 的变量
+    <code>out</code> 输出到管道</li>
+</ul>
+<h2 id="glsl-opengl-shading-language---preprocessor">Preprocessor</h2>
+<h1 id="vertex">vertex</h1>
+<p>Constant Vertex Attribute，对每个顶点都相同</p>
+<p>vertex 属性, ex: <code>layout(location = 0) in vec4 a_pos</code></p>
+<ul>
+  <li>in 属性只读</li>
+  <li>可以在着色器内部声明</li>
+</ul>
+<h1 id="图元-primitive-">图元（Primitive）</h1>
+<p>光栅化(Rasteriazation)是将图元（Primitive）转换为一组二维片段（Fragment）的过程，由片段着色器处理。</p>
+<p>图元绘制</p>
+<ul>
+  <li>glDrawArrays</li>
+  <li>glDrawElements</li>
+  <li>glDrawRangeElements</li>
+  <li>glDrawArraysInstanced</li>
+  <li>glDrawElementsInstanced</li>
+</ul>
+<p>图元由一组表示顶点位置的顶点描述。 GLES30 支持的图元</p>
+<ul>
+  <li>Triangles</li>
+  <li>Lines</li>
+  <li>Point sprites, 常用于粒子效果</li>
+</ul>
+ 
+</article>
+<div class="tag-container" >
+    
+</div>
+
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Quick/2021/12/note-2021-12-22"
+ var disqus_config = function () {
+     this.page.title = "2021年12月22日杂记"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Quick/2021/12/note-2021-12-22/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+        
+
+        
+
+        
+    </body>
+
+</html>

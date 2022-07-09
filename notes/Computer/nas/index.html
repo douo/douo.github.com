@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
-<html lang="zh-Hant-CN" class="borderbox" >
-   
+<html class="borderbox" >
+    
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,13 +22,12 @@
   <meta name="msapplication-square310x310logo" content="largetile.png" />
   <!-- Android Lolipop Theme Color -->
   <meta name="theme-color" content="#5d4d7a">
-  <link rel="stylesheet" href="/assets/main.css">
   <script src="/assets/main.js"></script>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
 
-  <body>
-    <header>
+    <body>
+        <header>
   <nav class="top-nav">
     <div class="container">
       <div class="nav-wrapper">
@@ -129,7 +128,7 @@
   <div class="row">
 
     <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
-<span class="post-date tooltipped" data-tooltip="最后更新 21-04-18">2016-12-08</span>
+<span class="post-date tooltipped" data-tooltip="最后更新 22-01-24">2016-12-08</span>
     
 </div>
 
@@ -271,10 +270,14 @@
 
 <h2 id="权限">权限</h2>
 
-<p>各类下载软件的默认都用各种的用户和组，修改各种 systemd 脚本不好维护。还是通过如下 <code>setfacl</code> 命令，让下载的目标目录下所有新建文件都具有当前用户的修改权限</p>
+<p>各类下载软件的默认都用各种的用户和组，修改各种 systemd 脚本不好维护。</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>setfacl <span class="nt">-d</span> <span class="nt">-m</span> u:tiou:rwx target
-</code></pre></div></div>
+<ol>
+  <li>用 <code>setfacl</code> 精细化控制各个目录各个用户的权限，ex：<code>setfacl -d -m u:user:rwx target</code></li>
+  <li>用组管理，比如 download media 作为各个目录的组权限，再把需要的用户加入组中。</li>
+</ol>
+
+<p>方案 2 足够简单且基本覆盖当前需求</p>
 
 <h2 id="媒体服务器">媒体服务器</h2>
 
@@ -304,10 +307,10 @@
 
 <h2 id="aria2">aria2</h2>
 
-<pre><code>aur sync aria2c-daemon
+<pre><code>sudo pacman -Syu aria2
 </code></pre>
 
-<p>配置文件 <code>/etc/conf.d/aria2c.conf</code> ，修改下载目录和启用 rpc。</p>
+<p>配置文件 <code>/etc/conf.d/aria2c.conf</code> ，修改下载目录和启用 rpc。见 <a href="https://github.com/douo/sensitive/blob/master/nas/aria2c.conf">aria2c.conf</a></p>
 
 <p><code>systemctl start aria2cd.service</code></p>
 
@@ -325,8 +328,6 @@ config.resilio.com
 173.244.209.150
 54.235.182.157
 </code></pre></div></div>
-
-<p>TXT32 link key:MRRBUESWI6IKIPCQRS23ST572KFYMZ2TD</p>
 
 <h2 id="transmission">Transmission</h2>
 
@@ -358,43 +359,76 @@ config.resilio.com
 
 <p><a href="https://github.com/AndrewMarchukov/tracker-add">AndrewMarchukov/tracker-add: Fully automated script for adding more trackers to Transmission.</a></p>
 
-<h2 id="calibrecalibre-web">calibre&amp;calibre-web</h2>
+<h2 id="book">Book</h2>
 
-<p>需要一个空 metadata.db 支持</p>
+<ul>
+  <li>calibre 创建维护书库</li>
+  <li>calibre-web，作为 书库（calibredb） 的前端，calibre 提供的web端太简略</li>
+  <li>calibre-helper，监控特定目录下的文件变更，自动添加进书库</li>
+</ul>
 
-<p><a href="https://github.com/kovidgoyal/calibre/blob/master/src/calibre/db/tests/metadata.db">https://github.com/kovidgoyal/calibre/blob/master/src/calibre/db/tests/metadata.db</a></p>
+<p>这些命令都需要编辑同一个目录，需要统一权限</p>
 
-<p>用 python 写的，熟悉可以自己拉下来用 systemd 写个服务</p>
+<h3 id="calibre">calibre</h3>
 
-<p>也可使用 aur 的版本进行 ，<a href="https://aur.archlinux.org/packages/calibre-web-git/">https://aur.archlinux.org/packages/calibre-web-git/</a></p>
+<p>书用 calibre 来管理，calibre 会将书复制到 CALIBRE_LIBRARY_PATH，一本书在 nas 起码上存在两份。</p>
 
-<p>依赖建议用 aurutils 。</p>
+<ul>
+  <li>安装 calibre 主要是用它的命令行工具，来管理 CALIBRE_LIBRARY_PATH。</li>
+  <li>找不到 headless 的版本，安装 calibre 引入一堆用不上的 qt 依赖，有点难受。</li>
+  <li>还有很强大的阅读功能也用不上。</li>
+  <li>在 mac/pc 上也可以通过 nfs 挂载这个目录，直接用本地的 calibre ui 来管理和阅读。</li>
+  <li>没有译者字段，应该可以自定义metadata</li>
+  <li>另外解析 pdf 元数据的时候有个小 bug，还给提了 <a href="https://github.com/kovidgoyal/calibre/pull/1473">PR</a></li>
+</ul>
 
-<p>sudo systemctl start calibre-webservice</p>
+<h3 id="calibre-web">calibre-web</h3>
 
-<p>便在 8083 端口启动了 web 服务。</p>
+<p>建议用 <code>aurutils</code> 安装</p>
 
-<p>calibre-web 只是一个前端，管理书籍还是需要 calibre。我是把数据库放到 nas 上，在 mac 或 pc 上用 calibre 管理</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>aur <span class="nb">sync </span>calibre-web
+</code></pre></div></div>
+
+<ul>
+  <li>权限 calibre-web:calibre-web</li>
+  <li>默认端口 8083</li>
+  <li>可能需要一个空 metadata.db 支持 <a href="https://github.com/kovidgoyal/calibre/blob/master/src/calibre/db/tests/metadata.db">https://github.com/kovidgoyal/calibre/blob/master/src/calibre/db/tests/metadata.db</a></li>
+  <li>支持编辑 metadata，需要对 CALIBRE_LIBRARY_PATH 有写权限</li>
+</ul>
 
 <h3 id="calibre-helper">calibre-helper</h3>
 
-<p>监听目录变化并自动导入 calibre</p>
+<p>脚本见 <a href="https://gist.github.com/douo/204923325f5f7526176108a39f038034">calibrew_helper</a>，监听目录变化并自动导入 calibre.</p>
+
+<pre><code>sudo pacman -Syu inotify-tools poppler
+</code></pre>
+
+<ul>
+  <li><code>inotify-tools</code> 用于实现监听目录</li>
+  <li><code>poppler</code> calibre 需要依赖 <code>pdfinfo</code></li>
+</ul>
+
+<p>目前只实现对于新增/修改文件的添加，删除会被忽略。主要是用于监听 rslsync 的目录。</p>
+
+<p>TODO</p>
+
+<ul>
+  <li>频繁变更是否需要一个队列来避免通知丢失</li>
+  <li>出现重复如何处理，calibre 通过 title 和 authors 判断是否重复。有些书的标题都是 untitled 或者是其他一致的无意义字符，直接覆盖也是不合理的</li>
+  <li><code>calibredb add ...  -e override</code> 可实现自动覆盖</li>
+  <li>权限与 calibre-web 一致，写入的文件，calibre-web 才能更改</li>
+</ul>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># /etc/systemd/system/calibre-helper.service</span>
 <span class="o">[</span>Unit]
 <span class="nv">After</span><span class="o">=</span>rslsync.service
-
 <span class="o">[</span>Service]
-<span class="nv">ExecStart</span><span class="o">=</span>/home/tiou/scripts/calibre_helper.sh
-
+<span class="nv">User</span><span class="o">=</span>calibre-web
+<span class="nv">Group</span><span class="o">=</span>calibre-web
+<span class="nv">ExecStart</span><span class="o">=</span>/opt/bin/calibre_helper.sh
 <span class="o">[</span>Install]
 <span class="nv">WantedBy</span><span class="o">=</span>default.target
-
 </code></pre></div></div>
-
-<p>脚本见 <a href="https://gist.github.com/douo/204923325f5f7526176108a39f038034">calibrew_helper</a>，监听目录变化并自动导入 calibre，需要安装 <code>inotify-tools</code>。</p>
-
-<p>需要依赖 pdfinfo: <code>sudo pacman -Syu poppler</code></p>
 
 <h2 id="内网穿透">内网穿透</h2>
 
@@ -658,6 +692,7 @@ config.resilio.com
     
 </div>
 
+
 <div id="disqus_thread"></div>
 <script>
 
@@ -680,6 +715,8 @@ config.resilio.com
  })();
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
 
 
 <a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
@@ -748,10 +785,11 @@ config.resilio.com
 
 
 
-    
+        
 
-    
-</body>
+        
+
+        
+    </body>
 
 </html>
-

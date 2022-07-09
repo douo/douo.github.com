@@ -1,0 +1,979 @@
+
+<!DOCTYPE html>
+<html class="borderbox" >
+    
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    Jetson | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+    <body>
+        <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">Jetson</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li>
+      <div class="logo">
+        <a id="logo-container" href="/notes" class="brand-logo">
+          <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+        </a>
+        <div class="social">
+          
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+          
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+          
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+          
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+          
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+          
+        </div>
+    </li>
+    </div>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 22-04-03">2020-12-15</span>
+    
+</div>
+
+<article>
+    <h1 id="名词解释">名词解释</h1>
+
+<ul>
+  <li>jetson
+每个产品都有一套 developer kit 和一套 module，引用自 <a href="https://developer.nvidia.com/embedded/faq#jetson-devkit-vs-module">FAQ</a>，developer kit 用于研发阶段，module 用于生产环境。
+FYI:
+    - <a href="https://forums.developer.nvidia.com/t/what-is-the-difference-between-jetson-nano-and-jetson-nano-developer-kit/78414">What is the difference between Jetson Nano and Jetson Nano developer kit - Jetson &amp; Embedded Systems / Jetson Nano - NVIDIA Developer Forums</a></li>
+  <li>l4t（Linux for Tegra），为 tegra 处理器发行的 linux，基于 ubuntu 定制。文档：<a href="https://docs.nvidia.com/jetson/l4t/index.html">NVIDIA Jetson Linux Developer Guide : Introduction | NVIDIA Docs</a></li>
+  <li>jetpack，nvidia 的软件开放工具包，包括 l4t和各种工具。<a href="https://docs.nvidia.com/jetson/jetpack/">NVIDIA JetPack Documentation</a></li>
+  <li>cuda, gpu 并行计算架构，</li>
+  <li>tensorrt，NVIDIA 深度学习加速</li>
+</ul>
+
+<h1 id="flash">Flash</h1>
+
+<p>刷机有两种方式：</p>
+
+<ol>
+  <li>通过 nvidia sdk mamager 刷入 jetpack</li>
+  <li>Manual, 手动刷入 l4t。</li>
+</ol>
+
+<h2 id="nvidia-sdk-manager">Nvidia Sdk manager</h2>
+
+<p><a href="https://docs.nvidia.com/sdk-manager/index.html">NVIDIA SDK Manager</a>，提供比较简单、自动化的刷机过程，有 gui，同时也支持 <a href="https://docs.nvidia.com/sdk-manager/sdkm-command-line-install/index.html">Command-Line Install :: NVIDIA SDK Manager Documentation</a>。</p>
+
+<p>简单尝试了下，因为网络的坑比较多，所以最后选择手动刷入 l4t。</p>
+
+<h2 id="manual">Manual</h2>
+
+<p>手动刷机主要分为两步，刷入 l4t 后，进入系统再安装 jetpack。</p>
+
+<p>刷 l4t，官方提供了比较详细的文档：<a href="https://docs.nvidia.com/jetson/l4t/index.html#page/Tegra%2520Linux%2520Driver%2520Package%2520Development%2520Guide%2Fquick_start.html%23">NVIDIA Jetson Linux Developer Guide : Quick Start Guide | NVIDIA Docs</a></p>
+
+<h3 id="安装环境">安装环境</h3>
+
+<h4 id="host">Host</h4>
+
+<p>nvidia sdkmanager 有声明需要 ubuntu 16 或 18。手动刷 l4t 没提及发行版的要求。根据这些天踩过 nvidia 的坑，还是稳妥点，乖乖 ubuntu。手动刷机更不需要 gui 了，所以选择 server 版本的 ubuntu，省点资源：<a href="https://releases.ubuntu.com/bionic/">Ubuntu 18.04.5 LTS (Bionic Beaver)</a></p>
+
+<p>我是 macOS + VirtualBox 环境：</p>
+
+<ul>
+  <li>Mac mini</li>
+  <li>macOS 11.1</li>
+  <li>VirtualBox 6.1.16</li>
+  <li>VirtualBox Extension Pack 6.1.16</li>
+  <li>Ubuntu-18.04.5-live-server-amd64.iso</li>
+</ul>
+
+<p>Vbox 需要支持 USB2/USB3，所以需要安装扩展包：<a href="https://www.virtualbox.org/wiki/Downloads">Downloads – Oracle VM VirtualBox</a></p>
+
+<h4 id="jetson">Jetson</h4>
+
+<ul>
+  <li>Jetson agx xavier 32GB(P2888-004)</li>
+  <li><a href="https://developer.nvidia.com/embedded/linux-tegra-r3244">L4T R32.4.4 archive | NVIDIA Developer</a></li>
+</ul>
+
+<h3 id="安装-ubuntu">安装 Ubuntu</h3>
+
+<p>创建虚拟机需要注意:</p>
+
+<ol>
+  <li>选择 usb3 的支持</li>
+  <li>硬盘镜像选择 30GB，基于 sdkmanager 安装 jetson 的文档提及可用空间需要大于 25GB，所以 30 GB 肯定是够的。</li>
+</ol>
+
+<p>手动安装只安装 l4t，实际肯定不用 30GB，但 10 GB 肯定是不够的，别问为什么。</p>
+
+<p>成功刷机后的空间情况：</p>
+
+<pre><code>$ df -h
+Filesystem                         Size  Used Avail Use% Mounted on
+udev                               462M     0  462M   0% /dev
+tmpfs                               99M  736K   98M   1% /run
+/dev/mapper/ubuntu--vg-ubuntu--lv   20G   19G   76M 100% /
+tmpfs                              493M     0  493M   0% /dev/shm
+tmpfs                              5.0M     0  5.0M   0% /run/lock
+tmpfs                              493M     0  493M   0% /sys/fs/cgroup
+/dev/sda2                          976M   78M  832M   9% /boot
+tmpfs                               99M     0   99M   0% /run/user/1000
+$ lsblk
+lsblk
+NAME                      MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda                         8:0    0   30G  0 disk
+├─sda1                      8:1    0    1M  0 part
+├─sda2                      8:2    0    1G  0 part /boot
+└─sda3                      8:3    0   29G  0 part
+  └─ubuntu--vg-ubuntu--lv 253:0    0   20G  0 lvm  /
+sr0                        11:0    1 1024M  0 rom
+</code></pre>
+
+<p>添加光驱镜像  <code>ubuntu-18.04.5-live-server-amd64.iso</code> 后，启动虚拟机便开始安装流程。主要注意把镜像替换为</p>
+
+<pre><code>https://mirrors.tuna.tsinghua.edu.cn/ubuntu
+</code></pre>
+
+<p>进入系统后，需要安装</p>
+
+<pre><code>sudo apt-get install qemu-user-static
+sudo apt-get install python # 需要 python 可执行，不确定是否要 python2
+</code></pre>
+
+<p>Host 便配置完成。</p>
+
+<h3 id="下载-l4t-archive">下载 l4t archive</h3>
+
+<p>下载页</p>
+
+<ul>
+  <li><a href="https://developer.nvidia.com/embedded/linux-tegra">Jetson Linux | NVIDIA Developer</a>
+下载</li>
+</ul>
+
+<ol>
+  <li><a href="https://developer.nvidia.com/embedded/L4T/r32_Release_v4.4/r32_Release_v4.4-GMC3/T186/Tegra186_Linux_R32.4.4_aarch64.tbz2">L4T Driver Package (BSP)</a></li>
+  <li><a href="https://developer.nvidia.com/embedded/L4T/r32_Release_v4.4/r32_Release_v4.4-GMC3/T186/Tegra_Linux_Sample-Root-Filesystem_R32.4.4_aarch64.tbz2">Sample Root Filesystem</a></li>
+</ol>
+
+<p>配置环境变量，可配可不配，主要是文档提及的文件名容易造成混淆。</p>
+
+<pre><code>export L4T_RELEASE_PACKAGE=Tegra186_Linux_R32.4.4_aarch64.tbz2  # 就是下载的 BSP 文件
+export SAMPLE_FS_PACKAGE=Tegra_Linux_Sample-Root-Filesystem_R32.4.4_aarch64.tbz2
+export BOARD=jetson-agx-xavier-devkit
+</code></pre>
+
+<p>解压文件</p>
+
+<pre><code>$ tar xf ${L4T_RELEASE_PACKAGE}
+$ cd Linux_for_Tegra/rootfs/
+$ sudo tar xpf ../../${SAMPLE_FS_PACKAGE}
+$ cd ..
+$ sudo ./apply_binaries.sh
+</code></pre>
+
+<p>然后准备刷机，</p>
+
+<ul>
+  <li>Jetson 关机再进入 Force Recovery Mode (RCM)</li>
+  <li>usb 链接 mac mini</li>
+  <li>vbox 添加 usb 到虚拟机，可能需要重启虚拟机、重新把擦才能认到。</li>
+  <li><code>lsusb</code> 确认 usb 已经链接到虚拟机并处在  RCM ：<code>Bus &lt;bbb&gt; Device &lt;ddd&gt;: ID 0955: &lt;nnnn&gt; Nvidia Corp.</code></li>
+  <li>usb 需要重启虚拟机才能认到</li>
+  <li>文档未提及需要 <code>python</code> 可执行。ubuntu 只有 python3，需要手动安装一些 python,或者链接一下python3</li>
+</ul>
+
+<p>正常情况下，就可以开始刷机了，不过文档未提及需要 <code>python</code> 可执行。第一次执行 flash.sh，因为本地找不到 python 可执行文件，所以报错。安装 python2 后重新执行，提示</p>
+
+<pre><code>Error: probing the target board failed.
+Flash Jetson TX2 : Make sure the target board is connected through
+Flash Jetson TX2 : USB port and is in recovery mode.
+</code></pre>
+
+<p>看了下 <code>flash.sh</code> 的代码发现问题是因为 <code>sudo ./bootloader/tegrarcm_v2 --uid</code> 报错：</p>
+
+<pre><code>Failed to read UID
+</code></pre>
+
+<p>根据这个回帖，<a href="https://forums.developer.nvidia.com/t/sdk-manager-could-not-detect-target-hardware/71797/24">SDK Manager - Could not detect target hardware - Jetson &amp; Embedded Systems / Jetson TX2 - NVIDIA Developer Forums</a> 猜测是第一次因为 python 报错导致，但 RCM 的信息被读取，下一次 flash 就会读不到信息最后超时报错。
+断电重新进入一次 Force Recovery Mode。便可以正常刷机。差点以为是不支持 VM：</p>
+
+<p>不过貌似也有办法支持其他 linux：https://forums.developer.nvidia.com/t/using-jetpack-from-arch-linux/44979</p>
+
+<p>确保所有条件没问题，便可以开始刷机。</p>
+
+<ol>
+  <li>进入 <code>Force Recovery mode</code>，设备关机，按住 Force Recovery 键（与电源键相邻），再开机。</li>
+  <li>链接 USB</li>
+  <li><code>sudo ./flash.sh ${BOARD} mmcblk0p1</code></li>
+</ol>
+
+<p>刷机成功，jetson 便会自动重启直接进入系统。</p>
+
+<h1 id="control">Control</h1>
+
+<p>刷好机后需要登陆到 jetson 进行配置，最直接的做法就是为 jetson 接上显示器和键盘，这个就不提了。另外也可以通过usb 模拟串口进行配置。</p>
+
+<h2 id="serial-console">Serial Console</h2>
+
+<p>Jetson： Jetson agx xavier 32GB(P2888-004)</p>
+
+<p>第一步：按照 <a href="https://forums.developer.nvidia.com/t/jetson-agx-xavier-headless-setup-no-ttyacm-port-created-on-host/165331">Jetson AGX Xavier headless setup - no ttyACM port created on host - Jetson &amp; Embedded Systems / Jetson AGX Xavier - NVIDIA Developer Forums</a> 的官方回复需要，<strong>将 jetson micro-usb 和 type-c 同时连接到主机再开启 jetson 的电源</strong>。</p>
+
+<p>但是我在 macOS 上发现只需插上 typec 就可以。</p>
+
+<h3 id="macos">macOS</h3>
+
+<p>两个接口连上  mbp 后：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>ioreg <span class="nt">-p</span> IOUSB  <span class="c">#可以看到有两个设备</span>
+...
+    +-o Linux <span class="k">for </span>Tegra@14100000  &lt;class AppleUSBDevice, <span class="nb">id </span>0x1002b3edc, registered, matched, active, busy 0 <span class="o">(</span>2 ms<span class="o">)</span>, retain 24&gt;
+    +-o Quad RS232-HS@14200000  &lt;class AppleUSBDevice, <span class="nb">id </span>0x1002b40d8, registered, matched, active, busy 0 <span class="o">(</span>2 ms<span class="o">)</span>, retain 18&gt;
+...
+<span class="nv">$ </span><span class="nb">ls</span> /dev/tty.usbmodem<span class="k">*</span> 能找到设备
+</code></pre></div></div>
+
+<p>然后通过  <code>screen</code> 连上该设备便可以：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>screen /dev/tty.usbmodem14238200066403 <span class="nt">-8</span> <span class="nt">-b</span> 115200
+</code></pre></div></div>
+
+<p><code>C-a C-\</code> 退出 screen</p>
+
+<p>登陆上去后可能需要设置一下才能让终端有颜色：</p>
+
+<pre><code>export TERM=xterm-256color
+</code></pre>
+
+<h3 id="ubuntu">Ubuntu</h3>
+
+<p>ubuntu 就需要同时连接 typc-c 和 micro-usb 才能找到 <code>/dev/ttyACM*</code></p>
+
+<p>另外也可以通过 <code>minicom</code> 连接。</p>
+
+<h1 id="configuration">Configuration</h1>
+
+<p>有用的信息：</p>
+
+<ul>
+  <li><code>/media/{user}/L4T-README</code>
+    <ul>
+      <li>README-usb-dev-mode.txt 如何通过 usb 与主机相连，包括虚拟串口方面的信息</li>
+      <li>README-vnc.txt 快速配置 vnc 服务</li>
+      <li>README-wifi.txt 通过命令行连接 wifi</li>
+    </ul>
+  </li>
+  <li><a href="https://developer.ridgerun.com/wiki/index.php?title=Xavier">NVIDIA Jetson Xavier | NVIDIA Xavier Guide | RidgeRun</a></li>
+  <li><a href="https://elinux.org/Jetson_AGX_Xavier">Jetson AGX Xavier - eLinux.org</a></li>
+  <li><a href="https://cloud-atlas.readthedocs.io/zh_CN/latest/machine_learning/jetson/jetson_nano.html">Jetson Nano — Cloud Atlas 0.1 文档</a></li>
+</ul>
+
+<h2 id="apt">apt</h2>
+
+<h3 id="换源可选">换源(可选)</h3>
+
+<p>备份</p>
+
+<pre><code>sudo cp /etc/apt/sources.list /etc/apt/sources.list.origin
+</code></pre>
+
+<p>内容替换为：</p>
+
+<pre><code>deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/ bionic main multiverse restricted universe
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/ bionic-security main multiverse restricted universe
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/ bionic-updates main multiverse restricted universe
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/ bionic-backports main multiverse restricted universe
+deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/ bionic main multiverse restricted universe
+deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/ bionic-security main multiverse restricted universe
+deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/ bionic-updates main multiverse restricted universe
+deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/ bionic-backports main multiverse restricted universe
+</code></pre>
+
+<h3 id="更新系统">更新系统</h3>
+
+<pre><code>sudo apt-get update
+sudo apt-get upgrade
+</code></pre>
+
+<p>见 <a href="https://docs.nvidia.com/jetson/l4t/Tegra%20Linux%20Driver%20Package%20Development%20Guide/quick_start.html#wwpID0E0EB0HA">How to Install Debian Packages with OTA Update</a></p>
+
+<p>display manager 更新为 lightdm(可选，TODO 自动登陆有问题)</p>
+
+<pre><code>sudo dpkg--reconfigure lightdm
+</code></pre>
+
+<h3 id="补完-jetpack">补完 jetpack</h3>
+
+<pre><code> sudo apt install nvidia-jetpack
+</code></pre>
+
+<p>见 <a href="https://docs.nvidia.com/jetson/jetpack/install-jetpack/index.html#package-management-tool">1.3. Package Management Tool</a></p>
+
+<p>最后 32 GB 的空间剩下：</p>
+
+<pre><code>   /dev/mmcblk0p1   28G   12G   15G  46% /
+</code></pre>
+
+<h3 id="其他必备">其他必备</h3>
+
+<ul>
+  <li><a href="https://github.com/rbonghi/jetson_stats">rbonghi/jetson_stats: 📊 Simple package to monitoring and control your NVIDIA Jetson [Xavier NX, Nano, AGX Xavier, TX1, TX2]</a></li>
+  <li>sudo apt install zsh</li>
+  <li><a href="https://ohmyz.sh/#install">Oh My Zsh - a delightful &amp; open source framework for Zsh</a>
+<code>omz theme set ys</code></li>
+</ul>
+
+<h2 id="headless-jetson">Headless Jetson</h2>
+
+<h3 id="tigervnc建议">tigervnc（建议）</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt <span class="nb">install </span>tigervnc-scraping-server
+</code></pre></div></div>
+
+<p>设置密码</p>
+
+<pre><code>vncpasswd
+</code></pre>
+<h4 id="共享本地桌面-x0vncserver">共享本地桌面 x0vncserver</h4>
+
+<p><code>x0vncserver/x0tigervncserver</code> 支持共享本地桌面</p>
+
+<p>创建 <code>~/.config/systemd/user/x0vncserver.service</code></p>
+
+<div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[Unit]</span>
+<span class="py">Description</span><span class="p">=</span><span class="s">Remote desktop service (VNC)</span>
+
+<span class="nn">[Service]</span>
+<span class="py">Type</span><span class="p">=</span><span class="s">simple</span>
+<span class="c"># wait for Xorg started by lc
+</span><span class="py">ExecStartPre</span><span class="p">=</span><span class="s">/bin/sh -c 'while ! pgrep -U "$USER" Xorg; do sleep 2; done'</span>
+<span class="py">ExecStart</span><span class="p">=</span><span class="s">/usr/bin/x0vncserver -rfbauth %h/.vnc/passwd -rfbport 5900</span>
+<span class="c"># or login with your username &amp; password
+#ExecStart=/usr/bin/x0vncserver -PAMService=login -PlainUsers=lc -SecurityTypes=TLSPlain
+</span>
+<span class="nn">[Install]</span>
+<span class="py">WantedBy</span><span class="p">=</span><span class="s">default.target</span>
+</code></pre></div></div>
+
+<p>启用服务：</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemctl <span class="nt">--user</span> <span class="nb">enable</span> ~/.config/systemd/user/x0vncserver.service
+systemctl <span class="nt">--user</span> start x0vncserver.service
+</code></pre></div></div>
+<p>同样需要登陆后才能生效</p>
+
+<p>修改 <code>/etc/gdm3/custom.conf</code> 开启自动登陆</p>
+
+<h4 id="一般-vncserver-方案">一般 vncserver 方案</h4>
+
+<p>默认情况下一个 vncserver 对应一个 xsession，不与当前显示器共享 xsession。</p>
+
+<p>当是这方案不支持 EGL</p>
+
+<blockquote>
+  <p>Unfortunately, if there is no monitor case, then VNC cannot work.
+You could try to use RDP (remote desktop protocol) application and it should work. However, EGL seems not able to run with rdp backend. Thus, if you want to render something by using EGL, it would not work.</p>
+</blockquote>
+
+<h3 id="vino">Vino</h3>
+
+<p>参考 <code>README-vnc</code>  或 <a href="https://developer.nvidia.com/embedded/learn/tutorials/vnc-setup">Setting Up VNC | NVIDIA Developer</a></p>
+
+<p>官方用的是 ubuntu 自带的 vino。与 x11vnc 一样是屏幕共享。需要等本地登陆后才能连，也可配置自动登陆:</p>
+
+<p>修改 <code>/etc/gdm3/custom.conf</code> 开启自动登陆</p>
+
+<p>不插显示器也支持，不过默认分辨率有点小:</p>
+
+<p>默认分辨率太小，需要修改 <code>/etc/X11/xorg.conf</code></p>
+
+<pre><code>Section "Screen"
+   Identifier    "Default Screen"
+   Monitor        "Configured Monitor"
+   Device        "Default Device"
+   SubSection "Display"
+       Depth    24
+       Virtual 1440 900
+   EndSubSection
+EndSection
+</code></pre>
+<p>也可以直接用 hdmi 欺骗器。</p>
+
+<p>问题：<strong>卡</strong>，没有 tigervnc 流畅</p>
+
+<p>切换到 lightdm 后流畅度改善不少。</p>
+
+<h3 id="x11vnc">x11vnc</h3>
+
+<ol>
+  <li>Dummy Monitor 不能生效，且不能使用 nvidia 驱动</li>
+  <li>尝试 hdmi 欺骗器 TODO</li>
+</ol>
+
+<h4 id="开机自动启用-x11vnc">开机自动启用 x11vnc</h4>
+
+<ol>
+  <li>
+    <p>login manager 自动登陆</p>
+  </li>
+  <li>
+    <p>先连到 loginmanager 的 xsession(Dispaly=:0)，手动登陆后再，连到桌面（Display=:1）:https://askubuntu.com/a/1036507</p>
+  </li>
+</ol>
+
+<h3 id="x11-forwarding">X11 Forwarding</h3>
+
+<p>转发远端的 xclient 链接到本地的 xserver</p>
+
+<h4 id="macos-1">macos</h4>
+
+<ul>
+  <li>xquartz</li>
+</ul>
+
+<h1 id="development">Development</h1>
+
+<ul>
+  <li><a href="https://elinux.org/Jetson_Zoo">Jetson Zoo - eLinux.org</a></li>
+  <li><a href="https://github.com/dusty-nv/jetson-inference">dusty-nv/jetson-inference: Hello AI World guide to deploying deep-learning inference networks and deep vision primitives with TensorRT and NVIDIA Jetson.</a></li>
+</ul>
+
+<h2 id="python">python</h2>
+
+<p>使用系统自带 python3 记得先升级一下 pip 避免各种奇葩问题：</p>
+
+<pre><code>python3 -m pip install pip
+</code></pre>
+
+<h3 id="jupyter">jupyter</h3>
+
+<pre><code>- python -m pip install jupyterlab ipywidgets
+- [matplotlib/ipympl: Matplotlib Jupyter Integration](https://github.com/matplotlib/ipympl)
+</code></pre>
+
+<h2 id="docker">docker</h2>
+
+<ul>
+  <li>Jetpack: 4.6</li>
+  <li>Docker: 20.10.7</li>
+</ul>
+
+<p>会遇到：</p>
+
+<pre><code>docker: Error response from daemon: failed to create shim: OCI runtime create failed: container_linux.go:380: starting container process caused: error adding seccomp filter rule for syscall clone3: permission denied: unknown.
+</code></pre>
+
+<p><a href="https://forums.developer.nvidia.com/t/docker-isnt-working-after-apt-upgrade/195213">Docker isn’t working after apt upgrade - Jetson &amp; Embedded Systems / Jetson Nano - NVIDIA Developer Forums</a></p>
+
+<p>降级 docker 解决 :</p>
+
+<p>wget https://launchpad.net/ubuntu/+source/docker.io/20.10.2-0ubuntu1~18.04.2/+build/21335731/+files/docker.io_20.10.2-0ubuntu1~18.04.2_arm64.deb
+sudo dpkg -i docker.io_20.10.2-0ubuntu1~18.04.2_arm64.deb
+rm docker.io_20.10.2-0ubuntu1~18.04.2_arm64.deb
+sudo apt install containerd=1.5.2-0ubuntu1~18.04.3</p>
+
+<p>pin docker 版本:</p>
+
+<pre><code>sudo nano /etc/apt/preferences
+</code></pre>
+
+<pre><code class="language-text">Package: docker.io
+Pin: version 20.10.2*
+Pin-Priority: 1001
+
+Package: containerd
+Pin: version 1.5.2*
+Pin-Priority: 1001
+</code></pre>
+
+<h2 id="pytorch">pytorch</h2>
+
+<h3 id="docker-1">Docker</h3>
+
+<p>不折腾选择 docker：</p>
+
+<p><a href="https://catalog.ngc.nvidia.com/orgs/nvidia/containers/l4t-pytorch">NVIDIA L4T PyTorch | NVIDIA NGC</a></p>
+
+<h3 id="本地安装">本地安装</h3>
+
+<p><a href="https://forums.developer.nvidia.com/t/pytorch-for-jetson-version-1-10-now-available/72048">PyTorch for Jetson - version 1.10 now available - Jetson &amp; Embedded Systems / Jetson Nano - NVIDIA Developer Forums</a></p>
+
+<p>cmake python3</p>
+
+<p>https://github.com/pytorch/vision/issues/2565</p>
+
+<h2 id="cmake">cmake</h2>
+
+<p>系统自带版本太旧，编译 torchvison 不支持 python3。删除系统的版本，再从源码重新编译。</p>
+
+<pre><code>sudo apt remove cmake
+</code></pre>
+
+<p>确保安装 openssl 依赖</p>
+
+<pre><code>sudo apt install libssl-dev
+</code></pre>
+
+<p>下载</p>
+
+<h2 id="opencv">opencv</h2>
+
+<p>自带的 opencv 并不支持 CUDA，<code>cv2.getBuildInfomation()</code>：</p>
+
+<pre><code>General configuration for OpenCV 4.1.1 =====================================
+  Version control:               4.1.1-2-gd5a58aa75
+
+  Platform:
+    Timestamp:                   2019-12-13T17:25:11Z
+    Host:                        Linux 4.9.140-tegra aarch64
+    CMake:                       3.10.2
+    CMake generator:             Unix Makefiles n        CMake build tool:            /usr/bin/make
+    Configuration:               Release
+
+  CPU/HW features:
+    Baseline:                    NEON FP16
+      required:                  NEON
+      disabled:                  VFPV3
+
+  ....
+
+OpenCV modules:
+    To be built:                 calib3d core dnn features2d flann gapi highgui imgcodecs imgproc ml objdetect photo python2 python3 stitching ts video videoio
+    Disabled:                    world
+    Disabled by dependency:      -
+    Unavailable:                 java js
+    Applications:                tests perf_tests examples apps
+    Documentation:               NO
+    Non-free algorithms:         NO
+</code></pre>
+
+<p>需要自己重新编译：<a href="https://qengineering.eu/install-opencv-4.5-on-jetson-nano.html">Install OpenCV 4.5 on Jetson Nano - Q-engineering</a></p>
+
+<pre><code># reveal the CUDA location
+sudo sh -c "echo '/usr/local/cuda/lib64' &gt;&gt; /etc/ld.so.conf.d/nvidia-tegra.conf"
+sudo ldconfig
+# third-party libraries
+sudo apt-get install build-essential cmake git unzip pkg-config
+sudo apt-get install libjpeg-dev libpng-dev libtiff-dev
+sudo apt-get install libavcodec-dev libavformat-dev libswscale-dev
+sudo apt-get install libgtk2.0-dev libcanberra-gtk*
+sudo apt-get install python3-dev python3-numpy python3-pip
+sudo apt-get install libxvidcore-dev libx264-dev libgtk-3-dev
+sudo apt-get install libtbb2 libtbb-dev libdc1394-22-dev
+sudo apt-get install libv4l-dev v4l-utils
+sudo apt-get install libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
+sudo apt-get install libavresample-dev libvorbis-dev libxine2-dev
+sudo apt-get install libfaac-dev libmp3lame-dev libtheora-dev
+sudo apt-get install libopencore-amrnb-dev libopencore-amrwb-dev
+sudo apt-get install libopenblas-dev libatlas-base-dev libblas-dev
+sudo apt-get install liblapack-dev libeigen3-dev gfortran
+sudo apt-get install libhdf5-dev protobuf-compiler
+sudo apt-get install libprotobuf-dev libgoogle-glog-dev libgflags-dev
+# qt5
+sudo apt-get install qt5-default
+</code></pre>
+
+<p>下载源码：</p>
+
+<pre><code># download the latest version
+$ cd ~
+$ wget -O opencv.zip https://github.com/opencv/opencv/archive/4.5.0.zip
+$ wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/4.5.0.zip
+# unpack
+$ unzip opencv.zip
+$ unzip opencv_contrib.zip
+
+$ mv opencv-4.5.0 opencv
+$ mv opencv_contrib-4.5.0 opencv_contrib
+# clean up the zip files
+$ rm opencv.zip
+$ rm opencv_contrib.zip
+
+$ cd ~/opencv
+$ mkdir build
+$ cd build
+</code></pre>
+
+<p>确保 <code>CUDA_ARCH_BIN</code> 改成 agx xavier 的版本
+默认安装位置是 <code>/usr/local</code>，改成<code>/usr</code>是为了和本机版本共存。</p>
+
+<pre><code>cmake -D CMAKE_BUILD_TYPE=RELEASE \
+        -D CMAKE_INSTALL_PREFIX=/usr \
+        -D OPENCV_EXTRA_MODULES_PATH=~/Playground/opencv_contrib/modules \
+        -D EIGEN_INCLUDE_PATH=/usr/include/eigen3 \
+        -D WITH_CUDA=ON \
+        -D CUDA_ARCH_BIN=7.2 \
+        -D CUDA_ARCH_PTX="" \
+        -D WITH_CUDNN=ON \
+        -D WITH_CUBLAS=ON \
+        -D ENABLE_FAST_MATH=ON \
+        -D CUDA_FAST_MATH=ON \
+        -D OPENCV_DNN_CUDA=ON \
+        -D ENABLE_NEON=ON \
+        -D WITH_QT=ON \
+        -D WITH_OPENMP=ON \
+        -D WITH_OPENGL=ON \
+        -D BUILD_TIFF=ON \
+        -D WITH_FFMPEG=ON \
+        -D WITH_GSTREAMER=ON \
+        -D WITH_TBB=ON \
+        -D BUILD_TBB=ON \
+        -D BUILD_TESTS=OFF \
+        -D WITH_EIGEN=ON \
+        -D WITH_V4L=ON \
+        -D WITH_LIBV4L=ON \
+        -D OPENCV_ENABLE_NONFREE=ON \
+        -D INSTALL_C_EXAMPLES=OFF \
+        -D INSTALL_PYTHON_EXAMPLES=OFF \
+        -D BUILD_NEW_PYTHON_SUPPORT=ON \
+        -D BUILD_opencv_python3=TRUE \
+        -D OPENCV_GENERATE_PKGCONFIG=ON \
+        -D BUILD_EXAMPLES=ON ..
+</code></pre>
+
+<p>编译</p>
+
+<pre><code>make -j4
+
+
+$ sudo rm -r /usr/include/opencv4/opencv2 # 清理 old packages
+$ sudo make install
+$ sudo ldconfig
+# cleaning (frees 300 KB)
+$ make clean
+</code></pre>
+
+<p>测试一下：</p>
+
+<pre><code>General configuration for OpenCV 4.5.1 =====================================
+  Version control:               unknown
+
+  Extra modules:
+    Location (extra):            /home/tx/Playground/opencv_contrib/modules
+    Version control (extra):     unknown
+
+  Platform:
+    Timestamp:                   2020-12-29T03:01:07Z
+    Host:                        Linux 4.9.140-tegra aarch64
+    CMake:                       3.19.2
+    CMake generator:             Unix Makefiles
+    CMake build tool:            /usr/bin/make
+    Configuration:               RELEASE
+
+  CPU/HW features:
+    Baseline:                    NEON FP16
+      required:                  NEON
+
+  ...
+
+  OpenCV modules:
+    To be built:                 alphamat aruco bgsegm bioinspired calib3d ccalib core cudaarithm cudabgsegm cudacodec cudafeatures2d cudafilters cudaimgproc cudalegacy cudaobjdetect cudaoptflow cudastereo cudawarping cudev cvv datasets dnn dnn_objdetect dnn_superres dpm face features2d flann freetype fuzzy gapi hdf hfs highgui img_hash imgcodecs imgproc intensity_transform line_descriptor mcc ml objdetect optflow phase_unwrapping photo plot python3 quality rapid reg rgbd saliency sfm shape stereo stitching structured_light superres surface_matching text tracking ts video videoio videostab xfeatures2d ximgproc xobjdetect xphoto
+    Disabled:                    world
+    Disabled by dependency:      -
+    Unavailable:                 cnn_3dobj java julia matlab ovis python2 viz
+    Applications:                perf_tests examples apps
+    Documentation:               NO
+    Non-free algorithms:         YES
+
+
+
+
+cv2.cuda.getCudaEnabledDeviceCount()
+1
+</code></pre>
+
+<h2 id="gstreamer">gstreamer</h2>
+
+<p>安装需要参考 <a href="https://docs.nvidia.com/jetson/archives/l4t-archived/l4t-3231/index.html#page/Tegra%2520Linux%2520Driver%2520Package%2520Development%2520Guide%2Faccelerated_gstreamer.html%23wwpID0E0H30H">Accelerated GStreamer</a></p>
+
+<pre><code>sudo add-apt-repository universe
+sudo add-apt-repository multiverse
+sudo apt-get update
+sudo apt-get install gstreamer1.0-tools gstreamer1.0-alsa \
+  gstreamer1.0-plugins-base gstreamer1.0-plugins-good \
+  gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly \
+  gstreamer1.0-libav
+sudo apt-get install libgstreamer1.0-dev \
+  libgstreamer-plugins-base1.0-dev \
+  libgstreamer-plugins-good1.0-dev \
+  libgstreamer-plugins-bad1.0-dev
+</code></pre>
+
+<p>opencv 才能支持 <code>CAP_GSTREAMER</code>，<a href="https://github.com/NVIDIA-AI-IOT/jetcam">jetcam</a> 才能正常使用</p>
+
+<p><code>cv2.getBuildInfomation()</code> 输出有：</p>
+
+<pre><code>Video I/O:
+    FFMPEG:                      YES
+      avcodec:                   YES (57.107.100)
+      avformat:                  YES (57.83.100)
+      avutil:                    YES (55.78.100)
+      swscale:                   YES (4.8.100)
+      avresample:                NO
+    GStreamer:                   YES (1.14.5)
+    v4l/v4l2:                    YES (linux/videodev2.h)
+</code></pre>
+
+<ul>
+  <li>videoparse</li>
+  <li>videoconvert</li>
+  <li>queue</li>
+</ul>
+
+<h2 id="ipython">ipython</h2>
+
+<h3 id="与-jedi-不兼容">与 jedi 不兼容</h3>
+
+<p>python3.6 支持的 ipython 7.16.x，与 jedi 0.18 不兼容报错：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> File <span class="s2">"../venv/lib/python3.8/site-packages/IPython/core/completer.py"</span>, line 2029, <span class="k">in </span>_complete
+    completions <span class="o">=</span> self._jedi_matches<span class="o">(</span>
+  File <span class="s2">"../venv/lib/python3.8/site-packages/IPython/core/completer.py"</span>, line 1373, <span class="k">in </span>_jedi_matches
+    interpreter <span class="o">=</span> jedi.Interpreter<span class="o">(</span>
+  File <span class="s2">"../venv/lib/python3.8/site-packages/jedi/api/__init__.py"</span>, line 725, <span class="k">in </span>__init__
+    super<span class="o">()</span>.__init__<span class="o">(</span>code, <span class="nv">environment</span><span class="o">=</span>environment,
+TypeError: __init__<span class="o">()</span> got an unexpected keyword argument <span class="s1">'column'</span>
+</code></pre></div></div>
+
+<p>需要降级 jedi，emacs lsp-mode 需要的 jedi-language-server 0.22.0，又将 jedi pin 在 0.18。
+需要安装指定版本：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip3 <span class="nb">install</span> <span class="s1">'jedi==0.17.2'</span>
+pip3 <span class="nb">install</span> <span class="s1">'jedi_language_server==0.21.0'</span>
+</code></pre></div></div>
+
+<p><a href="https://github.com/ipython/ipython/issues/12740">Last jedi release (0.18.0) is incompatible with ipython (7.19 and 7.18 tested); reason - column arg was deprecated, and now removed · Issue #12740 · ipython/ipython</a></p>
+
+<h3 id="jupyter-无法显示图片">jupyter 无法显示图片</h3>
+
+<p>https://stackoverflow.com/questions/61834868/ipython-display-display-not-showing-image-in-jupyter-notebook</p>
+
+<pre><code>python3 -m pip install ipywidgets
+jupyter nbextension enable --py widgetsnbextension
+# 需要安装 jupyter-lab 和 nodejs &gt; 12
+jupyter labextension install @jupyter-widgets/jupyterlab-manager
+</code></pre>
+
+<h2 id="zed">ZED</h2>
+
+<p>确保安装了</p>
+
+<p>Cython</p>
+
+<p>距离识别模式</p>
+
+<ul>
+  <li>STANDARD，效率好，检测边界，存在黑洞（无法获取数据的点）</li>
+  <li>FILL，生产稠密的距离图，不支持 Point Cloud，</li>
+</ul>
+
+<p>Dr=Z^2*alpha, where Dr is depth resolution, Z the distance and alpha a constant.</p>
+
+<p>zed-gstreamer</p>
+
+<pre><code>  gir1.2-gst-rtsp-server-1.0 gstreamer1.0-doc gstreamer1.0-qt5 libglib2.0-doc libgstrtspserver-1.0-0 libgstrtspserver-1.0-dev
+</code></pre>
+
+</article>
+<div class="tag-container" >
+    
+</div>
+
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Computer/jetson"
+ var disqus_config = function () {
+     this.page.title = "Jetson"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Computer/jetson/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+        
+
+        
+
+        
+    </body>
+
+</html>

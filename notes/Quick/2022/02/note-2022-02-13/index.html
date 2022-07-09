@@ -1,0 +1,329 @@
+
+<!DOCTYPE html>
+<html class="borderbox" >
+    
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    2022年02月13日杂记 | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+    <body>
+        <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">2022年02月13日杂记</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li>
+      <div class="logo">
+        <a id="logo-container" href="/notes" class="brand-logo">
+          <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+        </a>
+        <div class="social">
+          
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+          
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+          
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+          
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+          
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+          
+        </div>
+    </li>
+    </div>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 22-04-03">2022-02-13</span>
+    
+</div>
+
+<article>
+     <h1 id="machine-learning-inference">Machine Learning inference</h1>
+<p>机器学习推理，此过程也称为“运行 ML 模型”或“将 ML 模型投入生产”</p>
+<h1 id="hpe">HPE</h1>
+<p>https://zhuanlan.zhihu.com/p/400922771</p>
+<ul>
+  <li>top-down 方法，需要先利用目标检测算法确定人体的 bounding box，然后对于每一个 bounding box 中的人体，计算其根关节的绝对坐标以及其他关节相对于根关节的坐标。</li>
+  <li>bottom-up 方法，则首先预测所有关节的位置，再根据关节间的相对关系将属于同一个人的关节联系起来构成完整的人体。</li>
+</ul>
+<p>Human3.6M 的评价指标主要有 Mean Per Joint Position Error (MPJPE) 和 P-MPJPE。其中，MPJPE 是所有关键点预测坐标与 ground truth 坐标之间的平均欧式距离，一般会事先将预测结果与 ground truth 的根关节对齐；P-MPJPE 则是将预测结果通过 Procrustes Analysis 与 ground truth 对齐，再计算 MPJPE。</p>
+<h1 id="mmdet">mmdet</h1>
+<p>对于 checkpoints torch hub 会自动 cache</p>
+<p>model.show_result</p>
+<h1 id="mmtrack">mmtrack</h1>
+<p>jetson 报错，因为 scipy 编译报错。需要先：</p>
+<p>sudo apt-get install -y gfortran build-essential libatlas-base-dev</p>
+<p>见 https://forums.developer.nvidia.com/t/errors-during-install-sklearn/72622#5327807</p>
+<h1 id="mmpose">mmpose</h1>
+<ul>
+  <li>onnxruntime [Jetson Zoo - eLinux.org](https://elinux.org/Jetson_Zoo#ONNX_Runtime)</li>
+  <li>torch</li>
+  <li>xtcocotools</li>
+</ul>
+<p>默认的 track 用的不是深度学习，而是通过相邻两帧的姿态判断是否是同一个物体。</p>
+<p>用的是：</p>
+<ul>
+  <li>OKS，关键点相似度(Object Keypoint Similarity）。
+    经实验不适用于身体动作幅度大的场景</li>
+  <li>IOU，并交比（Intersection over Union）</li>
+</ul>
+<p>[Noise Filtering Using 1€ Filter | Jaan Tollander de Balsch](https://jaantollander.com/post/noise-filtering-using-one-euro-filter/)</p>
+<h1 id="config">config</h1>
+<h2 id="config--pipeline">pipeline</h2>
+<p>表示对输入的预处理流程</p>
+<ul>
+  <li>DefaultFormatBundle</li>
+  <li>img_norm_cfg 见 https://github.com/open-mmlab/mmdetection/issues/354#issuecomment-774486479
+    预训练模型用，应该表示数据集中所有图像的 rgb 通道的平均值和标准差</li>
+</ul>
+<h1 id="旧项目">旧项目</h1>
+<h2 id="旧项目--2d-to-30">2D to 30</h2>
+<p>代码来自 : [Nicholasli1995/EvoSkeleton: Official project website for the CVPR 2020 paper (Oral Presentation) &#8220;Cascaded deep monocular 3D human pose estimation wth evolutionary training data&#8221;](https://github.com/Nicholasli1995/EvoSkeleton)</p>
+<p>https://github.com/Nicholasli1995/EvoSkeleton/tree/master/examples</p>
+<p>H36M_NAMES = [&#8221;]*32
+  H36M_NAMES[0]  = &#8216;Root&#8217;
+  H36M_NAMES[1]  = &#8216;RHip&#8217;
+  H36M_NAMES[2]  = &#8216;RKnee&#8217;
+  H36M_NAMES[3]  = &#8216;RFoot&#8217;
+  H36M_NAMES[6]  = &#8216;LHip&#8217;
+  H36M_NAMES[7]  = &#8216;LKnee&#8217;
+  H36M_NAMES[8]  = &#8216;LFoot&#8217;
+  H36M_NAMES[12] = &#8216;Spine&#8217;
+  H36M_NAMES[13] = &#8216;Thorax&#8217;
+  H36M_NAMES[14] = &#8216;Neck/Nose&#8217;
+  H36M_NAMES[15] = &#8216;Head&#8217;
+  H36M_NAMES[17] = &#8216;LShoulder&#8217;
+  H36M_NAMES[18] = &#8216;LElbow&#8217;
+  H36M_NAMES[19] = &#8216;LWrist&#8217;
+  H36M_NAMES[25] = &#8216;RShoulder&#8217;
+  H36M_NAMES[26] = &#8216;RElbow&#8217;
+  H36M_NAMES[27] = &#8216;RWrist&#8217;</p>
+<h2 id="旧项目--mmpose-demo">mmpose demo</h2>
+<p>步骤：</p>
+<ul>
+  <li>mmdet 找人，并每个人分割为一个输入</li>
+  <li>mmpose top-down 算法对每个输入识别姿态，对画面中的人是 O(n)</li>
+  <li>track 通过前后帧的姿态变化来追踪，非深度学习模型，准确度一般，速度快
+    <ul>
+      <li>oks，关键点相似度。不适合在运动的场景</li>
+      <li>iou，bbox 的并交比，结果反而更好</li>
+    </ul>
+  </li>
+</ul>
+<h1 id="benchmark">Benchmark</h1>
+<p>176 帧</p>
+<table>
+  <tr><th>Name</th><th>Track</th><th>2D</th><th>3D</th><th>Score</th><th>Time</th></tr>
+  <tr><td>旧</td><td>deepsort</td><td>hrnet_288x384</td><td>H36M</td><td>关节点距离平均</td><td>38.483s</td></tr>
+  <tr><td>v1</td><td>oks/iou</td><td>hrnet_256x192</td><td>H36M</td><td>关节点距离平均</td><td>1m0.028s</td></tr>
+  <tr><td>v2</td><td>iou by bbox</td><td>hrnet_256x192</td><td>H36M</td><td>关节点距离平均</td><td>24.032s</td></tr>
+</table>
+<h2 id="benchmark--后续优化">后续优化</h2>
+<ul>
+  <li>参考帧需重新生成</li>
+  <li>设计一套模型 benchmark 流程</li>
+  <li>mmtrack 代替 oks/iou 先识别人再找姿态，规避 top-down 需用对每个人单独识别的问题</li>
+  <li>使用 bottomup 模型代替，需用验证转 3d 会不会出现问题</li>
+</ul>
+ 
+</article>
+<div class="tag-container" >
+    
+</div>
+
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Quick/2022/02/note-2022-02-13"
+ var disqus_config = function () {
+     this.page.title = "2022年02月13日杂记"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Quick/2022/02/note-2022-02-13/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+        
+
+        
+
+        
+    </body>
+
+</html>

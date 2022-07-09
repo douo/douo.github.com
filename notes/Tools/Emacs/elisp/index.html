@@ -1,0 +1,468 @@
+
+<!DOCTYPE html>
+<html class="borderbox" >
+    
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    Elisp 笔记 | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+    <body>
+        <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">Elisp 笔记</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li>
+      <div class="logo">
+        <a id="logo-container" href="/notes" class="brand-logo">
+          <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+        </a>
+        <div class="social">
+          
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+          
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+          
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+          
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+          
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+          
+        </div>
+    </li>
+    </div>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 22-06-27">2022-04-07</span>
+    
+</div>
+
+<article>
+     <h1 id="2022-04-07-thu">2022-04-07 Thu</h1>
+<ul>
+  <li>默认会对任何表进行求值，如表达式 <code>(hello world)</code> 会将 hello 作为指令 world 作为参数执行</li>
+  <li>特殊情况： <code>(quote a b c)</code> 会将参数作为列表返回而不执行，等同于 <code>&#39;(a b c)</code>
+    <ul>
+      <li><code>`(a ,b c)</code> 类似于 quote 但是会对 b 进行求值</li>
+    </ul>
+  </li>
+</ul>
+<h1 id="2022-04-08-fri">2022-04-08 Fri</h1>
+<p>对 emacs 的任意操作都是执行表达式，比如 <code>self-insert-command</code> 绑定到任意输入键，执行插入对应字符。</p>
+<ul>
+  <li>基本函数（ Primitive Functions ）:: 由 c 实现的函数</li>
+</ul>
+<p><code>defun</code> 宏:</p>
+<pre class="src" lang="elisp">
+(defun
+    function-name
+    (args1 args2)
+  &quot;可选的文档&quot;
+(interactive ARGUMENT-PASSING-INFO) ; 可选的标记函数是否可交互（通过 M-x 调用）
+;; BODY...
+(message args1)
+(message args2)
+  )
+</pre>
+<h1 id="2022-04-09-sat">2022-04-09 Sat</h1>
+<ul>
+  <li><code>(interactive &quot;p&quot;)</code> <code>p</code> 表示接收 prefix argument 作为函数参数。默认会设置为 1</li>
+  <li>prefix argument，通过 <code>C-u &lt;NUM&gt;</code> 或 <code>M-&lt;NUM&gt;</code> 传递的参数</li>
+  <li><a href="info:elisp#Interactive Codes">elisp#Interactive Codes</a></li>
+</ul>
+<h1 id="2022-04-12-tue">2022-04-12 Tue</h1>
+<ul>
+  <li><code>let</code> 局部变量
+    <pre class="src" lang="emacs-lisp">
+(let ((name value);;VARLIST
+      unbound-var ;; nil
+      ;;...
+      )
+  BODY...
+  ;;返回最后一个表达式的值
+  )
+    </pre>
+  </li>
+  <li><code>if</code>
+    <pre class="src" lang="emacs-lisp">
+(if TEST
+    THAN)
+(if TEST
+    (THAN)
+  (ELSE))
+    </pre>
+  </li>
+  <li>布尔值
+    <dl>
+      <dt><code>false</code></dt><dd><code>nil</code> 也是空列表 <code>()</code> 的意思</dd>
+      <dt><code>true</code></dt><dd>其他值</dd>
+    </dl>
+  </li>
+  <li><code>save-excursion</code>
+    <pre class="src" lang="emacs-lisp">
+(save-excursion
+       FIRST-EXPRESSION-IN-BODY
+       SECOND-EXPRESSION-IN-BODY
+       THIRD-EXPRESSION-IN-BODY
+        ...
+       LAST-EXPRESSION-IN-BODY)
+    </pre>
+    <p>保存当前 Point ，执行 BODY 后恢复到保存的 Point</p>
+    <dl>
+      <dt>Point</dt><dd>当前指针的位置，整型，在文档开头值为 1</dd>
+      <dt>mark</dt><dd>通过 <code>C-&lt;SPC&gt;</code> 设置的标记，</dd>
+      <dt>region</dt><dd>mark 与 point 构成一个范围（region）</dd>
+    </dl>
+  </li>
+</ul>
+<h1 id="2022-04-13-wed">2022-04-13 Wed</h1>
+<ul>
+  <li><code>mark-whole-buffer</code></li>
+  <li><code>transient-mark-mode</code></li>
+  <li><code>push-mark</code></li>
+  <li><code>append-to-buffer</code></li>
+  <li><code>let</code> 与 <code>let*</code> 的区别在赋值列表的行为
+    <pre class="src" lang="emacs-lisp">
+(setq y 2)
+;; 同步求值？
+(let ((y 1) ;; 1
+      (z y));; 2
+  (list y z))
+(let ((x 1)
+      (x 2)) ;; 赋值顺序不确定
+  (print x)) ;; 1 or 2
+;;一个接一个求值
+(let* ((y 1)
+       (z y))
+  (list y z)) ;; 1 1
+    </pre>
+  </li>
+</ul>
+<h1 id="2022-04-14-thu">2022-04-14 Thu</h1>
+<dl>
+  <dt>windows</dt><dd>A “window” is an area of the screen that is used to display a buffer.</dd>
+  <dt>frames</dt><dd>包含 1 或多个 windows 的容器，表现为操作系统级的窗口</dd>
+</dl>
+<ul>
+  <li><code>point</code> 与 <code>window-point</code>  不一致。</li>
+  <li><code>interactive</code>  if the string begins with <code>*</code>, an error is signaled if the buffer(当前的) is read-only.</li>
+  <li><code>let</code> 可以用于临时隐藏外部 Symbol, 使 <code>setq</code> 的作用域限定于 <code>let</code> 的 scope
+    <pre class="src" lang="emacs-lisp">
+(setq x (1+ 2))  ;; 3
+(let (x)
+  (setq x 1)
+  (print x)  ;; 1
+  )
+(print x) ;; 3
+    </pre>
+  </li>
+</ul>
+<h1 id="2022-04-15-fri">2022-04-15 Fri</h1>
+<ul>
+  <li>可选参数 <code>&amp;optional</code></li>
+  <li><code>\\[universal-argument]</code> 函数文档中，这种形象的表达式会被解析为绑定的按键，见 <a href="help:beginning-of-buffer">help:beginning-of-buffer</a></li>
+</ul>
+<h1 id="2022-04-18-mon">2022-04-18 Mon</h1>
+<ul>
+  <li>narrow <code>C-x n n</code>, widen <code>C-x n w</code></li>
+  <li>lisp 对 buffer 的处理会会被限制于 narrow 的区域，比如 <code>point-min</code> 会返回 narrow 后的首字符位置</li>
+  <li><code>save-restriction</code> 保存当前 narrow 的状态，完成后恢复</li>
+  <li><code>car</code>, Contents of the Address part of the Register, 返回的是原子(first)</li>
+  <li><code>cdr</code>, Contents of the Decrement part of the Register, 返回的是表(rest)</li>
+  <li><code>cons</code>, construct lists not arrays. <code>(cons CAR CDR)</code>
+    <pre class="src" lang="emacs-lisp">
+(cons &#39;pine &#39;(fir oak maple)) ;; (pine fir oak maple)
+    </pre>
+  </li>
+  <li><code>car</code> and <code>cdr</code>, <code>cons</code> is <b>non-destructive(immutable)</b>.</li>
+  <li><code>(nthcdr 2 &#39;(pine fir oak maple))</code> 相当于调用 n 次 <code>cdr</code>
+    <ul>
+      <li>0 返回原列表</li>
+      <li>&gt;len 返回空列表 <code>nil</code></li>
+    </ul>
+  </li>
+  <li><code>(nth 2 &#39;(pine fir oak maple))</code> 相当于调用 n 次 <code>cdr</code> 再调用 <code>car</code></li>
+  <li><code>setcar</code> and <code>setcdr</code> mutable 版本
+    <pre class="src" lang="emacs-lisp">
+(setq animals (list &#39;antelope &#39;giraffe &#39;lion &#39;tiger))
+(setcar animals &#39;hippopotamus)
+;; animals =&gt; hippopotamus giraffe lion tiger
+(setcdr animals &#39;(cat dog))
+;; animals =&gt; hippopotamus cat dog
+    </pre>
+  </li>
+</ul>
+<h1 id="2022-04-19-tue">2022-04-19 Tue</h1>
+<ul>
+  <li>隐式 <code>progn</code> ，文档中以 <code>...</code> 表示，比如 <code>BODY...</code></li>
+  <li><code>kill-ring</code></li>
+  <li><code>`引用&#39;</code> 相当于 <code>&#39;引用&#39;</code> 。历史遗留问题，info 里面用的是弯引号
+    <ul>
+      <li><a href="https://practicaltypography.com/straight-and-curly-quotes.html">Straight and curly quotes |  Butterick’s Practical Typography</a></li>
+    </ul>
+  </li>
+  <li><code>kill-region</code> kill 理解为 clip</li>
+  <li><code>condition-case</code> 相当于 try-catch</li>
+</ul>
+<h1 id="2022-04-25-mon">2022-04-25 Mon</h1>
+<ul>
+  <li>emacs 中的异常叫 &#8220;signaling an error&#8221;</li>
+  <li>macro
+    <ul>
+      <li><code>when</code></li>
+    </ul>
+  </li>
+</ul>
+<h1 id="2022-05-31-tue">2022-05-31 Tue</h1>
+<ul>
+  <li><code>after-change-functions</code> 注册的函数接收三个函数， region 、变更前的文本长度
+    <pre class="src" lang="elisp">
+;; 通过这三个参数判断是不是另起一行
+;; beg 是上一行最后一个位置
+;; end 是新行第一个位置
+(and (eq len 0) (not (eq beg end)) (eq (char-after beg) 10)))
+    </pre>
+  </li>
+  <li>Association List(alist)，关联列表
+    car 部分作为 key. cdr 部分作为 value.
+    常用如下语法构建 alist ：
+    <pre class="src" lang="elisp">
+((pine . cones)
+ (oak . acorns)
+ (maple . seeds))
+    </pre>
+    <p>如果是 <code>(pine connes)</code> 等价于 <code>(pine . (connes))</code>
+      <code>assoc</code> 通过 key 获取 pair
+      <code>rassq</code> 则是通过 value</p>
+  </li>
+</ul>
+<h1 id="2022-06-02-thu">2022-06-02 Thu</h1>
+<p>正则表达式</p>
+<ul>
+  <li>要输入 <code>\</code> 的字面量是 <code>\\</code> ，因为 <code>\</code> 也是 elisp 字符串的转义符号，字符串先被 elisp 转义后再输入给 regex 引擎。</li>
+  <li><code>(){}|</code> 不转义的话会匹配原意，这与其他正则相反。</li>
+</ul>
+<p>还有<b>反习惯</b>的点：<code>\</code> 在 <code>[]</code> （character alternatives）里只是普通字符，不能起转义作用。</p>
+<ul>
+  <li>要匹配 <code>]</code> 需要在第一个有效字符声明 <code>[]]</code> 或 <code>[^]]</code></li>
+  <li><code>-</code> 需要在最后一个有效字符 <code>[abcde-]</code></li>
+  <li><code>^</code> 不能在第一个字符</li>
+</ul>
+<p>所以 <code>[]</code> （character alternatives）不能放入 syntax(\sCode) 和 category(\cCode)，这也在 rx[fn:1] 的文档得到验证。</p>
+<blockquote>
+  <p>Each SET is a character, a string representing the set of its characters, a range or a character class&#8230;</p>
+</blockquote>
+<p>正则表达式相关的字符集合：</p>
+<ul>
+  <li><a href="info:elisp#Char Classes">elisp#Char Classes</a></li>
+  <li><code>\sCode</code> <a href="info:elisp#Syntax Class Table">elisp#Syntax Class Table</a>  elisp 的概念，每个 buffer 或者 main mode 都有自己的定义</li>
+  <li><code>\cC</code>, <code>C</code> 指 <a href="info:elisp#Categories">elisp#Categories</a>. 可以实现类似于 <code>\p{Han}</code> 的效果
+    <ul>
+      <li><code>describe-categories</code> 可以获取当前 categories table</li>
+    </ul>
+  </li>
+</ul>
+<h1 id="footnotes">Footnotes</h1>
+<p>[fn:1] rx 是 emacs 一套用 S-表达式表示正则表达式的工具，见 <a href="info:elisp#Rx Constructs">elisp#Rx Constructs</a></p>
+ 
+</article>
+<div class="tag-container" >
+    
+</div>
+
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Tools/Emacs/elisp"
+ var disqus_config = function () {
+     this.page.title = "Elisp 笔记"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Tools/Emacs/elisp/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+        
+
+        
+
+        
+    </body>
+
+</html>

@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
-<html lang="zh-Hant-CN" class="borderbox" >
-   
+<html class="borderbox" >
+    
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,13 +22,12 @@
   <meta name="msapplication-square310x310logo" content="largetile.png" />
   <!-- Android Lolipop Theme Color -->
   <meta name="theme-color" content="#5d4d7a">
-  <link rel="stylesheet" href="/assets/main.css">
   <script src="/assets/main.js"></script>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
 
-  <body>
-    <header>
+    <body>
+        <header>
   <nav class="top-nav">
     <div class="container">
       <div class="nav-wrapper">
@@ -129,7 +128,7 @@
   <div class="row">
 
     <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
-<span class="post-date tooltipped" data-tooltip="最后更新 21-03-14">2020-11-20</span>
+<span class="post-date tooltipped" data-tooltip="最后更新 22-07-09">2020-11-20</span>
     
 </div>
 
@@ -158,10 +157,6 @@
 </code></pre>
   </li>
 </ol>
-
-<h2 id="github-action">Github Action</h2>
-
-<p>接下来把 <code>.config</code> 提交到 github <a href="https://github.com/douo/openwrt/tree/douo-19.07.4/">douo-19.07.4</a>分支，便可以触发 github action 自动编译。</p>
 
 <h2 id="本地编译arch-linux">本地编译（Arch Linux）</h2>
 
@@ -196,6 +191,16 @@
 
 <p>比如 <code>bin/targets/x86/64/openwrt-x86-64-combined-ext4.img.gz</code></p>
 
+<h2 id="github-action">Github Action</h2>
+
+<p>把 <code>.config</code> 提交到 github 特定分支，便可以触发 github action 自动编译。</p>
+
+<p>启用分支：</p>
+
+<ul>
+  <li><a href="https://github.com/douo/openwrt/tree/douo-19.07.4/">douo-19.07.4</a></li>
+</ul>
+
 <h1 id="自定义">自定义</h1>
 
 <p>见 <a href="openwrt-miscellaneous">Openwrt 折腾</a></p>
@@ -204,24 +209,22 @@
 
 <p><a href="https://github.com/douo/openwrt">douo/openwrt</a>，fork 自官方源</p>
 
-<p>当前分支：<a href="https://github.com/douo/openwrt/tree/douo-19.07.4/">douo-19.07.4</a></p>
-
-<p>变动了：</p>
-
 <ul>
-  <li>推送到 douo-19.07.4 会自动编译 ，见 <a href="https://github.com/douo/openwrt/blob/douo-19.07.4/.github/workflows/openwrt-ci.yml">openwrt/openwrt-ci.yml</a></li>
-  <li>使用<a href="https://github.com/douo/openwrt-package">自己的 package</a></li>
-  <li>tools 新增 upx ucl，因为 v2ray-plugin 硬编码 upx 依赖</li>
-  <li><code>.config</code> 本地 <code>make menuconfig</code> 后的结果文件，提交上去是为了 github action 按这配置编译</li>
+  <li><a href="https://github.com/douo/openwrt/tree/douo-21.02/">douo-21.02</a>
+    <ul>
+      <li>当前分支</li>
+      <li>使用<a href="https://github.com/douo/openwrt-package">自己的 package</a></li>
+    </ul>
+  </li>
+  <li><a href="https://github.com/douo/openwrt/tree/douo-19.07.4/">douo-19.07.4</a>
+    <ul>
+      <li>推送到 douo-19.07.4 会自动编译 ，见 <a href="https://github.com/douo/openwrt/blob/douo-19.07.4/.github/workflows/openwrt-ci.yml">openwrt/openwrt-ci.yml</a></li>
+      <li>使用<a href="https://github.com/douo/openwrt-package">自己的 package</a></li>
+      <li>tools 新增 upx ucl，因为 v2ray-plugin 硬编码 upx 依赖</li>
+      <li><code>.config</code> 本地 <code>make menuconfig</code> 后的结果文件，提交上去是为了 github action 按这配置编译</li>
+    </ul>
+  </li>
 </ul>
-
-<h2 id="packages">Packages</h2>
-
-<p>官方 19.07 的 golang 版本只只有 1.13，编译 v2ray 等包，需要 1.15，需要手动修改：</p>
-
-<p><code>feeds/packages/lang/golang/golang-version.mk</code> 和 <code>feeds/packages/lang/golang/golang/Makefile</code> （PKG_HASH），参考：<a href="https://github.com/openwrt/packages/blob/master/lang/golang/golang/Makefile#L10">1.15</a></p>
-
-<p><a href="https://github.com/douo/openwrt-package">douo/openwrt-package</a>，方便自己折腾和写包。</p>
 
 <h1 id="安装">安装</h1>
 
@@ -257,7 +260,7 @@ VBoxManage convertfromraw <span class="nt">--format</span> VDI openwrt-x86-64-co
 
     <pre><code>uci set network.lan.ipaddr='192.168.56.2'
 uci commit
-reboot
+/etc/init.d/network restart
 </code></pre>
   </li>
   <li>ssh 连上 <code>root@192.168.56.2</code></li>
@@ -265,14 +268,14 @@ reboot
 </ol>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uci batch <span class="o">&lt;&lt;</span><span class="no">EOF</span><span class="sh">
+del network.lan
+del network.wan
+del network.wan6
 set network.mng=interface
-set network.mng.type='bridge'
 set network.mng.proto='static'
+set network.mng.ipaddr='192.168.56.2'
 set network.mng.netmask='255.255.255.0'
-set network.mng.ifname='eth0'
-
-delete network.wan
-delete network.wan6
+set network.mng.device='eth0'
 </span><span class="no">EOF
 </span></code></pre></div></div>
 
@@ -281,18 +284,22 @@ delete network.wan6
 </ol>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uci batch <span class="o">&lt;&lt;</span><span class="no">EOF</span><span class="sh">
-set network.lan=interface
-set network.lan.ifname='eth1'
+set network.lan='interface'
 set network.lan.proto='static'
 set network.lan.ipaddr='192.168.50.221'
 set network.lan.netmask='255.255.255.0'
 set network.lan.gateway='192.168.50.1'
-set network.lan.dns='8.8.8.8'
+set network.lan.device='eth1'
+add_list network.lan.dns='8.8.8.8'
 </span><span class="no">EOF
 </span></code></pre></div></div>
 
+<p>8.1 删除 bridge
+    - 21.02 ‘uci del network.device’
+    - 22.03 变成 devices 需要 <code>uci show network -X</code>，找到编号再删除 <code>uci del network.cfg030f15</code></p>
+
 <ol>
-  <li><code>uci commit &amp;&amp; reboot</code></li>
+  <li><code>uci commit &amp;&amp; /etc/init.d/network restart</code></li>
   <li>
     <p>注意确保接口<code>lan</code> 的防火墙允许 input/output/forward，<code>uci show firewall</code>：</p>
 
@@ -371,13 +378,13 @@ blkid # 工具
 
 <p>确保软路由运行的是 squashfs 的系统：</p>
 
-<pre><code>scp openwrt-x86-64-combined-ext4.img.gz root@192.168.1.1:/tmp/ # 上传镜像到路由
+<pre><code>scp openwrt-x86-64-generic-ext4-combined.img.gz root@192.168.1.1:/tmp/ # 上传镜像到路由
 </code></pre>
 
 <p>ssh 登陆到软路由，把 ext4 安装到 <code>/dev/sdb3</code>:</p>
 
-<pre><code>gunzip openwrt-x86-64-combined-ext4.img.gz
-losetup -Pf openwrt-x86-64-combined-ext4.img # 一般挂载在 loop1，lsblk 可以看到
+<pre><code>gunzip openwrt-x86-64-generic-ext4-combined.img.gz
+losetup -Pf openwrt-x86-64-generic-ext4-combined.img # 一般挂载在 loop1，lsblk 可以看到
 mkdir -p /tmp/boot; mount /dev/loop1p1 /tmp/boot # 挂载 /boot
 mkdir -p /tmp/root; mount /dev/loop1p2 /tmp/root # 挂载 /
 mkdir -p /tmp/hboot; mount /dev/sdx1 /tmp/hboot # 挂载软路由 boot
@@ -405,10 +412,57 @@ export partuuid=blkid | sed -n -r  's/\/dev\/sd.3.*PARTUUID="([^"]*)"/\1/gp' # �
 vi /tmp/hboot/boot/grub/grub.cfg #把输出的菜单项追加到前面
 </code></pre>
 
+<h2 id="备份">备份</h2>
+
+<p>配置目录在 <code>/etc/config</code></p>
+
+<p>着重备份：</p>
+
+<ul>
+  <li><code>/etc/config/network</code></li>
+  <li><code>/etc/config/passwall</code></li>
+</ul>
+
+<p>其他：</p>
+
+<p>passwall 黑白名单:</p>
+
+<ul>
+  <li><code>/usr/share/passwall/direct_host</code></li>
+  <li><code>/usr/share/passwall/direct_ip</code></li>
+  <li><code>/usr/share/passwall/proxy_host</code></li>
+  <li><code>/usr/share/passwall/proxy_ip</code></li>
+</ul>
+
+<p>adguardhome:</p>
+
+<ul>
+  <li>dns rewrite: <code>/etc/adguardhome.yaml</code></li>
+  <li>dhcp static lease: <code>/var/adguardhome/leases.db</code></li>
+</ul>
+
+<p>备份脚本：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/sh</span>
+<span class="nv">list</span><span class="o">=(</span><span class="s2">"/etc/config/network"</span> <span class="s2">"/etc/config/passwall"</span> <span class="s2">"/usr/share/passwall/rules/direct_host"</span> <span class="s2">"/usr/share/passwall/rules/direct_ip"</span> <span class="s2">"/usr/share/passwall/rules/proxy_host"</span> <span class="s2">"/usr/share/passwall/rules/proxy_ip"</span> <span class="s2">"/etc/adguardhome.yaml"</span> <span class="s2">"/var/adguardhome/leases.db"</span><span class="o">)</span>
+<span class="nv">server</span><span class="o">=</span>root@192.168.1.1 <span class="c"># 服务器</span>
+<span class="nv">tmp</span><span class="o">=</span><span class="s2">"/tmp/"</span> <span class="c"># 本地保存地址</span>
+
+<span class="c"># backup</span>
+<span class="k">for </span>i <span class="k">in</span> <span class="s2">"</span><span class="k">${</span><span class="nv">list</span><span class="p">[@]</span><span class="k">}</span><span class="s2">"</span><span class="p">;</span> <span class="k">do
+    </span>scp <span class="k">${</span><span class="nv">server</span><span class="k">}</span>:<span class="k">${</span><span class="nv">i</span><span class="k">}</span>  <span class="k">${</span><span class="nv">tmp</span><span class="k">}</span>
+<span class="k">done</span>
+<span class="c"># restore</span>
+<span class="k">for </span>i <span class="k">in</span> <span class="s2">"</span><span class="k">${</span><span class="nv">list</span><span class="p">[@]</span><span class="k">}</span><span class="s2">"</span><span class="p">;</span> <span class="k">do
+    </span>scp <span class="k">${</span><span class="nv">tmp</span><span class="k">}</span><span class="sb">`</span><span class="nb">basename</span> <span class="nv">$i</span><span class="sb">`</span> <span class="k">${</span><span class="nv">server</span><span class="k">}</span>:<span class="k">${</span><span class="nv">i</span><span class="k">}</span>
+<span class="k">done</span>
+</code></pre></div></div>
+
 </article>
 <div class="tag-container" >
     
 </div>
+
 
 <div id="disqus_thread"></div>
 <script>
@@ -432,6 +486,8 @@ vi /tmp/hboot/boot/grub/grub.cfg #把输出的菜单项追加到前面
  })();
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
 
 
 <a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
@@ -500,10 +556,11 @@ vi /tmp/hboot/boot/grub/grub.cfg #把输出的菜单项追加到前面
 
 
 
-    
+        
 
-    
-</body>
+        
+
+        
+    </body>
 
 </html>
-

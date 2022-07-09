@@ -1,0 +1,15 @@
+ <h1 id="隐私">隐私</h1>
+<p>避免生产环境暴露如下 collections:</p>
+<ul>
+  <li>resumes</li>
+  <li>diary</li>
+</ul>
+<p>jekyll 的生产环境判断受控于环境变量，确保 <code>npm run build</code> 有指定这个环境变量（见 <a href="package.json">package.json</a> 和 <a href=".github/workflows/deploy-workflow.yml">deploy-workflow.yml</a>）：</p>
+<pre class="src" lang="bash">
+JEKYLL_ENV=production
+</pre>
+<p>具体控制的方法是通过 <a href="_config_dev.yml">_config_dev.yml</a> 覆盖 <a href="_config.yml">_config.yml</a>, 确保 <code>npm start</code> 执行如下方法启动 jekyll:</p>
+<pre class="src" lang="bash">
+bundle exec jekyll build --watch --config _config.yml,_config_dev.yml
+</pre>
+ 

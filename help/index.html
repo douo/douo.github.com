@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
-<html lang="zh-Hant-CN" class="borderbox" >
-   
+<html class="borderbox" >
+    
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,13 +22,12 @@
   <meta name="msapplication-square310x310logo" content="largetile.png" />
   <!-- Android Lolipop Theme Color -->
   <meta name="theme-color" content="#5d4d7a">
-  <link rel="stylesheet" href="/assets/main.css">
   <script src="/assets/main.js"></script>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
 
-  <body>
-    <header>
+    <body>
+        <header>
   <nav class="top-nav">
     <div class="container">
       <div class="nav-wrapper">
@@ -186,11 +185,11 @@ $$
 
 $$ 5 + 5 $$
 
-But next comes a paragraph with an inline math statement: $$ 5 + 5 $$ 
+But next comes a paragraph with an inline math statement: $$ 5 + 5 $$
 
-This is block: \$$ 5 + 5 $$ 
+This is block: \$$ 5 + 5 $$
 
-This is block: \$\$ 5 + 5 $$ 
+This is block: \$\$ 5 + 5 $$
 
 </code></pre>
 <p>The following is a math block:</p>
@@ -211,7 +210,7 @@ This is block: \$\$ 5 + 5 $$
 
 <h3 id="标签逃逸">标签逃逸</h3>
 
-<pre><code>用 {% raw %} 标签 
+<pre><code>用 {% raw %} 标签
 </code></pre>
 
 <h3 id="graphviz">Graphviz</h3>
@@ -252,7 +251,7 @@ digraph G {
 	start [shape=Mdiamond];
 	end [shape=Msquare];
 }
-{% endgraphviz %} 
+{% endgraphviz %}
 </code></pre>
 
 <div class="graphviz" data-graph="
@@ -442,21 +441,33 @@ gantt
 
 
 
-    
-    <script src="https://cdn.bootcss.com/viz.js/1.8.2/viz-lite.js"></script>
-<script>
- $(".graphviz").each(function(a,b){b.appendChild(Viz($(b).data("graph"), { format: "png-image-element" }))});
+        
+        <script>
+ moon.initViz().then(viz =>{
+     $(".graphviz").each((a,b)=>{
+         viz.renderSVGElement($(b).data("graph"))
+            .then( ele => {
+                b.appendChild(ele)
+            });
+     })
+ })
 </script>
 
-    
+        
 
-    
-    <script type="text/javascript" async
+        
+        <script type="text/javascript" async
  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
 </script>
 
-    
-</body>
+        
+
+        
+        <script>
+ moon.initMermaid()
+</script>
+
+        
+    </body>
 
 </html>
-

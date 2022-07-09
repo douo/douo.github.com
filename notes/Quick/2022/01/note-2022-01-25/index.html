@@ -1,0 +1,312 @@
+
+<!DOCTYPE html>
+<html class="borderbox" >
+    
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    2022年01月25日杂记 | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+    <body>
+        <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">2022年01月25日杂记</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li>
+      <div class="logo">
+        <a id="logo-container" href="/notes" class="brand-logo">
+          <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+        </a>
+        <div class="social">
+          
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+          
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+          
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+          
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+          
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+          
+        </div>
+    </li>
+    </div>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 22-04-03">2022-01-25</span>
+    
+</div>
+
+<article>
+     <p>[2022-01-25 Tue 15:31]</p>
+<h1 id="yuv">YUV</h1>
+<p>类似于 RGB 的另外一种表述颜色的方法</p>
+<ul>
+  <li>中 Y 表示明亮度（Luminance、Luma），也就是灰阶值。</li>
+  <li>U、V 表示色度（Chrominance 或 Chroma），描述的是色调和饱和度。</li>
+</ul>
+<h1 id="yuv-采样">YUV 采样</h1>
+<ul>
+  <li>可以理解为将多个 YUV 像素表示图像，</li>
+  <li>YUV 所表示的图像，Y 和 UV 分量是分离，解决与和黑白电视机的兼容问题</li>
+  <li>人眼对色度的敏感程度低于对亮度的敏感程度，所以可以通过几个 Y 分量共用 UV 分量来节约空间</li>
+</ul>
+<p>采样格式：</p>
+<ul>
+  <li>YUV444，每个像素都用 Y、U、V 三分量表示，单个像素占用 3 个字节：Y0U0V0</li>
+  <li>YUV422，UV 分量的采样率是 Y 分量的一半（间隔采样），两个像素占用 4 个字节：Y0U0Y1V0</li>
+  <li>YUV420，一行(固定步进)只间隔采样 U 分量，另一行只间隔采样 V 分量，8 个像素 12 字节：Y0U0Y1Y2U2Y3 Y4V4Y5Y6V6Y7</li>
+</ul>
+<h1 id="存储方式">存储方式</h1>
+<ul>
+  <li>平面（planar format），各个分量独立连续存储</li>
+  <li>打包（packed format），按像素点连续存储，具体在内存中就是 YUV 交错存储</li>
+</ul>
+<p>不同的采样格式和存储方式可以产生出多种存储格式：</p>
+<ul>
+  <li>YUYV， YUV422 采样，打包存储。Y 分量，然后同时间隔采样UV，Y0U0Y1V0 Y2U2Y3V2</li>
+  <li>UYVY，同 YUYV ，顺序不同。U0Y0V0Y1 U2Y2V2Y3</li>
+  <li>YUV422P, YUV422 平面存储，</li>
+  <li>YUV420P, YUV420 平面存储
+    <ul>
+      <li>YU12, YUV 顺序存储平面</li>
+      <li>YU21, YVU 顺序存储平面</li>
+    </ul>
+  </li>
+  <li>YUV420SP, YUV420 平面存储，Y 单独一个平面，UV 打包存储
+    <ul>
+      <li>NV12, Y 平面 UV 交替存储。iOS 格式</li>
+      <li>NV21, Y 平面 VU 交替存储。Android 格式 <code>android.graphics.YuvImage</code> 只支持这个格式和 YUY2(YUYV)</li>
+    </ul>
+  </li>
+</ul>
+<h1 id="android-image">Android Image</h1>
+<p><code>android.media.Image</code> MediaCodec 和 CameraDevice 用的图像缓冲</p>
+<p><code>Image.Plane</code> 平面模式存储中的平面对象。除了存储像素数据外，还封装了像素步进（PixelStride）和行步进（RowStride）。
+  以 YUV420_888 格式为例，Y 平面像素步进为 1 ，表示连续存储。UV 平面像素步进为2，表示间隔存储。行步进就是图像的宽度。</p>
+<p>另外 Android 表示格式的有 <code>android.graphics.ImageFormat</code> 和 <code>android.graphics.PixelFormat</code></p>
+<p>对于 YUV 转 RGB android 的支持非常有限，自己实现的话 kotlin 位运算真是让人不适。</p>
+<pre class="src" lang="kotlin">
+fun main() {
+    val a:Int = 0xaa
+    val i:Int = -16777216.or(a)
+    val j:Int = -16777216 or a
+    println(Integer.toHexString(i))  // feffff56
+    println(Integer.toHexString(j))  // ff0000aa
+}
+</pre>
+<p>https://medium.com/androiddevelopers/convert-yuv-to-rgb-for-camerax-imageanalysis-6c627f3a0292
+  https://blog.minhazav.dev/how-to-convert-yuv-420-sp-android.media.Image-to-Bitmap-or-jpeg/</p>
+<ol>
+  <li>JavaAPI
+    <p>YUV420P -&gt; NV21 -&gt; RGB</p>
+    <p>YUV420 是 CameraX 获取到的帧格式， NV21 是 YuvImage 对应的 YUV420 采样的格式。 YuvImage 通过 compressToJpeg 将数据转换为 jpeg，再通过 BitmapFactory 将 jpeg 读到 Bitmap</p>
+    <p>而且会有厌烦的 <code>onFlyCompress</code> logcat 输出 [core/jni/android/graphics/YuvToJpegEncoder.cpp - platform/frameworks/base.git - Git at Google](https://android.googlesource.com/platform/frameworks/base.git/+/android-4.3_r2/core/jni/android/graphics/YuvToJpegEncoder.cpp#73)</p>
+  </li>
+  <li>RenderScript
+    <p>内置有 <code>android.renderscript.ScriptIntrinsicYuvToRGB</code> 支持。但 RenderScript 在 Android 12 已经弃用。
+      https://github.com/android/camera-samples/blob/master/CameraUtils/lib/src/main/java/com/example/android/camera/utils/YuvToRgbConverter.kt</p>
+  </li>
+</ol>
+ 
+</article>
+<div class="tag-container" >
+    
+</div>
+
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Quick/2022/01/note-2022-01-25"
+ var disqus_config = function () {
+     this.page.title = "2022年01月25日杂记"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Quick/2022/01/note-2022-01-25/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+        
+
+        
+
+        
+    </body>
+
+</html>

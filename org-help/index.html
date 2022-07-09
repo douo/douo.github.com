@@ -1,0 +1,638 @@
+
+<!DOCTYPE html>
+<html class="borderbox" >
+    
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    Org Help | DouO's Blog</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+    <body>
+        <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">Org Help</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li>
+      <div class="logo">
+        <a id="logo-container" href="/notes" class="brand-logo">
+          <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+        </a>
+        <div class="social">
+          
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+          
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+          
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+          
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+          
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+          
+        </div>
+    </li>
+    </div>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <h1 id="语法">语法</h1>
+<h2 id="语法--标题-headline-">标题（headline）</h2>
+<p>以 <code>*</code> 开头的行，标题的层级由 <code>*</code> 的数量决定：</p>
+<pre class="example">
+* 标题一
+** 标题二
+*** 标题三
+</pre>
+<h2 id="语法--条目-entry-">条目（Entry）</h2>
+<p>标题及其内容成为条目（Entry），条目包括：</p>
+<ul>
+  <li>段落</li>
+  <li>列表</li>
+  <li>抽屉（DRAWER）</li>
+</ul>
+<h2 id="语法--正文-段落-paragraph-">正文/段落（paragraph）</h2>
+<p>正文紧跟着标题的下一行书写， 首行空格（ <code>leading-space</code> ） 解析的时候会被忽略，我偏向于不使用首行空格。一个换行符会被渲染成一个空格，
+  <code>\\</code> 是强制换行。<br />
+  两个换行符才能另起一段。</p>
+<p>这是新的一段：向并弊积虏栏障份芽评贼遍惕毁颅镦溪讲峻怎描梁儿锁砷斑玻摘穿滤毒可阶无秦危哪浩熹郝吾肺耗慕影温砧晒滴缓片谓虎探淆狡乌软湘眉都创份瞪？智蒋信袋被。</p>
+<pre class="example">
+*** 正文/段落（paragraph）
+正文紧跟着标题的下一行书写， 首行空格（ ~leading-space~ ） 解析的时候会被忽略，我偏向于不使用首行空格。一个换行符会被渲染成一个空格，
+~\\~ 是强制换行。\\
+两个换行符才能另起一段。
+
+这是新的一段：向并弊积虏栏障份芽评贼遍惕毁颅镦溪讲峻怎描梁儿锁砷斑玻摘穿滤毒可阶无秦危哪浩熹郝吾肺耗慕影温砧晒滴缓片谓虎探淆狡乌软湘眉都创份瞪？智蒋信袋被。
+</pre>
+<p>org 也可以开启自动缩进（不使用），默认缩进为标题的层级 +1。</p>
+<pre class="src" lang="elisp">
+(setq org-adapt-indentation t)
+</pre>
+<p><code>org-indent-mode</code> 可以让 org 的结构看起来有缩进，但实际并没有空格，比如 gtd 文件，就是启用了这个模式。也可以通过 startup 属性 <code>indent</code> 配置。</p>
+<h2 id="语法--列表">列表</h2>
+<ul>
+  <li><code>TAB</code> (<code>org-cycle</code>) 折叠子列表，如果列表项还没有文本，则切换列表缩进</li>
+  <li><code>M-&lt;RET&gt;</code> 插入新的列表项</li>
+  <li><code>M-S-&lt;RET&gt;</code> 插入新的 checkbox 列表</li>
+  <li><code>S-&lt;UP&gt;/&lt;DOWN&gt;</code> 同级列表项间移动</li>
+  <li><code>M-&lt;Up&gt;/&lt;DOWN&gt;</code> 移动列表项</li>
+  <li><code>M-&lt;LEFT&gt;/&lt;RIGHT&gt;</code> 切换列表项缩进</li>
+  <li><code>M-S-&lt;LEFT&gt;/&lt;RIGHT&gt;</code> 切换列表项及其<b>子列表</b>缩进</li>
+  <li>有效的列表标识 : <code>-</code>, <code>+</code>, <code>*</code>, <code>1.</code>, <code>1)</code></li>
+  <li><code>C-c ^</code> 列表排序</li>
+</ul>
+<h3 id="语法--列表--符号列表">符号列表</h3>
+<ul>
+  <li>这是列表1
+    <ul>
+      <li>这是列表2
+        <ul>
+          <li><code>M-Ret</code> 插入同级列表</li>
+          <li><code>S-right</code> 切换列表符号</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>这是列表2</li>
+  <li>这是列表1</li>
+  <li>这是列表2</li>
+</ul>
+<pre class="example">
+- 这是列表1
+  - 这是列表2
+    + ~M-Ret~ 插入同级列表
+    + ~S-right~ 切换列表符号
+- 这是列表2
+- 这是列表1
+- 这是列表2
+</pre>
+<h3 id="语法--列表--数字列表">数字列表</h3>
+<ol>
+  <li>数字列表 1
+    <ol>
+      <li>符号列表 1</li>
+      <li>符号列表 2</li>
+    </ol>
+  </li>
+  <li>数字列表 2</li>
+</ol>
+<pre class="example">
+1) 数字列表 1
+   1. 符号列表 1
+   2. 符号列表 2
+2) 数字列表 2
+</pre>
+<h3 id="语法--列表--检查框列表">检查框列表</h3>
+<ul>
+  <li>[ ] 检查框列表 1</li>
+  <li>[ ] <code>M-S-RET</code> 插入新的检查列表项</li>
+  <li>[ ] <code>C-c C-c</code> 切换检查状态</li>
+  <li>[-] 支持子项目 [1/3]
+    <ul>
+      <li>[X] 子项目 A</li>
+      <li>[ ] 子项目 B</li>
+      <li>[ ] 列表项后加入 [/] 或 [%] 可以检查统计状态</li>
+    </ul>
+  </li>
+</ul>
+<p>问题</p>
+<ul>
+  <li>org-ruby 不能解析</li>
+  <li>pandoc 可以解析到 <code>&lt;input type=&quot;checkbox&quot; disabled&gt;</code></li>
+</ul>
+<h3 id="语法--列表--定义列表-description-list-">定义列表（Description List）</h3>
+<dl>
+  <dt>定义列表</dt><dd>用于列举定义项</dd>
+  <dt>item 2</dt><dd><code>M-RET</code> 插入新的项目</dd>
+</dl>
+<pre class="example">
+- 定义列表 :: 用于列举定义项
+- item 2 :: ~M-RET~ 插入新的项目
+</pre>
+<p>解析为 <code>dl</code> 标签</p>
+<h2 id="语法--引用">引用</h2>
+<h2 id="语法--块-blocks-">块（Blocks）</h2>
+<p>块的格式如下：</p>
+<pre class="example">
+#+begin_TYPE
+CONTENT
+#+end_TYPE
+</pre>
+<ul>
+  <li>在块中显示块语法，需要转义 <code>#+</code> -&gt; <code>,#+</code></li>
+  <li>显示标题，需要转义 <code>*</code> -&gt; <code>,*</code></li>
+  <li><code>C-c C-,</code> 快速插入内置的块类型</li>
+</ul>
+<p>兼容性：</p>
+<ul>
+  <li>org-ruby 忽略自定义 type</li>
+  <li>pandoc 会解析自定义 type</li>
+  <li>verse 块，保留换行格式</li>
+  <li>quote，引用
+    <blockquote>
+      <p>Everything should be made as simple as possible,
+        but not any simpler &#8212;Albert Einstein</p>
+    </blockquote>
+  </li>
+  <li>center，置中
+    <div style="text-align: center">
+      <p>Everything should be made as simple as possible, <br />
+        but not any simpler</p>
+    </div>
+  </li>
+</ul>
+<h3 id="语法--块-blocks---literal-examples">Literal Examples</h3>
+<p>type 为 example 或 src 的块，称为 literal examples. 支持块内跳转：</p>
+<pre class="example">
+Here is example (ref:sc)
+[[(sc)][跳转到块内]]
+</pre>
+<p><a href="(sc)">跳转到块内</a> org-ruby、pandoc 都不支持</p>
+<p>example 支持单行语法</p>
+<pre class="example">
+* Headline
+</pre>
+<p>标记为 ~: ~</p>
+<pre class="example">
+: * Headline
+</pre>
+<h3 id="语法--块-blocks---代码高亮">代码高亮</h3>
+<pre class="src" lang="python">
+try:
+    from wheel.bdist_wheel import bdist_wheel
+except ImportError:
+    # This is useful when wheel is not installed and bdist_wheel is not
+    # specified on the command line. If it _is_ specified, parsing the command
+    # line will fail before wheel_concatenate is needed
+    wheel_concatenate = None
+else:
+    # Need to create the proper LICENSE.txt for the wheel
+    class wheel_concatenate(bdist_wheel):
+        &quot;&quot;&quot; check submodules on sdist to prevent incomplete tarballs &quot;&quot;&quot;
+        def run(self):
+            with concat_license_files():
+                super().run()
+</pre>
+<h2 id="语法--drawers">Drawers</h2>
+<p><code>C-c C-x d</code> <code>(org-insert-drawer)</code>
+  用于描述条目的元数据，属于不可见的数据。</p>
+<ul>
+  <li>org-ruby 会解析显示出 drawer 的内容</li>
+  <li>pandoc 会解析显示出 drawer 的内容</li>
+</ul>This is inside the drawer.
+<pre class="example">
+，** This is a headline
+Still outside the drawer
+:DRAWERNAME:
+This is inside the drawer.
+:END:
+After the drawer.
+</pre>
+<h2 id="语法----b--属性-property-">[#B] 属性（Property）</h2>
+<p>条目的属性需要在 headline 或 schedule line 的下一行中定义，属性 drawer 不应出现空行。</p>
+<pre class="example">
+:PROPERTIES:
+:KEY:      value
+:KEY_ALL: 为子项定义词表_
+:END:
+#+PROPERTY:
+</pre>
+<p>也可以用一行属性</p>
+<pre class="example">
+#+PROPERTY: KEY VALUE
+</pre>
+<ul>
+  <li><code>C-c C-x p</code> ( <code>org-set-property</code> ) 可以为当前条目设置属性</li>
+  <li><a href="info:org#Special Properties">org 的特殊属性</a></li>
+</ul>
+<h2 id="语法--表格">表格</h2>
+<p>org 的表格语法看起来与 markdown 一致</p>
+<table>
+  <tr><th>Name</th><th>Phone</th><th>Age</th></tr>
+  <tr><td>Peter</td><td>1234</td><td>17</td></tr>
+  <tr><td>Anna</td><td>4321</td><td>25</td></tr>
+</table>
+<pre class="example">
+| Name  | Phone | Age |
+|-------+-------+-----|
+| Peter |  1234 |  17 |
+| Anna  |  4321 |  25 |
+</pre>
+<ul>
+  <li><code>&lt;TAB&gt;</code> 加上行的一个非空白字符为 <code>|</code>, <code>|-</code> 几乎可以生成整个表格</li>
+  <li><code>C-c |</code> 可以当成 dwim 的方式创建表格</li>
+  <li><code>C-c C-c</code> 对齐表格， <code>&lt;TAB&gt;</code> 在有文本的单元格内可以对齐表格</li>
+</ul>
+<h2 id="语法--链接">链接</h2>
+<ul>
+  <li><a href="https://google.com">DESCRIPTION</a></li>
+  <li><a href="https://google.com">https://google.com</a></li>
+  <li><a href="\test\\">\test\</a></li>
+  <li>[[\[\]][[]​]]</li>
+</ul>
+<pre class="example">
+- [[https://google.com][DESCRIPTION]]
+- [[https://google.com]]
+- [[\test\\][\test\]]
+- [[\[\]][[]​]]
+</pre>
+<ul>
+  <li>org-ruby 不能正确解析， link 转义 <code>[[\[\]][[]​]]</code> 不能被解析为 <code>[]</code></li>
+  <li>pandoc 不能解析 <code>[[\test\\][\test\]]</code></li>
+</ul>
+<p>内部链接，仅 pandoc 支持 custom id.</p>
+<ul>
+  <li>&lt;&lt;my-target&gt;&gt;</li>
+  <li>&lt;&lt;&lt;radio-target&gt;&gt;&gt;</li>
+  <li><a href="my-target">my-target</a></li>
+  <li>radio-target</li>
+  <li><a href="*math">*math</a></li>
+  <li><a href="name-target">name-target</a></li>
+  <li><a href="#my-custom-id">#my-custom-id</a></li>
+</ul>
+<p>另外还有一个实用操作：</p>
+<ul>
+  <li><code>org-store-link</code> 将当前位置的链接压入栈</li>
+  <li><code>org-insert-link</code> 可将栈中的链接弹出，插入当前位置</li>
+</ul>
+<h2 id="语法--图片">图片</h2>
+<p>图片的语法等同于不带描述的链接格式，支持附加元数据，通过后缀名判断是否是图片</p>
+<ul>
+  <li>org 不支持外部图片</li>
+  <li>org-ruby 支持 web 图片，不支持元数据</li>
+  <li>pandoc 支持 web 图片。</li>
+</ul>
+<p><img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_light_color_272x92dp.png" alt="https://www.google.com/images/branding/googlelogo/1x/googlelogo_light_color_272x92dp.png" /></p>
+<pre class="example">
+#+CAPTION: This is the caption
+#+NAME:   google
+[[https://www.google.com/images/branding/googlelogo/1x/googlelogo_light_color_272x92dp.png]]
+</pre>
+<p>另外，包括图片、表格、块都支持通过元数据设置标题（captions）</p>
+<pre class="example">
+#+CAPTION: This is caption
+</pre>
+<h2 id="语法--附件">附件</h2>默认的附件行为会在 org 文件同目录下的 data(<code>org-attach-id-dir</code>) 文件夹生成 ID 文件夹，一个条目对于一个 ID。
+<ul>
+  <li>org-ruby 不支持 attachment link</li>
+  <li>pandoc  不支持 attachment link</li>
+</ul>
+<p><img src="/data/B6/10FE16-BD19-4B86-93FA-2DD0DD4C2F7E/2022-05-13_16-29-53_screenshot.png" alt="/data/B6/10FE16-BD19-4B86-93FA-2DD0DD4C2F7E/2022-05-13_16-29-53_screenshot.png" /></p>
+<p><img src="/data/B6/10FE16-BD19-4B86-93FA-2DD0DD4C2F7E/2022-05-13_16-47-26_screenshot.png" alt="/data/B6/10FE16-BD19-4B86-93FA-2DD0DD4C2F7E/2022-05-13_16-47-26_screenshot.png" /></p>
+<h2 id="语法--强调--emphasis--">强调（ Emphasis ）</h2>
+<p>默认的强调语法，需要确保包围字符与外部字符之间有空格隔开，对于中文来说水土不服<a id="fnr.1" class="footref" href="#fn.1"><sup>1</sup></a>。解决的方向有两个：</p>
+<ol>
+  <li>修改 <code>org-emphasis-regexp-components</code>，改变量控制对强调语法的匹配</li>
+  <li>自动加空格或零宽空格（~C-x 8 RET~），比如 <a href="https://github.com/ingtshan/separate-inline.el">ingtshan/separate-inline.el</a> 或 <a href="https://github.com/zk-phi/electric-spacing">zk-phi/electric-spacing</a></li>
+</ol>
+<p>考虑源自 markdown 的使用习惯和一致性，我选择修改 <code>org-emphasis-regexp-components</code><a id="fnr.2" class="footref" href="#fn.2"><sup>2</sup></a>.</p>
+<pre class="src" lang="elisp">
+(org-set-emph-re &#39;org-emphasis-regexp-components
+ (let ((cjk &quot;[:nonascii:]&quot;)) ;; 应该使用 \\cc\\cj\\ch 但 char alternative 不支持 category 使用只能用 char class.
+   (pcase-let ((`(,f ,s . ,r) org-emphasis-regexp-components))
+     `(,(concat f cjk) ,(concat s cjk) . ,r)
+     )
+   ))
+</pre>
+<p>org-ruby 这块的正则是写死，需要改一下代码。ruby 的 character alternatives(character classes) 是支持 <code>\</code> 转义的，可以使用 <code>\p{Han}</code> 这样的类别字符集，但是匹配全角符号和零宽空格麻烦一些<a id="fnr.3" class="footref" href="#fn.3"><sup>3</sup></a>。</p>
+<p>最终效果如下：</p>
+<p><b>粗体（ bold ）</b>、<i>斜体（ italic ）</i>、<span style="text-decoration:underline;">下划线（ underlined ）</span>、<code>抄录？（ verbatim ）</code>、<code>代码（ code ）</code>、<del>删除线（ strike-through ）</del></p>
+<pre class="example">
+*粗体（ bold ）*、/斜体（ italic ）/、_下划线（ underlined ）_、=抄录？（ verbatim ）=、~代码（ code ）~、+删除线（ strike-through ）+
+</pre>
+<p>code 和 verbatim 内的字符串不被当作 org 语法处理。</p>
+<h2 id="语法--水平线">水平线</h2>
+<hr />
+<p>大于5个 <code>-</code></p>
+<h2 id="语法--脚注">脚注</h2>
+<p>这是一个脚注链接<a id="fnr.4" class="footref" href="#fn.4"><sup>4</sup></a>， <code>C-c C-c</code> 可以创建脚注。脚注自动创建在最后一个名为 <code>Footnotes</code> 的条目里。脚注语法如下：</p>
+<pre class="example">
+这是脚注[fn:1]
+[fn:1] 这是脚注定义
+</pre>
+<p>org-ruby 可支持行内脚注<a id="fnr.name" class="footref" href="#fn.name"><sup>name</sup></a>但不支持匿名。行内脚注的定位会输出在当前条目后的 Footnotes 条目内，但该行为存在严重 bug: 脚注定义会在声明后的每个条目内重复生成<a id="fnr.5" class="footref" href="#fn.5"><sup>5</sup></a>。另外不管当前条目处于什么层级，Footnotes 条目都固定为 <code>h2</code>, 总体问题较多，好在使用场景较少就不一一修复了。</p>
+<pre class="example">
+[fn:name: 这是一个名为 name 的行内脚注]
+[fn:: 匿名脚注]
+</pre>
+<p>行内脚注也支持脚注定义，用于补充引用。</p>
+<p>org-ruby 默认不开启脚注支持，需要在属性中打开支持：</p>
+<pre class="example">
+#+OPTIONS: f:t
+</pre>
+<p>pandoc 不支持命名脚注</p>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes:</h2>
+<div id="text-footnotes">
+<p><a id="fn.name" class="footnum" href="#fnr.name"><sup>name</sup></a>这是一个名为 name 的行内脚注</p>
+</div>
+</div>
+<h2 id="语法--上标下标及特殊符号">上标下标及特殊符号</h2>
+<p>The radius of the sun is R_sun = 6.96 x 10^8 m.  On the other hand, the radius of Alpha Centauri is R<sub>Alpha Centauri</sub> = 1.28 x R<sub>sun</sub>.</p>
+<pre class="example">
+The radius of the sun is R_sun = 6.96 x 10^8 m.  On the other hand, the radius of Alpha Centauri is R_{Alpha Centauri} = 1.28 x R_{sun}.
+</pre>
+<p>一些内置特殊符号：</p>
+<ul>
+  <li>&alpha;</li>
+  <li>&pi;{d}</li>
+  <li>&rarr;</li>
+  <li>见变量 <code>org-entitiens</code></li>
+  <li><code>C-c C-x \</code> (<code>org-toggle-pretty-entities</code>) 切换文本显示为 WYSIWYM</li>
+  <li>org-ruby 只支持 <code>_{}</code>, <code>^{}</code></li>
+</ul>
+<h2 id="语法--latex">LaTex</h2>
+<p>行内 LaTex 标记：</p>
+<blockquote>
+  <p>If $a^2=b$ and \( b=2 \), then the solution must be either $$ a=+\sqrt{2} $$ or \[ a=-\sqrt{2} \].</p>
+</blockquote>
+<p>能自动识别 Latex 块，无需特殊包围标记：</p>
+<blockquote>
+  <p>\begin{align*}
+    &amp; &phi;(x,y) = &phi; \left(&sum;<sub>i=1</sub>^n x_ie_i, &sum;<sub>j=1</sub>^n y_je_j \right)
+    = &sum;<sub>i=1</sub>^n &sum;<sub>j=1</sub>^n x_i y_j &phi;(e_i, e_j) = <br />
+    &amp; (x_1, \ldots, x_n) \left( \begin{array}{ccc}
+    &phi;(e_1, e_1) &amp; \cdots &amp; &phi;(e_1, e_n) &#92;
+    \vdots &amp; \ddots &amp; \vdots &#92;
+    &phi;(e_n, e_1) &amp; \cdots &amp; &phi;(e_n, e_n)
+    \end{array} \right)
+    \left( \begin{array}{c}
+    y_1 &#92;
+    \vdots &#92;
+    y_n
+    \end{array} \right)
+    \end{align*}</p>
+</blockquote>
+<h3 id="语法--latex--org-ruby">org-ruby</h3>
+<ul>
+  <li><code>$$</code> 不支持</li>
+  <li><code>\( \)</code> 支持</li>
+  <li><code>$$$$</code>, <code>\[\]</code>  当成块处理</li>
+  <li>基本不支持自动识别</li>
+</ul>
+<h3 id="语法--latex--pandoc">pandoc</h3>
+<ul>
+  <li><code>$$</code> 支持</li>
+  <li><code>\( \)</code> 支持</li>
+  <li><code>$$$$</code>, <code>\[\]</code>  不支持</li>
+  <li>不支持自动识别</li>
+</ul>
+<pre class="src" lang="latex">
+\begin{equation}
+A[v_1, v_2, \ldots, v_r] = [\sigma_1 u_1, \sigma_2 u_2, \ldots, \sigma_r u_r]
+\end{equation}
+</pre>
+<h2 id="语法--liquid">Liquid</h2>
+<pre class="example">
+enabled
+</pre>
+<p></p>
+<p>or</p>
+<p>2022-07-09T08:06:15+00:00</p>
+<h2 id="语法--导出">导出</h2>
+<ul>
+  <li><code>C-c C-e</code> <code>(org-export)</code></li>
+  <li><code>org-hint</code> 可以检测文本错误，避免导出出错。</li>
+  <li><code>#+OPTIONS: broken-links:t</code> 或变量 <code>(org-export-with-broken-links)</code> 可以忽略不能解析的链接</li>
+  <li>更多设置见：<a href="info:org#Export Settings">info:org#Export Settings</a></li>
+</ul>
+<h3 id="语法--导出--第三方">第三方</h3>
+<ul>
+  <li>org-ruby</li>
+  <li>pandoc</li>
+</ul>
+<h1 id="org-ruby">org-ruby</h1>
+<p>支持 in buffer setting:
+  <code>EXPORT_SELECT_TAGS</code>, only those headings will get exported.
+  <code>EXPORT_EXCLUDE_TAGS</code>, subtree will not get exported.</p>
+<h1 id="footnotes">Footnotes</h1>
+<p><a id="fn.1" class="footnum" href="#fnr.1"><sup>1</sup></a> 讨论见  <a href="https://emacs-china.org/t/org-mode/597">Org-mode 中文行内格式化的问题 - Org-mode - Emacs China</a></p>
+<p><a id="fn.2" class="footnum" href="#fnr.2"><sup>2</sup></a> 见 <a href="https://github.com/douo/lims_dot_emacs/commit/9f7c0ed126233a7032c94ecff62a9d363cb8202a">feat: tweak emphasis regex to match chinese</a></p>
+<p><a id="fn.3" class="footnum" href="#fnr.3"><sup>3</sup></a> 见 <a href="https://github.com/douo/org-ruby/commit/5f523f3566e0a4c4a457a7541450ca407eb5088e">hack: CJK support for empasis syntax.</a></p>
+<p><a id="fn.4" class="footnum" href="#fnr.4"><sup>4</sup></a> 这是脚注</p>
+<p><a id="fn.5" class="footnum" href="#fnr.5"><sup>5</sup></a> 见 <a href="https://github.com/douo/org-ruby/commit/a3f6e7d8fe2d725a0395f579555fd09b4f65d864">feat: keep inline fn defination same with normal fn defination in html.</a></p>
+<p><a id="fn.name" class="footnum" href="#fnr.name"><sup>name</sup></a> additional references</p>
+
+
+
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+        
+        <script>
+ moon.initViz().then(viz =>{
+     $(".graphviz").each((a,b)=>{
+         viz.renderSVGElement($(b).data("graph"))
+            .then( ele => {
+                b.appendChild(ele)
+            });
+     })
+ })
+</script>
+
+        
+
+        
+        <script type="text/javascript" async
+ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+        
+
+        
+    </body>
+
+</html>
