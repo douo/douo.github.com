@@ -205,6 +205,7 @@ let event = CGEvent.init(scrollWheelEvent2Source: nil, units: .pixel, wheelCount
 <p>重新回到主题上，那屏幕间导航是什么意思？控制屏幕焦点的主体不就是眼睛吗，切换屏幕不就是转动一下眼球或脖子的功夫？话是这样说没错，但是我认为 macOS 是有一个当前全屏的概念的，这个屏幕并不是拥有当前输入焦点的窗口所在的屏幕，AltTab 称之为 <b>Active screen</b>，而是当前鼠标指针所在的屏幕，AltTab 称之 <b>Screen including mouse</b>，姑且称为<b>鼠标屏幕</b>。</p>
 <p>为什么需要定义这样一个概念，很遗憾这是 Mission Control 生效的屏幕，同时也是唤起 Spotlight 的屏幕。为了通过快捷键<code>C-→/C-←</code>切换期望的屏幕的空间（Space）<a id="fnr.6" class="footref" href="#fn.6"><sup>6</sup></a>，需要先切换当前的鼠标屏幕。屏幕间导航也就是指这个。</p>
 <p>所以几年前我写了一个小工具 <a href="https://github.com/douo/hopscotch">hopscotch</a>, 来实现通过快捷键切换鼠标屏幕。更早之前用的是 <a href="https://twitter.com/virushuo">@virushuo</a> 的 <a href="http://blog.xiqiao.info/2011/06/12/catchmouse-icon%E5%8F%8Aweb-%E8%AE%BE%E8%AE%A1/">CatchMouse</a> 来解决这个这个痛点，不过这个工具只能通过编号切换显示器，对于这种场景还是有点别扭。更符合直觉的上一个或下一个循环切换，就趁着 swiftui 刚出来，用它撸了个这个小工具，边学边做，做的比较粗糙，也就自己用而已。</p>
+<p><img src="/data/F9/6361A8-E745-465B-B407-E0415FCA1E3F/2022-07-10_14-22-37_screen_jumper_intro.gif" alt="/data/F9/6361A8-E745-465B-B407-E0415FCA1E3F/2022-07-10_14-22-37_screen_jumper_intro.gif" /></p>
 <p>最近写这文章，就顺便把 AltTab 的活跃屏幕（Active scree）也搬运过来，实现快捷键将鼠标屏幕切换到活跃屏幕。这样，通过 <code>⌘-⇥</code> 切换键盘输入焦点后，就能一个快捷键把 Mission Control 的焦点也带过来，十分符合操作逻辑。只可惜找不到不用无障碍 API 获取其它应用窗口的坐标和尺寸的办法，所以要使用这个功能只能赋予 Accessibility 权限。</p>
 <p>用了 AltTab 后，其实 hopscotch 大部分作用场景是能被 AltTab 替代。主要区别是 Mission Control 是基于空间切换的，而 AltTab 是基于窗口切换的，目的都是为了切换到目标窗口，显然 AltTab 更为直接，但俗话说技多不压身啊，多个提供一种方法也没什么不好的。</p>
 <h1 id="footnotes">Footnotes</h1>
