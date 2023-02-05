@@ -1,4 +1,4 @@
-/*! dourok.info 0.0.1 - Sun Jul 10 2022 06:30:11 GMT+0000 (Coordinated Universal Time) - 🦆 */
+/*! dourok.info 0.0.1 - Sun Feb 05 2023 18:33:44 GMT+0000 (Coordinated Universal Time) - 🦆 */
 (self["webpackChunkwriting"] = self["webpackChunkwriting"] || []).push([[319],{
 
 /***/ 9741:

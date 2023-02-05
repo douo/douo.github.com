@@ -129,7 +129,7 @@
   <div class="row">
 
     <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
-<span class="post-date tooltipped" data-tooltip="最后更新 22-04-03">2020-12-15</span>
+<span class="post-date tooltipped" data-tooltip="最后更新 23-02-05">2020-12-15</span>
     
 </div>
 
@@ -147,7 +147,11 @@ FYI:
   <li>tensorrt，NVIDIA 深度学习加速</li>
 </ul>
 
-<h1 id="flash">Flash</h1>
+<h1 id="jetson-nano-developer-kit">Jetson Nano Developer Kit</h1>
+
+<p>参考 <a href="https://developer.nvidia.com/embedded/learn/get-started-jetson-nano-devkit">Getting Started with Jetson Nano Developer Kit</a></p>
+
+<h1 id="jetson-agx-xavier-flash">Jetson AGX Xavier Flash</h1>
 
 <p>刷机有两种方式：</p>
 
@@ -166,7 +170,12 @@ FYI:
 
 <p>手动刷机主要分为两步，刷入 l4t 后，进入系统再安装 jetpack。</p>
 
-<p>刷 l4t，官方提供了比较详细的文档：<a href="https://docs.nvidia.com/jetson/l4t/index.html#page/Tegra%2520Linux%2520Driver%2520Package%2520Development%2520Guide%2Fquick_start.html%23">NVIDIA Jetson Linux Developer Guide : Quick Start Guide | NVIDIA Docs</a></p>
+<p>刷 l4t，官方提供了比较详细的文档：</p>
+
+<ul>
+  <li><a href="https://docs.nvidia.com/jetson/l4t/index.html#page/Tegra%2520Linux%2520Driver%2520Package%2520Development%2520Guide%2Fquick_start.html%23">NVIDIA Jetson Linux Developer Guide : Quick Start Guide | NVIDIA Docs</a></li>
+  <li><a href="https://docs.nvidia.com/jetson/archives/r34.1/DeveloperGuide/text/SD/FlashingSupport.html">Flashing Support</a></li>
+</ul>
 
 <h3 id="安装环境">安装环境</h3>
 
@@ -190,7 +199,7 @@ FYI:
 
 <ul>
   <li>Jetson agx xavier 32GB(P2888-004)</li>
-  <li><a href="https://developer.nvidia.com/embedded/linux-tegra-r3244">L4T R32.4.4 archive | NVIDIA Developer</a></li>
+  <li><a href="https://developer.nvidia.com/embedded/jetson-linux-r341">L4T R34.1.1 archive | NVIDIA Developer</a></li>
 </ul>
 
 <h3 id="安装-ubuntu">安装 Ubuntu</h3>
@@ -198,7 +207,14 @@ FYI:
 <p>创建虚拟机需要注意:</p>
 
 <ol>
-  <li>选择 usb3 的支持</li>
+  <li>选择 usb3 的支持
+    <ul>
+      <li>设置</li>
+      <li>Ports</li>
+      <li>USB</li>
+      <li>USB 3.0(xHCI) Controller</li>
+    </ul>
+  </li>
   <li>硬盘镜像选择 30GB，基于 sdkmanager 安装 jetson 的文档提及可用空间需要大于 25GB，所以 30 GB 肯定是够的。</li>
 </ol>
 
@@ -250,8 +266,8 @@ sudo apt-get install python # 需要 python 可执行，不确定是否要 pytho
 </ul>
 
 <ol>
-  <li><a href="https://developer.nvidia.com/embedded/L4T/r32_Release_v4.4/r32_Release_v4.4-GMC3/T186/Tegra186_Linux_R32.4.4_aarch64.tbz2">L4T Driver Package (BSP)</a></li>
-  <li><a href="https://developer.nvidia.com/embedded/L4T/r32_Release_v4.4/r32_Release_v4.4-GMC3/T186/Tegra_Linux_Sample-Root-Filesystem_R32.4.4_aarch64.tbz2">Sample Root Filesystem</a></li>
+  <li><a href="https://developer.nvidia.com/embedded/l4t/r34_release_v1.1/release/jetson_linux_r34.1.1_aarch64.tbz2">L4T Driver Package (BSP)</a></li>
+  <li><a href="https://developer.nvidia.com/embedded/l4t/r34_release_v1.1/release/tegra_linux_sample-root-filesystem_r34.1.1_aarch64.tbz2">Sample Root Filesystem</a></li>
 </ol>
 
 <p>配置环境变量，可配可不配，主要是文档提及的文件名容易造成混淆。</p>
@@ -270,14 +286,17 @@ $ cd ..
 $ sudo ./apply_binaries.sh
 </code></pre>
 
-<p>然后准备刷机，</p>
+<p>然后准备刷机前，需要留意一些问题。</p>
 
 <ul>
-  <li>Jetson 关机再进入 Force Recovery Mode (RCM)</li>
-  <li>usb 链接 mac mini</li>
-  <li>vbox 添加 usb 到虚拟机，可能需要重启虚拟机、重新把擦才能认到。</li>
-  <li><code>lsusb</code> 确认 usb 已经链接到虚拟机并处在  RCM ：<code>Bus &lt;bbb&gt; Device &lt;ddd&gt;: ID 0955: &lt;nnnn&gt; Nvidia Corp.</code></li>
-  <li>usb 需要重启虚拟机才能认到</li>
+  <li>检查是否成功链接到虚拟机并处在 RCM
+    <ul>
+      <li>usb 链接 mac mini</li>
+      <li>vbox 添加 usb 到虚拟机，可能需要重启虚拟机、重新把擦才能认到。</li>
+      <li><code>lsusb</code> 确认 usb 已经链接到虚拟机并处在  RCM ：<code>Bus &lt;bbb&gt; Device &lt;ddd&gt;: ID 0955: &lt;nnnn&gt; Nvidia Corp.</code></li>
+      <li>usb 需要重启虚拟机才能认到</li>
+    </ul>
+  </li>
   <li>文档未提及需要 <code>python</code> 可执行。ubuntu 只有 python3，需要手动安装一些 python,或者链接一下python3</li>
 </ul>
 
@@ -301,12 +320,14 @@ Flash Jetson TX2 : USB port and is in recovery mode.
 <p>确保所有条件没问题，便可以开始刷机。</p>
 
 <ol>
-  <li>进入 <code>Force Recovery mode</code>，设备关机，按住 Force Recovery 键（与电源键相邻），再开机。</li>
+  <li>进入 <code>Force Recovery mode(RCM)</code>，设备关机，按住 Force Recovery 键（与电源键相邻），再开机。</li>
   <li>链接 USB</li>
   <li><code>sudo ./flash.sh ${BOARD} mmcblk0p1</code></li>
 </ol>
 
 <p>刷机成功，jetson 便会自动重启直接进入系统。</p>
+
+<h3 id="安装到-nvme">安装到 nvme</h3>
 
 <h1 id="control">Control</h1>
 
@@ -321,6 +342,8 @@ Flash Jetson TX2 : USB port and is in recovery mode.
 <p>但是我在 macOS 上发现只需插上 typec 就可以。</p>
 
 <h3 id="macos">macOS</h3>
+
+<p>TODO modem 与 serial 的区别</p>
 
 <p>两个接口连上  mbp 后：</p>
 
@@ -337,7 +360,7 @@ Flash Jetson TX2 : USB port and is in recovery mode.
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>screen /dev/tty.usbmodem14238200066403 <span class="nt">-8</span> <span class="nt">-b</span> 115200
 </code></pre></div></div>
 
-<p><code>C-a C-\</code> 退出 screen</p>
+<p><code>C-a k</code> 退出 screen</p>
 
 <p>登陆上去后可能需要设置一下才能让终端有颜色：</p>
 
@@ -346,9 +369,13 @@ Flash Jetson TX2 : USB port and is in recovery mode.
 
 <h3 id="ubuntu">Ubuntu</h3>
 
-<p>ubuntu 就需要同时连接 typc-c 和 micro-usb 才能找到 <code>/dev/ttyACM*</code></p>
+<p>FIXME</p>
 
-<p>另外也可以通过 <code>minicom</code> 连接。</p>
+<pre><code>minicon /dev/ttyUSB3 8 -b 115200 # agx xavier 是 usb3
+# 可以一直保持链接，关机重启也会自动更新
+</code></pre>
+
+<p>ubuntu 就需要同时连接 typc-c 和 micro-usb 才能找到 <code>/dev/ttyACM*</code></p>
 
 <h1 id="configuration">Configuration</h1>
 
@@ -424,7 +451,9 @@ sudo apt-get upgrade
 
 <h2 id="headless-jetson">Headless Jetson</h2>
 
-<h3 id="tigervnc建议">tigervnc（建议）</h3>
+<h3 id="tigervnc">tigervnc</h3>
+
+<p>tigervnc 各方面都不错，但是，<a href="https://github.com/TigerVNC/tigervnc/issues/529#issuecomment-524866913">不支持 ClientCutText</a>，考虑用 <a href="https://www.realvnc.com/en/connect/download/vnc/linux/">vnc server</a> 收费软件代替。</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt <span class="nb">install </span>tigervnc-scraping-server
 </code></pre></div></div>
@@ -440,16 +469,26 @@ sudo apt-get upgrade
 <p>创建 <code>~/.config/systemd/user/x0vncserver.service</code></p>
 
 <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[Unit]</span>
+<span class="py">Description</span><span class="p">=</span><span class="s">Vino VNC server</span>
+
+<span class="nn">[Service]</span>
+<span class="py">Type</span><span class="p">=</span><span class="s">dbus</span>
+<span class="py">BusName</span><span class="p">=</span><span class="s">org.gnome.Vino</span>
+<span class="py">ExecStart</span><span class="p">=</span><span class="s">/usr/lib/vino/vino-server</span>
+<span class="py">Restart</span><span class="p">=</span><span class="s">on-failure</span>
+<span class="err">tx@onanj:~$</span> <span class="err">cat</span> <span class="err">~/.config/systemd/user/x0vncserver.service</span>
+<span class="nn">[Unit]</span>
 <span class="py">Description</span><span class="p">=</span><span class="s">Remote desktop service (VNC)</span>
 
 <span class="nn">[Service]</span>
 <span class="py">Type</span><span class="p">=</span><span class="s">simple</span>
 <span class="c"># wait for Xorg started by lc
 </span><span class="py">ExecStartPre</span><span class="p">=</span><span class="s">/bin/sh -c 'while ! pgrep -U "$USER" Xorg; do sleep 2; done'</span>
-<span class="py">ExecStart</span><span class="p">=</span><span class="s">/usr/bin/x0vncserver -rfbauth %h/.vnc/passwd -rfbport 5900</span>
-<span class="c"># or login with your username &amp; password
-#ExecStart=/usr/bin/x0vncserver -PAMService=login -PlainUsers=lc -SecurityTypes=TLSPlain
-</span>
+<span class="c"># 1.12.0
+# ExecStart=/usr/bin/x0vncserver -localhost no -rfbauth %h/.vnc/passwd -rfbport 5900 -fg
+# 1.7.0
+</span><span class="py">ExecStart</span><span class="p">=</span><span class="s">/usr/bin/x0vncserver -rfbauth %h/.vnc/passwd -rfbport 5900</span>
+
 <span class="nn">[Install]</span>
 <span class="py">WantedBy</span><span class="p">=</span><span class="s">default.target</span>
 </code></pre></div></div>
@@ -625,7 +664,8 @@ Pin-Priority: 1001
     Timestamp:                   2019-12-13T17:25:11Z
     Host:                        Linux 4.9.140-tegra aarch64
     CMake:                       3.10.2
-    CMake generator:             Unix Makefiles n        CMake build tool:            /usr/bin/make
+    CMake generator:             Unix Makefiles
+    CMake build tool:            /usr/bin/make
     Configuration:               Release
 
   CPU/HW features:

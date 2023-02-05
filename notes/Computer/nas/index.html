@@ -129,7 +129,7 @@
   <div class="row">
 
     <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
-<span class="post-date tooltipped" data-tooltip="最后更新 22-01-24">2016-12-08</span>
+<span class="post-date tooltipped" data-tooltip="最后更新 23-02-05">2016-12-08</span>
     
 </div>
 
@@ -164,13 +164,21 @@
 
 <p>电源：250-300w 200</p>
 
-<p>蜗牛星际组 NAS</p>
+<p>nn蜗牛星际组 NAS</p>
 
 <p><a href="https://post.smzdm.com/p/a25r4ddq/">蜗牛星际：我集齐了ABCD款，折腾矿渣一个月的全记录！__什么值得买</a></p>
 
 <p><a href="https://blog.ggrarea.cn/archives/29916.html">矿难来袭！速看蜗牛星际矿NAS用料。 - 徐自远的乱七八糟小站</a></p>
 
-<h1 id="功耗">功耗</h1>
+<h1 id="蜗牛星际-a">蜗牛星际 A</h1>
+
+<h2 id="usb30">usb3.0</h2>
+
+<p>usb3.0 接触不良，上面的口没成功过，下面的口用力差确实能成功识别 usb3.0</p>
+
+<p>获取 usb 信息，需安装 <code>sudo pacman -S usbutils</code>, 提供 lsusb, usb-devices, lsusb.py. 其中 lsusb.py 特别好用</p>
+
+<h2 id="功耗">功耗</h2>
 
 <p>639.3 小时，用电量 10.61 kwh。硬盘唤醒功率：24w，硬盘休眠功率 14w。</p>
 
@@ -184,7 +192,7 @@
 
 <p><a href="https://downloadcenter.intel.com/download/13663/Intel-Network-Adapter-Driver-for-82575-6-82580-I350-and-I210-211-Based-Gigabit-Network-Connections-for-Linux-?product=64404">Download Intel® Network Adapter Driver for 82575/6, 82580, I350, and I210/211-Based Gigabit Network Connections for Linux*</a></p>
 
-<h2 id="archlinux">ArchLinux</h2>
+<h1 id="archlinux">ArchLinux</h1>
 
 <p>对 Nas 系统了解不多，直观印象就是 Linux 上+ WebUI。我还是喜欢通过 ssh 进行系统管理，所以我选择用 ArchLinux 组建一个 NAS 系统。</p>
 
@@ -203,6 +211,8 @@
 <p>aur 被墙可以用清华大学的镜像，比如：</p>
 
 <p><code>env AUR_LOCATION='[https://aur.tuna.tsinghua.edu.cn](https://aur.tuna.tsinghua.edu.cn/)' aur sync -c jellyfin</code></p>
+
+<p>see https://github.com/AladW/aurutils/blob/master/lib/aur-query#L5</p>
 
 <h2 id="systemd">systemd</h2>
 
@@ -639,6 +649,12 @@ config.resilio.com
 <p>transmission 有自己的用户和组</p>
 
 <p>jellyfin 有自己的用户和组</p>
+
+<h2 id="监控">监控</h2>
+
+<h3 id="sysstat">sysstat</h3>
+
+<p>TODO</p>
 
 <h1 id="弃用">弃用</h1>
 

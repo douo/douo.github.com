@@ -129,7 +129,7 @@
   <div class="row">
 
     <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
-<span class="post-date tooltipped" data-tooltip="最后更新 22-07-09">2020-11-20</span>
+<span class="post-date tooltipped" data-tooltip="最后更新 23-02-05">2020-11-20</span>
     
 </div>
 
@@ -208,10 +208,10 @@
 
 <h2 id="源码">源码</h2>
 
-<p><a href="https://github.com/douo/openwrt">douo/openwrt</a>，fork 自官方源</p>
-
+<p><a href="https://github.com/douo/openwrt">douo/openwrt</a>，fork 自官方源
+主要目的是记录</p>
 <ul>
-  <li><a href="https://github.com/douo/openwrt/tree/douo-21.02/">douo-21.02</a>
+  <li><a href="https://github.com/douo/openwrt/tree/douo-22.03/">douo-22.03</a>
     <ul>
       <li>当前分支</li>
       <li>使用<a href="https://github.com/douo/openwrt-package">自己的 package</a></li>
@@ -297,7 +297,7 @@ add_list network.lan.dns='8.8.8.8'
 
 <p>8.1 删除 bridge
     - 21.02 ‘uci del network.device’
-    - 22.03 变成 devices 需要 <code>uci show network -X</code>，找到编号再删除 <code>uci del network.cfg030f15</code></p>
+    - 22.03 变成 devices 需要 <code>uci -X show network</code>，找到编号再删除 <code>uci del network.cfg030f15</code></p>
 
 <ol>
   <li><code>uci commit &amp;&amp; /etc/init.d/network restart</code></li>

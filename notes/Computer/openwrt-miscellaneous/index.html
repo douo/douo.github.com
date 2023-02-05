@@ -129,7 +129,7 @@
   <div class="row">
 
     <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
-<span class="post-date tooltipped" data-tooltip="最后更新 22-07-09">2020-02-04</span>
+<span class="post-date tooltipped" data-tooltip="最后更新 23-02-05">2020-02-04</span>
     
 </div>
 
@@ -264,6 +264,7 @@ opkg list-installed
       <li>UDPspeeder</li>
       <li>httping</li>
       <li>iperf3</li>
+      <li>netcat</li>
     </ul>
   </li>
   <li>Network-File Transfer
@@ -316,6 +317,7 @@ opkg list-installed
       <li>losetup</li>
       <li>lsof</li>
       <li>nnn</li>
+      <li>sed</li>
       <li>tree</li>
     </ul>
   </li>
@@ -511,24 +513,32 @@ vi /tmp/hboot/boot/grub/grub.cfg #把输出的菜单项追加到前面
 </ul>
 <p>软路由，没什么限制，直接编进去 <code>bash</code> 或 <code>zsh</code> 更好</p>
 <h2 id="系统--dns">dns</h2>
-<h3 id="系统--dns--adguard-home">ADGuard Home</h3>用 ADG 替换 dnsmasq、odhcp。
-<p>先停用 dnsmasq、odhcp：</p>
+<h3 id="系统--dns--adguard-home">ADGuard Home</h3>
+<h4 id="系统--dns--adguard-home--用-adg-替换-dnsmasq">用 ADG 替换 dnsmasq</h4>
+<p>ADG 有 dhcp 功能，但不建议替换 odhcp ，其 dhcpv6 有 bug(v0.107.0)。</p>
+<p>先停用 dnsmasq：</p>
 <pre class="example">
 /etc/init.d/dnsmasq disable
 /etc/init.d/dnsmasq stop
-/etc/init.d/odhcpd disable
-/etc/init.d/odhcpd stop
 </pre>
-<p>设置 adguardhome 的数据持久化，包括静态 dhcp 客户端：</p>
+<p>设置 adguardhome 的数据持久化</p>
 <pre class="example">
 uci set adguardhome.config.workdir=&#39;/var/adguardhome&#39;
 </pre>
-<p>再配置 ADG，dns 端口可以改为 53。同时配置启用 dhcp。</p>
+<p>再配置 ADG，dns 端口可以改为 53。</p>
 <h4 id="系统--dns--adguard-home--bug-fix">Bug FIX</h4>因为这行提交
   <a href="https://github.com/douo/openwrt-package/blob/45d2be84d0bb035032ad483e7701ff75c8a5d99c/luci-app-passwall/root/usr/share/passwall/app.sh#L1564">openwrt-package/app.sh
   at 45d2be84d0bb035032ad483e7701ff75c8a5d99c · douo/openwrt-package</a>
 <p>adguardhome 的二进制名为 <code>AdguardHome</code> 所以需要手动 <code>ln</code> 一下绕过这验证:</p>
 <p><code>ln -s  /usr/bin/AdGuardHome  /bin/adguardhome</code></p>
+<h3 id="系统--dns--odhcp">odhcp</h3>
+<p>配置 static lease，参考 [[https://openwrt.org/docs/guide-user/base-system/dhcp_configuration?s\[\]=dhcp&amp;s\[\]=static&amp;s\[\]=lease][[OpenWrt Wiki] DNS and DHCP examples]]</p>
+<p>用脚本生成 batch 配置搞定。</p>
+<p>&lt;2023-01-29 Sun&gt; 发现 dhcpv4 一段时间后就出问题。只能禁用掉让 adguardhome 负责 dhcpv4</p>
+<pre class="src" lang="shell">
+uci set dhcp.lan.dhcpv4=disabled
+</pre>
+<p>https://openwrt.org/docs/techref/odhcpd</p>
 <h2 id="系统--opkg">opkg</h2>更新 opkg
 <pre class="src" lang="shell">
 opkg update

@@ -1,0 +1,565 @@
+
+<!DOCTYPE html>
+<html class="borderbox" >
+    
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    Learning Python | DouO's Note</title>
+  <meta name="description" content="有時樹會倒下，某片天頃刻明亮
+">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content=" Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
+  <link rel="stylesheet" href="/assets/main.css">
+  <script src="/assets/main.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+
+    <body>
+        <header>
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper">
+        <div class="row">
+          <div class="col s12 m10 offset-m1">
+            <h1 class="header">Learning Python</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+  <ul id="nav-mobile" class="sidenav sidenav-fixed">
+    <li>
+      <div class="logo">
+        <a id="logo-container" href="/notes" class="brand-logo">
+          <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+        </a>
+        <div class="social">
+          
+          <a href="/rss.xml" title="订阅">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-feed"></use>
+            </svg>
+          </a>
+          
+          <a href="https://github.com/douo" title="Github">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-github"></use>
+            </svg>
+          </a>
+          
+          <a href="https://stackoverflow.com/users/851344/douo" title="StackOverflow">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-stack-overflow"></use>
+            </svg>
+          </a>
+          
+          <a href="https://plus.google.com/102537448648560113422" title="Google Plus">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-google-plus"></use>
+            </svg>
+          </a>
+          
+          <a href="https://instagram.com/douo" title="Instagram">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-instagram"></use>
+            </svg>
+          </a>
+          
+        </div>
+    </li>
+    </div>
+    <li class="search">
+      <div class="search-wrapper">
+        <input id="search" placeholder="Search"><i class="material-icons">search</i>
+        <div class="search-results"></div>
+      </div>
+    </li>
+    <li class="no-padding">
+      <div id="blog-nav">
+        <ul>
+          
+          <li><a href="/">主页</a></li>
+          
+          <li><a href="/notes">笔记</a></li>
+          
+          <li><a href="/categories#coder-ref">编码</a></li>
+          
+          <li><a href="/categories#life-ref">生活</a></li>
+          
+          <li><a href="/categories#otaku-ref">兴趣</a></li>
+          
+          <li><a href="/tags">标签</a></li>
+          
+          <li><a href="/log">日志</a></li>
+          
+          <li><a href="/help">帮助</a></li>
+          
+          <li><a href="/about">关于</a></li>
+          
+        </ul>
+      </div>
+      <div id="note-nav"></div>
+    </li>
+  </ul>
+  <div id="nav-tab" class="hide-on-med-and-down">
+    <div class="row">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+        <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+  <div class="row">
+
+    <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
+<span class="post-date tooltipped" data-tooltip="最后更新 23-02-05">2012-10-26</span>
+    
+</div>
+
+<article>
+     <h1 id="tool-stack">Tool Stack</h1>
+<h2 id="tool-stack--lint">lint</h2>
+<ul>
+  <li>pylint</li>
+  <li>flake8</li>
+  <li>mypy</li>
+</ul>
+<p>lsp 通过 publishDiagnostics 能代替或者通过插件的形式代替这些 lint</p>
+<h2 id="tool-stack--code-style">code style</h2>
+<ul>
+  <li>pep8，https://pep8.org/</li>
+</ul>
+<h3 id="tool-stack--code-style--自动格式化工具">自动格式化工具</h3>
+<ul>
+  <li>autopep8</li>
+  <li>black，争议大
+    uncompromising，不可配置，比如以下的强制行为：
+    <ul>
+      <li>单引号转双引号</li>
+      <li>空行</li>
+    </ul>
+  </li>
+  <li>yapf, by google auto-formatting + beautify
+    可选择不同的 style guideline</li>
+</ul>
+<p>lsp 通过 codeFormatting 支持格式化</p>
+<h2 id="tool-stack--lsp">lsp</h2>
+<p>支持各种 IDE feature，如：</p>
+<blockquote>
+  <p>Auto Completion
+    Code Linting
+    Signature Help
+    Go to definition
+    Hover
+    Find References
+    Document Symbols
+    Document Formatting
+    Code folding
+    Multiple workspaces</p>
+</blockquote>
+<p>补完通过传递 ~
+  CompletionItem~
+  自动导入（autoImports） 通过 <code>CompletionItem.additionalTextEdits</code> 传递</p>
+<h3 id="tool-stack--lsp--工具">工具</h3>
+<ul>
+  <li>[ ] pyright</li>
+  <li>[ ] jedi</li>
+  <li>[X] pylsp</li>
+</ul>
+<h3 id="tool-stack--lsp--pyright">pyright</h3>
+<p>pyright 的定位是一个静态类型检测器，与之比较的是 <a href="http://mypy-lang.org/">mypy</a>。不过它还带有一个实现 lsp 的服务 <code>pyright-langserver</code></p>
+<ul>
+  <li>支持自动导入，但初始化貌似没有加载 sys.path 的 module, 必须先 import os 后才行</li>
+  <li>支持手动创建 stub 文件：<code>pyright --createstub cv2</code></li>
+  <li>对于额外的 <code>.pyi</code> 文件，比如 cv2 ，只需要存放到项目根目录的 <code>typings</code> 文件夹，便能优先识别：</li>
+</ul>
+<pre class="src">
+typings
+├── cv2
+│   └── __init__.pyi
+</pre>
+<h3 id="tool-stack--lsp--jedi">Jedi</h3>
+<ul>
+  <li>static analysis tool，提供库的功能：
+    <pre class="src" lang="python">
+jedi.set_debug_function()
+# 输出补全列表
+jedi.Script(&#39;import cv2;cv2.&#39;, environment=jedi.get_system_environment(&#39;3.10&#39;)).complete()
+    </pre>
+  </li>
+  <li>lsp 功能由 <a href="https://github.com/pappasam/jedi-language-server">pappasam/jedi-language-server</a> 提供</li>
+  <li>见 <a href="https://jedi.readthedocs.io/en/latest/docs/features.html">Features and Limitations — Jedi 0.18.2 documentation</a></li>
+  <li>应该是支持 Type Hinting</li>
+  <li>支持的一些文档生成工具的注释风格：
+    <ul>
+      <li><a href="http://www.sphinx-doc.org/en/stable/domains.html#info-field-lists">Domains — Sphinx documentation</a></li>
+      <li><a href="http://epydoc.sourceforge.net/manual-fields.html">Epydoc Fields</a></li>
+      <li>需要额外安装 <a href="https://pypi.python.org/pypi/numpydoc">numpydoc · PyPI</a>  以支持 <a href="https://github.com/numpy/numpy/blob/master/doc/HOWTO_DOCUMENT.rst.txt">numpydoc</a></li>
+    </ul>
+  </li>
+  <li>对于一些较大的库，如 numpy 加载较慢，可以使用预加载（~preload_module()~）</li>
+  <li>使用 Typeshed 为 stdlib 提供补全
+    <ul>
+      <li><a href="https://github.com/davidhalter/jedi/blob/master/jedi/third_party/README_typeshed.md">jedi/README_typeshed.md at master · davidhalter/jedi · GitHub</a></li>
+      <li><a href="https://github.com/davidhalter/jedi/blob/master/jedi/inference/gradual/typeshed.py">jedi/typeshed.py at master · davidhalter/jedi · GitHub</a></li>
+    </ul>
+  </li>
+  <li>要支持 cv2 等 <a href="https://github.com/microsoft/python-type-stubs">python-type-stubs</a> 需要将 pyi 文件放入 cv2 module 目录下，如 venv 下的 site_packages</li>
+</ul>
+<h3 id="tool-stack--lsp--pylsp">pylsp</h3>
+<p><a href="https://github.com/python-lsp/python-lsp-server">python-lsp-server</a> 相当于一个实现 lsp 的脚手架，基础功能由 <a href="*Jedi">Jedi</a> 提供，包括 Completions、Definitions、Hover、References、Signature Help 和 Symbols。
+  各个功能通过插件扩展实现。另外一些功能通过默认开启的插件提供，如 pycodestyle、pyflake 提供  diagnostic。</p>
+<h4 id="tool-stack--lsp--pylsp--插件">插件</h4>
+<ul>
+  <li>插件的发现机制：
+    On startup, pylsp will automatically discover plugins by querying pkg_resources for entrypoints.
+    如：
+    <pre class="src">
+[options.entry_points]
+pylsp = pylsp_myplugin = pylsp_myplugin.plugin
+    </pre>
+  </li>
+  <li>基于 <a href="https://pluggy.readthedocs.io/en/stable/">pluggy</a></li>
+</ul>
+<h4 id="tool-stack--lsp--pylsp--缺陷">缺陷</h4>
+<ul>
+  <li>补全速度较慢</li>
+</ul>
+<h4 id="tool-stack--lsp--pylsp--安装">安装</h4>
+<p>为了用上最新的特性，clone 到本地再安装到虚拟环境</p>
+<pre class="src" lang="shell">
+git clone https://github.com/python-lsp/python-lsp-server.git
+pip install &#39;.[all]&#39; # 安装全部依赖
+</pre>
+<h4 id="tool-stack--lsp--pylsp--配置">配置</h4>
+<ul>
+  <li>rope
+    <ul>
+      <li>pylsp.plugins.rope_completion.enabled
+        默认不启用 completion，有 jedi 就够了，保持不启用，不开启也能使用 autoimport</li>
+      <li>pylsp.plugins.rope_autoimport.enabled
+        补全自动 import 需要开启</li>
+      <li><a href="https://github.com/python-rope/pylsp-rope">pylsp-rope</a>，非自带插件
+        通过 code action 提供更多 rope refactor 的能力，比如
+        <ul>
+          <li>Extract method</li>
+          <li>Convert lacal variable to field</li>
+          <li>Organize import</li>
+          <li>&#8230;</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>mccabe
+    用于计算<a href="https://zh.wikipedia.org/wiki/%E5%BE%AA%E7%92%B0%E8%A4%87%E9%9B%9C%E5%BA%A6">循环复杂度</a>
+    默认开启</li>
+  <li>linter
+    默认是用  pycodestyle、pyflake，不支持 pyproject.toml 配置</li>
+  <li>formatter
+    <ul>
+      <li>手动禁用 autopep8
+        <code>pylsp.plugins.autopep8.enabled</code></li>
+      <li>yapf，内置需要手动开启，选择不开启，问题如下：
+        <ul>
+          <li><a href="https://github.com/google/yapf/issues/983">不支持 3.10 =match&#8230;case=</a></li>
+          <li>存在 <code>pyproject.toml</code> 的项目需要先安装 <code>toml</code>  yapf 才愿意解析
+            <code>pip install toml</code></li>
+        </ul>
+      </li>
+      <li><a href="https://github.com/paradoxxxzero/pyls-isort">paradoxxxzero/pyls-isort</a>
+        接收 <code>textDocument/formatting</code> 通过 isort 对 import 语句进行排序</li>
+      <li><a href="https://github.com/python-lsp/python-lsp-black">python-lsp/python-lsp-black</a>
+        <ul>
+          <li>与 isort 、pylint 的兼容需要阅读：<a href="https://black.readthedocs.io/en/stable/guides/using_black_with_other_tools.html">Using Black with other tools - Black 22.10.0 documentation</a>
+            <ul>
+              <li>pycodestyle 兼容需要，项目目录下建立 <code>pycodestyle.cfg</code> 文件，并写入：
+                <pre class="src">
+[pycodestyle]
+max-line-length = 88
+                </pre>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="https://github.com/python-lsp/pylsp-mypy">pylsp-mypy</a>
+    用于 lint，通过 pyproject.toml 配置
+    mypy 不能识别 `pip install &#8211;editable` 基于 setuptools  的包，见 <a href="https://github.com/python/mypy/issues/7508">#7508</a>
+    在 <code>pyproject.toml</code> 添加如下解决：
+    <pre class="src" lang="toml">
+[tool.setuptools]
+zip-safe = false #  force setuptools to always install the project as a directory. required by mypy(#7508)
+    </pre>
+  </li>
+</ul>
+<h1 id="editor-emacs-">Editor(Emacs)</h1>
+<p>venv 环境</p>
+<ul>
+  <li>安装 python-lsp-server</li>
+</ul>
+<h2 id="editor-emacs---lsp-bridge">lsp-bridge</h2>
+<p>elisp 模块与 python 模块
+  还有一个额外 acm 用于补全</p>
+<p><code>langserver/*.json</code>  的作用：</p>
+<ul>
+  <li>python 模块解析</li>
+</ul>
+<p>-</p>
+<h1 id="syntax">Syntax</h1>
+<h2 id="syntax--shebang">Shebang</h2>
+<p>不要写死 python 的路径，而是通过 env 获取 python 的路径：</p>
+<p>python3:</p>
+<pre class="src" lang="python">
+#! /usr/bin/env python3
+</pre>
+<p>python2 或 python3：</p>
+<pre class="src" lang="python">
+#! /usr/bin/env python
+</pre>
+<h2 id="syntax--tips">Tips</h2>
+<ul>
+  <li>换行，在行尾加 <code>\</code></li>
+  <li>try&#8230;except&#8230;else 写法</li>
+</ul>
+<h2 id="syntax--下划线变量">下划线变量</h2>
+<ul>
+  <li>__all__</li>
+</ul>
+<h1 id="plugin">Plugin</h1>
+<h2 id="plugin--pluggy">pluggy</h2>
+<p>一个 PluginManager 下有多个 hook，hook 由一个 spec 和多个 impl 组成。</p>
+<h3 id="plugin--pluggy--hookspec">hookspec</h3>
+<pre class="src" lang="python">
+hookspec = pluggy.HookspecMarker(&quot;project_name&quot;)
+</pre>
+<p>hookspec 是一个 decorator，装饰一个函数相当于声明一个 spec。函数名相当于 spec 的签名，由于一个 hook 只有一个 spec 所以也相当于是 hook 的签名。也就是说同一个 PluginManager 下的 hookspec 不允许重名的。
+  具体的实现，是通过为被装饰函数添加一个属性来标识该函数是 spec</p>
+<pre class="src" lang="python">
+setattr(
+              func,
+              self.project_name + &quot;_spec&quot;,
+              dict(
+                  firstresult=firstresult,
+                  historic=historic,
+                  warn_on_impl=warn_on_impl,
+              ),
+          )
+</pre>
+<p>hookspec 函数并不会被执行， pluggy 只会分析其函数签名。</p>
+<h2 id="plugin--hookimpl">hookimpl</h2>
+<pre class="src" lang="python">
+hookimpl = pluggy.HookimplMarker(&quot;project_name&quot;)
+</pre>
+<p>hookspec 也是一个 decorator，作用与实现与 hookspec 类似。处理默认用函数名作为 hook 签名外，还能通过 specname 属性指定签名。</p>
+<h3 id="plugin--hookimpl--pluginmanager">PluginManager</h3>
+<p>添加 hookspec（hookspec 等价于 hook）：</p>
+<pre class="src" lang="python">
+pm.add_hookspecs(module_or_class)
+</pre>
+<p>遍历 module_or_class 的所有属性，找出其中被相同 <code>project_name</code> 的 hookspec 装饰的函数。接着对每个 hookspec 再其属性 <code>pm.hook</code> 创建一个相同签名的函数。</p>
+<p>注册 hookimpl(相当于 plugin)：</p>
+<pre class="src" lang="python">
+pm.register(module_or_class)
+</pre>
+<p>遍历 module_or_class 的所有属性，找出其中被相同 <code>project_name</code> 的 hookimpl 装饰的函数。添加到对应的 hook 中。如果找不到对应的 hookspec 会自动创建一个没有 hookspec 的 hook(HookCaller). 但是如果调用 <code>pm.check_pending()</code> 就会报错。通过设置 optionalhook 可以避免报错。</p>
+<h3 id="plugin--hookimpl--historic">historic</h3>
+<pre class="src" lang="python">
+@hookspec(historic=True)
+def myhook(arg1, arg2):
+    pass
+</pre>
+<p>标识可以在 register 之前，可以向改 hook 注册回调，每当一个新的 hookimpl 被注册，就是执行并将结果传给回调。</p>
+<pre class="src" lang="python">
+pm.hook.myhook.call_historic(lambda r: print(f&quot;lambda:{r}&quot;), {&#39;arg1&#39;:1, &#39;arg2&#39;:2})
+</pre>
+<h3 id="plugin--hookimpl--缺点">缺点</h3>
+<p>不支持条件触发。</p>
+<h2 id="plugin--entry_points">entry_points</h2>
+<p>setuptools 也能通过配置 entry_points 实现插件的效果。</p>
+<p>以为 plugin 的 pyproject.toml 为例：</p>
+<pre class="src" lang="toml">
+[project.entry-points.{entry_point_group}]
+{name} = {entry_point}
+# 或者
+[project.entry-points]
+{entry_point_group} = [
+n{name} = {entry_point},...
+]
+</pre>
+<p>host 可以这样调用：</p>
+<pre class="src" lang="python">
+from importlib.metadata import entry_points
+plugins_eps = entry_points(group=entry_point_group)
+for ep in plugins_eps:
+    plugin = ep.load()
+</pre>
+<p>entry point 的语法见 <a href="https://setuptools.pypa.io/en/latest/userguide/entry_point.html#entry-points-syntax">Entry Points - setuptools</a></p>
+<h1 id="test">Test</h1>
+<h2 id="test--pytest">pytest</h2>
+<h3 id="test--pytest--fixture">fixture</h3>
+<ul>
+  <li>parameter matter!  test 函数中的参数就是 fixture</li>
+  <li>fixture 的返回是会被缓存的[fn:1]，由 <code>scope</code> 控制，默认是 function
+    <ul>
+      <li>也就是说同一个 test 多次引用同一个 fixture 指向的都是同一个实例</li>
+      <li>更大的 scope 更早执行，比如 session 比 class  早</li>
+    </ul>
+  </li>
+  <li>autouse 标识所有 test 都依赖的 fixture
+    同一个 scope 下 autouse 最先执行</li>
+  <li>request 是 fixture 的特殊参数，一个对象，可以用于内省测试函数、类或模块上下文
+    <ul>
+      <li>比如直接添加 teardown: <code>request.addfinalizer(delete_user)</code></li>
+      <li>或者通过<code>@pytest.mark</code> 为 fixture 提供数据</li>
+    </ul>
+  </li>
+  <li><code>conftest.py</code>，提供可供整个目录使用的 fixtures
+    fixture 的搜索策略是当前再往上</li>
+</ul>
+<h3 id="test--pytest--parametrizing">parametrizing</h3>
+<p>对于每个参数都都生成一个新的方法</p>
+<ul>
+  <li>fixture
+    每个依赖以下 fixture 的 test 都会分别生成两个 test:
+    <ul>
+      <li>test[smtp.gmail.com]</li>
+      <li>test[mail.python.org]</li>
+    </ul>
+  </li>
+</ul>
+<pre class="src" lang="python">
+@pytest.fixture(scope=&quot;module&quot;, params=[&quot;smtp.gmail.com&quot;, &quot;mail.python.org&quot;])
+def smtp_connection(request):
+</pre>
+<ul>
+  <li>test function
+    @pytest.mark.parametrize.</li>
+</ul>
+<h1 id="footnotes">Footnotes</h1>
+<p>[fn:1] https://docs.pytest.org/en/6.2.x/fixture.html#scope-sharing-fixtures-across-classes-modules-packages-or-session</p>
+ 
+</article>
+<div class="tag-container" >
+    
+</div>
+
+
+<div id="disqus_thread"></div>
+<script>
+
+ /**
+  *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+ var jekyll_id = "/notes/Programming/Python/python"
+ var disqus_config = function () {
+     this.page.title = "Learning Python"
+     this.page.identifier = "posts"+jekyll_id.substring(jekyll_id.lastIndexOf('/'))+".md"; // required: replace example with your forum shortname
+     console.log(this.page.identifier);
+     this.page.url = "http://dourok.info/notes/Programming/Python/python/";
+    };
+
+ (function() { // DON'T EDIT BELOW THIS LINE
+     var d = document, s = d.createElement('script');
+     s.src = '//doousblog.disqus.com/embed.js';
+     s.setAttribute('data-timestamp', +new Date());
+     (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+</div>
+    <div class="col hide-on-small-only m1 xl1 ">
+        <a class="btn-floating teal" id='toc-toggle'><i id='toc-toogle-icon' class="material-icons">compare_arrows</i></a>
+      </div>
+    <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+      <ul class="section table-of-contents">
+      </ul>
+    </div>
+  </button>
+</div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m5 offset-m1">
+                <h5>友情链接</h5>
+                <ul class="mdl-mega-footer__link-list">
+                    
+                    <li><a href="https://magicalboy.com/">MAGICALBOY</a></li>
+                    
+                    <li><a href="http://www.cnlvzi.com/">驴子博客</a></li>
+                    
+                </ul>
+            </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    
+                    <a href="/">主页</a>
+                    
+                    <a href="/notes">笔记</a>
+                    
+                    <a href="/categories#coder-ref">编码</a>
+                    
+                    <a href="/categories#life-ref">生活</a>
+                    
+                    <a href="/categories#otaku-ref">兴趣</a>
+                    
+                    <a href="/tags">标签</a>
+                    
+                    <a href="/log">日志</a>
+                    
+                    <a href="/help">帮助</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+        </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col offset-m1">
+                    ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> | <small class="license">
+	                  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh"><img title="知识共享许可协议" style="border-width: 0px; vertical-align: middle; display: inline; " src="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" original="https://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png"></a>
+	                  </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+        
+
+        
+
+        
+    </body>
+
+</html>
