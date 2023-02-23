@@ -167,30 +167,30 @@
 
 <p>针对这些，增加了下面的新方法</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">QianQianStringFilter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">string</span><span class="p">):</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">QianQianStringFilter</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="n">string</span><span class="p">):</span>
 <span class="n">s</span> <span class="o">=</span> <span class="n">string</span>
 <span class="c1"># 英文转小写
-</span><span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">lower</span><span class="p">()</span>
+</span><span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="nf">lower</span><span class="p">()</span>
 <span class="c1"># 去括号，大中小还有全角的小括号
-</span><span class="n">s</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="n">sub</span><span class="p">(</span><span class="s">'\(.*?\)|\[.*?]|{.*?}|（.*?）'</span><span class="p">,</span> <span class="s">''</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
+</span><span class="n">s</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="nf">sub</span><span class="p">(</span><span class="s">'\(.*?\)|\[.*?]|{.*?}|（.*?）'</span><span class="p">,</span> <span class="s">''</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
 <span class="c1"># 去除半角特殊符号，空格，逗号，etc。
-</span><span class="n">s</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="n">sub</span><span class="p">(</span><span class="s">'[ -/:-@[-`{-~]+'</span><span class="p">,</span> <span class="s">''</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
+</span><span class="n">s</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="nf">sub</span><span class="p">(</span><span class="s">'[ -/:-@[-`{-~]+'</span><span class="p">,</span> <span class="s">''</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
 <span class="c1"># 繁（正）体转换为简体
-</span><span class="n">s</span> <span class="o">=</span> <span class="n">translate</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="s">'zh-tw'</span><span class="p">,</span><span class="s">'zh-cn'</span><span class="p">)</span>
-<span class="n">s</span> <span class="o">=</span> <span class="nb">unicode</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="s">'utf_8'</span><span class="p">)</span>
+</span><span class="n">s</span> <span class="o">=</span> <span class="nf">translate</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="s">'zh-tw'</span><span class="p">,</span><span class="s">'zh-cn'</span><span class="p">)</span>
+<span class="n">s</span> <span class="o">=</span> <span class="nf">unicode</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="s">'utf_8'</span><span class="p">)</span>
 <span class="c1"># 去除全角特殊符号
-</span><span class="n">s</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">u</span><span class="s">'[</span><span class="se">\u2014\u2018\u201c\u2026\u3001\u3002\u300a\u300b\u300e\u300f\u3010\u3011\u30fb\uff01\uff08\uff09\uff0c\uff1a\uff1b\uff1f\uff5e\uffe5</span><span class="s">]+'</span><span class="p">,</span><span class="s">''</span><span class="p">,</span><span class="n">s</span><span class="p">)</span>
+</span><span class="n">s</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="nf">sub</span><span class="p">(</span><span class="sa">u</span><span class="s">'[</span><span class="se">\u2014\u2018\u201c\u2026\u3001\u3002\u300a\u300b\u300e\u300f\u3010\u3011\u30fb\uff01\uff08\uff09\uff0c\uff1a\uff1b\uff1f\uff5e\uffe5</span><span class="s">]+'</span><span class="p">,</span><span class="s">''</span><span class="p">,</span><span class="n">s</span><span class="p">)</span>
 <span class="k">return</span> <span class="n">s</span>
 </code></pre></div></div>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="n">text</span><span class="p">,</span><span class="n">lang_from</span><span class="p">,</span><span class="n">lang_to</span><span class="p">):</span>
 <span class="n">url</span> <span class="o">=</span> <span class="p">(</span><span class="s">'http://ajax.googleapis.com/ajax/services/language/translate?'</span> <span class="o">+</span>
-<span class="s">'v=1.0&amp;q='</span><span class="o">+</span><span class="n">urllib</span><span class="p">.</span><span class="n">quote</span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="o">+</span><span class="s">'&amp;langpair='</span><span class="o">+</span><span class="n">lang_from</span><span class="o">+</span><span class="s">'%7C'</span><span class="o">+</span><span class="n">lang_to</span><span class="p">)</span>
-<span class="n">json</span> <span class="o">=</span> <span class="n">urllib</span><span class="p">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">).</span><span class="n">read</span><span class="p">()</span>
+<span class="s">'v=1.0&amp;q='</span><span class="o">+</span><span class="n">urllib</span><span class="p">.</span><span class="nf">quote</span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="o">+</span><span class="s">'&amp;langpair='</span><span class="o">+</span><span class="n">lang_from</span><span class="o">+</span><span class="s">'%7C'</span><span class="o">+</span><span class="n">lang_to</span><span class="p">)</span>
+<span class="n">json</span> <span class="o">=</span> <span class="n">urllib</span><span class="p">.</span><span class="nf">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">).</span><span class="nf">read</span><span class="p">()</span>
 <span class="c1"># return json;
-</span><span class="n">p</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="nb">compile</span><span class="p">(</span><span class="s">'"translatedText":"(.+?)"'</span><span class="p">)</span>
-<span class="n">m</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="n">json</span><span class="p">);</span>
-<span class="k">return</span> <span class="n">m</span><span class="p">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span><span class="n">p</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="nf">compile</span><span class="p">(</span><span class="s">'"translatedText":"(.+?)"'</span><span class="p">)</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="nf">search</span><span class="p">(</span><span class="n">json</span><span class="p">);</span>
+<span class="k">return</span> <span class="n">m</span><span class="p">.</span><span class="nf">group</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
 </code></pre></div></div>
 
 <p><a id="attention"></a><strong>注意:</strong>谷歌翻译的 API 已经过期了，会导致查词失败，新的翻译 API 又要收费还很贵，见<a href="http://code.google.com/apis/language/translate/v2/pricing.html">http://code.google.com/apis/language/translate/v2/pricing.html</a>，坑爹呢这是。幸好还有 Bing 做后援。虽然不给力，但简繁转换还是没问题的。下面的代码改用 Bing 的翻译服务：</p>
@@ -199,11 +199,11 @@
 <span class="n">url</span> <span class="o">=</span> <span class="p">(</span><span class="s">'http://api.microsofttranslator.com/V2/Ajax.svc/Translate?'</span> <span class="o">+</span>
 <span class="s">'appId=DE2A1CAA235EB52E611BC1243F16E4D301BB600E'</span> <span class="o">+</span>
 <span class="s">'&amp;from='</span><span class="o">+</span> <span class="n">lang_from</span> <span class="o">+</span><span class="s">'&amp;to='</span><span class="o">+</span> <span class="n">lang_to</span> <span class="o">+</span>
-<span class="s">'&amp;text='</span><span class="o">+</span><span class="n">urllib</span><span class="p">.</span><span class="n">quote</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
-<span class="n">json</span> <span class="o">=</span> <span class="n">urllib</span><span class="p">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">).</span><span class="n">read</span><span class="p">()</span>
-<span class="n">p</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="nb">compile</span><span class="p">(</span><span class="s">'"(.+?)"'</span><span class="p">)</span> <span class="c1">#對應必應
-</span><span class="n">m</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="n">json</span><span class="p">);</span>
-<span class="k">return</span> <span class="n">m</span><span class="p">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="s">'&amp;text='</span><span class="o">+</span><span class="n">urllib</span><span class="p">.</span><span class="nf">quote</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
+<span class="n">json</span> <span class="o">=</span> <span class="n">urllib</span><span class="p">.</span><span class="nf">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">).</span><span class="nf">read</span><span class="p">()</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="nf">compile</span><span class="p">(</span><span class="s">'"(.+?)"'</span><span class="p">)</span> <span class="c1">#對應必應
+</span><span class="n">m</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="nf">search</span><span class="p">(</span><span class="n">json</span><span class="p">);</span>
+<span class="k">return</span> <span class="n">m</span><span class="p">.</span><span class="nf">group</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
 </code></pre></div></div>
 
 <p>这样，大部分流行歌曲特别是华人音乐，都可以表示毫无压力。

@@ -292,8 +292,8 @@ Java：</p>
 
 <p>Python:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">math</span>
-<span class="kn">import</span> <span class="nn">time</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">math</span>
+<span class="kn">import</span> <span class="n">time</span>
 <span class="n">primes</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">def</span> <span class="nf">buildTable</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
 <span class="c1">#    if(len(primes)&lt;=0):
@@ -301,30 +301,30 @@ Java：</p>
 #        sindex = 1;
 #    else:
 #        sindex = len(primes+1);
-</span>    <span class="n">primes</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-    <span class="n">primes</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</span>    <span class="n">primes</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">primes</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
     <span class="n">s</span> <span class="o">=</span> <span class="mi">5</span>
     <span class="n">k</span> <span class="o">=</span> <span class="mi">2</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
         <span class="n">j</span><span class="o">=</span><span class="mi">0</span>
-        <span class="n">q</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">math</span><span class="p">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">+</span><span class="mf">0.5</span><span class="p">)</span>
-        <span class="k">while</span><span class="p">(</span><span class="n">j</span><span class="o">&lt;</span><span class="n">i</span><span class="p">):</span>
-            <span class="k">if</span><span class="p">(</span><span class="n">primes</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">&lt;=</span><span class="n">q</span> <span class="ow">and</span> <span class="n">s</span><span class="o">%</span><span class="n">primes</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">):</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="n">math</span><span class="p">.</span><span class="nf">sqrt</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">+</span><span class="mf">0.5</span><span class="p">)</span>
+        <span class="nf">while</span><span class="p">(</span><span class="n">j</span><span class="o">&lt;</span><span class="n">i</span><span class="p">):</span>
+            <span class="nf">if</span><span class="p">(</span><span class="n">primes</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">&lt;=</span><span class="n">q</span> <span class="ow">and</span> <span class="n">s</span><span class="o">%</span><span class="n">primes</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">):</span>
                 <span class="n">s</span><span class="o">+=</span><span class="n">k</span>
                 <span class="n">k</span><span class="o">=</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="n">k</span><span class="p">)</span><span class="o">%</span><span class="mi">6</span>
-                <span class="n">q</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">math</span><span class="p">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">+</span><span class="mf">0.5</span><span class="p">)</span>
+                <span class="n">q</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="n">math</span><span class="p">.</span><span class="nf">sqrt</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">+</span><span class="mf">0.5</span><span class="p">)</span>
                 <span class="n">j</span><span class="o">=</span><span class="mi">0</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">j</span><span class="o">+=</span><span class="mi">1</span>
-        <span class="n">primes</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+        <span class="n">primes</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
         <span class="n">s</span><span class="o">+=</span><span class="n">k</span>
         <span class="n">k</span><span class="o">=</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="n">k</span><span class="p">)</span><span class="o">%</span><span class="mi">6</span>
-        <span class="n">q</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">math</span><span class="p">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">+</span><span class="mf">0.5</span><span class="p">)</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="n">math</span><span class="p">.</span><span class="nf">sqrt</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">+</span><span class="mf">0.5</span><span class="p">)</span>
 
-<span class="n">time</span><span class="p">.</span><span class="n">clock</span><span class="p">()</span>
-<span class="n">buildTable</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+<span class="n">time</span><span class="p">.</span><span class="nf">clock</span><span class="p">()</span>
+<span class="nf">buildTable</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
 <span class="k">print</span> <span class="n">primes</span><span class="p">[</span><span class="mi">10000</span><span class="p">]</span>
-<span class="k">print</span> <span class="n">time</span><span class="p">.</span><span class="n">clock</span><span class="p">()</span>
+<span class="k">print</span> <span class="n">time</span><span class="p">.</span><span class="nf">clock</span><span class="p">()</span>
 </code></pre></div></div>
 
 <p>Groovy:</p>
