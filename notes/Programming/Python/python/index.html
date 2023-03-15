@@ -129,7 +129,7 @@
   <div class="row">
 
     <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
-<span class="post-date tooltipped" data-tooltip="最后更新 23-02-05">2012-10-26</span>
+<span class="post-date tooltipped" data-tooltip="最后更新 23-03-15">2012-10-26</span>
     
 </div>
 
@@ -226,6 +226,11 @@ jedi.Script(&#39;import cv2;cv2.&#39;, environment=jedi.get_system_environment(&
 <h3 id="tool-stack--lsp--pylsp">pylsp</h3>
 <p><a href="https://github.com/python-lsp/python-lsp-server">python-lsp-server</a> 相当于一个实现 lsp 的脚手架，基础功能由 <a href="*Jedi">Jedi</a> 提供，包括 Completions、Definitions、Hover、References、Signature Help 和 Symbols。
   各个功能通过插件扩展实现。另外一些功能通过默认开启的插件提供，如 pycodestyle、pyflake 提供  diagnostic。</p>
+<h4 id="tool-stack--lsp--pylsp--问题">问题</h4>
+<ul>
+  <li>经常无响应，导致几乎不可用。估计是这个 ISSUE 描述的问题
+    https://github.com/python-lsp/python-lsp-server/issues/227</li>
+</ul>
 <h4 id="tool-stack--lsp--pylsp--插件">插件</h4>
 <ul>
   <li>插件的发现机制：
@@ -314,9 +319,14 @@ zip-safe = false #  force setuptools to always install the project as a director
 <h1 id="editor-emacs-">Editor(Emacs)</h1>
 <p>venv 环境</p>
 <ul>
-  <li>安装 python-lsp-server</li>
+  <li><del>安装 python-lsp-server</del></li>
+  <li>pip install pyright black</li>
 </ul>
 <h2 id="editor-emacs---lsp-bridge">lsp-bridge</h2>
+<p>环境要求：</p>
+<ul>
+  <li>pip install epc</li>
+</ul>
 <p>elisp 模块与 python 模块
   还有一个额外 acm 用于补全</p>
 <p><code>langserver/*.json</code>  的作用：</p>
@@ -343,6 +353,11 @@ zip-safe = false #  force setuptools to always install the project as a director
 <h2 id="syntax--下划线变量">下划线变量</h2>
 <ul>
   <li>__all__</li>
+</ul>
+<h2 id="syntax--函数">函数</h2>
+<h3 id="syntax--函数--参数默认值">参数默认值</h3>
+<ul>
+  <li>函数内修改参数默认值必须非常小心地完成。原因是第一次到达函数时，参数的默认值仅被执行一次。此后，相同的值（或可变对象）在后续函数调用中被引用。</li>
 </ul>
 <h1 id="plugin">Plugin</h1>
 <h2 id="plugin--pluggy">pluggy</h2>

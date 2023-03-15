@@ -129,7 +129,7 @@
   <div class="row">
 
     <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
-<span class="post-date tooltipped" data-tooltip="最后更新 23-02-05">2020-12-15</span>
+<span class="post-date tooltipped" data-tooltip="最后更新 23-03-15">2020-12-15</span>
     
 </div>
 
@@ -174,7 +174,7 @@ FYI:
 
 <ul>
   <li><a href="https://docs.nvidia.com/jetson/l4t/index.html#page/Tegra%2520Linux%2520Driver%2520Package%2520Development%2520Guide%2Fquick_start.html%23">NVIDIA Jetson Linux Developer Guide : Quick Start Guide | NVIDIA Docs</a></li>
-  <li><a href="https://docs.nvidia.com/jetson/archives/r34.1/DeveloperGuide/text/SD/FlashingSupport.html">Flashing Support</a></li>
+  <li><a href="https://docs.nvidia.com/jetson/archives/r35.2.1/DeveloperGuide/text/SD/FlashingSupport.html">Flashing Support</a></li>
 </ul>
 
 <h3 id="安装环境">安装环境</h3>
@@ -261,9 +261,10 @@ sudo apt-get install python # 需要 python 可执行，不确定是否要 pytho
 <p>下载页</p>
 
 <ul>
-  <li><a href="https://developer.nvidia.com/embedded/linux-tegra">Jetson Linux | NVIDIA Developer</a>
-下载</li>
+  <li><a href="https://developer.nvidia.com/embedded/linux-tegra">Jetson Linux | NVIDIA Developer</a></li>
 </ul>
+
+<p>下载</p>
 
 <ol>
   <li><a href="https://developer.nvidia.com/embedded/l4t/r34_release_v1.1/release/jetson_linux_r34.1.1_aarch64.tbz2">L4T Driver Package (BSP)</a></li>
@@ -328,6 +329,19 @@ Flash Jetson TX2 : USB port and is in recovery mode.
 <p>刷机成功，jetson 便会自动重启直接进入系统。</p>
 
 <h3 id="安装到-nvme">安装到 nvme</h3>
+
+<p>Jetson AGX Xavier 需要先刷一遍 eMMC，才能刷到 NVME:</p>
+
+<blockquote>
+  <p>Jetson AGX Xavier series devices use boot firmware that is stored only on internal eMMC memory, and the esp partition on internal eMMC memory is also required. As a result, this type of device can boot from a USB or an NVMe drive only if the drive’s internal eMMC has been flashed.</p>
+</blockquote>
+
+<p>这条指令可以自动处理整个流程：</p>
+
+<pre><code>sudo ./nvsdkmanager_flash.sh --storage nvme0n1p1
+</code></pre>
+
+<p>详细参考： https://docs.nvidia.com/jetson/archives/r35.2.1/DeveloperGuide/text/SD/FlashingSupport.html#flashing-to-an-nvme-drive</p>
 
 <h1 id="control">Control</h1>
 
@@ -394,6 +408,10 @@ Flash Jetson TX2 : USB port and is in recovery mode.
   <li><a href="https://cloud-atlas.readthedocs.io/zh_CN/latest/machine_learning/jetson/jetson_nano.html">Jetson Nano — Cloud Atlas 0.1 文档</a></li>
 </ul>
 
+<h2 id="network">Network</h2>
+
+<p>默认 dhcp，配置使用命令 <code>nmcli</code></p>
+
 <h2 id="apt">apt</h2>
 
 <h3 id="换源可选">换源(可选)</h3>
@@ -428,18 +446,6 @@ sudo apt-get upgrade
 <pre><code>sudo dpkg--reconfigure lightdm
 </code></pre>
 
-<h3 id="补完-jetpack">补完 jetpack</h3>
-
-<pre><code> sudo apt install nvidia-jetpack
-</code></pre>
-
-<p>见 <a href="https://docs.nvidia.com/jetson/jetpack/install-jetpack/index.html#package-management-tool">1.3. Package Management Tool</a></p>
-
-<p>最后 32 GB 的空间剩下：</p>
-
-<pre><code>   /dev/mmcblk0p1   28G   12G   15G  46% /
-</code></pre>
-
 <h3 id="其他必备">其他必备</h3>
 
 <ul>
@@ -453,7 +459,16 @@ sudo apt-get upgrade
 
 <h3 id="tigervnc">tigervnc</h3>
 
-<p>tigervnc 各方面都不错，但是，<a href="https://github.com/TigerVNC/tigervnc/issues/529#issuecomment-524866913">不支持 ClientCutText</a>，考虑用 <a href="https://www.realvnc.com/en/connect/download/vnc/linux/">vnc server</a> 收费软件代替。</p>
+<p>tigervnc 各方面都不错，但是，<a href="https://github.com/TigerVNC/tigervnc/issues/529#issuecomment-524866913">不支持 ClientCutText</a>，考虑用 <a href="https://www.realvnc.com/en/connect/download/vnc/linux/">vnc server</a>(不支持 arm64) 收费软件代替。</p>
+
+<h4 id="通过-ssh-操作剪切板">通过 ssh 操作剪切板</h4>
+
+<pre><code>apt-get install xclip
+alias xclip="xclip -selection c" # set clip
+alias xclipg="xclip -selection c -o" # get clip
+export DISPLAY=:0
+echo -n text | xclip
+</code></pre>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt <span class="nb">install </span>tigervnc-scraping-server
 </code></pre></div></div>
@@ -469,15 +484,6 @@ sudo apt-get upgrade
 <p>创建 <code>~/.config/systemd/user/x0vncserver.service</code></p>
 
 <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[Unit]</span>
-<span class="py">Description</span><span class="p">=</span><span class="s">Vino VNC server</span>
-
-<span class="nn">[Service]</span>
-<span class="py">Type</span><span class="p">=</span><span class="s">dbus</span>
-<span class="py">BusName</span><span class="p">=</span><span class="s">org.gnome.Vino</span>
-<span class="py">ExecStart</span><span class="p">=</span><span class="s">/usr/lib/vino/vino-server</span>
-<span class="py">Restart</span><span class="p">=</span><span class="s">on-failure</span>
-<span class="err">tx@onanj:~$</span> <span class="err">cat</span> <span class="err">~/.config/systemd/user/x0vncserver.service</span>
-<span class="nn">[Unit]</span>
 <span class="py">Description</span><span class="p">=</span><span class="s">Remote desktop service (VNC)</span>
 
 <span class="nn">[Service]</span>
@@ -554,11 +560,11 @@ EndSection
     <p>login manager 自动登陆</p>
   </li>
   <li>
-    <p>先连到 loginmanager 的 xsession(Dispaly=:0)，手动登陆后再，连到桌面（Display=:1）:https://askubuntu.com/a/1036507</p>
+    <p>先连到 loginmanager 的 xsession(Dispaly=:0)，手动登陆后再，连到桌面（Display=:1）:https://askubuntu.com/a/1036507
+p</p>
+    <h3 id="x11-forwarding">X11 Forwarding</h3>
   </li>
 </ol>
-
-<h3 id="x11-forwarding">X11 Forwarding</h3>
 
 <p>转发远端的 xclient 链接到本地的 xserver</p>
 
@@ -575,6 +581,38 @@ EndSection
   <li><a href="https://github.com/dusty-nv/jetson-inference">dusty-nv/jetson-inference: Hello AI World guide to deploying deep-learning inference networks and deep vision primitives with TensorRT and NVIDIA Jetson.</a></li>
 </ul>
 
+<h2 id="jetpack">jetpack</h2>
+
+<p><img src="https://docs.google.com/drawings/d/e/2PACX-1vQRL973rup4vKwlFuY_gu0sXh336QACYg8kEAYs4XYggeh2ew1X0-TppZ5R8kHMoViCO-w-2jK3AqEC/pub?w=1078&amp;h=572" alt="Jetpack" /></p>
+
+<h3 id="jetpack-5x">jetpack 5.x</h3>
+
+<pre><code>sudo apt install nvidia-jetpack
+</code></pre>
+
+<ul>
+  <li>需要在本机跑程序，则安装 jetpack
+nvidia-jetpack 安装两个包（11.6GB）：
+    <ul>
+      <li>nvidia-jetpack-runtime</li>
+      <li>nvidia-jetpack-dev (开发可选)</li>
+    </ul>
+  </li>
+  <li>docker 的话则只需安装 nvidia-container（5.9GB）</li>
+</ul>
+
+<h3 id="jetpack-4x">jetpack 4.x</h3>
+
+<pre><code>sudo apt install nvidia-jetpack
+</code></pre>
+
+<p>见 <a href="https://docs.nvidia.com/jetson/jetpack/install-jetpack/index.html#package-management-tool">1.3. Package Management Tool</a></p>
+
+<p>最后 32 GB 的空间剩下：</p>
+
+<pre><code>   /dev/mmcblk0p1   28G   12G   15G  46% /
+</code></pre>
+
 <h2 id="python">python</h2>
 
 <p>使用系统自带 python3 记得先升级一下 pip 避免各种奇葩问题：</p>
@@ -590,15 +628,22 @@ EndSection
 
 <h2 id="docker">docker</h2>
 
-<ul>
-  <li>Jetpack: 4.6</li>
-  <li>Docker: 20.10.7</li>
-</ul>
+<h3 id="jetpack-5x-1">Jetpack 5.x</h3>
 
-<p>会遇到：</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt update
+<span class="nb">sudo </span>apt <span class="nb">install </span>nvidia-container
+<span class="nb">sudo </span>systemctl restart docker
+<span class="nb">sudo </span>usermod <span class="nt">-aG</span> docker <span class="nv">$USER</span>
+newgrp docker
+</code></pre></div></div>
 
-<pre><code>docker: Error response from daemon: failed to create shim: OCI runtime create failed: container_linux.go:380: starting container process caused: error adding seccomp filter rule for syscall clone3: permission denied: unknown.
-</code></pre>
+<h3 id="jetpack-46">Jetpack: 4.6</h3>
+
+<p>Docker: 20.10.7 会遇到：</p>
+
+<blockquote>
+  <p>docker: Error response from daemon: failed to create shim: OCI runtime create failed: container_linux.go:380: starting container process caused: error adding seccomp filter rule for syscall clone3: permission denied: unknown.</p>
+</blockquote>
 
 <p><a href="https://forums.developer.nvidia.com/t/docker-isnt-working-after-apt-upgrade/195213">Docker isn’t working after apt upgrade - Jetson &amp; Embedded Systems / Jetson Nano - NVIDIA Developer Forums</a></p>
 
@@ -822,7 +867,13 @@ cv2.cuda.getCudaEnabledDeviceCount()
 
 <h2 id="gstreamer">gstreamer</h2>
 
-<p>安装需要参考 <a href="https://docs.nvidia.com/jetson/archives/l4t-archived/l4t-3231/index.html#page/Tegra%2520Linux%2520Driver%2520Package%2520Development%2520Guide%2Faccelerated_gstreamer.html%23wwpID0E0H30H">Accelerated GStreamer</a></p>
+<p>官方 Manual:</p>
+<ul>
+  <li>https://developer.download.nvidia.com/embedded/L4T/r32_Release_v1.0/Docs/Accelerated_GStreamer_User_Guide.pdf?t=eyJscyI6ImdzZW8iLCJsc2QiOiJodHRwczovL3d3dy5nb29nbGUuY29tLyJ9</li>
+  <li><a href="https://docs.nvidia.com/jetson/archives/r35.2.1/DeveloperGuide/text/SD/Multimedia/AcceleratedGstreamer.html">Accelerated GStreamer</a></li>
+</ul>
+
+<p>安装:</p>
 
 <pre><code>sudo add-apt-repository universe
 sudo add-apt-repository multiverse
@@ -909,7 +960,7 @@ jupyter labextension install @jupyter-widgets/jupyterlab-manager
 
 <p>zed-gstreamer</p>
 
-<pre><code>  gir1.2-gst-rtsp-server-1.0 gstreamer1.0-doc gstreamer1.0-qt5 libglib2.0-doc libgstrtspserver-1.0-0 libgstrtspserver-1.0-dev
+<pre><code>gir1.2-gst-rtsp-server-1.0 gstreamer1.0-doc gstreamer1.0-qt5 libglib2.0-doc libgstrtspserver-1.0-0 libgstrtspserver-1.0-dev
 </code></pre>
 
 </article>
